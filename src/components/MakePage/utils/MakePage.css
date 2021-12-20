@@ -1,0 +1,226 @@
+.make-page-container{
+    display:flex;
+    flex-direction:row;
+    height: 100%;
+    width:100%;
+    overflow:hidden;
+    -webkit-overflow-scrolling: touch;
+    background-color:white;
+}
+
+.make-page-example{
+    width:70%;
+    height:100%;
+    background-color:pink;
+}
+
+.colorSelection{
+    margin:10px;
+    display: flex;
+    justify-content : center;
+    align-items :center;
+    width:90px;
+    height:90px;
+    background-color:white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+
+.fontSelection{
+    margin:10px;
+    display: flex;
+    justify-content : center;
+    align-items :center;
+    width:100%;
+    height:50px;
+    background-color:white;
+    border-radius: 3px;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+    cursor:pointer;
+}
+
+.fontSelection:hover{
+    border:1px 
+}
+
+.section-one-make-one{
+    display: flex;
+    justify-content :center;
+    flex-direction:column;
+    width:100%;
+}
+
+.section-table-container{
+    justify-content: start;
+    width:90%;
+    padding-left: 10px; 
+}
+
+.section-selector-container{
+    display: flex;
+    justify-content :center;
+    align-items : center;
+    flex-direction:row;
+}
+
+.make-page-section-selector{
+    margin:5px;
+    width:70px;
+    height:70px;
+    border-radius:5px;
+    box-shadow:1px 1px 3px rgba(0,0,0,0.2);
+    cursor:pointer;
+    display: flex;
+    justify-content :center;
+    align-items :center;
+}
+
+.section-image{
+    width:200px;
+    height:200px;
+}
+
+.section-one-make{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items : start;
+    padding-top:10px;
+}
+.section-one-title-input{
+    width:100%;
+    font-size: 19px;
+}
+
+.file-input{
+    width:30%;
+}
+.col-image{
+    width:300px;
+}
+.last-section-container{
+    display: flex;
+    justify-content : center;
+    align-items : center;
+}
+.make-apply-button{
+    margin-top:2%;
+    cursor: pointer;
+    border: 5px solid white;
+    background-color:white;
+    border-radius:5px;
+    color:black;
+    width:250px;
+    height:40px;
+    display: flex;
+    align-items:center;
+    justify-content : center;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.make-apply-button:hover{
+    background-color:white;
+    color:black;
+    font-weight:600;
+}
+
+.section-title{
+    font-size:20px;
+    color:#6B63F7;
+    font-family:Noto Sans KR; 
+    font-weight:700; 
+    display:flex; 
+    justify-content:space-between; 
+    width:100%;
+    padding:0px 10px;
+}
+
+.make-footer{
+    background-color:rgb(255, 255, 255);
+    height:200px;
+    display: flex; 
+    justify-content : center;
+    align-items : center;
+    color:rgb(131, 131, 131);
+    font-weight:400;
+    flex-direction: row;
+    width:100%;
+    padding-left:25%;
+  }
+
+  .make-left-landing{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    height:94vh;
+  }
+
+.make-main-page-container{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+.scroll-container{
+    border-radius:5px;
+    border: 1px solid gray;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index:10;
+}
+.make-left-bottom-container{
+    justify-content: center;
+    align-items: center;
+    height:15vh;
+    width:90%;
+}
+
+.make-navigation{
+    width:100%;
+    z-index:3;
+    height:60px;
+    width: 70%;
+    display: flex;
+    justify-content: start;
+    align-items : center;
+}
+
+.make-nav-bar-title{
+    font-size:30px;
+    font-weight: 700;
+    width:100%;
+    padding-right:10vw;
+}
+
+.make-nav-on{
+    display: flex;
+    align-items :center;
+    width:50%;
+    cursor:pointer;
+    justify-content : center;
+    width:100%;
+    padding-left:10vw;
+}
+.make-nav-button{
+    border-radius:5px;
+    width:130px;
+    height:35px;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    background-color:rgba(0,0,0,0);
+    border:none;
+    font-size:15px;
+}
+
+.make-left-top-container{
+    padding:3px 3px;
+    width:80%;
+    justify-content: start;
+    align-items: center;
+}
