@@ -110,18 +110,6 @@
     cursor: pointer;
 }
 
-.make-hover-section:hover{
-    border:3px solid purple;
-}
-
-.make-section-button{
-    font-size:1em;
-    background-color:black;
-    color:white;
-    margin-top:-2%;
-    cursor: pointer;
-}
-
 .select-section-template-container{
     padding:5% 0%;
     background-color:white;

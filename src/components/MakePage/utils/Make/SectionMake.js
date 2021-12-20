@@ -49,18 +49,9 @@ function SectionMake(props) {
     useEffect(() => {
     },[])
 
-    const handleSliderChange = (event, newValue) => {
-        props.setTitleSize(newValue);
-        setTs(newValue)
-      };
-
       const handleSliderChange2 = (event, newValue) => {
         props.setDescSize(newValue);
         setDs(newValue)
-    };
-    const handleSliderChange3 = (event, newValue) => {
-        props.setImageWidth(newValue);
-        setWs(newValue)
     };
 
     const onFileChangeBack = e => {
@@ -114,18 +105,6 @@ function SectionMake(props) {
                         <div  className="make-section-title">
                             <span style={{marginTop:'5px'}}>- 타이틀 크기</span>   
                             <div style={{display:'flex', justifyContent:'start', alignItems:'center', flexDirection:'row', paddingLeft:'3%'}}>                     
-                                <Slider
-                                    value={ts}
-                                    onChange={handleSliderChange}
-                                    aria-labelledby="input-slider"
-                                    sx={{
-                                    color: '#6B63F7',
-                                    width:200,
-                                    '& .MuiSlider-thumb': {
-                                        borderRadius: '1px',
-                                    },
-                                    }}
-                                />
                                 <Input
                                     placeholder="글씨 크기"
                                     prefix={<UserOutlined className="site-form-item-icon" />}
@@ -136,8 +115,8 @@ function SectionMake(props) {
                                     }
                                     type="number"
                                     style={{marginLeft:'5%', width:'30%'}}
-                                    value={ts} 
-                                    onChange={e =>  {props.setTitleSize(e.currentTarget.value); setTs(e.currentTarget.value);}}
+                                    value={props.titleSize} 
+                                    onChange={e =>  {props.setTitleSize(e.currentTarget.value)}}
                                     />
                             </div>
                         </div>
@@ -157,20 +136,6 @@ function SectionMake(props) {
                         <div  className="make-section-title">
                             <span style={{marginTop:'5px'}}>- 내용 크기</span>   
                             <div style={{display:'flex', justifyContent:'start', alignItems:'center', flexDirection:'row', paddingLeft:'3%'}}>                     
-                                <Slider
-                                    value={props.descSize}
-                                    onChange={handleSliderChange2}
-                                    aria-labelledby="input-slider"
-                                    sx={{
-                                    color: '#6B63F7',
-                                    width:200,
-                                    '& .MuiSlider-thumb': {
-                                        borderRadius: '1px',
-                                    },
-                                    }}
-                                    min={1}
-                                    max={50}
-                                />
                                 <Input
                                     placeholder="글씨 크기"
                                     prefix={<UserOutlined className="site-form-item-icon" />}
@@ -181,8 +146,8 @@ function SectionMake(props) {
                                     }
                                     type="number"
                                     style={{marginLeft:'5%', width:'30%'}}
-                                    value={ds} 
-                                    onChange={e =>  {props.setDescSize(e.currentTarget.value); setDs(e.currentTarget.value);}}
+                                    value={props.descSize} 
+                                    onChange={e =>  {props.setDescSize(e.currentTarget.value);}}
                                     />
                             </div>
                         </div>
@@ -206,20 +171,6 @@ function SectionMake(props) {
                         <div  className="make-section-title">
                             <span style={{marginTop:'5px'}}>- 사진 크기</span>   
                             <div style={{display:'flex', justifyContent:'start', alignItems:'center', flexDirection:'row', paddingLeft:'3%'}}>                     
-                                <Slider
-                                    value={props.imageWidth}
-                                    onChange={handleSliderChange3}
-                                    aria-labelledby="input-slider"
-                                    sx={{
-                                    color: '#6B63F7',
-                                    width:200,
-                                    '& .MuiSlider-thumb': {
-                                        borderRadius: '1px',
-                                    },
-                                    }}
-                                    min={100}
-                                    max={1500}
-                                />
                                 <Input
                                     placeholder="사진 크기"
                                     prefix={<UserOutlined className="site-form-item-icon" />}
@@ -230,7 +181,7 @@ function SectionMake(props) {
                                     }
                                     type="number"
                                     style={{marginLeft:'5%', width:'30%'}}
-                                    value={ws} 
+                                    value={props.imageWidth} 
                                     onChange={e =>  {props.setImageWidth(e.currentTarget.value); setWs(e.currentTarget.value);}}
                                     />
                             </div>

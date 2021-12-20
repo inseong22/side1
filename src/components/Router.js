@@ -4,6 +4,7 @@ import './App.css';
 import MainPage from '../components/MainPage/MainPage';
 import MainPageV2 from '../components/MainPage/MainPageV2';
 import MakePage from '../components/MakePage/MakePage';
+import MakePageV2 from '../components/MakePage/MakePageV2';
 import ResponsePage from '../components/ResponsePage/ResponsePage';
 import SubmitPage from './MakePage/utils/SubmitPage';
 import CouponPage from './CouponPage/CouponPage';
@@ -18,9 +19,8 @@ import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
 const AppRouter = () => {
-    console.log("dpdpdpdpdㅇ애애애애ㅐㅂ 라우터터터");
     console.log(window.location.host.split("."));
-    if (window.location.host.split(".")[0] != "surfee") {
+    if (window.location.host.split(".")[0] != "surfee" && window.location.host.split(".")[0] != 'localhost:3000') {
         return(
             <Router history={history}>
                 <>
@@ -62,7 +62,9 @@ const AppRouter = () => {
                     <Route path="/questions">
                         <QuestionsPage history={history} />
                     </Route>
-                    <Route exact path="/:id" component={L2} />
+                    <Route path="/makev2">
+                        <MakePageV2 history={history}/>
+                    </Route>
                 </Switch>
                 </div>
                 </> 

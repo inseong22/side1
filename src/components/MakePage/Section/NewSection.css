@@ -1,0 +1,25 @@
+.section-template-button{
+    cursor: pointer;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 3px;
+    padding:10px 5px;
+}
+
+.make-hover-section{
+    border:3px solid rgba(255, 255, 255, 0);
+    width:100%;
+}
+
+.make-hover-section:hover{
+    border:3px solid purple;
+}
+
+.make-section-button{
+    font-size:1em;
+    background-color:black;
+    color:white;
+    margin-top:-2%;
+    cursor: pointer;
+    z-index:10;
+    cursor: pointer;
+}

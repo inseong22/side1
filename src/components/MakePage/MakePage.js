@@ -165,7 +165,7 @@ const MakePage = ({history}) => {
     const [secNum, setSecNum] = useState(1);
     const [secNums, setSecNums] = useState([0,1]);
     const [loading, setLoading] = useState(false);
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     // CTA
     const [ctaUse, setCtaUse] = useState(false);
     const [ctaTitle, setCtaTitle] = useState("CTA 버튼");
@@ -772,7 +772,7 @@ const MakePage = ({history}) => {
             case 0: // 기본 세팅
                 return <>
                 <MainSection
-                    ctaUse={ctaUse} ctaLink={ctaLink} ctaTitle={ctaTitle} ctaUse={ctaUse} urlId={urlId} naviButtonColor={naviButtonColor} footerOrNot={footerOrNot}
+                    ctaUse={ctaUse} ctaLink={ctaLink} ctaTitle={ctaTitle} urlId={urlId} naviButtonColor={naviButtonColor} footerOrNot={footerOrNot}
                     mainColor={mainColor} naviTitle={naviTitle} naviTitleColor={naviTitleColor} naviButtonTitle={naviButtonTitle} mainTitleColor={mainTitleColor}
                     userEmail={userEmail} userPhoneNumber={userPhoneNumber} faviconAttachment={faviconAttachment} urlTitle={urlTitle}
                     naviColor={naviColor} setNaviColor={setNaviColor} footerColor={footerColor} setFooterColor={setFooterColor}
@@ -869,13 +869,13 @@ const MakePage = ({history}) => {
 
     return (<>
        <MakeNavBar 
-       doLoad={doLoad}
-        open={open} setOpen={setOpen}
-        full={full} setFull={setFull}
-        device={device} setDevice={setDevice} doSave={doSave}
-        naviColor={naviColor}
-        password={password} setPassword={setPassword}
-        onSubmit={onSubmit}
+            doLoad={doLoad}
+            open={open} setOpen={setOpen}
+            full={full} setFull={setFull}
+            device={device} setDevice={setDevice} doSave={doSave}
+            naviColor={naviColor}
+            password={password} setPassword={setPassword}
+            onSubmit={onSubmit}
        />
        <OverflowScrolling className="make-page-container" style={{marginTop:'-10px'}}>
         {/* <div className="make-page-container" style={{marginTop:'-10px', overflow: 'hidden'}}> */}
