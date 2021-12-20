@@ -175,7 +175,7 @@ function MainPageV2({history}) {
                             <div className="card-content" style={{color:'rgb(30,30,30)', fontSize:'1.5em'}}>
                                 Surfee를 통해 제작한 랜딩페이지는<br/>
                                 모바일 환경에서도 최적화된<br/>
-                                반응형으로 제공된답니다!
+                                반응형으로 제공됩니다.
                             </div>
                             <div className="card-content-link">
                                 <Link to="" className="card-link">지금 바로 만들기 ></Link>
@@ -213,7 +213,7 @@ function MainPageV2({history}) {
                     <div style={{flexDirection:'row', display:'flex', justifyContent:'center', width:'100%', marginTop:'5%'}}>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span>Let's Build Your Page!</span>
-                        <Link to="/make" className="apply-button-v2" >제작하러가기</Link>
+                            <Link to="/make" className="apply-button-v2" >제작하러가기</Link>
                         </div>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span style={{color:'#6a63f7'}}>이미 제작을 완료하셨다면</span>
