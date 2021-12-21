@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useState, useRef, createContext} from 'react'
 import './utils/MakePage.css'
 import { dbService } from '../tools/fbase';
 import { stService } from '../tools/fbase';
@@ -19,10 +19,13 @@ import './utils/NavBar/MakeNavBar.css'
 import Switch from '@mui/material/Switch';
 import { alpha, styled } from '@mui/material/styles';
 import OverflowScrolling from 'react-overflow-scrolling';
-
 import empty from '../tools/img/empty.png';
 import { v4 as uuidv4 } from 'uuid';
 
+export const MyContext = React.createContext({
+    state : {addingSectionAt : 1000},
+    action : {setAddingSectionAt : () => {}}
+});
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
     '& .MuiSwitch-switchBase.Mui-checked': {
@@ -72,7 +75,8 @@ const MakePageV2 = ({history}) => {
                 font:'Pretendard-Regular',
             }
         }
-])
+    ])
+    const [addingSectionAt, setAddingSectionAt] = useState(1000);
 
     // 메인 세팅
     const [mainColor, setMainColor] = useState("#6B63F7");
@@ -135,6 +139,11 @@ const MakePageV2 = ({history}) => {
     const [secNums, setSecNums] = useState([0,1]);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
+
+    const contextValue = {
+        state:{addingSectionAt},
+        action : {setAddingSectionAt}
+    }
 
     const onSubmit = () => {
         setCh(true);
@@ -250,7 +259,6 @@ const MakePageV2 = ({history}) => {
     }
 
     const selectorTable = () => {
-        
         return(
             <NewSectionMake secNum={secNum} content={content} item={content[secNum-1]} setContent={setContent} />
         )
@@ -274,85 +282,87 @@ const MakePageV2 = ({history}) => {
             password={password} setPassword={setPassword}
             onSubmit={onSubmit}
        />
-       <OverflowScrolling className="make-page-container" style={{marginTop:'-10px'}}>
-            {/* 여기서부터 메인페이지 베껴옴 */}
-            <div  className="make-left-landing" style={{width:`${full ? '100%' : '70%' }`}}>
-                <div className="make-left-top-container" style={{display:`${full ? 'none' : 'flex'}`, justifyContent:`${device ? 'start':'center'}`}}>
-                    Let's Building Your Web site! {device ?  <></> : <span> in Mobile</span>}
-                </div>
-                <OverflowScrolling className="scroll-container" style={{ width:`${full ? '100%' : '80%' }`, height:`${full ? '94vh' : '63vh'}`}}>
-                
-                <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`, backgroundColor:`${s1backgroundColor}`}}>  
+       <MyContext.Provider value={contextValue}>
+            <OverflowScrolling className="make-page-container" style={{marginTop:'-10px'}}>
+                    {/* 여기서부터 메인페이지 베껴옴 */}
+                    <div  className="make-left-landing" style={{width:`${full ? '100%' : '70%' }`}}>
+                        <div className="make-left-top-container" style={{display:`${full ? 'none' : 'flex'}`, justifyContent:`${device ? 'start':'center'}`}}>
+                            Let's Building Your Web site! {device ?  <></> : <span> in Mobile</span>}
+                        </div>
+                        <OverflowScrolling className="scroll-container" style={{ width:`${full ? '100%' : '80%' }`, height:`${full ? '94vh' : '63vh'}`}}>
+                        
+                        <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`, backgroundColor:`${s1backgroundColor}`}}>  
 
-                    <MakeNavigation
-                        full={full} naviColor={naviColor} naviTitle={naviTitle}
-                        font={font} urlId={urlId} naviButtonColor={naviButtonColor}
-                        descFont={descFont} naviButtonTitle={naviButtonTitle}
-                        history={history}
-                    />
-                    {/* 새로운 섹션 방식 */}
-                    {sectionsReturn}
-                    {/* 새로운 섹션 방식 끝 */}
-                    {footerOrNot ?  <></> : 
-                        <MakeFooter 
-                            userPhoneNumber={userPhoneNumber}
-                            userEmail={userEmail}
-                            naviTitle={naviTitle}
-                            footerColor={footerColor}
-                            full={full} bigfont={bigfont} smallfont={smallfont}
-                            rate={rate}
-                        />
-                    } 
-                </div> 
+                            <MakeNavigation
+                                full={full} naviColor={naviColor} naviTitle={naviTitle}
+                                font={font} urlId={urlId} naviButtonColor={naviButtonColor}
+                                descFont={descFont} naviButtonTitle={naviButtonTitle}
+                                history={history}
+                            />
+                            {/* 새로운 섹션 방식 */}
+                            {sectionsReturn}
+                            {/* 새로운 섹션 방식 끝 */}
+                            {footerOrNot ?  <></> : 
+                                <MakeFooter 
+                                    userPhoneNumber={userPhoneNumber}
+                                    userEmail={userEmail}
+                                    naviTitle={naviTitle}
+                                    footerColor={footerColor}
+                                    full={full} bigfont={bigfont} smallfont={smallfont}
+                                    rate={rate}
+                                />
+                            } 
+                        </div> 
+                        </OverflowScrolling>
+
+                        {/* 섹션 추가 및 선택 및 제거를 위한 버튼 컨테이너 */}
+                    
+                        <div className="make-left-bottom-container" style={{display:`${full ? 'none' : 'flex'}`}}>
+                            <div className="section-selector-container">
+                                {selectorList}
+                                {
+                                    useLastSection !== 0 && 
+                                    <span style={{backgroundColor:`${secNum === 10 ? "#6B63F7a2" : "white"}`}} className="make-page-section-selector" onClick={(e) => setSecNum(10)}>
+                                        <span style={{width:'70%'}}>신청</span>
+                                    </span>
+                                }
+                                <button onClick={() => addSection()} className="make-which-section-making-add-button">+</button>
+                                <button onClick={() => deleteSection()} className="make-which-section-making-add-button">-</button>
+                                <button onClick={() => {
+                                    if(useLastSection === 0){
+                                        setUseLastSection(10);
+                                    }else{
+                                        setUseLastSection(0);
+                                    }
+                                }} className="make-which-section-making-add-button" style={{backgroundColor:`${useLastSection !== 0 ? 'rgba(255,0,0,0.4)' : "#6a63f76e"}`}}>{useLastSection ? <span>신청 섹션 제거</span> : <span>신청 섹션 추가</span>}</button>
+                            </div>
+                        </div>
+                    </div>
+                {/* 여기까지 메인페이지 베껴옴 */}
+                <div style={{display: 'flex', justifyContent:'center', alignItems: 'center', backgroundColor:'white'}}>
+                    <OverflowScrolling className='overflow-scrolling'>
+                        <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
+                            <div className="section-table-container" style={{width:'100%'}}>
+                                {selectorTable()}
+                            </div>
+                            <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
+                                <ModalMade open={open} setOpen={setOpen} naviTitle={naviTitle} setNaviTitle={setNaviTitle} s1title={s1title} setS1title={setS1title} />
+                                <LoadingModal loading={loading} />
+                                <CheckModal ch={ch} setCh={setCh} onSubmit2={onSubmit2}/>
+                            </div>
+                        </div>
+                    </OverflowScrolling>
+                </div>
+                    {/* 모바일 제한 페이지 */}
+                    <div className="mobile-hide">
+                        <div>
+                            본 사이트는 PC환경에 최적화되어있습니다. <br />
+                            PC로 이동해서 랜딩페이지 제작을 시작해보세요. 😁
+                        </div>
+                    </div>
+                    {/* 로딩창 */}
                 </OverflowScrolling>
-
-                {/* 섹션 추가 및 선택 및 제거를 위한 버튼 컨테이너 */}
-            
-                <div className="make-left-bottom-container" style={{display:`${full ? 'none' : 'flex'}`}}>
-                    <div className="section-selector-container">
-                        {selectorList}
-                        {
-                            useLastSection !== 0 && 
-                            <span style={{backgroundColor:`${secNum === 10 ? "#6B63F7a2" : "white"}`}} className="make-page-section-selector" onClick={(e) => setSecNum(10)}>
-                                <span style={{width:'70%'}}>신청</span>
-                            </span>
-                        }
-                        <button onClick={() => addSection()} className="make-which-section-making-add-button">+</button>
-                        <button onClick={() => deleteSection()} className="make-which-section-making-add-button">-</button>
-                        <button onClick={() => {
-                            if(useLastSection === 0){
-                                setUseLastSection(10);
-                            }else{
-                                setUseLastSection(0);
-                            }
-                        }} className="make-which-section-making-add-button" style={{backgroundColor:`${useLastSection !== 0 ? 'rgba(255,0,0,0.4)' : "#6a63f76e"}`}}>{useLastSection ? <span>신청 섹션 제거</span> : <span>신청 섹션 추가</span>}</button>
-                    </div>
-                </div>
-            </div>
-        {/* 여기까지 메인페이지 베껴옴 */}
-        <div style={{display: 'flex', justifyContent:'center', alignItems: 'center', backgroundColor:'white'}}>
-            <OverflowScrolling className='overflow-scrolling'>
-                <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
-                    <div className="section-table-container" style={{width:'100%'}}>
-                        {selectorTable()}
-                    </div>
-                    <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
-                        <ModalMade open={open} setOpen={setOpen} naviTitle={naviTitle} setNaviTitle={setNaviTitle} s1title={s1title} setS1title={setS1title} />
-                        <LoadingModal loading={loading} />
-                        <CheckModal ch={ch} setCh={setCh} onSubmit2={onSubmit2}/>
-                    </div>
-                </div>
-            </OverflowScrolling>
-        </div>
-        {/* 모바일 제한 페이지 */}
-        <div className="mobile-hide">
-            <div>
-                본 사이트는 PC환경에 최적화되어있습니다. <br />
-                PC로 이동해서 랜딩페이지 제작을 시작해보세요. 😁
-            </div>
-        </div>
-            {/* 로딩창 */}
-        </OverflowScrolling>
+        </MyContext.Provider>
         </>)
 }
 

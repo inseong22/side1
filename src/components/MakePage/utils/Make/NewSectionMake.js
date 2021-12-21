@@ -1,30 +1,29 @@
 import React, {useState, useEffect} from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import update from 'react-addons-update';
 
 function NewSectionMake(props) {
+    const [nowtext, setNowtext] = useState("하위")
 
     const changeText = (event, editor, data) => {
-        console.log(props.content.slice(0,props.content.sectionNumber), "하하체크용")
-        props.setContent([
-            ...props.content.slice(0,props.item.sectionNumber),
-            {
-                ...props.item,
-                titles:{
-                    title:`${data}`,
-                    ...props.content[props.item.sectionNumber-1]
+        setNowtext(data);
+        props.setContent(update(props.content, 
+                {
+                    [props.secNum-1]:{
+                        titles : {$set:{
+                            title : data,
+                        }}
+                    }
                 }
-            },
-            ...props.content.slice(props.item.sectionNumber, props.content.length - 1),
-        ])
+            ))
+        console.log(props.item.titles.title);
     }
-
     return (
         <div>
             이이이에제
-            이건 {props.secNum}입니다.
+            이건 {props.item.titles.title}입니다.
             <br/>
-            <input type="text" value={props.item.titles.title}/>
             <CKEditor
                 editor={ ClassicEditor }
                 data={props.item.titles.title}
@@ -41,7 +40,8 @@ function NewSectionMake(props) {
                 } }
             />
             <br/>
-            {props.item.descs.desc}
+            <pre dangerouslySetInnerHTML={{__html: props.item.titles.title}} style={{fontSize:'2em', color:'red', font:'Pretendard-Regular', width:'100%', textAlign:'left'}}>
+            </pre>
         </div>
     )
 }

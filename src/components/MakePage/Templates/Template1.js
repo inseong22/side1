@@ -7,8 +7,7 @@ function Template1({content}) {
     */
     return (
         <div>
-            <pre>
-                {content.titles.title}
+            <pre dangerouslySetInnerHTML={{__html: content.titles.title}}>
             </pre>
         </div>
     )
