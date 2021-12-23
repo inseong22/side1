@@ -27,18 +27,6 @@ export const MyContext = React.createContext({
     action : {setAddingSectionAt : () => {}}
 });
 
-const GreenSwitch = styled(Switch)(({ theme }) => ({
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      color: "#6B63F7",
-      '&:hover': {
-        backgroundColor: alpha("#6B63F7", theme.palette.action.hoverOpacity),
-      },
-    },
-    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-      backgroundColor: "#6B63F7",
-    },
-  }));
-
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 const smallfont = `28px`;
@@ -52,9 +40,10 @@ const MakePageV2 = ({history}) => {
     const [password, setPassword] = useState("");
     const [ch, setCh] = useState(false);
     // 새로운 세팅
-    const [content, setContent] = useState([
+    const [contents, setContents] = useState([
         {
             sectionTemplateNumber:1,
+            sectionIndex:0,
             titles:{
                 title:'여기서 타이틀을 입력하세요.',
                 font:'Pretendard-Regular',
@@ -66,6 +55,7 @@ const MakePageV2 = ({history}) => {
         },
         {
             sectionTemplateNumber:2,
+            sectionIndex:1,
             titles:{
                 title:'여기서 타2222세요.',
                 font:'Pretendard-Regular',
@@ -260,14 +250,14 @@ const MakePageV2 = ({history}) => {
 
     const selectorTable = () => {
         return(
-            <NewSectionMake secNum={secNum} content={content} item={content[secNum-1]} setContent={setContent} />
+            <NewSectionMake secNum={secNum} contents={contents} content={contents[secNum]} setContents={setContents} />
         )
     }
 
-    const sectionsReturn = content.map((item, index) => {
+    const sectionsReturn = contents.map((item, index) => {
         return(
             <>
-                <NewSection content={item} index={index} setSecNum={setSecNum} />
+                <NewSection content={item} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents}/>
             </>
         )
     })

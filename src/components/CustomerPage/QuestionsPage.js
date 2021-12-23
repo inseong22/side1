@@ -7,14 +7,14 @@ import Footer from '../NavBar/Footer';
 function QuestionsPage() {
     const [cnum, setCnum] = useState(1);
     const [cnums, setCnums] = useState([1,2,3]);
-    const [scrollPosition, setScrollPosition] = useState(0);
+    // const [scrollPosition, setScrollPosition] = useState(0);
 
-    const updateScroll = () => {
-        setScrollPosition(window.scrollY || document.documentElement.scrollTop);
-    }
+    // const updateScroll = () => {
+    //     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+    // }
 
     useEffect(()=>{
-        window.addEventListener('scroll', updateScroll);
+        // window.addEventListener('scroll', updateScroll);
     });
 
     const tabsTable = cnums.map((item, index) => {
@@ -231,7 +231,6 @@ function QuestionsPage() {
     return (
         <>
         <div className="questionspage-container">
-            <NavBarV2 />
             <div className="q-inner">
                 <div className="q-info-top">
                     <div className="q-title-top" style={{fontWeight: 'bold'}}>

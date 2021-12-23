@@ -58,17 +58,17 @@ const ourInfos = [
     },
 ];
 
-function MainPageV2({history}) {
+function MainPageV2({history, isLoggedIn}) {
     const [email,setEmail] = useState("");
     const targets = useRef(null)
-    const [scrollPosition, setScrollPosition] = useState(0);
+    // const [scrollPosition, setScrollPosition] = useState(0);
 
-    const updateScroll = () => {
-        setScrollPosition(window.scrollY || document.documentElement.scrollTop);
-    }
+    // const updateScroll = () => {
+    //     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+    // }
 
     useEffect(()=>{
-        window.addEventListener('scroll', updateScroll);
+        // window.addEventListener('scroll', updateScroll);
     });
 
     const sendData = async () => {
@@ -103,10 +103,21 @@ function MainPageV2({history}) {
         )
     })
 
+    const checkLoggedIn = () => {
+        console.log("로그인했나?", isLoggedIn)
+        if(isLoggedIn === false){
+            alert("로그인하셔야 이용가능한 페이지입니다.");
+            return
+        }else{
+            history.push('/#/seeResponse');
+            history.go();
+            return;
+        }
+    }
+
     return (
         <>
         <div className="main-page-container">
-            <NavBarV2 scrollPosition={scrollPosition} />
             <div className="main-page-section-topbottom" style={{backgroundColor:'white'}}>
                 <div className="main-section-left-topbottom" style={{color:'black'}}>
                     <span className="one-section-big-topbottom">
@@ -217,11 +228,12 @@ function MainPageV2({history}) {
                         </div>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span style={{color:'#6a63f7'}}>이미 제작을 완료하셨다면</span>
-                        <Link to="/seeResponse" className="apply-button-v2" style={{backgroundColor:'#ffffff', color:'#6a63f7'}}>관리하기</Link>   
+                        <Link className="apply-button-v2" onClick={() => checkLoggedIn()} style={{backgroundColor:'#ffffff', color:'#6a63f7'}}>관리하기</Link>   
                         </div>
                     </div>
                 </span>
-                {/* <span className="last-one-component">
+                {/* 
+                <span className="last-one-component">
                     <div className="main-section-last-title">
                         지금 당장 필요하지 않다면<br/>쿠폰 받아가세요!
                     </div>
@@ -232,15 +244,9 @@ function MainPageV2({history}) {
                         이벤트 기간 : 2021.00.00 ~ 2021.00.00 <br/>
                         사용 가능 기간 : ~ 2022.02.28
                     </div>
-                </span> */}
+                </span> 
+                */}
             </div>
-            {/* <div className="main-page-section-last" style={{backgroundColor:'white', color:'black'}}>
-                <span className="last-one-component" style={{width:'100%'}}>
-                    <div>
-                        여기에 뭐 설명같은거
-                    </div>
-                </span>
-            </div> */}
         </div>
         <Footer />
         </>

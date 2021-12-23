@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './utils/ResponsePage.css';
 import {dbService} from '../tools/fbase';
+import {authService} from '../tools/fbase';
 import ReactGa from 'react-ga'
 import AskPassword from './utils/AskPassword'
 import NavBarV2 from '../NavBar/NavBarV2'
@@ -21,50 +22,76 @@ const columns = [
       key: 'date',
       render: date => <span>2021년 {date.getMonth()+1}월 {date.getDate()}일 {date.getHours()}시에 신청 </span>
     },
+    {
+      title: '유입 URL',
+      dataIndex: 'urlId',
+      key: 'urlId',
+      render: text => <span>{text}</span>
+    },
   ];
   
-function ResponsePage() {
+function ResponsePage({userObj}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const [get, setGet] = useState(false);
-    const [reponses, setReponses] = useState([{
-        email:"",
-        created:0,
-        date:"now"
-    }]);
+    const [get, setGet] = useState(true); // 이젠 안쓰는 기능
+    const [responses, setResponses] = useState([[]]);
+    const [mylandings, setMylandings] = useState([]);
     const [part, setPart] = useState(1);
     const [myDatas, setMyDatas] = useState({
         all_sessions:0,
         all_pageViews:0
     });
+    const [nowChecking, setNowChecking] = useState(0);
     
     useEffect(() => {
         ReactGa.initialize('UA-213792742-1');
         // to report page view
-        ReactGa.pageview('/seeResponse');
-        getDatas();
+        ReactGa.pageview(`/seeResponse/${userObj.email}`);
+        getThisUserDatas();
     },[loading])
 
-    const getDatas = async () => {
+    const getThisUserDatas = async () => {
+        const thisuserDatas = await dbService
+            .collection('apply-landing-data')
+            .where("makerEmail", "==", userObj.email)
+            .get();
+        
+        let thisuserData = thisuserDatas.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+        setMylandings(thisuserData);
+
+        let tempDatas = []
+        
+        thisuserData.map(item => {
+            let tempd = []
+            getDatas(item.urlId).then(i => {
+                tempd = i;
+                tempDatas.push(tempd);
+            })
+        })
+        setResponses(tempDatas);
+
+        setTimeout(() => {
+            console.log(responses);
+            setLoading(true);
+        },300)
+}
+
+    const getDatas = async (urlId) => {
         const reDatas = await dbService
         .collection("apply-datas")
         .orderBy("created", "desc")
+        .where("urlId", "==", urlId)
         .get(); // uid를 creatorId로 줬었으니까.
 
         let reData = reDatas.docs.map(doc => {
             let day = new Date(doc.data().created)
             return({...doc.data(), id:doc.id, date:day})
         });
-        setReponses(reData);
 
-        // let p = [];
-        // for(var i = 0; i<Math.ceil(reData.length/10); i++){
-        //     p.push(i+1);
-        // }
-        // setPages(p);
-
-        setLoading(true);
+        return reData;
     }
 
     const getMyData = (path) => {
@@ -105,6 +132,16 @@ function ResponsePage() {
         }
     }
 
+    const returnMylandingsTable = mylandings.map((item, index) => {
+        return(
+            <div className="mylandings-card" key={index}>
+                {item.urlTitle}
+                <button>{"https://surfee.co.kr/#/" + item.urlId}</button>
+                <span onClick={() => {setNowChecking(index)}}>이 정보 보기</span>
+            </div>
+        )
+    })
+
     if(get === false){
         return(
             <AskPassword password={password} setPassword={setPassword} getByPassWord={getByPassWord}/>
@@ -113,11 +150,13 @@ function ResponsePage() {
         if(loading === true){
             return (
                 <div style={{backgroundColor:'white', display:'flex', justifyContent:'center',alignItems:'center', width:'100%', flexDirection:'column'}}>
-                <NavBarV2 />
                 <div className="get-all-container">
                     <div className="get-up-container">
                         <div className="get-up-title">
                             김호진 님의 대시보드
+                        </div>
+                        <div className="get__mylandings-cantainer">
+                            {returnMylandingsTable}
                         </div>
                         <div className="get-buttons-container">
                             <button className="get-part-button" style={{backgroundColor:`${part === 1 ? "#6a63f76e" : "white"}`}} onClick={e => setPart(1)}>응답</button>
@@ -129,9 +168,10 @@ function ResponsePage() {
                         <div className="response-container">
                             <div className="response-table">
                                 <div className="response-table-top">
-                                    <span className="response-table-title"> 총 신청자 수 : {reponses.length} 명 </span>
+                                    <span className="response-table-title"> {responses.length === 0 ? "응답을 볼 페이지를 클릭하세요." : <div>총 목표액션 전환 수 : {responses[nowChecking].length} 명</div>} </span>
                                 </div>
-                                <Table columns={columns} dataSource={reponses} className="response-table-datas"/>
+                                {responses.length === 0 ? <></> : <Table columns={columns} dataSource={responses[nowChecking]} className="response-table-datas"/>}
+                                
                             </div>
                         </div>
                         :
@@ -152,7 +192,11 @@ function ResponsePage() {
             )
         }else{
             return(
-                <></>
+                <>
+                <div>
+                    유저 정보를 불러오는 중입니다..
+                </div>
+                </>
             )
         }
     }

@@ -2,9 +2,18 @@ import React, {useState, useEffect} from 'react'
 import './utils/NavBar.css'
 import './utils/NavBarV2.css'
 import {Link} from 'react-router-dom';
+import {authService} from '../tools/fbase'
 
 
-function NavBarV2({history, scrollPosition}) {
+function NavBarV2({history, scrollPosition, isLoggedIn}) {
+
+
+    const onLogout = () => {
+        localStorage.removeItem('name');
+        localStorage.removeItem('job');
+        authService.signOut();
+        alert("로그아웃 되셨습니다.");
+    }
     
     return (
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width:'100%'}}>
@@ -19,6 +28,21 @@ function NavBarV2({history, scrollPosition}) {
                     <Link to="/questions" className="nav-left-text">
                         문의하기
                     </Link>
+                    {isLoggedIn ? 
+                    <>
+                    <span className="nav-left-text" onClick={() => onLogout()}>
+                        로그아웃
+                    </span>
+                    </> : 
+                    <>
+                        <Link to="/login" className="nav-left-text">
+                            로그인
+                        </Link>
+                        <Link to="/register" className="nav-left-text">
+                            회원가입
+                        </Link>
+                    </>
+                    }
                 </div>
                 <div className="nav-on-v2">
                     <button className="nav-button-round-v2" onClick={() => window.scrollTo(0,document.body.scrollHeight)}>무료로 체험하기</button>

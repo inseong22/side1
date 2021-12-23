@@ -7,19 +7,37 @@
 
 .make-hover-section{
     border:3px solid rgba(255, 255, 255, 0);
+    padding:30px 0px;
     width:100%;
 }
 
-.make-hover-section:hover{
-    border:3px solid purple;
-}
-
 .make-section-button{
-    font-size:1em;
+    font-size:0.6em;
     background-color:black;
     color:white;
     margin-top:-2%;
     cursor: pointer;
     z-index:10;
+    width:20%;
+    position:relative;
+    top:6%;
+}
+
+.section-hover-selections{
+    background-color:black;
+    color:white;
+    font-size:0.5em;
+    margin:1%;
     cursor: pointer;
+}
+
+.section-adding-template{
+    background-color:white;
+    font-size:0.8em;
+}
+
+.section-selection-container{
+    position: absolute;
+
+    flex-direction:row;
 }

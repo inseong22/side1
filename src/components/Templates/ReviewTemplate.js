@@ -6,8 +6,7 @@ function Template3() {
     */
     return (
         <div>
-            이미지 왼쪽
-            텍스트 오른쪽
+            리뷰들
         </div>
     )
 }

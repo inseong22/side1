@@ -1248,6 +1248,32 @@
   dependencies:
     "ckeditor5" "^31.1.0"
 
+"@ckeditor/ckeditor5-build-balloon-block@^31.1.0":
+  "integrity" "sha512-ePMMdTOLBfZWW2EpSDIZjmd6RAVT5uQJTi2tcZeVMqYmUeOzXy0z13Jg8pGlzSSd2nSFBVke6lWFtpwwWau2uw=="
+  "resolved" "https://registry.npmjs.org/@ckeditor/ckeditor5-build-balloon-block/-/ckeditor5-build-balloon-block-31.1.0.tgz"
+  "version" "31.1.0"
+  dependencies:
+    "@ckeditor/ckeditor5-adapter-ckfinder" "^31.1.0"
+    "@ckeditor/ckeditor5-autoformat" "^31.1.0"
+    "@ckeditor/ckeditor5-basic-styles" "^31.1.0"
+    "@ckeditor/ckeditor5-block-quote" "^31.1.0"
+    "@ckeditor/ckeditor5-ckfinder" "^31.1.0"
+    "@ckeditor/ckeditor5-cloud-services" "^31.1.0"
+    "@ckeditor/ckeditor5-easy-image" "^31.1.0"
+    "@ckeditor/ckeditor5-editor-balloon" "^31.1.0"
+    "@ckeditor/ckeditor5-essentials" "^31.1.0"
+    "@ckeditor/ckeditor5-heading" "^31.1.0"
+    "@ckeditor/ckeditor5-image" "^31.1.0"
+    "@ckeditor/ckeditor5-indent" "^31.1.0"
+    "@ckeditor/ckeditor5-link" "^31.1.0"
+    "@ckeditor/ckeditor5-list" "^31.1.0"
+    "@ckeditor/ckeditor5-media-embed" "^31.1.0"
+    "@ckeditor/ckeditor5-paragraph" "^31.1.0"
+    "@ckeditor/ckeditor5-paste-from-office" "^31.1.0"
+    "@ckeditor/ckeditor5-table" "^31.1.0"
+    "@ckeditor/ckeditor5-typing" "^31.1.0"
+    "@ckeditor/ckeditor5-ui" "^31.1.0"
+
 "@ckeditor/ckeditor5-build-classic@^31.1.0":
   "integrity" "sha512-g55K2CLOaLKb56OItEYafPhA9Zf8VqRmlXLYgUqJUJ0px0xrO82+G7vU7az9WJyjiW+nSkvusRBON9SZv1/Bdw=="
   "resolved" "https://registry.npmjs.org/@ckeditor/ckeditor5-build-classic/-/ckeditor5-build-classic-31.1.0.tgz"
@@ -1314,6 +1340,14 @@
   "version" "31.1.0"
   dependencies:
     "ckeditor5" "^31.1.0"
+
+"@ckeditor/ckeditor5-editor-balloon@^31.1.0":
+  "integrity" "sha512-vL9l/BranIZp/ZcQ9iN6JirXW5gcxuOTP+wM8QsXvpihtq+Gt5a8w2TPGtF+d4BoJYbXpqnA3fR+OBtu86dEvA=="
+  "resolved" "https://registry.npmjs.org/@ckeditor/ckeditor5-editor-balloon/-/ckeditor5-editor-balloon-31.1.0.tgz"
+  "version" "31.1.0"
+  dependencies:
+    "ckeditor5" "^31.1.0"
+    "lodash-es" "^4.17.15"
 
 "@ckeditor/ckeditor5-editor-classic@^31.1.0":
   "integrity" "sha512-DCwDBnjQ5vuD47JMmbuo193nb/hMW+mlHaHMBEy8lCWtfsUpqd6pG1mG5zCvTAX++8XDVFAjtdayANuQRej0jg=="

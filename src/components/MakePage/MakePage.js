@@ -13,12 +13,10 @@ import MainSection from './utils/Make/MainSection'
 import ModalMade from './utils/ModalMade'
 import LoadingModal from './utils/Modal/LoadingModal'
 import CheckModal from './utils/Modal/CheckModal'
-import { Input, Tooltip, Button } from 'antd';
 import './utils/MakeLanding.css'
 import './utils/NavBar/MakeNavBar.css'
 import Switch from '@mui/material/Switch';
 import { alpha, styled } from '@mui/material/styles';
-import { pink } from '@mui/material/colors';
 import OverflowScrolling from 'react-overflow-scrolling';
 
 import section0 from '../tools/img/section0.png';

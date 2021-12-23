@@ -13,15 +13,6 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!-- 웹 앱 매니페스트를 읽어 들이기 -->
     <link rel="manifest" href="manifest.json">
-    <!-- 서비스 워커를 등록 -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-        .then((reg) => {
-          console.log('서비스 워커가 등록됨.', reg);
-        });
-      }
-    </script>
     
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3P8WL2EDT"></script>

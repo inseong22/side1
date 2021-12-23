@@ -6,7 +6,7 @@ function Template1({content}) {
     * 텍스트 오른쪽
     */
     return (
-        <div>
+        <div className="make-main-page-section">
             <pre dangerouslySetInnerHTML={{__html: content.titles.title}}>
             </pre>
         </div>
