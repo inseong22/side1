@@ -3,6 +3,7 @@ import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Input } from 'antd';
 import Checkbox from '@mui/material/Checkbox';
+import {dbService} from '../../../tools/fbase'
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -42,16 +43,21 @@ const style = {
 function CheckModal({ch, setCh, onSubmit2}) {
     const [myYes, setMyYes] = useState(false);
     const [email, setEmail] = useState("");
-    const [byes, setByes] = useState(false);
+    const [feedback1, setFeedback1] = useState("");
 
     const submitDone = () => {
-        if(!myYes || !byes){
+        if(!myYes){
             alert("상기의 사항에 대해서 동의한 경우에만 신청이 진행될 수 있습니다!")
             return;
         }else if(email.length < 3){
             alert("이메일 양식에 맞게 작성해주시기 바랍니다.")
             return;
         }else{
+            // 피드백 입력 받아서 저장. 입력한 내용이랑 현재 유저의 이메일, 현재 제작한 랜딩페이지의 아이디
+            dbService.collection('make-feedback').add({
+                feedback1:feedback1
+            })
+
             onSubmit2();
             setCh(!ch);
         }
@@ -84,13 +90,13 @@ function CheckModal({ch, setCh, onSubmit2}) {
                                 <span>이메일</span>
                                 <Input style={{width:'60%'}} tyle="text" value={email} onChange={e => setEmail(e.currentTarget.value)}/>
                             </div>
+                            <div style={{display:'flex', flexDirection:'column'}}>
+                                <span>피드백 질문 1</span>
+                                <Input style={{width:'60%'}} tyle="text" value={feedback1} onChange={e => setFeedback1(e.currentTarget.value)}/>
+                            </div>
                             <div style={{marginTop:'20px', display:'flex', flexDirection:'row', alignItems:'center'}}>
                                 <Checkbox color="secondary" type="checkbox" value={myYes} onChange={e => setMyYes(!myYes)}/>
                                 <span style={{marginLeft:'10px'}}> 개인정보 수집/이용에 동의합니다.</span>
-                            </div>
-                            <div style={{ display:'flex', flexDirection:'row', alignItems:'center'}}>
-                                <Checkbox color="secondary"  type="checkbox" value={byes} onChange={e => setByes(!byes)}/>
-                                <span style={{marginLeft:'10px'}}> 베타 서비스 기간 동안은 제출 후 수정이 불가능하니 꼼꼼하게 확인하여 주시기 바랍니다.</span>
                             </div>
                         </div>
                         <div>

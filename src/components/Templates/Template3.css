@@ -1,0 +1,22 @@
+.features-container{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items : center;
+    flex-direction:column;
+}
+
+.features__feature-card{
+    width:25%;
+    margin:1%;
+    padding:5%;
+    background-color:gray;
+}
+
+.features__features-card-container{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items : center;
+    flex-direction:row;
+}

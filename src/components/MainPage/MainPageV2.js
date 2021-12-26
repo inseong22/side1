@@ -69,6 +69,13 @@ function MainPageV2({history, isLoggedIn}) {
 
     useEffect(()=>{
         // window.addEventListener('scroll', updateScroll);
+        setInterval(() => {
+            // console.log("시작")
+            // dbService.collection("test").add({
+            //     id:'id'
+            // })
+            // console.log("끝")
+        },1000)
     });
 
     const sendData = async () => {

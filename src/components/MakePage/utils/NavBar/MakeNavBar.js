@@ -22,7 +22,9 @@ function MakeNavBar(props) {
                 <Button onClick={props.doLoad} className="make-nav-left-text">
                     불러오기
                 </Button>
-                <Button style={{width:'120px', backgroundColor:'#6a63f75b'}} onClick={props.onSubmit} className="make-nav-left-text">제작완료 후 신청</Button>
+                <Button style={{width:'120px', backgroundColor:'#6a63f75b'}} onClick={props.onSubmit} className="make-nav-left-text">
+                    배포하기
+                </Button>
             </div>
         </div>
     )

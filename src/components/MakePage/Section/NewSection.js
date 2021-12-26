@@ -1,7 +1,7 @@
 import React, {useState,useContext} from 'react'
 import Template1 from '../../Templates/Template1'
 import Template2 from '../../Templates/Template2'
-import ReviewTemplate from '../../Templates/ReviewTemplate'
+import Template3 from '../../Templates/Template3'
 import VideoTemplate from '../../Templates/VideoTemplate'
 import './NewSection.css'
 import { MyContext } from '../MakePageV2'
@@ -12,6 +12,7 @@ function NewSection({content, index, setSecNum, contents, setContents}) {
     const {state, action} = useContext(MyContext)
 
     const deleteThisSection = () => {
+        console.log(index, content)
         setContents([
             ...contents.slice(0,index),
             ...contents.slice(index + 1,contents.length)
@@ -34,17 +35,15 @@ function NewSection({content, index, setSecNum, contents, setContents}) {
                 )
             case 2:
                 return (
-                    <div>
-                        안녕하세요 새로운 섹션2
-                    </div>
+                    <Template2 content={content} />
                 )
             case 3:
                 return (
-                    <VideoTemplate content={content} />
+                    <Template3 content={content} />
                 )
             case 4:
                 return (
-                    <ReviewTemplate content={content} />
+                    <VideoTemplate content={content} />
                 )
             default:
                 return (

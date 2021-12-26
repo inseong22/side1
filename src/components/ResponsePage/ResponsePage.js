@@ -3,10 +3,10 @@ import './utils/ResponsePage.css';
 import {dbService} from '../tools/fbase';
 import {authService} from '../tools/fbase';
 import ReactGa from 'react-ga'
-import AskPassword from './utils/AskPassword'
 import NavBarV2 from '../NavBar/NavBarV2'
 import Footer from '../NavBar/Footer'
 import { Table, Tag, Space } from 'antd';
+import MadeLandingCard from './utils/MadeLandingCard'
 import gadata from './data/gadata';
 
 const columns = [
@@ -34,7 +34,6 @@ function ResponsePage({userObj}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const [get, setGet] = useState(true); // 이젠 안쓰는 기능
     const [responses, setResponses] = useState([[]]);
     const [mylandings, setMylandings] = useState([]);
     const [part, setPart] = useState(1);
@@ -117,36 +116,11 @@ function ResponsePage({userObj}) {
         setMyDatas(body);
     }
 
-    const getByPassWord = () => {
-        if(password === "surfee.ourdata"){
-            const path = '/'
-            setGet(!get);
-            getDatas();
-            getMyData(path)
-        }else{
-            // password로 firebase에서 where 써서 원하는 데이터만 리턴하는 세팅.
-            // 비밀번호에 해당하는 랜딩페이지 정보 불러오기
-            // 불러온 랜딩페이지 정보에 해당하는 응답들 불러오기
-            // 불러온 랜딩페이지 정보의 path( urlId )에 해당하는 GA데이터 찾아서 세팅하기
-            alert("존재하지 않는 비밀번호 입니다!");
-        }
-    }
-
     const returnMylandingsTable = mylandings.map((item, index) => {
         return(
-            <div className="mylandings-card" key={index}>
-                {item.urlTitle}
-                <button>{"https://surfee.co.kr/#/" + item.urlId}</button>
-                <span onClick={() => {setNowChecking(index)}}>이 정보 보기</span>
-            </div>
+            <MadeLandingCard item={item} key={item.id} index={index} setNowChecking={setNowChecking} />
         )
     })
-
-    if(get === false){
-        return(
-            <AskPassword password={password} setPassword={setPassword} getByPassWord={getByPassWord}/>
-        )
-    }else{
         if(loading === true){
             return (
                 <div style={{backgroundColor:'white', display:'flex', justifyContent:'center',alignItems:'center', width:'100%', flexDirection:'column'}}>
@@ -165,6 +139,7 @@ function ResponsePage({userObj}) {
                     </div>
                     <div className="get-down-container">
                         {  part === 1 ? 
+                        // 응답 파트
                         <div className="response-container">
                             <div className="response-table">
                                 <div className="response-table-top">
@@ -176,6 +151,7 @@ function ResponsePage({userObj}) {
                         </div>
                         :
                         <>
+                        {/* 데이터 파트 */}
                         <div style={{height:'100vh'}}>
                             <button onClick={() => getMyData()}>데이터 불러오기</button>
                             <div>
@@ -199,7 +175,6 @@ function ResponsePage({userObj}) {
                 </>
             )
         }
-    }
 }
 
 export default ResponsePage

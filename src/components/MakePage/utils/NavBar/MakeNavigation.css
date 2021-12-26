@@ -1,0 +1,9 @@
+.make-navigation{
+    width:100%;
+    z-index:3;
+    height:60px;
+    width: 70%;
+    display: flex;
+    justify-content: start;
+    align-items : center;
+}

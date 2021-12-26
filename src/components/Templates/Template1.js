@@ -2,8 +2,7 @@ import React from 'react'
 
 function Template1({content}) {
     /*
-    * 이미지 왼쪽
-    * 텍스트 오른쪽
+    * only 텍스트
     */
     return (
         <div className="make-main-page-section">

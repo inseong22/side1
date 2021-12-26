@@ -1,14 +1,12 @@
 import React from 'react'
 
-function Template2() {
+function Template2({content}) {
     /*
-    * 이미지 오른쪽
-    * 텍스트 왼쪽
+    * 이미지
     */
     return (
         <div>
-            이미지 왼쪽
-            텍스트 오른쪽
+            <img src={content.attachment} style={{width:`${content.width}%`}} />
         </div>
     )
 }

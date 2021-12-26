@@ -5,3 +5,8 @@
     margin:1%;
     cursor: pointer;
 }
+
+.section-make__inner-container{
+    display:flex;
+    flex-direction: column;
+}

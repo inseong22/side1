@@ -13,6 +13,8 @@ function NavBarV2({history, scrollPosition, isLoggedIn}) {
         localStorage.removeItem('job');
         authService.signOut();
         alert("로그아웃 되셨습니다.");
+        history.push('/');
+        history.go();
     }
     
     return (

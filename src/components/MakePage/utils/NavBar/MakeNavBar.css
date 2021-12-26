@@ -9,6 +9,7 @@
     border-bottom: 1px solid #dadada;
     font-family: Noto Sans KR;
     font-size: 14px;
+    z-index:100;
 }
 
 .make-page-nav-half{

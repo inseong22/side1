@@ -7,20 +7,19 @@ import NewSection from './Section/NewSection'
 import SectionMake from './utils/Make/SectionMake'
 import NewSectionMake from './utils/Make/NewSectionMake'
 import MakeNavBar from './utils/NavBar/MakeNavBar'
-import MakeNavigation from './utils/NavBar/MakeNavigation'
+import MakeNavigationV2 from './utils/NavBar/MakeNavigationV2'
+import NaviFooterSectionMake from './utils/Make/NaviFooterSectionMake'
 import MakeFooter from './utils/NavBar/MakeFooter'
-import LastSectionMake from './utils/Make/LastSectionMake'
-import MainSection from './utils/Make/MainSection'
 import ModalMade from './utils/ModalMade'
 import LoadingModal from './utils/Modal/LoadingModal'
 import CheckModal from './utils/Modal/CheckModal'
 import './utils/MakeLanding.css'
 import './utils/NavBar/MakeNavBar.css'
 import Switch from '@mui/material/Switch';
-import { alpha, styled } from '@mui/material/styles';
 import OverflowScrolling from 'react-overflow-scrolling';
-import empty from '../tools/img/empty.png';
 import { v4 as uuidv4 } from 'uuid';
+import { useLocation, useParams } from 'react-router';
+import { base } from '../Templates/baseTemplates'
 
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
@@ -33,40 +32,35 @@ const smallfont = `28px`;
 const bigfont = '50px';
 const rate = 0.63;
 
-const MakePageV2 = ({history}) => {
+const MakePageV2 = ({history}, props) => {
     const targets = useRef(null)
     const [device, setDevice] = useState(true)
     const [full, setFull] = useState(false)
     const [password, setPassword] = useState("");
     const [ch, setCh] = useState(false);
+    const [nowState, setNowState] = useState('new');
+    const [load, setLoad] = useState(false);
+    const location = useLocation();
+
     // 새로운 세팅
-    const [contents, setContents] = useState([
-        {
-            sectionTemplateNumber:1,
-            sectionIndex:0,
-            titles:{
-                title:'여기서 타이틀을 입력하세요.',
-                font:'Pretendard-Regular',
-            },
-            descs:{
-                desc:'여기서 설명을 입력하세요.',
-                font:'Pretendard-Regular',
-            }
-        },
-        {
-            sectionTemplateNumber:2,
-            sectionIndex:1,
-            titles:{
-                title:'여기서 타2222세요.',
-                font:'Pretendard-Regular',
-            },
-            descs:{
-                desc:'여기서 설22222하세요.',
-                font:'Pretendard-Regular',
-            }
-        }
-    ])
-    const [addingSectionAt, setAddingSectionAt] = useState(1000);
+    const [contents, setContents] = useState([ base[0], base[1] ])
+
+    // 네비게이션
+    const [navi, setNavi] = useState({
+        sectionTemplateNumber:1,
+        title:'Surfee',
+        backgroundColor:'rgba(0,0,0,0)', 
+        buttonFunc:'link',
+        link:'www.naver.com',
+        buttonTitle:'신청하기'
+    });
+    // 푸터
+    const [foot, setFoot] = useState({
+        sectionTemplateNumber:1,
+        footerOrNot:true
+    });
+
+    const [addingSectionAt, setAddingSectionAt] = useState(1000); // 1000은 추가하고 있지 않다는 것을 의미.
 
     // 메인 세팅
     const [mainColor, setMainColor] = useState("#6B63F7");
@@ -79,44 +73,10 @@ const MakePageV2 = ({history}) => {
 
     // 섹션 1
     const [s1title, setS1title] = useState("Surfee에 오신 것을 환영합니다.\n프로젝트의 타이틀 설명을\n적어보세요.");
-    const [s1titleColor, setS1titleColor] = useState("rgba(255,255,255,1)");
-    const [s1desc, setS1desc] = useState("여기는 타이틀에 대한 세부 내용을 적어보세요.\n신규 서비스와 이벤트부터 스타트업 아이템 검증까지,\n코딩없이 랜딩페이지를 만들고 실시간 데이터 분석을 통해\n최고의 고객 전환율을 경험해 보세요.");
-    const [s1descColor, setS1descColor] = useState("rgba(255,255,255,1)");
-    const [s1descSize, setS1descSize] = useState(20);
-    const [s1titleSize, setS1titleSize] = useState(40);
-    const [attachment1, setAttachment1] = useState(`${empty}`);
-    const [imageWidth1, setImageWidth1] = useState(400);
-    const [s1template, setS1template] = useState(1);
-    const [s1backgroundColor, setS1backgroundColor] = useState("#6B63F7")
-    const [backgroundImage1, setBackgroundImage1] = useState("")
-    const [sectionHeight1, setSectionHeight1] = useState(100)
-    const [s1applyButton, setS1applyButton] = useState("지금바로 시작하기");
-    const [s1applyButtonUse, setS1applyButtonUse] = useState(false);
-    const [s1applyButtonColor, setS1applyButtonColor] = useState("rgba(255,255,255,1)");
-
-    // 라스트 신청 부분
-    const [useLastSection, setUseLastSection] = useState(0);
-    const [lasttitle, setLasttitle] = useState("One-stop 랜딩페이지 제작 툴,\n가장 먼저 이용해 보세요");
-    const [lastdesc, setLastdesc] = useState("사전신청하신 분들에겐 오픈 시 사용 가능한\n일주일 무료 이용권이 제공됩니다.");
-    const [lasttitleColor, setLasttitleColor] = useState("rgba(252,252,252,1)");
-    const [lastdescColor, setLastdescColor] = useState("rgba(252,252,252,1)");
-    const [lasttitleSize, setLasttitleSize] = useState(30);
-    const [lastDescSize, setLastDescSize] = useState(20);
-    const [lasttemplate, setLasttemplate] = useState(1);
-    const [lastbackgroundColor, setLastbackgroundColor] = useState("black")
-    const [lastapplyButton, setLastapplyButton] = useState("사전신청하고 혜택받기");
-    const [lastApplies, setLastApplies] = useState(1);
-    const [answers, setAnswers] = useState([])
-    const [lastSectionHeight, setLastSectionHeight] = useState(100);
-    const [link, setLink] = useState("www.naver.com")
-    const [inf, setInf] = useState(1);
 
     // 네비게이션
     const [naviTitle, setNaviTitle] = useState("")
     const [naviColor, setNaviColor] = useState("rgba(255,255,255,0)")
-    const [naviTitleColor, setNaviTitleColor] = useState("rgba(255,255,255,1)")
-    const [naviButtonTitle, setNaviButtonTitle] = useState("사전신청 하기")
-    const [naviButtonColor, setNaviButtonColor] = useState("white")
 
     // 푸터
     const [footerOrNot, setFooterOrNot] = useState(false);
@@ -125,18 +85,41 @@ const MakePageV2 = ({history}) => {
     const [userPhoneNumber, setUserPhoneNumber] = useState("010-4690-5086");
 
     // 사진들 아래는 기타
-    const [secNum, setSecNum] = useState(1);
+    const [secNum, setSecNum] = useState(0); // 현재 수정중인 페이지를 의미.
     const [secNums, setSecNums] = useState([0,1]);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
 
+    useEffect(() => {
+        if(load === false && location.state !== undefined){
+            const arr = location.pathname.split('/');
+            setNowState(arr[arr.length -1]);
+            setLoad(true);
+            // setContents(location.state.item)
+        }
+    })
+
     const contextValue = {
-        state:{addingSectionAt},
-        action : {setAddingSectionAt}
+        state: {addingSectionAt, secNum},
+        action : {setAddingSectionAt, setSecNum}
     }
 
-    const onSubmit = () => {
-        setCh(true);
+    const onSubmit = async () => {
+        if(nowState === 'edit'){
+            setLoading(true);
+            // 기존에 있는걸 업데이트 해야한다.
+            const body = {
+                contents:contents
+            }
+            await dbService.doc(`apply-landing-data/${contents.id}`)
+                .update(body)
+            
+            alert("업데이트된 정보로 배포하였습니다.");
+            
+            setLoading(false);
+        }else{
+            setCh(true);
+        }
     }
 
     const onSubmit2 = async () => {
@@ -162,7 +145,7 @@ const MakePageV2 = ({history}) => {
             const {currentTarget:{result}} = finishedEvent;
             switch (num){
                 case 1:
-                    setAttachment1(result);
+                    // setAttachment1(result);
                     break;
             }
         }
@@ -221,15 +204,6 @@ const MakePageV2 = ({history}) => {
         setSecNums(secNumsTemp);
     }
 
-    const addInput = () => {
-        setLastApplies(lastApplies + 1);
-        console.log(lastApplies + 1);
-    }
-
-    const selectorList = secNums.map((item,index) => {
-        
-    })
-
     const doLoad = async () => {
         setLoading(true);
         const checkDatas = await dbService
@@ -249,9 +223,16 @@ const MakePageV2 = ({history}) => {
     }
 
     const selectorTable = () => {
-        return(
-            <NewSectionMake secNum={secNum} contents={contents} content={contents[secNum]} setContents={setContents} />
-        )
+        // 50은 내비를 의미, 51은 푸터를 의미
+        if(secNum === 50 && addingSectionAt === 1000 || secNum === 51 && addingSectionAt === 1000 ){
+            return(
+                <NaviFooterSectionMake navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot} />
+            )
+        }else{
+            return(
+                <NewSectionMake contents={contents} content={contents[secNum]} setContents={setContents} />
+            )
+        }
     }
 
     const sectionsReturn = contents.map((item, index) => {
@@ -271,6 +252,7 @@ const MakePageV2 = ({history}) => {
             naviColor={naviColor}
             password={password} setPassword={setPassword}
             onSubmit={onSubmit}
+            nowState={nowState}
        />
        <MyContext.Provider value={contextValue}>
             <OverflowScrolling className="make-page-container" style={{marginTop:'-10px'}}>
@@ -281,12 +263,10 @@ const MakePageV2 = ({history}) => {
                         </div>
                         <OverflowScrolling className="scroll-container" style={{ width:`${full ? '100%' : '80%' }`, height:`${full ? '94vh' : '63vh'}`}}>
                         
-                        <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`, backgroundColor:`${s1backgroundColor}`}}>  
-
-                            <MakeNavigation
-                                full={full} naviColor={naviColor} naviTitle={naviTitle}
-                                font={font} urlId={urlId} naviButtonColor={naviButtonColor}
-                                descFont={descFont} naviButtonTitle={naviButtonTitle}
+                        <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`}}>  
+                            {/* 네비게이션 */}
+                            <MakeNavigationV2
+                                full={full} navi={navi}
                                 history={history}
                             />
                             {/* 새로운 섹션 방식 */}
@@ -308,27 +288,10 @@ const MakePageV2 = ({history}) => {
                         {/* 섹션 추가 및 선택 및 제거를 위한 버튼 컨테이너 */}
                     
                         <div className="make-left-bottom-container" style={{display:`${full ? 'none' : 'flex'}`}}>
-                            <div className="section-selector-container">
-                                {selectorList}
-                                {
-                                    useLastSection !== 0 && 
-                                    <span style={{backgroundColor:`${secNum === 10 ? "#6B63F7a2" : "white"}`}} className="make-page-section-selector" onClick={(e) => setSecNum(10)}>
-                                        <span style={{width:'70%'}}>신청</span>
-                                    </span>
-                                }
-                                <button onClick={() => addSection()} className="make-which-section-making-add-button">+</button>
-                                <button onClick={() => deleteSection()} className="make-which-section-making-add-button">-</button>
-                                <button onClick={() => {
-                                    if(useLastSection === 0){
-                                        setUseLastSection(10);
-                                    }else{
-                                        setUseLastSection(0);
-                                    }
-                                }} className="make-which-section-making-add-button" style={{backgroundColor:`${useLastSection !== 0 ? 'rgba(255,0,0,0.4)' : "#6a63f76e"}`}}>{useLastSection ? <span>신청 섹션 제거</span> : <span>신청 섹션 추가</span>}</button>
-                            </div>
                         </div>
                     </div>
                 {/* 여기까지 메인페이지 베껴옴 */}
+                {/* 아래는 제작하는 곳 */}
                 <div style={{display: 'flex', justifyContent:'center', alignItems: 'center', backgroundColor:'white'}}>
                     <OverflowScrolling className='overflow-scrolling'>
                         <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
