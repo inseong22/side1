@@ -44,9 +44,9 @@ function ResponsePage({userObj}) {
     const [nowChecking, setNowChecking] = useState(0);
     
     useEffect(() => {
-        ReactGa.initialize('UA-213792742-1');
         // to report page view
-        ReactGa.pageview(`/seeResponse/${userObj.email}`);
+        // ReactGa.initialize('UA-213792742-1');
+        // ReactGa.pageview(`/seeResponse/${userObj.email}`);
         getThisUserDatas();
     },[loading])
 

@@ -58,7 +58,7 @@ const ourInfos = [
     },
 ];
 
-function MainPageV2({history, isLoggedIn}) {
+function MainPageV2({history, isLoggedIn, userObj}) {
     const [email,setEmail] = useState("");
     const targets = useRef(null)
     // const [scrollPosition, setScrollPosition] = useState(0);
@@ -119,6 +119,20 @@ function MainPageV2({history, isLoggedIn}) {
             history.push('/#/seeResponse');
             history.go();
             return;
+        }
+    }
+
+    const SomeoneClickMoveToMake = () => {
+        if(userObj !== null){
+            dbService.collection('SomeoneClickMoveToMake').add({
+                name:userObj.displayName,
+                email:userObj.email,
+                createdAt: new Date(),
+            })
+        }else{
+            dbService.collection('SomeoneClickMoveToMake').add({
+                createdAt: new Date(),
+            })
         }
     }
 
@@ -231,7 +245,7 @@ function MainPageV2({history, isLoggedIn}) {
                     <div style={{flexDirection:'row', display:'flex', justifyContent:'center', width:'100%', marginTop:'5%'}}>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span>Let's Build Your Page!</span>
-                            <Link to="/make" className="apply-button-v2" >제작하러가기</Link>
+                            <Link to="/make" className="apply-button-v2" onClick={() => SomeoneClickMoveToMake()}>제작하러가기</Link>
                         </div>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span style={{color:'#6a63f7'}}>이미 제작을 완료하셨다면</span>

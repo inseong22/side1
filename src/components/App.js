@@ -25,6 +25,7 @@ function App() {
     }else{
       setInit(true)
     }
+    console.log(userObj)
   })
 
   return (

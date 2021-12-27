@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, Tooltip, Button } from 'antd';
 import Switch from '@mui/material/Switch';
 
-function MakeNavBar(props) {
+function NavBarInMakePage(props) {
     return (
         <div className="make-page-nav">
             <div className="make-page-nav-half" style={{justifyContent: 'start', marginLeft:'1%'}}>
@@ -10,6 +10,8 @@ function MakeNavBar(props) {
                 <span style={{marginLeft:'5%', width:'50%'}}>
                     <span>전체화면보기</span>
                     <Switch value={props.full} onChange={e => props.setFull(!props.full)}  style={{marginLeft:'3%'}}/>
+                    <span>모바일 전환</span>
+                    <Switch value={props.device} onChange={e => props.setDevice(!props.device)}  style={{marginLeft:'3%'}}/>
                     {/* <span style={{marginLeft:'5%'}}>모바일 화면 보기</span>
                     <Switch value={props.device} onChange={e => props.setDevice(!props.device)}  style={{marginLeft:'3%'}}/> */}
                 </span>
@@ -30,4 +32,4 @@ function MakeNavBar(props) {
     )
 }
 
-export default MakeNavBar
+export default NavBarInMakePage

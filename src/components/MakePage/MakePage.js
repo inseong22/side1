@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import Section from './utils/Section/Section'
 import SectionMake from './utils/Make/SectionMake'
 import LastSection from './utils/Section/LastSection'
-import MakeNavBar from './utils/NavBar/MakeNavBar'
+import NavBarInMakePage from './utils/NavBar/NavBarInMakePage'
 import MakeFooter from './utils/NavBar/MakeFooter'
 import LastSectionMake from './utils/Make/LastSectionMake'
 import MainSection from './utils/Make/MainSection'
@@ -866,7 +866,7 @@ const MakePage = ({history}) => {
     }
 
     return (<>
-       <MakeNavBar 
+       <NavBarInMakePage 
             doLoad={doLoad}
             open={open} setOpen={setOpen}
             full={full} setFull={setFull}

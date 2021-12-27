@@ -14,6 +14,10 @@ export const base = [
         sectionTemplateNumber:2,
         attachment: "",
         width:40,
+        animation:{
+            type:'bigger',
+            timing:0.6,
+        }
     },
     {
         sectionTemplateNumber:3,

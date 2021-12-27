@@ -10,6 +10,7 @@ import info3 from '../../tools/info/info3.png';
 import smile from '../../tools/info/smile3d.png';
 import good from '../../tools/info/good3d.png';
 import { Input } from 'antd';
+import {dbService} from '../../tools/fbase'
 
 const { TextArea } = Input;
 
@@ -57,7 +58,15 @@ function ModalMade({open, setOpen, naviTitle, setNaviTitle, s1title, setS1title}
     // 모달
     const [cnum, setCnum] = useState(1);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = async () => {
+        // 마지막에는 입력한 정보도 저장한다. 근데 한명껄 여러번 저장해서 헷갈리지 않게..!
+
+        await dbService.collection('question_answers').add({
+            title:naviTitle,
+            createdAt: new Date(),
+        })
+        setOpen(false)
+    };
 
     useEffect(() => {
         setCnum(1);

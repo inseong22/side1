@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import update from 'react-addons-update';
 import { MyContext } from '../../MakePageV2'
 import {base} from '../../../Templates/baseTemplates'
@@ -10,19 +10,6 @@ function NewSectionMake(props) {
     const [nowtext, setNowtext] = useState("하위")
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    // 템플릿 1 텍스트의 경우
-    const changeText = (event, editor, data) => {
-        setNowtext(data);
-        props.setContents(update(props.contents, 
-                {
-                    [state.secNum]:{
-                        titles : {$set:{
-                            title : data,
-                        }}
-                    }
-                }
-            ))
-    }
 
     // 템플릿 2 이미지의 경우에는
     const onChangeImage = e => {
@@ -94,6 +81,17 @@ function NewSectionMake(props) {
         action.setAddingSectionAt(1000)
     }
 
+    // 템플릿 1 텍스트의 경우
+    const changeText = (event, editor, data) => {
+        props.setContents(update(props.contents, {
+                    [state.secNum]:{
+                        titles : {$set:{
+                            title : data,
+                        }}
+                    }
+                }))
+    }
+
     const sectionMakeTable = () => {
 
         switch(props.content.sectionTemplateNumber){
@@ -101,7 +99,7 @@ function NewSectionMake(props) {
                 return(
                     <div className="section-make__inner-container">
                         섹션 {state.secNum}번이고 템플릿은 1번 - 텍스트 입니다.
-                        <CKEditor
+                        {/* <CKEditor
                             editor={ ClassicEditor }
                             data={props.content.titles.title}
                             onReady={ editor => {
@@ -115,7 +113,7 @@ function NewSectionMake(props) {
                             } }
                             onFocus={ ( event, editor ) => {
                             } }
-                            />
+                            /> */}
                         <br/>
                         <pre dangerouslySetInnerHTML={{__html: props.content.titles.title}} style={{fontSize:'2em', color:'red', font:'Pretendard-Regular', width:'100%', textAlign:'left'}}>
                         </pre>
@@ -168,8 +166,8 @@ function NewSectionMake(props) {
             default:
                 return(
                     <div>
-                        섹션 {state.secNum}번이고 템플릿은 뭐지? 티폴트 값입니다.
-                        <CKEditor
+                        섹션 {state.secNum}번이고 템플릿은 뭐지? 디폴트 값입니다.
+                        {/* <CKEditor
                             editor={ ClassicEditor }
                             data={props.content.titles.title}
                             onReady={ editor => {
@@ -183,7 +181,7 @@ function NewSectionMake(props) {
                             } }
                             onFocus={ ( event, editor ) => {
                             } }
-                            />
+                            /> */}
                         <br/>
                         <pre dangerouslySetInnerHTML={{__html: props.content.titles.title}} style={{fontSize:'2em', color:'red', font:'Pretendard-Regular', width:'100%', textAlign:'left'}}>
                         </pre>

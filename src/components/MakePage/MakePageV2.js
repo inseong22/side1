@@ -4,9 +4,8 @@ import { dbService } from '../tools/fbase';
 import { stService } from '../tools/fbase';
 import {Link} from 'react-router-dom';
 import NewSection from './Section/NewSection'
-import SectionMake from './utils/Make/SectionMake'
 import NewSectionMake from './utils/Make/NewSectionMake'
-import MakeNavBar from './utils/NavBar/MakeNavBar'
+import NavBarInMakePage from './utils/NavBar/NavBarInMakePage'
 import MakeNavigationV2 from './utils/NavBar/MakeNavigationV2'
 import NaviFooterSectionMake from './utils/Make/NaviFooterSectionMake'
 import MakeFooter from './utils/NavBar/MakeFooter'
@@ -20,6 +19,7 @@ import OverflowScrolling from 'react-overflow-scrolling';
 import { v4 as uuidv4 } from 'uuid';
 import { useLocation, useParams } from 'react-router';
 import { base } from '../Templates/baseTemplates'
+import ReactGa from 'react-ga'
 
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
@@ -36,6 +36,7 @@ const MakePageV2 = ({history}, props) => {
     const targets = useRef(null)
     const [device, setDevice] = useState(true)
     const [full, setFull] = useState(false)
+    const [isWidget, setIsWidget] = useState(false)
     const [password, setPassword] = useState("");
     const [ch, setCh] = useState(false);
     const [nowState, setNowState] = useState('new');
@@ -91,6 +92,10 @@ const MakePageV2 = ({history}, props) => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
+        // to report page view
+        // ReactGa.initialize('UA-213792742-1');
+        // ReactGa.pageview(`/making/`);
+
         if(load === false && location.state !== undefined){
             const arr = location.pathname.split('/');
             setNowState(arr[arr.length -1]);
@@ -190,20 +195,6 @@ const MakePageV2 = ({history}, props) => {
         }
     }
 
-    const addSection = () => {
-        if(secNums.length > 4){
-            alert("제작가능한 최대 섹션 개수에 한계가 있습니다!");
-        }else{
-            setSecNums([...secNums, secNums.length]);
-        }
-    }
-
-    const deleteSection = () => {
-        const secNumsTemp = secNums;
-        secNumsTemp.pop();
-        setSecNums(secNumsTemp);
-    }
-
     const doLoad = async () => {
         setLoading(true);
         const checkDatas = await dbService
@@ -243,8 +234,19 @@ const MakePageV2 = ({history}, props) => {
         )
     })
 
+    const backgroundClick = e => {
+        if(e.target.className === "make-left-landing"){
+            setIsWidget(false)
+        }else if(e.target.className === 'make-hover-section' || e.target.className === "make-nav-on" || e.target.className === "make-footer"){
+            setIsWidget(true)
+        }else{
+            console.log(e.target.className)
+            return;
+        }
+    }
+
     return (<>
-       <MakeNavBar 
+       <NavBarInMakePage 
             doLoad={doLoad}
             open={open} setOpen={setOpen}
             full={full} setFull={setFull}
@@ -255,66 +257,51 @@ const MakePageV2 = ({history}, props) => {
             nowState={nowState}
        />
        <MyContext.Provider value={contextValue}>
-            <OverflowScrolling className="make-page-container" style={{marginTop:'-10px'}}>
-                    {/* 여기서부터 메인페이지 베껴옴 */}
-                    <div  className="make-left-landing" style={{width:`${full ? '100%' : '70%' }`}}>
-                        <div className="make-left-top-container" style={{display:`${full ? 'none' : 'flex'}`, justifyContent:`${device ? 'start':'center'}`}}>
-                            Let's Building Your Web site! {device ?  <></> : <span> in Mobile</span>}
-                        </div>
-                        <OverflowScrolling className="scroll-container" style={{ width:`${full ? '100%' : '80%' }`, height:`${full ? '94vh' : '63vh'}`}}>
-                        
-                        <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`}}>  
-                            {/* 네비게이션 */}
-                            <MakeNavigationV2
-                                full={full} navi={navi}
-                                history={history}
-                            />
-                            {/* 새로운 섹션 방식 */}
-                            {sectionsReturn}
-                            {/* 새로운 섹션 방식 끝 */}
-                            {footerOrNot ?  <></> : 
-                                <MakeFooter 
-                                    userPhoneNumber={userPhoneNumber}
-                                    userEmail={userEmail}
-                                    naviTitle={naviTitle}
-                                    footerColor={footerColor}
-                                    full={full} bigfont={bigfont} smallfont={smallfont}
-                                    rate={rate}
-                                />
-                            } 
-                        </div> 
-                        </OverflowScrolling>
+            <div className="make-page-container" style={{marginTop:'-10px'}}>
+                {/* 여기서부터 메인페이지 베껴옴 */}
+                    <div className="make-left-landing" onClick={e => backgroundClick(e)} style={{width:`${full || !isWidget ? '100%' : '70%' }`}}>
+                        {/* <div className="make-left-top-container" style={{display:`${full ? 'none' : 'flex'}`, justifyContent:`${device ? 'start':'center'}`}}>
+                            Let's Building Your Web site! {device ?  <></> : <span>in Mobile</span>}
+                        </div> */}
+                        <OverflowScrolling className="scroll-container" style={{ width:`${full ? '100%' : device ? '80%' : '400px' }`, height:`${full ? '94vh' : '80vh'}`}}>
+                            <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`}}>  
+                                {/* 네비게이션 */}
+                                <MakeNavigationV2 full={full} navi={navi} history={history} />
 
-                        {/* 섹션 추가 및 선택 및 제거를 위한 버튼 컨테이너 */}
-                    
-                        <div className="make-left-bottom-container" style={{display:`${full ? 'none' : 'flex'}`}}>
-                        </div>
+                                {/* 새로운 섹션 방식 */}
+                                {sectionsReturn}
+                                {/* 새로운 섹션 방식 끝 */}
+
+                                { footerOrNot ?  <></> : 
+                                <MakeFooter userPhoneNumber={userPhoneNumber} userEmail={userEmail} naviTitle={naviTitle} footerColor={footerColor} full={full} bigfont={bigfont} smallfont={smallfont} rate={rate} /> 
+                                } 
+                            </div> 
+                        </OverflowScrolling>
                     </div>
                 {/* 여기까지 메인페이지 베껴옴 */}
                 {/* 아래는 제작하는 곳 */}
-                <div style={{display: 'flex', justifyContent:'center', alignItems: 'center', backgroundColor:'white'}}>
-                    <OverflowScrolling className='overflow-scrolling'>
-                        <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
-                            <div className="section-table-container" style={{width:'100%'}}>
-                                {selectorTable()}
+                    <div style={{display:`${isWidget ? 'flex' : 'none'}`, justifyContent:'center', alignItems: 'center', backgroundColor:'white'}}>
+                        <OverflowScrolling className='overflow-scrolling'>
+                            <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
+                                <div className="section-table-container" style={{width:'100%'}}>
+                                    {selectorTable()}
+                                </div>
+                                <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
+                                    <ModalMade open={open} setOpen={setOpen} naviTitle={naviTitle} setNaviTitle={setNaviTitle} s1title={s1title} setS1title={setS1title} />
+                                    <LoadingModal loading={loading} />
+                                    <CheckModal ch={ch} setCh={setCh} onSubmit2={onSubmit2}/>
+                                </div>
                             </div>
-                            <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
-                                <ModalMade open={open} setOpen={setOpen} naviTitle={naviTitle} setNaviTitle={setNaviTitle} s1title={s1title} setS1title={setS1title} />
-                                <LoadingModal loading={loading} />
-                                <CheckModal ch={ch} setCh={setCh} onSubmit2={onSubmit2}/>
-                            </div>
-                        </div>
-                    </OverflowScrolling>
-                </div>
-                    {/* 모바일 제한 페이지 */}
+                        </OverflowScrolling>
+                    </div>
+                {/* 모바일 제한 페이지 */}
                     <div className="mobile-hide">
                         <div>
                             본 사이트는 PC환경에 최적화되어있습니다. <br />
                             PC로 이동해서 랜딩페이지 제작을 시작해보세요. 😁
                         </div>
                     </div>
-                    {/* 로딩창 */}
-                </OverflowScrolling>
+            </div>
         </MyContext.Provider>
         </>)
 }

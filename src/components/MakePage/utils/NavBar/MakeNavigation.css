@@ -2,8 +2,32 @@
     width:100%;
     z-index:3;
     height:60px;
-    width: 70%;
     display: flex;
     justify-content: start;
     align-items : center;
+}
+
+.make-nav-bar-title{
+    font-size:0.9em;
+    font-weight: 700;
+    width:100%;
+}
+
+.make-nav-on{
+    display: flex;
+    align-items :center;
+    width:50%;
+    cursor:pointer;
+    justify-content : center;
+    width:100%;
+}
+.make-nav-button{
+    font-size:0.9em;
+    border-radius:5px;
+    height:35px;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    background-color:rgba(0,0,0,0);
+    border:none;
 }

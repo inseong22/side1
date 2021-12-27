@@ -20,3 +20,10 @@
     align-items : center;
     flex-direction:row;
 }
+
+.ck-editor__editable{
+    min-width: 300px;
+}
+.ck-editor_main{
+    min-width: 600px;
+}
