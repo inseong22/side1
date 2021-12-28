@@ -3,17 +3,12 @@ import './utils/MainPage.css'
 import './utils/MainPageV2.css'
 import {Link} from 'react-router-dom';
 import { dbService } from '../tools/fbase';
-import NavBarV2 from '../NavBar/NavBarV2';
-import SavingsIcon from '@mui/icons-material/Savings';
 import Footer from '../NavBar/Footer'
 import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import { ToolOutlined, PieChartOutlined, MobileOutlined, GroupOutlined, FormatPainterOutlined, BranchesOutlined, PicLeftOutlined, AlertOutlined, PictureOutlined, FormOutlined } from '@ant-design/icons';
+import { motion } from "framer-motion"
 
-import section0 from '../tools/img/005.png';
-import section1 from '../tools/img/001.png';
-import section2 from '../tools/img/003.png';
 import s1 from '../tools/img/surfee1.png';
-import s2 from '../tools/img/surfeelogo.png';
 
 const ourInfos = [
     {
@@ -136,6 +131,11 @@ function MainPageV2({history, isLoggedIn, userObj}) {
         }
     }
 
+    const variants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 },
+      }
+
     return (
         <>
         <div className="main-page-container">
@@ -154,9 +154,12 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                         무료로 체험하기
                     </button>
                 </div>
-                <div className="main-section-right-topbottom">              
+                <motion.div className="main-section-right-topbottom" 
+                    initial="hidden" 
+                    animate="visible" 
+                    variants={variants}>
                     <img src={s1} className="section-one-image-main-topbottom" />
-                </div>
+                </motion.div>
             </div>
             
             <div className="main-page-section-topbottom" style={{backgroundColor:"white"}}>

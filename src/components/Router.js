@@ -20,7 +20,7 @@ import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
 const AppRouter = ({userObj, isLoggedIn}) => {
-    if (window.location.host.split(".")[0] != "surfee" && window.location.host.split(".")[0] != 'localhost:3000') {
+    if (window.location.host.split(".")[0] !== "surfee" && window.location.host.split(".")[0] !== 'localhost:3000') {
         return(
             <Router history={history}>
                 <>
