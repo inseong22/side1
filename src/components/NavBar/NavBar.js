@@ -22,7 +22,7 @@ function NavBar({history}) {
     return (
         <>
         <div className={scrollPosition < 50 ? "nav-bar-container-top" : "nav-bar-container"} 
-        style={{backgroundColor:`rgba(255,255,255,${back})`, color:`rgba(${255-back*149},${255-back*156},${255-back*8},1)`
+        style={{backgroundColor:`rgba(255,255,255,1)`, color:`rgba(${255-back*149},${255-back*156},${255-back*8},1)`
         }}>
             <span className="nav-bar-title" onClick={() => {history.push('/#/'); history.go();}} style={{cursor:'pointer'}}>
                 Surfee

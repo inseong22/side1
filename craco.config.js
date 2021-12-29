@@ -1,6 +1,7 @@
 const { styles } = require("@ckeditor/ckeditor5-dev-utils");
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
+
 const enableCKEWebpackConfigPlugin = (webpackConfig, { env, paths }) => {
   // Extract the oneOf array from the relevant webpack.module.rules object
   let oneOf;
@@ -71,8 +72,6 @@ const enableCKEWebpackConfigPlugin = (webpackConfig, { env, paths }) => {
 };
 module.exports = {
   webpack: {
-    alias: {},
-    plugins: [],
     configure: (webpackConfig, { env, paths }) => {
       return enableCKEWebpackConfigPlugin(webpackConfig, { env, paths });
     }

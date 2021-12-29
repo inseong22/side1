@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { dbService } from '../../../tools/fbase';
-import fp from '../utils/images.png';
-import Section from '../../Make/utils/Section/Section'
-import LastSection from '../../Make/utils/Section/LastSection'
-import MakeFooter from '../../Make/utils/NavBar/MakeFooter'
+import { dbService } from '../../tools/fbase';
+import Section from '../../components/Make/utils/Section/Section'
+import LastSection from '../../components/Make/utils/Section/LastSection'
+import MakeFooter from '../../components/Make/utils/NavBar/MakeFooter'
 import ReactGa from 'react-ga'
 
 const LANDINGID = "REDE";
@@ -13,7 +12,7 @@ const USEREMAIL = "직접 입력하기"
 const smallfont = `28px`;
 const bigfont = '50px';
 
-const L1 = ({history}) => {
+const MadePage = (props) => {
     const [ item, setItem ] = useState();
     const [ loading, setLoading ] = useState(false);
 
@@ -23,8 +22,8 @@ const L1 = ({history}) => {
 
     const loadData = async () => {
         const userOrder = await dbService
-            .collection("apply-landing")
-            .where("urlId", "==", "soozip")
+            .collection("apply-landing-data")
+            .where("urlId", "==", window.location.host.split(".")[0])
             .get(); // uid를 creatorId로 줬었으니까.
 
         let orderData = userOrder.docs.map(doc => {
@@ -37,10 +36,11 @@ const L1 = ({history}) => {
     }
 
     useEffect(() => {
+        console.log(window.location.host.split(".")[0])
         loadData()
         ReactGa.initialize('UA-213792742-1');
         // to report page view
-        ReactGa.pageview(`/soozip`);
+        ReactGa.pageview(`/${window.location.host.split(".")[0]}`);
     }, [loading])
 
     return (
@@ -49,7 +49,7 @@ const L1 = ({history}) => {
             <div className="scroll-container" style={{ width:`100%`, height:`100vh`, marginTop:'-60px', border:'none'}}>
                 <div className="make-main-page-container" style={{fontSize:`${bigfont}`, backgroundColor:`${item.s1backgroundColor}`}}>  
                     <div className="make-navigation" style={{width:`100%`, backgroundColor:`${item.naviColor}`}}>
-                        <span className="make-nav-bar-title" onClick={() => {history.push(`/#/${item.urlId}`); history.go();}} style={{fontFamily:`${item.font}`, cursor:'pointer', color:`${item.naviTitleColor}`}}>
+                        <span className="make-nav-bar-title" onClick={() => {props.history.push(`/${item.urlId}`); props.history.go();}} style={{fontFamily:`${item.font}`, cursor:'pointer', color:`${item.naviTitleColor}`}}>
                             {item.naviTitle}
                         </span>
                         <span className="make-nav-on">
@@ -103,10 +103,11 @@ const L1 = ({history}) => {
 
                     { item.useLastSection !== 0 && 
                         <LastSection 
+                            urlId={item.urlId}
                             targets={item.targets} lasttitleColor={item.lasttitleColor} full={true} rate={item.rate}
                             title={item.lasttitle} desc={item.lastdesc} sectionHeight={item.lastSectionHeight}
                             font={item.font} backgroundColor={item.lastbackgroundColor} descSize={item.lastDescSize}
-                            titleColor={item.lasttitleColor} titleSize={item.lasttitleSize} font={item.font} descFont={item.descFont}
+                            titleColor={item.lasttitleColor} titleSize={item.lasttitleSize} descFont={item.descFont}
                             applyButtonText={item.lastapplyButton} answers={item.answers} lastdescColor={item.lastdescColor}
                             bigfont={bigfont} smallfont={smallfont} inf={item.inf}
                         />
@@ -129,4 +130,4 @@ const L1 = ({history}) => {
     
 }
 
-export default L1
+export default MadePage

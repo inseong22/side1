@@ -1,0 +1,36 @@
+.make-page-nav{
+    height: 50px;
+    background-color: white;
+    width: 100%;
+    margin-top:-50px;
+    position:fixed;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #dadada;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    z-index:100;
+}
+
+.make-page-nav-half{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.make-nav-left-text{
+    width:70px;
+    color:black;
+    margin-left:1vw;
+    cursor: pointer;
+    padding:3px 0px;
+    border-radius: 5px;
+    text-decoration: none;
+    padding:3px 10px;
+}
+
+.make-nav-left-text:hover{
+    color:black;
+    background-color: #6a63f7b0;
+}

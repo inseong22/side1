@@ -1,0 +1,22 @@
+.make-footer{
+    width:100%;
+    display: flex;
+    justify-content :center;
+    align-items :center;
+    padding:3% 10%;
+}
+
+.footer-item{
+  margin-top:7px;
+  width:100%;
+  display: flex;
+  justify-content : start;
+  align-items : center;
+}
+
+.footer-section{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content :end;
+}
