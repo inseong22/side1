@@ -3,7 +3,7 @@ import { dbService } from '../../../tools/fbase';
 import fp from '../utils/images.png';
 import Section from '../../Make/utils/Section/Section'
 import LastSection from '../../Make/utils/Section/LastSection'
-import MakeFooter from '../../Make/utils/NavBar/MakeFooter'
+import MakeFooter from '../../Make/utils/old/NavBar/MakeFooter'
 import ReactGa from 'react-ga'
 
 const LANDINGID = "REDE";

@@ -1,8 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import '../Modal/Modal.css'
+import './FirstQuestions.css'
 import {Link} from 'react-router-dom'
+import { MyContext } from '../../../pages/Make/MakePageV2'
+import {dbService} from '../../../tools/fbase';
 
 import info1 from '../../../tools/info/info1.png';
 import info2 from '../../../tools/info/info2.png';
@@ -11,7 +14,6 @@ import smile from '../../../tools/info/smile3d.png';
 import good from '../../../tools/info/good3d.png';
 
 import { Input } from 'antd';
-import {dbService} from '../../../tools/fbase'
 
 const { TextArea } = Input;
 
@@ -54,24 +56,105 @@ const style = {
 //   borderRadius:'20px',
 };
 
+const secondQuestion = [
+    {
+        question : "사업 아이템 검증?",
+        type:'pre',
+    },
+    {
+        question : "앱 홍보",
+        type:'app',
+    },
+    {
+        question : "이벤트?",
+        type:'event',
+    },
+]
 
-function FirstQuestions({open, setOpen, naviTitle, setNaviTitle, s1title, setS1title}) {
+function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
     // 모달
     const [cnum, setCnum] = useState(1);
+    const [type, setType] = useState("");
+    const [templates, setTemplates] = useState([]);
+    const [templateNum, setTemplateNum] = useState(0);
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+
     const handleOpen = () => setOpen(true);
     const handleClose = async () => {
         // 마지막에는 입력한 정보도 저장한다. 근데 한명껄 여러번 저장해서 헷갈리지 않게..!
 
         await dbService.collection('question_answers').add({
-            title:naviTitle,
             createdAt: new Date(),
         })
         setOpen(false)
     };
 
     useEffect(() => {
+        
         setCnum(1);
     },[open]);
+
+    const onChangeTitle = e => {
+        let newNavi = Object.assign({}, navi)
+        newNavi.title = e.currentTarget.value
+        setNavi(newNavi)
+    }
+
+    const nextAndSetTemplates = async (e) => {
+        if(type === ""){
+            alert("위의 보기 중 한가지를 선택해주세요.");
+            return
+        }else{
+            const typeTemplatesdata = await dbService
+                .collection("templates")
+                .where("type", "==", type)
+                .get(); // uid를 creatorId로 줬었으니까.
+
+            let typeTemplates = typeTemplatesdata.docs.map(doc => {
+                return({...doc.data(), id:doc.id})
+            });
+
+            setTemplates(typeTemplates);
+            setCnum(cnum + 1);
+        }
+    }
+    const nextAndSetTemplate = async (e) => {
+        if(templateNum === 0){
+            alert("위의 보기 중 한가지를 선택해주세요.");
+            return
+        }else if(editing === true){
+            const real = window.confirm("템플릿을 새로 설정하면 이전에 작성한 내용이 사라집니다. 괜찮으신가요?")
+            if(real){
+                {
+                    // templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0]
+                    // 이걸 set Contents에.
+                    action.setContents(templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0])
+        
+                    setCnum(cnum + 1);
+                }
+            }else{
+                return
+            }
+        }else{
+            // templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0]
+            // 이걸 set Contents에.
+            action.setContents(templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0])
+
+            setCnum(cnum + 1);
+        }
+    }
+
+    const getAllTemplates = async(e) => {
+        const typeTemplatesdata = await dbService
+            .collection("templates")
+            .get(); // uid를 creatorId로 줬었으니까.
+
+        let typeTemplates = typeTemplatesdata.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+
+        setTemplates(typeTemplates);
+    }
 
     const content = () => {
         switch(cnum){
@@ -84,11 +167,10 @@ function FirstQuestions({open, setOpen, naviTitle, setNaviTitle, s1title, setS1t
                             <div className="modal-title">
                                 안녕하세요! <br/><span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을  환영합니다 :)
                             </div>
-                            <Input type="text" placeholder="프로젝트 이름이 어떻게 되나요?" value={naviTitle} onChange={e => setNaviTitle(e.target.value)}
-                            style={{fontSize:'25px', marginTop:'6%', width:'60%'}}/>
+                            <Input type="text" placeholder="프로젝트 이름이 어떻게 되나요?" value={navi.title} onChange={e => onChangeTitle(e)} />
                         </div>
                         <div className="modal-button-container">
-                            <button onSubmit={e => setCnum(cnum + 1)} className="modal-move-button" style={{display:`${naviTitle.length > 0 ? 'flex' : 'none'}`}} onClick={e => setCnum(cnum + 1)}>다음</button>  
+                            <button onSubmit={e => setCnum(cnum + 1)} className="modal-move-button" style={{display:`${navi.title.length > 0 ? 'flex' : 'none'}`}} onClick={e => setCnum(cnum + 1)}>다음</button>  
                         </div>
                         </form>
                     </div>
@@ -98,8 +180,9 @@ function FirstQuestions({open, setOpen, naviTitle, setNaviTitle, s1title, setS1t
             case 2:
                 return(
                     <div style={{display:'flex', flexDirection:'column'}}>
-                        <div style={{display:'flex', flexDirection:'row', marginBottom:'5%'}}>
-                            <div className="modal-main-card">
+                        <div style={{display:'flex', flexDirection:'column', marginBottom:'5%'}}>
+                            <div>{navi.title}님 환영합니다!</div>
+                            {/* <div className="modal-main-card">
                                 <div className="modal-title">
                                     Step 1
                                 </div>
@@ -110,8 +193,23 @@ function FirstQuestions({open, setOpen, naviTitle, setNaviTitle, s1title, setS1t
                                 <div className="modal-desc">
                                     Section을 하나씩 설정하여<br/>쉽고 간편하게 랜딩페이지를 제작해 보세요.
                                 </div>
-                            </div>
-                            <div className="modal-main-card">
+                            </div> */}
+                            {
+                                secondQuestion.map((item, index) => {
+                                    let color = 'white';
+                                    if(item.type === type){
+                                        color = 'black';
+                                    }
+                                    return(
+                                        <div className="button1" onClick={() => {
+                                            setType(item.type);
+                                        }} key={index} 
+                                        style={{backgroundColor: `${color}`}}
+                                        >{item.question}</div>
+                                    )
+                                })
+                            }
+                            {/* <div className="modal-main-card">
                                 <div className="modal-title">
                                     Step 2
                                 </div>
@@ -123,11 +221,11 @@ function FirstQuestions({open, setOpen, naviTitle, setNaviTitle, s1title, setS1t
                                 당신의 프로젝트에 흥미를 느낀 <br/>
                                 유저가 버튼을 누를 수 있도록 꾸며보세요!
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="modal-button-container">
                             <button className="modal-move-button" onClick={e => setCnum(cnum - 1)}>이전</button>
-                            <button className="modal-move-button" onClick={e => setCnum(cnum + 1)}>다음</button>  
+                            <button className="modal-move-button" onClick={e => nextAndSetTemplates(e)}>다음</button>  
                         </div>
                     </div>
                 )
@@ -137,7 +235,7 @@ function FirstQuestions({open, setOpen, naviTitle, setNaviTitle, s1title, setS1t
                 return(
                     <div style={{display:'flex', flexDirection:'column'}}>
                         <div className="modal-main-card">
-                            <img src={info3} style={{width:'400px', marginBottom:'5%', boxShadow:'2px 2px 4px rgba(0,0,0,0.3)'}}/>
+                            {/* <img src={info3} style={{width:'400px', marginBottom:'5%', boxShadow:'2px 2px 4px rgba(0,0,0,0.3)'}}/>
                             <div className="modal-title" style={{fontSize:'3em'}}>
                                 <span style={{color:'#6C63FF'}}>Surfee</span> <span style={{color:'gray', fontSize:"0.5em"}}>beta</span> 주의사항!
                             </div>
@@ -147,11 +245,34 @@ function FirstQuestions({open, setOpen, naviTitle, setNaviTitle, s1title, setS1t
                                 2. 한번 '제출 완료'시 수정이 어려우니,<br/>신중하게 제출해주세요.
                                 <br />
                                 3. 제작 완료시 우측 상단의 '제작완료 후 신청'을 눌러주세요. <br/>마지막으로 안내창을 꼼꼼히 읽고 제출해주세요.
-                            </div>
+                            </div> */}
+                            {
+                                templates.map((item, index) => {
+                                    let color = 'white';
+                                    if(item.templateNum === templateNum && item.type === type){
+                                        color = 'black';
+                                    }
+                                    return(
+                                        <div>
+                                            {
+                                                item.type === type && <div>추천</div>
+                                            }
+                                            <div className="template__card" key={index}
+                                                onClick={() => {
+                                                    setTemplateNum(item.templateNum);
+                                                    setType(item.type);
+                                                }}
+                                                style={{backgroundColor: `${color}`}}
+                                            >{item.type}{item.templateName}</div>
+                                        </div>
+                                    )
+                                })
+                            }
+                            <button className="modal-move-button" onClick={e => getAllTemplates(e)}>전체보기</button>
                         </div>
                         <div className="modal-button-container">
                             <button className="modal-move-button" onClick={e => setCnum(cnum - 1)}>이전</button>
-                            <button className="modal-move-button" onClick={e => setCnum(cnum + 1)}>다음</button>  
+                            <button className="modal-move-button" onClick={e => nextAndSetTemplate()}>다음</button>  
                         </div>
                     </div>
                 )
@@ -174,7 +295,10 @@ function FirstQuestions({open, setOpen, naviTitle, setNaviTitle, s1title, setS1t
                         </div>
                         <div className="modal-button-container">
                             <button className="modal-move-button" onClick={e => setCnum(cnum - 1)}>이전</button>
-                            <button className="modal-move-button" onClick={handleClose} style={{backgroundColor:'rgba(255,0,0,0.7)'}}>시작하기</button>
+                            <button className="modal-move-button" onClick={() => {
+                                setEditing(true);
+                                handleClose()
+                            }} style={{backgroundColor:'rgba(255,0,0,0.7)'}}>시작하기</button>
                         </div>
                     </div>
                 )
@@ -191,7 +315,15 @@ function FirstQuestions({open, setOpen, naviTitle, setNaviTitle, s1title, setS1t
                 BackdropComponent={Backdrop}
             >
                 <Box sx={style}>
-                    <Link to="/" className="arrow-hover" style={{position:'absolute', top:'10px', left:'20px', fontSize:'30px', border:'none', backgroundColor:'#ffffffff', cursor:'pointer', color:'black'}}>←</Link>
+                    {editing ? 
+                        <span onClick={() => handleClose()} className="arrow-hover" style={{position:'absolute', top:'10px', left:'20px', fontSize:'30px', border:'none', backgroundColor:'#ffffffff', cursor:'pointer', color:'black'}}>
+                            ←
+                        </span>
+                         :
+                        <Link to="/" className="arrow-hover" style={{position:'absolute', top:'10px', left:'20px', fontSize:'30px', border:'none', backgroundColor:'#ffffffff', cursor:'pointer', color:'black'}}>
+                            ←
+                        </Link> 
+                    }
                     <div style={{width:'50%', marginBottom:'10%'}}>
                         {content()}
                     </div>

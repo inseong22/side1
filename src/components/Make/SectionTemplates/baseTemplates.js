@@ -12,6 +12,12 @@ export const base = [
         animation:{
             use:false,
             type:0,
+        },
+        button:{
+            title:'버튼입니다.',
+            buttonTemplate:1,
+            func:1,
+            link:"https://surfee.co.kr"
         }
     },
     {

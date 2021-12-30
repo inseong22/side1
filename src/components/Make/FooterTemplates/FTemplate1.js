@@ -21,14 +21,8 @@ function FTemplate1({foot, setFoot}) {
                 />
             </div>
             <div className="footer-section">
-                <div> 
-                    
-                </div>
-                <div> 
-
-                </div>
                 <div>
-                    <a href="https://surfee.co.kr/#/v2" target="_blank" className="insta" style={{color:'black'}}>Surfee로 제작한 페이지입니다. 사용하러 가기 🖥</a>
+                    <a href="https://surfee.co.kr/#/v2" target="_blank" className="insta" style={{color:'black', fontSize:'0.5em'}}>Surfee로 제작한 페이지입니다. 사용하러 가기 🖥</a>
                 </div>
             </div>
         </>

@@ -10,7 +10,7 @@ import NewSectionMake from '../../components/Make/Edit/NewSectionMake'
 import NavBarInMakePage from '../../components/Make/NavBar/NavBarInMakePage'
 import MakeNavigationV2 from '../../components/Make/LookAhead/MakeNavigationV2'
 import MakeFooterV2 from '../../components/Make/LookAhead/MakeFooterV2'
-import ModalMade from '../../components/Make/utils/FirstQuestions'
+import FirstQuestions from '../../components/Make/Modal/FirstQuestions'
 import LoadingModal from '../../components/Make/Modal/LoadingModal'
 import CheckModal from '../../components/Make/Modal/CheckModal'
 import OverflowScrolling from 'react-overflow-scrolling';
@@ -35,6 +35,7 @@ const rate = 0.63;
 
 const MakePageV2 = ({history}, props) => {
     const targets = useRef(null)
+    // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
     const [device, setDevice] = useState(true)
     const [full, setFull] = useState(false)
     const [isWidget, setIsWidget] = useState(false)
@@ -42,6 +43,8 @@ const MakePageV2 = ({history}, props) => {
     const [ch, setCh] = useState(false);
     const [nowState, setNowState] = useState('new');
     const [load, setLoad] = useState(false);
+    const [nu, setNu] = useState(0);
+    const [editing, setEditing] = useState(false);
     const location = useLocation();
 
     // 새로운 세팅
@@ -66,26 +69,14 @@ const MakePageV2 = ({history}, props) => {
     const [addingSectionAt, setAddingSectionAt] = useState(1000); // 1000은 추가하고 있지 않다는 것을 의미.
 
     // 메인 세팅
-    const [mainColor, setMainColor] = useState("#6B63F7");
-    const [mainTitleColor, setMainTitleColor] = useState("#000000");
     const [urlId, setUrlId] = useState("");
-    const [urlTitle, setUrlTitle] = useState("Surfee | Landing Page Saas");
-    const [font, setFont] = useState("Pretendard-ExptraBold");
-    const [descFont, setDescFont] = useState("Pretendard-Regular");
-    const [faviconAttachment, setFaviconAttachment] = useState("");
-
-    // 섹션 1
-    const [s1title, setS1title] = useState("Surfee에 오신 것을 환영합니다.\n프로젝트의 타이틀 설명을\n적어보세요.");
 
     // 네비게이션
-    const [naviTitle, setNaviTitle] = useState("")
     const [naviColor, setNaviColor] = useState("rgba(255,255,255,0)")
 
     // 푸터
     const [footerOrNot, setFooterOrNot] = useState(false);
     const [footerColor, setFooterColor] = useState("white");
-    const [userEmail, setUserEmail] = useState("surfee.business@gmail.com");
-    const [userPhoneNumber, setUserPhoneNumber] = useState("010-4690-5086");
 
     // 사진들 아래는 기타
     const [secNum, setSecNum] = useState(0); // 현재 수정중인 페이지를 의미.
@@ -97,14 +88,40 @@ const MakePageV2 = ({history}, props) => {
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/making/`);
 
+        console.log("base")
+
+        function repeat(){
+            localStorage.setItem('temp', JSON.stringify(contents));
+        }
+        // 70초에 한번 씩 자동 저장
+        let id = setInterval(repeat, 70000);
+        return () => clearInterval(id);
+    })
+
+    useEffect(() => {
+
         if(load === false && location.state !== undefined){
             const arr = location.pathname.split('/');
             setNowState(arr[arr.length -1]);
-            setLoad(true);
             // setContents(location.state.item)
+            
+            // 처음에만, 로컬스토리지에 저장된 정보가 있다면 불러온다.
+            const item = localStorage.getItem('temp');
+            
+            if( item !== null ){
+                const ask = window.confirm("작업 중이던 정보가 있습니다. 불러오시겠습니까?")
+                if(ask){
+                    setContents(JSON.parse(item));
+                    setOpen(false);
+                    setEditing(true);
+                }else{
+                    return
+                }
+            }
+            setLoad(true);
+            console.log("처음에만 실행");
         }
-        console.log("base")
-    })
+    },[])
 
     const contextValue = {
         state: {addingSectionAt, secNum, contents},
@@ -112,6 +129,7 @@ const MakePageV2 = ({history}, props) => {
     }
 
     const onSubmit = async () => {
+        // 배포하기 클릭
         if(nowState === 'edit'){
             setLoading(true);
             // 기존에 있는걸 업데이트 해야한다.
@@ -125,6 +143,7 @@ const MakePageV2 = ({history}, props) => {
             
             setLoading(false);
         }else{
+            // 새로 업로드 해야한다.
             setCh(true);
         }
     }
@@ -135,6 +154,9 @@ const MakePageV2 = ({history}, props) => {
             const oneLandingPage = {};
 
             await dbService.collection("apply-landing-data").add(oneLandingPage);
+
+            // 자동저장 하던 걸 지운다.
+            window.localStorage.removeItem("temp");
             
             setTimeout(() => {
                 setLoading(false);
@@ -228,7 +250,7 @@ const MakePageV2 = ({history}, props) => {
     const backgroundClick = e => {
         if(e.target.className === "make-left-landing"){
             setIsWidget(false)
-        }else if(e.target.className === 'make-hover-section' || e.target.className === 'template' || e.target.className === "make-nav-on" || e.target.className === "make-footer"){
+        }else if(e.target.className === 'make-hover-section' || e.target.className === 'template' || e.target.className === "make-nav-on" || e.target.className === "make-footer" || e.target.className === "footer-section"){
             setIsWidget(true)
         }else{
             return;
@@ -278,7 +300,7 @@ const MakePageV2 = ({history}, props) => {
                                     {selectorTable()}
                                 </div>
                                 <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
-                                    <ModalMade open={open} setOpen={setOpen} naviTitle={naviTitle} setNaviTitle={setNaviTitle} s1title={s1title} setS1title={setS1title} />
+                                    <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing}/>
                                     <LoadingModal loading={loading} />
                                     <CheckModal ch={ch} setCh={setCh} onSubmit2={onSubmit2}/>
                                 </div>

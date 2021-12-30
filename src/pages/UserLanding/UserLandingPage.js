@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { dbService } from '../../tools/fbase';
-import Section from '../../components/Make/utils/Section/Section'
-import LastSection from '../../components/Make/utils/Section/LastSection'
-import MakeFooter from '../../components/Make/utils/NavBar/MakeFooter'
+import Section from '../../components/Make/utils/old/Section/Section'
+import LastSection from '../../components/Make/utils/old/Section/LastSection'
+import MakeFooter from '../../components/Make/utils/old/NavBar/MakeFooter'
 import ReactGa from 'react-ga'
 
 const LANDINGID = "REDE";

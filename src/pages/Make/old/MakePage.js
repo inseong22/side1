@@ -2,14 +2,14 @@ import React, {useEffect, useState, useRef} from 'react'
 import { dbService } from '../../../tools/fbase';
 import { stService } from '../../../tools/fbase';
 import {Link} from 'react-router-dom';
-import Section from '../../../components/Make/utils/Section/Section'
-import SectionMake from '../../../components/Make/utils/Make/SectionMake'
-import LastSection from '../../../components/Make/utils/Section/LastSection'
+import Section from '../../../components/Make/utils/old/Section/Section'
+import SectionMake from '../../../components/Make/utils/old/Make/SectionMake'
+import LastSection from '../../../components/Make/utils/old/Section/LastSection'
 import NavBarInMakePage from '../../../components/Make/NavBar/NavBarInMakePage'
-import MakeFooter from '../../../components/Make/utils/NavBar/MakeFooter'
-import LastSectionMake from '../../../components/Make/utils/Make/LastSectionMake'
-import MainSection from '../../../components/Make/utils/Make/MainSection'
-import ModalMade from '../../../components/Make/utils/FirstQuestions'
+import MakeFooter from '../../../components/Make/utils/old/NavBar/MakeFooter'
+import LastSectionMake from '../../../components/Make/utils/old/Make/LastSectionMake'
+import MainSection from '../../../components/Make/utils/old/Make/MainSection'
+import ModalMade from '../../../components/Make/Modal/FirstQuestions'
 import LoadingModal from '../../../components/Make/Modal/LoadingModal'
 import CheckModal from '../../../components/Make/Modal/CheckModal'
 

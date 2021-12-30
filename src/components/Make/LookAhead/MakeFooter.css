@@ -1,9 +1,9 @@
-.make-footer{
-    width:100%;
-    display: flex;
-    justify-content :center;
-    align-items :center;
-    padding:3% 10%;
+.make-footer__container{
+  width:100%;
+  display: flex;
+  justify-content :center;
+  align-items :center;
+  padding:5% 0%;
 }
 
 .footer-item{
@@ -15,8 +15,8 @@
 }
 
 .footer-section{
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    justify-content :end;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content :end;
 }
