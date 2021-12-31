@@ -43,7 +43,6 @@ function NewSectionMake({content, contents, setContents, navi, foot, setNavi, se
             // 특징들인 경우 편집화면
             case 3:
                 return(
-                
                     <MakeTemplate3 content={content} contents={contents} setContents={setContents}/>
                 )
             
@@ -69,7 +68,7 @@ function NewSectionMake({content, contents, setContents, navi, foot, setNavi, se
         }
     }
 
-    // 섹션을 추가하는 중이 아니라 수정하는 중일 때!
+    // 섹션을 추가하는 중이 아니라 수정하는 중일 때! == addingSectionAt이 1000일 때.
     if(state.addingSectionAt === 1000){
         return (
             <>

@@ -1,4 +1,5 @@
 .template-image{
     opacity:1;
-    position:relative;
+    background-color:blue;
+    height:100%;
 }

@@ -38,8 +38,10 @@ function Template1({content,  contents, setContents}) {
 
     return (
         <div className="template">
-            {/* <pre dangerouslySetInnerHTML={{__html: content.titles.title}}>
-            </pre> */}
+            <div className="title-container">
+                <div dangerouslySetInnerHTML={{__html: content.titles.title}} style={{displat:'flex', backgroundColor:'red', width:'100%', alignItems: 'left', justifyContent:'start'}}>
+                </div>
+            </div>
             <Editor 
                 data={content.titles.title}
                 onChange={(e, editor) => {

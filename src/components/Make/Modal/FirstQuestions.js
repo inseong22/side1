@@ -6,6 +6,7 @@ import './FirstQuestions.css'
 import {Link} from 'react-router-dom'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import {dbService} from '../../../tools/fbase';
+import OverflowScrolling from 'react-overflow-scrolling';
 
 import info1 from '../../../tools/info/info1.png';
 import info2 from '../../../tools/info/info2.png';
@@ -14,8 +15,6 @@ import smile from '../../../tools/info/smile3d.png';
 import good from '../../../tools/info/good3d.png';
 
 import { Input } from 'antd';
-
-const { TextArea } = Input;
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -51,32 +50,168 @@ const style = {
   px: 4,
   pb: 3,
   display:'flex',
-  justifyContent: 'end',
+  justifyContent: 'center',
+  alignItems: 'center',
+//   borderRadius:'20px',
+  position:'relative',
+}
+const StyledModal2 = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius:10px;
+`;
+
+const Backdrop2 = styled('div')`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-tap-highlight-color: transparent;
+`;
+
+const style2 = {
+  width: '30vw',
+  height: '80vh',
+  bgcolor: 'rgba(255,255,255,1)',
+  border: '0px solid #000',
+  flexDirection:'column',
+  p: 2,
+  px: 4,
+  pb: 3,
+  display:'flex',
+  justifyContent: 'center',
   alignItems: 'center',
 //   borderRadius:'20px',
 };
 
-const secondQuestion = [
+const progressList = [
     {
-        question : "사업 아이템 검증?",
-        type:'pre',
+        num:1,
+        name:'NAME',
     },
     {
-        question : "앱 홍보",
-        type:'app',
+        num:2,
+        name:'GOAL',
     },
     {
-        question : "이벤트?",
-        type:'event',
+        num:3,
+        name:'TEMPLATE',
+    },
+    {
+        num:4,
+        name:'DESIGN',
+    },
+    {
+        num:5,
+        name:'URL',
     },
 ]
 
-function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
+const secondQuestion = [
+    {
+        typequestion: "🍎 앱 다운로드",
+        question : "많은 사람들이 우리의 앱을 다운로드 하면 좋겠어요",
+        type:'app',
+    },
+    {
+        typequestion: "✍️ 사전신청",
+        question : "사전신청을 많이 받고 싶어요",
+        type:'pre',
+    },
+    {
+        typequestion: "💰 판매",
+        question : "서비스/제품을 많이 팔고 싶어요",
+        type:'sell',
+    },
+    {
+        typequestion: "🎁 이벤트",
+        question : "이벤트를 널리 알리고 싶어요",
+        type:'event',
+    },
+    {
+        typequestion: "📚 포트폴리오",
+        question : "멋진 나를 알리고 싶어요",
+        type:'portfolio',
+    },
+    {
+        typequestion: "🎸 기타",
+        question : "다른 목표를 향하고 있습니다",
+        type:'etc',
+    },
+]
+
+const fontList = [
+    {
+        name:'Noto Sans KR',
+        font:'Noto Sans KR',
+    },
+    {
+        name:'Pretendard',
+        font:'Pretendard-Regular',
+    },
+    {
+        name:'에스코어드림',
+        font:'Noto Sans KR',
+    },
+    {
+        name:'Noto Sans KR',
+        font:'Noto Sans KR',
+    },,
+    {
+        name:'Noto Sans KR',
+        font:'Noto Sans KR',
+    },,
+    {
+        name:'Noto Sans KR',
+        font:'Noto Sans KR',
+    },
+]
+const colorList = [
+    {
+        name:'검',
+        color:'rgba(0,0,0,1)',
+    },
+    {
+        name:'차분',
+        color:'rgba(255,255,255,1)',
+    },
+    {
+        name:'노',
+        color:'rgba(0,255,255,1)',
+    },
+    {
+        name:'빨',
+        color:'rgba(250,0,0,1)',
+    },,
+    {
+        name:'초',
+        color:'rgba(0,250,0,1)',
+    },,
+    {
+        name:'파',
+        color:'rgba(0,0,250,1)',
+    },
+]
+
+function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing, setting, setSetting}) {
     // 모달
     const [cnum, setCnum] = useState(1);
     const [type, setType] = useState("");
     const [templates, setTemplates] = useState([]);
     const [templateNum, setTemplateNum] = useState(0);
+    const [font, setFont] = useState('');
+    const [color, setColor] = useState('');
+    const [tmodalOpen, setTmodalOpen] = useState(false);
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const handleOpen = () => setOpen(true);
@@ -100,6 +235,12 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
         setNavi(newNavi)
     }
 
+    const onUrlChange = e => {
+        let newSetting = Object.assign({}, setting)
+        newSetting.urlId = e.currentTarget.value
+        setSetting(newSetting)
+    }
+
     const nextAndSetTemplates = async (e) => {
         if(type === ""){
             alert("위의 보기 중 한가지를 선택해주세요.");
@@ -118,9 +259,31 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
             setCnum(cnum + 1);
         }
     }
+
     const nextAndSetTemplate = async (e) => {
         if(templateNum === 0){
             alert("위의 보기 중 한가지를 선택해주세요.");
+            return
+        }else{
+            // templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0]
+            // 이걸 set Contents에.
+            // action.setContents(templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0])
+
+            setCnum(cnum + 1);
+        }
+    }
+
+    const nextAndSetFont = async e => {
+        if(font === ''){
+            alert("위의 보기 중 한가지를 선택해주세요.");
+            return
+        }else{
+            setCnum(cnum + 1);
+        }
+    }
+    const nextAndSetDone = async e => {
+        if(setting.urlId === ''){
+            alert("URL을 입력해주세요. 이후 페이지에서 수정가능합니다.");
             return
         }else if(editing === true){
             const real = window.confirm("템플릿을 새로 설정하면 이전에 작성한 내용이 사라집니다. 괜찮으신가요?")
@@ -130,17 +293,17 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
                     // 이걸 set Contents에.
                     action.setContents(templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0])
         
-                    setCnum(cnum + 1);
+                    setEditing(true);
+                    handleClose();
                 }
             }else{
-                return
+                return;
             }
         }else{
-            // templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0]
-            // 이걸 set Contents에.
             action.setContents(templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0])
 
-            setCnum(cnum + 1);
+            setEditing(true);
+            handleClose();
         }
     }
 
@@ -156,22 +319,27 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
         setTemplates(typeTemplates);
     }
 
+    const showTemplateModal = () => {
+        setTmodalOpen(true);
+    }
+
     const content = () => {
         switch(cnum){
             case 1:
                 return(
                     <div style={{display:'flex', flexDirection:'column'}}>
-                        <form onSubmit={() => setCnum(cnum + 1)}>
-                        <div className="modal-main-card">
-                            <img src={smile} className="modal-image"/>
-                            <div className="modal-title">
-                                안녕하세요! <br/><span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을  환영합니다 :)
+                        <form onSubmit={() => setCnum(cnum + 1)} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
+                            <div className="modal-main-card">
+                                <div className="modal-title">
+                                    안녕하세요! <span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을 환영합니다! <br/>
+                                    당신의 서비스 / 제품 명을 알려주세요. 😊
+                                </div>
                             </div>
-                            <Input type="text" placeholder="프로젝트 이름이 어떻게 되나요?" value={navi.title} onChange={e => onChangeTitle(e)} />
-                        </div>
-                        <div className="modal-button-container">
-                            <button onSubmit={e => setCnum(cnum + 1)} className="modal-move-button" style={{display:`${navi.title.length > 0 ? 'flex' : 'none'}`}} onClick={e => setCnum(cnum + 1)}>다음</button>  
-                        </div>
+                            <Input className="input-holder" type="text" placeholder="한글은 8자 이내, 영문 10자 이내일 때 가장 이뻐요!" value={navi.title} onChange={e => onChangeTitle(e)} />
+                            <div className="modal-button-container">
+                                <button className="modal-move-button" onSubmit={e => setCnum(cnum + 1)} style={{visibility:`${navi.title.length > 0 ? 'visible' : 'hidden'}`, display:'flex'}} 
+                                    onClick={e => setCnum(cnum + 1)}>확인</button>  
+                            </div>
                         </form>
                     </div>
                 )
@@ -179,49 +347,30 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
 
             case 2:
                 return(
-                    <div style={{display:'flex', flexDirection:'column'}}>
-                        <div style={{display:'flex', flexDirection:'column', marginBottom:'5%'}}>
-                            <div>{navi.title}님 환영합니다!</div>
-                            {/* <div className="modal-main-card">
-                                <div className="modal-title">
-                                    Step 1
-                                </div>
-                                <img src={info1} style={{width:'300px', boxShadow:'2px 2px 4px rgba(0,0,0,0.3)'}}/>
-                                <div className="modal-title" style={{fontSize:'1.4em'}}>
-                                    우측 제작창에서 내용을 입력하세요.
-                                </div>
-                                <div className="modal-desc">
-                                    Section을 하나씩 설정하여<br/>쉽고 간편하게 랜딩페이지를 제작해 보세요.
-                                </div>
-                            </div> */}
+                    <div style={{display:'flex', flexDirection:'column'}}>   
+                        <div className="modal-title">
+                            <span style={{color:'#6C63FF'}}>{navi.title}</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀
+                        </div>                     
+                        <div className="modal-main-card">
                             {
                                 secondQuestion.map((item, index) => {
-                                    let color = 'white';
+                                    let color = 'none';
                                     if(item.type === type){
-                                        color = 'black';
+                                        color = '1px solid #6C63FF';
                                     }
                                     return(
-                                        <div className="button1" onClick={() => {
-                                            setType(item.type);
-                                        }} key={index} 
-                                        style={{backgroundColor: `${color}`}}
-                                        >{item.question}</div>
+                                        <div className="button1" onClick={() => {setType(item.type);}} key={index} 
+                                            style={{border:`${color}`}}>
+                                            <div style={{fontSize:'20px'}}>
+                                                {item.typequestion}
+                                            </div>
+                                            <div style={{marginTop:'4%'}}>
+                                                {item.question}
+                                            </div>
+                                        </div>
                                     )
                                 })
                             }
-                            {/* <div className="modal-main-card">
-                                <div className="modal-title">
-                                    Step 2
-                                </div>
-                                <img src={info2} style={{width:'300px', boxShadow:'2px 2px 4px rgba(0,0,0,0.3)'}}/>
-                                <div className="modal-title" style={{fontSize:'1.4em'}}>
-                                    섹션을 추가하고, 유저의 응답을 유도하세요.
-                                </div>
-                                <div className="modal-desc">
-                                당신의 프로젝트에 흥미를 느낀 <br/>
-                                유저가 버튼을 누를 수 있도록 꾸며보세요!
-                                </div>
-                            </div> */}
                         </div>
                         <div className="modal-button-container">
                             <button className="modal-move-button" onClick={e => setCnum(cnum - 1)}>이전</button>
@@ -233,46 +382,48 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
 
             case 3:
                 return(
-                    <div style={{display:'flex', flexDirection:'column'}}>
+                    <div style={{display:'flex', flexDirection:'column'}}> 
+                        <div className="modal-title">
+                            그렇다면 이런 템플릿을 추천해드릴게요 😎
+                        </div>
                         <div className="modal-main-card">
-                            {/* <img src={info3} style={{width:'400px', marginBottom:'5%', boxShadow:'2px 2px 4px rgba(0,0,0,0.3)'}}/>
-                            <div className="modal-title" style={{fontSize:'3em'}}>
-                                <span style={{color:'#6C63FF'}}>Surfee</span> <span style={{color:'gray', fontSize:"0.5em"}}>beta</span> 주의사항!
-                            </div>
-                            <div className="modal-desc" style={{fontSize:'1.3em', textAlign:'left'}}>
-                                1. 새로고침시 작업사항이 모두 날아갈 수 있습니다.<br/>수시로 저장하세요.
-                                <br/>
-                                2. 한번 '제출 완료'시 수정이 어려우니,<br/>신중하게 제출해주세요.
-                                <br />
-                                3. 제작 완료시 우측 상단의 '제작완료 후 신청'을 눌러주세요. <br/>마지막으로 안내창을 꼼꼼히 읽고 제출해주세요.
-                            </div> */}
                             {
                                 templates.map((item, index) => {
-                                    let color = 'white';
-                                    if(item.templateNum === templateNum && item.type === type){
-                                        color = 'black';
+                                    let color = 'none';
+                                    if(item.type === type && templateNum === item.templateNum){
+                                        color = '1px solid #6C63FF';
                                     }
                                     return(
                                         <div>
-                                            {
-                                                item.type === type && <div>추천</div>
-                                            }
                                             <div className="template__card" key={index}
                                                 onClick={() => {
                                                     setTemplateNum(item.templateNum);
                                                     setType(item.type);
                                                 }}
-                                                style={{backgroundColor: `${color}`}}
-                                            >{item.type}{item.templateName}</div>
+                                                style={{border: `${color}`}} >
+
+                                                <span className="magnify-button" onClick={() => showTemplateModal()}>↗</span>
+                                                
+                                                <img src={good} width={240} />
+                                                
+                                                <div>
+                                                    {item.type}
+                                                    {item.templateName}
+                                                </div>
+                                            </div>
                                         </div>
                                     )
                                 })
                             }
-                            <button className="modal-move-button" onClick={e => getAllTemplates(e)}>전체보기</button>
                         </div>
                         <div className="modal-button-container">
                             <button className="modal-move-button" onClick={e => setCnum(cnum - 1)}>이전</button>
                             <button className="modal-move-button" onClick={e => nextAndSetTemplate()}>다음</button>  
+                        </div>
+                        <div style={{width:'100%', display: 'flex', justifyContent:'center'}}>
+                            <span className="ask-another-template" onClick={e => getAllTemplates(e)}>
+                                앗, 다른 템플릿을 원하시나요?
+                            </span>
                         </div>
                     </div>
                 )
@@ -280,24 +431,95 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
             case 4:
                 return(
                     <div style={{display:'flex', flexDirection:'column'}}>
+                        <div className="modal-title">
+                            멋져요! 디자인은 어떻게 할까요? 🤔
+                        </div>
                         <div className="modal-main-card">
-                            <div className="modal-title">
-                                준비 끝!
+                            <div style={{width:'48%'}}>
+                                <div style={{width:'100%', textAlign:'center', margin:'2% 0%'}}>
+                                    폰트를 선택해주세요.
+                                </div>
+                                <OverflowScrolling className="font-selections__container">
+                                    {fontList.map((item, index) => {
+                                        let color = 'none';
+                                        if(item.font === font){
+                                            color = '1px solid #6C63FF';
+                                        }
+                                        return(
+                                            <div className="template__card" key={index}
+                                                onClick={() => {
+                                                    setFont(item.font);
+                                                }}
+                                                style={{border: `${color}`, fontFamily:`${item.font}`, padding:'5% 3%'}}
+                                            >
+                                                <div>
+                                                    {item.name}
+                                                </div>
+                                                <div style={{marginTop:'2%'}}>
+                                                    노코드 랜딩페이지 제작 툴, Surfee
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </OverflowScrolling>
                             </div>
-                            <div className="modal-title" style={{marginTop:'4%'}}>
-                                이제 <span style={{color:'#6C63FF'}}>Surfee</span>와 함께
-                                랜딩페이지를 제작해 보아요!
-                            </div>
-                            <img src={good} className="modal-image"/>
-                            <div className="modal-title" style={{fontSize:'1.4em'}}>
-                                쉽고 간편하게 제작하는 랜딩페이지 제작 툴, Surfee
+                            <div style={{width:'48%', marginLeft:'2%'}}>
+                                <div style={{width:'100%', textAlign:'center', margin:'2% 0%'}}>
+                                    색상을 선택해주세요.
+                                </div>
+                                <OverflowScrolling className="font-selections__container">
+                                    {colorList.map((item, index) => {
+                                        let bor = 'none';
+                                        if(item.color === color){
+                                            bor = '1px solid #6C63FF';
+                                        }
+                                        return(
+                                            <div className="template__card" key={index}
+                                                onClick={() => {
+                                                    setColor(item.color);
+                                                }}
+                                                style={{border: `${bor}`, padding:'5% 3%'}}
+                                            >
+                                                <div>
+                                                    {item.name}
+                                                </div>
+                                                <div style={{backgroundColor:`${item.color}`}}>
+                                                    색
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </OverflowScrolling>
                             </div>
                         </div>
                         <div className="modal-button-container">
                             <button className="modal-move-button" onClick={e => setCnum(cnum - 1)}>이전</button>
+                            <button className="modal-move-button" onClick={() => nextAndSetFont()}>다음</button>
+                        </div>
+                    </div>
+                )
+                break;
+
+            case 5:
+                return(
+                    <div style={{display:'flex', flexDirection:'column'}}>
+                        <div className="modal-title">
+                            마지막으로, <span style={{color:'#6C63FF'}}>{navi.title}</span> 랜딩페이지의 URL을 설정해주세요!
+                        </div>
+                        <div className="modal-title" style={{fontSize:'25px'}}>
+                            <Input className="input-holder" type="text" value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
+                        </div>
+                            <div style={{color:'gray', paddingLeft:'6%',marginTop:'3%', fontSize:'18px', textAlign:'left', fontFamily:'Pretendard-Regular'}}>
+                                <div>
+                                    - 영문과 숫자만 사용 가능합니다.<br/><br/>
+                                    - 개인 도메인 연결은 다음 버전에 빠르게 업데이트 해올게요!<br/><br/>
+                                    - 수정 가능하니 편하게 설정해주세요 :)<br/><br/>
+                                </div>
+                            </div>
+                        <div className="modal-button-container">
+                            <button className="modal-move-button" onClick={e => setCnum(cnum - 1)}>이전</button>
                             <button className="modal-move-button" onClick={() => {
-                                setEditing(true);
-                                handleClose()
+                                nextAndSetDone();
                             }} style={{backgroundColor:'rgba(255,0,0,0.7)'}}>시작하기</button>
                         </div>
                     </div>
@@ -308,27 +530,64 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing}) {
 
     return (
         <div>
-            <StyledModal
+        <StyledModal
+            aria-labelledby="unstyled-modal-title"
+            aria-describedby="unstyled-modal-description"
+            open={open}
+            BackdropComponent={Backdrop}
+        >
+            <Box sx={style}>
+                {editing ? 
+                    <span onClick={() => handleClose()} className="arrow-hover" style={{position:'absolute', top:'10px', left:'20px', fontSize:'30px', border:'none', backgroundColor:'#ffffffff', cursor:'pointer', color:'black'}}>
+                        ←
+                    </span>
+                     :
+                    <Link to="/" className="arrow-hover" style={{position:'absolute', top:'10px', left:'20px', fontSize:'30px', border:'none', backgroundColor:'#ffffffff', cursor:'pointer', color:'black'}}>
+                        ←
+                    </Link> 
+                }
+                <div className="progress-bar__container">
+                    {progressList.map((item, index) => {
+                        let backColor = 'rgba(0,0,0,0.3)'
+                        let fontColor = 'rgba(0,0,0,0.6)'
+                        let fontColor2 = 'rgba(0,0,0,0.6)'
+
+                        if(item.num < cnum){
+                            backColor = '#6C63FF'
+                            fontColor = "white"
+                            fontColor2 = 'black'
+                        }else if(item.num === cnum){
+                            backColor = 'white'
+                            fontColor = "#6C63FF"
+                            fontColor2 = "#6C63FF"
+                        }
+
+                        return(
+                            <span style={{display:'flex', flexDirection:'column', margin:'3%', alignItems: 'center', justifyContent: 'center'}}>
+                                <span className="list-component" style={{backgroundColor:`${backColor}`, color:`${fontColor}`, border:`1px solid ${fontColor}`}}>{item.num}</span>
+                                <span style={{fontSize:'10px', color:`${fontColor2}`, marginTop:'12px'}}>{item.name}</span>
+                            </span>
+                        )
+                    })}
+                </div>
+                <div style={{width:'60%'}}>
+                    {content()}
+                </div>
+            </Box>
+        </StyledModal>
+            <StyledModal2
                 aria-labelledby="unstyled-modal-title"
                 aria-describedby="unstyled-modal-description"
-                open={open}
-                BackdropComponent={Backdrop}
+                open={tmodalOpen}
+                onClose={() => setTmodalOpen(false)}
+                BackdropComponent={Backdrop2}
             >
-                <Box sx={style}>
-                    {editing ? 
-                        <span onClick={() => handleClose()} className="arrow-hover" style={{position:'absolute', top:'10px', left:'20px', fontSize:'30px', border:'none', backgroundColor:'#ffffffff', cursor:'pointer', color:'black'}}>
-                            ←
-                        </span>
-                         :
-                        <Link to="/" className="arrow-hover" style={{position:'absolute', top:'10px', left:'20px', fontSize:'30px', border:'none', backgroundColor:'#ffffffff', cursor:'pointer', color:'black'}}>
-                            ←
-                        </Link> 
-                    }
-                    <div style={{width:'50%', marginBottom:'10%'}}>
-                        {content()}
-                    </div>
+                <Box sx={style2}>
+                    <>
+                    템플릿
+                    </>
                 </Box>
-            </StyledModal>
+            </StyledModal2>
         </div>
     )
 }

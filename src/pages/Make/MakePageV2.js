@@ -69,6 +69,13 @@ const MakePageV2 = ({history}, props) => {
     const [addingSectionAt, setAddingSectionAt] = useState(1000); // 1000은 추가하고 있지 않다는 것을 의미.
 
     // 메인 세팅
+    const [setting, setSetting] = useState({
+        urlId:'',
+        faviconAttachment:'',
+        font:'',
+        smallFont:'',
+        color:'',
+    });
     const [urlId, setUrlId] = useState("");
 
     // 네비게이션
@@ -124,8 +131,8 @@ const MakePageV2 = ({history}, props) => {
     },[])
 
     const contextValue = {
-        state: {addingSectionAt, secNum, contents},
-        action : {setAddingSectionAt, setSecNum, setContents}
+        state: {addingSectionAt, secNum, contents, isWidget},
+        action : {setAddingSectionAt, setSecNum, setContents, setIsWidget},
     }
 
     const onSubmit = async () => {
@@ -269,43 +276,40 @@ const MakePageV2 = ({history}, props) => {
             nowState={nowState}
        />
        <MyContext.Provider value={contextValue}>
-            <div className="make-page-container" style={{marginTop:'-10px'}}>
-                {/* 여기서부터 메인페이지 베껴옴 */}
-                    <div className="make-left-landing" onClick={e => backgroundClick(e)} style={{width:`${full || !isWidget ? '100%' : '70%' }`}}>
-                        {/* <div className="make-left-top-container" style={{display:`${full ? 'none' : 'flex'}`, justifyContent:`${device ? 'start':'center'}`}}>
-                            Let's Building Your Web site! {device ?  <></> : <span>in Mobile</span>}
-                        </div> */}
-                        <OverflowScrolling className="scroll-container" style={{ width:`${full ? '100%' : device ? '80%' : '400px' }`, height:`${full ? '94vh' : '80vh'}`}}>
-                            <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`}}>  
-                                {/* 네비게이션 */}
-                                <MakeNavigationV2 full={full} navi={navi} history={history} setIsWidget={setIsWidget} />
-                                
-                                {/* 새로운 섹션 방식 */}
-                                {sectionsReturn}
+            <div className="make-page-container" style={{marginTop:'0px'}}>
+                <OverflowScrolling className="make-left-landing" onClick={e => backgroundClick(e)} style={{width:`${full || !isWidget ? '100%' : '70%' }`}}>
+                    <div className="scroll-container" style={{ width:`${full ? '100%' : device ? '80%' : '400px' }`}}>
+                        {/* , height:`${full ? '94vh' : '80vh'}` */}
+                        {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
+                        <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`}}>  
+                            {/* 네비게이션 */}
+                            <MakeNavigationV2 full={full} navi={navi} history={history} setIsWidget={setIsWidget} />
+                            
+                            {/* 섹션 디스플레이 */}
+                            {sectionsReturn}
 
-                                {/* 푸터 */}
-                                { footerOrNot ?  <></> : 
-                                <MakeFooterV2 foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
-                                } 
-                            </div> 
-                        </OverflowScrolling>
+                            {/* 푸터 */}
+                            {footerOrNot ? <></>:
+                            <MakeFooterV2 foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
+                            } 
+                        </div> 
                     </div>
-                {/* 여기까지 메인페이지 베껴옴 */}
+                </OverflowScrolling>
                 {/* 아래는 제작하는 곳 */}
-                    <div style={{display:`${isWidget ? 'flex' : 'none'}`, justifyContent:'center', alignItems: 'center', backgroundColor:'white'}}>
-                        <OverflowScrolling className='overflow-scrolling'>
+                    <div style={{display:`${isWidget ? 'flex' : 'none'}`, justifyContent:'center', alignItems: 'center'}}>
                             <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
-                                <div className="section-table-container" style={{width:'100%'}}>
-                                    {/* 제작페이지 메인 */}
-                                    {selectorTable()}
-                                </div>
-                                <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
-                                    <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing}/>
-                                    <LoadingModal loading={loading} />
-                                    <CheckModal ch={ch} setCh={setCh} onSubmit2={onSubmit2}/>
-                                </div>
+                                <OverflowScrolling className='overflow-scrolling'>
+                                    <div>
+                                        {/* 제작페이지 메인 */}
+                                        {selectorTable()}
+                                    </div>
+                                    <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
+                                        <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
+                                        <LoadingModal loading={loading} />
+                                        <CheckModal ch={ch} setCh={setCh} onSubmit2={onSubmit2}/>
+                                    </div>
+                                </OverflowScrolling>
                             </div>
-                        </OverflowScrolling>
                     </div>
                 {/* 모바일 제한 페이지 */}
                     <div className="mobile-hide">

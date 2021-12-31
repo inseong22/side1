@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import EditTopBar from '../tools/EditTopBar'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 
 function MakeTemplate3({content, contents, setContents}) {

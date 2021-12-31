@@ -1,6 +1,7 @@
 .make-page-container{
     display:flex;
     flex-direction:row;
+    align-items :start;
     height: 100%;
     width:100%;
     overflow:hidden;
@@ -47,12 +48,6 @@
     justify-content :center;
     flex-direction:column;
     width:100%;
-}
-
-.section-table-container{
-    justify-content: start;
-    width:90%;
-    padding-left: 10px; 
 }
 
 .section-selector-container{
@@ -153,9 +148,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: red;
-    height:94vh;
+    padding:3% 0%;
     z-index: 1;
+    -webkit-overflow-scrolling: touch;
   }
 
 .make-main-page-container{
@@ -169,11 +164,10 @@
   }
 
 .scroll-container{
-    border-radius:5px;
-    border: 1px solid gray;
+    border-radius:10px;
     overflow: auto;
-    -webkit-overflow-scrolling: touch;
     z-index:10;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
 }
 .make-left-bottom-container{
     justify-content: center;

@@ -10,3 +10,9 @@
     display:flex;
     flex-direction: column;
 }
+
+.make__top-bar{
+    background-color: #6C63FF;
+    width:100%;
+    padding:5px 1px;
+}

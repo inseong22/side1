@@ -24,8 +24,9 @@ function Template2({content, contents, setContents}) {
     }
 
     return (
-        <div>
-            <input className="template-image" type="file" accept="image/*" id="file" onChange={ e => onChangeImage(e) } style={{width:`${content.width}%`}} />
+        <div className="template">
+            <input className="template-image" type="file" accept="image/*" id="file" 
+                onChange={ e => onChangeImage(e) } style={{width:`${content.width}%`}} />
             {content.attachment ?
             <>
                 <img src={content.attachment} style={{width:`${content.width}%`}} />
