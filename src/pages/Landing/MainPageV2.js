@@ -109,7 +109,6 @@ function MainPageV2({history, isLoggedIn, userObj}) {
         console.log("로그인했나?", isLoggedIn)
         if(isLoggedIn === false){
             alert("로그인하셔야 이용가능한 페이지입니다.");
-            return
         }else{
             history.push('/#/seeResponse');
             history.go();
@@ -252,7 +251,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                         </div>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span style={{color:'#6a63f7'}}>이미 제작을 완료하셨다면</span>
-                        <Link className="apply-button-v2" onClick={() => checkLoggedIn()} style={{backgroundColor:'#ffffff', color:'#6a63f7'}}>관리하기</Link>   
+                        <span className="apply-button-v2" onClick={() => checkLoggedIn()} style={{backgroundColor:'#ffffff', color:'#6a63f7'}}>관리하기</span>   
                         </div>
                     </div>
                 </span>

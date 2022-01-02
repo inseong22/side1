@@ -21,6 +21,7 @@ import ReactGa from 'react-ga'
 import lodash from 'lodash'
 import EditNaviSection from '../../components/Make/Edit/EditTemplates/EditNaviSection'
 import EditFooterSection from '../../components/Make/Edit/EditTemplates/EditFooterSection'
+import {motion} from 'framer-motion'
 
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
@@ -256,7 +257,8 @@ const MakePageV2 = ({history}, props) => {
 
     const backgroundClick = e => {
         if(e.target.className === "make-left-landing"){
-            setIsWidget(false)
+            setIsWidget(false);
+            setAddingSectionAt(1000);
         }else if(e.target.className === 'make-hover-section' || e.target.className === 'template' || e.target.className === "make-nav-on" || e.target.className === "make-footer" || e.target.className === "footer-section"){
             setIsWidget(true)
         }else{
@@ -299,10 +301,20 @@ const MakePageV2 = ({history}, props) => {
                     <div style={{display:`${isWidget ? 'flex' : 'none'}`, justifyContent:'center', alignItems: 'center'}}>
                             <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
                                 <OverflowScrolling className='overflow-scrolling'>
-                                    <div>
+                                    <motion.div
+                                        animate={
+                                            isWidget ? {
+                                                x:[500, 0],
+                                                transition:{
+                                                    duration:0.3,
+                                                }
+                                            } : 
+                                            'stop'
+                                        }
+                                        >
                                         {/* 제작페이지 메인 */}
                                         {selectorTable()}
-                                    </div>
+                                    </motion.div>
                                     <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
                                         <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
                                         <LoadingModal loading={loading} />

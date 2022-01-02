@@ -55,6 +55,7 @@ const style = {
 //   borderRadius:'20px',
   position:'relative',
 }
+
 const StyledModal2 = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -565,7 +566,7 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing, sett
                         return(
                             <span style={{display:'flex', flexDirection:'column', margin:'3%', alignItems: 'center', justifyContent: 'center'}}>
                                 <span className="list-component" style={{backgroundColor:`${backColor}`, color:`${fontColor}`, border:`1px solid ${fontColor}`}}>{item.num}</span>
-                                <span style={{fontSize:'10px', color:`${fontColor2}`, marginTop:'12px'}}>{item.name}</span>
+                                <span style={{fontSize:'12px', color:`${fontColor2}`, marginTop:'12px'}}>{item.name}</span>
                             </span>
                         )
                     })}

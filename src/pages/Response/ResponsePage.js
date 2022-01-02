@@ -30,7 +30,7 @@ const columns = [
     },
   ];
   
-function ResponsePage({userObj}) {
+function ResponsePage({userObj, history}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -41,7 +41,7 @@ function ResponsePage({userObj}) {
         all_sessions:0,
         all_pageViews:0
     });
-    const [nowChecking, setNowChecking] = useState(0);
+    const [nowChecking, setNowChecking] = useState(10000);
     
     useEffect(() => {
         // to report page view
@@ -72,18 +72,15 @@ function ResponsePage({userObj}) {
         })
         setResponses(tempDatas);
 
-        setTimeout(() => {
-            console.log(responses);
-            setLoading(true);
-        },300)
+        setLoading(true);
 }
 
     const getDatas = async (urlId) => {
         const reDatas = await dbService
-        .collection("apply-datas")
-        .orderBy("created", "desc")
-        .where("urlId", "==", urlId)
-        .get(); // uid를 creatorId로 줬었으니까.
+            .collection("apply-datas") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
+            .orderBy("created", "desc")
+            .where("urlId", "==", urlId)
+            .get();
 
         let reData = reDatas.docs.map(doc => {
             let day = new Date(doc.data().created)
@@ -118,7 +115,7 @@ function ResponsePage({userObj}) {
 
     const returnMylandingsTable = mylandings.map((item, index) => {
         return(
-            <MadeLandingCard item={item} key={item.id} index={index} setNowChecking={setNowChecking} />
+            <MadeLandingCard history={history} item={item} key={item.id} index={index} setNowChecking={setNowChecking} />
         )
     })
         if(loading === true){
@@ -138,15 +135,14 @@ function ResponsePage({userObj}) {
                         </div>
                     </div>
                     <div className="get-down-container">
-                        {  part === 1 ? 
+                        { part === 1 ? 
                         // 응답 파트
                         <div className="response-container">
                             <div className="response-table">
                                 <div className="response-table-top">
-                                    <span className="response-table-title"> {responses.length === 0 ? "응답을 볼 페이지를 클릭하세요." : <div>총 목표액션 전환 수 : {responses[nowChecking].length} 명</div>} </span>
+                                    <span className="response-table-title"> {nowChecking === 10000 ? "응답을 볼 페이지를 클릭하세요." : <div>총 목표액션 전환 수 : {responses[nowChecking].length} 명</div>} </span>
                                 </div>
                                 {responses.length === 0 ? <></> : <Table columns={columns} dataSource={responses[nowChecking]} className="response-table-datas"/>}
-                                
                             </div>
                         </div>
                         :
