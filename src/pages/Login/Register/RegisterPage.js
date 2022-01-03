@@ -5,6 +5,7 @@ import { dbService } from '../../../tools/fbase'
 import { Input } from 'antd';
 import googlelogo from '../googlelogo.png'
 import s1 from '../../../tools/img/surfee1.png';
+import {Link} from 'react-router-dom';
 
 function RegisterPage({history}) {
     const [id, setId] = useState("");
@@ -111,7 +112,7 @@ function RegisterPage({history}) {
         : 
 
         <div className="login-container">
-            <div style={{width: '40%', borderRight:'1px solid rgba(0,0,0,0.4)', height:'100%', display: 'flex', justifyContent:'center', alignItems: 'center'}}>
+            <div className="login-container__container">
                 <div className="login__inner">
                     <div className="login-title" style={{color:'#6a63f7'}}>
                         Surfee
@@ -148,6 +149,14 @@ function RegisterPage({history}) {
                         <img src={googlelogo} width={20}/>
                         <span style={{marginLeft:'5%'}}>구글 회원가입</span>
                     </button>
+                    <div style={{padding:'2% 0%', justifyContent:'flex-start', display:'flex', width:'100%'}}>
+                        <Link to="/customer" className="footer-text-click">
+                            개인정보 처리방침
+                        </Link>
+                        <Link to="/customer" className="footer-text-click" style={{marginLeft:'2%'}}>
+                            이용약관
+                        </Link>
+                    </div>
                 </div>
             </div>
             <div className="login-background">

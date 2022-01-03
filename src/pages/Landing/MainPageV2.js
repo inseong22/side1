@@ -232,9 +232,6 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                         </div>
                     </span>
                 </div>
-                {/* <div className="main-section-right-topbottom">                   
-                    <img src={section1} className="section-one-image"/>
-                </div> */}
             </div>
             <div ref={targets} className="main-page-section-last-v2" style={{backgroundColor:'#c5c2fa'}}>
                 <span className="last-one-component-v2">
@@ -255,20 +252,6 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                         </div>
                     </div>
                 </span>
-                {/* 
-                <span className="last-one-component">
-                    <div className="main-section-last-title">
-                        지금 당장 필요하지 않다면<br/>쿠폰 받아가세요!
-                    </div>
-                    <Link to="coupon" onClick={AddLog} className="apply-button" style={{backgroundColor:'rgba(0,0,0,0)', color:'white'}}>
-                        할인쿠폰 받으러 가기</Link>
-                    
-                    <div className="main-section-last-desc">
-                        이벤트 기간 : 2021.00.00 ~ 2021.00.00 <br/>
-                        사용 가능 기간 : ~ 2022.02.28
-                    </div>
-                </span> 
-                */}
             </div>
         </div>
         <Footer />

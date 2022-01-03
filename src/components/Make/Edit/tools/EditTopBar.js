@@ -6,13 +6,13 @@ function EditTopBar({category, setCategory}) {
 
     return (
         <div className="make__top-bar">
-            <span onClick={() => setCategory(0)} style={{cursor:'pointer', backgroundColor:`${category === 0 ? 'rgba(220,0,0,1)' : 'rgba(0,220,0,1)'}`}}>
-                템플릿
-            </span>
-            <span onClick={() => setCategory(1)} style={{cursor:'pointer', backgroundColor:`${category === 1 ? 'rgba(220,0,0,1)' : 'rgba(0,220,0,1)'}`}}>
+            <span className="make-radio" onClick={() => setCategory(0)} style={{cursor:'pointer', backgroundColor:`${category === 1 ? 'rgba(220,0,0,1)' : 'rgba(0,220,0,1)'}`}}>
                 디자인
             </span>
-            <span onClick={() => action.setIsWidget(false)}>
+            <span className="make-radio" onClick={() => setCategory(1)} style={{cursor:'pointer', backgroundColor:`${category === 0 ? 'rgba(220,0,0,1)' : 'rgba(0,220,0,1)'}`}}>
+                템플릿
+            </span>
+            <span onClick={() => action.setIsWidget(false)} style={{cursor:'pointer'}}>
                 Done
             </span>
         </div>

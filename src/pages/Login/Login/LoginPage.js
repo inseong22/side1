@@ -6,6 +6,8 @@ import { dbService } from '../../../tools/fbase'
 import { Input } from 'antd';
 import googlelogo from '../googlelogo.png'
 import s1 from '../../../tools/img/surfee1.png';
+import Footer from '../../NavAndFooter/Footer';
+import {Link} from 'react-router-dom';
 
 function LoginPage({history}) {
     const [id, setId] = useState("");
@@ -78,8 +80,9 @@ function LoginPage({history}) {
             {/* 여기에 회원가입 페이지랑 똑같이 입력받는걸 넣어야 하는 건가..? */}
         </div>
         :
+        <div>
         <div className="login-container">
-            <div style={{width: '40%', borderRight:'1px solid rgba(0,0,0,0.4)', height:'100%', display: 'flex', justifyContent:'center', alignItems: 'center'}}>
+            <div className="login-container__container">
                 <div className="login__inner">
                     <div className="login-title" style={{color:'#6a63f7'}}>
                         Surfee
@@ -116,6 +119,14 @@ function LoginPage({history}) {
                         <img src={googlelogo} width={20}/>
                         <span style={{marginLeft:'5%'}}>구글 로그인</span>
                     </button>
+                    <div style={{padding:'2% 0%', justifyContent:'flex-start', display:'flex', width:'100%'}}>
+                        <Link to="/customer" className="footer-text-click">
+                            개인정보 처리방침
+                        </Link>
+                        <Link to="/customer" className="footer-text-click" style={{marginLeft:'2%'}}>
+                            이용약관
+                        </Link>
+                    </div>
                 </div>
             </div>
             <div className="login-background">
@@ -127,6 +138,8 @@ function LoginPage({history}) {
                     Surfee와 함께 1분만에 완성하는 랜딩페이지
                 </div>
             </div>
+        </div>
+        <Footer />
         </div>
      }</>
         

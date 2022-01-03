@@ -3,7 +3,7 @@ import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import './App.css';
 import LoginPage from './pages/Login/Login/LoginPage'
 import MainPage from './pages/Landing/old/MainPage';
-import MadePage from './pages/UserLanding/UserLandingPage';
+import UserLandingPage from './pages/UserLanding/UserLandingPage';
 import MainPageV2 from './pages/Landing/MainPageV2';
 import MakePage from './pages/Make/old/MakePage';
 import MakePageV2 from './pages/Make/MakePageV2';
@@ -23,7 +23,7 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                 <>
                 <div className="Container" style={{ minHeight: 'calc(100vh - 80px)', zIndex:-1 }}>
                     <Switch>
-                        <Route path="/" component={MadePage} />
+                        <Route path="/" component={UserLandingPage} />
                     </Switch>
                 </div>
                 </> 

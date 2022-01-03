@@ -35,6 +35,15 @@
     flex-direction:column;
 }
 
+.login-container__container{
+    width: 40%; 
+    border-right:1px solid rgba(0,0,0,0.4);
+    height:100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
 .login-label{
     margin-top:5%;
 }
@@ -90,4 +99,13 @@
     margin-top:1%;
     color:white;
     font-size:1.2em;
+}
+
+@media screen and (max-width:800px){
+    .login-background{
+        display:none;
+    }
+    .login-container__container{
+        width:100%;
+    }
 }

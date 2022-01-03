@@ -1,0 +1,10 @@
+.balloon{
+    position: absolute;;
+    background-color:black;
+    color:white;
+    height:30px;
+    padding:0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

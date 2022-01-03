@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import QnA from '../../components/Customer/QnA'
 import Term from '../../components/Customer/Term'
 import PersonalInformation from '../../components/Customer/PersonalInformation'
+import Footer from '../NavAndFooter/Footer'
 
 import './CustomerPage.css'
 
@@ -93,6 +94,7 @@ function CustomerPage() {
                 </div>
             </div>
         </div>
+        <Footer />
         </>
     )
 }

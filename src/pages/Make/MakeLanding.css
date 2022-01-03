@@ -194,10 +194,11 @@
     display: flex;
     padding-bottom:10%;
     position:fixed;
-    right:0%;
+    left:0%;
     top:7vh;
     width:470px;
     height:80vh;
+    z-index: 2;
 }
 
 .overflow-scrolling {

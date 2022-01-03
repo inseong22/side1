@@ -1,6 +1,7 @@
 .make-page-container{
     display:flex;
     flex-direction:row;
+    justify-content : end;
     align-items :start;
     height: 100%;
     width:100%;
@@ -161,6 +162,7 @@
     flex-direction: column;
     background-color:white;
     z-index: 10;
+    overflow:visible;
   }
 
 .scroll-container{
@@ -168,6 +170,7 @@
     overflow: auto;
     z-index:10;
     box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+    overflow:visible;
 }
 .make-left-bottom-container{
     justify-content: center;

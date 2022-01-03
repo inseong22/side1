@@ -16,12 +16,13 @@ import CheckModal from '../../components/Make/Modal/CheckModal'
 import OverflowScrolling from 'react-overflow-scrolling';
 import { v4 as uuidv4 } from 'uuid';
 import { useLocation, useParams } from 'react-router';
-import { base } from '../../components/Make/SectionTemplates/baseTemplates'
+import { base } from '../../components/Make/SectionTypes/baseTypes'
 import ReactGa from 'react-ga'
 import lodash from 'lodash'
 import EditNaviSection from '../../components/Make/Edit/EditTemplates/EditNaviSection'
 import EditFooterSection from '../../components/Make/Edit/EditTemplates/EditFooterSection'
 import {motion} from 'framer-motion'
+import { isMobile } from 'react-device-detect';
 
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
@@ -256,17 +257,28 @@ const MakePageV2 = ({history}, props) => {
     })
 
     const backgroundClick = e => {
-        if(e.target.className === "make-left-landing"){
+        if(e.target.className === "make-left-landing" || e.target.className === "for-section-hover"){
             setIsWidget(false);
             setAddingSectionAt(1000);
-        }else if(e.target.className === 'make-hover-section' || e.target.className === 'template' || e.target.className === "make-nav-on" || e.target.className === "make-footer" || e.target.className === "footer-section"){
-            setIsWidget(true)
-        }else{
+        }
+        // else if(e.target.className === 'make-hover-section' || e.target.className === 'template' || e.target.className === "make-nav-on" || e.target.className === "make-footer" || e.target.className === "footer-section"){
+        //     setIsWidget(true)
+        // }
+        else{
             return;
         }
     }
 
     return (<>
+    { isMobile ? 
+        <div className="mobile-hide">
+            <div>
+                본 사이트는 PC환경에 최적화되어있습니다. <br />
+                PC로 이동해서 랜딩페이지 제작을 시작해보세요. 😁
+            </div>
+        </div> 
+        :
+    <>
        <NavBarInMakePage 
             doLoad={doLoad}
             open={open} setOpen={setOpen}
@@ -279,8 +291,46 @@ const MakePageV2 = ({history}, props) => {
        />
        <MyContext.Provider value={contextValue}>
             <div className="make-page-container" style={{marginTop:'0px'}}>
-                <OverflowScrolling className="make-left-landing" onClick={e => backgroundClick(e)} style={{width:`${full || !isWidget ? '100%' : '70%' }`}}>
-                    <div className="scroll-container" style={{ width:`${full ? '100%' : device ? '80%' : '400px' }`}}>
+                {/* 아래는 제작하는 곳 */}
+                <motion.div style={{display:`${isWidget ? 'flex' : 'none'}`, justifyContent:'center', alignItems: 'center'}}>
+                    <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
+                        <OverflowScrolling className='overflow-scrolling'>
+                            <div>
+                                {/* 제작페이지 메인 */}
+                                {selectorTable()}
+                            </div>
+                            <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
+                                <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
+                                <LoadingModal loading={loading} />
+                                <CheckModal ch={ch} setCh={setCh} onSubmit2={onSubmit2}/>
+                            </div>
+                        </OverflowScrolling>
+                    </div>
+                </motion.div>
+                {/* 아래는 미리보기 화면 */}
+                <motion.div className="make-left-landing" onClick={e => backgroundClick(e)}
+                    animate={ full || !isWidget ? {}: device ? {
+                            width:['100%', '70%'],
+                            transition:{
+                                duration:0.3,
+                            }
+                        } : {
+                            x:[0, 250],
+                            transition:{
+                                duration:0.3,
+                            }
+                        }
+                    }>
+                    <motion.div className="scroll-container" 
+                        style={{ width:`${full ? '100%' :'80%'}`}}
+                        animate={
+                            device ? {} : {
+                                width:['80%', '30%'],
+                                transition:{
+                                    duration:0.3
+                                }
+                            }
+                        }>
                         {/* , height:`${full ? '94vh' : '80vh'}` */}
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
                         <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`}}>  
@@ -295,43 +345,11 @@ const MakePageV2 = ({history}, props) => {
                             <MakeFooterV2 foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
                             } 
                         </div> 
-                    </div>
-                </OverflowScrolling>
-                {/* 아래는 제작하는 곳 */}
-                    <div style={{display:`${isWidget ? 'flex' : 'none'}`, justifyContent:'center', alignItems: 'center'}}>
-                            <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
-                                <OverflowScrolling className='overflow-scrolling'>
-                                    <motion.div
-                                        animate={
-                                            isWidget ? {
-                                                x:[500, 0],
-                                                transition:{
-                                                    duration:0.3,
-                                                }
-                                            } : 
-                                            'stop'
-                                        }
-                                        >
-                                        {/* 제작페이지 메인 */}
-                                        {selectorTable()}
-                                    </motion.div>
-                                    <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
-                                        <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
-                                        <LoadingModal loading={loading} />
-                                        <CheckModal ch={ch} setCh={setCh} onSubmit2={onSubmit2}/>
-                                    </div>
-                                </OverflowScrolling>
-                            </div>
-                    </div>
-                {/* 모바일 제한 페이지 */}
-                    <div className="mobile-hide">
-                        <div>
-                            본 사이트는 PC환경에 최적화되어있습니다. <br />
-                            PC로 이동해서 랜딩페이지 제작을 시작해보세요. 😁
-                        </div>
-                    </div>
+                    </motion.div>
+                </motion.div>
             </div>
         </MyContext.Provider>
+        </> }
         </>)
 }
 

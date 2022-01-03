@@ -55,6 +55,7 @@ const Editor = (props) => {
     return (
         <div className="ckeditor-container">
         <CKEditor
+        style={{fontSize:'1em'}}
         onInit={(editor) => {
           editor.ui
             .getEditableElement()

@@ -1,0 +1,11 @@
+.templates-radio{
+    margin:2%;
+    background-color: green;
+    cursor: pointer;
+}
+
+.templates__inner-container{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+}
