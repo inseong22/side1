@@ -11,7 +11,7 @@ import { motion } from 'framer-motion'
 import {Delete, Options} from '@styled-icons/fluentui-system-filled'
 import {ArrowUpShort,ArrowDownShort} from '@styled-icons/bootstrap'
 
-function NewSection({content, index, contents, setContents, setIsWidget}) {
+function NewSection({content, index, contents, setContents}) {
     const [adding, setAdding] = useState(false);
     const [isHover, setIsHover] = useState('none');
     const {state, action} = useContext(MyContext)
@@ -109,19 +109,17 @@ function NewSection({content, index, contents, setContents, setIsWidget}) {
             </div>
         </div>
         <div className="section__container">
-            <div className="make-hover-section">
-                {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
-                <motion.div animation={{scale:3}} style={{fontSize:'0.6em'}}>
-                    {returnType()}
-                </motion.div>
-            </div>
+            {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
+            <motion.div animation={{scale:3}} style={{fontSize:'0.6em', width:'100%'}}>
+                {returnType()}
+            </motion.div>
         </div>
         <span className="make-section-button" style={{display:`${isHover}`}} onClick={() => {
                 if(state.addingSectionAt === index){
                     action.setAddingSectionAt(1000);
                 }else{
                     action.setAddingSectionAt(index)
-                    setIsWidget(true);
+                    action.setIsWidget(true);
                 }
             }}>
             {parseInt(state.addingSectionAt) === parseInt(index) ? <>- 섹션 제거하기</> : <>+ 섹션 추가하기</>}

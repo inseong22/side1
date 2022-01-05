@@ -21,6 +21,7 @@ export const base = [
         },
         button:{
             title:'버튼입니다.',
+            backgroundColor:'rgba(255,255,255,1)',
             buttonTemplate:1,
             func:1,
             link:"https://surfee.co.kr"

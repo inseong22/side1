@@ -6,12 +6,9 @@ import MakeTemplate2 from './EditTemplates/MakeTemplate2'
 import MakeTemplate3 from './EditTemplates/MakeTemplate3'
 import EditTopBar from './tools/EditTopBar'
 import AddingSection from './AddingSection'
-import EditNaviSection from './EditTemplates/EditNaviSection'
-import EditFooterSection from './EditTemplates/EditFooterSection'
-import lodash from 'lodash'
 import './NewSectionMake.css'
 
-function NewSectionMake({content, contents, setContents, navi, foot, setNavi, setFoot}) {
+function NewSectionMake({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [category, setCategory] = useState(0);
 

@@ -8,7 +8,7 @@ import json
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 KEY_FILE_LOCATION = './client_secrets.json'
 VIEW_ID = '256626925'
-FILE_PATH = '../ResponsePage/data/gadata.json'
+FILE_PATH = './gadata.json'
 
 
 def initialize_analyticsreporting():

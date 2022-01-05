@@ -195,8 +195,8 @@
     padding-bottom:10%;
     position:fixed;
     left:0%;
+    width:30vw;
     top:7vh;
-    width:470px;
     height:80vh;
     z-index: 2;
 }

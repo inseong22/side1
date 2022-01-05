@@ -55,7 +55,6 @@ const Editor = (props) => {
     return (
         <div className="ckeditor-container">
         <CKEditor
-        style={{fontSize:'1em'}}
         onInit={(editor) => {
           editor.ui
             .getEditableElement()
@@ -71,12 +70,8 @@ const Editor = (props) => {
             Paragraph,
             Bold,
             Italic,
-            Heading,
-            Indent,
-            IndentBlock,
             Underline,
             Strikethrough,
-            BlockQuote,
             Font,
             Alignment,
             List,
@@ -88,17 +83,13 @@ const Editor = (props) => {
             ImageUpload,
             ImageResize,
             Base64UploadAdapter,
-            Table,
-            TableToolbar,
-            TableProperties,
-            TableCellProperties,
             TextTransformation
           ],
           toolbar: props.toolbar
             ? props.toolbar
-            : [
-                "heading",
-                "|",
+            : {
+              shouldNotGroupWhenFull:true,
+              items:[
                 "bold",
                 "italic",
                 "underline",
@@ -109,10 +100,6 @@ const Editor = (props) => {
                 "fontBackgroundColor",
                 "|",
                 "alignment",
-                "outdent",
-                "indent",
-                "bulletedList",
-                "numberedList",
                 "blockQuote",
                 "|",
                 "link",
@@ -121,7 +108,107 @@ const Editor = (props) => {
                 "|",
                 "undo",
                 "redo",
-              ],
+              ]},
+          fontColor:{
+            columns:4,
+            documentColors:4,
+            colors:[
+            {
+              color: 'hsl(0, 0%, 0%)',
+              label: '검정'
+            },
+            {
+              color: 'hsl(0, 0%, 90%)',
+              label: '연회색'
+            },
+            {
+              color: 'hsl(0, 0%, 100%)',
+              label: '흰색',
+              hasBorder: true
+            },
+            {
+              color: 'rgb(255,0,0)',
+              label: '빨강'
+            },
+            {
+              color: 'hsl(30, 75%, 60%)',
+              label: '주황'
+            },
+            {
+              color: 'hsl(60, 75%, 60%)',
+              label: '노랑'
+            },
+            {
+              color: 'hsl(90, 75%, 60%)',
+              label: '연초록'
+            },
+            {
+              color: 'hsl(120, 75%, 60%)',
+              label: '초록'
+            },
+            {
+              color: 'hsl(210, 75%, 60%)',
+              label: '하늘'
+            },
+            {
+              color: 'hsl(240, 75%, 60%)',
+              label: '파랑'
+            },
+            {
+              color: 'hsl(270, 75%, 60%)',
+              label: '보라'
+            }
+          ]},
+          fontBackgroundColor:{
+            columns:4,
+            documentColors:4,
+            colors:[
+            {
+              color: 'hsl(0, 0%, 0%)',
+              label: '검정'
+            },
+            {
+              color: 'hsl(0, 0%, 90%)',
+              label: '연회색'
+            },
+            {
+              color: 'hsl(0, 0%, 100%)',
+              label: '흰색',
+              hasBorder: true
+            },
+            {
+              color: 'rgb(255,0,0)',
+              label: '빨강'
+            },
+            {
+              color: 'hsl(30, 75%, 60%)',
+              label: '주황'
+            },
+            {
+              color: 'hsl(60, 75%, 60%)',
+              label: '노랑'
+            },
+            {
+              color: 'hsl(90, 75%, 60%)',
+              label: '연초록'
+            },
+            {
+              color: 'hsl(120, 75%, 60%)',
+              label: '초록'
+            },
+            {
+              color: 'hsl(210, 75%, 60%)',
+              label: '하늘'
+            },
+            {
+              color: 'hsl(240, 75%, 60%)',
+              label: '파랑'
+            },
+            {
+              color: 'hsl(270, 75%, 60%)',
+              label: '보라'
+            }
+          ]},
           fontSize: {
             options: [
               14,
@@ -145,15 +232,6 @@ const Editor = (props) => {
           },
           alignment: {
             options: ["justify", "left", "center", "right"],
-          },
-          table: {
-            contentToolbar: [
-              "tableColumn",
-              "tableRow",
-              "mergeTableCells",
-              "tableProperties",
-              "tableCellProperties",
-            ],
           },
           image: {
             resizeUnit: "px",

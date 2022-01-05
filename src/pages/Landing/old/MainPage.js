@@ -2,7 +2,7 @@ import React, {useEffect,useRef, useState} from 'react'
 import './MainPage.css'
 import {Link} from 'react-router-dom';
 import { dbService } from '../../../tools/fbase';
-import NavBar from '../../../components/NavBar/NavBar'
+import NavBar from '../../NavAndFooter/NavBar/NavBar'
 import Footer from '../../NavAndFooter/Footer'
 
 import section1 from '../../../tools/img/001.png';

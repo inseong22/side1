@@ -29,11 +29,11 @@ function Template2({content, contents, setContents}) {
                 onChange={ e => onChangeImage(e) } style={{width:`${content.width}%`}} />
             {content.attachment ?
             <>
-                <img src={content.attachment} style={{width:`${content.width}%`}} />
+                <img src={content.attachment} width={100} />
             </>
             : 
             <>
-                <img src={empty} style={{width:`${content.width}%`}} />
+                <img src={empty} width={100}/>
             </>
             }
         </div>

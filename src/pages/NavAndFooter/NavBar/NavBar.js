@@ -10,6 +10,7 @@ function NavBar({history}) {
     const updateScroll = () => {
         setScrollPosition(window.scrollY || document.documentElement.scrollTop);
     }
+    
     useEffect(()=>{
         window.addEventListener('scroll', updateScroll);
         if(scrollPosition < 50){

@@ -4,6 +4,22 @@
     width: 100%;
 }
 
+.ck-editor__editable{
+    min-width:150px;
+}
+
 .ckeditor-container:hover{
     border: 1px dashed gray;
 }
+
+.ck-body{
+    background-color:black;
+}
+
+.ck-media__placeholder__url__text{
+    color:blue;
+}
+
+.ck-button{
+    background-color:red;
+}                                                                                               

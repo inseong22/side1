@@ -7,6 +7,7 @@ import { stService } from '../../tools/fbase';
 import {Link} from 'react-router-dom';
 import NewSection from '../../components/Make/LookAhead/NewSection'
 import NewSectionMake from '../../components/Make/Edit/NewSectionMake'
+import EditSetting from '../../components/Make/Edit/EditSetting'
 import NavBarInMakePage from '../../components/Make/NavBar/NavBarInMakePage'
 import MakeNavigationV2 from '../../components/Make/LookAhead/MakeNavigationV2'
 import MakeFooterV2 from '../../components/Make/LookAhead/MakeFooterV2'
@@ -45,9 +46,22 @@ const MakePageV2 = ({history}, props) => {
     const [ch, setCh] = useState(false);
     const [nowState, setNowState] = useState('new');
     const [load, setLoad] = useState(false);
-    const [nu, setNu] = useState(0);
     const [editing, setEditing] = useState(false);
     const location = useLocation();
+
+    // 메인 세팅
+    const [setting, setSetting] = useState({
+        urlId:'',
+        faviconAttachment:'',
+        font:'',
+        smallFont:'',
+        color:'',
+        fta:{
+            use:false,
+            backgroundColor:'rgba(150,150,0,1)',
+            text:'fta 버튼'
+        }
+    });
 
     // 새로운 세팅
     const [contents, setContents] = useState([ lodash.cloneDeep(base[0]), lodash.cloneDeep(base[1]) ])
@@ -70,14 +84,6 @@ const MakePageV2 = ({history}, props) => {
 
     const [addingSectionAt, setAddingSectionAt] = useState(1000); // 1000은 추가하고 있지 않다는 것을 의미.
 
-    // 메인 세팅
-    const [setting, setSetting] = useState({
-        urlId:'',
-        faviconAttachment:'',
-        font:'',
-        smallFont:'',
-        color:'',
-    });
     const [urlId, setUrlId] = useState("");
 
     // 네비게이션
@@ -85,7 +91,6 @@ const MakePageV2 = ({history}, props) => {
 
     // 푸터
     const [footerOrNot, setFooterOrNot] = useState(false);
-    const [footerColor, setFooterColor] = useState("white");
 
     // 사진들 아래는 기타
     const [secNum, setSecNum] = useState(0); // 현재 수정중인 페이지를 의미.
@@ -133,8 +138,8 @@ const MakePageV2 = ({history}, props) => {
     },[])
 
     const contextValue = {
-        state: {addingSectionAt, secNum, contents, isWidget},
-        action : {setAddingSectionAt, setSecNum, setContents, setIsWidget},
+        state: {addingSectionAt, secNum, contents, isWidget, device},
+        action : {setAddingSectionAt, setSecNum, setContents, setIsWidget, setDevice},
     }
 
     const onSubmit = async () => {
@@ -241,6 +246,10 @@ const MakePageV2 = ({history}, props) => {
             return(
                 <EditFooterSection foot={foot} setFoot={setFoot} />
             )
+        }else if(secNum === 52 && addingSectionAt === 1000 ){
+            return(
+                <EditSetting setting={setting} setSetting={setSetting}/>
+            )
         }else{
             return(
                 <NewSectionMake contents={contents} content={contents[secNum]} setContents={setContents} />
@@ -279,17 +288,17 @@ const MakePageV2 = ({history}, props) => {
         </div> 
         :
     <>
-       <NavBarInMakePage 
-            doLoad={doLoad}
-            open={open} setOpen={setOpen}
-            full={full} setFull={setFull}
-            device={device} setDevice={setDevice} doSave={doSave}
-            naviColor={naviColor}
-            password={password} setPassword={setPassword}
-            onSubmit={onSubmit}
-            nowState={nowState}
-       />
        <MyContext.Provider value={contextValue}>
+            <NavBarInMakePage 
+                doLoad={doLoad}
+                open={open} setOpen={setOpen}
+                full={full} setFull={setFull}
+                device={device} setDevice={setDevice} doSave={doSave}
+                naviColor={naviColor}
+                password={password} setPassword={setPassword}
+                onSubmit={onSubmit}
+                nowState={nowState}
+            />
             <div className="make-page-container" style={{marginTop:'0px'}}>
                 {/* 아래는 제작하는 곳 */}
                 <motion.div style={{display:`${isWidget ? 'flex' : 'none'}`, justifyContent:'center', alignItems: 'center'}}>
@@ -325,15 +334,15 @@ const MakePageV2 = ({history}, props) => {
                         style={{ width:`${full ? '100%' :'80%'}`}}
                         animate={
                             device ? {} : {
-                                width:['80%', '30%'],
+                                width:['70%', '30%'],
                                 transition:{
                                     duration:0.3
                                 }
                             }
                         }>
-                        {/* , height:`${full ? '94vh' : '80vh'}` */}
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
                         <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`}}>  
+                            
                             {/* 네비게이션 */}
                             <MakeNavigationV2 full={full} navi={navi} history={history} setIsWidget={setIsWidget} />
                             
@@ -341,10 +350,12 @@ const MakePageV2 = ({history}, props) => {
                             {sectionsReturn}
 
                             {/* 푸터 */}
-                            {footerOrNot ? <></>:
-                            <MakeFooterV2 foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
-                            } 
-                        </div> 
+                            <MakeFooterV2 ref={targets} foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
+
+                            { targets.current && <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${targets.current.clientWidth-targets.current.clientWidth/100}px`}}>
+                                {setting.fta.text}
+                            </button>}
+                        </div>
                     </motion.div>
                 </motion.div>
             </div>

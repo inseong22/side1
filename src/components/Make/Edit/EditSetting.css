@@ -1,0 +1,8 @@
+.fta-button{
+    border-radius:3px;
+    position:fixed;
+    bottom:5px;
+    z-index:1000;
+    width:90%;
+    border:none;
+}
