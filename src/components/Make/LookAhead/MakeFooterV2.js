@@ -28,7 +28,7 @@ function MakeFooterV2({foot, setFoot, setIsWidget}) {
     }
 
     return (
-        <footer className="make-footer__container" onClick={() => {
+        <footer className="make-footer__container" style={{fontSize:'0.7em'}} onClick={() => {
             action.setAddingSectionAt(1000);
             action.setSecNum(51);
         }}>

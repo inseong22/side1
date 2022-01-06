@@ -153,6 +153,7 @@
     padding:3% 0%;
     z-index: 1;
     -webkit-overflow-scrolling: touch;
+    background-color:rgba(200,200,200,0.3);
   }
 
 .make-main-page-container{
@@ -170,7 +171,7 @@
     border-radius:10px;
     overflow: auto;
     z-index:10;
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+    /* box-shadow: 3px 3px 8px rgba(0,0,0,0.4); */
     overflow:visible;
 }
 .make-left-bottom-container{

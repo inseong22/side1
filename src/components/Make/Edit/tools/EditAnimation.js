@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
-import { MyContext } from '../../../pages/Make/MakePageV2'
-import {animations} from '../tools/animations'
+import { MyContext } from '../../../../pages/Make/MakePageV2'
+import {animations} from '../../tools/animations'
+import './EditAnimation.css'
 import lodash from 'lodash'
 
 const EditAnimation = ({content}) => {

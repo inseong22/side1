@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import {base} from '../SectionTypes/baseTypes'
-import { detailSectionTemplateList } from './EditTemplates/InnerTemplates'
+import { detailSectionTemplateList, heroSectionTemplateList,featuresSectionTemplateList, mapSectionTemplateList, reviewSectionTemplateList, priceSectionTemplateList, ctaSectionTemplateList,  } from './EditTemplates/InnerTemplates'
 
 function AddingSection() {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -37,11 +37,74 @@ function AddingSection() {
                     })}
                     </>
                 )
-
-            case 'HorizontalSection':
+            case 'HeroSection':
                 return(
                     <>
-                        <span className="type-selection" onClick={() => addSectionByTemplate(1)}>추가</span>
+                    {heroSectionTemplateList.map((item, index) => {
+                        return(
+                            <span className="type-selection" onClick={() => addSectionByTemplate(item.templateNumber)}>{item.templateNumber}</span>
+                        )
+                    })}
+                    </>
+                )
+            case 'ReviewSection':
+                return(
+                    <>
+                    {reviewSectionTemplateList.map((item, index) => {
+                        return(
+                            <span className="type-selection" onClick={() => addSectionByTemplate(item.templateNumber)}>{item.templateNumber}</span>
+                        )
+                    })}
+                    </>
+                )
+            case 'MapSection':
+                return(
+                    <>
+                    {mapSectionTemplateList.map((item, index) => {
+                        return(
+                            <span className="type-selection" onClick={() => addSectionByTemplate(item.templateNumber)}>{item.templateNumber}</span>
+                        )
+                    })}
+                    </>
+                )
+            case 'PriceSection':
+                return(
+                    <>
+                    {priceSectionTemplateList.map((item, index) => {
+                        return(
+                            <span className="type-selection" onClick={() => addSectionByTemplate(item.templateNumber)}>{item.templateNumber}</span>
+                        )
+                    })}
+                    </>
+                )
+            case 'CtaSection':
+                return(
+                    <>
+                    {ctaSectionTemplateList.map((item, index) => {
+                        return(
+                            <span className="type-selection" onClick={() => addSectionByTemplate(item.templateNumber)}>{item.templateNumber}</span>
+                        )
+                    })}
+                    </>
+                )
+            case 'FeaturesSection':
+                return(
+                    <>
+                    {featuresSectionTemplateList.map((item, index) => {
+                        return(
+                            <span className="type-selection" onClick={() => addSectionByTemplate(item.templateNumber)}>{item.templateNumber}</span>
+                        )
+                    })}
+                    </>
+                )
+
+            case 'ETCetraSection':
+                return(
+                    <>
+                        <span className="type-selection" onClick={() => addSectionByTemplate(1)}>텍스트</span>
+                        <span className="type-selection" onClick={() => addSectionByTemplate(1)}>사진</span>
+                        <span className="type-selection" onClick={() => addSectionByTemplate(1)}>빈공간</span>
+                        <span className="type-selection" onClick={() => addSectionByTemplate(1)}>구분선</span>
                     </>
                 )
 
@@ -68,7 +131,12 @@ function AddingSection() {
                     })}
                 </div>
                 <div className="template-selection__container">
-                    { returnTepmplateSelections() }
+                    <div>
+                        {nowType}
+                    </div>
+                    <div className="column">
+                        { returnTepmplateSelections() }
+                    </div>
                 </div>
             </div>
         </div>

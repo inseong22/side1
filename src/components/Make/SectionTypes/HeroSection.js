@@ -10,7 +10,7 @@ import playstorebutton from '../../../tools/img/playstorebutton.png'
 import Popover from '@mui/material/Popover';
 import {ImageAdd} from '@styled-icons/boxicons-regular';
 
-function DetailSection({content}) {
+function HeroSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const imgRef = useRef(null)
     const [imageShow, setImageShow] = useState(null);
@@ -193,4 +193,5 @@ function DetailSection({content}) {
     )
 }
 
-export default DetailSection
+
+export default HeroSection

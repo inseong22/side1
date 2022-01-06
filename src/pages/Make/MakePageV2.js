@@ -37,11 +37,11 @@ const bigfont = '50px';
 const rate = 0.63;
 
 const MakePageV2 = ({history}, props) => {
-    const targets = useRef(null)
+    const targets = useRef(null);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
-    const [device, setDevice] = useState(true)
-    const [full, setFull] = useState(false)
-    const [isWidget, setIsWidget] = useState(false)
+    const [isPhone, setIsPhone] = useState(true);
+    const [full, setFull] = useState(false);
+    const [isWidget, setIsWidget] = useState(false);
     const [password, setPassword] = useState("");
     const [ch, setCh] = useState(false);
     const [nowState, setNowState] = useState('new');
@@ -64,7 +64,7 @@ const MakePageV2 = ({history}, props) => {
     });
 
     // 새로운 세팅
-    const [contents, setContents] = useState([ lodash.cloneDeep(base[0]), lodash.cloneDeep(base[1]) ])
+    const [contents, setContents] = useState([ lodash.cloneDeep(base[0]), lodash.cloneDeep(base[1]), lodash.cloneDeep(base[2]), lodash.cloneDeep(base[4]) ])
 
     // 네비게이션
     const [navi, setNavi] = useState({
@@ -138,8 +138,8 @@ const MakePageV2 = ({history}, props) => {
     },[])
 
     const contextValue = {
-        state: {addingSectionAt, secNum, contents, isWidget, device},
-        action : {setAddingSectionAt, setSecNum, setContents, setIsWidget, setDevice},
+        state: {addingSectionAt, secNum, contents, isWidget, isPhone},
+        action : {setAddingSectionAt, setSecNum, setContents, setIsWidget, setIsPhone},
     }
 
     const onSubmit = async () => {
@@ -259,9 +259,9 @@ const MakePageV2 = ({history}, props) => {
 
     const sectionsReturn = contents.map((item, index) => {
         return(
-            <>
+            <div>
                 <NewSection content={item} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} setIsWidget={setIsWidget}/>
-            </>
+            </div>
         )
     })
 
@@ -293,7 +293,7 @@ const MakePageV2 = ({history}, props) => {
                 doLoad={doLoad}
                 open={open} setOpen={setOpen}
                 full={full} setFull={setFull}
-                device={device} setDevice={setDevice} doSave={doSave}
+                isPhone={isPhone} setIsPhone={setIsPhone} doSave={doSave}
                 naviColor={naviColor}
                 password={password} setPassword={setPassword}
                 onSubmit={onSubmit}
@@ -318,30 +318,31 @@ const MakePageV2 = ({history}, props) => {
                 </motion.div>
                 {/* 아래는 미리보기 화면 */}
                 <motion.div className="make-left-landing" onClick={e => backgroundClick(e)}
-                    animate={ full || !isWidget ? {}: device ? {
-                            width:['100%', '70%'],
-                            transition:{
-                                duration:0.3,
-                            }
-                        } : {
+                    animate={ full || !isWidget ? {}: isPhone ? {
                             x:[0, 250],
                             transition:{
                                 duration:0.3,
                             }
+                        }: {
+                                width:['100%', '70%'],
+                                transition:{
+                                    duration:0.3,
+                                }
+                            }
                         }
-                    }>
+                        >
                     <motion.div className="scroll-container" 
                         style={{ width:`${full ? '100%' :'80%'}`}}
                         animate={
-                            device ? {} : {
+                            isPhone ? {
                                 width:['70%', '30%'],
                                 transition:{
                                     duration:0.3
                                 }
-                            }
+                            } : {}
                         }>
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
-                        <div className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`}}>  
+                        <div ref={targets} className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`, borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
                             
                             {/* 네비게이션 */}
                             <MakeNavigationV2 full={full} navi={navi} history={history} setIsWidget={setIsWidget} />
@@ -350,11 +351,14 @@ const MakePageV2 = ({history}, props) => {
                             {sectionsReturn}
 
                             {/* 푸터 */}
-                            <MakeFooterV2 ref={targets} foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
+                            <MakeFooterV2 foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
 
-                            { targets.current && <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${targets.current.clientWidth-targets.current.clientWidth/100}px`}}>
-                                {setting.fta.text}
-                            </button>}
+                            {/* ${targets.current.clientWidth-targets.current.clientWidth/100}px */}
+                            { ( setting.fta.use && targets.current ) &&
+                                <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${targets.current.clientWidth-targets.current.clientWidth/10}px`}}>
+                                    {setting.fta.text}
+                                </button>
+                            }
                         </div>
                     </motion.div>
                 </motion.div>

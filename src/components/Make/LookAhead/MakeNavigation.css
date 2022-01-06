@@ -3,8 +3,10 @@
     z-index:3;
     height:60px;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items : center;
+    flex-direction: row;
+    position:relative;
 }
 
 .make-nav-bar-title{

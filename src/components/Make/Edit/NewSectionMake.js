@@ -2,8 +2,11 @@ import React, {useState, useEffect, useContext} from 'react'
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import EditDetailSection from './EditTemplates/EditDetailSection'
-import MakeTemplate2 from './EditTemplates/MakeTemplate2'
-import MakeTemplate3 from './EditTemplates/MakeTemplate3'
+import EditCtaSection from './EditTemplates/EditCtaSection'
+import EditReviewSection from './EditTemplates/EditReviewSection'
+import EditFeaturesSection from './EditTemplates/EditFeaturesSection'
+import EditMapSection from './EditTemplates/EditMapSection'
+import EditPriceSection from './EditTemplates/EditPriceSection'
 import EditTopBar from './tools/EditTopBar'
 import AddingSection from './AddingSection'
 import './NewSectionMake.css'
@@ -23,35 +26,34 @@ function NewSectionMake({content}) {
             // 이미지인 경우 편집화면
             case 'HeroSection':
                 return (
-                    <MakeTemplate2 content={content} category={category}/>
+                    <EditCtaSection content={content} category={category}/>
                 )
 
-            // 특징들인 경우 편집화면
+            // 리뷰들인 경우 편집화면
             case 'ReviewSection':
                 return(
-                    <MakeTemplate3 content={content} category={category}/>
+                    <EditReviewSection content={content} category={category}/>
                 )
             
             case 'FeaturesSection':
                 return(
-                    <div>
-                        섹션 {state.secNum}번이고 템플릿은 4번 - 특징들 입니다.
-                        <img src={content.attachment} />
-                    </div>
+                    <EditFeaturesSection content={content} category={category}/>
+
                 )
 
             case 'MapSection':
                 return(
-                    <div>
-                        섹션 {state.secNum}번이고 템플릿은 5번 - 구분선 입니다.
-                    </div>
+                    <EditMapSection content={content} category={category}/>
                 )
 
-            case 'HorizontalSection':
+            case 'CtaSection':
                 return(
-                    <div>
-                        섹션 {state.secNum}번이고 템플릿은 5번 - 구분선 입니다.
-                    </div>
+                    <EditCtaSection content={content} category={category}/>
+                )
+
+            case 'PriceSection':
+                return(
+                    <EditPriceSection content={content} category={category}/>
                 )
 
             default:

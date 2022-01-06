@@ -1,15 +1,14 @@
 export const base = [
     {
-        sectionTypeName:'DetailSection',
+        sectionTypeName:'HeroSection',
         sectionTypeNumber:1,
         templateNumber:1,
         titles:{
             title:'<p>여기서 타이틀을 입력rhrh</p>',
             font:'Pretendard-Regular',
         },
-        descs:{
-            desc:'여기서 설명을 입력하세요.',
-            font:'Pretendard-Regular',
+        design:{
+
         },
         image:{
             attachment:'',
@@ -28,9 +27,31 @@ export const base = [
         }
     },
     {
-        sectionTypeName:'HeroSection',
+        sectionTypeName:'DetailSection',
         sectionTypeNumber:2,
         templateNumber:1,
+        titles:{
+            title:'<p>여기서 타이틀을 입력rhrh</p>',
+            font:'Pretendard-Regular',
+        },
+        design:{
+
+        },
+        image:{
+            attachment:'',
+            width:70,
+        },
+        animation:{
+            use:false,
+            type:0,
+        },
+        button:{
+            title:'버튼입니다.',
+            backgroundColor:'rgba(255,255,255,1)',
+            buttonTemplate:1,
+            func:1,
+            link:"https://surfee.co.kr"
+        }
     },
     {
         sectionTypeName:'ReviewSection',
@@ -62,21 +83,43 @@ export const base = [
         sectionTypeName:'MapSection',
         sectionTypeNumber:5,
         templateNumber:1,
+        text:'쭉 내려와서 우회전 하세요',
+        address:'서대문구 연희로 12길 15'
     },
     {
-        sectionTypeName:'InputSection',
-        sectionTypeNumber:6,
-        templateNumber:1,
-    },
-    {
-        sectionTypeName:'EmptySection',
-        sectionTypeNumber:7,
-        templateNumber:1,
-    },
-    {
-        sectionTypeName:'HorizontalSection',
+        sectionTypeName:'PriceSection',
         sectionTypeNumber:8,
         templateNumber:1,
         width:90,
     },
+    {
+        sectionTypeName:'CtaSection',
+        sectionTypeNumber:9,
+        templateNumber:1,
+        width:90,
+    },
+    {
+        sectionTypeName:'ETCetraSection',
+        sectionTypeNumber:10,
+        templateNumber:1,
+        etcSections:[
+            {
+                sectionTypeName:'EmptySection',
+                sectionTypeNumber:7,
+                templateNumber:1,
+            },
+            {
+                sectionTypeName:'HorizontalSection',
+                sectionTypeNumber:8,
+                templateNumber:1,
+                width:90,
+            },
+            {
+                sectionTypeName:'TextSection',
+            },
+            {
+                sectionTypeName:'ImageSection',
+            }
+        ]
+    }
 ]

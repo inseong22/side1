@@ -1,8 +1,12 @@
 import React, {useState,useContext} from 'react'
 import DetailSection from '../SectionTypes/DetailSection'
-import Template2 from '../SectionTypes/Template2'
-import Template3 from '../SectionTypes/Template3'
-import VideoTemplate from '../SectionTypes/VideoTemplate'
+import HeroSection from '../SectionTypes/HeroSection'
+import MapSection from '../SectionTypes/MapSection'
+import PriceSection from '../SectionTypes/PriceSection'
+import ReviewSection from '../SectionTypes/ReviewSection'
+import FeaturesSection from '../SectionTypes/FeaturesSection'
+import CtaSection from '../SectionTypes/CtaSection'
+
 import HorizontalSection from '../SectionTypes/HorizontalSection'
 import {animations} from '../tools/animations'
 import './NewSection.css'
@@ -65,27 +69,37 @@ function NewSection({content, index, contents, setContents}) {
 
             case 'HeroSection':
                 return (
-                    <Template2 content={content}  contents={contents} setContents={setContents}/>
+                    <HeroSection content={content}  contents={contents} setContents={setContents}/>
                 )
 
             case 'ReviewSection':
                 return (
-                    <Template3 content={content}  contents={contents} setContents={setContents}/>
+                    <ReviewSection content={content}/>
                 )
 
             case 'FeaturesSection':
                 return (
-                    <VideoTemplate content={content}  contents={contents} setContents={setContents}/>
+                    <FeaturesSection content={content}/>
                 )
 
             case 'MapSection':
                 return (
-                    <HorizontalSection content={content}  contents={contents} setContents={setContents}/>
+                    <MapSection content={content}/>
+                )
+
+            case 'PriceSection':
+                return (
+                    <PriceSection content={content}/>
                 )
 
             case 'HorizontalSection':
                 return (
-                    <HorizontalSection content={content}  contents={contents} setContents={setContents}/>
+                    <HorizontalSection content={content}/>
+                )
+
+            case 'CtaSection':
+                return (
+                    <CtaSection content={content}/>
                 )
 
             default:
@@ -110,9 +124,9 @@ function NewSection({content, index, contents, setContents}) {
         </div>
         <div className="section__container">
             {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
-            <motion.div animation={{scale:3}} style={{fontSize:'0.6em', width:'100%'}}>
+            <div style={{fontSize:'0.6em', width:'100%'}}>
                 {returnType()}
-            </motion.div>
+            </div>
         </div>
         <span className="make-section-button" style={{display:`${isHover}`}} onClick={() => {
                 if(state.addingSectionAt === index){
