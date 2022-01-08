@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import { Input, Button } from 'antd';
 import Switch from '@mui/material/Switch';
 import './MakeNavBar.css';
-import { MyContext } from '../../../pages/Make/MakePageV2'
+import { MyContext } from '../MakePageV2'
 
 const NavBarInMakePage = (props) => {
     const {state, action} = useContext(MyContext)

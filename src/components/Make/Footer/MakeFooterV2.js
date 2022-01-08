@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import { MyContext } from '../../../pages/Make/MakePageV2'
-import FTemplate1 from '../FooterTemplates/FTemplate1'
-import FTemplate2 from '../FooterTemplates/FTemplate2'
+import FTemplate1 from './FooterTemplates/FTemplate1'
+import FTemplate2 from './FooterTemplates/FTemplate2'
 import './MakeFooter.css'
 
 function MakeFooterV2({foot, setFoot, setIsWidget}) {

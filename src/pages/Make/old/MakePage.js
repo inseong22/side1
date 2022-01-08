@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import Section from '../../../components/Make/utils/old/Section/Section'
 import SectionMake from '../../../components/Make/utils/old/Make/SectionMake'
 import LastSection from '../../../components/Make/utils/old/Section/LastSection'
-import NavBarInMakePage from '../../../components/Make/NavBar/NavBarInMakePage'
+import NavBarInMakePage from '../NavBarInMakePage/NavBarInMakePage'
 import MakeFooter from '../../../components/Make/utils/old/NavBar/MakeFooter'
 import LastSectionMake from '../../../components/Make/utils/old/Make/LastSectionMake'
 import MainSection from '../../../components/Make/utils/old/Make/MainSection'

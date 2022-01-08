@@ -24,12 +24,11 @@
     width:100%;
 }
 .make-nav-button{
-    font-size:0.9em;
+    font-size:0.7em;
     border-radius:5px;
     height:35px;
     display: flex;
     justify-content: center;
     align-items : center;
-    background-color:rgba(0,0,0,0);
     border:none;
 }

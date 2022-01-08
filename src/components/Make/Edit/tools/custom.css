@@ -1,0 +1,47 @@
+:root {
+    --main-color: #6B63F7;
+  }
+  
+  .radio-element-first{
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px;
+    padding:3px 10px;
+}
+.radio-element-end{
+    border-top-right-radius:3px;
+    border-bottom-right-radius:3px;
+    padding:3px 10px;
+}
+.radio-element{
+    padding:3px 10px;
+}
+
+
+.button-table{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:row;
+    flex-wrap: wrap;
+    padding:10px 0px;
+}
+
+.button-container{
+    width:180px;
+    cursor:pointer;
+    padding:10px 10px;
+}
+
+.color-button{
+    border-radius:20px;
+    width:27px;
+    height:27px;
+    display: block;
+    cursor: pointer;
+    border:2px solid rgba(0, 0, 0, 0);
+    margin:1%;
+}
+
+.color-button:hover{
+    border:2px solid black;
+}

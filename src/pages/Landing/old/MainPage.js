@@ -9,6 +9,8 @@ import section1 from '../../../tools/img/001.png';
 import section0 from '../../../tools/img/005.png';
 import section2 from '../../../tools/img/003.png';
 
+import {Input} from 'antd'
+
 function MainPage({history}) {
     const [email,setEmail] = useState("");
     const targets = useRef(null)
@@ -117,7 +119,7 @@ function MainPage({history}) {
                         One-stop 랜딩페이지 제작 툴,<br/>
                         가장 먼저 이용해 보세요
                     </div>
-                    <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="이메일을 입력하세요." className="input-text"/>
+                    <Input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="이메일을 입력하세요." className="input-text"/>
                     <button className="apply-button" onClick={sendData}>사전신청하고 혜택받기</button>
                     <div className="main-section-last-desc">
                         사전신청하신 분들에겐 오픈 시 사용 가능한<br/>일주일 무료 이용권이 제공됩니다.

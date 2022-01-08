@@ -87,6 +87,13 @@
   display: none;
 }
 
+.center-row{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
 
 @font-face {
   font-family: 'ImcreSoojin';

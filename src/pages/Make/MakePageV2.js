@@ -5,12 +5,12 @@ import './MakeLanding.css'
 import { dbService } from '../../tools/fbase';
 import { stService } from '../../tools/fbase';
 import {Link} from 'react-router-dom';
-import NewSection from '../../components/Make/LookAhead/NewSection'
+import NewSection from '../../components/Make/NewSection'
 import NewSectionMake from '../../components/Make/Edit/NewSectionMake'
-import EditSetting from '../../components/Make/Edit/EditSetting'
-import NavBarInMakePage from '../../components/Make/NavBar/NavBarInMakePage'
-import MakeNavigationV2 from '../../components/Make/LookAhead/MakeNavigationV2'
-import MakeFooterV2 from '../../components/Make/LookAhead/MakeFooterV2'
+import EditSetting from '../../components/Make/Edit/NavFooterSetting/EditSetting'
+import NavBarInMakePage from './NavBarInMakePage/NavBarInMakePage'
+import MakeNavigationV2 from '../../components/Make/NavBar/MakeNavigationV2'
+import MakeFooterV2 from '../../components/Make/Footer/MakeFooterV2'
 import FirstQuestions from '../../components/Make/Modal/FirstQuestions'
 import LoadingModal from '../../components/Make/Modal/LoadingModal'
 import CheckModal from '../../components/Make/Modal/CheckModal'
@@ -20,8 +20,8 @@ import { useLocation, useParams } from 'react-router';
 import { base } from '../../components/Make/SectionTypes/baseTypes'
 import ReactGa from 'react-ga'
 import lodash from 'lodash'
-import EditNaviSection from '../../components/Make/Edit/EditTemplates/EditNaviSection'
-import EditFooterSection from '../../components/Make/Edit/EditTemplates/EditFooterSection'
+import EditNaviSection from '../../components/Make/Edit/NavFooterSetting/EditNaviSection'
+import EditFooterSection from '../../components/Make/Edit/NavFooterSetting/EditFooterSection'
 import {motion} from 'framer-motion'
 import { isMobile } from 'react-device-detect';
 
@@ -71,9 +71,13 @@ const MakePageV2 = ({history}, props) => {
         sectionTemplateNumber:1,
         title:'Surfee',
         backgroundColor:'rgba(0,0,0,0)', 
-        buttonFunc:'link',
-        link:'www.naver.com',
-        buttonTitle:'신청하기'
+        bottomBorder:false,
+        button:{
+            use:true,
+            func:'link',
+            link:'www.naver.com',
+            title:'신청하기'
+        }
     });
     // 푸터
     const [foot, setFoot] = useState({

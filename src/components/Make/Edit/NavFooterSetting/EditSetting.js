@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
-import { MyContext } from '../../../pages/Make/MakePageV2'
+import { MyContext } from '../../../../pages/Make/MakePageV2'
 import './EditSetting.css'
+import '../EditTemplates/Edit.css'
 
 function EdtirSetting({setting, setSetting}) {
     const [category, setCategory] = useState(0)

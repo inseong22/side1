@@ -7,7 +7,7 @@ function NaviTemplate1({navi}) {
                 {navi.title}
             </span>
             <span className="make-nav-on">
-                <button className="make-nav-button" onClick={() => console.log("내비 클릭")}>{navi.buttonTitle}</button>
+                { navi.button.use && <button className="make-nav-button" style={{backgroundColor:`${navi.button.color}`}}>{navi.button.title}</button> }
             </span>
         </>
     )
