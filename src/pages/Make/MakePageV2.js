@@ -70,20 +70,38 @@ const MakePageV2 = ({history}, props) => {
     const [navi, setNavi] = useState({
         sectionTemplateNumber:1,
         title:'Surfee',
+        fixed:false,
+        isLogo:'logo',
+        logo:'',
         backgroundColor:'rgba(0,0,0,0)', 
         bottomBorder:false,
         button:{
             use:true,
             func:'link',
+            templateNum:1,
             link:'www.naver.com',
-            title:'신청하기'
+            title:'신청하기',
+            color:'rgba(0,0,0,0.4)',
         }
     });
     // 푸터
     const [foot, setFoot] = useState({
         sectionTemplateNumber:1,
         footerOrNot:true,
-        text:"<p>E-mail : surfee.business@gmail.com</p><p>2021 Copyright © , All rights reserved</p>"
+        backgroundColor:'white', 
+        isOne:'one',
+        padding:1,
+        text:" <p style=\"text-align:center;\">About Us - Contact Us - 개인정보 처리방침 - 팀 소개</p><p style=\"text-align:center;\">E-mail : surfee.business@gmail.com</p><p style=\"text-align:center;\"><strong>2021 Copyright © , All rights reserved</strong></p>",
+        iconUse:true,
+        iconStyle:'circle',
+        iconColor:'white',
+        iconAlign:'start',
+        icons:[
+            
+        ],
+        second:{
+            text:'<p>두번 째 단입니다.</p>'
+        }
     });
 
     const [addingSectionAt, setAddingSectionAt] = useState(1000); // 1000은 추가하고 있지 않다는 것을 의미.
@@ -349,13 +367,13 @@ const MakePageV2 = ({history}, props) => {
                         <div ref={targets} className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`, borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
                             
                             {/* 네비게이션 */}
-                            <MakeNavigationV2 full={full} navi={navi} history={history} setIsWidget={setIsWidget} />
+                            <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} setIsWidget={setIsWidget} />
                             
                             {/* 섹션 디스플레이 */}
                             {sectionsReturn}
 
                             {/* 푸터 */}
-                            <MakeFooterV2 foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
+                            <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
 
                             {/* ${targets.current.clientWidth-targets.current.clientWidth/100}px */}
                             { ( setting.fta.use && targets.current ) &&

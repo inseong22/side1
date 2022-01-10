@@ -1,21 +1,23 @@
 :root {
     --main-color: #6B63F7;
   }
-  
-  .radio-element-first{
-    border-top-left-radius:3px;
-    border-bottom-left-radius:3px;
-    padding:3px 10px;
-}
-.radio-element-end{
-    border-top-right-radius:3px;
-    border-bottom-right-radius:3px;
-    padding:3px 10px;
-}
+
 .radio-element{
     padding:3px 10px;
+    cursor:pointer;
 }
 
+.r-first{
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px;
+}
+
+.r-end{
+    border-top-right-radius:3px;
+    border-bottom-right-radius:3px;
+}
+
+/* 아래는 버튼 선택 테이블 */
 
 .button-table{
     display: flex;
@@ -31,6 +33,8 @@
     cursor:pointer;
     padding:10px 10px;
 }
+
+/* 아래는 색상 선택 테이블 */
 
 .color-button{
     border-radius:20px;

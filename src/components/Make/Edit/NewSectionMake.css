@@ -42,11 +42,3 @@
     flex-direction: column;
     width:60%;
 }
-
-.column{
-    display:flex;
-    justify-content:start;
-    align-items: center;
-    flex-direction: column;
-    width:100%;
-}

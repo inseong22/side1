@@ -9,6 +9,17 @@
     position:relative;
 }
 
+.make-nav-container{
+    width:100%;
+    z-index:13;
+    height:60px;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    flex-direction: row;
+    position:relative;
+}
+
 .make-nav-bar-title{
     font-size:0.9em;
     font-weight: 700;
@@ -23,12 +34,35 @@
     justify-content : center;
     width:100%;
 }
+
 .make-nav-button{
-    font-size:0.7em;
     border-radius:5px;
     height:35px;
     display: flex;
     justify-content: center;
     align-items : center;
     border:none;
+}
+
+.make-nav-logoc{
+    justify-content:start;
+    padding-left:10%;
+}
+
+.make-nav-buttonc{
+    justify-content:end;
+    padding-right:10%;
+}
+
+.b-one{
+    border-radius:5px;
+}
+.b-two{
+    border-radius:10px;
+}
+.b-three{
+    border-radius:15px;
+}
+.b-four{
+    border-radius:0px;
 }

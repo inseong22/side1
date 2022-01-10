@@ -42,3 +42,7 @@
     width:100%;
     border-left: 1px solid var(--make-border);
 }
+
+.no-border{
+    border: none;
+}

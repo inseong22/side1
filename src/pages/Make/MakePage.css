@@ -131,20 +131,7 @@
     padding:0px 10px;
 }
 
-.make-footer{
-    background-color:rgb(255, 255, 255);
-    height:200px;
-    display: flex; 
-    justify-content : center;
-    align-items : center;
-    color:rgb(131, 131, 131);
-    font-weight:400;
-    flex-direction: row;
-    width:100%;
-    padding-left:25%;
-  }
-
-  .make-left-landing{
+.make-left-landing{
     display:flex;
     width:100%;
     justify-content: center;
@@ -154,7 +141,7 @@
     z-index: 1;
     -webkit-overflow-scrolling: touch;
     background-color:rgba(200,200,200,0.3);
-  }
+}
 
 .make-main-page-container{
     width:100%;

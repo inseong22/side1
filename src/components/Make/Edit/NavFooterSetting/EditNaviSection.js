@@ -29,6 +29,21 @@ function EditNaviSection({navi, setNavi}) {
         setNavi(newNavi);
     }
 
+    // 템플릿 2 이미지의 경우에는
+    const onChangeLogoImage = e => {
+        let newNavi = JSON.parse(JSON.stringify(navi))
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
+            newNavi.logo= result;
+        }
+        reader.readAsDataURL(oneFile);
+        setNavi(newNavi);
+    }
+
     const returnFuncEdit = () => {
         switch(buttonFunc){
             case "link":
@@ -66,9 +81,11 @@ function EditNaviSection({navi, setNavi}) {
                         네비게이션 수정
                     </div>
                     <div className="edit-element">
-                        <div className="edit-element__left">배경색</div>
-                        <div className="edit-element__right">
-                            <EditColor onChange={(e) => setNavi({...navi, backgroundColor:e.currentTarget.value})} />
+                        <div className="edit-element__one">
+                            <div className="edit-element__left">배경색</div>
+                            <div className="edit-element__right">
+                                <EditColor onChange={(e) => setNavi({...navi, backgroundColor:e})} value={navi.backgroundColor} />
+                            </div>
                         </div>
                     </div>
                     <div className="edit-element">
@@ -76,7 +93,8 @@ function EditNaviSection({navi, setNavi}) {
                             <div className="edit-element__left">상단에 고정</div>
                             <div className="edit-element__right">
                                 <Checkbox
-                                    checked={false}
+                                    value={navi.fixed}
+                                    onChange={e => setNavi({...navi, fixed:!navi.fixed})}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                 />
                             </div>
@@ -93,23 +111,38 @@ function EditNaviSection({navi, setNavi}) {
                         </div>
                     </div>
                     <div className="edit-element">
-                        <div className="edit-element__left">메인 로고</div>
-                        <div className="edit-element__right">
-                            <RadioCustom 
-                                options={logoOptions}
-                                onChange={setLogo}
-                                value={logo}
-                            />
+                        <div className="edit-element__one">
+                            <div className="edit-element__left">메인 로고</div>
+                            <div className="edit-element__right">
+                                <RadioCustom 
+                                    options={logoOptions}
+                                    onChange={(e) => setNavi({...navi, isLogo:e})}
+                                    value={navi.isLogo}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="edit-element">
-                        <div className="edit-element__left">버튼 사용</div>
-                        <div className="edit-element__right">
-                            <Checkbox
-                                value={navi.button.use}
-                                onChange={() => setNavi({...navi, button:{...navi.button, use:!navi.button.use}})}
-                                inputProps={{ 'aria-label': 'controlled' }}
-                            />
+                    {
+                        navi.isLogo === 'logo' && 
+                        <div className="edit-element no-border">
+                            <div className="edit-element__one">
+                                <div className="edit-element__left">로고</div>
+                                <div className="edit-element__right">
+                                    <input type="file" accept="image/*" id="file" onChange={ e => onChangeLogoImage(e) } />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div className="edit-element no-border">
+                        <div className="edit-element__one">
+                            <div className="edit-element__left">버튼 사용</div>
+                            <div className="edit-element__right">
+                                <Checkbox
+                                    value={navi.button.use}
+                                    onChange={() => setNavi({...navi, button:{...navi.button, use:!navi.button.use}})}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            </div>
                         </div>
                     </div>
                     { navi.button.use && <>
@@ -127,10 +160,10 @@ function EditNaviSection({navi, setNavi}) {
                         <div className="edit-element">
                             <div className="edit-element__left">버튼 색</div>
                             <div className="edit-element__right">
-                                <input type="color" />
+                                <EditColor onChange={(e) => setNavi({...navi, button:{...navi.button, color:e}})} value={navi.button.color} />
                             </div>
                         </div>
-                        <EditButtonTable value={buttonTemplate} onChange={setButtonTemplate} />
+                        <EditButtonTable value={navi.button.num} onChange={(e) => setNavi({...navi, button:{...navi.button, num:e}})} color={navi.button.color} />
                     </> }
                 </div>
             </>

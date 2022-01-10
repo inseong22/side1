@@ -11,13 +11,13 @@ function RadioCustom({options, value, onChange}) {
                 }
                 if(index === 0){
                     return(
-                        <span className="radio-element-first" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
+                        <span className="radio-element r-first" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
                             {item.label}
                         </span>
                     )
                 }else if(index === (options.length - 1)){
                     return(
-                        <span className="radio-element-end" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
+                        <span className="radio-element r-end" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
                             {item.label}
                         </span>
                     )

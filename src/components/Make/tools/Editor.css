@@ -1,10 +1,21 @@
+:root{
+    --ck-color-base-focus:black;
+    --ck-color-base-active:black;
+    --ck-color-base-active-focus:black;
+}
+
 .ckeditor-container{
     border-radius: 4px;
     border: 1px solid rgba(231, 0, 0, 0);
 }
 
 .ck-editor__editable{
-    min-width:150px;
+    min-width:30px;
+    padding:0px;
+}
+
+.ck.ck-editor__editable_inline{
+    padding:0px 0px;
 }
 
 .ckeditor-container:hover{

@@ -6,27 +6,27 @@ import {Delete, Options} from '@styled-icons/fluentui-system-filled'
 import { motion } from 'framer-motion'
 import './MakeNavigation.css'
 
-function MakeNavigationV2(props) {
+function MakeNavigationV2({full, navi, setNavi, history, setIsWidget}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [isHover, setIsHover] = useState('none');
 
     const returnNaviTemplate = () => {
-        switch(props.navi.sectionTemplateNumber){
+        switch(navi.sectionTemplateNumber){
             case 1:
                 return (
-                    <NaviTemplate1 navi={props.navi}/>
+                    <NaviTemplate1 navi={navi} setNavi={setNavi}/>
                 )
 
             case 2:
                 return (
-                    <NaviTemplate2 navi={props.navi}/>
+                    <NaviTemplate2 navi={navi} setNavi={setNavi}/>
                 )
 
             default:
                 return (
                     <>
                         <span className="make-nav-bar-title" onClick={() => console.log("하이")}>
-                            {props.navi.title}
+                            {navi.title}
                         </span>
                     </>
                 )
@@ -35,11 +35,13 @@ function MakeNavigationV2(props) {
 
     return (
         <>
-        {/* <div className="make-navigation" onClick={() => {action.setSecNum(50); action.setAddingSectionAt(1000); props.setIsWidget(true)}} style={{width:`${props.full ? '100%' : '100%'}`, backgroundColor:`${props.navi.backgroundColor}`}}>
+        {/* <div className="make-navigation" onClick={() => {action.setSecNum(50); action.setAddingSectionAt(1000); setIsWidget(true)}} style={{width:`${full ? '100%' : '100%'}`, backgroundColor:`${navi.backgroundColor}`}}>
             {returnNaviTemplate()}
         </div> */}
-        <div className="make-navigation" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{width:`${props.full ? '100%' : '100%'}`, backgroundColor:`${props.navi.backgroundColor}`, borderBottom:`${props.navi.borderBottom ? '1px solid rgb(210,210,210)' : 'none'}`}}>
-            {returnNaviTemplate()}
+        <div className="make-navigation" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{ backgroundColor:`${navi.backgroundColor}`}}>
+            <div className="make-nav-container" style={{width:"100%", borderBottom:`${navi.bottomBorder ? '1px solid rgba(150,150,150,0.2)' : '1px solid rgba(150,150,150,0)'}`}}>
+                {returnNaviTemplate()}
+            </div>
             <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
                 <div className="section-selection-container" style={{display:`${isHover}`, left:`${state.isWidget ? '18vw' : '5vw'}`}}>
                     <span className="section-hover-selections" onClick={() => {}}><Delete size="30" /></span>

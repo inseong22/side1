@@ -1,13 +1,25 @@
+.make-footer{
+  width:100%;
+  z-index:3;
+  display: flex;
+  justify-content: center;
+  align-items : center;
+  flex-direction: row;
+  position:relative;
+}
+
 .make-footer__container{
   width:100%;
+  padding:4% 0%;
+  z-index:13;
   display: flex;
-  justify-content :center;
-  align-items :center;
-  padding:5% 0%;
+  justify-content: center;
+  align-items : center;
+  flex-direction: row;
+  position:relative;
 }
 
 .footer-item{
-  margin-top:7px;
   width:100%;
   display: flex;
   justify-content : start;
@@ -19,4 +31,11 @@
   display: flex;
   flex-direction: column;
   justify-content :end;
+  padding:0% 3%;
+}
+
+.footer-icon{
+  width:27px;
+  margin:3px;
+  cursor:pointer;
 }

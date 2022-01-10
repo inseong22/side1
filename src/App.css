@@ -92,8 +92,31 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  height:100%;
+  width:100%;
 }
 
+.center-column{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height:100%;
+  width:100%;
+}
+
+.centera{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  width:100%;
+}
+
+.hover:hover{
+  border:0.2px solid rgba(200,200,200,1);
+  cursor:pointer;
+}
 
 @font-face {
   font-family: 'ImcreSoojin';
