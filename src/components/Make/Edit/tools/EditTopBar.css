@@ -1,0 +1,14 @@
+
+
+.edit__top-bar{
+    background-color:#6B63F7;
+    padding:1% 2%;
+    width:100%;
+    box-sizing:border-box;
+}
+.edit-radios{
+    display: flex;
+    padding:3px;
+    border-radius: 5px;
+    margin-left:3px;
+}

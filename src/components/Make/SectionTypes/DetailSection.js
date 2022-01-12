@@ -144,7 +144,6 @@ function DetailSection({content}) {
                     onChange={(e, editor) => {
                         const data = editor.getData();
                         changeText(data);
-                        console.log(editor)
                     }}
                     />
                 {returnButton()}

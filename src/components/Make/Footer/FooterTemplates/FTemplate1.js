@@ -76,17 +76,6 @@ function FTemplate1({foot, setFoot, history}) {
                     />  
                 </div>
             </div>
-            {foot.isOne === "two" && 
-            <div className="footer-section" style={{fontSize:'0.5em'}}>
-                <Editor
-                    data={foot.second.text}
-                    onChange={(e, editor) => {
-                        const data = editor.getData();
-                        setFoot({...foot, second:{...foot.second, text:data}});
-                    }}
-                />
-            </div>
-            }
         </>
     )
 }

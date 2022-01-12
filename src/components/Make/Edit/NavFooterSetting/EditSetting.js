@@ -27,6 +27,12 @@ function EdtirSetting({setting, setSetting}) {
                     <>
                     <div>
                         기본
+                        <div>
+                            urlId
+                        </div>
+                        <div>
+                            <input type="text" value={setting.urlId} onChange={e => setSetting({...setting, urlId:e.currentTarget.value})} />
+                        </div>
                     </div>
                     </>
                 )

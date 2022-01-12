@@ -17,4 +17,30 @@ function EditColor({onChange}) {
     )
 }
 
+export const returnColorContainer = (text, value, func) => {
+    return(
+        <div className="edit-element">
+            <div className="edit-element__one">
+                <div className="edit-element__left">{text}</div>
+                <div className="edit-element__right">
+                    <EditColor onChange={(e) => func(e)} value={value || 'white'} />
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const EditColorContainer = ({text, value, func}) => {
+    return(
+        <div className="edit-element">
+            <div className="edit-element__one">
+                <div className="edit-element__left">{text}</div>
+                <div className="edit-element__right">
+                    <EditColor onChange={(e) => func(e)} value={value || 'white'} />
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export default EditColor

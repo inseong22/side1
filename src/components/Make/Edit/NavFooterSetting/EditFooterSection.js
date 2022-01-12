@@ -90,18 +90,6 @@ function EditFooterSection({foot, setFoot}) {
                             </div>
                         </div>
                     </div>
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">푸터 단 설정</div>
-                            <div className="edit-element__right">
-                                <RadioCustom 
-                                    options={oneOrTwoOptions}
-                                    onChange={(e) => setFoot({...foot, isOne:e})}
-                                    value={foot.isOne}
-                                />
-                            </div>
-                        </div>
-                    </div>
                     <div className="edit-element no-border">
                         <div className="edit-element__one">
                             <div className="edit-element__left">아이콘 사용</div>

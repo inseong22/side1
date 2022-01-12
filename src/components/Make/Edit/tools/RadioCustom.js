@@ -34,4 +34,21 @@ function RadioCustom({options, value, onChange}) {
     )
 }
 
+export const EditRadioContainer = ({text, options, value, func}) => {
+    return(
+        <div className="edit-element">
+            <div className="edit-element__one">
+                <div className="edit-element__left">{text}</div>
+                <div className="edit-element__right">
+                    <RadioCustom 
+                        options={options}
+                        onChange={e => func(e)}
+                        value={value}
+                    />
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export default RadioCustom

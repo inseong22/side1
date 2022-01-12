@@ -9,7 +9,7 @@ import NavBarInMakePage from '../NavBarInMakePage/NavBarInMakePage'
 import MakeFooter from '../../../components/Make/utils/old/NavBar/MakeFooter'
 import LastSectionMake from '../../../components/Make/utils/old/Make/LastSectionMake'
 import MainSection from '../../../components/Make/utils/old/Make/MainSection'
-import ModalMade from '../../../components/Make/Modal/FirstQuestions'
+import ModalMade from '../../Questions/FirstQuestions'
 import LoadingModal from '../../../components/Make/Modal/LoadingModal'
 import CheckModal from '../../../components/Make/Modal/CheckModal'
 

@@ -94,6 +94,7 @@
   flex-direction: row;
   height:100%;
   width:100%;
+  box-sizing:border-box;
 }
 
 .center-column{
@@ -103,6 +104,7 @@
   flex-direction: column;
   height:100%;
   width:100%;
+  box-sizing:border-box;
 }
 
 .centera{
@@ -111,6 +113,7 @@
   align-items: center;
   height:100%;
   width:100%;
+  box-sizing:border-box;
 }
 
 .hover:hover{

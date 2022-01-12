@@ -52,7 +52,7 @@ function ResponsePage({userObj, history}) {
 
     const getThisUserDatas = async () => {
         const thisuserDatas = await dbService
-            .collection('apply-landing-data')
+            .collection('made-page')
             .where("makerEmail", "==", userObj.email)
             .get();
         
@@ -60,12 +60,12 @@ function ResponsePage({userObj, history}) {
             return({...doc.data(), id:doc.id})
         });
         setMylandings(thisuserData);
-
+        
         let tempDatas = []
         
         thisuserData.map(item => {
             let tempd = []
-            getDatas(item.urlId).then(i => {
+            getDatas(item.setting.urlId).then(i => {
                 tempd = i;
                 tempDatas.push(tempd);
             })

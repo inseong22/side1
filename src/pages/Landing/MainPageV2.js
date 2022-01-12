@@ -116,17 +116,38 @@ function MainPageV2({history, isLoggedIn, userObj}) {
         }
     }
 
-    const SomeoneClickMoveToMake = () => {
-        if(userObj !== null){
-            dbService.collection('SomeoneClickMoveToMake').add({
-                name:userObj.displayName,
-                email:userObj.email,
-                createdAt: new Date(),
-            })
+    const SomeoneClickMoveToMake = async () => {
+        const isNew = localStorage.getItem('isNew');
+        console.log("isNew", isNew);
+        if(isNew === null){
+            localStorage.setItem('isNew', false);
+            if(userObj !== null){
+                dbService.collection('SomeoneClickMoveToMake').add({
+                    name:userObj.displayName,
+                    email:userObj.email,
+                    new:true,
+                    createdAt: new Date(),
+                })
+            }else{
+                dbService.collection('SomeoneClickMoveToMake').add({
+                    new:true,
+                    createdAt: new Date(),
+                })
+            }
         }else{
-            dbService.collection('SomeoneClickMoveToMake').add({
-                createdAt: new Date(),
-            })
+            if(userObj !== null){
+                dbService.collection('SomeoneClickMoveToMake').add({
+                    name:userObj.displayName,
+                    email:userObj.email,
+                    new:false,
+                    createdAt: new Date(),
+                })
+            }else{
+                dbService.collection('SomeoneClickMoveToMake').add({
+                    new:false,
+                    createdAt: new Date(),
+                })
+            }
         }
     }
 

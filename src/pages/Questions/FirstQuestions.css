@@ -127,3 +127,19 @@
     justify-content: center;
     font-weight: 600;
 }
+
+.arrow-back{
+    position:absolute;
+    top:10px;
+    left:20px;
+    font-size:30px;
+    border:none;
+    background-color:#ffffffff;
+    cursor:pointer;
+    color:rgb(105, 105, 105);
+    text-decoration: none;
+}
+
+.arrow-back:hover{
+    color:black;
+}

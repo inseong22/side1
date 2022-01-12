@@ -1,18 +1,14 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
-import '../Modal/Modal.css'
+import '../../components/Make/Modal/Modal.css';
 import './FirstQuestions.css'
 import {Link} from 'react-router-dom'
-import { MyContext } from '../../../pages/Make/MakePageV2'
-import {dbService} from '../../../tools/fbase';
+import { MyContext } from '../Make/MakePageV2'
+import {dbService} from '../../tools/fbase';
 import OverflowScrolling from 'react-overflow-scrolling';
 
-import info1 from '../../../tools/info/info1.png';
-import info2 from '../../../tools/info/info2.png';
-import info3 from '../../../tools/info/info3.png';
-import smile from '../../../tools/info/smile3d.png';
-import good from '../../../tools/info/good3d.png';
+import good from '../../tools/info/good3d.png';
 
 import { Input } from 'antd';
 
@@ -45,10 +41,12 @@ const style = {
   height: '100vh',
   bgcolor: 'rgba(255,255,255,1)',
   border: '0px solid #000',
+  marginTop: '-60px',
   flexDirection:'column',
   p: 2,
   px: 4,
   pb: 3,
+  zIndex:'10000099',
   display:'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -204,43 +202,31 @@ const colorList = [
     },
 ]
 
-function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing, setting, setSetting}) {
+function FQ(props) {
     // 모달
     const [cnum, setCnum] = useState(1);
     const [type, setType] = useState("");
     const [templates, setTemplates] = useState([]);
     const [templateNum, setTemplateNum] = useState(0);
+    const [title, setTitle] = useState('');
+    const [urlId, setUrlId] = useState('');
     const [font, setFont] = useState('');
     const [color, setColor] = useState('');
     const [tmodalOpen, setTmodalOpen] = useState(false);
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = async () => {
-        // 마지막에는 입력한 정보도 저장한다. 근데 한명껄 여러번 저장해서 헷갈리지 않게..!
+    // const handleOpen = () => setOpen(true);
+    // const handleClose = async () => {
+    //     // 마지막에는 입력한 정보도 저장한다. 근데 한명껄 여러번 저장해서 헷갈리지 않게..!
 
-        await dbService.collection('question_answers').add({
-            createdAt: new Date(),
-        })
-        setOpen(false)
-    };
+    //     await dbService.collection('question_answers').add({
+    //         createdAt: new Date(),
+    //     })
+    //     setOpen(false)
+    // };
 
     useEffect(() => {
-        
-        setCnum(1);
-    },[open]);
-
-    const onChangeTitle = e => {
-        let newNavi = Object.assign({}, navi)
-        newNavi.title = e.currentTarget.value
-        setNavi(newNavi)
-    }
-
-    const onUrlChange = e => {
-        let newSetting = Object.assign({}, setting)
-        newSetting.urlId = e.currentTarget.value
-        setSetting(newSetting)
-    }
+    }, []);
 
     const nextAndSetTemplates = async (e) => {
         if(type === ""){
@@ -283,29 +269,46 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing, sett
         }
     }
     const nextAndSetDone = async e => {
-        if(setting.urlId === ''){
+        const urlDatas = await dbService
+            .collection("urlStores")
+            .where("urlId", "==", urlId)
+            .get(); // uid를 creatorId로 줬었으니까.
+        
+        let urlData = urlDatas.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+
+        if(urlId === ''){
             alert("URL을 입력해주세요. 이후 페이지에서 수정가능합니다.");
             return
-        }else if(editing === true){
-            const real = window.confirm("템플릿을 새로 설정하면 이전에 작성한 내용이 사라집니다. 괜찮으신가요?")
-            if(real){
-                {
-                    // templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0]
-                    // 이걸 set Contents에.
-                    action.setContents(templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0])
-        
-                    setEditing(true);
-                    handleClose();
-                }
-            }else{
-                return;
-            }
-        }else{
-            action.setContents(templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0])
-
-            setEditing(true);
-            handleClose();
+        }else if(urlData.length > 0){
+            alert("이미 존재하는 url입니다. 다른 url을 사용해주세요.");
+            return;
         }
+        
+        // if(urlId === ''){
+        //     alert("URL을 입력해주세요. 이후 페이지에서 수정가능합니다.");
+        //     return
+        // }else if(editing === true){
+        //     const real = window.confirm("템플릿을 새로 설정하면 이전에 작성한 내용이 사라집니다. 괜찮으신가요?")
+        //     if(real){
+        //         {
+        //             // templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0]
+        //             // 이걸 set Contents에.
+        //             action.setContents(templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0])
+        
+        //             setEditing(true);
+        //             handleClose();
+        //         }
+        //     }else{
+        //         return;
+        //     }
+        // }else{
+        //     action.setContents(templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0])
+
+        //     setEditing(true);
+        //     handleClose();
+        // }
     }
 
     const getAllTemplates = async(e) => {
@@ -336,9 +339,9 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing, sett
                                     당신의 서비스 / 제품 명을 알려주세요. 😊
                                 </div>
                             </div>
-                            <Input className="input-holder" type="text" placeholder="한글은 8자 이내, 영문 10자 이내일 때 가장 이뻐요!" value={navi.title} onChange={e => onChangeTitle(e)} />
+                            <Input className="input-holder" type="text" placeholder="한글은 8자 이내, 영문 10자 이내일 때 가장 이뻐요!" value={title} onChange={e => setTitle(e.currentTarget.value)} />
                             <div className="modal-button-container">
-                                <button className="modal-move-button" onSubmit={e => setCnum(cnum + 1)} style={{visibility:`${navi.title.length > 0 ? 'visible' : 'hidden'}`, display:'flex'}} 
+                                <button className="modal-move-button" onSubmit={e => setCnum(cnum + 1)} style={{visibility:`${title.length > 0 ? 'visible' : 'hidden'}`, display:'flex'}} 
                                     onClick={e => setCnum(cnum + 1)}>확인</button>  
                             </div>
                         </form>
@@ -350,7 +353,7 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing, sett
                 return(
                     <div style={{display:'flex', flexDirection:'column'}}>   
                         <div className="modal-title">
-                            <span style={{color:'#6C63FF'}}>{navi.title}</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀
+                            <span style={{color:'#6C63FF'}}>{title}</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀
                         </div>                     
                         <div className="modal-main-card">
                             {
@@ -505,10 +508,10 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing, sett
                 return(
                     <div style={{display:'flex', flexDirection:'column'}}>
                         <div className="modal-title">
-                            마지막으로, <span style={{color:'#6C63FF'}}>{navi.title}</span> 랜딩페이지의 URL을 설정해주세요!
+                            마지막으로, <span style={{color:'#6C63FF'}}>{title}</span> 랜딩페이지의 URL을 설정해주세요!
                         </div>
                         <div className="modal-title" style={{fontSize:'25px'}}>
-                            <Input className="input-holder" type="text" value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
+                            <Input className="input-holder" type="text" value={urlId} onChange={e => setUrlId(e.currentTarget.value)} />.surfee.co.kr
                         </div>
                             <div style={{color:'gray', paddingLeft:'6%',marginTop:'3%', fontSize:'18px', textAlign:'left', fontFamily:'Pretendard-Regular'}}>
                                 <div>
@@ -531,22 +534,16 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing, sett
 
     return (
         <div>
-        <StyledModal
-            aria-labelledby="unstyled-modal-title"
-            aria-describedby="unstyled-modal-description"
-            open={open}
-            BackdropComponent={Backdrop}
-        >
             <Box sx={style}>
-                {editing ? 
+                {/* {editing ? 
                     <span onClick={() => handleClose()} className="arrow-hover" style={{position:'absolute', top:'10px', left:'20px', fontSize:'30px', border:'none', backgroundColor:'#ffffffff', cursor:'pointer', color:'black'}}>
                         ←
                     </span>
-                     :
-                    <Link to="/" className="arrow-hover" style={{position:'absolute', top:'10px', left:'20px', fontSize:'30px', border:'none', backgroundColor:'#ffffffff', cursor:'pointer', color:'black'}}>
+                     : */}
+                    <Link to="/" className="arrow-back">
                         ←
                     </Link> 
-                }
+                {/* } */}
                 <div className="progress-bar__container">
                     {progressList.map((item, index) => {
                         let backColor = 'rgba(0,0,0,0.3)'
@@ -575,22 +572,8 @@ function FirstQuestions({open, setOpen, navi, setNavi, editing, setEditing, sett
                     {content()}
                 </div>
             </Box>
-        </StyledModal>
-            <StyledModal2
-                aria-labelledby="unstyled-modal-title"
-                aria-describedby="unstyled-modal-description"
-                open={tmodalOpen}
-                onClose={() => setTmodalOpen(false)}
-                BackdropComponent={Backdrop2}
-            >
-                <Box sx={style2}>
-                    <>
-                    템플릿
-                    </>
-                </Box>
-            </StyledModal2>
         </div>
     )
 }
 
-export default FirstQuestions
+export default FQ

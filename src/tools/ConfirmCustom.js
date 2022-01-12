@@ -1,6 +1,7 @@
 import React from 'react'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
+import './ConfirmCustom.css'
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -38,7 +39,7 @@ const style = {
   display:'flex',
   justifyContent: 'center',
   alignItems: 'center',
-//   borderRadius:'20px',
+  borderRadius:'5px',
   position:'relative',
 }
 
@@ -53,15 +54,15 @@ function ConfirmCustom({open, setOpen, message, callback}) {
             BackdropComponent={Backdrop}
         >
             <Box sx={style}>
-                <div>
+                <div className="centera confirm-message" style={{height:'80%'}}>
                     {message}
                 </div>
-                <div>
-                    <button onClick={() => {callback(); setOpen(false)}}>
-                        예
-                    </button>
-                    <button onClick={() => setOpen(false)}>
+                <div className="center-row confirm-button__container">
+                    <button className="confirm-button" style={{border:'1px solid #6C63FF', color:'#6C63FF'}} onClick={() => {setOpen(false)}}>
                         아니오
+                    </button>
+                    <button className="confirm-button" style={{backgroundColor:'#6C63FF', color:'white'}} onClick={() => {callback(); setOpen(false)}}>
+                        예
                     </button>
                 </div>
             </Box>

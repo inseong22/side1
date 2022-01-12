@@ -3,6 +3,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import EditDetailSection from './EditTemplates/EditDetailSection'
 import EditCtaSection from './EditTemplates/EditCtaSection'
+import EditHeroSection from './EditTemplates/EditHeroSection'
 import EditReviewSection from './EditTemplates/EditReviewSection'
 import EditFeaturesSection from './EditTemplates/EditFeaturesSection'
 import EditMapSection from './EditTemplates/EditMapSection'
@@ -26,7 +27,7 @@ function NewSectionMake({content}) {
             // 이미지인 경우 편집화면
             case 'HeroSection':
                 return (
-                    <EditCtaSection content={content} category={category}/>
+                    <EditHeroSection content={content} category={category}/>
                 )
 
             // 리뷰들인 경우 편집화면

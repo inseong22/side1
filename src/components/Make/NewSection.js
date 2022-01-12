@@ -82,11 +82,6 @@ function NewSection({content, index, contents, setContents}) {
                     <FeaturesSection content={content}/>
                 )
 
-            case 'MapSection':
-                return (
-                    <MapSection content={content}/>
-                )
-
             case 'PriceSection':
                 return (
                     <PriceSection content={content}/>
@@ -122,9 +117,11 @@ function NewSection({content, index, contents, setContents}) {
                 { index !== state.contents.length-1 && <span className="section-hover-selections" onClick={() => moveDown()}><ArrowDownShort size="30" /></span>}
             </div>
         </div>
-        <div className="section__container">
+        <div className="section__container" style={{backgroundImage:`${content.backgroundImage.use ? `url(${content.backgroundImage.attachment})` : ''}`}}>
             {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
-            <div style={{fontSize:'0.6em', width:'100%'}}>
+            <div style={{backgroundColor:`${content.backgroundColor}`, opacity:`${content.backgroundOpacity}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
+            </div>
+            <div style={{fontSize:'0.6em', width:'100%', zIndex:3}}>
                 {returnType()}
             </div>
         </div>

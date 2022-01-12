@@ -4,6 +4,7 @@ import './App.css';
 import AppRouter from './Router';
 import NavBarV2 from './pages/NavAndFooter/NavBarV2';
 import { authService } from './tools/fbase'
+import {RecoilRoot} from 'recoil';
 
 function App() {
   const [init, setInit] = useState(false);
@@ -30,9 +31,9 @@ function App() {
 
   return (
     <>
-    <div className="App">
+    <RecoilRoot className="App">
       {init ? <AppRouter userObj={userObj} isLoggedIn={isLoggedIn} /> : "Initializing..."}
-    </div>
+    </RecoilRoot>
     </>
   );
 }

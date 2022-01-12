@@ -75,9 +75,9 @@ function HeroSection({content}) {
                     </div>
                 </Popover>
                 {content.image.attachment === '' ?  
-                    <img ref={imgRef} src={playstorebutton} className="image" onClick={(e) =>{ setImageShow(e.currentTarget)}} />
+                    <img ref={imgRef} src={playstorebutton} className="image" onClick={(e) =>{ setImageShow(e.currentTarget)}} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}} />
                     : 
-                    <img ref={imgRef} src={`${content.image.attachment}`} className="image" onClick={(e) => setImageShow(e.currentTarget)} />
+                    <img ref={imgRef} src={`${content.image.attachment}`} className="image" onClick={(e) => setImageShow(e.currentTarget)} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}}/>
                 }
             </div>
         )
@@ -113,7 +113,8 @@ function HeroSection({content}) {
             </Popover>
             
             <div className="button__container" style={{justifyContent: `${align}`, border:`${ anchorEl !== null ? '1px dashed rgba(0,0,0,0.4)' : '' }`}} onClick={e => setAnchorEl(e.currentTarget)}>
-                <div>                 
+                {
+                content.button.first && <div>                 
                     {content.button.link.includes("play.google.com/store") ? <img src={playstorebutton} />
                      : 
                      content.button.link.includes("apps.apple.com/") ? <img src={appstorebutton} />
@@ -131,6 +132,7 @@ function HeroSection({content}) {
                      </button>
                     }
                 </div>
+                }
             </div>
             </>
         )
@@ -144,7 +146,6 @@ function HeroSection({content}) {
                     onChange={(e, editor) => {
                         const data = editor.getData();
                         changeText(data);
-                        console.log(editor)
                     }}
                     />
                 {returnButton()}
@@ -187,9 +188,9 @@ function HeroSection({content}) {
     }
 
     return (
-        <>
+        <div style={{padding:`${content.paddingSize}% 0%`}}>
             {returnSectionTemplate()}
-        </>
+        </div>
     )
 }
 

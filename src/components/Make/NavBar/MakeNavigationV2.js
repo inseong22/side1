@@ -38,8 +38,8 @@ function MakeNavigationV2({full, navi, setNavi, history, setIsWidget}) {
         {/* <div className="make-navigation" onClick={() => {action.setSecNum(50); action.setAddingSectionAt(1000); setIsWidget(true)}} style={{width:`${full ? '100%' : '100%'}`, backgroundColor:`${navi.backgroundColor}`}}>
             {returnNaviTemplate()}
         </div> */}
-        <div className="make-navigation" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{ backgroundColor:`${navi.backgroundColor}`}}>
-            <div className="make-nav-container" style={{width:"100%", borderBottom:`${navi.bottomBorder ? '1px solid rgba(150,150,150,0.2)' : '1px solid rgba(150,150,150,0)'}`}}>
+        <div className="make-navigation" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
+            <div className="make-nav-container" style={{width:"100%", borderBottom:`${navi.bottomBorder ? '1px solid rgba(150,150,150,0.2)' : '1px solid rgba(150,150,150,0)'}`, backgroundColor:`${navi.backgroundColor}`}} >
                 {returnNaviTemplate()}
             </div>
             <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>

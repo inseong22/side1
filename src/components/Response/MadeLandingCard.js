@@ -2,21 +2,18 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import {dbService, stService} from '../../tools/fbase'
+import './MadeLandingCard.css'
 
 function MadeLandingCard({item, index, setNowChecking, history}) {
-    const [open, setOpen] = useState(false)
+    const [deleteopen, setDeleteOpen] = useState(false)
 
     const deletePage = async () => {
-        console.log("삭제");
-
         const dbgallery = await dbService
-        .collection("apply-landing-data")
-        .where("urlId", "==", item.urlId)
+        .collection("made-page")
+        .where("urlId", "==", item.setting.urlId)
         .get()
         
         let dbgal = dbgallery.docs.map(doc => {return({...doc.data(), gal_id:doc.id})})
-
-        // 댓글 목록에서도 지워야한다.
         
         //delete 파일도 같이 지워져야만 한다.
         await dbService.doc(`apply-landing-data/${item.id}`).delete();
@@ -29,7 +26,7 @@ function MadeLandingCard({item, index, setNowChecking, history}) {
     }
 
     return (
-        <div className="mylandings-card" key={index}>
+        <div className="page-card" key={index}>
             {item.urlTitle}
             <Link to={{
                 pathname:`/make/edit`,
@@ -39,10 +36,10 @@ function MadeLandingCard({item, index, setNowChecking, history}) {
                 }}>
                 편집하기
             </Link>
-            <button onClick={() => {setOpen(true)}}>삭제하기</button>
-            <button>{"https://surfee.co.kr/#/" + item.urlId}</button>
+            <button onClick={() => {setDeleteOpen(true)}}>삭제하기</button>
+            <button>{"https://" + item.setting.urlId + ".surfee.co.kr/#/"}</button>
             <span onClick={() => {setNowChecking(index)}}>이 정보 보기</span>
-            <ConfirmCustom open={open} setOpen={setOpen} message={"한번 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?"} callback={deletePage}/>
+            <ConfirmCustom open={deleteopen} setOpen={setDeleteOpen} message={"한번 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?"} callback={deletePage}/>
         </div>
     )
 }
