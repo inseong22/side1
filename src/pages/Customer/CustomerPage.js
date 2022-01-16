@@ -3,20 +3,21 @@ import QnA from '../../components/Customer/QnA'
 import Term from '../../components/Customer/Term'
 import PersonalInformation from '../../components/Customer/PersonalInformation'
 import Footer from '../NavAndFooter/Footer'
+import ReactGa from 'react-ga'
+import { useRecoilState } from 'recoil'
+import {userState} from '../../Router'
 
 import './CustomerPage.css'
 
 function CustomerPage() {
     const [cnum, setCnum] = useState(1);
     const [cnums, setCnums] = useState([1,2,3]);
-    // const [scrollPosition, setScrollPosition] = useState(0);
-
-    // const updateScroll = () => {
-    //     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
-    // }
-
+    const [userData, setUserData] = useRecoilState(userState);
+    
     useEffect(()=>{
-        // window.addEventListener('scroll', updateScroll);
+
+        // ReactGa.initialize('UA-213792742-1');
+        // ReactGa.pageview('/customerPage');
     });
 
     const tabsTable = cnums.map((item, index) => {

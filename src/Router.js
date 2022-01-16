@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import './App.css';
 import LoginPage from './pages/Login/Login/LoginPage'
@@ -13,11 +13,28 @@ import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/utils/SubmitPage';
 import CustomerPage from './pages/Customer/CustomerPage'
 import FQ from './pages/Questions/FQ'
+import { useRecoilState } from 'recoil'
+import {
+    atom,
+} from 'recoil';
 
 import { createBrowserHistory } from 'history';
+
 const history = createBrowserHistory();
 
+export const userState = atom({
+    key:'userState',
+    default:'',
+})
+
+
 const AppRouter = ({userObj, isLoggedIn}) => {
+    const [userData, setUserData] = useRecoilState(userState);
+
+    useEffect(() => {
+        setUserData(userObj);
+    },[])
+
     if (window.location.host.split(".")[0] !== "surfee" && window.location.host.split(".")[0] !== 'localhost:3000') {
         return(
             <Router history={history}>

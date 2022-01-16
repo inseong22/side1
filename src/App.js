@@ -17,7 +17,7 @@ function App() {
       authService.onAuthStateChanged((user) => {
         if(user){
           setIsLoggedIn(true)
-          setUserObj(user.multiFactor.user);
+          // setUserObj(user.multiFactor.user);
         }else{
           setIsLoggedIn(false)
         }

@@ -45,8 +45,8 @@ function ResponsePage({userObj, history}) {
     
     useEffect(() => {
         // to report page view
-        // ReactGa.initialize('UA-213792742-1');
-        // ReactGa.pageview(`/seeResponse/${userObj.email}`);
+        ReactGa.initialize('UA-213792742-1');
+        ReactGa.pageview(`/seeResponse/${userObj.email}`);
         getThisUserDatas();
     },[loading])
 
@@ -79,13 +79,15 @@ function ResponsePage({userObj, history}) {
         const reDatas = await dbService
             .collection("apply-datas") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
             .orderBy("created", "desc")
-            .where("urlId", "==", urlId)
+            // .where("urlId", "==", urlId)
             .get();
 
         let reData = reDatas.docs.map(doc => {
             let day = new Date(doc.data().created)
             return({...doc.data(), id:doc.id, date:day})
         });
+
+        console.log(reData);
 
         return reData;
     }

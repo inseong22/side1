@@ -7,6 +7,7 @@ import Footer from '../NavAndFooter/Footer'
 import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import { ToolOutlined, PieChartOutlined, MobileOutlined, GroupOutlined, FormatPainterOutlined, BranchesOutlined, PicLeftOutlined, AlertOutlined, PictureOutlined, FormOutlined } from '@ant-design/icons';
 import { motion } from "framer-motion"
+import Icons from '../../components/Make/tools/Icons'
 
 import s1 from '../../tools/img/surfee1.png';
 
@@ -64,13 +65,6 @@ function MainPageV2({history, isLoggedIn, userObj}) {
 
     useEffect(()=>{
         // window.addEventListener('scroll', updateScroll);
-        setInterval(() => {
-            // console.log("시작")
-            // dbService.collection("test").add({
-            //     id:'id'
-            // })
-            // console.log("끝")
-        },1000)
     });
 
     const sendData = async () => {
@@ -164,6 +158,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     <span className="one-section-big-topbottom">
                         '타이핑'과 '이미지'로만<br/>
                         빠르고 간단하게 랜딩페이지를 제작해보세요
+                        {/* <Icons /> */}
                     </span>
                     {/* <span className="one-section-small">
                     신규 서비스와 이벤트부터 스타트업 아이템 검증까지,<br/>

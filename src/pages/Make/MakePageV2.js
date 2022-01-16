@@ -27,9 +27,6 @@ import EditFooterSection from '../../components/Make/Edit/NavFooterSetting/EditF
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import {motion} from 'framer-motion'
 import { isMobile } from 'react-device-detect';
-import { useRecoilState } from 'recoil'
-import { contentsState, settingState, naviState, footState } from '../../components/Make/state'
-
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
     action : {setAddingSectionAt : () => {}}
@@ -122,7 +119,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     useEffect(() => {
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
-        // ReactGa.pageview(`/making/`);
+        // ReactGa.pageview(`/making/${userObj.email}`);
 
         function repeat(){
             console.log("임시 저장");

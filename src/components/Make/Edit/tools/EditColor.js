@@ -12,7 +12,7 @@ function EditColor({onChange}) {
             <div className="color-button" style={{backgroundColor:"green"}} onClick={() => onChange('green')}>
                 
             </div>
-            <input className="color-button" type="color" value onChange={(e) => onChange(e.currentTarget.value)}/>
+            <input className="color-button" type="color" value onChange={(e) => {onChange(e.currentTarget.value); console.log(e)}}/>
         </div>
     )
 }
