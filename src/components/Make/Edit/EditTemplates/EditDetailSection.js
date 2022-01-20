@@ -4,6 +4,7 @@ import EditAnimation from '../tools/EditAnimation'
 import { detailSectionTemplateList } from './InnerTemplates'
 import TemplateChoose from '../tools/TemplateChoose'
 import './EditeTemplates.css'
+import './EditContent.css'
 
 function EditDetailSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.

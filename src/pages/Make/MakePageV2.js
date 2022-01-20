@@ -24,9 +24,11 @@ import ReactGa from 'react-ga'
 import lodash from 'lodash'
 import EditNaviSection from '../../components/Make/Edit/NavFooterSetting/EditNaviSection'
 import EditFooterSection from '../../components/Make/Edit/NavFooterSetting/EditFooterSection'
+import EditContents from '../../components/Make/Edit/NavFooterSetting/EditContents'
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import {motion} from 'framer-motion'
 import { isMobile } from 'react-device-detect';
+
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
     action : {setAddingSectionAt : () => {}}
@@ -122,10 +124,9 @@ const MakePageV2 = ({history, userObj}, props) => {
         // ReactGa.pageview(`/making/${userObj.email}`);
 
         function repeat(){
-            console.log("임시 저장");
             localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
         }
-        // 60초에 한번 씩 자동 저장
+        // 30초에 한번 씩 자동 저장
         let id = setInterval(repeat, 30000);
         return () => clearInterval(id);
     })
@@ -165,7 +166,6 @@ const MakePageV2 = ({history, userObj}, props) => {
                 // }else{
                 // }
             }else{
-                console.log("처음 저장")
                 localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
             }
         }
@@ -245,7 +245,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     }
 
     const selectorTable = () => {
-        // 50은 내비를 의미, 51은 푸터를 의미
+        // 50은 내비를 의미, 51은 푸터를 의미, 52는 기본세팅을 의미
         if(secNum === 50 && addingSectionAt === 1000){
             return(
                 <EditNaviSection navi={navi} setNavi={setNavi}/>
@@ -259,6 +259,10 @@ const MakePageV2 = ({history, userObj}, props) => {
             return(
                 <EditSetting setting={setting} setSetting={setSetting}/>
             )
+        }else if(secNum === 53 && addingSectionAt === 1000 ){
+            return(
+                <EditContents />
+            )
         }else{
             return(
                 <NewSectionMake contents={contents} content={contents[secNum]} setContents={setContents} />
@@ -268,7 +272,7 @@ const MakePageV2 = ({history, userObj}, props) => {
 
     const sectionsReturn = contents.map((item, index) => {
         return(
-            <div>
+            <div style={{width:'100%'}}>
                 <NewSection content={item} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} setIsWidget={setIsWidget}/>
             </div>
         )
@@ -355,6 +359,7 @@ const MakePageV2 = ({history, userObj}, props) => {
                             <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} setIsWidget={setIsWidget} />
                             
                             {/* 섹션 디스플레이 */}
+                            
                             {sectionsReturn}
 
                             {/* 푸터 */}

@@ -89,7 +89,20 @@ const NavBarInMakePage = (props) => {
         <div className="make-page-nav">
             <div className="make-page-nav-half" style={{justifyContent: 'start', marginLeft:'1%'}}>
                 {/* <Button onClick={e => props.setOpen(!props.open)}>설명 다시보기</Button> */}
-                <Button onClick={e => {console.log(state);action.setIsWidget(true); action.setSecNum(52); action.setAddingSectionAt(1000)}}>기본설정</Button>
+                <Button onClick={e => {
+                    action.setIsWidget(true); 
+                    action.setSecNum(52); 
+                    action.setAddingSectionAt(1000)
+                    }}>
+                    기본설정
+                </Button>
+                <Button onClick={e => {
+                    action.setIsWidget(true); 
+                    action.setSecNum(53); 
+                    action.setAddingSectionAt(1000)
+                    }}>
+                    컨텐츠
+                </Button>
                 <span style={{marginLeft:'5%', width:'50%'}}>
                     <span>전체화면보기</span>
                     <Switch value={props.full} onChange={e => props.setFull(!props.full)}  style={{marginLeft:'3%'}}/>

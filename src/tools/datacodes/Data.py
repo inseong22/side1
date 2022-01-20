@@ -39,9 +39,20 @@ def get_report(analytics):
             'reportRequests': [
                 {
                     'viewId': VIEW_ID,
-                    'dateRanges': [{'startDate': '7daysAgo', 'endDate': 'today'}],
-                    'metrics': [{'expression': 'ga:sessions'}, {'expression': 'ga:pageViews'}, {'expression': 'ga:sessionDuration'}],
-                    'dimensions': [{'name': 'ga:userType'}, {'name': 'ga:fullReferrer'}, {'name': 'ga:pagePath'}]
+                    'dateRanges': [{
+                        'startDate': '7daysAgo',
+                        'endDate': 'today'
+                    }],
+                    'metrics': [
+                        {'expression': 'ga:sessions'},
+                        {'expression': 'ga:pageViews'},
+                        {'expression': 'ga:sessionDuration'}
+                    ],
+                    'dimensions': [
+                        {'name': 'ga:userType'},
+                        {'name': 'ga:fullReferrer'},
+                        {'name': 'ga:pagePath'}
+                    ]
                     # dimensions에 해당하는 카테고리에서
                     # metrics의 값이다.
                 }]

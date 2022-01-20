@@ -28,7 +28,7 @@ const ourInfos = [
         icon : <BranchesOutlined className="func-icon" style={{color:'#6a63f7', fontSize:'2em'}}/>,
         desc : "도메인 연결",
     },
-    {
+    { 
         icon : <AlertOutlined className="func-icon" style={{color:'#6a63f7', fontSize:'2em'}}/>,
         desc : "CTA 제공",
     },

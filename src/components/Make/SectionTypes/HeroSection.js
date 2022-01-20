@@ -6,6 +6,7 @@ import './DetailSection.css'
 
 import appstorebutton from '../../../tools/img/appstorebutton.png'
 import playstorebutton from '../../../tools/img/playstorebutton.png'
+import './HeroSection.css'
 
 import Popover from '@mui/material/Popover';
 import {ImageAdd} from '@styled-icons/boxicons-regular';
@@ -25,6 +26,13 @@ function HeroSection({content}) {
         let newContents = state.contents.map((item, index) => index === state.secNum ? {...item, titles: {...item.titles, title : data}} : item)
         action.setContents(newContents);
     }
+    
+    // 템플릿 1 텍스트의 경우
+    const changeDesc = ( data ) => {
+        let newContents = state.contents.map((item, index) => index === state.secNum ? {...item, desc : data } : item)
+        action.setContents(newContents);
+    }
+
     // 템플릿 1 텍스트의 경우
     const changeButtonText = ( data ) => {
         let newContents = state.contents.map((item, index) => index === state.secNum ? {...item, button: {...item.button, title : data}} : item)
@@ -48,7 +56,7 @@ function HeroSection({content}) {
 
     const returnImage = () => {
         return(
-            <div className="image__container">
+            <div className="image__container centera">
                 <Popover
                     id={Boolean(imageShow) ? 'simple-popover' : undefined} // 수정
                     open={Boolean(imageShow)} // 수정
@@ -86,7 +94,7 @@ function HeroSection({content}) {
     const returnButton = () => {
         return(
             <>
-            <Popover
+            {/* <Popover
                 id={id}
                 open={Boolean(anchorEl)}
                 anchorEl={anchorEl}
@@ -110,28 +118,31 @@ function HeroSection({content}) {
                         오
                     </span>
                 </div>
-            </Popover>
+            </Popover> 
+             onClick={e => setAnchorEl(e.currentTarget)}
+             */}
             
-            <div className="button__container" style={{justifyContent: `${align}`, border:`${ anchorEl !== null ? '1px dashed rgba(0,0,0,0.4)' : '' }`}} onClick={e => setAnchorEl(e.currentTarget)}>
+            <div className="button__container" style={{border:`${ anchorEl !== null ? '1px dashed rgba(0,0,0,0.4)' : '' }`}}>
                 {
-                content.button.first && <div>                 
-                    {content.button.link.includes("play.google.com/store") ? <img src={playstorebutton} />
-                     : 
-                     content.button.link.includes("apps.apple.com/") ? <img src={appstorebutton} />
-                     :
-                     <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`}}>
-                         {/* <Editor 
-                             style={{width:'100px'}}
-                             data={content.button.title}
-                             onChange={(e, editor) => {
-                                 const data = editor.getData();
-                                 changeButtonText(data);
-                             }} 
-                         /> */}
-                         버튼asdas
-                     </button>
-                    }
-                </div>
+                    content.button.first && 
+                    <div>                 
+                        {content.button.link.includes("play.google.com/store") ? <img src={playstorebutton} />
+                        : 
+                        content.button.link.includes("apps.apple.com/") ? <img src={appstorebutton} />
+                        :
+                        <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`}}>
+                            {/* <Editor 
+                                style={{width:'100px'}}
+                                data={content.button.title}
+                                onChange={(e, editor) => {
+                                    const data = editor.getData();
+                                    changeButtonText(data);
+                                }} 
+                            /> */}
+                            버튼
+                        </button>
+                        }
+                    </div>
                 }
             </div>
             </>
@@ -142,12 +153,19 @@ function HeroSection({content}) {
         return(
             <div className="text__container">
                 <Editor 
-                    data={content.titles.title}
+                    data={content.title}
                     onChange={(e, editor) => {
                         const data = editor.getData();
                         changeText(data);
                     }}
-                    />
+                />
+                <Editor 
+                    data={content.desc}
+                    onChange={(e, editor) => {
+                        const data = editor.getData();
+                        changeDesc(data);
+                    }}
+                />
                 {returnButton()}
             </div>
         )

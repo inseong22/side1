@@ -2,10 +2,10 @@ import * as bi from '@styled-icons/boxicons-logos'
 
 import React, {useState} from 'react'
 
-const icons = [
+export const icons = [
     {
         icon:<bi.Adobe size={30} />,
-        name: "adobe"
+        name: "Adobe"
     },
     {
         icon:<bi.Airbnb size={30} />,

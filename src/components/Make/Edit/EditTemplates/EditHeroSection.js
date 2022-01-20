@@ -21,9 +21,9 @@ const imageBorderOptions = [
     { label: '사각형', value: 0 },
 ]
 const imageSizeOptions = [
-    { label: '작게', value: 150 },
-    { label: '보통', value: 200 },
-    { label: '크게', value: 300 },
+    { label: '작게', value: 250 },
+    { label: '보통', value: 400 },
+    { label: '크게', value: 500 },
 ]
 
 const imageOptions = [

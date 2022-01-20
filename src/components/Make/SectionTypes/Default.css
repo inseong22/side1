@@ -1,3 +1,14 @@
+.template{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
+    padding:0% 20px;
+    box-sizing: border-box;
+}
+
 .balloon{
     display: flex;
     flex-direction: row;
@@ -35,4 +46,14 @@
 }
 .text-editor{
     width:80%;
+}
+
+.input{
+    border:1px solid rgba(0,0,0,0.2);
+    padding:3px;
+    font-size:1.5em;
+}
+
+.mt30{
+    margin-top:30px;
 }

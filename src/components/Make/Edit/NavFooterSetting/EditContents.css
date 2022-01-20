@@ -1,0 +1,14 @@
+.one-contents-draggable{
+    border-radius: 5px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+    margin:10px;
+    padding:5px;
+    cursor:pointer;
+}
+
+.one-contents-draggable:hover{
+    background-color:#c6c3ff;
+}
