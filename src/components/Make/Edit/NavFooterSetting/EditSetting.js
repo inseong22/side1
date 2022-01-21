@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
+import EditTopBar from '../tools/EditTopBar'
 import './EditSetting.css'
 import '../EditTemplates/Edit.css'
 
@@ -83,17 +84,7 @@ function EdtirSetting({setting, setSetting}) {
 
     return(
         <>
-            <div className="make__top-bar">
-                <span className="make-radio" onClick={() => setCategory(0)} style={{cursor:'pointer', backgroundColor:`${category === 1 ? 'rgba(220,0,0,1)' : 'rgba(0,220,0,1)'}`}}>
-                    디자인
-                </span>
-                <span className="make-radio" onClick={() => setCategory(1)} style={{cursor:'pointer', backgroundColor:`${category === 0 ? 'rgba(220,0,0,1)' : 'rgba(0,220,0,1)'}`}}>
-                    템플릿
-                </span>
-                <span onClick={() => action.setIsWidget(false)} style={{cursor:'pointer'}}>
-                    Done
-                </span>
-            </div>
+            <EditTopBar category={category} setCategory={setCategory} />
             {returnTable()}
         </>
     )

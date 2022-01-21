@@ -8,7 +8,7 @@ function EditTopBar({category, setCategory}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return (
-        <div className="edit__top-bar center-row">
+        <div className="edit__top-bar">
             <div className="edit-radios" onClick={() => setCategory(0)} style={{cursor:'pointer', backgroundColor:`${category === 1 ? 'rgb(200,200,202)' : 'white'}`}}>
                 <DesignServices size="40" />
             </div>
@@ -16,7 +16,7 @@ function EditTopBar({category, setCategory}) {
                 <Template size="40" />
             </div>
             <div className="centera" style={{justifyContent:'end'}}>
-                <div onClick={() => action.setIsWidget(false)} style={{cursor:'pointer'}}>
+                <div onClick={() => action.setSecNum(state.CONTENTSSECNUM)} style={{cursor:'pointer'}}>
                     Done
                 </div>
             </div>

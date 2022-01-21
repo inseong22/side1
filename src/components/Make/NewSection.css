@@ -1,3 +1,19 @@
+
+
+.for-section-hover{
+    height:100%;
+    width:100vw;
+    position:absolute;
+    z-index:1;
+}
+
+.section-selection-container{
+    position: absolute;
+    z-index: 10;
+    flex-direction:column;
+    left:15vw;
+}
+
 .section-template-button{
     cursor: pointer;
     border: 1px solid rgb(216, 216, 216);
@@ -30,21 +46,15 @@
     font-size:0.8em;
 }
 
-.section-selection-container{
-    position: absolute;
-    z-index: 10;
-    flex-direction:column;
-}
-
-.section-hover-selections{
+.section-option{
     background-color:rgb(134, 134, 134);
     color:white;
     font-size:0.5em;
     margin:3%;
     cursor: pointer;
     border-radius: 5px;
-    width:50px;
-    height:50px;
+    width:40px;
+    height:40px;
     justify-content :center;
     align-items : center;
     display: flex;
@@ -59,11 +69,4 @@
     flex-direction:column;
     position:relative;
     overflow:visible;
-}
-
-.for-section-hover{
-    height:100%;
-    width:100vw;
-    position:absolute;
-    z-index:1;
 }

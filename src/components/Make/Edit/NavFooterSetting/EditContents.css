@@ -5,10 +5,16 @@
     align-items:center;
     flex-direction: column;
     margin:10px;
-    padding:5px;
-    cursor:pointer;
 }
 
 .one-contents-draggable:hover{
     background-color:#c6c3ff;
+}
+
+.one-contents__inner{
+    border-radius: 5px;
+    cursor:pointer;
+    padding:5px;
+    height:100%;
+    width:100%;
 }

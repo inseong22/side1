@@ -60,6 +60,13 @@
   font-style: normal;
 }
 
+:root {
+  --make-border: rgb(192, 192, 192);
+  --main-color: #6B63F7;
+  --main-hover-color: #b3b0f5;
+}
+
+
 .App {
   text-align: center;
   padding-top:60px;
@@ -119,6 +126,10 @@
 .hover:hover{
   border:0.2px solid rgba(200,200,200,1);
   cursor:pointer;
+}
+
+.hoverback:hover{
+  background-color: var(--main-hover-color);
 }
 
 @font-face {

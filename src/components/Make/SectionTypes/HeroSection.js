@@ -129,7 +129,7 @@ function HeroSection({content}) {
                         {content.button.link.includes("play.google.com/store") ? <img src={playstorebutton} />
                         : 
                         content.button.link.includes("apps.apple.com/") ? <img src={appstorebutton} />
-                        :
+                        : 
                         <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`}}>
                             {/* <Editor 
                                 style={{width:'100px'}}
@@ -137,9 +137,9 @@ function HeroSection({content}) {
                                 onChange={(e, editor) => {
                                     const data = editor.getData();
                                     changeButtonText(data);
-                                }} 
+                                }}
                             /> */}
-                            버튼
+                            버튼aaa
                         </button>
                         }
                     </div>

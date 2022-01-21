@@ -40,6 +40,12 @@ const smallfont = `28px`;
 const bigfont = '50px';
 const rate = 0.63;
 
+const NAVSECNUM = 50;
+const FOOTSECNUM = 51;
+const SETTINGSECNUM = 52;
+const CONTENTSSECNUM = 53;
+const NOTADDING = 1000;
+
 const MakePageV2 = ({history, userObj}, props) => {
     const targets = useRef(null);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
@@ -49,7 +55,7 @@ const MakePageV2 = ({history, userObj}, props) => {
 
     const [isPhone, setIsPhone] = useState(true);
     const [full, setFull] = useState(false);
-    const [isWidget, setIsWidget] = useState(false);
+    const [isWidget, setIsWidget] = useState(true);
     const [password, setPassword] = useState("");
     const [nowState, setNowState] = useState('new');
     const [load, setLoad] = useState(false);
@@ -111,7 +117,7 @@ const MakePageV2 = ({history, userObj}, props) => {
         }
     });
 
-    const [addingSectionAt, setAddingSectionAt] = useState(1000); // 1000은 추가하고 있지 않다는 것을 의미.
+    const [addingSectionAt, setAddingSectionAt] = useState(NOTADDING); // 1000은 추가하고 있지 않다는 것을 의미.
 
     const [urlId, setUrlId] = useState("");
     // 푸터
@@ -174,8 +180,8 @@ const MakePageV2 = ({history, userObj}, props) => {
     },[])
 
     const contextValue = {
-        state: {addingSectionAt, secNum, contents, isWidget, isPhone},
-        action : {setAddingSectionAt, setSecNum, setContents, setIsWidget, setIsPhone},
+        state: {addingSectionAt, secNum, contents, isPhone, CONTENTSSECNUM},
+        action : {setAddingSectionAt, setSecNum, setContents, setIsPhone},
     }
 
     const loadLocalStorage = () => {
@@ -246,20 +252,20 @@ const MakePageV2 = ({history, userObj}, props) => {
 
     const selectorTable = () => {
         // 50은 내비를 의미, 51은 푸터를 의미, 52는 기본세팅을 의미
-        if(secNum === 50 && addingSectionAt === 1000){
+        if(secNum === NAVSECNUM && addingSectionAt === NOTADDING){
             return(
                 <EditNaviSection navi={navi} setNavi={setNavi}/>
             )
 
-        }else if(secNum === 51 && addingSectionAt === 1000 ){
+        }else if(secNum === FOOTSECNUM && addingSectionAt === NOTADDING ){
             return(
                 <EditFooterSection foot={foot} setFoot={setFoot} />
             )
-        }else if(secNum === 52 && addingSectionAt === 1000 ){
+        }else if(secNum === SETTINGSECNUM && addingSectionAt === NOTADDING ){
             return(
                 <EditSetting setting={setting} setSetting={setSetting}/>
             )
-        }else if(secNum === 53 && addingSectionAt === 1000 ){
+        }else if(secNum === CONTENTSSECNUM && addingSectionAt === NOTADDING ){
             return(
                 <EditContents />
             )
@@ -273,19 +279,16 @@ const MakePageV2 = ({history, userObj}, props) => {
     const sectionsReturn = contents.map((item, index) => {
         return(
             <div style={{width:'100%'}}>
-                <NewSection content={item} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} setIsWidget={setIsWidget}/>
+                <NewSection content={item} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents}/>
             </div>
         )
     })
 
     const backgroundClick = e => {
         if(e.target.className === "make-left-landing" || e.target.className === "for-section-hover"){
-            setIsWidget(false);
-            setAddingSectionAt(1000);
+            setSecNum(CONTENTSSECNUM)
+            setAddingSectionAt(NOTADDING);
         }
-        // else if(e.target.className === 'make-hover-section' || e.target.className === 'template' || e.target.className === "make-nav-on" || e.target.className === "make-footer" || e.target.className === "footer-section"){
-        //     setIsWidget(true)
-        // }
         else{
             return;
         }
@@ -313,40 +316,23 @@ const MakePageV2 = ({history, userObj}, props) => {
             />
             <div className="make-page-container" style={{marginTop:'0px'}}>
                 {/* 아래는 제작하는 곳 */}
-                <motion.div style={{display:`${isWidget ? 'flex' : 'none'}`, justifyContent:'center', alignItems: 'center'}}>
+                <div style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
                     <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
                         <OverflowScrolling className='overflow-scrolling'>
-                            <div>
-                                {/* 제작페이지 메인 */}
-                                {selectorTable()}
-                            </div>
-                            <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
-                                <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
-                                <LoadingModal loading={loading} />
-                            </div>
+                            {/* 제작페이지 메인 */}
+                            {selectorTable()}
                         </OverflowScrolling>
                     </div>
-                </motion.div>
+                    <div className="fake-make">
+                    </div>
+                </div>
                 {/* 아래는 미리보기 화면 */}
-                <motion.div className="make-left-landing" onClick={e => backgroundClick(e)}
-                    animate={ full || !isWidget ? {}: isPhone ? {
-                            x:[0, 250],
-                            transition:{
-                                duration:0.3,
-                            }
-                        }: {
-                                width:['100%', '70%'],
-                                transition:{
-                                    duration:0.3,
-                                }
-                            }
-                        }
-                        >
+                <div className="make-left-landing" onClick={e => backgroundClick(e)}>
                     <motion.div className="scroll-container" 
-                        style={{ width:`${full ? '100%' :'80%'}`}}
+                        style={{ width:`${full ? '100%' :'90%'}`}}
                         animate={
                             isPhone ? {
-                                width:['70%', '30%'],
+                                width:['80%', '40%'],
                                 transition:{
                                     duration:0.3
                                 }
@@ -356,24 +342,29 @@ const MakePageV2 = ({history, userObj}, props) => {
                         <div ref={targets} className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`, borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
                             
                             {/* 네비게이션 */}
-                            <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} setIsWidget={setIsWidget} />
+                            <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} />
                             
                             {/* 섹션 디스플레이 */}
                             
                             {sectionsReturn}
 
                             {/* 푸터 */}
-                            <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} setIsWidget={setIsWidget} /> 
+                            <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> 
 
-                            {/* ${targets.current.clientWidth-targets.current.clientWidth/100}px */}
                             { ( setting.fta.use && targets.current ) &&
-                                <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${targets.current.clientWidth-targets.current.clientWidth/10}px`}}>
+                                <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${isPhone ? 300 : 600}px`}}>
                                     {setting.fta.text}
                                 </button>
                             }
                         </div>
                     </motion.div>
-                </motion.div>
+                </div>
+            </div>
+            
+            {/* 모달 모아두기 */}
+            <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
+                <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
+                <LoadingModal loading={loading} />
             </div>
             <ConfirmCustom open={footerOrNot} setOpen={setFooterOrNot} message={"제작 중이던 페이지가 있습니다. 불러오시겠습니까? 취소 시 이전에 작업하던 내용은 사라집니다."} callback={ loadLocalStorage } />
         </MyContext.Provider>

@@ -90,16 +90,14 @@ const NavBarInMakePage = (props) => {
             <div className="make-page-nav-half" style={{justifyContent: 'start', marginLeft:'1%'}}>
                 {/* <Button onClick={e => props.setOpen(!props.open)}>설명 다시보기</Button> */}
                 <Button onClick={e => {
-                    action.setIsWidget(true); 
                     action.setSecNum(52); 
-                    action.setAddingSectionAt(1000)
+                    action.setAddingSectionAt(1000);
                     }}>
                     기본설정
                 </Button>
                 <Button onClick={e => {
-                    action.setIsWidget(true); 
-                    action.setSecNum(53); 
-                    action.setAddingSectionAt(1000)
+                    action.setSecNum(state.CONTENTSSECNUM); 
+                    action.setAddingSectionAt(1000);
                     }}>
                     컨텐츠
                 </Button>

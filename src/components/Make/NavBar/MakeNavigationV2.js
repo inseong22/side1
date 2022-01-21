@@ -6,7 +6,7 @@ import {Delete, Options} from '@styled-icons/fluentui-system-filled'
 import { motion } from 'framer-motion'
 import './MakeNavigation.css'
 
-function MakeNavigationV2({full, navi, setNavi, history, setIsWidget}) {
+function MakeNavigationV2({full, navi, setNavi, history}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [isHover, setIsHover] = useState('none');
 
@@ -45,7 +45,7 @@ function MakeNavigationV2({full, navi, setNavi, history, setIsWidget}) {
             <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
                 <div className="section-selection-container" style={{display:`${isHover}`, left:`${state.isWidget ? '18vw' : '5vw'}`}}>
                     <span className="section-hover-selections" onClick={() => {}}><Delete size="30" /></span>
-                    <span className="section-hover-selections" onClick={() => {action.setIsWidget(true); action.setSecNum(50); action.setAddingSectionAt(1000)}}><Options size="30" /></span>
+                    <span className="section-hover-selections" onClick={() => {action.setSecNum(50); action.setAddingSectionAt(1000)}}><Options size="30" /></span>
                 </div>
             </div>
         </div>

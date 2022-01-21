@@ -10,8 +10,8 @@ const getItemStyle = (isDragging, draggableStyle, backColor) => {
         userSelect: "none",
         textAlign: "right",
 
-        // change background colour if dragging
-        background: isDragging ? "lightgreen" : backColor,
+        // change background color if dragging
+        background: isDragging ? "lightgreen" : 'rgba(200,200,200,0.6)',
 
         // styles we need to apply on draggables
         ...draggableStyle
@@ -44,29 +44,27 @@ function EditContents() {
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}>
                                 {state.contents.map((item, index) => {
-                                    
-                                    let backColor = 'grey'
                                     return(
                                         <Draggable draggableId={String(index)} key={index} index={index} style={{width:'100%'}}>
                                             {(provided, snapshot) => {
                                                 return(
                                                     <div
                                                         className="one-contents-draggable"
-                                                        onMouseEnter={() => {
-                                                            backColor='red';
-                                                        }}
-                                                        onMouseLeave={() => {
-                                                            backColor = 'grey';
-                                                        }}
                                                         ref={provided.innerRef}
                                                         {...provided.dragHandleProps}
                                                         {...provided.draggableProps}
+
+                                                        onClick={() => {
+                                                            action.setSecNum(index)
+                                                        }}
+
                                                         style={getItemStyle(
                                                           snapshot.isDragging,
                                                           provided.draggableProps.style,
-                                                          backColor,
                                                         )}>
-                                                            {item.sectionTypeName}
+                                                            <div className="center-row hoverback one-contents__inner">
+                                                                {item.sectionTypeName}
+                                                            </div>   
                                                     </div>
                                                 )}}
                                         </Draggable>

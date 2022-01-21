@@ -185,6 +185,15 @@
     font-size:14px;
 }
 
+.fake-make{
+    display: flex;
+    padding-bottom:10%;
+    left:0%;
+    width:30vw;
+    top:7vh;
+    height:80vh;
+    z-index:1;
+}
 
 .make-page-make-space{
     font-family: Noto Sans KR;

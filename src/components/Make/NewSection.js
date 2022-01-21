@@ -109,12 +109,23 @@ function NewSection({content, index, contents, setContents}) {
     return(
         <div className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
             <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
-                <div className="section-selection-container" style={{display:`${isHover}`, left:`${state.isWidget ? '18vw' : '5vw'}`}}>
-                    {/* <span className="section-hover-selections" onClick={() => pasteThisSection()}>복사하기</span> */}
-                    { state.contents.length > 0 && <span className="section-hover-selections" onClick={() => deleteThisSection()}><Delete size="30" /></span> }
-                    <span className="section-hover-selections" onClick={() => {action.setIsWidget(true); action.setSecNum(index); action.setAddingSectionAt(1000)}}><Options size="30" /></span>
-                    { index !== 0 && <span className="section-hover-selections" onClick={() => moveUp()}><ArrowUpShort size="30" /></span> }
-                    { index !== state.contents.length-1 && <span className="section-hover-selections" onClick={() => moveDown()}><ArrowDownShort size="30" /></span>}
+                <div className="section-selection-container" style={{display:`${isHover}`}}>
+                    {/* <span className="section-option" onClick={() => pasteThisSection()}>복사하기</span> */}
+                    { state.contents.length > 0 && 
+                        <span className="section-option" onClick={() => deleteThisSection()}>
+                            <Delete size="20" />
+                        </span> }
+                    <span className="section-option" onClick={() => { action.setSecNum(index); action.setAddingSectionAt(1000); }}>
+                        <Options size="20" />
+                    </span>
+                    { index !== 0 && 
+                        <span className="section-option" onClick={() => moveUp()}>
+                            <ArrowUpShort size="20" />
+                        </span> }
+                    { index !== state.contents.length-1 && 
+                        <span className="section-option" onClick={() => moveDown()}>
+                            <ArrowDownShort size="20" />
+                        </span> }
                 </div>
             </div>
             <div className="section__container" style={{backgroundImage:`url(${content.backgroundImage.attachment})`}}>
@@ -130,7 +141,6 @@ function NewSection({content, index, contents, setContents}) {
                         action.setAddingSectionAt(1000);
                     }else{
                         action.setAddingSectionAt(index)
-                        action.setIsWidget(true);
                     }
                 }}>
                 {parseInt(state.addingSectionAt) === parseInt(index) ? <>- 섹션 제거하기</> : <>+ 섹션 추가하기</>}
