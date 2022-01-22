@@ -249,8 +249,8 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     </span>
                 </div>
             </div>
-            <div ref={targets} className="main-page-section-last-v2" style={{backgroundColor:'#c5c2fa'}}>
-                <span className="last-one-component-v2">
+            <div ref={targets} className="main-page-section-last-v2">
+                <span className="last-one-component-v2 last-card">
                     <div className="main-section-last-title-v2">
                         <span>
                         고객 검증을 위한 '랜딩페이지' 제작은<br/>

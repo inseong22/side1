@@ -112,6 +112,7 @@
     height:500px;
     justify-content : center;
     align-items : center;
+    background-color:var(--main-color);
 }
 
 .main-section-last-title-v2{
@@ -125,14 +126,20 @@
     font-weight:500;
 }
 
+.last-card{
+    height:70%;
+    width:70%;
+    background-color:white;
+    border-radius:40px;
+}
+
 
 .apply-button-v2{
     margin:2%;
     cursor: pointer;
-    border: 5px solid white;
     border: 1px solid #6a63f7;
     background-color:#6a63f7;
-    border-radius:50px;
+    border-radius:10px;
     color:white;
     width:80%;
     height:55px;
