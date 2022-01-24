@@ -20,6 +20,7 @@ const imageBorderOptions = [
     { label: '라운드', value: 7 },
     { label: '사각형', value: 0 },
 ]
+
 const imageSizeOptions = [
     { label: '작게', value: 250 },
     { label: '보통', value: 400 },

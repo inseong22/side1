@@ -33,14 +33,6 @@
     width:100%;
 }
 
-.make-section-button{
-    font-size:0.6em;
-    background-color:black;
-    color:white;
-    cursor: pointer;
-    z-index:10;
-}
-
 .section-adding-template{
     background-color:white;
     font-size:0.8em;

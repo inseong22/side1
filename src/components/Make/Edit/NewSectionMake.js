@@ -10,9 +10,20 @@ import EditMapSection from './EditTemplates/EditMapSection'
 import EditPriceSection from './EditTemplates/EditPriceSection'
 import EditTopBar from './tools/EditTopBar'
 import AddingSection from './AddingSection'
+
+import EditSetting from './NavFooterSetting/EditSetting'
+import EditNaviSection from './NavFooterSetting/EditNaviSection'
+import EditFooterSection from './NavFooterSetting/EditFooterSection'
+import EditContents from './NavFooterSetting/EditContents'
+
 import './NewSectionMake.css'
 
-function NewSectionMake({content}) {
+const NAVSECNUM = 50;
+const FOOTSECNUM = 51;
+const SETTINGSECNUM = 52;
+const CONTENTSSECNUM = 53;
+
+function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [category, setCategory] = useState(0);
 
@@ -68,21 +79,50 @@ function NewSectionMake({content}) {
         }
     }
 
-    // 섹션을 추가하는 중이 아니라 수정하는 중일 때! == addingSectionAt이 1000일 때.
-    if(state.addingSectionAt === 1000){
-        return (
-            <>
-                <EditTopBar category={category} setCategory={setCategory} />
-                {sectionMakeTable()}
-            </>
-        )
-    }else{
-        return(
-            <>
-                <AddingSection />
-            </>
-        )
+    const returnMake = () => {
+        if(state.secNum === NAVSECNUM){
+            return(
+                <EditNaviSection navi={navi} setNavi={setNavi}/>
+            )
+
+        }else if(state.secNum === FOOTSECNUM ){
+            return(
+                <EditFooterSection foot={foot} setFoot={setFoot} />
+            )
+        }else if(state.secNum === SETTINGSECNUM ){
+            return(
+                <EditSetting setting={setting} setSetting={setSetting}/>
+            )
+        }else if(state.secNum === CONTENTSSECNUM ){
+            return(
+                <EditContents navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot}/>
+            )
+        }else{
+            return (
+                <>
+                    <div className="back__container">
+                        <div className="left">
+                            <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                ⬅
+                            </span>
+                            <span className="back-text">
+                                {content.sectionTypeName}
+                            </span>
+                        </div>
+                    </div>
+                    <EditTopBar category={category} setCategory={setCategory} />
+                    {sectionMakeTable()}
+                </>
+            )
+        }
     }
+
+    // 섹션을 추가하는 중이 아니라 수정하는 중일 때! == addingSectionAt이 1000일 때.
+    return (
+        <>
+            {returnMake()}
+        </>
+    )
 }
 
 export default NewSectionMake

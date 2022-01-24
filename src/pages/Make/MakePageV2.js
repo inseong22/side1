@@ -40,10 +40,6 @@ const smallfont = `28px`;
 const bigfont = '50px';
 const rate = 0.63;
 
-const NAVSECNUM = 50;
-const FOOTSECNUM = 51;
-const SETTINGSECNUM = 52;
-const CONTENTSSECNUM = 53;
 const NOTADDING = 1000;
 
 const MakePageV2 = ({history, userObj}, props) => {
@@ -82,6 +78,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     // 네비게이션
     const [navi, setNavi] = useState({
         sectionTemplateNumber:1,
+        use:true,
         title:'Surfee',
         fixed:false,
         isLogo:'logo',
@@ -101,10 +98,10 @@ const MakePageV2 = ({history, userObj}, props) => {
     // 푸터
     const [foot, setFoot] = useState({
         sectionTemplateNumber:1,
-        footerOrNot:true,
+        use:true,
         backgroundColor:'white', 
         padding:1,
-        text:" <p style=\"text-align:center;\">About Us - Contact Us - 개인정보 처리방침 - 팀 소개</p><p style=\"text-align:center;\">E-mail : surfee.business@gmail.com</p><p style=\"text-align:center;\"><strong>2021 Copyright © , All rights reserved</strong></p>",
+        text:"<p style=\"text-align:center;\">About Us - Contact Us - 개인정보 처리방침 - 팀 소개</p><p style=\"text-align:center;\">E-mail : surfee.business@gmail.com</p><p style=\"text-align:center;\"><strong>2021 Copyright © , All rights reserved</strong></p>",
         iconUse:true,
         iconStyle:'circle',
         iconColor:'white',
@@ -180,7 +177,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     },[])
 
     const contextValue = {
-        state: {addingSectionAt, secNum, contents, isPhone, CONTENTSSECNUM},
+        state: {addingSectionAt, secNum, contents, isPhone},
         action : {setAddingSectionAt, setSecNum, setContents, setIsPhone},
     }
 
@@ -252,28 +249,9 @@ const MakePageV2 = ({history, userObj}, props) => {
 
     const selectorTable = () => {
         // 50은 내비를 의미, 51은 푸터를 의미, 52는 기본세팅을 의미
-        if(secNum === NAVSECNUM && addingSectionAt === NOTADDING){
-            return(
-                <EditNaviSection navi={navi} setNavi={setNavi}/>
-            )
-
-        }else if(secNum === FOOTSECNUM && addingSectionAt === NOTADDING ){
-            return(
-                <EditFooterSection foot={foot} setFoot={setFoot} />
-            )
-        }else if(secNum === SETTINGSECNUM && addingSectionAt === NOTADDING ){
-            return(
-                <EditSetting setting={setting} setSetting={setSetting}/>
-            )
-        }else if(secNum === CONTENTSSECNUM && addingSectionAt === NOTADDING ){
-            return(
-                <EditContents />
-            )
-        }else{
-            return(
-                <NewSectionMake contents={contents} content={contents[secNum]} setContents={setContents} />
-            )
-        }
+        return(
+            <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
+        )
     }
 
     const sectionsReturn = contents.map((item, index) => {
@@ -285,13 +263,13 @@ const MakePageV2 = ({history, userObj}, props) => {
     })
 
     const backgroundClick = e => {
-        if(e.target.className === "make-left-landing" || e.target.className === "for-section-hover"){
-            setSecNum(CONTENTSSECNUM)
-            setAddingSectionAt(NOTADDING);
-        }
-        else{
-            return;
-        }
+        // if(e.target.className === "make-left-landing" || e.target.className === "for-section-hover"){
+        //     setSecNum(CONTENTSSECNUM)
+        //     setAddingSectionAt(NOTADDING);
+        // }
+        // else{
+        //     return;
+        // }
     }
 
     return (<>
@@ -342,14 +320,14 @@ const MakePageV2 = ({history, userObj}, props) => {
                         <div ref={targets} className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`, borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
                             
                             {/* 네비게이션 */}
-                            <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} />
+                            {navi.use && <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} /> }
                             
                             {/* 섹션 디스플레이 */}
                             
                             {sectionsReturn}
 
                             {/* 푸터 */}
-                            <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> 
+                            {foot.use && <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> }                             
 
                             { ( setting.fta.use && targets.current ) &&
                                 <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${isPhone ? 300 : 600}px`}}>

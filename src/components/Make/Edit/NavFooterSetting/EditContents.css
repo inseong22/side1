@@ -4,7 +4,7 @@
     justify-content:center;
     align-items:center;
     flex-direction: column;
-    margin:10px;
+    margin:15px;
 }
 
 .one-contents-draggable:hover{
@@ -14,7 +14,68 @@
 .one-contents__inner{
     border-radius: 5px;
     cursor:pointer;
-    padding:5px;
+    padding:10px;
     height:100%;
     width:100%;
+    font-size: 0.9em;
+    position:relative;
+}
+
+.small-button__container{
+    visibility:hidden;
+}
+.small-button__container:hover{
+    visibility:visible;
+}
+
+.make-section-button__small{
+    background-color:#c6c3ff;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    position:absolute;
+    cursor: pointer;
+}
+
+.content__button{
+    border:1px solid black;
+    padding:2px;
+    font-size:0.8em;
+    border-radius:2px;
+    margin-left:5px;
+}
+
+.delete{
+    border:1px solid red;
+    color:red;
+}
+
+.content__button:hover{
+    background-color:rgba(230,230,230,0.6);
+}
+
+.content__name{
+    font-size:1em;
+}
+
+.hr{
+    width:90%;
+    border-color:rgba(200,200,200,0.6);
+}
+
+.make-section-button{
+    display: flex;
+    align-items :center;
+    justify-content :center;
+    font-size:0.8em;
+    color:var(--main-color);
+    border: 1px solid var(--main-color);
+    cursor: pointer;
+    width:40%;
+    border-radius: 2px;
+    padding:5px;
+}
+
+.make-section-button:hover{
+    background-color:rgba(250,250,250,1);
 }

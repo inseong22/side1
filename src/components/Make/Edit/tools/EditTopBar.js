@@ -15,11 +15,6 @@ function EditTopBar({category, setCategory}) {
             <div className="edit-radios" onClick={() => setCategory(1)} style={{cursor:'pointer', backgroundColor:`${category === 0 ? 'rgb(200,200,202)' : 'white'}`}}>
                 <Template size="40" />
             </div>
-            <div className="centera" style={{justifyContent:'end'}}>
-                <div onClick={() => action.setSecNum(state.CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                    Done
-                </div>
-            </div>
         </div>
     )
 }

@@ -106,29 +106,16 @@ function NewSection({content, index, contents, setContents}) {
         }
     }
 
+    const setThisSection = () => {
+        action.setSecNum(index);
+    }
+
     return(
         <div className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
             <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
-                <div className="section-selection-container" style={{display:`${isHover}`}}>
-                    {/* <span className="section-option" onClick={() => pasteThisSection()}>복사하기</span> */}
-                    { state.contents.length > 0 && 
-                        <span className="section-option" onClick={() => deleteThisSection()}>
-                            <Delete size="20" />
-                        </span> }
-                    <span className="section-option" onClick={() => { action.setSecNum(index); action.setAddingSectionAt(1000); }}>
-                        <Options size="20" />
-                    </span>
-                    { index !== 0 && 
-                        <span className="section-option" onClick={() => moveUp()}>
-                            <ArrowUpShort size="20" />
-                        </span> }
-                    { index !== state.contents.length-1 && 
-                        <span className="section-option" onClick={() => moveDown()}>
-                            <ArrowDownShort size="20" />
-                        </span> }
-                </div>
+
             </div>
-            <div className="section__container" style={{backgroundImage:`url(${content.backgroundImage.attachment})`}}>
+            <div className="section__container" style={{backgroundImage:`url(${content.backgroundImage.attachment})`}} onClick={() => setThisSection()}>
                 {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                 <div style={{backgroundColor:`${content.backgroundColor}`, opacity:`${content.backgroundOpacity}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
                 </div>
@@ -136,22 +123,28 @@ function NewSection({content, index, contents, setContents}) {
                     {returnType()}
                 </div>
             </div>
-            <span className="make-section-button" style={{display:`${isHover}`}} onClick={() => {
-                    if(state.addingSectionAt === index){
-                        action.setAddingSectionAt(1000);
-                    }else{
-                        action.setAddingSectionAt(index)
-                    }
-                }}>
-                {parseInt(state.addingSectionAt) === parseInt(index) ? <>- 섹션 제거하기</> : <>+ 섹션 추가하기</>}
-            </span>
-            {index === state.addingSectionAt && 
-                <div className="section-adding-template">
-                    우측에서 추가할 템플릿을 선택해주세요.
-                </div>
-            }
         </div>
     )
 }
+
+{/* 
+    <div className="section-selection-container" style={{display:`${isHover}`}}>
+{ state.contents.length > 0 && 
+    <span className="section-option" onClick={() => deleteThisSection()}>
+        <Delete size="20" />
+    </span> }
+<span className="section-option" onClick={() => { action.setSecNum(index); action.setAddingSectionAt(1000); }}>
+    <Options size="20" />
+</span>
+{ index !== 0 && 
+    <span className="section-option" onClick={() => moveUp()}>
+        <ArrowUpShort size="20" />
+    </span> }
+{ index !== state.contents.length-1 && 
+    <span className="section-option" onClick={() => moveDown()}>
+        <ArrowDownShort size="20" />
+    </span> }
+</div> 
+*/}
 
 export default NewSection
