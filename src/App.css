@@ -72,6 +72,7 @@
   padding-top:60px;
   font-size:15px;
   background-color:#6a63f700;
+  font-family: Pretendard-Regular;
 }
 
 .App-logo {
@@ -121,6 +122,22 @@
   height:100%;
   width:100%;
   box-sizing:border-box;
+}
+
+.left{
+  display:flex;
+  justify-content: start;
+  align-items: center;
+  width:50%;
+  padding-left:5px;
+}
+
+.right{
+  display:flex;
+  justify-content: end;
+  align-items: center;
+  width:50%;
+  padding-right:5px;
 }
 
 .hover:hover{
