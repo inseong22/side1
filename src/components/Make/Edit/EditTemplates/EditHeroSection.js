@@ -9,6 +9,7 @@ import {EditColorContainer} from '../tools/EditColor'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
 
+
 const paddingOptions = [
     { label: '없음', value: 0 },
     { label: '좁게', value: 5 },
@@ -20,23 +21,30 @@ const imageBorderOptions = [
     { label: '라운드', value: 7 },
     { label: '사각형', value: 0 },
 ]
-
 const imageSizeOptions = [
     { label: '작게', value: 250 },
     { label: '보통', value: 400 },
     { label: '크게', value: 500 },
 ]
-
 const imageOptions = [
     { label:'동영상', value:'video'},
     { label:'사진', value:'image'},
     { label:'목업', value:'mockup'},
     { label:'슬라이드', value:'slide'},
 ]
+const backOptions = [
+    { label: '단색', value: 'color' },
+    { label: '이미지', value: 'image'},
+]
 
 function EditHeroSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
-    const [selectOpen, setSelectOpen] = useState(false)
+    
+    const changeBackgroundOption = e => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].backgroundType = e;
+        }));
+    }
 
     const changeImageOption = e => {
         action.setContents(produce(state.contents, draft => {
@@ -44,7 +52,50 @@ function EditHeroSection({content, category}) {
         }));
     }
 
-    // 템플릿 2 이미지의 경우에는
+    const backgroundColorOrImage = () => {
+        switch(content.backgroundType){
+            case 'color':
+                return(
+                        <>
+                        <EditColorContainer text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].backgroundColor = e
+                        }))} />
+                        <div className="edit-element">
+                        <div className="edit-element__one">
+                            <div className="edit-element__left">배경 색상 투명도</div>
+                            <div className="edit-element__right">
+                                <input onChange={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].backgroundOpacity = e.currentTarget.value
+                                    draft[state.secNum].backgroundImage.use = 'hidden'
+                                }))} value={content.backgroundOpacity} type="number" />
+                            </div>
+                        </div>
+                        </div>
+                        </>
+                )           
+            case 'image':
+                return(
+                    <div className='edit-element'>
+                        <div className="edit-element__one">
+                        <CheckBoxContainer text="배경 업로드" value={content.backgroundImage.use} func={ () => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].backgroundImage.use = !content.backgroundImage.use;
+                            draft[state.secNum].backgroundColor= 'transparent';
+                        }))} />
+                        {
+                            content.backgroundImage.use ? ( 
+                                <ImageAddEdit value={content.backgroundImage.attachment} func={e => onChangeBackgroundImage(e)} />
+                            ):
+                            (
+                                DeleteBackgroundImage()
+                            )
+                        }
+                        </div>
+                    </div>
+                )
+        }
+    }
+
+    // 템플릿 2 이미지의 경우에는 (이미지 로드)
     const onChangeBackgroundImage = e => {
         let newContents = JSON.parse(JSON.stringify(state.contents))
         const {target:{files},} = e;
@@ -57,6 +108,13 @@ function EditHeroSection({content, category}) {
         }
         reader.readAsDataURL(oneFile);
         action.setContents(newContents);
+    }
+
+    // 체크가 눌리지 않았을 경우, 이미지 삭제
+    const DeleteBackgroundImage = () => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].backgroundImage.attachment = '';
+        }))
     }
 
     const returnImageOrVideoAdd = () => {
@@ -101,7 +159,11 @@ function EditHeroSection({content, category}) {
                             히어로 섹션 수정
                         </div>
                     </div>
-                    <EditColorContainer text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                    <EditRadioContainer text='배경' options={backOptions} value={content.backgroundType} func={e=>changeBackgroundOption(e)} />
+                    {
+                        backgroundColorOrImage()
+                    }
+                    {/* <EditColorContainer text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].backgroundColor = e
                         }))} />
                     <div className="edit-element">
@@ -110,17 +172,19 @@ function EditHeroSection({content, category}) {
                             <div className="edit-element__right">
                                 <input onChange={(e) => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].backgroundOpacity = e.currentTarget.value
+                                    draft[state.secNum].backgroundImage.use = 'hidden'
                                 }))} value={content.backgroundOpacity} type="number" />
                             </div>
                         </div>
                     </div>
                     <CheckBoxContainer text="배경에 이미지 삽입" value={content.backgroundImage.use} func={ () => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].backgroundImage.use = !content.backgroundImage.use;
+                        draft[state.secNum].backgroundColor= 'transparent';
                     }))} />
                     {
                         content.backgroundImage.use && 
                             <ImageAddEdit text="배경에 이미지 삽입" value={content.backgroundImage.attachment} func={e => onChangeBackgroundImage(e)} />
-                    }
+                    } */}
                     <EditRadioContainer text="위아래 여백" options={paddingOptions} value={content.paddingSize} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].paddingSize = e;
                         }))} />

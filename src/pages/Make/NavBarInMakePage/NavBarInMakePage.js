@@ -96,8 +96,7 @@ const NavBarInMakePage = (props) => {
                     기본설정
                 </Button>
                 <Button onClick={e => {
-                    action.setSecNum(state.CONTENTSSECNUM); 
-                    action.setAddingSectionAt(1000);
+                    action.setSecNum(53);
                     }}>
                     컨텐츠
                 </Button>

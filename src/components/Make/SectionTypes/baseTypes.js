@@ -5,6 +5,7 @@ export const base = [
         sectionTypeNumber:1,
         templateNumber:1,
         paddingSize:0,
+        backgroundType:'color',
         backgroundColor:'white',
         backgroundOpacity:1,
         backgroundImage:{
