@@ -1,7 +1,7 @@
 import React from 'react'
-import Editor from '../../tools/Editor'
+import Editor from '../tools/Editor'
 
-function NaviTemplate1({navi, setNavi}) {
+function NaviTemplate({navi, setNavi}) {
 
     const returnButton = () => {
         switch(navi.button.num){
@@ -81,4 +81,4 @@ function NaviTemplate1({navi, setNavi}) {
     )
 }
 
-export default NaviTemplate1
+export default NaviTemplate

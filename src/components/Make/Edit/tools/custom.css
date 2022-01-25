@@ -37,7 +37,7 @@
 /* 아래는 색상 선택 테이블 */
 
 .color-button{
-    border-radius:20px;
+    border-radius:5px;
     width:27px;
     height:27px;
     display: block;

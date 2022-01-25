@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react'
-import { MyContext } from '../../../../pages/Make/MakePageV2'
+import React, {useContext, useState} from 'react';
+import { MyContext } from '../../../../pages/Make/MakePageV2';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import produce from 'immer';
 import ConfirmCustom from '../../../../tools/ConfirmCustom';
-import AddingSection from '../../Modal/AddingSection'
-import './EditContents.css'
+import AddingSection from '../../Modal/AddingSection';
+import './EditContents.css';
 
 const BCOLOR = 'rgba(230,230,230,0.8)'
 
@@ -14,7 +14,8 @@ const getItemStyle = (isDragging, draggableStyle, backColor) => {
         textAlign: "right",
 
         // change background color if dragging
-        background: isDragging ? "lightgreen" : BCOLOR,
+        background: isDragging ? "white" : BCOLOR,
+        boxShadow: isDragging ? "2px 2px 3px rgba(0,0,0,0.2)" : 'none',
 
         // styles we need to apply on draggables
         ...draggableStyle

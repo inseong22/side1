@@ -1,7 +1,6 @@
 import React, {useState,useContext} from 'react'
 import DetailSection from './SectionTypes/DetailSection'
 import HeroSection from './SectionTypes/HeroSection'
-import MapSection from './SectionTypes/MapSection'
 import PriceSection from './SectionTypes/PriceSection'
 import ReviewSection from './SectionTypes/ReviewSection'
 import FeaturesSection from './SectionTypes/FeaturesSection'
@@ -13,52 +12,11 @@ import './NewSection.css'
 import { MyContext } from '../../pages/Make/MakePageV2'
 import { motion } from 'framer-motion'
 import {Delete, Options} from '@styled-icons/fluentui-system-filled'
-import {ArrowUpShort,ArrowDownShort} from '@styled-icons/bootstrap'
 
 function NewSection({content, index, contents, setContents}) {
     const [adding, setAdding] = useState(false);
     const [isHover, setIsHover] = useState('none');
     const {state, action} = useContext(MyContext)
-
-    const deleteThisSection = () => {
-        const ask = window.confirm("정말로 삭제하시겠습니까?")
-        if(ask){
-            console.log(index, content)
-            setContents([
-                ...contents.slice(0,index),
-                ...contents.slice(index + 1,contents.length)
-            ])
-        }
-    }
-
-    const pasteThisSection = () => {
-        setContents([
-            ...contents.slice(0,index),
-            content,
-            ...contents.slice(index, contents.length)
-        ])
-    }
-
-    const moveUp = () => {
-        let newContents = JSON.parse(JSON.stringify(contents));
-        const item = newContents.splice(index, index);
-        newContents.splice(index-1, 0, item[0]);
-
-        setContents(newContents)
-    }
-
-    const moveDown = () => {
-        let newContents = JSON.parse(JSON.stringify(contents));
-        let item;
-        if(index === 0){
-            item = newContents.splice(index, index+1);
-        }else{
-            item = newContents.splice(index, index);
-        }
-        newContents.splice(index+1, 0, item[0]);
-
-        setContents(newContents)
-    }
 
     const returnType = () => {
         switch(content.sectionTypeName){
@@ -108,6 +66,7 @@ function NewSection({content, index, contents, setContents}) {
 
     const setThisSection = () => {
         action.setSecNum(index);
+        action.setCategory(0);
     }
 
     return(

@@ -1,6 +1,6 @@
 .make-navigation{
     width:100%;
-    z-index:3;
+    z-index:5;
     height:60px;
     display: flex;
     justify-content: center;
