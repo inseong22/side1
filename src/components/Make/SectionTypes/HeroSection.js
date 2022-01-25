@@ -206,7 +206,7 @@ function HeroSection({content}) {
     }
 
     return (
-        <div style={{padding:`${content.paddingSize}% 0%`}}>
+        <div style={{padding:`${content.paddingTop}% 0% ${content.paddingBottom}% 0%`}}>
             {returnSectionTemplate()}
         </div>
     )

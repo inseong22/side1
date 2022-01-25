@@ -8,13 +8,14 @@ import produce from 'immer';
 import {EditColorContainer} from '../tools/EditColor'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
-
+import EditSlider from '../tools/EditSlider'
 
 const paddingOptions = [
     { label: '없음', value: 0 },
     { label: '좁게', value: 5 },
     { label: '보통', value: 10 },
     { label: '넓게', value: 20 },
+    { label: '커스텀', value: ''},
 ]
 const imageBorderOptions = [
     { label: '원형', value: 50 },
@@ -40,18 +41,37 @@ const backOptions = [
 function EditHeroSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     
+    // (a) 배경 관련
     const changeBackgroundOption = e => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].backgroundType = e;
         }));
     }
-
     const changeImageOption = e => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].image.type = e;
         }));
     }
-
+    // 템플릿 2 이미지의 경우에는 (이미지 로드)
+    const onChangeBackgroundImage = e => {
+        let newContents = JSON.parse(JSON.stringify(state.contents))
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
+            newContents[state.secNum].backgroundImage.attachment = result;
+        }
+        reader.readAsDataURL(oneFile);
+        action.setContents(newContents);
+    }
+    // 체크가 눌리지 않았을 경우, 이미지 삭제
+    const DeleteBackgroundImage = () => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].backgroundImage.attachment = '';
+        }))
+    }
     const backgroundColorOrImage = () => {
         switch(content.backgroundType){
             case 'color':
@@ -95,27 +115,47 @@ function EditHeroSection({content, category}) {
         }
     }
 
-    // 템플릿 2 이미지의 경우에는 (이미지 로드)
-    const onChangeBackgroundImage = e => {
-        let newContents = JSON.parse(JSON.stringify(state.contents))
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            const {currentTarget:{result}} = finishedEvent;
-            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
-            newContents[state.secNum].backgroundImage.attachment = result;
-        }
-        reader.readAsDataURL(oneFile);
-        action.setContents(newContents);
-    }
-
-    // 체크가 눌리지 않았을 경우, 이미지 삭제
-    const DeleteBackgroundImage = () => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].backgroundImage.attachment = '';
+    // (b) 여백 관련
+    const setPaddingTop = (e) => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].paddingTop = e.target.value
         }))
     }
+    const setPaddingBottom = (e) => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].paddingBottom = e.target.value
+        }))
+    }
+    const customPadding = () => {
+        if(content.paddingTop !== 0 && 5 && 10 && 20) 
+        return(
+            <>
+            <div className="edit-element">
+                <div className="edit-element__one">
+                    <div className="edit-element__left">여백(위)</div>
+                    <div className="edit-element__right">
+                        <EditSlider content={content} func={setPaddingTop}/>
+                    </div>
+                </div>
+            </div>
+            <div className="edit-element">
+            <div className="edit-element__one">
+                <div className="edit-element__left">여백(아래)</div>
+                <div className="edit-element__right">
+                    <EditSlider content={content} func={setPaddingBottom}/>
+                </div>
+            </div>
+            </div>
+        </>
+        )  
+    }
+    const changePaddingOption = e => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].paddingTop = e
+            draft[state.secNum].paddingBottom = e
+        }))
+    }
+
 
     const returnImageOrVideoAdd = () => {
         switch(content.image.type){
@@ -163,43 +203,20 @@ function EditHeroSection({content, category}) {
                     {
                         backgroundColorOrImage()
                     }
-                    {/* <EditColorContainer text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].backgroundColor = e
-                        }))} />
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">배경 색상 투명도</div>
-                            <div className="edit-element__right">
-                                <input onChange={(e) => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].backgroundOpacity = e.currentTarget.value
-                                    draft[state.secNum].backgroundImage.use = 'hidden'
-                                }))} value={content.backgroundOpacity} type="number" />
-                            </div>
-                        </div>
-                    </div>
-                    <CheckBoxContainer text="배경에 이미지 삽입" value={content.backgroundImage.use} func={ () => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].backgroundImage.use = !content.backgroundImage.use;
-                        draft[state.secNum].backgroundColor= 'transparent';
-                    }))} />
+                    <EditRadioContainer text="위아래 여백" options={paddingOptions} value={content.paddingSize} func={e => changePaddingOption(e)} />
                     {
-                        content.backgroundImage.use && 
-                            <ImageAddEdit text="배경에 이미지 삽입" value={content.backgroundImage.attachment} func={e => onChangeBackgroundImage(e)} />
-                    } */}
-                    <EditRadioContainer text="위아래 여백" options={paddingOptions} value={content.paddingSize} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].paddingSize = e;
-                        }))} />
+                        customPadding()
+                    }
                     <EditRadioContainer text="사진 테두리" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].image.border = e;
                                     }))} />
                     <EditRadioContainer text="사진 크기" options={imageSizeOptions} value={content.image.size} func={e =>  action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].image.size = e;
                                     }))} />
-                    <EditRadioContainer text="사진 사용" options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />
-                    
+                    <EditRadioContainer text="사진 사용" options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />                   
                     {
                         returnImageOrVideoAdd()
-                    }
-                    
+                    }                  
                     <CheckBoxContainer text="버튼 1 사용" value={content.button.first} func={ () => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.first = !content.button.first;
                     }))} />
