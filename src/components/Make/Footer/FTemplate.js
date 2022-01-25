@@ -1,15 +1,16 @@
 import React from 'react'
-import Editor from '../../tools/Editor'
+import Editor from '../tools/Editor'
+import produce from 'immer'
 import {FacebookCircle, FacebookSquare, Youtube, Twitter, InstagramAlt} from '@styled-icons/boxicons-logos';
 import { Mail } from '@styled-icons/entypo';
 import { Naver, Notion, Kakaotalk } from '@styled-icons/simple-icons';
 
-function FTemplate1({foot, setFoot, history}) {
+function FTemplate({foot, setFoot, history}) {
 
     const onChangeText = (data) => {
-        let newContent = foot
-        newContent.text = data
-        setFoot(newContent);
+        setFoot(produce(foot, draft => {
+            draft.text = data;
+        }));
     }
 
     const returnIcons = foot.icons.map((item, index) => {
@@ -62,16 +63,16 @@ function FTemplate1({foot, setFoot, history}) {
                 </div>
                 {
                     foot.iconUse && 
-                    <div className="center-row" style={{justifyContent:`${foot.iconAlign}`}}>
-                        {returnIcons}
-                    </div>
+                        <div className="center-row" style={{justifyContent:`${foot.iconAlign}`}}>
+                            {returnIcons}
+                        </div>
                 }
                 <div>
-                    <Editor
-                        data={foot.text}
-                        onChange={(e, editor) => {
-                            const data = editor.getData();
-                            onChangeText(data);
+                    <input
+                        className="text-input"
+                        value={foot.text}
+                        onChange={(e) => {
+                            onChangeText(e.currentTarget.value);
                         }}
                     />  
                 </div>
@@ -80,4 +81,4 @@ function FTemplate1({foot, setFoot, history}) {
     )
 }
 
-export default FTemplate1
+export default FTemplate

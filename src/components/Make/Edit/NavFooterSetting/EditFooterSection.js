@@ -3,7 +3,7 @@ import EditTopBar from '../tools/EditTopBar'
 import Checkbox from '@mui/material/Checkbox';
 import RadioCustom from '../tools/RadioCustom'
 import EditButtonTable from '../tools/EditButtonTable'
-import EditColor from '../tools/EditColor'
+import EditColor from '../tools/ColorCustom'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 

@@ -25,47 +25,46 @@ const CONTENTSSECNUM = 53;
 
 function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
-    const [category, setCategory] = useState(0);
 
     const sectionMakeTable = () => {
 
         switch(content.sectionTypeName){
             case 'DetailSection':
                 return (
-                    <EditDetailSection content={content} category={category}/>
+                    <EditDetailSection content={content} category={state.category}/>
                 )
 
             // 이미지인 경우 편집화면
             case 'HeroSection':
                 return (
-                    <EditHeroSection content={content} category={category}/>
+                    <EditHeroSection content={content} category={state.category}/>
                 )
 
             // 리뷰들인 경우 편집화면
             case 'ReviewSection':
                 return(
-                    <EditReviewSection content={content} category={category}/>
+                    <EditReviewSection content={content} category={state.category}/>
                 )
             
             case 'FeaturesSection':
                 return(
-                    <EditFeaturesSection content={content} category={category}/>
+                    <EditFeaturesSection content={content} category={state.category}/>
 
                 )
 
             case 'MapSection':
                 return(
-                    <EditMapSection content={content} category={category}/>
+                    <EditMapSection content={content} category={state.category}/>
                 )
 
             case 'CtaSection':
                 return(
-                    <EditCtaSection content={content} category={category}/>
+                    <EditCtaSection content={content} category={state.category}/>
                 )
 
             case 'PriceSection':
                 return(
-                    <EditPriceSection content={content} category={category}/>
+                    <EditPriceSection content={content} category={state.category}/>
                 )
 
             default:
@@ -82,16 +81,40 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
     const returnMake = () => {
         if(state.secNum === NAVSECNUM){
             return(
-                <EditNaviSection navi={navi} setNavi={setNavi}/>
+                <>
+                    <div className="back__container">
+                            <div className="left">
+                                <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                    ⬅
+                                </span>
+                                <span className="back-text">
+                                    {navi.sectionTypeName}
+                                </span>
+                            </div>
+                    </div>
+                    <EditNaviSection navi={navi} setNavi={setNavi} category={state.category}/>
+                </>
             )
 
         }else if(state.secNum === FOOTSECNUM ){
             return(
-                <EditFooterSection foot={foot} setFoot={setFoot} />
+                <>
+                    <div className="back__container">
+                            <div className="left">
+                                <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                    ⬅
+                                </span>
+                                <span className="back-text">
+                                    {foot.sectionTypeName}
+                                </span>
+                            </div>
+                    </div>
+                    <EditFooterSection foot={foot} setFoot={setFoot} category={state.category}/>
+                </>
             )
         }else if(state.secNum === SETTINGSECNUM ){
             return(
-                <EditSetting setting={setting} setSetting={setSetting}/>
+                <EditSetting setting={setting} setSetting={setSetting} category={state.category}/>
             )
         }else if(state.secNum === CONTENTSSECNUM ){
             return(
@@ -100,24 +123,26 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
         }else{
             return (
                 <>
+                {content && 
+                <>
                     <div className="back__container">
-                        <div className="left">
-                            <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                ⬅
-                            </span>
-                            <span className="back-text">
-                                {content.sectionTypeName}
-                            </span>
-                        </div>
+                            <div className="left">
+                                <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                    ⬅
+                                </span>
+                                <span className="back-text">
+                                    {content.sectionTypeName}
+                                </span>
+                            </div>
                     </div>
-                    <EditTopBar category={category} setCategory={setCategory} />
+                    <EditTopBar category={state.category} setCategory={action.setCategory} />
                     {sectionMakeTable()}
+                </> }
                 </>
             )
         }
     }
 
-    // 섹션을 추가하는 중이 아니라 수정하는 중일 때! == addingSectionAt이 1000일 때.
     return (
         <>
             {returnMake()}

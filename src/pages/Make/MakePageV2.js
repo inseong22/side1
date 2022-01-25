@@ -56,6 +56,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     const [nowState, setNowState] = useState('new');
     const [load, setLoad] = useState(false);
     const [editing, setEditing] = useState(false);
+    const [category, setCategory] = useState(0);
     const location = useLocation();
 
     // 메인 세팅
@@ -64,7 +65,7 @@ const MakePageV2 = ({history, userObj}, props) => {
         faviconAttachment:'',
         font:'',
         smallFont:'',
-        color:'',
+        color:'#63B3F7',
         fta:{
             use:false,
             backgroundColor:'rgba(150,150,0,1)',
@@ -77,13 +78,14 @@ const MakePageV2 = ({history, userObj}, props) => {
 
     // 네비게이션
     const [navi, setNavi] = useState({
+        sectionTypeName:'상단 바',
         sectionTemplateNumber:1,
         use:true,
         title:'Surfee',
         fixed:false,
         isLogo:'logo',
         logo:'',
-        backgroundColor:'rgba(0,0,0,0)', 
+        backgroundColor:'rgba(255,255,255,1)', 
         bottomBorder:false,
         button:{
             use:true,
@@ -97,11 +99,12 @@ const MakePageV2 = ({history, userObj}, props) => {
 
     // 푸터
     const [foot, setFoot] = useState({
+        sectionTypeName:'푸터 바',
         sectionTemplateNumber:1,
         use:true,
         backgroundColor:'white', 
         padding:1,
-        text:"<p style=\"text-align:center;\">About Us - Contact Us - 개인정보 처리방침 - 팀 소개</p><p style=\"text-align:center;\">E-mail : surfee.business@gmail.com</p><p style=\"text-align:center;\"><strong>2021 Copyright © , All rights reserved</strong></p>",
+        text:"copyright 2022",
         iconUse:true,
         iconStyle:'circle',
         iconColor:'white',
@@ -177,8 +180,8 @@ const MakePageV2 = ({history, userObj}, props) => {
     },[])
 
     const contextValue = {
-        state: {addingSectionAt, secNum, contents, isPhone},
-        action : {setAddingSectionAt, setSecNum, setContents, setIsPhone},
+        state: {addingSectionAt, secNum, contents, isPhone, category, setting},
+        action : {setAddingSectionAt, setSecNum, setContents, setIsPhone, setCategory, setSetting},
     }
 
     const loadLocalStorage = () => {
@@ -247,13 +250,6 @@ const MakePageV2 = ({history, userObj}, props) => {
         }
     }
 
-    const selectorTable = () => {
-        // 50은 내비를 의미, 51은 푸터를 의미, 52는 기본세팅을 의미
-        return(
-            <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
-        )
-    }
-
     const sectionsReturn = contents.map((item, index) => {
         return(
             <div style={{width:'100%'}}>
@@ -298,7 +294,7 @@ const MakePageV2 = ({history, userObj}, props) => {
                     <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
                         <OverflowScrolling className='overflow-scrolling'>
                             {/* 제작페이지 메인 */}
-                            {selectorTable()}
+                           <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
                         </OverflowScrolling>
                     </div>
                     <div className="fake-make">

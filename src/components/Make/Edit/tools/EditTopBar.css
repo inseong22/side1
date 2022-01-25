@@ -1,18 +1,24 @@
 
 
 .edit__top-bar{
-    background-color:#6B63F7;
+    /* background-color:#6B63F7; */
     padding:1% 2%;
     width:100%;
     box-sizing:border-box;
     display: flex;
     flex-direction: row;
-    justify-content :center;
+    justify-content :start;
     align-items :center;
 }
+
 .edit-radios{
     display: flex;
     padding:3px;
-    border-radius: 5px;
+    border-radius: 2px;
     margin-left:3px;
+    cursor:pointer;
+    border: 1px solid #6a63f700;
+}
+.edit-radios:hover{
+    border: 1px solid #6a63f76c;
 }
