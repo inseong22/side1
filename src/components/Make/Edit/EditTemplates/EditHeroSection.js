@@ -9,6 +9,7 @@ import {EditColorContainer} from '../tools/ColorCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
 import EditSlider from '../tools/EditSlider'
+import { useAnimation } from 'framer-motion'
 
 const paddingOptions = [
     { label: '없음', value: 0 },
@@ -36,6 +37,10 @@ const imageOptions = [
 const backOptions = [
     { label: '단색', value: 'color' },
     { label: '이미지', value: 'image'},
+]
+const animationOptions = [
+    { label: '없음', value: false},
+    { label: '있음', value: true}
 ]
 
 function EditHeroSection({content, category}) {
@@ -160,7 +165,16 @@ function EditHeroSection({content, category}) {
         }))
     }
 
+    // (c) 애니메이션 관련
+    const setAnimation = e => {
+        action.setContents(produce(state.contents, draft=> {
+            draft[state.secNum].animation.use = e
+            // if(draft[state.secNum].animation.use)
+                
+            // else
 
+        }))
+    }
     const returnImageOrVideoAdd = () => {
         switch(content.image.type){
             case 'image':
@@ -220,7 +234,8 @@ function EditHeroSection({content, category}) {
                     <EditRadioContainer text="사진 사용" options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />                   
                     {
                         returnImageOrVideoAdd()
-                    }                  
+                    } 
+                    <EditRadioContainer text="애니메이션" options={animationOptions} value={content.animation.use} func={ e => setAnimation(e)} />               
                     <CheckBoxContainer text="버튼 1 사용" value={content.button.first} func={ () => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.first = !content.button.first;
                     }))} />

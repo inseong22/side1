@@ -6,6 +6,7 @@ import NavBarV2 from './pages/NavAndFooter/NavBarV2';
 import { authService } from './tools/fbase'
 import {RecoilRoot} from 'recoil';
 
+
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

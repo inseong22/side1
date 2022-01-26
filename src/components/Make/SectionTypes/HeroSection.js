@@ -118,14 +118,14 @@ function HeroSection({content}) {
             <div className="text__container">
                 <input 
                     className="text-input"
-                    value={content.title}
+                    placeholder={content.title}
                     onChange={(e) => {
                         changeText(e.currentTarget.value);
                     }}
                 />
                 <input 
                     className="text-input"
-                    value={content.desc}
+                    placeholder={content.desc}
                     onChange={(e) => {
                         changeDesc(e.currentTarget.value);
                     }}
@@ -134,12 +134,32 @@ function HeroSection({content}) {
             </div>
         )
     }
+
+    const animationDiv = () => {
+        if(!content.animation.use)
+        return(
+            <>
+            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
+                {returnTextAndButton()}
+                {returnImage()}
+            </div>
+        </>
+        )
+        else 
+        return(
+            <>
+            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}} data-aos="flip-down"  aos-duration="2000">
+                {returnTextAndButton()}
+                {returnImage()}
+            </div>
+            </>
+        )
+    }
     
     return (
         <div style={{padding:`${content.paddingTop}% 0% ${content.paddingBottom}% 0%`}}>
             <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-                {returnTextAndButton()}
-                {returnImage()}
+                {animationDiv()}
             </div>
         </div>
     )
