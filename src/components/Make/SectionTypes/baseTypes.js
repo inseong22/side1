@@ -7,6 +7,7 @@ export const base = [
         paddingSize:'',
         paddingLeft:'',
         paddingRight:'',
+        paddingCustom: false,
         backgroundType:'color',
         backgroundColor:'white',
         backgroundOpacity:1,

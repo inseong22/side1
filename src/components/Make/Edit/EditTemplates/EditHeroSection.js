@@ -15,7 +15,7 @@ const paddingOptions = [
     { label: '좁게', value: 5 },
     { label: '보통', value: 10 },
     { label: '넓게', value: 20 },
-    { label: '커스텀', value: ''},
+    { label: '커스텀', value: 0.1},
 ]
 const imageBorderOptions = [
     { label: '원형', value: 50 },
@@ -127,7 +127,7 @@ function EditHeroSection({content, category}) {
         }))
     }
     const customPadding = () => {
-        if(content.paddingTop !== 0 && 5 && 10 && 20) 
+        if(content.paddingCustom) 
         return(
             <>
             <div className="edit-element">
@@ -153,6 +153,10 @@ function EditHeroSection({content, category}) {
         action.setContents(produce(state.contents, draft=>{
             draft[state.secNum].paddingTop = e
             draft[state.secNum].paddingBottom = e
+            if(draft[state.secNum].paddingTop == 0.1)
+                draft[state.secNum].paddingCustom = true
+            else
+                draft[state.secNum].paddingCustom = false
         }))
     }
 
@@ -203,7 +207,7 @@ function EditHeroSection({content, category}) {
                     {
                         backgroundColorOrImage()
                     }
-                    <EditRadioContainer text="위아래 여백" options={paddingOptions} value={content.paddingSize} func={e => changePaddingOption(e)} />
+                    <EditRadioContainer text="위아래 여백" options={paddingOptions} value={content.paddingTop} func={e => changePaddingOption(e)} />
                     {
                         customPadding()
                     }
