@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import Editor from '../tools/Editor'
+import produce from 'immer';
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import './DetailSection.css'
@@ -21,16 +22,16 @@ function HeroSection({content}) {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
-    // 템플릿 1 텍스트의 경우
+    // 제목
     const changeText = ( data ) => {
-        let newContents = state.contents.map((item, index) => index === state.secNum ? {...item, titles: {...item.titles, title : data}} : item)
-        action.setContents(newContents);
+        action.setContents(produce(state.contents, draft => {
+        draft[state.secNum].title.text= data}))
     }
     
-    // 템플릿 1 텍스트의 경우
+    // 본문
     const changeDesc = ( data ) => {
-        let newContents = state.contents.map((item, index) => index === state.secNum ? {...item, desc : data } : item)
-        action.setContents(newContents);
+        action.setContents(produce(state.contents, draft => {
+        draft[state.secNum].desc.text= data}))
     }
 
     // 템플릿 1 텍스트의 경우
@@ -118,16 +119,26 @@ function HeroSection({content}) {
             <div className="text__container">
                 <input 
                     className="text-input"
-                    placeholder={content.title}
+                    placeholder='제목을 입력하세요'
                     onChange={(e) => {
                         changeText(e.currentTarget.value);
+                    }}
+                    value={content.title.text}
+                    style={{
+                        textAlign: `${content.title.align}`,
+                        fontSize: `${content.title.size}px`
                     }}
                 />
                 <input 
                     className="text-input"
-                    placeholder={content.desc}
+                    placeholder='본문을 입력하세요'
                     onChange={(e) => {
                         changeDesc(e.currentTarget.value);
+                    }}
+                    value={content.desc.text}
+                    style={{
+                        textAlign: `${content.desc.align}`,
+                        fontSize: `${content.desc.size}px`
                     }}
                 />
                 {returnButton()}

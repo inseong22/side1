@@ -20,8 +20,16 @@ export const base = [
             type:0,
         },
         // 특정 섹션에 해당할 확률이 높은 것들
-        title:'<p>여기서 타이틀을 입력rhrh</p>',
-        desc:'<p>여기서 설명을 입력</p>',
+        title:{
+            text: '',
+            align: '',
+            size: 10
+        },
+        desc:{
+            text: '',
+            align: '',
+            size: 10
+        },
         image:{
             type:'image',
             attachment:'',

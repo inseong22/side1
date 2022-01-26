@@ -10,6 +10,7 @@ import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
 import EditSlider from '../tools/EditSlider'
 import { useAnimation } from 'framer-motion'
+import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 
 const paddingOptions = [
     { label: '없음', value: 0 },
@@ -41,6 +42,16 @@ const backOptions = [
 const animationOptions = [
     { label: '없음', value: false},
     { label: '있음', value: true}
+]
+const alignOptions = [
+    { label: <AlignStart width={30} />, value: 'left' },
+    { label: <AlignCenter width={30} />, value: 'center' },
+    { label: <AlignEnd width={30} />, value: 'right' },
+]
+const textSizeOptions = [
+    { label: 's', value: 15 },
+    { label: 'm', value: 20 },
+    { label: 'l', value: 25 },
 ]
 
 function EditHeroSection({content, category}) {
@@ -225,6 +236,18 @@ function EditHeroSection({content, category}) {
                     {
                         customPadding()
                     }
+                    <EditRadioContainer text="제목 텍스트 배치" options={alignOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].title.align = e
+                    }))}/> 
+                    <EditRadioContainer text="제목 크기 설정" options={textSizeOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].title.size = e
+                    }))}/> 
+                    <EditRadioContainer text="본문 텍스트 배치" options={alignOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].desc.align = e
+                    }))}/> 
+                    <EditRadioContainer text="본문 크기 설정" options={textSizeOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].desc.size = e
+                    }))}/>      
                     <EditRadioContainer text="사진 테두리" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].image.border = e;
                                     }))} />
