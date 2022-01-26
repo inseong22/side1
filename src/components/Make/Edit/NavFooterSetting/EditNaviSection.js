@@ -3,7 +3,10 @@ import EditTopBar from '../tools/EditTopBar'
 import Checkbox from '@mui/material/Checkbox';
 import RadioCustom from '../tools/RadioCustom'
 import EditButtonTable from '../tools/EditButtonTable'
-import EditColor from '../tools/EditColor'
+import EditColor from '../tools/ColorCustom'
+import OpenCloseCustom from '../tools/OpenCloseCustom'
+import OnOffCustom from '../tools/OnOffCustom'
+import produce from 'immer';
 import { Radio } from 'antd';
 
 const logoOptions = [
@@ -16,8 +19,7 @@ const buttonOptions = [
     { label: '팝업', value: 'popup' },
 ]
 
-function EditNaviSection({navi, setNavi}) {
-    const [category, setCategory] = useState(0);
+function EditNaviSection({navi, setNavi, category}) {
     const [logo, setLogo] = useState("logo")
     const [buttonUse, setButtonUse] = useState(true)
     const [buttonFunc, setButtonFunc] = useState("link")
@@ -73,7 +75,6 @@ function EditNaviSection({navi, setNavi}) {
 
     return (
         <div>
-            <EditTopBar category={category} setCategory={setCategory} />
             { category === 0 ? 
             <>
                 <div>
@@ -133,38 +134,43 @@ function EditNaviSection({navi, setNavi}) {
                             </div>
                         </div>
                     }
-                    <div className="edit-element no-border">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">버튼 사용</div>
-                            <div className="edit-element__right">
-                                <Checkbox
-                                    value={navi.button.use}
-                                    onChange={() => setNavi({...navi, button:{...navi.button, use:!navi.button.use}})}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                />
+                    <OpenCloseCustom title="버튼 사용">
+                        <OnOffCustom text="버튼 사용" value={navi.button.use} func={() => setNavi(produce(navi, draft => {
+                            draft.button.use = !navi.button.use
+                        }))} />
+                        <div className="edit-element no-border">
+                            <div className="edit-element__one">
+                                <div className="edit-element__left">버튼 사용</div>
+                                <div className="edit-element__right">
+                                    <Checkbox
+                                        value={navi.button.use}
+                                        onChange={() => setNavi({...navi, button:{...navi.button, use:!navi.button.use}})}
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    { navi.button.use && <>
-                        <div className="edit-element" style={{border:'none'}}>
-                            <div className="edit-element__left">버튼 기능</div>
-                            <div className="edit-element__right">
-                                <RadioCustom 
-                                    options={buttonOptions}
-                                    onChange={setButtonFunc}
-                                    value={buttonFunc}
-                                />
+                        { navi.button.use && <>
+                            <div className="edit-element" style={{border:'none'}}>
+                                <div className="edit-element__left">버튼 기능</div>
+                                <div className="edit-element__right">
+                                    <RadioCustom 
+                                        options={buttonOptions}
+                                        onChange={setButtonFunc}
+                                        value={buttonFunc}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        {returnFuncEdit()}
-                        <div className="edit-element">
-                            <div className="edit-element__left">버튼 색</div>
-                            <div className="edit-element__right">
-                                <EditColor onChange={(e) => setNavi({...navi, button:{...navi.button, color:e}})} value={navi.button.color} />
+                            {returnFuncEdit()}
+                            <div className="edit-element">
+                                <div className="edit-element__left">버튼 색</div>
+                                <div className="edit-element__right">
+                                    <EditColor onChange={(e) => setNavi({...navi, button:{...navi.button, color:e}})} value={navi.button.color} />
+                                </div>
                             </div>
-                        </div>
-                        <EditButtonTable value={navi.button.num} onChange={(e) => setNavi({...navi, button:{...navi.button, num:e}})} color={navi.button.color} />
-                    </> }
+                            <EditButtonTable value={navi.button.num} onChange={(e) => setNavi({...navi, button:{...navi.button, num:e}})} color={navi.button.color} />
+                        </> }
+                    </OpenCloseCustom>
                 </div>
             </>
             : 

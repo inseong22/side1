@@ -5,7 +5,7 @@ import { detailSectionTemplateList } from './InnerTemplates'
 import TemplateChoose from '../tools/TemplateChoose'
 import {EditRadioContainer} from '../tools/RadioCustom'
 import produce from 'immer';
-import {EditColorContainer} from '../tools/EditColor'
+import {EditColorContainer} from '../tools/ColorCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
 import EditSlider from '../tools/EditSlider'

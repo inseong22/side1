@@ -28,40 +28,11 @@ function CtaSection({content}) {
         )
     }
 
-    const returnSectionTemplate = () => {
-        switch(content.templateNumber){
-            case 1:
-                return(
-                    <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-                        {returnCtaSection()}
-                    </div>
-                )
-
-            case 2:
-                return(
-                    <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-                        2입니다.
-                    </div>
-                )
-
-            case 3:
-                return(
-                    <div className="template" style={{flexDirection:'column'}}>
-                        33입니다.
-                    </div>
-                )
-
-            default:
-                return(
-                    <div className="template" style={{flexDirection:'column-reverse'}}>
-                    </div>
-                )
-        }
-    }
-
     return (
         <>
-            {returnSectionTemplate()}
+            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
+                {returnCtaSection()}
+            </div>
         </>
     )
 }

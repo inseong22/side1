@@ -93,35 +93,7 @@ function HeroSection({content}) {
 
     const returnButton = () => {
         return(
-            <>
-            {/* <Popover
-                id={id}
-                open={Boolean(anchorEl)}
-                anchorEl={anchorEl}
-                onClose={() => setAnchorEl(null)}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-                }}>
-                <div className="pop-balloon" style={{width:'100px'}}>
-                    <span className="balloon-item" onClick={() => setAlign('left')}>
-                        왼
-                    </span>
-                    <span className="balloon-item" onClick={() => setAlign('center')}>
-                        중
-                    </span>
-                    <span className="balloon-item" onClick={() => setAlign('right')}>
-                        오
-                    </span>
-                </div>
-            </Popover> 
-             onClick={e => setAnchorEl(e.currentTarget)}
-             */}
-            
+            <>            
             <div className="button__container" style={{border:`${ anchorEl !== null ? '1px dashed rgba(0,0,0,0.4)' : '' }`}}>
                 {
                     content.button.first && 
@@ -131,15 +103,7 @@ function HeroSection({content}) {
                         content.button.link.includes("apps.apple.com/") ? <img src={appstorebutton} />
                         : 
                         <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`}}>
-                            {/* <Editor 
-                                style={{width:'100px'}}
-                                data={content.button.title}
-                                onChange={(e, editor) => {
-                                    const data = editor.getData();
-                                    changeButtonText(data);
-                                }}
-                            /> */}
-                            버튼aaa
+                            버튼
                         </button>
                         }
                     </div>
@@ -152,62 +116,31 @@ function HeroSection({content}) {
     const returnTextAndButton = () => {
         return(
             <div className="text__container">
-                <Editor 
-                    data={content.title}
-                    onChange={(e, editor) => {
-                        const data = editor.getData();
-                        changeText(data);
+                <input 
+                    className="text-input"
+                    value={content.title}
+                    onChange={(e) => {
+                        changeText(e.currentTarget.value);
                     }}
                 />
-                <Editor 
-                    data={content.desc}
-                    onChange={(e, editor) => {
-                        const data = editor.getData();
-                        changeDesc(data);
+                <input 
+                    className="text-input"
+                    value={content.desc}
+                    onChange={(e) => {
+                        changeDesc(e.currentTarget.value);
                     }}
                 />
                 {returnButton()}
             </div>
         )
     }
-
-    const returnSectionTemplate = () => {
-        switch(content.templateNumber){
-            case 1:
-                return(
-                    <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-                        {returnTextAndButton()}
-                        {returnImage()}
-                    </div>
-                )
-
-            case 2:
-                return(
-                    <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-                        {returnImage()}
-                        {returnTextAndButton()}
-                    </div>
-                )
-            
-            case 3:
-                return(
-                    <div className="template" style={{flexDirection:'column'}}>
-                        {returnTextAndButton()}
-                        {returnImage()}
-                    </div>
-                )
-
-            default:
-                return(
-                    <div className="template">
-                    </div>
-                )
-        }
-    }
-
+    
     return (
         <div style={{padding:`${content.paddingTop}% 0% ${content.paddingBottom}% 0%`}}>
-            {returnSectionTemplate()}
+            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
+                {returnTextAndButton()}
+                {returnImage()}
+            </div>
         </div>
     )
 }

@@ -149,6 +149,14 @@
   background-color: var(--main-hover-color);
 }
 
+.text-input{
+  width:100%;
+  border:1px solid rgba(200,200,200,0.4);
+}
+.text-input:hover{
+  border:1px solid rgba(200,200,200,0.7);
+}
+
 @font-face {
   font-family: 'ImcreSoojin';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');

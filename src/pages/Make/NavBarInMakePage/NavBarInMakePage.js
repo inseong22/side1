@@ -91,7 +91,6 @@ const NavBarInMakePage = (props) => {
                 {/* <Button onClick={e => props.setOpen(!props.open)}>설명 다시보기</Button> */}
                 <Button onClick={e => {
                     action.setSecNum(52); 
-                    action.setAddingSectionAt(1000);
                     }}>
                     기본설정
                 </Button>
