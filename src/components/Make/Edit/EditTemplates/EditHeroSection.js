@@ -8,6 +8,7 @@ import produce from 'immer';
 import {EditColorContainer} from '../tools/ColorCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
+import AddContentImg from '../tools/AddContentImg'
 import EditSlider from '../tools/EditSlider'
 import { useAnimation } from 'framer-motion'
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
@@ -191,13 +192,7 @@ function EditHeroSection({content, category}) {
         switch(content.image.type){
             case 'image':
                 return(
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">사진 삽입</div>
-                            <div className="edit-element__right">
-                            </div>
-                        </div>
-                    </div>
+                    <AddContentImg value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                 )
             
             case 'video':
@@ -216,6 +211,27 @@ function EditHeroSection({content, category}) {
                     <div>아니</div>
                 )
         }
+    }
+
+    // 콘텐츠 - 이미지 업로드
+    const onChangeContentImage= e => {
+        let newContents = JSON.parse(JSON.stringify(state.contents))
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
+            newContents[state.secNum].image.attachment = result;
+        }
+        reader.readAsDataURL(oneFile);
+        action.setContents(newContents);
+    }
+    // 콘텐츠 - 이미지 삭제
+    const RemoveImage = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].image.attachment = '';
+        }))
     }
 
     const returnTable = () => {
