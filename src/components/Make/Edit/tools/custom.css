@@ -49,3 +49,9 @@
 .color-button:hover{
     border:2px solid black;
 }
+
+.text-size__input{
+    width:30px;
+    padding:6px 5px;
+    margin-left:10px;
+}

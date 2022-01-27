@@ -1,11 +1,17 @@
-
+:root{
+    --edit-main-border-color:rgba(0,0,0,0.2);
+}
 
 .edit-element{
     width:100%;
     display:flex;
     justify-content: center;
     align-items : center;
-    border-bottom:1px solid var(--make-border);
+    /* border-bottom:1px solid var(--edit-main-border-color); */
+}
+
+.border{
+    border: 1px solid var(--edit-main-border-color);
 }
 
 .edit-element__one{
@@ -15,6 +21,13 @@
     flex-direction: row;
     width:100%;
 }
+
+.edit-element__box{
+    width:95%;
+    border-radius: 5px;
+    border: 1px solid var(--edit-main-border-color);
+}
+
 .edit-element__left{
     display: flex;
     justify-content: start;

@@ -6,6 +6,11 @@ import EditButtonTable from '../tools/EditButtonTable'
 import EditColor from '../tools/ColorCustom'
 import OpenCloseCustom from '../tools/OpenCloseCustom'
 import OnOffCustom from '../tools/OnOffCustom'
+import InputCustom from '../tools/InputCustom'
+import ResponsiveCustom from '../tools/ResponsiveCustom'
+import CheckBoxContainer from '../tools/CheckBoxContainer'
+import ElementsTable from '../tools/ElementsTable'
+import TextSizeCustom from '../tools/TextSizeCustom'
 import produce from 'immer';
 import { Radio } from 'antd';
 
@@ -24,6 +29,30 @@ function EditNaviSection({navi, setNavi, category}) {
     const [buttonUse, setButtonUse] = useState(true)
     const [buttonFunc, setButtonFunc] = useState("link")
     const [buttonTemplate, setButtonTemplate] = useState(1)
+
+    const elements = [
+        {
+            title:'버튼',
+            use:navi.elements.buttonUse,
+            func:() => setNavi(produce(navi, draft => {
+                draft.elements.buttonUse = !navi.elements.buttonUse;
+            }))
+        },
+        {
+            title:'로고',
+            use:navi.elements.logoUse,
+            func:() => setNavi(produce(navi, draft => {
+                draft.elements.logoUse = !navi.elements.logoUse;
+            }))
+        },
+        {
+            title:'앱 다운로드',
+            use:navi.elements.appButtonUse,
+            func:() => setNavi(produce(navi, draft => {
+                draft.elements.appButtonUse = !navi.elements.appButtonUse;
+            }))
+        },
+    ]
 
     const changeNaviTemplate = num => {
         let newNavi = JSON.parse(JSON.stringify(navi))
@@ -78,62 +107,35 @@ function EditNaviSection({navi, setNavi, category}) {
             { category === 0 ? 
             <>
                 <div>
-                    <div className="edit-element">
-                        네비게이션 수정
-                    </div>
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">배경색</div>
-                            <div className="edit-element__right">
-                                <EditColor onChange={(e) => setNavi({...navi, backgroundColor:e})} value={navi.backgroundColor} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">상단에 고정</div>
-                            <div className="edit-element__right">
-                                <Checkbox
-                                    value={navi.fixed}
-                                    onChange={e => setNavi({...navi, fixed:!navi.fixed})}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                />
-                            </div>
-                        </div>
-                        <div className="edit-element__more">
-                            <div className="edit-element__left">아래선 적용</div>
-                            <div className="edit-element__right">
-                                <Checkbox
-                                    value={navi.bottomBorder}
-                                    onChange={e => setNavi({...navi, bottomBorder:!navi.bottomBorder})}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">메인 로고</div>
-                            <div className="edit-element__right">
-                                <RadioCustom 
-                                    options={logoOptions}
-                                    onChange={(e) => setNavi({...navi, isLogo:e})}
-                                    value={navi.isLogo}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    {
-                        navi.isLogo === 'logo' && 
-                        <div className="edit-element no-border">
+                    <ElementsTable elements={elements} />
+                    <OpenCloseCustom title="로고">
+                        <div className="edit-element">
                             <div className="edit-element__one">
-                                <div className="edit-element__left">로고</div>
+                                <div className="edit-element__left">메인 로고</div>
                                 <div className="edit-element__right">
-                                    <input type="file" accept="image/*" id="file" onChange={ e => onChangeLogoImage(e) } />
+                                    <RadioCustom 
+                                        options={logoOptions}
+                                        onChange={(e) => setNavi({...navi, isLogo:e})}
+                                        value={navi.isLogo}
+                                    />
                                 </div>
                             </div>
                         </div>
-                    }
+                        {
+                            navi.isLogo === 'logo' && 
+                            <div className="edit-element no-border">
+                                <div className="edit-element__one">
+                                    <div className="edit-element__left">로고</div>
+                                    <div className="edit-element__right">
+                                        <input type="file" accept="image/*" id="file" onChange={ e => onChangeLogoImage(e) } />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <TextSizeCustom text="크기" value={navi.logo.textSize} func={e =>  setNavi(produce(navi, draft => {
+                                draft.logo.textSize = e;
+                            }))} />
+                    </OpenCloseCustom>
                     <OpenCloseCustom title="버튼 사용">
                         <OnOffCustom text="버튼 사용" value={navi.button.use} func={() => setNavi(produce(navi, draft => {
                             draft.button.use = !navi.button.use
@@ -171,20 +173,47 @@ function EditNaviSection({navi, setNavi, category}) {
                             <EditButtonTable value={navi.button.num} onChange={(e) => setNavi({...navi, button:{...navi.button, num:e}})} color={navi.button.color} />
                         </> }
                     </OpenCloseCustom>
+                    <div className="centera">
+                        <div className="edit-element__box">
+                            <OnOffCustom text="페이지 상단 고정" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
+                            <div>
+                                스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </>
             : 
             <>
-            <div className="templates__inner-container">
-                <span className="templates-radio" onClick={() => changeNaviTemplate(1)}>
-                    템플릿 1
-                </span>
-                <span className="templates-radio" onClick={() => changeNaviTemplate(2)}>
-                    템플릿 2
-                </span>
-                <span className="templates-radio" onClick={() => changeNaviTemplate(3)}>
-                    템플릿 3
-                </span>
+            <div>
+                <OpenCloseCustom title="배경색">
+                    <div className="edit-element">
+                        <div className="edit-element__one">
+                            <div className="edit-element__left">배경색</div>
+                            <div className="edit-element__right">
+                                <EditColor onChange={(e) => setNavi({...navi, backgroundColor:e})} value={navi.backgroundColor} />
+                            </div>
+                        </div>
+                    </div>
+                </OpenCloseCustom>
+                <OpenCloseCustom title="구분선">
+                    <CheckBoxContainer text="구분선" value={navi.bottomBorder} func={e => setNavi({...navi, bottomBorder:!navi.bottomBorder})}/>
+                </OpenCloseCustom>
+                <OpenCloseCustom title="높이">
+                    <div className="edit-element">
+                        <div className="edit-element__more">
+                            <div className="edit-element__left">아래선 적용</div>
+                            <div className="edit-element__right">
+                                <Checkbox
+                                    value={navi.bottomBorder}
+                                    onChange={e => setNavi({...navi, bottomBorder:!navi.bottomBorder})}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </OpenCloseCustom>
+                <ResponsiveCustom />
             </div>
             </>
             }

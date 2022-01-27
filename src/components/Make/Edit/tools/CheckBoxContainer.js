@@ -1,6 +1,17 @@
 import React from 'react'
 import Checkbox from '@mui/material/Checkbox';
 
+export const CheckboxCustom = ({value, func}) => {
+    return(
+        <Checkbox
+            checked={value || false}
+            value={value || false}
+            onClick={func}
+            inputProps={{ 'aria-label': 'controlled' }}
+        />
+    )
+}
+
 function CheckBoxContainer({text, value, func}) {
     return(
         <div className="edit-element">
