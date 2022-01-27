@@ -54,6 +54,7 @@ const textSizeOptions = [
     { label: 'l', value: 25 },
 ]
 
+
 function EditHeroSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     
@@ -242,12 +243,18 @@ function EditHeroSection({content, category}) {
                     <EditRadioContainer text="제목 크기 설정" options={textSizeOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].title.size = e
                     }))}/> 
+                    <EditColorContainer text={"제목 텍스트 색상"} value={content.title.color} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].title.color = e
+                    }))} />
                     <EditRadioContainer text="본문 텍스트 배치" options={alignOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].desc.align = e
                     }))}/> 
                     <EditRadioContainer text="본문 크기 설정" options={textSizeOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
-                                        draft[state.secNum].desc.size = e
+                        draft[state.secNum].desc.size = e
                     }))}/>      
+                    <EditColorContainer text={"본문 텍스트 색상"} value={content.desc.color} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].desc.color = e
+                    }))} />
                     <EditRadioContainer text="사진 테두리" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].image.border = e;
                                     }))} />

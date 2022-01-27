@@ -126,7 +126,8 @@ function HeroSection({content}) {
                     value={content.title.text}
                     style={{
                         textAlign: `${content.title.align}`,
-                        fontSize: `${content.title.size}px`
+                        fontSize: `${content.title.size}px`,
+                        color: `${content.title.color}`
                     }}
                 />
                 <input 
@@ -138,7 +139,8 @@ function HeroSection({content}) {
                     value={content.desc.text}
                     style={{
                         textAlign: `${content.desc.align}`,
-                        fontSize: `${content.desc.size}px`
+                        fontSize: `${content.desc.size}px`,
+                        color: `${content.desc.color}`
                     }}
                 />
                 {returnButton()}

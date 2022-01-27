@@ -23,12 +23,14 @@ export const base = [
         title:{
             text: '',
             align: '',
-            size: 10
+            size: 10,
+            color: 'black'
         },
         desc:{
             text: '',
             align: '',
-            size: 10
+            size: 10,
+            color: 'black'
         },
         image:{
             type:'image',
