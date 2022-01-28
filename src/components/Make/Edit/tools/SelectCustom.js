@@ -1,38 +1,57 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import {ChevronDown} from '@styled-icons/bootstrap';
 import Popover from '@mui/material/Popover';
+import './SelectCustom.css'
 
 function SelectCustom({options, onChange, value}) {
-    const [selectOpen, setSelectOpen] = useState(false);
-    const el = useRef();
+    const [anchorEl, setAnchorEl] = useState(null);
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+  
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     return (
-        <div>
-            <div className="select-open-button center-row" onClick={(e) => setSelectOpen(!selectOpen)} 
+        <div style={{width:'200px'}}>
+            <div className="select-open-button center-row" aria-describedby={id} variant="contained" onClick={handleClick}
                 style={{
-                    borderBottom:`${selectOpen ? 'none' : '1px solid rgb(192, 192, 192)'}`,
-                    borderBottomLeftRadius:`${selectOpen ? '0px' : '5px'}`,
-                    borderBottomRightRadius:`${selectOpen ? '0px' : '5px'}`,
+                    borderBottom:`${open ? 'none' : '1px solid rgb(192, 192, 192)'}`,
+                    borderBottomLeftRadius:`${open ? '0px' : '5px'}`,
+                    borderBottomRightRadius:`${open ? '0px' : '5px'}`,
                 }}>
                 <div className="select-button__content" style={{paddingLeft:'15px'}}>
-                    {options.filter(doc => doc.value === value).label}
+                    {options.filter(doc => doc.value === value)[0].label}
                 </div>
                 <div className="select-button__content" style={{justifyContent:'end', paddingRight:'15px'}}><ChevronDown size="20" /></div>
             </div>
-            {
-            selectOpen && 
-                <div className="select-options__container" ref={el}>
+            <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+            >
+                <div className="so__container">
                     {options.map((item, index) => {
                         return(
-                            <div className="select-hover" onClick={() => {onChange(item.value); setSelectOpen(!selectOpen)}}
-                                style={{borderBottomLeftRadius:`${index === options.length -1 ? '5px' : '0px'}`,borderBottomRightRadius:`${index === options.length ? '5px' : '0px'}`}}
+                            <div className="select-hover" onClick={() => {onChange(item.value); setAnchorEl('')}}
+                                style={{ fontFamily:`${item.value}`, borderBottomLeftRadius:`${index === options.length -1 ? '5px' : '0px'}`,borderBottomRightRadius:`${index === options.length ? '5px' : '0px'}`}}
                             >
                                 {item.label}
                             </div>
                         )
                     })}
                 </div>
-            }
+            </Popover>
         </div>
     )
 }

@@ -33,3 +33,33 @@
     color:black;
     background-color: #6a63f7b0;
 }
+
+.edit-nav-button{
+    background-color:rgba(0,0,0,0);
+    border: 1px solid black;
+    padding: 3px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.edit-nav-home-button{
+    color:var(--main-color);
+    font-size:2em;
+    border:none;
+    background-color:rgba(0,0,0,0);
+    cursor: pointer;
+}
+
+.device-button{
+    border:1px solid black;
+    padding:2px 5px;
+    border-radius:2px;
+    cursor: pointer;
+}
+
+.device__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items : center;
+}

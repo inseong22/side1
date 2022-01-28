@@ -3,61 +3,19 @@ import Editor from '../tools/Editor'
 
 function NaviTemplate({navi, setNavi}) {
 
-    const returnButton = () => {
-        switch(navi.button.num){
-            case 1:
-                return(
-                    <button className="make-nav-button b-one" style={{backgroundColor:`${navi.button.color}`}}>
-                        <Editor 
-                            data={navi.button.title} 
-                            onChange={(e, editor) => {
-                                const data = editor.getData();
-                                setNavi({...navi, button:{...navi.button, title:data}});
-                            }} />
-                    </button>
-                )
-
-            case 2:
-                return(
-                    <button className="make-nav-button b-two" style={{backgroundColor:`${navi.button.color}`}}>
-                        <Editor 
-                            data={navi.button.title} 
-                            onChange={(e, editor) => {
-                                const data = editor.getData();
-                                setNavi({...navi, button:{...navi.button, title:data}});
-                            }} />
-                    </button>
-                )
-
-            case 3:
-                return(
-                    <button className="make-nav-button b-three" style={{backgroundColor:`${navi.button.color}`}}>
-                        <Editor 
-                            data={navi.button.title} 
-                            onChange={(e, editor) => {
-                                const data = editor.getData();
-                                setNavi({...navi, button:{...navi.button, title:data}});
-                            }} />
-                    </button>
-                )
-
-            case 4:
-                return(
-                    <button className="make-nav-button b-four" style={{backgroundColor:`${navi.button.color}`}}>                        
-                        <Editor 
-                            data={navi.button.title} 
-                            onChange={(e, editor) => {
-                                const data = editor.getData();
-                                setNavi({...navi, button:{...navi.button, title:data}});
-                            }} />
-                    </button>
-                )
-
-            defualt:
-                return(
-                    <button className="make-nav-button" style={{backgroundColor:`${navi.button.color}`}}>{navi.button.title}</button>
-                )
-        }
+    const returnCtaButton = () => {
+        return(
+            <button className="make-nav-button b-one">
+                버튼
+            </button>
+        )
+    }
+    const returnGhostButton = () => {
+        return(
+            <button className="make-nav-button b-one">
+                버튼
+            </button>
+        )
     }
 
     return (
@@ -66,16 +24,16 @@ function NaviTemplate({navi, setNavi}) {
                 {navi.isLogo === "logo" && 
                     <div className="centera" style={{width:'80px'}}><img className="hover" src={navi.logo} height={30} /></div>}
                 {navi.isLogo === "text" && 
-                <Editor 
-                    data={navi.title} 
-                    onChange={(e, editor) => {
-                        const data = editor.getData();
-                        setNavi({...navi, title:data});
+                <input 
+                    value={navi.title} 
+                    onChange={(e) => {
+                        setNavi({...navi, title:e.currentTarget.value});
                     }}
                     />}
             </span>
             <span className="make-nav-buttonc centera">
-                { navi.button.use && returnButton() }
+                { navi.cta.use && returnCtaButton() }
+                { navi.ghost.use && returnGhostButton() }
             </span>
         </>
     )

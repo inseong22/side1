@@ -152,6 +152,7 @@
 .text-input{
   width:100%;
   border:1px solid rgba(200,200,200,0.4);
+  background-color:rgba(0,0,0,0);
 }
 .text-input:hover{
   border:1px solid rgba(200,200,200,0.7);

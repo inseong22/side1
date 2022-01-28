@@ -1,24 +1,37 @@
 import React, {useState, useContext} from 'react'
+import RadioCustom from '../tools/RadioCustom'
+import {EditRadioContainer} from '../tools/RadioCustom'
+import { EditColorContainer } from '../tools/ColorCustom'
+import OpenCloseCustom from '../tools/OpenCloseCustom'
+import OnOffCustom from '../tools/OnOffCustom'
+import InputCustom from '../tools/InputCustom'
+import produce from 'immer';
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import EditTopBar from '../tools/EditTopBar'
+import SelectCustom from '../tools/SelectCustom'
 import './EditSetting.css'
 import '../EditTemplates/Edit.css'
 
-function EdtirSetting({setting, setSetting}) {
-    const [category, setCategory] = useState(0)
+const fontOptions = [
+    { label: '노토산스', value: 'Noto Sans KR' },
+    { label: '에스코어 드림', value: '' },
+    { label: '노토산스', value: 'Noto Sans KR' },
+    { label: '노토산스', value: 'Noto Sans KR' },
+]
+
+const shapeOptions = [
+    { label: '사각형', value: 0 },
+    { label: '라운드', value: 5 },
+    { label: '원형', value: 20 },
+]
+
+const sizeOptions = [
+    { label: 'small', value: 50 },
+    { label: 'medium', value: 75 },
+    { label: 'large', value: 100 },
+]
+
+function EdtirSetting({setting, setSetting, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
-
-    const changeFtaUse = () => {
-        setSetting({...setting, fta:{...setting.fta, use:!setting.fta.use}});
-    }
-
-    const changeFtaText = (e) => {
-        setSetting({...setting, fta:{...setting.fta, text:e.currentTarget.value}});
-    }
-
-    const changeFtaColor = e => {
-        setSetting({...setting, fta:{...setting.fta, color:e.currentTarget.value}});
-    }
 
     const returnTable = () => {
         switch(category){
@@ -27,13 +40,44 @@ function EdtirSetting({setting, setSetting}) {
                 return(
                     <>
                     <div>
-                        기본
-                        <div>
-                            urlId
-                        </div>
-                        <div>
-                            <input type="text" value={setting.urlId} onChange={e => setSetting({...setting, urlId:e.currentTarget.value})} />
-                        </div>
+                        <OpenCloseCustom title="파비콘" tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지를 대표하는 아이콘입니다.">
+                            
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="페이지 이름" tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다.">
+                            
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="플로팅 버튼" tooltip="화면 하단에 고정되어 떠다니는 버튼입니다. 내비게이션의 버튼과 플로팅 버튼 중 하나만 사용하시길 바랍니다.">
+                            <OnOffCustom text="플로팅 버튼" value={setting.fta.use} func={(e) => setSetting(produce(setting, draft => {
+                                draft.fta.use = !setting.fta.use
+                            }))} />
+                            <EditRadioContainer text="사이즈" options={sizeOptions} value={setting.fta.size} func={(e) => setSetting(produce(setting, draft => {
+                                draft.fta.size = e
+                            }))} />
+                            <EditRadioContainer text="모양" options={shapeOptions} value={setting.fta.shape} func={(e) => setSetting(produce(setting, draft => {
+                                draft.fta.shape = e
+                            }))} />
+                            <EditColorContainer text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                                draft.fta.backgroundColor = e;
+                            }))} />
+                            <InputCustom value={setting.fta.link} func={(e) => setSetting(produce(setting, draft => {
+                                draft.fta.link = e
+                            }))}/>
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="URL">
+                            <div className="center-column">
+                                <div className="edit-element center-row">
+                                    <div>
+                                        <input />
+                                    </div>
+                                    <div>
+                                        .surfee.co.kr
+                                    </div>
+                                </div>
+                                <div className="edit-element">
+                                    * 영문, 숫자만 사용 가능합니다.
+                                </div>
+                            </div>
+                        </OpenCloseCustom>
                     </div>
                     </>
                 )
@@ -43,48 +87,87 @@ function EdtirSetting({setting, setSetting}) {
                 return(
                     <>
                     <div>
-                        <div>
-                            버튼
-                        </div>
-                        <div>
-                            <div>
-                                <span>FTA</span>
-                                <span><input type="checkbox" value={setting.fta.use} onChange={() => changeFtaUse()} /></span>
+                        <OpenCloseCustom title="메인 색상">
+                            <EditColorContainer text="색상" value={setting.color} func={(e) => setSetting(produce(setting, draft => {
+                                draft.color = e;
+                            }))} />
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="글씨체">
+                            <div className="edit-element">
+                                <div className="left">
+                                    글씨체
+                                </div>
+                                <SelectCustom options={fontOptions} value={setting.font} onChange={(e) => setSetting(produce(setting, draft => {
+                                    draft.font = e;
+                                }))} />
                             </div>
-                            {setting.fta.use && 
-                                <div>
-                                    <div>
-                                        <span>link</span>
-                                        <span>
-                                            <input value={setting.fta.text} onChange={(e) => changeFtaText(e)} />
-                                        </span>
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="CTA 버튼" preseen={
+                            <div className="edit-element">
+                                <div className="centera" style={{padding:'5px 10px'}}>
+                                    <div className="custom-button" style={{ color:`${setting.cta.color}`, border:`${setting.cta.border ? `1px solid ${setting.borderColor}` : 'none'}`, boxShadow:`${setting.cta.shadow ? '2px 2px 3px rgba(0,0,0,0.5)' : 'none'}`, borderRadius:`${setting.cta.borderRadius}px`, backgroundColor:`${setting.cta.backgroundColor}`}}>
+                                        버튼
                                     </div>
-                                    <div>
-                                        <span>색상</span>
-                                        <span>
-                                            <input type="color" value={setting.fta.text} onChange={(e) => changeFtaColor(e)} />
-                                        </span>
+                                </div>
+                            </div>
+                        }>
+                            <EditRadioContainer text="모양" options={shapeOptions} value={setting.cta.borderRadius} func={(e) => setSetting(produce(setting, draft => {
+                                draft.cta.borderRadius = e
+                            }))} />
+                            <EditColorContainer text="배경 색상" value={setting.cta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                                draft.cta.backgroundColor = e;
+                            }))} />
+                            <EditColorContainer text="폰트 색상" value={setting.cta.color} func={(e) => setSetting(produce(setting, draft => {
+                                draft.cta.color = e;
+                            }))} />
+                            <OnOffCustom text="그림자" value={setting.cta.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                draft.cta.shadow = !setting.cta.shadow
+                            }))} />
+                            <OnOffCustom text="테두리" value={setting.cta.border} func={(e) => setSetting(produce(setting, draft => {
+                                draft.cta.border = !setting.cta.border
+                            }))} />
+                            <EditColorContainer text="테두리 색상" value={setting.cta.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                draft.cta.borderColor = e;
+                            }))} />
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="고스트 버튼" preseen={
+                            <div className="edit-element">
+                                <div className="centera" style={{padding:'5px 10px'}}>
+                                    <div className="custom-button" style={{ color:`${setting.ghost.color}`, border:`${setting.ghost.border ? `1px solid ${setting.borderColor}` : 'none'}`, boxShadow:`${setting.ghost.shadow ? '2px 2px 3px rgba(0,0,0,0.5)' : 'none'}`, borderRadius:`${setting.ghost.borderRadius}px`, backgroundColor:`${setting.ghost.backgroundColor}`}}>
+                                        버튼
                                     </div>
-                                </div>}
-                        </div>
-                        <div>
-                            버튼
-                        </div>
+                                </div>
+                            </div>
+                        }>
+                            <EditRadioContainer text="모양" options={shapeOptions} value={setting.ghost.borderRadius} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.borderRadius = e
+                            }))} />
+                            <EditColorContainer text="배경 색상" value={setting.ghost.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.backgroundColor = e;
+                            }))} />
+                            <EditColorContainer text="폰트 색상" value={setting.ghost.color} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.color = e;
+                            }))} />
+                            <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.shadow = !setting.ghost.shadow
+                            }))} />
+                            <OnOffCustom text="테두리" value={setting.ghost.border} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.border = !setting.ghost.border
+                            }))} />
+                            <EditColorContainer text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.borderColor = e;
+                            }))} />
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="애니메이션">
+                        </OpenCloseCustom>
                     </div>
                     </>
-                )
-
-            default:
-                return(
-                    <div className="section-make__inner-container">
-                    </div>
                 )
         }
     }
 
     return(
         <>
-            <EditTopBar category={category} setCategory={setCategory} />
             {returnTable()}
         </>
     )

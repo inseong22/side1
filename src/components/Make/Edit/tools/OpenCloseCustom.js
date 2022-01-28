@@ -6,6 +6,8 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Tooltip from '@mui/material/Tooltip';
+import { InformationCircle } from '@styled-icons/ionicons-outline';
 import './OpenCloseCustom.css'
 // import Accordion from '@mui/material/Accordion';
 
@@ -40,46 +42,58 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(0.3),
 }));
 
-// const OpenCloseCustom = (props) => {
-//   return (
-//     <div className="centera">
-//       <Accordion>
-//         <AccordionSummary
-//           expandIcon={<ExpandMoreIcon />}
-//           aria-controls="panel1a-content"
-//           id="panel1a-header"
-//         >
-//             <div>
-//                 {props.title}
-//             </div>
-//         </AccordionSummary>
-//         <AccordionDetails>
-//             <div>
-//                 {props.children}
-//             </div>
-//         </AccordionDetails>
-//       </Accordion>
-//     </div>
-//   );
-// }
+// 아래는 열고 닫히는 애니메이션 효과까지 적용
+export const AccordionCustom = (props) => {
+  return (
+    <div className="centera">
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+            <div>
+                {props.title}
+            </div>
+        </AccordionSummary>
+        <AccordionDetails>
+            <div>
+                {props.children}
+            </div>
+        </AccordionDetails>
+      </Accordion>
+    </div>
+  );
+}
+
 const OpenCloseCustom = (props) => {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="edit-element no-border">
+    <div className="one-element">
       <div className="accordion">
         <div className="accordion__header" onClick={() => setOpen(!open)}>
-            <div className="left">
+          <div className="edit-element">
+            <div className="edit-element__left">
               {props.title}
+              {
+                props.tooltip && 
+                  <Tooltip placement="top" title={props.tooltip} arrow>
+                    <InformationCircle size="20" style={{color:'grey', zIndex:'20', marginLeft:'10px'}}/>
+                  </Tooltip>
+              }
             </div>
-            <div className="right">
+            <div className="edit-element__right">
               { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
             </div>
+          </div>
+          { props.preseen && 
+            <div className="edit-element">
+              {props.preseen}
+            </div> }
         </div>
         <div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`}}>
-          <div>
-            {props.children}
-          </div>
+          {props.children}
         </div>
       </div>
     </div>

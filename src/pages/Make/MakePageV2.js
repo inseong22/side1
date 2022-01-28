@@ -278,10 +278,12 @@ const MakePageV2 = ({history, userObj}, props) => {
                             {/* 푸터 */}
                             {foot.use && <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> }                             
 
-                            { ( setting.fta.use && targets.current ) &&
-                                <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${isPhone ? 300 : 600}px`}}>
+                            { ( setting.fta.use ) &&
+                            <div style={{width:`${isPhone ? 300 : 600}px`}}>
+                                <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${setting.fta.size}%`, borderRadius:`${setting.fta.shape}px`}}>
                                     {setting.fta.text}
                                 </button>
+                            </div>
                             }
                         </div>
                     </motion.div>

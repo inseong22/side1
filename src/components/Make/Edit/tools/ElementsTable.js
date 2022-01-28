@@ -4,7 +4,7 @@ import './ElementsTable.css'
 
 function ElementsTable({elements}) {
     return (
-        <div className="edit-element">
+        <div className="one-element">
             <div className="edit-element__box">
                 <div className="edit-element__title">
                     요소

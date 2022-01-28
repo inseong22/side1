@@ -23,9 +23,6 @@ function EditColor({onChange, value}) {
             <div className="color-button" style={{backgroundColor:`${state.setting.color}`}} onClick={() => onChange(`${state.setting.color}`)}>
                 
             </div>
-            <div className="color-button" style={{backgroundColor:"blue"}} onClick={() => onChange('blue')}>
-                
-            </div>
             <div>
 
             </div>

@@ -1,6 +1,4 @@
 import React, {useState} from 'react'
-import EditTopBar from '../tools/EditTopBar'
-import Checkbox from '@mui/material/Checkbox';
 import RadioCustom from '../tools/RadioCustom'
 import EditButtonTable from '../tools/EditButtonTable'
 import EditColor from '../tools/ColorCustom'
@@ -10,9 +8,10 @@ import InputCustom from '../tools/InputCustom'
 import ResponsiveCustom from '../tools/ResponsiveCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ElementsTable from '../tools/ElementsTable'
+import {EditSliderContainer} from '../tools/EditSlider'
 import TextSizeCustom from '../tools/TextSizeCustom'
+import BoxCustom from '../tools/BoxCustom'
 import produce from 'immer';
-import { Radio } from 'antd';
 
 const logoOptions = [
     { label: '로고 이미지', value: 'logo' },
@@ -137,50 +136,42 @@ function EditNaviSection({navi, setNavi, category}) {
                             }))} />
                     </OpenCloseCustom>
                     <OpenCloseCustom title="버튼 사용">
-                        <OnOffCustom text="버튼 사용" value={navi.button.use} func={() => setNavi(produce(navi, draft => {
-                            draft.button.use = !navi.button.use
+
+                        <OnOffCustom text="버튼 사용" value={navi.elements.buttonUse} func={() => setNavi(produce(navi, draft => {
+                            draft.elements.buttonUse = !navi.elements.buttonUse
                         }))} />
-                        <div className="edit-element no-border">
-                            <div className="edit-element__one">
-                                <div className="edit-element__left">버튼 사용</div>
-                                <div className="edit-element__right">
-                                    <Checkbox
-                                        value={navi.button.use}
-                                        onChange={() => setNavi({...navi, button:{...navi.button, use:!navi.button.use}})}
-                                        inputProps={{ 'aria-label': 'controlled' }}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        { navi.button.use && <>
-                            <div className="edit-element" style={{border:'none'}}>
-                                <div className="edit-element__left">버튼 기능</div>
-                                <div className="edit-element__right">
-                                    <RadioCustom 
-                                        options={buttonOptions}
-                                        onChange={setButtonFunc}
-                                        value={buttonFunc}
-                                    />
-                                </div>
-                            </div>
-                            {returnFuncEdit()}
-                            <div className="edit-element">
-                                <div className="edit-element__left">버튼 색</div>
-                                <div className="edit-element__right">
-                                    <EditColor onChange={(e) => setNavi({...navi, button:{...navi.button, color:e}})} value={navi.button.color} />
-                                </div>
-                            </div>
-                            <EditButtonTable value={navi.button.num} onChange={(e) => setNavi({...navi, button:{...navi.button, num:e}})} color={navi.button.color} />
-                        </> }
+                        
+                        <OnOffCustom text="CTA 버튼" value={navi.cta.use} func={() => setNavi(produce(navi, draft => {
+                            draft.cta.use = !navi.cta.use
+                        }))} />
+                        {
+                            navi.cta.use && 
+                            <InputCustom value={navi.cta.link} func={(e) => setNavi(produce(navi, draft => {
+                                draft.cta.link = e
+                            }))} />
+                        }
+                        
+                        <OnOffCustom text="고스트 버튼" value={navi.ghost.use} func={() => setNavi(produce(navi, draft => {
+                            draft.ghost.use = !navi.ghost.use
+                        }))} />
+                        {
+                            navi.ghost.use && 
+                            <InputCustom value={navi.ghost.link} func={(e) => setNavi(produce(navi, draft => {
+                                draft.ghost.link = e
+                            }))} />
+                        }
+                        
                     </OpenCloseCustom>
-                    <div className="centera">
-                        <div className="edit-element__box">
-                            <OnOffCustom text="페이지 상단 고정" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
-                            <div>
-                                스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.
-                            </div>
+                    <BoxCustom>
+                        <OnOffCustom text="페이지 상단 고정" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
+                        <div>
+                            {
+                                navi.fixed ? <p>스크롤을 내리면 내비게이션 바는 더 이상 보이지 않습니다.</p> 
+                                    : 
+                                <p>스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.</p>
+                            }
                         </div>
-                    </div>
+                    </BoxCustom>
                 </div>
             </>
             : 
@@ -200,18 +191,7 @@ function EditNaviSection({navi, setNavi, category}) {
                     <CheckBoxContainer text="구분선" value={navi.bottomBorder} func={e => setNavi({...navi, bottomBorder:!navi.bottomBorder})}/>
                 </OpenCloseCustom>
                 <OpenCloseCustom title="높이">
-                    <div className="edit-element">
-                        <div className="edit-element__more">
-                            <div className="edit-element__left">아래선 적용</div>
-                            <div className="edit-element__right">
-                                <Checkbox
-                                    value={navi.bottomBorder}
-                                    onChange={e => setNavi({...navi, bottomBorder:!navi.bottomBorder})}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                    <EditSliderContainer text="높이 조정" value={navi.height} func={e => setNavi({...navi, height:e})}/>
                 </OpenCloseCustom>
                 <ResponsiveCustom />
             </div>

@@ -5,3 +5,11 @@
     z-index:1003;
     border:none;
 }
+
+.select__font{
+    width:80%;
+}
+
+.MuiSelect-select{
+    background-color:red;
+}

@@ -116,7 +116,10 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             )
         }else if(state.secNum === SETTINGSECNUM ){
             return(
-                <EditSetting setting={setting} setSetting={setSetting} category={state.category}/>
+                <>
+                    <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    <EditSetting setting={setting} setSetting={setSetting} category={state.category}/>
+                </>
             )
         }else if(state.secNum === CONTENTSSECNUM ){
             return(

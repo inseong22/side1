@@ -1,14 +1,15 @@
 .accordion{
     border:1px solid rgba(0, 0, 0, 0.15);
     border-radius: 5px;
-    width:90%;
-    padding:10px;
+    width:95%;
+    box-sizing: border-box;
 }
 
 .accordion__header{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     cursor:pointer;
+    box-sizing: border-box;
 }
 
 .accordion__header:hover{
@@ -17,4 +18,13 @@
 
 #panel1a-header:hover{
     color:var(--main-color);
+}
+
+.accordion__body{
+    display: flex;
+    flex-direction: column;
+    justify-content :center;
+    align-items :center;
+    box-sizing: border-box;
+    width:100%;
 }

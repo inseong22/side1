@@ -41,16 +41,14 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
 
 function OnOffCustom({text, value, func}) {
     return (
-        <div className="edit-element">
-            <div className="edit-element__one">
-                <div className="edit-element__left">
-                    {text}
-                </div>
-                <div className="edit-element__right">
-                    <CustomSwitch value={value} onChange={e => func()} checkedChildren="ON" unCheckedChildren="OFF" defaultChecked />
-                </div>
-            </div>
+      <div className="edit-element">
+        <div className="edit-element__left">
+            {text}
         </div>
+        <div className="edit-element__right">
+            <CustomSwitch value={value} onChange={e => func()} checkedChildren="ON" unCheckedChildren="OFF" defaultChecked />
+        </div>
+      </div>
     )
 }
 

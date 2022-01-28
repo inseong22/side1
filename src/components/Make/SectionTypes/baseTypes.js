@@ -222,6 +222,7 @@ export const defaults = {
         },
         sectionTypeName:'상단 바',
         sectionTemplateNumber:1,
+        height:60,
         use:true,
         title:'Surfee',
         logo:{
@@ -234,12 +235,13 @@ export const defaults = {
         fixed:false,
         backgroundColor:'rgba(255,255,255,1)', 
         bottomBorder:false,
-        button:{
-            func:'link',
-            templateNum:1,
-            link:'www.naver.com',
-            title:'신청하기',
-            color:'rgba(0,0,0,0.4)',
+        cta:{
+            use:true,
+            link:''
+        },
+        ghost:{
+            use:true,
+            link:''
         },
     },
     foot:{
@@ -267,9 +269,31 @@ export const defaults = {
         smallFont:'',
         color:'#63B3F7',
         fta:{
+            width:50,
+            borderRadius:5,
             use:false,
             backgroundColor:'rgba(150,150,0,1)',
-            text:'fta 버튼'
+            text:'fta 버튼',
+            link:'',
+        },
+        cta:{
+            borderRadius:5,
+            backgroundColor:'rgba(150,150,0,1)',
+            color:'rgba(0,0,0,1)',
+            shadow:true,
+            borderColor:'rgba(0,0,0,1)',
+            border:false,
+        },
+        ghost:{
+            borderRadius:5,
+            backgroundColor:'rgba(150,0,150,1)',
+            color:'rgba(0,0,0,1)',
+            shadow:true,
+            borderColor:'rgba(0,0,0,1)',
+            border:false,
+        },
+        animation:{
+
         }
     }
 }

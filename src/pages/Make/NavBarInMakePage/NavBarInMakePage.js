@@ -5,11 +5,28 @@ import './MakeNavBar.css';
 import { MyContext } from '../MakePageV2'
 import CheckModal from '../../../components/Make/Modal/CheckModal'
 import {dbService} from '../../../tools/fbase'
+import {Monitor} from '@styled-icons/feather'
+import Popover from '@mui/material/Popover'
+import { Phone } from '@styled-icons/bootstrap'
+import {Fullscreen} from '@styled-icons/bootstrap'
 
 const NavBarInMakePage = (props) => {
     const [open, setOpen] = useState(false)
     const {state, action} = useContext(MyContext)
     const [checkModalOpen, setCheckModalOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    const openDevice = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
     const moveToMain = () => {
         
         window.location.replace('/');
@@ -89,27 +106,52 @@ const NavBarInMakePage = (props) => {
         <div className="make-page-nav">
             <div className="make-page-nav-half" style={{justifyContent: 'start', marginLeft:'1%'}}>
                 {/* <Button onClick={e => props.setOpen(!props.open)}>설명 다시보기</Button> */}
-                <Button onClick={e => {
+                <span className="edit-nav-button" onClick={e => {
                     action.setSecNum(52); 
                     }}>
                     기본설정
-                </Button>
-                <Button onClick={e => {
+                </span>
+                <button className="edit-nav-button" onClick={e => {
                     action.setSecNum(53);
                     }}>
-                    컨텐츠
-                </Button>
-                <span style={{marginLeft:'5%', width:'50%'}}>
-                    <span>전체화면보기</span>
-                    <Switch value={props.full} onChange={e => props.setFull(!props.full)}  style={{marginLeft:'3%'}}/>
-                    <span>모바일 전환</span>
-                    <Switch value={props.isPhone} onChange={e => props.setIsPhone(!props.isPhone)}  style={{marginLeft:'3%'}}/>
-                </span>
+                    페이지 구성
+                </button>
+            </div>
+            <div className="make-page-nav-half">
+                <div className="centera">
+                    <Button onClick={() => moveToMain()} className="edit-nav-home-button">
+                        Surfee
+                    </Button>
+                </div>
             </div>
             <div className="make-page-nav-half" style={{justifyContent: 'end', marginRight:'1%'}}>
-                <Button onClick={() => moveToMain()}>
-                    Surfee
-                </Button>
+                <span className="device-button" onClick={handleClick}>
+                    {
+                        props.isPhone ? <Phone size="25" /> : <Monitor size="25" />
+                    }
+                </span>
+                <Popover
+                    id={id}
+                    open={openDevice}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                >
+                    <div className="device__container">
+                        <span className="device-button" onClick={e => {props.setIsPhone(true); setAnchorEl('')}}>
+                            <Phone size="25" />
+                        </span>
+                        <span className="device-button" onClick={e => {props.setFull(!props.full); setAnchorEl('')}}>
+                            <Fullscreen size="25" />
+                        </span>
+                        <span className="device-button" onClick={e => {props.setIsPhone(false); setAnchorEl('')}}>
+                            <Monitor size="25" />
+                        </span>
+                    </div>
+                </Popover>
                 <Button style={{width:'120px', backgroundColor:'#6a63f75b'}} onClick={() => onSubmit()} className="make-nav-left-text">
                     저장 후 배포하기
                 </Button>

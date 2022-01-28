@@ -12,7 +12,7 @@ function MakeNavigationV2({full, navi, setNavi, history}) {
     return (
         <>
         <div className="make-navigation" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
-            <div className="make-nav-container" style={{width:"100%", borderBottom:`${navi.bottomBorder ? '1px solid rgba(150,150,150,0.2)' : '1px solid rgba(150,150,150,0)'}`, backgroundColor:`${navi.backgroundColor}`}} onClick={() => action.setSecNum(50)}>
+            <div className="make-nav-container" style={{borderBottom:`${navi.bottomBorder ? '5px solid rgba(150,150,150,0.2)' : '1px solid rgba(150,150,150,0)'}`, backgroundColor:`${navi.backgroundColor}`, height:`${navi.height}px`}} onClick={() => action.setSecNum(50)}>
                 <NaviTemplate navi={navi} setNavi={setNavi}/>
             </div>
             <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
