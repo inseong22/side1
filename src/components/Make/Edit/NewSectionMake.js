@@ -92,6 +92,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                                 </span>
                             </div>
                     </div>
+                    <EditTopBar category={state.category} setCategory={action.setCategory} />
                     <EditNaviSection navi={navi} setNavi={setNavi} category={state.category}/>
                 </>
             )
@@ -109,6 +110,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                                 </span>
                             </div>
                     </div>
+                    <EditTopBar category={state.category} setCategory={action.setCategory} />
                     <EditFooterSection foot={foot} setFoot={setFoot} category={state.category}/>
                 </>
             )

@@ -1,16 +1,18 @@
 import React, {useRef} from 'react'
 
+
 function AddContentImg({value, func, removeFunc}) {
     const photoInput = useRef();
     const inputClick = () => {
         photoInput.current.click();
-      };
-    
-      
+    };
 
     return (
         <>
-        <div className="put-img-div" onClick={inputClick}
+        <div className="put-img-div" 
+        onClick={inputClick}
+        onChange={e => func(e)}
+        id='attach'
         style={{backgroundImage: `url(${value}`}}
         >
             <div 

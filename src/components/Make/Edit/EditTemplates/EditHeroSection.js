@@ -79,10 +79,14 @@ function EditHeroSection({content, category}) {
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
             // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
-            newContents[state.secNum].backgroundImage.attachment = result;
+            // newContents[state.secNum].backgroundImage.attachment = result;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].backgroundImage.attachment = result;
+            }))
         }
-        reader.readAsDataURL(oneFile);
-        action.setContents(newContents);
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
     }
     // 체크가 눌리지 않았을 경우, 이미지 삭제
     const DeleteBackgroundImage = () => {
@@ -222,10 +226,14 @@ function EditHeroSection({content, category}) {
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
             // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
-            newContents[state.secNum].image.attachment = result;
+            // newContents[state.secNum].image.attachment = result;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].image.attachment = result;
+            }))
         }
-        reader.readAsDataURL(oneFile);
-        action.setContents(newContents);
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
     }
     // 콘텐츠 - 이미지 삭제
     const RemoveImage = () => {

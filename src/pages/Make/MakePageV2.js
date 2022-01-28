@@ -20,6 +20,7 @@ import OverflowScrolling from 'react-overflow-scrolling';
 import { v4 as uuidv4 } from 'uuid';
 import { useLocation, useParams } from 'react-router';
 import { base } from '../../components/Make/SectionTypes/baseTypes'
+import { defaults } from '../../components/Make/SectionTypes/baseTypes'
 import ReactGa from 'react-ga'
 import lodash from 'lodash'
 import EditNaviSection from '../../components/Make/Edit/NavFooterSetting/EditNaviSection'
@@ -60,66 +61,19 @@ const MakePageV2 = ({history, userObj}, props) => {
     const location = useLocation();
 
     // 메인 세팅
-    const [setting, setSetting] = useState({
-        urlId:'',
-        faviconAttachment:'',
-        font:'',
-        smallFont:'',
-        color:'#63B3F7',
-        fta:{
-            use:false,
-            backgroundColor:'rgba(150,150,0,1)',
-            text:'fta 버튼'
-        }
-    });
+    const [setting, setSetting] = useState(lodash.cloneDeep(defaults.setting));
 
     // 새로운 세팅
     const [contents, setContents] = useState([ lodash.cloneDeep(base[0]), lodash.cloneDeep(base[1]), lodash.cloneDeep(base[2]), lodash.cloneDeep(base[4]) ])
 
     // 네비게이션
-    const [navi, setNavi] = useState({
-        sectionTypeName:'상단 바',
-        sectionTemplateNumber:1,
-        use:true,
-        title:'Surfee',
-        fixed:false,
-        isLogo:'logo',
-        logo:'',
-        backgroundColor:'rgba(255,255,255,1)', 
-        bottomBorder:false,
-        button:{
-            use:true,
-            func:'link',
-            templateNum:1,
-            link:'www.naver.com',
-            title:'신청하기',
-            color:'rgba(0,0,0,0.4)',
-        }
-    });
+    const [navi, setNavi] = useState(lodash.cloneDeep(defaults.navi));
 
     // 푸터
-    const [foot, setFoot] = useState({
-        sectionTypeName:'푸터 바',
-        sectionTemplateNumber:1,
-        use:true,
-        backgroundColor:'white', 
-        padding:1,
-        text:"copyright 2022",
-        iconUse:true,
-        iconStyle:'circle',
-        iconColor:'white',
-        iconAlign:'start',
-        icons:[
-            
-        ],
-        second:{
-            text:'<p>두번 째 단입니다.</p>'
-        }
-    });
+    const [foot, setFoot] = useState(lodash.cloneDeep(defaults.foot));
 
     const [addingSectionAt, setAddingSectionAt] = useState(NOTADDING); // 1000은 추가하고 있지 않다는 것을 의미.
 
-    const [urlId, setUrlId] = useState("");
     // 푸터
     const [footerOrNot, setFooterOrNot] = useState(false);
 
@@ -203,13 +157,12 @@ const MakePageV2 = ({history, userObj}, props) => {
             setLoading(true);
             const checkDatas = await dbService
                 .collection("apply-landing")
-                .where("password", "==", password)
                 .get(); // uid를 creatorId로 줬었으니까.
             let checkData = checkDatas.docs.map(doc => {
                 return({...doc.data(), id:doc.id})
             });
 
-            const attachmentRef = stService.ref().child(`${urlId}/${uuidv4()}`)
+            const attachmentRef = stService.ref().child(`${setting.urlId}/${uuidv4()}`)
 
             const oneLandingPage = {
 

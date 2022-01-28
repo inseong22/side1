@@ -212,3 +212,64 @@ export const base = [
         ]
     }
 ]
+
+export const defaults = {
+    navi:{
+        elements:{
+            buttonUse:true,
+            logoUse:true,
+            appButtonUse:true,
+        },
+        sectionTypeName:'상단 바',
+        sectionTemplateNumber:1,
+        use:true,
+        title:'Surfee',
+        logo:{
+            text:'',
+            textSize:20,
+            textColor:'red',
+            isLogo:'logo',
+            logo:'',
+        },
+        fixed:false,
+        backgroundColor:'rgba(255,255,255,1)', 
+        bottomBorder:false,
+        button:{
+            func:'link',
+            templateNum:1,
+            link:'www.naver.com',
+            title:'신청하기',
+            color:'rgba(0,0,0,0.4)',
+        },
+    },
+    foot:{
+        sectionTypeName:'푸터 바',
+        sectionTemplateNumber:1,
+        use:true,
+        backgroundColor:'white', 
+        padding:1,
+        text:"copyright 2022",
+        iconUse:true,
+        iconStyle:'circle',
+        iconColor:'white',
+        iconAlign:'start',
+        icons:[
+            
+        ],
+        second:{
+            text:'<p>두번 째 단입니다.</p>'
+        }
+    },
+    setting:{
+        urlId:'',
+        faviconAttachment:'',
+        font:'',
+        smallFont:'',
+        color:'#63B3F7',
+        fta:{
+            use:false,
+            backgroundColor:'rgba(150,150,0,1)',
+            text:'fta 버튼'
+        }
+    }
+}
