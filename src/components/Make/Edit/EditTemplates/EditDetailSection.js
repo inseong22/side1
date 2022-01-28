@@ -1,6 +1,5 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import EditAnimation from '../tools/EditAnimation'
 import { detailSectionTemplateList } from './InnerTemplates'
 import TemplateChoose from '../tools/TemplateChoose'
 import './EditeTemplates.css'
@@ -24,7 +23,6 @@ function EditDetailSection({content, category}) {
                         <br/>
                         <pre dangerouslySetInnerHTML={{__html: content.titles.title}}>
                         </pre>
-                        <EditAnimation content={content}/>
                         <div>
                             <div>버튼링크</div>
                             <input type="text" value={content.button.link} onChange={(e) => onChangeButtonLink(e)}/>

@@ -1,11 +1,11 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import EditAnimation from '../tools/EditAnimation'
 import { detailSectionTemplateList } from './InnerTemplates'
 import TemplateChoose from '../tools/TemplateChoose'
 import {EditRadioContainer} from '../tools/RadioCustom'
 import produce from 'immer';
 import {EditColorContainer} from '../tools/ColorCustom'
+import OnOffCustom from '../tools/OnOffCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
 import AddContentImg from '../tools/AddContentImg'
@@ -181,13 +181,12 @@ function EditHeroSection({content, category}) {
         }))
     }
 
-    // (c) 애니메이션 관련
+    // // (c) 애니메이션 관련
     // const setAnimation = e => {
     //     action.setContents(produce(state.contents, draft=> {
-    //         draft[state.secNum].animation.use = e
-    //         // if(draft[state.secNum].animation.use)
+    //         if(draft[state.secNum].animation.type == 'none')
                 
-    //         // else
+    //         else
 
     //     }))
     // }
@@ -288,7 +287,10 @@ function EditHeroSection({content, category}) {
                     {
                         returnImageOrVideoAdd()
                     } 
-                    {/* <EditRadioContainer text="애니메이션" options={animationOptions} value={content.animation.use} func={ e => setAnimation(e)} />                */}
+                    <OnOffCustom text="애니메이션" value={content.animation.type} 
+                        func={ () => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].animation.use = !content.animation.use
+                        }))}/>
                     <CheckBoxContainer text="버튼 1 사용" value={content.button.first} func={ () => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.first = !content.button.first;
                     }))} />

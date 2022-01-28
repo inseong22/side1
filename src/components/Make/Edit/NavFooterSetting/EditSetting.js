@@ -3,7 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import EditTopBar from '../tools/EditTopBar'
 import OpenCloseCustom from '../tools/OpenCloseCustom'
 import produce from 'immer';
-import {EditRadioContainer} from '../tools/RadioCustom'
+import {EditAnimationContainer} from '../tools/AnimationCustom'
 import { base } from '../../SectionTypes/baseTypes'
 
 import './EditSetting.css'
@@ -91,16 +91,11 @@ function EdtirSetting({setting, setSetting}) {
                     </div>
                     <OpenCloseCustom title="애니메이션">
 
-                            <EditRadioContainer 
+                            <EditAnimationContainer 
                                 text="애니메이션" 
                                 options={animationOptions} 
                                 value={setting.animation} 
                                 func={ e => changeAnimationOption(e)} />
-                                {/* <div className="animation-div">
-                                    <div className="animation-box">없음</div>
-                                    <div className="animation-box">떠오르기</div>
-                                    <div className="animation-box">Fade in</div>
-                                </div> */}
 
                         </OpenCloseCustom>
                     </>

@@ -175,7 +175,7 @@ function EditNaviSection({navi, setNavi, category}) {
                     </OpenCloseCustom>
                     <div className="centera">
                         <div className="edit-element__box">
-                            <OnOffCustom text="페이지 상단 고정" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
+                            <OnOffCustom text="" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
                             <div>
                                 스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.
                             </div>

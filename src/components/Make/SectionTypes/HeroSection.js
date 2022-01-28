@@ -150,35 +150,34 @@ function HeroSection({content}) {
         )
     }
 
-    // const animationDiv = () => {
-    //     if(!content.animation.use)
-    //     return(
-    //         <>
-    //         <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-    //             {returnTextAndButton()}
-    //             {returnImage()}
-    //         </div>
-    //     </>
-    //     )
-    //     else 
-    //     return(
-    //         <>
-    //         <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}} 
-    //         data-aos={content.animation.type} aos-duration="2000" >
-    //             {returnTextAndButton()}
-    //             {returnImage()}
-    //         </motion.div>
-    //         </>
-    //     )
-    // }
-    
-    return (
-        <div style={{padding:`${content.paddingTop}% 0% ${content.paddingBottom}% 0%`}}>
+    const animationDiv = () => {
+        if(!content.animation.use)
+        return(
+            <>
+            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
+                {returnTextAndButton()}
+                {returnImage()}
+            </div>
+        </>
+        )
+        else 
+        return(
+            <>
             <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}} 
             data-aos={content.animation.type} aos-duration="2000" >
                 {returnTextAndButton()}
                 {returnImage()}
             </motion.div>
+            </>
+        )
+    }
+    
+    return (
+        <div style={{padding:`${content.paddingTop}% 0% ${content.paddingBottom}% 0%`}}>
+            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
+                {animationDiv()}
+            </div>
+
         </div>
     )
 }

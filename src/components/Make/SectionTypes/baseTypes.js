@@ -16,8 +16,8 @@ export const base = [
             attachment:'',
         },
         animation:{
-            use:false,
-            type:'',
+            use: true,
+            type:'none',
         },
         // 특정 섹션에 해당할 확률이 높은 것들
         title:{
@@ -71,7 +71,7 @@ export const base = [
             width:70,
         },
         animation:{
-            use:false,
+            use:true,
             type:'none',
         },
         button:{
@@ -124,7 +124,7 @@ export const base = [
             attachment:'',
         },
         animation:{
-            use:false,
+            use:true,
             type:'none',
         },
     },
@@ -162,7 +162,7 @@ export const base = [
             attachment:'',
         },
         animation:{
-            use:false,
+            use:true,
             type:'none',
         },
     },
@@ -178,7 +178,7 @@ export const base = [
             attachment:'',
         },
         animation:{
-            use:false,
+            use:true,
             type:'none',
         },
     },
@@ -205,7 +205,7 @@ export const base = [
             attachment:'',
         },
         animation:{
-            use:false,
+            use:true,
             type:'none',
         },
     },
@@ -220,7 +220,7 @@ export const base = [
             attachment:'',
         },
         animation:{
-            use:false,
+            use:true,
             type:'none',
         },
         etcSections:[
