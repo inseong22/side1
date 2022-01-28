@@ -38,7 +38,7 @@ function ReviewSection({content}) {
     return (
         <>
             <motion.div className="template"
-            ata-aos={content.animation.type} aos-duration="2000">
+            data-aos={content.animation.type} aos-duration="2000">
                 <div>
                     {content.title}
                 </div>
