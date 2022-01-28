@@ -162,6 +162,7 @@ function EditNaviSection({navi, setNavi, category}) {
                         }
                         
                     </OpenCloseCustom>
+<<<<<<< HEAD
                     <BoxCustom>
                         <OnOffCustom text="페이지 상단 고정" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
                         <div>
@@ -170,6 +171,14 @@ function EditNaviSection({navi, setNavi, category}) {
                                     : 
                                 <p>스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.</p>
                             }
+=======
+                    <div className="centera">
+                        <div className="edit-element__box">
+                            <OnOffCustom text="" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
+                            <div>
+                                스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.
+                            </div>
+>>>>>>> 387b425e1f04f4c189b4b8ab065139e9f7c2f51f
                         </div>
                     </BoxCustom>
                 </div>

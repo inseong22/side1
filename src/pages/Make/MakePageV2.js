@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useRef, createContext} from 'react'
 import './MakePage.css'
 import './MakeLanding.css'
-
 // Recoil , Immer JS 적용
 // 
 
@@ -27,7 +26,6 @@ import EditNaviSection from '../../components/Make/Edit/NavFooterSetting/EditNav
 import EditFooterSection from '../../components/Make/Edit/NavFooterSetting/EditFooterSection'
 import EditContents from '../../components/Make/Edit/NavFooterSetting/EditContents'
 import ConfirmCustom from '../../tools/ConfirmCustom'
-import {motion} from 'framer-motion'
 import { isMobile } from 'react-device-detect';
 
 export const MyContext = React.createContext({
@@ -59,7 +57,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     const [editing, setEditing] = useState(false);
     const [category, setCategory] = useState(0);
     const location = useLocation();
-
+      
     // 메인 세팅
     const [setting, setSetting] = useState(lodash.cloneDeep(defaults.setting));
 
@@ -255,7 +253,7 @@ const MakePageV2 = ({history, userObj}, props) => {
                 </div>
                 {/* 아래는 미리보기 화면 */}
                 <div className="make-left-landing" onClick={e => backgroundClick(e)}>
-                    <motion.div className="scroll-container" 
+                    <div className="scroll-container" 
                         style={{ width:`${full ? '100%' :'90%'}`}}
                         animate={
                             isPhone ? {
@@ -286,7 +284,7 @@ const MakePageV2 = ({history, userObj}, props) => {
                             </div>
                             }
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
             

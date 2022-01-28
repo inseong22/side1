@@ -7,6 +7,7 @@ import OnOffCustom from '../tools/OnOffCustom'
 import InputCustom from '../tools/InputCustom'
 import produce from 'immer';
 import { MyContext } from '../../../../pages/Make/MakePageV2'
+<<<<<<< HEAD
 import SelectCustom from '../tools/SelectCustom'
 import './EditSetting.css'
 import '../EditTemplates/Edit.css'
@@ -17,6 +18,36 @@ const fontOptions = [
     { label: '노토산스', value: 'Noto Sans KR' },
     { label: '노토산스', value: 'Noto Sans KR' },
 ]
+=======
+import EditTopBar from '../tools/EditTopBar'
+import OpenCloseCustom from '../tools/OpenCloseCustom'
+import produce from 'immer';
+import {EditAnimationContainer} from '../tools/AnimationCustom'
+import { base } from '../../SectionTypes/baseTypes'
+
+import './EditSetting.css'
+import '../EditTemplates/Edit.css'
+
+function EdtirSetting({setting, setSetting}) {
+
+    // 애니메이션 관련 -> 아직 재사용성 고려 X, 일단 구현 우선
+    const animationOptions = [
+        {label:'없음', value: 'none'},
+        {label:'떠오르기', value: 'fade-up'},
+        {label:'zoom-in', value: 'zoom-in'}
+    ]
+
+    const changeAnimationOption = e => {
+        base.map((section)=>section.animation.type=e)
+        action.setContents(base)
+        setSetting({...setting, animation:e})
+    }
+
+    const {state, action} = useContext(MyContext)
+
+
+    const [category, setCategory] = useState(0)
+>>>>>>> 387b425e1f04f4c189b4b8ab065139e9f7c2f51f
 
 const shapeOptions = [
     { label: '사각형', value: 0 },
@@ -136,6 +167,7 @@ function EdtirSetting({setting, setSetting, category}) {
                                     <div className="custom-button" style={{ color:`${setting.ghost.color}`, border:`${setting.ghost.border ? `1px solid ${setting.borderColor}` : 'none'}`, boxShadow:`${setting.ghost.shadow ? '2px 2px 3px rgba(0,0,0,0.5)' : 'none'}`, borderRadius:`${setting.ghost.borderRadius}px`, backgroundColor:`${setting.ghost.backgroundColor}`}}>
                                         버튼
                                     </div>
+<<<<<<< HEAD
                                 </div>
                             </div>
                         }>
@@ -160,7 +192,20 @@ function EdtirSetting({setting, setSetting, category}) {
                         </OpenCloseCustom>
                         <OpenCloseCustom title="애니메이션">
                         </OpenCloseCustom>
+=======
+                                </div>}
+                        </div>
+>>>>>>> 387b425e1f04f4c189b4b8ab065139e9f7c2f51f
                     </div>
+                    <OpenCloseCustom title="애니메이션">
+
+                            <EditAnimationContainer 
+                                text="애니메이션" 
+                                options={animationOptions} 
+                                value={setting.animation} 
+                                func={ e => changeAnimationOption(e)} />
+
+                        </OpenCloseCustom>
                     </>
                 )
         }

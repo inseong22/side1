@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import Editor from '../tools/Editor'
 import './CtaSection.css'
+import { motion } from 'framer-motion';
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
 
@@ -30,9 +31,10 @@ function CtaSection({content}) {
 
     return (
         <>
-            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
+            <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}
+            data-aos={content.animation.type} aos-duration="2000">
                 {returnCtaSection()}
-            </div>
+            </motion.div>
         </>
     )
 }

@@ -17,6 +17,10 @@
     background-color:pink;
 }
 
+.section-animation{
+    width: 100%;
+}
+
 .colorSelection{
     margin:10px;
     display: flex;
