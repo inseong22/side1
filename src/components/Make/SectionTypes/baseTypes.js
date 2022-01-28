@@ -17,7 +17,7 @@ export const base = [
         },
         animation:{
             use:false,
-            type:0,
+            type:'',
         },
         // 특정 섹션에 해당할 확률이 높은 것들
         title:{
@@ -55,6 +55,10 @@ export const base = [
         templateNumber:1,
         backgroundColor:'white',
         backgroundOpacity:1,
+        backgroundImage:{
+            use:false,
+            attachment:'',
+        },
         titles:{
             title:'<p>여기서 타이틀을 입력rhrh</p>',
             font:'Pretendard-Regular',
@@ -68,7 +72,7 @@ export const base = [
         },
         animation:{
             use:false,
-            type:0,
+            type:'none',
         },
         button:{
             title:'버튼입니다.',
@@ -90,6 +94,10 @@ export const base = [
         title:"Surfee의 자랑",
         backgroundColor:'white',
         backgroundOpacity:1,
+        backgroundImage:{
+            use:false,
+            attachment:'',
+        },
         ratingColor:'red',
         reviews:[
             {
@@ -114,7 +122,11 @@ export const base = [
         backgroundImage:{
             use:false,
             attachment:'',
-        }
+        },
+        animation:{
+            use:false,
+            type:'none',
+        },
     },
     {
         sectionTypeName:'FeaturesSection',
@@ -122,6 +134,10 @@ export const base = [
         templateNumber:1,
         backgroundColor:'white',
         backgroundOpacity:1,
+        backgroundImage:{
+            use:false,
+            attachment:'',
+        },
         align:'start',
         features:[
             {
@@ -144,7 +160,11 @@ export const base = [
         backgroundImage:{
             use:false,
             attachment:'',
-        }
+        },
+        animation:{
+            use:false,
+            type:'none',
+        },
     },
     {
         sectionTypeName:'PriceSection',
@@ -156,7 +176,11 @@ export const base = [
         backgroundImage:{
             use:false,
             attachment:'',
-        }
+        },
+        animation:{
+            use:false,
+            type:'none',
+        },
     },
     {
         sectionTypeName:'CtaSection',
@@ -179,7 +203,11 @@ export const base = [
         backgroundImage:{
             use:false,
             attachment:'',
-        }
+        },
+        animation:{
+            use:false,
+            type:'none',
+        },
     },
     {
         sectionTypeName:'ETCetraSection',
@@ -190,6 +218,10 @@ export const base = [
         backgroundImage:{
             use:false,
             attachment:'',
+        },
+        animation:{
+            use:false,
+            type:'none',
         },
         etcSections:[
             {
@@ -270,6 +302,7 @@ export const defaults = {
             use:false,
             backgroundColor:'rgba(150,150,0,1)',
             text:'fta 버튼'
-        }
+        },
+        animation: 'none',
     }
 }

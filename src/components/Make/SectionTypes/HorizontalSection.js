@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import './Default.css'
+import { motion } from 'framer-motion';
 
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';

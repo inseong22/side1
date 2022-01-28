@@ -1,12 +1,33 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import EditTopBar from '../tools/EditTopBar'
+import OpenCloseCustom from '../tools/OpenCloseCustom'
+import produce from 'immer';
+import {EditRadioContainer} from '../tools/RadioCustom'
+import { base } from '../../SectionTypes/baseTypes'
+
 import './EditSetting.css'
 import '../EditTemplates/Edit.css'
 
 function EdtirSetting({setting, setSetting}) {
+
+    // 애니메이션 관련 -> 아직 재사용성 고려 X, 일단 구현 우선
+    const animationOptions = [
+        {label:'없음', value: 'none'},
+        {label:'떠오르기', value: 'fade-up'},
+        {label:'zoom-in', value: 'zoom-in'}
+    ]
+
+    const changeAnimationOption = e => {
+        base.map((section)=>section.animation.type=e)
+        action.setContents(base)
+        setSetting({...setting, animation:e})
+    }
+
+    const {state, action} = useContext(MyContext)
+
+
     const [category, setCategory] = useState(0)
-    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const changeFtaUse = () => {
         setSetting({...setting, fta:{...setting.fta, use:!setting.fta.use}});
@@ -67,10 +88,21 @@ function EdtirSetting({setting, setSetting}) {
                                     </div>
                                 </div>}
                         </div>
-                        <div>
-                            버튼
-                        </div>
                     </div>
+                    <OpenCloseCustom title="애니메이션">
+
+                            <EditRadioContainer 
+                                text="애니메이션" 
+                                options={animationOptions} 
+                                value={setting.animation} 
+                                func={ e => changeAnimationOption(e)} />
+                                {/* <div className="animation-div">
+                                    <div className="animation-box">없음</div>
+                                    <div className="animation-box">떠오르기</div>
+                                    <div className="animation-box">Fade in</div>
+                                </div> */}
+
+                        </OpenCloseCustom>
                     </>
                 )
 

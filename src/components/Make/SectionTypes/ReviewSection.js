@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import Editor from '../tools/Editor'
 import './ReviewSection.css'
 import Rating from '@mui/material/Rating';
-
+import { motion } from 'framer-motion';
 import { MyContext } from '../../../pages/Make/MakePageV2'
 
 function ReviewSection({content}) {
@@ -37,14 +37,15 @@ function ReviewSection({content}) {
 
     return (
         <>
-            <div className="template">
+            <motion.div className="template"
+            ata-aos={content.animation.type} aos-duration="2000">
                 <div>
                     {content.title}
                 </div>
                 <div className="reviews__container"> 
                     {returnReviewCards}
                 </div>
-            </div>
+            </motion.div>
         </>
     )
 }

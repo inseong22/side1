@@ -10,7 +10,6 @@ import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
 import AddContentImg from '../tools/AddContentImg'
 import EditSlider from '../tools/EditSlider'
-import { useAnimation } from 'framer-motion'
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 
 const paddingOptions = [
@@ -183,15 +182,15 @@ function EditHeroSection({content, category}) {
     }
 
     // (c) 애니메이션 관련
-    const setAnimation = e => {
-        action.setContents(produce(state.contents, draft=> {
-            draft[state.secNum].animation.use = e
-            // if(draft[state.secNum].animation.use)
+    // const setAnimation = e => {
+    //     action.setContents(produce(state.contents, draft=> {
+    //         draft[state.secNum].animation.use = e
+    //         // if(draft[state.secNum].animation.use)
                 
-            // else
+    //         // else
 
-        }))
-    }
+    //     }))
+    // }
     const returnImageOrVideoAdd = () => {
         switch(content.image.type){
             case 'image':
@@ -289,7 +288,7 @@ function EditHeroSection({content, category}) {
                     {
                         returnImageOrVideoAdd()
                     } 
-                    <EditRadioContainer text="애니메이션" options={animationOptions} value={content.animation.use} func={ e => setAnimation(e)} />               
+                    {/* <EditRadioContainer text="애니메이션" options={animationOptions} value={content.animation.use} func={ e => setAnimation(e)} />                */}
                     <CheckBoxContainer text="버튼 1 사용" value={content.button.first} func={ () => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.first = !content.button.first;
                     }))} />

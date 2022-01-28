@@ -19,6 +19,7 @@ function NewSection({content, index, contents, setContents}) {
     const {state, action} = useContext(MyContext)
 
     const returnType = () => {
+        console.log(content.sectionTypeName)
         switch(content.sectionTypeName){
             case 'DetailSection':
                 return (
@@ -74,7 +75,9 @@ function NewSection({content, index, contents, setContents}) {
             <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
 
             </div>
-            <div className="section__container" style={{backgroundImage:`url(${content.backgroundImage.attachment})`}} onClick={() => setThisSection()}>
+            <div className="section__container" 
+            // style={{backgroundImage:`url(${content.backgroundImage.attachment})`}} 
+            onClick={() => setThisSection()}>
                 {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                 <div style={{backgroundColor:`${content.backgroundColor}`, opacity:`${content.backgroundOpacity}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
                 </div>

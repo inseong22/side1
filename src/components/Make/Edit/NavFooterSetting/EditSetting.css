@@ -5,3 +5,17 @@
     z-index:1003;
     border:none;
 }
+
+.animation-div{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px 10px 10px 10px;
+}
+
+.animation-box{
+    border-color: black;
+    border: solid;
+    margin: 10px;
+    cursor: pointer;
+    padding: 8px;
+}

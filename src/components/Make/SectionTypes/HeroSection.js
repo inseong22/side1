@@ -12,6 +12,8 @@ import './HeroSection.css'
 import Popover from '@mui/material/Popover';
 import {ImageAdd} from '@styled-icons/boxicons-regular';
 
+import { motion } from 'framer-motion';
+
 function HeroSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const imgRef = useRef(null)
@@ -148,32 +150,35 @@ function HeroSection({content}) {
         )
     }
 
-    const animationDiv = () => {
-        if(!content.animation.use)
-        return(
-            <>
-            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-                {returnTextAndButton()}
-                {returnImage()}
-            </div>
-        </>
-        )
-        else 
-        return(
-            <>
-            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}} data-aos="flip-down"  aos-duration="2000">
-                {returnTextAndButton()}
-                {returnImage()}
-            </div>
-            </>
-        )
-    }
+    // const animationDiv = () => {
+    //     if(!content.animation.use)
+    //     return(
+    //         <>
+    //         <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
+    //             {returnTextAndButton()}
+    //             {returnImage()}
+    //         </div>
+    //     </>
+    //     )
+    //     else 
+    //     return(
+    //         <>
+    //         <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}} 
+    //         data-aos={content.animation.type} aos-duration="2000" >
+    //             {returnTextAndButton()}
+    //             {returnImage()}
+    //         </motion.div>
+    //         </>
+    //     )
+    // }
     
     return (
         <div style={{padding:`${content.paddingTop}% 0% ${content.paddingBottom}% 0%`}}>
-            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-                {animationDiv()}
-            </div>
+            <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}} 
+            data-aos={content.animation.type} aos-duration="2000" >
+                {returnTextAndButton()}
+                {returnImage()}
+            </motion.div>
         </div>
     )
 }
