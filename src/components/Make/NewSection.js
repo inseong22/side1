@@ -19,7 +19,6 @@ function NewSection({content, index, contents, setContents}) {
     const {state, action} = useContext(MyContext)
 
     const returnType = () => {
-        console.log(content.sectionTypeName)
         switch(content.sectionTypeName){
             case 'DetailSection':
                 return (

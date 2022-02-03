@@ -181,20 +181,20 @@ function EditHeroSection({content, category}) {
         }))
     }
 
-    // // (c) 애니메이션 관련
-    // const setAnimation = e => {
-    //     action.setContents(produce(state.contents, draft=> {
-    //         if(draft[state.secNum].animation.type == 'none')
-                
-    //         else
-
-    //     }))
-    // }
     const returnImageOrVideoAdd = () => {
         switch(content.image.type){
             case 'image':
                 return(
                     <AddContentImg value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
+                )
+            case 'slide':
+                return(
+                    <>
+                    <AddContentImg value={content.slide_img.slide1} func={e => onChangeSlideImage1(e)} removeFunc={e => RemoveSlide1(e)}/>
+                    <AddContentImg value={content.slide_img.slide2} func={e => onChangeSlideImage2(e)} removeFunc={e => RemoveSlide2(e)}/>
+                    <AddContentImg value={content.slide_img.slide3} func={e => onChangeSlideImage3(e)} removeFunc={e => RemoveSlide3(e)}/>
+                    최대 5MB까지 가능합니다.
+                    </>
                 )
             
             case 'video':
@@ -227,6 +227,7 @@ function EditHeroSection({content, category}) {
             // newContents[state.secNum].image.attachment = result;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].image.attachment = result;
+                draft[state.secNum].image.slide = false
             }))
         }
         if(oneFile){
@@ -237,6 +238,73 @@ function EditHeroSection({content, category}) {
     const RemoveImage = () => {
         action.setContents(produce(state.contents, draft=>{
             draft[state.secNum].image.attachment = '';
+        }))
+    }
+
+    // 슬라이드 - 이미지
+    const onChangeSlideImage1= e => {
+        let newContents = JSON.parse(JSON.stringify(state.contents))
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide1 = result;
+                draft[state.secNum].image.slide = true
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide1 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide1 = '';
+        }))
+    }
+    const onChangeSlideImage2= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
+            // newContents[state.secNum].image.attachment = result;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide2 = result;
+                draft[state.secNum].image.slide = true
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide2 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide2 = '';
+        }))
+    }
+    const onChangeSlideImage3= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
+            // newContents[state.secNum].image.attachment = result;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide3 = result;
+                draft[state.secNum].image.slide = true
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide3 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide3 = '';
         }))
     }
 

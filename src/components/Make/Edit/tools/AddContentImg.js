@@ -1,5 +1,5 @@
 import React, {useRef} from 'react'
-
+import {base} from '../../SectionTypes/baseTypes'
 
 function AddContentImg({value, func, removeFunc}) {
     const photoInput = useRef();

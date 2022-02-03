@@ -38,6 +38,12 @@ export const base = [
             width:70,
             border:0,
             size:150,
+            slide:false,
+        },
+        slide_img:{
+            slide1: '',
+            slide2: '',
+            slide3: '',
         },
         button:{
             title:'버튼입니다.',
