@@ -75,15 +75,17 @@ const OpenCloseCustom = (props) => {
         <div className="accordion__header" onClick={() => setOpen(!open)}>
           <div className="edit-element">
             <div className="edit-element__left">
-              {props.title}
+              <div>
+                {props.title}
+              </div>
               {
                 props.tooltip && 
                   <Tooltip placement="top" title={props.tooltip} arrow>
-                    <InformationCircle size="20" style={{color:'grey', zIndex:'20', marginLeft:'10px'}}/>
+                    <InformationCircle size="16" style={{color:'#C4CACF', zIndex:'20', marginLeft:'6px'}}/>
                   </Tooltip>
               }
             </div>
-            <div className="edit-element__right">
+            <div className="centera" style={{justifyContent: 'end'}}>
               { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
             </div>
           </div>

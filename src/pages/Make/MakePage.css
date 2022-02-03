@@ -6,17 +6,10 @@
     height: 100%;
     width:100%;
     overflow:hidden;
-    background-color:white;
     padding-top:60px;
     position:relative;
+    background-color:rgba(200,200,200,0.2);
 }
-
-.make-page-example{
-    width:70%;
-    height:100%;
-    background-color:pink;
-}
-
 .section-animation{
     width: 100%;
 }
@@ -146,7 +139,6 @@
     padding:3% 0%;
     z-index: 1;
     -webkit-overflow-scrolling: touch;
-    background-color:rgba(200,200,200,0.3);
 }
 
 .make-main-page-container{

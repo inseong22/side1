@@ -27,9 +27,10 @@
 
 .edit-element__box{
     width:95%;
-    border-radius: 5px;
-    border: 1px solid var(--edit-main-border-color);
+    border-radius: var(--br-01);
     box-sizing: border-box;
+    box-shadow: var(--default-shadow-01);
+    padding:10px 15px;
 }
 
 .edit-element__left{
@@ -46,6 +47,7 @@
     align-items : center;
     /* padding:10px 10px 10px 10px; */
     width:100%;
+    margin-top:15px;
 }
 
 .edit-element__more{
@@ -65,7 +67,7 @@
     display:flex;
     justify-content: center;
     align-items : center;
-    padding:5px 0px;
+    padding:7px 0px;
 }
 
 
@@ -73,6 +75,6 @@
     display: flex;
     align-items : center;
     justify-content : center;
-    padding:5px 13px;
+    padding:15px 25px;
     cursor:pointer;
 }

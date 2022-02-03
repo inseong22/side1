@@ -4,9 +4,10 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import produce from 'immer';
 import ConfirmCustom from '../../../../tools/ConfirmCustom';
 import AddingSection from '../../Modal/AddingSection';
+import {CustomSwitch} from '../tools/OnOffCustom'
 import './EditContents.css';
 
-const BCOLOR = 'rgba(230,230,230,0.8)'
+const BCOLOR = 'rgba(230,230,230,0)'
 
 const getItemStyle = (isDragging, draggableStyle, backColor) => {
     return {
@@ -15,7 +16,7 @@ const getItemStyle = (isDragging, draggableStyle, backColor) => {
 
         // change background color if dragging
         background: isDragging ? "white" : BCOLOR,
-        boxShadow: isDragging ? "2px 2px 3px rgba(0,0,0,0.2)" : 'none',
+        boxShadow: isDragging ? "2px 4px 20px #E8F0F9" : 'none',
 
         // styles we need to apply on draggables
         ...draggableStyle
@@ -80,15 +81,15 @@ function EditContents({navi, setNavi, foot, setFoot}) {
             </div>
             <div>
                 <div className="one-contents-draggable" style={{backgroundColor:`${BCOLOR}`}}>
-                    <div className="center-row hoverback one-contents__inner">
+                    <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
                         <div className="left">
                             <div className="content__name">
                                 네비 바
                             </div>
-                            <div>
-                                <input type="checkbox" checked={navi.use} value={navi.use} onChange={e => setNavi(produce(navi, draft => {
+                            <div style={{paddingLeft:'7%'}}>
+                                <CustomSwitch value={navi.use} onChange={e => setNavi(produce(navi, draft => {
                                     draft.use = !navi.use
-                                })) } />
+                                })) }/>
                             </div>
                         </div>
                         <div className="right">
@@ -120,26 +121,35 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                                                             snapshot.isDragging,
                                                             provided.draggableProps.style,
                                                             )}>
-                                                                <div className="center-row hoverback one-contents__inner">
-                                                                    <div className="left">
-                                                                        <div className="content__name">
-                                                                            {item.sectionTypeName}
+                                                                <div className="center-column hoverback one-contents__inner">
+                                                                    <div className="center-row">
+                                                                        <div className="left">
+                                                                            <div className="content__name">
+                                                                                {item.name}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="right">
+                                                                            {optionButton(index)}
                                                                         </div>
                                                                     </div>
-                                                                    <div className="right">
-                                                                        {optionButton(index)}
-                                                                        <div className="content__button delete"
-                                                                            onClick={() => {
-                                                                                const yes = window.confirm("정말 삭제하시겠습니까?");
-                                                                                if(yes){
-                                                                                    deleteSection(index);
-                                                                                }
-                                                                            } }>
-                                                                            삭제
+                                                                    <div className="center-row">
+                                                                        <div className="left">
+
                                                                         </div>
-                                                                        <div className="content__button"
-                                                                            onClick={() => pasteThisSection(state.contents[index], index) }>
-                                                                            복제
+                                                                        <div className="right">
+                                                                            <div className="content__button cb-delete"
+                                                                                onClick={() => {
+                                                                                    const yes = window.confirm("정말 삭제하시겠습니까?");
+                                                                                    if(yes){
+                                                                                        deleteSection(index);
+                                                                                    }
+                                                                                } }>
+                                                                                삭제
+                                                                            </div>
+                                                                            <div className="content__button cb-duplicate"
+                                                                                onClick={() => pasteThisSection(state.contents[index], index) }>
+                                                                                복제
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>   
@@ -169,16 +179,16 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                     </div>
                 </div>
                 <hr className="hr" />
-                <div className="one-contents-draggable" style={{backgroundColor:`${BCOLOR}`}}>
-                    <div className="center-row hoverback one-contents__inner">
+                <div className="one-contents-draggable">
+                    <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
                         <div className="left">
                             <div className="content__name">
                                 푸터 바
                             </div>
-                            <div>
-                                <input type="checkbox" checked={foot.use} value={foot.use} onChange={e => setFoot(produce(foot, draft => {
+                            <div style={{paddingLeft:'7%'}}>
+                                <CustomSwitch value={foot.use} onChange={e => setFoot(produce(foot, draft => {
                                     draft.use = !foot.use
-                                })) } />
+                                })) }/>
                             </div>
                         </div>
                         <div className="right">

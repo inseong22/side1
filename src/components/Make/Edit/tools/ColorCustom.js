@@ -19,16 +19,18 @@ function EditColor({onChange, value}) {
 
 
     return (
-        <div className="center-row">
-            <div className="color-button" style={{backgroundColor:`${state.setting.color}`}} onClick={() => onChange(`${state.setting.color}`)}>
-                
+        <div className="center-row" style={{justifyContent: "start"}}>
+            <div className="color-button" style={{backgroundColor : `${state.setting.color}`}} onClick={() => onChange(`${state.setting.color}`)}>
+                {/* <div style={{color:'rgba(255,255,255,0.8)'}}>
+                    main
+                </div> */}
+                <div>
+                    {state.setting.color}
+                </div>
             </div>
-            <div>
 
-            </div>
-            {/* <input className="color-button" type="color" value onChange={(e) => {onChange(e.currentTarget.value); console.log(e)}}/> */}
-
-            <div ref={colorRef} className="color-button" style={{backgroundColor:"green"}} onClick={(e) =>{ setColorShow(e.currentTarget)}}>    
+            <div ref={colorRef} className="color-button" style={{backgroundColor:`${value}`}} onClick={(e) =>{ setColorShow(e.currentTarget)}}>    
+                {value}
             </div>
 
             <Popover
@@ -89,7 +91,7 @@ function EditColor({onChange, value}) {
 export const returnColorContainer = (text, value, func) => {
     return(
         <div className="edit-element">
-            <div className="edit-element__one">
+            <div className="edit-element__one" style={{flexDirection: 'column'}}>
                 <div className="edit-element__left">
                     {text}
                 </div>
@@ -104,7 +106,7 @@ export const returnColorContainer = (text, value, func) => {
 export const EditColorContainer = ({text, value, func}) => {
     return(
         <div className="edit-element">
-            <div className="edit-element__one">
+            <div className="edit-element__one" style={{flexDirection: 'column'}}>
                 <div className="edit-element__left">{text}</div>
                 <div className="edit-element__right">
                     <EditColor onChange={(e) => func(e)} value={value || 'white'} />

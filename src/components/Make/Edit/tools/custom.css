@@ -2,19 +2,57 @@
     --main-color: #6B63F7;
   }
 
-.radio-element{
-    padding:3px 10px;
-    cursor:pointer;
+  .radio-container{
+      display: flex;
+      flex-direction:row;
+      justify-content:start;
+      align-items: center;
+      width:100%;
+  }
+
+  .radio-element{
+    cursor: pointer;
+    width:110px;
+    height:110px;
+    background:var(--main-gradient);
+    box-shadow: var(--main-shadow-01);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    border-radius: 30px;
+    font-size: 14px;
+    margin:8px;
+    flex-direction: column;
+    border-color:white;
+}
+.r-unclicked{
+    background:white;
+    color:var(--main-gray);
+    box-shadow: var(--default-shadow-01);
+    border-color:#C4CACF;
 }
 
-.r-first{
-    border-top-left-radius:3px;
-    border-bottom-left-radius:3px;
+.radio-shape{
+    border:2px solid;
+    box-sizing: border-box;
+    width:28px;
+    height: 28px;
 }
 
-.r-end{
-    border-top-right-radius:3px;
-    border-bottom-right-radius:3px;
+.box{
+    border-radius:1px;
+}
+.round{
+    border-radius:8px;
+}
+.circle{
+    border-radius:50%;
+}
+
+.radio-shape-text{
+    font-size:12px;
+    margin-top:8px;
 }
 
 /* 아래는 버튼 선택 테이블 */
@@ -37,17 +75,41 @@
 /* 아래는 색상 선택 테이블 */
 
 .color-button{
-    border-radius:5px;
-    width:27px;
-    height:27px;
+    border-radius:50%;
+    width:90px;
+    height:90px;
     display: block;
     cursor: pointer;
-    border:2px solid rgba(0, 0, 0, 0);
-    margin:1%;
+    /* border:1px solid rgba(0, 0, 0, 0); */
+    margin-right:2%;
+    display:flex;
+    justify-content: center;
+    align-items : center;
+    color:white;
+    font-size: 13px;
+    box-shadow: var(--default-shadow-01);
+    flex-direction: column;
 }
 
 .color-button:hover{
-    border:2px solid black;
+    /* border:1px solid black; */
+}
+
+.custom-check{
+    border:1px solid var(--main-color-soft);
+    background-color:var(--main-color-soft);
+    width:22px;
+    height:22px;
+    color:white;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:2%;
+}
+
+.cc-unclicked{
+    background-color:white;
 }
 
 /* 아래는 콘텐트 이미지 추가 관련 css */

@@ -1,8 +1,11 @@
 .accordion{
-    border:1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
+    border-radius: var(--br-01);
+    box-sizing: border-box;
+    box-shadow: var(--default-shadow-01);
     width:95%;
     box-sizing: border-box;
+    /* 전체 온오프 패딩 조절 */
+    padding:10px 15px;
 }
 
 .accordion__header{
@@ -27,4 +30,6 @@
     align-items :center;
     box-sizing: border-box;
     width:100%;
+    color:#757E8A;
+    font-size:16px;
 }

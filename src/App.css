@@ -63,7 +63,20 @@
 :root {
   --make-border: rgb(192, 192, 192);
   --main-color: #6B63F7;
+  --main-color-soft:#A89AFF;
+  --main-font-color: #202936;
   --main-hover-color: #b3b0f5;
+
+  --default-shadow-01: 2px 4px 20px #E8F0F9;
+  --br-01: 25px;
+  --br-02:32px;
+  --main-gradient:linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
+  --main-shadow-01:4px 4px 15px #D0CDFF;
+  --main-shadow-02:2px 2px 8px rgba(0,0,0,0.25);
+
+  --main-gray:#C4CACF;
+  --main-dark-gray: #555C67;
+  --main-black-01:#202936;
 }
 
 
@@ -93,6 +106,21 @@
 }
 .mobile-hide{
   display: none;
+}
+
+.default-button-02{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background:var(--main-gradient);
+  box-shadow: var(--main-shadow-01);
+  border-radius: var(--br-02);
+  color:white;
+  font-size: 15px;
+  border:none;
+  padding:0px 35px;
+  height:40px;
+  cursor: pointer;
 }
 
 .center-row{

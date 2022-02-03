@@ -1,0 +1,23 @@
+.custom-switch{
+    width: 64px;
+    height:34px;
+    background:var(--main-gradient);
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-switch-thumb{
+    background-color:white;
+    width:30px;
+    height: 30px;
+    box-shadow: var(--main-shadow-02);
+    border-radius: 100px;
+    left:2px;
+    top:2px;
+    position: absolute;
+}
+
+.unclicked{
+    background:rgb(161, 161, 161);
+}

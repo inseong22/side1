@@ -2,7 +2,7 @@
 
 .edit__top-bar{
     /* background-color:#6B63F7; */
-    padding:1% 2%;
+    padding:1% 1%;
     width:100%;
     box-sizing:border-box;
     display: flex;
@@ -17,8 +17,15 @@
     border-radius: 2px;
     margin-left:3px;
     cursor:pointer;
-    border: 1px solid #6a63f700;
+    font-size: 26px;
+    color:var(--main-gray);
 }
+
 .edit-radios:hover{
-    border: 1px solid #6a63f76c;
+    color:var(--main-black-01);
+}
+
+.er-clicked{
+    color:#202936;
+    border-bottom:3px solid var(--main-black-01);
 }

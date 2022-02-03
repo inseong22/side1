@@ -6,8 +6,6 @@ import EditCtaSection from './EditTemplates/EditCtaSection'
 import EditHeroSection from './EditTemplates/EditHeroSection'
 import EditReviewSection from './EditTemplates/EditReviewSection'
 import EditFeaturesSection from './EditTemplates/EditFeaturesSection'
-import EditMapSection from './EditTemplates/EditMapSection'
-import EditPriceSection from './EditTemplates/EditPriceSection'
 import EditTopBar from './tools/EditTopBar'
 import AddingSection from './AddingSection'
 
@@ -15,7 +13,7 @@ import EditSetting from './NavFooterSetting/EditSetting'
 import EditNaviSection from './NavFooterSetting/EditNaviSection'
 import EditFooterSection from './NavFooterSetting/EditFooterSection'
 import EditContents from './NavFooterSetting/EditContents'
-
+import {ChevronLeft} from '@styled-icons/bootstrap'
 import './NewSectionMake.css'
 
 const NAVSECNUM = 50;
@@ -52,19 +50,9 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
 
                 )
 
-            case 'MapSection':
-                return(
-                    <EditMapSection content={content} category={state.category}/>
-                )
-
             case 'CtaSection':
                 return(
                     <EditCtaSection content={content} category={state.category}/>
-                )
-
-            case 'PriceSection':
-                return(
-                    <EditPriceSection content={content} category={state.category}/>
                 )
 
             default:
@@ -83,12 +71,12 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             return(
                 <>
                     <div className="back__container">
-                            <div className="left">
-                                <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                    ⬅
+                            <div className="left" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                <span className="back-button">
+                                    <ChevronLeft size={17} />
                                 </span>
                                 <span className="back-text">
-                                    {navi.sectionTypeName}
+                                    내비게이션 바
                                 </span>
                             </div>
                     </div>
@@ -101,12 +89,12 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             return(
                 <>
                     <div className="back__container">
-                            <div className="left">
-                                <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                    ⬅
+                            <div className="left" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                <span className="back-button">
+                                    <ChevronLeft size={17} />
                                 </span>
                                 <span className="back-text">
-                                    {foot.sectionTypeName}
+                                    푸터 바
                                 </span>
                             </div>
                     </div>
@@ -131,12 +119,12 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                 {content && 
                 <>
                     <div className="back__container">
-                            <div className="left">
-                                <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                    ⬅
+                            <div className="left" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                <span className="back-button">
+                                    <ChevronLeft size={17} />
                                 </span>
                                 <span className="back-text">
-                                    {content.sectionTypeName}
+                                    {content.name}
                                 </span>
                             </div>
                     </div>

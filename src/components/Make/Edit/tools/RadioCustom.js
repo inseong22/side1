@@ -3,52 +3,91 @@ import './custom.css'
 
 function RadioCustom({options, value, onChange}) {
     return (
-        <div>
+        <div className="radio-container">
             {options.map((item, index) => {
-                let backColor = "rgb(100,100,100)";
-                if(value === item.value){
-                    backColor = "#6a6cfa";
-                }
-                if(index === 0){
-                    return(
-                        <span className="radio-element r-first" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
-                            {item.label}
-                        </span>
-                    )
-                }else if(index === (options.length - 1)){
-                    return(
-                        <span className="radio-element r-end" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
-                            {item.label}
-                        </span>
-                    )
-                }
-                else{
-                    return(
-                        <span className="radio-element" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
-                            {item.label}
-                        </span>
-                    )
-                }
+                return(
+                    <div className={value === item.value ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(item.value)} key={index}>
+                        {item.label}
+                    </div>
+                )
             })}
         </div>
     )
 }
+function RadioCustomButton({options, value, onChange}) {
+    const ROUNDBORDER = 5;
+    const CIRCLEBORDER = 15;
 
-export const EditRadioContainer = ({text, options, value, func}) => {
-    return(
-        <div className="edit-element">
-            <div className="edit-element__one">
-                <div className="edit-element__left">{text}</div>
-                <div className="edit-element__right">
-                    <RadioCustom 
-                        options={options}
-                        onChange={e => {func(e)}}
-                        value={value}
-                    />
+    return (
+        <div className="radio-container">
+            <div className={value === 0 ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(0)}>
+                <div className="radio-shape box">
+
+                </div>
+                <div className="radio-shape-text">
+                    사각형
+                </div>
+            </div>
+            <div className={value === ROUNDBORDER ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(ROUNDBORDER)}>
+                <div className="radio-shape round">
+
+                </div>
+                <div className="radio-shape-text">
+                    라운드
+                </div>
+            </div>
+            <div className={value === CIRCLEBORDER ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(CIRCLEBORDER)}>
+                <div className="radio-shape circle">
+
+                </div>
+                <div className="radio-shape-text">
+                    원형
                 </div>
             </div>
         </div>
     )
+}
+
+export const EditRadioContainer = ({text, options, value, func, button}) => {
+    if (button === true){
+        return(
+            <div className="edit-element">
+            <div className="edit-element__one" style={{flexDirection: 'column'}}>
+                {text ? 
+                    <div className="edit-element__left">{text}</div> 
+                    : 
+                    <></>
+                }
+                <div className="radio-container">
+                    <RadioCustomButton
+                        options={options}
+                        onChange={e => {func(e)}}
+                        value={value}
+                        />
+                </div>
+            </div>
+        </div>
+        )
+    }else{
+        return(
+            <div className="edit-element">
+            <div className="edit-element__one" style={{flexDirection: 'column'}}>
+                {text ? 
+                    <div className="edit-element__left">{text}</div> 
+                    : 
+                    <></>
+                }
+                <div className="radio-container">
+                    <RadioCustom 
+                        options={options}
+                        onChange={e => {func(e)}}
+                        value={value}
+                        />
+                </div>
+            </div>
+        </div>
+        )
+    }
 }
 
 export default RadioCustom

@@ -106,16 +106,20 @@ const NavBarInMakePage = (props) => {
         <div className="make-page-nav">
             <div className="make-page-nav-half" style={{justifyContent: 'start', marginLeft:'1%'}}>
                 {/* <Button onClick={e => props.setOpen(!props.open)}>설명 다시보기</Button> */}
-                <span className="edit-nav-button" onClick={e => {
+                <span className="nav-button" onClick={e => {
                     action.setSecNum(52); 
-                    }}>
+                }}
+                style={{fontWeight: `${state.secNum === 52 ? 'bold' : ''}`}}
+                >
                     기본설정
                 </span>
-                <button className="edit-nav-button" onClick={e => {
+                <span className="nav-button" onClick={e => {
                     action.setSecNum(53);
-                    }}>
+                }}
+                style={{fontWeight: `${state.secNum === 53 ? 'bold' : ''}`}}
+                >
                     페이지 구성
-                </button>
+                </span>
             </div>
             <div className="make-page-nav-half">
                 <div className="centera">
@@ -152,8 +156,8 @@ const NavBarInMakePage = (props) => {
                         </span>
                     </div>
                 </Popover>
-                <Button style={{width:'120px', backgroundColor:'#6a63f75b'}} onClick={() => onSubmit()} className="make-nav-left-text">
-                    저장 후 배포하기
+                <Button onClick={() => onSubmit()} className="default-button-02">
+                    배포하기
                 </Button>
             </div>
             {/* <ConfirmCustom open={open} setOpen={setOpen} message={"홈"} callback={deletePage}/> */}

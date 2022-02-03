@@ -9,10 +9,10 @@ function EditTopBar({category, setCategory}) {
 
     return (
         <div className="edit__top-bar">
-            <div className="edit-radios" onClick={() => setCategory(0)} style={{backgroundColor:`${category === 1 ? 'white' : 'rgb(200,200,202)'}`}}>
+            <div className={category === 1 ? 'edit-radios' : 'edit-radios er-clicked'} onClick={() => setCategory(0)}>
                 기본
             </div>
-            <div className="edit-radios" onClick={() => setCategory(1)} style={{backgroundColor:`${category === 0 ? 'white' : 'rgb(200,200,202)'}`}}>
+            <div className={category === 0 ? 'edit-radios' : 'edit-radios er-clicked'} onClick={() => setCategory(1)}>
                 디자인
             </div>
         </div>

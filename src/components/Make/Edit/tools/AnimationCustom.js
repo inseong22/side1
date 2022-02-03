@@ -2,34 +2,38 @@ import React from 'react'
 import './custom.css'
 
 function AnimationCustom({options, value, onChange}) {
+    const NONE = 'none'
+    const FADEUP = 'fade-up'
+    const ZOOMIN = 'zoom-in'
+
     return (
         <div>
-            {options.map((item, index) => {
-                let backColor = "rgb(100,100,100)";
-                if(value === item.value){
-                    backColor = "#6a6cfa";
-                }
-                if(index === 0){
-                    return(
-                        <span className="animation-box" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
-                            {item.label}
-                        </span>
-                    )
-                }else if(index === (options.length - 1)){
-                    return(
-                        <span className="animation-box" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
-                            {item.label}
-                        </span>
-                    )
-                }
-                else{
-                    return(
-                        <span className="animation-box" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
-                            {item.label}
-                        </span>
-                    )
-                }
-            })}
+            <div className="radio-container">
+                <div className={value === NONE ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(NONE)}>
+                    <div className="radio-shape round">
+            
+                    </div>
+                    <div className="radio-shape-text">
+                        없음
+                    </div>
+                </div>
+                <div className={value === FADEUP ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(FADEUP)}>
+                    <div className="radio-shape round">
+            
+                    </div>
+                    <div className="radio-shape-text">
+                        떠오르기
+                    </div>
+                </div>
+                <div className={value === ZOOMIN ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(ZOOMIN)}>
+                    <div className="radio-shape circle">
+            
+                    </div>
+                    <div className="radio-shape-text">
+                        페이드인
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
@@ -37,14 +41,15 @@ function AnimationCustom({options, value, onChange}) {
 export const EditAnimationContainer = ({text, options, value, func}) => {
     return(
         <div className="edit-element">
-                <div className="animation-div" />
-                    <AnimationCustom 
-                        options={options}
-                        onChange={e => {func(e)}}
-                        value={value}
-                    />
+            <div className="animation-div" />
+                <AnimationCustom 
+                    options={options}
+                    onChange={e => {func(e)}}
+                    value={value}
+                />
         </div>
     )
 }
 
 export default AnimationCustom
+

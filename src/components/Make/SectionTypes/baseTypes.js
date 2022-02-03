@@ -1,6 +1,7 @@
 export const base = [
     {
         // 공통적으로 들어갈 확률이 높은 것들
+        name:'메인',
         sectionTypeName:'HeroSection',
         sectionTypeNumber:1,
         templateNumber:1,
@@ -50,6 +51,7 @@ export const base = [
         },
     },
     {
+        name:'디테일',
         sectionTypeName:'DetailSection',
         sectionTypeNumber:2,
         templateNumber:1,
@@ -87,6 +89,7 @@ export const base = [
         }
     },
     {
+        name:'리뷰/추천',
         sectionTypeName:'ReviewSection',
         sectionTypeNumber:3,
         templateNumber:1,
@@ -129,6 +132,7 @@ export const base = [
         },
     },
     {
+        name:'특징',
         sectionTypeName:'FeaturesSection',
         sectionTypeNumber:4,
         templateNumber:1,
@@ -167,22 +171,7 @@ export const base = [
         },
     },
     {
-        sectionTypeName:'PriceSection',
-        sectionTypeNumber:8,
-        templateNumber:1,
-        width:90,
-        backgroundColor:'white',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        animation:{
-            use:true,
-            type:'none',
-        },
-    },
-    {
+        name:'CTA',
         sectionTypeName:'CtaSection',
         sectionTypeNumber:9,
         templateNumber:1,
@@ -209,40 +198,6 @@ export const base = [
             type:'none',
         },
     },
-    {
-        sectionTypeName:'ETCetraSection',
-        sectionTypeNumber:10,
-        templateNumber:1,
-        backgroundColor:'white',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        animation:{
-            use:true,
-            type:'none',
-        },
-        etcSections:[
-            {
-                sectionTypeName:'EmptySection',
-                sectionTypeNumber:7,
-                templateNumber:1,
-            },
-            {
-                sectionTypeName:'HorizontalSection',
-                sectionTypeNumber:8,
-                templateNumber:1,
-                width:90,
-            },
-            {
-                sectionTypeName:'TextSection',
-            },
-            {
-                sectionTypeName:'ImageSection',
-            }
-        ]
-    }
 ]
 
 export const defaults = {
@@ -305,7 +260,6 @@ export const defaults = {
             borderRadius:5,
             use:false,
             backgroundColor:'rgba(150,150,0,1)',
-<<<<<<< HEAD
             text:'fta 버튼',
             link:'',
         },
@@ -328,10 +282,5 @@ export const defaults = {
         animation:{
 
         }
-=======
-            text:'fta 버튼'
-        },
-        animation: 'none',
->>>>>>> 387b425e1f04f4c189b4b8ab065139e9f7c2f51f
     }
 }

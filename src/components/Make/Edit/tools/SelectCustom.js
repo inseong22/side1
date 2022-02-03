@@ -18,17 +18,12 @@ function SelectCustom({options, onChange, value}) {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-        <div style={{width:'200px'}}>
-            <div className="select-open-button center-row" aria-describedby={id} variant="contained" onClick={handleClick}
-                style={{
-                    borderBottom:`${open ? 'none' : '1px solid rgb(192, 192, 192)'}`,
-                    borderBottomLeftRadius:`${open ? '0px' : '5px'}`,
-                    borderBottomRightRadius:`${open ? '0px' : '5px'}`,
-                }}>
+        <div>
+            <div className="select-open-button center-row" aria-describedby={id} variant="contained" onClick={handleClick}>
                 <div className="select-button__content" style={{paddingLeft:'15px'}}>
                     {options.filter(doc => doc.value === value)[0].label}
                 </div>
-                <div className="select-button__content" style={{justifyContent:'end', paddingRight:'15px'}}><ChevronDown size="20" /></div>
+                <div className="select-button__content" style={{justifyContent:'end', paddingRight:'15px'}}><ChevronDown size="17" /></div>
             </div>
             <Popover
                 id={id}

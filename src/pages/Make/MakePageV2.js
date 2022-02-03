@@ -239,7 +239,7 @@ const MakePageV2 = ({history, userObj}, props) => {
                 loading={loading} setLoading={setLoading}
                 navi={navi} foot={foot} setting={setting}
             />
-            <div className="make-page-container" style={{marginTop:'0px'}}>
+            <div className="make-page-container">
                 {/* 아래는 제작하는 곳 */}
                 <div style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
                     <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>

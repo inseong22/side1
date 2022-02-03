@@ -196,7 +196,6 @@
 }
 
 .make-page-make-space{
-    font-family: Noto Sans KR;
     font-weight:500;
     background-color:rgb(255, 255, 255);
     flex-direction: column;
@@ -205,14 +204,18 @@
     position:fixed;
     left:0%;
     width:30vw;
-    top:7vh;
+    top:8vh;
     height:93vh;
     z-index: 2;
+    box-shadow: var(--default-shadow-01);
+    border-radius: 0px 30px 0px 0px;
 }
 
 .overflow-scrolling {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    height: 100%;
+    padding-bottom:50px;
 }
 
 .title-desc-text{
