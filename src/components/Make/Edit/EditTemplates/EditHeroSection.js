@@ -205,6 +205,10 @@ function EditHeroSection({content, category}) {
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].video.file = result;
                 draft[state.secNum].video.use = true;
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = false 
             }))
             // actionImgCompress(result);
         }
@@ -244,6 +248,13 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     <AddYoutubeLink content={content} value={content.video.link} />
+                    <OnOffCustom text="자동 재생" value={content.animation.type} 
+                        func={ () => action.setContents(produce(state.contents, draft => {
+                            if (content.video.link.includes('autoplay=1'))
+                                draft[state.secNum].video.link = content.video.link.replace('autoplay=1', 'autoplay=0');
+                            else
+                                draft[state.secNum].video.link = content.video.link.replace('autoplay=0', 'autoplay=1');
+                        }))}/>
                     </>
                 )
         }
@@ -289,6 +300,10 @@ function EditHeroSection({content, category}) {
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].image.attachment = result;
                 draft[state.secNum].image.slide = false
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].video.use = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = true               
             }))
         }
         if(oneFile){
@@ -313,6 +328,10 @@ function EditHeroSection({content, category}) {
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].slide_img.slide1 = result;
                 draft[state.secNum].image.slide = true
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].video.use = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = false 
             }))
         }
         if(oneFile){
@@ -330,8 +349,6 @@ function EditHeroSection({content, category}) {
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
-            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
-            // newContents[state.secNum].image.attachment = result;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].slide_img.slide2 = result;
                 draft[state.secNum].image.slide = true
@@ -352,8 +369,6 @@ function EditHeroSection({content, category}) {
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
-            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
-            // newContents[state.secNum].image.attachment = result;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].slide_img.slide3 = result;
                 draft[state.secNum].image.slide = true

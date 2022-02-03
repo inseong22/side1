@@ -2,7 +2,7 @@ import React, {useRef, useContext} from 'react'
 import produce from 'immer';
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 
-function AddYoutubeLink({content,value, func}) {
+function AddYoutubeLink({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const onChangeLink = e => {
@@ -14,7 +14,11 @@ function AddYoutubeLink({content,value, func}) {
         const submitLink = content.video.link.replace('watch?v=', 'embed/');
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].video.youtube = true
-            draft[state.secNum].video.link = submitLink
+            draft[state.secNum].video.link = submitLink+'?autoplay=1'+'&mute=1'
+            draft[state.secNum].image.slide = false
+            draft[state.secNum].video.use = false
+            draft[state.secNum].image.slide = false
+            draft[state.secNum].image.oneImg = false 
         }))
     }
 

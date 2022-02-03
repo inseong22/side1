@@ -60,11 +60,11 @@ function HeroSection({content}) {
     }
 
     const ImageOrSlide = () => {
-        if(content.video.youtube)
+        if(content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg)
         return(
-            <iframe src={`${content.video.link}`} width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+            <iframe src={`${content.video.link}`} width="560" height="315" frameborder="0" allow='autoplay'/>
         )
-        if(content.video.use)
+        if(!content.video.youtube && content.video.use && !content.image.slide && !content.image.oneImg)
         return(
             <div>
                 <video 
@@ -79,16 +79,16 @@ function HeroSection({content}) {
                 </video>
             </div>
         )
-        if(content.image.slide)
+        if(!content.video.youtube && !content.video.use && content.image.slide && !content.image.oneImg)
         return(
             <div className="slide-box">
                 <ImageCarousel content={content}/>
             </div>
         )
-        else 
+        if(!content.video.youtube && !content.video.use && !content.image.slide && content.image.oneImg)
         return (
             <div >
-            <Popover
+            {/* <Popover
                 id={Boolean(imageShow) ? 'simple-popover' : undefined} // 수정
                 open={Boolean(imageShow)} // 수정
                 anchorEl={imageShow} // 수정
@@ -112,7 +112,7 @@ function HeroSection({content}) {
                         동영상
                     </span>
                 </div>
-            </Popover>
+            </Popover> */}
             {content.image.attachment === '' ?  
                 <img ref={imgRef} src={playstorebutton} className="image" onClick={(e) =>{ setImageShow(e.currentTarget)}} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}} />
                 : 

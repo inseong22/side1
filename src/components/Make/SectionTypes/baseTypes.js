@@ -33,6 +33,7 @@ export const base = [
             color: 'black'
         },
         image:{
+            oneImg:true,
             type:'image',
             attachment:'',
             width:70,
