@@ -60,6 +60,10 @@ function HeroSection({content}) {
     }
 
     const ImageOrSlide = () => {
+        if(content.video.youtube)
+        return(
+            <iframe src={`${content.video.link}`} width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+        )
         if(content.video.use)
         return(
             <div>

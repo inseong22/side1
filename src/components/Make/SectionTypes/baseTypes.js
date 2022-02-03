@@ -49,6 +49,8 @@ export const base = [
             use: false,
             type: 'base',
             file: '',
+            youtube: false,
+            link: '',
         },
         button:{
             title:'버튼입니다.',

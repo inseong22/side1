@@ -10,6 +10,7 @@ import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
 import AddContentImg from '../tools/AddContentImg'
 import AddContentVideo from '../tools/AddContentVideo'
+import AddYoutubeLink from '../tools/AddYoutubeLink'
 import EditSlider from '../tools/EditSlider'
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 
@@ -242,7 +243,7 @@ function EditHeroSection({content, category}) {
             case 'youtube':
                 return(
                     <>
-                    <AddYoutubeLink />
+                    <AddYoutubeLink content={content} value={content.video.link} />
                     </>
                 )
         }
