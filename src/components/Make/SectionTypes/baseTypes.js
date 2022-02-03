@@ -45,6 +45,11 @@ export const base = [
             slide2: '',
             slide3: '',
         },
+        video:{
+            use: false,
+            type: 'base',
+            file: '',
+        },
         button:{
             title:'버튼입니다.',
             backgroundColor:'rgba(255,255,255,1)',

@@ -62,7 +62,10 @@ const MakePageV2 = ({history, userObj}, props) => {
     const [setting, setSetting] = useState(lodash.cloneDeep(defaults.setting));
 
     // 새로운 세팅
-    const [contents, setContents] = useState([ lodash.cloneDeep(base[0]), lodash.cloneDeep(base[1]), lodash.cloneDeep(base[2]), lodash.cloneDeep(base[4]) ])
+    // local storage 저장을 위한 contents 재설정 - video의 용량 초과 때문에 일단..ㅠ
+    const arr = lodash.cloneDeep(base[0])
+    delete arr.video.file
+    const [contents, setContents] = useState([ arr, lodash.cloneDeep(base[1]), lodash.cloneDeep(base[2]), lodash.cloneDeep(base[4]) ])
 
     // 네비게이션
     const [navi, setNavi] = useState(lodash.cloneDeep(defaults.navi));
@@ -74,13 +77,12 @@ const MakePageV2 = ({history, userObj}, props) => {
 
     // 푸터
     const [footerOrNot, setFooterOrNot] = useState(false);
-
     // 반복 실행되는 useEffect
     useEffect(() => {
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/making/${userObj.email}`);
-
+        console.log(arr)
         function repeat(){
             localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
         }
@@ -204,7 +206,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     const sectionsReturn = contents.map((item, index) => {
         return(
             <div style={{width:'100%'}}>
-                <NewSection content={item} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents}/>
+                <NewSection content={item} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} />
             </div>
         )
     })

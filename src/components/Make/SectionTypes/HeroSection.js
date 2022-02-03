@@ -19,6 +19,7 @@ function HeroSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const imgRef = useRef(null)
     const [imageShow, setImageShow] = useState(null);
+    const [videoShow, setVideoShow] = useState(null);
     const [align, setAlign] = useState('center');
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -59,10 +60,25 @@ function HeroSection({content}) {
     }
 
     const ImageOrSlide = () => {
+        if(content.video.use)
+        return(
+            <div>
+                <video 
+                className="video"
+                src={`${content.video.file}`} 
+                type="video/mp4" 
+                autoPlay
+                muted
+                loop
+                style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}}
+                >
+                </video>
+            </div>
+        )
         if(content.image.slide)
         return(
             <div className="slide-box">
-            <ImageCarousel content={content}/>
+                <ImageCarousel content={content}/>
             </div>
         )
         else 

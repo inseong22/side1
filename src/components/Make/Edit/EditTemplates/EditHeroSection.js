@@ -9,6 +9,7 @@ import OnOffCustom from '../tools/OnOffCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
 import AddContentImg from '../tools/AddContentImg'
+import AddContentVideo from '../tools/AddContentVideo'
 import EditSlider from '../tools/EditSlider'
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 
@@ -52,6 +53,10 @@ const textSizeOptions = [
     { label: 's', value: 15 },
     { label: 'm', value: 20 },
     { label: 'l', value: 25 },
+]
+const videoOptions = [
+    { label: '업로드', value: 'base'},
+    { label: '유튜브 링크', value: 'youtube'}
 ]
 
 
@@ -181,6 +186,68 @@ function EditHeroSection({content, category}) {
         }))
     }
 
+    // video type
+    const changeVideoOption = e => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].video.type = e;
+        }));
+    }
+
+    // video upload - BufferArray를 서버에서 stream으로 처리하는 방식으로 하는게 제일인데.. 포기...
+    const onChangeContentVideo = e => {
+        // let newContents = JSON.parse(JSON.stringify(state.contents))
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].video.file = result;
+                draft[state.secNum].video.use = true;
+            }))
+            // actionImgCompress(result);
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+        // action.setContents(newContents);
+        // const reader = new FileReader();
+        // reader.readAsArrayBuffer(e.target.files[0]);
+        // reader.onloadend = (finishedEvent) => {
+        //     const {currentTarget:{result}} = finishedEvent;
+        //     console.log(result);
+        //     action.setContents(produce(state.contents, draft => {
+        //         draft[state.secNum].video.file = result;
+        //         draft[state.secNum].video.use = true;
+        //         console.log(draft[state.secNum].video.file)
+        //     }))
+        // }
+    }
+    // video remove
+    const RemoveVideo = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].video.file = '';
+        }))
+    }
+    
+
+    const videoType = () => {
+        switch(content.video.type){
+            case 'base':
+                return(
+                    <>
+                    <AddContentVideo value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
+                    </>
+                )
+            case 'youtube':
+                return(
+                    <>
+                    <AddYoutubeLink />
+                    </>
+                )
+        }
+    }
+
     const returnImageOrVideoAdd = () => {
         switch(content.image.type){
             case 'image':
@@ -199,14 +266,10 @@ function EditHeroSection({content, category}) {
             
             case 'video':
                 return(
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">동영상 사용</div>
-                            <div className="edit-element__right">
-                            </div>
-                        </div>
-                    </div>
-
+                    <>
+                    <EditRadioContainer text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
+                    {videoType()}
+                    </>
                 )
             default:
                 return(
@@ -217,14 +280,11 @@ function EditHeroSection({content, category}) {
 
     // 콘텐츠 - 이미지 업로드
     const onChangeContentImage= e => {
-        let newContents = JSON.parse(JSON.stringify(state.contents))
         const {target:{files},} = e;
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
-            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
-            // newContents[state.secNum].image.attachment = result;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].image.attachment = result;
                 draft[state.secNum].image.slide = false
