@@ -74,10 +74,8 @@ const OpenCloseCustom = (props) => {
       <div className="accordion">
         <div className="accordion__header" onClick={() => setOpen(!open)}>
           <div className="edit-element">
-            <div className="edit-element__left">
-              <div>
-                {props.title}
-              </div>
+            <div className="onoff-title">
+              {props.title}
               {
                 props.tooltip && 
                   <Tooltip placement="top" title={props.tooltip} arrow>

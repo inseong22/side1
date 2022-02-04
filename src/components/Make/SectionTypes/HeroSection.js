@@ -62,7 +62,7 @@ function HeroSection({content}) {
     const ImageOrSlide = () => {
         if(content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg)
         return(
-            <iframe src={`${content.video.link}`} width="560" height="315" frameborder="0" allow='autoplay'/>
+            <iframe src={`${content.video.link}`} width='500px' height={`${content.image.size}px`} frameborder="0" allow='autoplay'/>
         )
         if(!content.video.youtube && content.video.use && !content.image.slide && !content.image.oneImg)
         return(
@@ -116,7 +116,13 @@ function HeroSection({content}) {
             {content.image.attachment === '' ?  
                 <img ref={imgRef} src={playstorebutton} className="image" onClick={(e) =>{ setImageShow(e.currentTarget)}} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}} />
                 : 
-                <img ref={imgRef} src={`${content.image.attachment}`} className="image" onClick={(e) => setImageShow(e.currentTarget)} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}}/>
+                <img 
+                ref={imgRef} 
+                src={`${content.image.attachment}`} 
+                className="image" 
+                onClick={(e) => setImageShow(e.currentTarget)} 
+                style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`}}
+                />
             }
             </div>
     )
@@ -128,16 +134,16 @@ function HeroSection({content}) {
             <div className="button__container" style={{border:`${ anchorEl !== null ? '1px dashed rgba(0,0,0,0.4)' : '' }`}}>
                 {
                     content.button.first && 
-                    <div>                 
+                        <>         
                         {content.button.link.includes("play.google.com/store") ? <img src={playstorebutton} />
                         : 
                         content.button.link.includes("apps.apple.com/") ? <img src={appstorebutton} />
                         : 
-                        <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`}}>
+                        <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`, margin:`${content.button.align}`}}>
                             버튼
                         </button>
                         }
-                    </div>
+                        </>
                 }
             </div>
             </>

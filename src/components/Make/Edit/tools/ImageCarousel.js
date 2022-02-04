@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useRef, useEffect} from 'react'
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
@@ -27,6 +27,9 @@ margin-top: -30px;
 
 
 function ImageCarousel({content}) {
+    useEffect(() => {
+        console.log(content.image.border)
+    })
 
     const imgRef = useRef(null)
 
@@ -39,7 +42,7 @@ function ImageCarousel({content}) {
     )
 
     const settings = {
-        dots: true, // 캐러셀이미지가 몇번째인지 알려주는 점을 보여줄지 정한다.
+        dots: false, // 캐러셀이미지가 몇번째인지 알려주는 점을 보여줄지 정한다.
         speed: 500, // 애미메이션의 속도, 단위는 milliseconds
         slidesToShow: 1, // 한번에 몇개의 슬라이드를 보여줄 지
         slidesToScroll: 1, // 한번 스크롤시 몇장의 슬라이드를 넘길지
@@ -48,11 +51,11 @@ function ImageCarousel({content}) {
       };
 
     return (
-        <div className="slide-box">
+        <div className="slide-box" style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}>
             <Slider {...settings}> 
-            <img className="image" ref={imgRef} src={`${content.slide_img.slide1}`}/>
-            <img className="image" ref={imgRef} src={`${content.slide_img.slide2}`}/> 
-            <img className="image" ref={imgRef} src={`${content.slide_img.slide3}`}/>
+            <img className="image" ref={imgRef} src={`${content.slide_img.slide1}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
+            <img className="image" ref={imgRef} src={`${content.slide_img.slide2}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/> 
+            <img className="image" ref={imgRef} src={`${content.slide_img.slide3}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
             </Slider>
         </div>
     )

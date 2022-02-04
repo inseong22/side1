@@ -39,8 +39,9 @@ export const base = [
             attachment:'',
             width:70,
             border:0,
-            size:150,
+            size:200,
             slide:false,
+            
         },
         slide_img:{
             slide1: '',
@@ -53,6 +54,7 @@ export const base = [
             file: '',
             youtube: false,
             link: '',
+            auto: true
         },
         button:{
             title:'버튼입니다.',
@@ -62,6 +64,9 @@ export const base = [
             link:"https://surfee.co.kr",
             first:true,
             second:false,
+            align:'0',
+            ctaUse:true,
+            ghostUse:false,
         },
     },
     {
@@ -85,6 +90,8 @@ export const base = [
         image:{
             attachment:'',
             width:70,
+            shadow: true,
+            shadowValue: "2px 4px 20px #E8F0F9"
         },
         animation:{
             use:true,
