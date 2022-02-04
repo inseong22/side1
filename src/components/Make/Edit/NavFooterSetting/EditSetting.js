@@ -36,7 +36,7 @@ const sizeOptions = [
 function EdtiSetting({setting, setSetting, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    // 애니메이션 관련 -> 아직 재사용성 고려 X, 일단 구현 우선
+    // 애니메이션 관련 
     const animationOptions = [
         {label:'없음', value: 'none'},
         {label:'떠오르기', value: 'fade-up'},

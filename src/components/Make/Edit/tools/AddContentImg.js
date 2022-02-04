@@ -1,6 +1,5 @@
 import React, {useRef} from 'react'
 
-
 function AddContentImg({value, func, removeFunc}) {
     const photoInput = useRef();
     const inputClick = () => {

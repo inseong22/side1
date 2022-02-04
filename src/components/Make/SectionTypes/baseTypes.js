@@ -34,11 +34,25 @@ export const base = [
             color: 'black'
         },
         image:{
+            oneImg:true,
             type:'image',
             attachment:'',
             width:70,
             border:0,
             size:150,
+            slide:false,
+        },
+        slide_img:{
+            slide1: '',
+            slide2: '',
+            slide3: '',
+        },
+        video:{
+            use: false,
+            type: 'base',
+            file: '',
+            youtube: false,
+            link: '',
         },
         button:{
             title:'버튼입니다.',

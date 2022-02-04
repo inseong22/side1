@@ -11,6 +11,7 @@ import './HeroSection.css'
 
 import Popover from '@mui/material/Popover';
 import {ImageAdd} from '@styled-icons/boxicons-regular';
+import ImageCarousel from '../Edit/tools/ImageCarousel'
 
 import { motion } from 'framer-motion';
 
@@ -18,6 +19,7 @@ function HeroSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const imgRef = useRef(null)
     const [imageShow, setImageShow] = useState(null);
+    const [videoShow, setVideoShow] = useState(null);
     const [align, setAlign] = useState('center');
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -57,41 +59,67 @@ function HeroSection({content}) {
         action.setContents(newContents);
     }
 
-    const returnImage = () => {
+    const ImageOrSlide = () => {
+        if(content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg)
         return(
-            <div className="image__container centera">
-                <Popover
-                    id={Boolean(imageShow) ? 'simple-popover' : undefined} // 수정
-                    open={Boolean(imageShow)} // 수정
-                    anchorEl={imageShow} // 수정
-                    onClose={() => setImageShow(null)} // 수정
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                    }}>
-                    <div className="pop-balloon" style={{width:'100px'}}>
-                        <span className="balloon-item">
-                            <ImageAdd color="black" width={30} />
-                            { imgRef.current && 
-                                <input className="image-input" type="file" accept="image/*" id="file"
-                                    onChange={ e => onChangeImage(e) } style={{width:'20px', height:'20px'}}/> }
-                        </span>
-                        <span className="balloon-item" onClick={() => {}}>
-                            동영상
-                        </span>
-                    </div>
-                </Popover>
-                {content.image.attachment === '' ?  
-                    <img ref={imgRef} src={playstorebutton} className="image" onClick={(e) =>{ setImageShow(e.currentTarget)}} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}} />
-                    : 
-                    <img ref={imgRef} src={`${content.image.attachment}`} className="image" onClick={(e) => setImageShow(e.currentTarget)} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}}/>
-                }
+            <iframe src={`${content.video.link}`} width="560" height="315" frameborder="0" allow='autoplay'/>
+        )
+        if(!content.video.youtube && content.video.use && !content.image.slide && !content.image.oneImg)
+        return(
+            <div>
+                <video 
+                className="video"
+                src={`${content.video.file}`} 
+                type="video/mp4" 
+                autoPlay
+                muted
+                loop
+                style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}}
+                >
+                </video>
             </div>
         )
+        if(!content.video.youtube && !content.video.use && content.image.slide && !content.image.oneImg)
+        return(
+            <div className="slide-box">
+                <ImageCarousel content={content}/>
+            </div>
+        )
+        if(!content.video.youtube && !content.video.use && !content.image.slide && content.image.oneImg)
+        return (
+            <div >
+            {/* <Popover
+                id={Boolean(imageShow) ? 'simple-popover' : undefined} // 수정
+                open={Boolean(imageShow)} // 수정
+                anchorEl={imageShow} // 수정
+                onClose={() => setImageShow(null)} // 수정
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+                }}>
+                <div className="pop-balloon" style={{width:'100px'}}>
+                    <span className="balloon-item">
+                        <ImageAdd color="black" width={30} />
+                        { imgRef.current && 
+                            <input className="image-input" type="file" accept="image/*" id="file"
+                                onChange={ e => onChangeImage(e) } style={{width:'20px', height:'20px'}}/> }
+                    </span>
+                    <span className="balloon-item" onClick={() => {}}>
+                        동영상
+                    </span>
+                </div>
+            </Popover> */}
+            {content.image.attachment === '' ?  
+                <img ref={imgRef} src={playstorebutton} className="image" onClick={(e) =>{ setImageShow(e.currentTarget)}} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}} />
+                : 
+                <img ref={imgRef} src={`${content.image.attachment}`} className="image" onClick={(e) => setImageShow(e.currentTarget)} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}}/>
+            }
+            </div>
+    )
     }
 
     const returnButton = () => {
@@ -156,7 +184,7 @@ function HeroSection({content}) {
             <>
             <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
                 {returnTextAndButton()}
-                {returnImage()}
+                {ImageOrSlide()}
             </div>
         </>
         )
@@ -166,7 +194,7 @@ function HeroSection({content}) {
             <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}} 
             data-aos={content.animation.type} aos-duration="2000" >
                 {returnTextAndButton()}
-                {returnImage()}
+                {ImageOrSlide()}
             </motion.div>
             </>
         )

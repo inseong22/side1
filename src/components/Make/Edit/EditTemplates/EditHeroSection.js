@@ -9,6 +9,8 @@ import OnOffCustom from '../tools/OnOffCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ImageAddEdit from '../tools/ImageAddEdit'
 import AddContentImg from '../tools/AddContentImg'
+import AddContentVideo from '../tools/AddContentVideo'
+import AddYoutubeLink from '../tools/AddYoutubeLink'
 import EditSlider from '../tools/EditSlider'
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 
@@ -52,6 +54,10 @@ const textSizeOptions = [
     { label: 's', value: 15 },
     { label: 'm', value: 20 },
     { label: 'l', value: 25 },
+]
+const videoOptions = [
+    { label: '업로드', value: 'base'},
+    { label: '유튜브 링크', value: 'youtube'}
 ]
 
 
@@ -181,32 +187,101 @@ function EditHeroSection({content, category}) {
         }))
     }
 
-    // // (c) 애니메이션 관련
-    // const setAnimation = e => {
-    //     action.setContents(produce(state.contents, draft=> {
-    //         if(draft[state.secNum].animation.type == 'none')
-                
-    //         else
+    // video type
+    const changeVideoOption = e => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].video.type = e;
+        }));
+    }
 
-    //     }))
-    // }
+    // video upload - BufferArray를 서버에서 stream으로 처리하는 방식으로 하는게 제일인데.. 포기...
+    const onChangeContentVideo = e => {
+        // let newContents = JSON.parse(JSON.stringify(state.contents))
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].video.file = result;
+                draft[state.secNum].video.use = true;
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = false 
+            }))
+            // actionImgCompress(result);
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+        // action.setContents(newContents);
+        // const reader = new FileReader();
+        // reader.readAsArrayBuffer(e.target.files[0]);
+        // reader.onloadend = (finishedEvent) => {
+        //     const {currentTarget:{result}} = finishedEvent;
+        //     console.log(result);
+        //     action.setContents(produce(state.contents, draft => {
+        //         draft[state.secNum].video.file = result;
+        //         draft[state.secNum].video.use = true;
+        //         console.log(draft[state.secNum].video.file)
+        //     }))
+        // }
+    }
+    // video remove
+    const RemoveVideo = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].video.file = '';
+        }))
+    }
+    
+
+    const videoType = () => {
+        switch(content.video.type){
+            case 'base':
+                return(
+                    <>
+                    <AddContentVideo value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
+                    </>
+                )
+            case 'youtube':
+                return(
+                    <>
+                    <AddYoutubeLink content={content} value={content.video.link} />
+                    <OnOffCustom text="자동 재생" value={content.animation.type} 
+                        func={ () => action.setContents(produce(state.contents, draft => {
+                            if (content.video.link.includes('autoplay=1'))
+                                draft[state.secNum].video.link = content.video.link.replace('autoplay=1', 'autoplay=0');
+                            else
+                                draft[state.secNum].video.link = content.video.link.replace('autoplay=0', 'autoplay=1');
+                        }))}/>
+                    </>
+                )
+        }
+    }
+
     const returnImageOrVideoAdd = () => {
         switch(content.image.type){
             case 'image':
                 return(
                     <AddContentImg value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                 )
+            case 'slide':
+                return(
+                    <>
+                    <AddContentImg value={content.slide_img.slide1} func={e => onChangeSlideImage1(e)} removeFunc={e => RemoveSlide1(e)}/>
+                    <AddContentImg value={content.slide_img.slide2} func={e => onChangeSlideImage2(e)} removeFunc={e => RemoveSlide2(e)}/>
+                    <AddContentImg value={content.slide_img.slide3} func={e => onChangeSlideImage3(e)} removeFunc={e => RemoveSlide3(e)}/>
+                    최대 5MB까지 가능합니다.
+                    </>
+                )
             
             case 'video':
                 return(
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">동영상 사용</div>
-                            <div className="edit-element__right">
-                            </div>
-                        </div>
-                    </div>
-
+                    <>
+                    <EditRadioContainer text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
+                    {videoType()}
+                    </>
                 )
             default:
                 return(
@@ -217,16 +292,18 @@ function EditHeroSection({content, category}) {
 
     // 콘텐츠 - 이미지 업로드
     const onChangeContentImage= e => {
-        let newContents = JSON.parse(JSON.stringify(state.contents))
         const {target:{files},} = e;
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
-            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
-            // newContents[state.secNum].image.attachment = result;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].image.attachment = result;
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].video.use = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = true               
             }))
         }
         if(oneFile){
@@ -237,6 +314,73 @@ function EditHeroSection({content, category}) {
     const RemoveImage = () => {
         action.setContents(produce(state.contents, draft=>{
             draft[state.secNum].image.attachment = '';
+        }))
+    }
+
+    // 슬라이드 - 이미지
+    const onChangeSlideImage1= e => {
+        let newContents = JSON.parse(JSON.stringify(state.contents))
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide1 = result;
+                draft[state.secNum].image.slide = true
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].video.use = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = false 
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide1 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide1 = '';
+        }))
+    }
+    const onChangeSlideImage2= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide2 = result;
+                draft[state.secNum].image.slide = true
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide2 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide2 = '';
+        }))
+    }
+    const onChangeSlideImage3= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide3 = result;
+                draft[state.secNum].image.slide = true
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide3 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide3 = '';
         }))
     }
 
