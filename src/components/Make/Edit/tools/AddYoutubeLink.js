@@ -1,6 +1,7 @@
 import React, {useRef, useContext} from 'react'
 import produce from 'immer';
 import { MyContext } from '../../../../pages/Make/MakePageV2'
+import './InputCustom.css'
 
 function AddYoutubeLink({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -23,11 +24,13 @@ function AddYoutubeLink({content}) {
     }
 
     return (
-        <form>
+        <form className="center-row">
            <input
+                className="edit-input"
                 type="text"
                 onChange={e=>onChangeLink(e)}
                 style={{width: '80%'}}
+                placeholder="유튜브 링크를 입력해주세요."
            /> 
            <div 
            type="submit" 

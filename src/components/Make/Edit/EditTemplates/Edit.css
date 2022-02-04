@@ -13,6 +13,15 @@
     /* border-bottom:1px solid var(--edit-main-border-color); */
 }
 
+.switch-element{
+    width:100%;
+    display:flex;
+    align-items : center;
+    box-sizing: border-box;
+    padding:var(--edit-main-padding);
+    margin-top: 40px;
+}
+
 .border{
     border: 1px solid var(--edit-main-border-color);
 }
@@ -39,6 +48,15 @@
     align-items : center;
     /* padding:10px 10px 10px 20px; */
     width:100%;
+    padding-left: 31px;
+}
+.switch-element__left{
+    margin-right: 13px;
+    margin-left: 21px;
+}
+.onoff-title{
+    padding-left: 0px;
+    width: 100%;
 }
 
 .edit-element__right{

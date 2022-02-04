@@ -8,7 +8,7 @@ import InputCustom from '../tools/InputCustom'
 import ResponsiveCustom from '../tools/ResponsiveCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ElementsTable from '../tools/ElementsTable'
-import {EditSliderContainer} from '../tools/EditSlider'
+import EditSlider from '../tools/EditSlider'
 import TextSizeCustom from '../tools/TextSizeCustom'
 import BoxCustom from '../tools/BoxCustom'
 import produce from 'immer';
@@ -191,7 +191,7 @@ function EditNaviSection({navi, setNavi, category}) {
                     <CheckBoxContainer text="구분선" value={navi.bottomBorder} func={e => setNavi({...navi, bottomBorder:!navi.bottomBorder})}/>
                 </OpenCloseCustom>
                 <OpenCloseCustom title="높이">
-                    <EditSliderContainer text="높이 조정" value={navi.height} func={e => setNavi({...navi, height:e})}/>
+                    <EditSlider text="높이 조정" value={navi.height} func={e => setNavi({...navi, height:e})}/>
                 </OpenCloseCustom>
                 <ResponsiveCustom />
             </div>
