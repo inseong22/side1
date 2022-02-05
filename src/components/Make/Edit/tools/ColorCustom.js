@@ -20,7 +20,7 @@ function EditColor({onChange, value}) {
 
     return (
         <div className="center-row" style={{justifyContent: "start"}}>
-            <div className="color-button" style={{backgroundColor : `${state.setting.color}`}} onClick={() => onChange(`${state.setting.color}`)}>
+            <div className="color-button" style={{backgroundColor : `${state.setting.color}`, color:`${state.setting.color === '#ffffff' ? '#555C67' : 'white'}`}} onClick={() => onChange(`${state.setting.color}`)}>
                 {/* <div style={{color:'rgba(255,255,255,0.8)'}}>
                     main
                 </div> */}
@@ -29,7 +29,7 @@ function EditColor({onChange, value}) {
                 </div>
             </div>
 
-            <div ref={colorRef} className="color-button" style={{backgroundColor:`${value}`}} onClick={(e) =>{ setColorShow(e.currentTarget)}}>    
+            <div ref={colorRef} className="color-button" style={{backgroundColor:`${value}`, color:`${value === '#ffffff' ? '#555C67' : 'white'}`}} onClick={(e) =>{ setColorShow(e.currentTarget)}}>    
                 {value}
             </div>
 
@@ -88,27 +88,12 @@ function EditColor({onChange, value}) {
     )
 }
 
-export const returnColorContainer = (text, value, func) => {
-    return(
-        <div className="edit-element">
-            <div className="edit-element__one" style={{flexDirection: 'column'}}>
-                <div className="edit-element__left">
-                    {text}
-                </div>
-                <div className="edit-element__right">
-                    <EditColor onChange={func} value={value || '#ffffff'} />
-                </div>
-            </div>
-        </div>
-    )
-}
-
 export const EditColorContainer = ({text, value, func}) => {
     return(
         <div className="edit-element">
             <div className="edit-element__one" style={{flexDirection: 'column'}}>
                 <div className="edit-element__left">{text}</div>
-                <div className="edit-element__right">
+                <div className="edit-element__bottom">
                     <EditColor onChange={(e) => func(e)} value={value || 'white'} />
                 </div>
             </div>

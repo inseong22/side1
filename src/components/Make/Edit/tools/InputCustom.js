@@ -2,14 +2,27 @@ import React from 'react'
 import {Link45deg} from '@styled-icons/bootstrap'
 import './InputCustom.css'
 
-function InputCustom({value, func}) {
+function InputCustom({value, func, placeholder}) {
     return (
-        <div className="center-row">
+        <div className="edit-element" style={{justifyContent:'start'}}>
             {/* <div>
                 <Link45deg size="25" />
             </div> */}
-            <div>
-                <input className="edit-input" placeholder="링크를 입력하세요." value={value} onChange={e => func(e.currentTarget.value)} />
+            <div className="centera">
+                <input className="edit-input" placeholder={placeholder} value={value} onChange={e => func(e.currentTarget.value)} />
+            </div>
+        </div>
+    )
+}
+
+export function EditInputContainer({value, func, placeholder, text}) {
+    return (
+        <div className="edit-element" style={{justifyContent:'start', flexDirection:'column'}}>
+            <div className="centera" style={{justifyContent:'start'}}>
+                {text}
+            </div>
+            <div className="centera" style={{marginTop:'12px'}}>
+                <input className="edit-input" placeholder={placeholder} value={value} onChange={e => func(e.currentTarget.value)} />
             </div>
         </div>
     )

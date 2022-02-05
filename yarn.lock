@@ -1207,6 +1207,7 @@
   dependencies:
     "@chakra-ui/theme-tools" "^1.3.1"
 
+<<<<<<< HEAD
 "@chakra-ui/anatomy@1.2.2":
   "integrity" "sha512-vNDTgS5yjihuZQsWgtIYbDHaglOsX9JgT1/mwE/VP1p6Zy7Su3e3YutPdBJfaTj0NLbFCnllargIv3kIZdiipQ=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/anatomy/-/anatomy-1.2.2.tgz"
@@ -1214,6 +1215,8 @@
   dependencies:
     "@chakra-ui/theme-tools" "^1.3.1"
 
+=======
+>>>>>>> f3dd5fe7c (Design navigation, footer and add sections)
 "@chakra-ui/avatar@1.3.4":
   "integrity" "sha512-ZNUv0le9dqd9LR2NKDH0bcBgHymwbVa8KlwXTmFWM0cBoLoGprN+siF6CEk6dzVxLyIftpkBQogzZH9qkc4KVw=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/avatar/-/avatar-1.3.4.tgz"
@@ -1582,7 +1585,11 @@
     "@chakra-ui/system" "1.10.1"
     "@chakra-ui/utils" "1.10.0"
 
+<<<<<<< HEAD
 "@chakra-ui/slider@^1.5.3", "@chakra-ui/slider@1.5.4":
+=======
+"@chakra-ui/slider@1.5.4":
+>>>>>>> f3dd5fe7c (Design navigation, footer and add sections)
   "integrity" "sha512-XNaOC2BStIstPwGAqgROLTI+Avh48BEGvHZm9qkRDQwIzb2lEHKhWwvsBf+1j/gRdAiKnQ8hC2R0teyNpojEEQ=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/slider/-/slider-1.5.4.tgz"
   "version" "1.5.4"
@@ -1669,7 +1676,11 @@
     "@chakra-ui/form-control" "1.5.4"
     "@chakra-ui/utils" "1.10.0"
 
+<<<<<<< HEAD
 "@chakra-ui/theme-tools@^1.3.1", "@chakra-ui/theme-tools@^1.3.2", "@chakra-ui/theme-tools@1.3.2":
+=======
+"@chakra-ui/theme-tools@^1.3.1", "@chakra-ui/theme-tools@1.3.2":
+>>>>>>> f3dd5fe7c (Design navigation, footer and add sections)
   "integrity" "sha512-7UyUv6k6CXr3WX7BrR7vAZ2Iobxyyy2INZtlUqS2JK+6/YV1FCmBKsNaTSFHvcSYb/eAPYJwgeQdhkzA1HTKpQ=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/theme-tools/-/theme-tools-1.3.2.tgz"
   "version" "1.3.2"
@@ -1677,6 +1688,7 @@
     "@chakra-ui/utils" "1.10.0"
     "@ctrl/tinycolor" "^3.4.0"
 
+<<<<<<< HEAD
 "@chakra-ui/theme@^1.13.1", "@chakra-ui/theme@>=1.0.0":
   "integrity" "sha512-hjXeV+WmFBxEL1XpyXAXs/k4b/57GbYG1jKXQu8WLHW6/7IIG3klqSxXcaLPbXs1i1dE55ZJiiEhXjDgyUAX3g=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/theme/-/theme-1.13.1.tgz"
@@ -1687,6 +1699,9 @@
     "@chakra-ui/utils" "1.10.0"
 
 "@chakra-ui/theme@1.13.0":
+=======
+"@chakra-ui/theme@>=1.0.0", "@chakra-ui/theme@1.13.0":
+>>>>>>> f3dd5fe7c (Design navigation, footer and add sections)
   "integrity" "sha512-0GQzj6FRezCd9c93WnV55XTNP2UV/uBDJl5bE6it7WMyDZkUwUUQ7PU4zIvgG4HOO9lIoBVOg+ZW1lxV/E88Ag=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/theme/-/theme-1.13.0.tgz"
   "version" "1.13.0"
@@ -8688,7 +8703,11 @@
   dependencies:
     "map-cache" "^0.2.2"
 
+<<<<<<< HEAD
 "framer-motion@^4.1.7", "framer-motion@3.x || 4.x || 5.x":
+=======
+"framer-motion@^4.1.17", "framer-motion@3.x || 4.x || 5.x":
+>>>>>>> f3dd5fe7c (Design navigation, footer and add sections)
   "integrity" "sha512-thx1wvKzblzbs0XaK2X0G1JuwIdARcoNOW7VVwjO8BUltzXPyONGAElLu6CiCScsOQRI7FIk/45YTFtJw5Yozw=="
   "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-4.1.17.tgz"
   "version" "4.1.17"

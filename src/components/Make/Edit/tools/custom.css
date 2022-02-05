@@ -13,6 +13,23 @@
   .radio-element{
     cursor: pointer;
     width:110px;
+    height:45px;
+    background:var(--main-gradient);
+    box-shadow: var(--main-shadow-01);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    border-radius: 30px;
+    font-size: 14px;
+    margin:8px;
+    flex-direction: column;
+    border-color:white;
+}
+
+.radio-element-b{
+    cursor: pointer;
+    width:110px;
     height:110px;
     background:var(--main-gradient);
     box-shadow: var(--main-shadow-01);
@@ -26,6 +43,7 @@
     flex-direction: column;
     border-color:white;
 }
+
 .r-unclicked{
     background:white;
     color:var(--main-gray);
@@ -85,7 +103,6 @@
     display:flex;
     justify-content: center;
     align-items : center;
-    color:white;
     font-size: 13px;
     box-shadow: var(--default-shadow-01);
     flex-direction: column;
@@ -105,7 +122,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin:2%;
+    margin-left:2%;
+    margin-right:2%;
+    cursor:pointer;
 }
 
 .cc-unclicked{
@@ -244,9 +263,12 @@
     margin-top: 60px;
 }
 .text-size__input{
-    width:30px;
-    padding:6px 5px;
+    background: #F2F6FA;
+    border-radius: 29px;
+    padding:15px 15px;
     margin-left:10px;
+    border:none;
+    width:40px;
 }
 
 /* 애니메이션 관련 */

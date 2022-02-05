@@ -35,6 +35,11 @@ const alignOptions = [
     {label:'왼쪽', value: '0'},
     {label:'중앙', value: '0 auto'}
 ]
+const backOptions = [
+    { label: '단색', value: 'color' },
+    { label: '이미지', value: 'image'},
+]
+
 const animationOptions = [
     { label: '없음', value: false},
     { label: '있음', value: true}

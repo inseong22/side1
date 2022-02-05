@@ -28,6 +28,11 @@
     z-index: 10;
     position:relative;
 }
+.section__container-inner{
+    font-size:0.6em;
+    width:100%;
+    z-index: 3;
+}
 
 .make-hover-section{
     width:100%;

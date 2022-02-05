@@ -26,11 +26,9 @@ function CheckBoxContainer({text, value, func}) {
                     {text}
                 </div>
                 <div className="edit-element__right">
-                    <Checkbox
-                        checked={value || false}
+                    <CheckboxCustom
                         value={value || false}
-                        onClick={func}
-                        inputProps={{ 'aria-label': 'controlled' }}
+                        func={func}
                     />
                 </div>
             </div>

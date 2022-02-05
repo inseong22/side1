@@ -211,7 +211,6 @@ function HeroSection({content}) {
             <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
                 {animationDiv()}
             </div>
-
         </div>
     )
 }

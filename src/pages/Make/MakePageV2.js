@@ -82,9 +82,8 @@ const MakePageV2 = ({history, userObj}, props) => {
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/making/${userObj.email}`);
-        console.log(arr)
         function repeat(){
-            localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
+            // localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
         }
         // 30초에 한번 씩 자동 저장
         let id = setInterval(repeat, 30000);
@@ -206,7 +205,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     const sectionsReturn = contents.map((item, index) => {
         return(
             <div style={{width:'100%'}}>
-                <NewSection content={item} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} />
+                <NewSection content={item} key={index} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} />
             </div>
         )
     })

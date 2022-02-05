@@ -75,7 +75,7 @@ function EdtiSetting({setting, setSetting, category}) {
                             <EditColorContainer text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.backgroundColor = e;
                             }))} />
-                            <InputCustom value={setting.fta.link} func={(e) => setSetting(produce(setting, draft => {
+                            <InputCustom value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.link = e
                             }))}/>
                         </OpenCloseCustom>
@@ -83,7 +83,7 @@ function EdtiSetting({setting, setSetting, category}) {
                             <div className="center-column">
                                 <div className="edit-element center-row">
                                     <div>
-                                        <InputCustom value={setting.urlId} func={(e) => setSetting(produce(setting, draft => {
+                                        <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" func={(e) => setSetting(produce(setting, draft => {
                                             draft.urlId = e;
                                         }))}/>
                                     </div>
@@ -154,7 +154,7 @@ function EdtiSetting({setting, setSetting, category}) {
                         <OpenCloseCustom title="고스트 버튼" preseen={
                             <div className="edit-element">
                                 <div className="centera" style={{padding:'5px 10px'}}>
-                                    <div className="custom-button" style={{ color:`${setting.ghost.color}`, border:`${setting.ghost.border ? `1px solid ${setting.borderColor}` : 'none'}`, boxShadow:`${setting.ghost.shadow ? '2px 2px 3px rgba(0,0,0,0.5)' : 'none'}`, borderRadius:`${setting.ghost.borderRadius}px`, backgroundColor:`${setting.ghost.backgroundColor}`}}>
+                                    <div className="custom-button" style={{ color:`${setting.ghost.color}`, border:`${setting.ghost.border ? `1px solid ${setting.borderColor}` : 'none'}`, boxShadow:`${setting.ghost.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'}`, borderRadius:`${setting.ghost.borderRadius}px`, backgroundColor:`${setting.ghost.backgroundColor}`}}>
                                         디자인 미리보기
                                     </div>
                                 </div>

@@ -1,8 +1,14 @@
+.custom-input__container{
+    display:flex;
+    justify-content:center;
+}
+
 .edit-input{
     background-color:#F2F6FA;
     border-radius: 29px;
     border:none;
     padding:15px 20px;
+    width:90%;
 }
 
 .edit-input{

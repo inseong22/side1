@@ -9,7 +9,7 @@ function AnimationCustom({options, value, onChange}) {
     return (
         <div>
             <div className="radio-container">
-                <div className={value === NONE ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(NONE)}>
+                <div className={value === NONE ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(NONE)}>
                     <div className="radio-shape round">
             
                     </div>
@@ -17,7 +17,7 @@ function AnimationCustom({options, value, onChange}) {
                         없음
                     </div>
                 </div>
-                <div className={value === FADEUP ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(FADEUP)}>
+                <div className={value === FADEUP ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(FADEUP)}>
                     <div className="radio-shape round">
             
                     </div>
@@ -25,7 +25,7 @@ function AnimationCustom({options, value, onChange}) {
                         떠오르기
                     </div>
                 </div>
-                <div className={value === ZOOMIN ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(ZOOMIN)}>
+                <div className={value === ZOOMIN ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(ZOOMIN)}>
                     <div className="radio-shape circle">
             
                     </div>

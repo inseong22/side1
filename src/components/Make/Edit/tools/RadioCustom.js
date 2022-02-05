@@ -20,7 +20,7 @@ function RadioCustomButton({options, value, onChange}) {
 
     return (
         <div className="radio-container">
-            <div className={value === 0 ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(0)}>
+            <div className={value === 0 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(0)}>
                 <div className="radio-shape box">
 
                 </div>
@@ -28,7 +28,7 @@ function RadioCustomButton({options, value, onChange}) {
                     사각형
                 </div>
             </div>
-            <div className={value === ROUNDBORDER ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(ROUNDBORDER)}>
+            <div className={value === ROUNDBORDER ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(ROUNDBORDER)}>
                 <div className="radio-shape round">
 
                 </div>
@@ -36,7 +36,7 @@ function RadioCustomButton({options, value, onChange}) {
                     라운드
                 </div>
             </div>
-            <div className={value === CIRCLEBORDER ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(CIRCLEBORDER)}>
+            <div className={value === CIRCLEBORDER ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(CIRCLEBORDER)}>
                 <div className="radio-shape circle">
 
                 </div>

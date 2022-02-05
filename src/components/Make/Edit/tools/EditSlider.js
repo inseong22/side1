@@ -29,4 +29,25 @@ function EditSlider({top, text, func, value, max}) {
     )
 }
 
+export const EditSliderContainer = ({text, subtext, value, func}) => {
+  return(
+    <div className="edit-element" style={{flexDirection: 'column'}}>
+      { text && 
+        <div className="edit-element__left">
+            {text}
+        </div>
+      }
+      <div className="edit-element__right">
+        <EditSlider value={value} func={func}/>
+      </div>
+      {
+        subtext && 
+          <div>
+            {subtext}
+          </div>
+      }
+    </div>
+  )
+}
+
 export default EditSlider

@@ -1,51 +1,58 @@
 import React from 'react'
-
+import {
+    NumberInput,
+    NumberInputField,
+    NumberInputStepper,
+    NumberIncrementStepper,
+    NumberDecrementStepper,
+} from '@chakra-ui/react'
 
 const textSizeOptions = [
-    { label: 's', value: 15 },
-    { label: 'm', value: 20 },
-    { label: 'l', value: 25 },
+    { label: 's', value: 24 },
+    { label: 'm', value: 32 },
+    { label: 'l', value: 42 },
 ]
 
 function RadioCustom({options, value, onChange}) {
     return (
-        <div>
+        <>
             {options.map((item, index) => {
-                let backColor = "rgb(100,100,100)";
-                if(value === item.value){
-                    backColor = "#6a6cfa";
-                }
-                if(index === 0){
-                    return(
-                        <span className="radio-element r-first" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
-                            {item.label}
-                        </span>
-                    )
-                }else if(index === (options.length - 1)){
-                    return(
-                        <span className="radio-element r-end" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
-                            {item.label}
-                        </span>
-                    )
-                }
-                else{
-                    return(
-                        <span className="radio-element" style={{border:`1px solid ${backColor}`, color:`${backColor}`}} onClick={() => onChange(item.value)} key={index}>
-                            {item.label}
-                        </span>
-                    )
-                }
+                return(
+                    <div className={value === item.value ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(item.value)} key={index}>
+                        {item.label}
+                    </div>
+                )
             })}
-        </div>
+        </>
+    )
+}
+
+export function NumberInputCustom({value, func}) {
+    return(
+        <NumberInput size='sm' value={value} onChange={val => func(val)} min={10}>
+            <NumberInputField focusBorderColor='red.200' />
+            <NumberInputStepper>
+                <NumberIncrementStepper
+                bg='green.200'
+                _active={{ bg: 'green.300' }}
+                children='+'
+                />
+                <NumberDecrementStepper
+                bg='pink.200'
+                _active={{ bg: 'pink.300' }}
+                children='-'
+                />
+            </NumberInputStepper>
+        </NumberInput>
     )
 }
 
 function TextSizeCustom({text, value, func}) {
     return (
         <div className="edit-element">
-            <div className="edit-element__one">
+            <div className="edit-element__one" style={{flexDirection: 'column'}}>
                 <div className="edit-element__left">{text}</div>
-                <div className="edit-element__right">
+                <div className="edit-element__right" style={{flexDirection: 'row'}}>
                     <RadioCustom 
                         options={textSizeOptions}
                         onChange={e => func(e)}
