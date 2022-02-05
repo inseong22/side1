@@ -4,12 +4,9 @@
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^1.8.1",
-<<<<<<< HEAD
     "@chakra-ui/slider": "^1.5.3",
     "@chakra-ui/theme": "^1.13.1",
     "@chakra-ui/theme-tools": "^1.3.2",
-=======
->>>>>>> f3dd5fe7c (Design navigation, footer and add sections)
     "@ckeditor/ckeditor5-alignment": "^31.1.0",
     "@ckeditor/ckeditor5-basic-styles": "^31.1.0",
     "@ckeditor/ckeditor5-editor-inline": "^31.1.0",

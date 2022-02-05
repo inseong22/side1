@@ -9,6 +9,7 @@ import ResponsiveCustom from '../tools/ResponsiveCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import ElementsTable from '../tools/ElementsTable'
 import EditSlider from '../tools/EditSlider'
+import {EditSliderContainer} from '../tools/EditSlider'
 import TextSizeCustom from '../tools/TextSizeCustom'
 import BoxCustom from '../tools/BoxCustom'
 import produce from 'immer';

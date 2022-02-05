@@ -4,7 +4,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import produce from 'immer';
 import ConfirmCustom from '../../../../tools/ConfirmCustom';
 import AddingSection from '../../Modal/AddingSection';
-import {CustomSwitch} from '../tools/OnOffCustom'
+import {CustomSwitch2} from '../tools/OnOffCustom'
 import './EditContents.css';
 
 const BCOLOR = 'rgba(230,230,230,0)'
@@ -87,7 +87,7 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                                 네비 바
                             </div>
                             <div style={{paddingLeft:'7%'}}>
-                                <CustomSwitch value={navi.use} onChange={e => setNavi(produce(navi, draft => {
+                                <CustomSwitch2 value={navi.use} onChange={e => setNavi(produce(navi, draft => {
                                     draft.use = !navi.use
                                 })) }/>
                             </div>
@@ -186,7 +186,7 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                                 푸터 바
                             </div>
                             <div style={{paddingLeft:'7%'}}>
-                                <CustomSwitch value={foot.use} onChange={e => setFoot(produce(foot, draft => {
+                                <CustomSwitch2 value={foot.use} onChange={e => setFoot(produce(foot, draft => {
                                     draft.use = !foot.use
                                 })) }/>
                             </div>

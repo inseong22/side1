@@ -17,6 +17,13 @@ export const CustomSwitch = ({text, value, onChange}) => {
     </div>
   )
 }
+export const CustomSwitch2 = ({text, value, onChange}) => {
+  return(
+    <div className={value ? 'custom-switch' : 'custom-switch unclicked'} onClick={onChange}>
+      <div className="custom-switch-thumb" style={{left : `${value ? '32px' : '2px'}`}}></div>
+    </div>
+  )
+}
 
 function OnOffCustom({text, value, func}) {
     return (
@@ -25,7 +32,7 @@ function OnOffCustom({text, value, func}) {
             {text}
         </div>
         <div className="edit-element__right">
-            <CustomSwitch value={value} onChange={e => func(e)} checkedChildren="ON" unCheckedChildren="OFF" defaultChecked />
+            <CustomSwitch2 value={value} onChange={e => func(e)} checkedChildren="ON" unCheckedChildren="OFF" defaultChecked />
         </div>
       </div>
     )
