@@ -14,6 +14,9 @@ import AddSlideImg from '../tools/func/FuncSlideImg'
 import AddContentVideo from '../tools/func/FuncContentVideo'
 import AddYoutubeLink from '../tools/func/FuncYoutubeLink'
 import EditSlider from '../tools/Custom/SliderCustom'
+import InputCustom from '../tools/Custom/InputCustom'
+import ApplyButton from '../tools/ApplyButton'
+
 
 const imageBorderOptions = [
     { label: '원형', value: 50 },
@@ -34,6 +37,10 @@ const imageOptions = [
 const alignOptions = [
     {label:'왼쪽', value: '0'},
     {label:'중앙', value: '0 auto'}
+]
+const buttonOptions = [
+    {label: '링크 연결', value: 'link'},
+    {label: '신청', value: 'apply'},
 ]
 const backOptions = [
     { label: '단색', value: 'color' },
@@ -318,6 +325,48 @@ function EditHeroSection({content, category}) {
         }))
     }
 
+    // 버튼 관련
+    const ctaOpen = () => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].button.ctaUse = !content.button.ctaUse}))
+        
+    }
+
+    const ghostOpen = () => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].button.ghostUse = !content.button.ghostUse}))
+    }
+
+    const changeButtons = () => {
+        action.setContents(produce(state.contents, draft => {
+            if (draft[state.secNum].button.option == 'link')
+                draft[state.secNum].button.option = 'apply'
+            else
+                draft[state.secNum].button.option = 'link'
+        }))
+    }
+
+    const returnCtaOptions = () => {
+        switch(content.button.option){
+            case 'link':
+                return(
+                    <InputCustom value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button.ctaLink = e
+                    }))} />
+                )
+            case 'apply':
+                return(
+                    <ApplyButton value={content.button.ctaApply} func = {(e) => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button.ctaApply = e
+                    }))} />
+                )
+            default:
+                return(
+                    <> 에러 </>
+                )
+        }
+    }
+
     const returnTable = () => {
         switch(category){
             case 0:
@@ -332,9 +381,14 @@ function EditHeroSection({content, category}) {
                     </OpenCloseCustom>
                     <OpenCloseCustom title="버튼">
                     <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
-                    <CustomSwitch text="CTA 버튼"/>
-                    {/* <RadioCustom options={linkOptions} value={} */}
-                    <CustomSwitch text="고스트 버튼"/>
+                    <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange={e => ctaOpen(e)}/>
+                    { content.button.ctaUse && (
+                        <>
+                            <RadioCustom options={buttonOptions} value={content.button.option} func={e => changeButtons(e)}/>
+                            {returnCtaOptions()}
+                        </>
+                    )}
+                    <CustomSwitch text="고스트 버튼" value={content.button.ghostUse} onChange = {e => ghostOpen(e)}/>
                     </OpenCloseCustom>
                     <CheckBoxContainer text="버튼 1 사용" value={content.button.first} func={ () => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.first = !content.button.first;

@@ -1,24 +1,4 @@
-// 모든 섹션에 공통적으로 들어가야 하는 것들
-// 
-// name:'메인',
-// sectionTypeName:'HeroSection',
-// backgroundColor:'#ffffff',
-// backgroundImage:{
-//     use:false,
-//     attachment:'',
-// },
-// title:{
-//     text: '',
-//     align: '',
-//     size: 10,
-//     color: '#000000'
-// },
-// desc:{
-//     text: '',
-//     align: '',
-//     size: 10,
-//     color: '#000000'
-// },
+import { TreasureMap } from "@styled-icons/remix-fill"
 
 const commons = {
     backgroundColor:'#ffffff',
@@ -97,6 +77,12 @@ export const base = [
             second:false,
             align:'0',
             ctaUse:true,
+            option: 'link',
+            ctaLink:'',
+            ctaApply: '',
+            ghostUseOrLink: true, 
+            ghostLink:'',
+            ghostApply: '',
             ghostUse:false,
         },
     },
