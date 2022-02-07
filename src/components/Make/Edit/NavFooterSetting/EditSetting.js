@@ -12,12 +12,33 @@ import OnOffCustom from '../tools/Custom/OnOffCustom'
 import produce from 'immer';
 import AnimationCustom from '../tools/Custom/AnimationCustom'
 import { base } from '../../SectionTypes/baseTypes'
+import AddContentImg from '../tools/func/FuncContentImg'
+import {Check} from '@styled-icons/bootstrap'
+import {
+    ChakraProvider,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    PopoverAnchor,
+    ButtonGroup,
+    Portal,
+    Button
+  } from '@chakra-ui/react'
 
 const fontOptions = [
     { label: '노토산스', value: 'Noto Sans KR' },
-    { label: '에스코어 드림', value: '' },
-    { label: '노토산스', value: 'Noto Sans KR' },
-    { label: '노토산스', value: 'Noto Sans KR' },
+    { label: '프리텐다드', value: 'Pretendard-Regular' },
+    { label: '나눔스퀘어 라운드', value: 'NanumSquareRound' },
+    { label: '바른 공군', value: 'ROKAFSansBold' },
+    { label: '지마켓 산스', value: 'GmarketSansMedium' },
+    { label: '고운 돋움', value: 'GowunDodum-Regular' },
+    { label: '에스코어 드림', value: 'S-CoreDream-4Regular' },
+    
 ]
 
 const shapeOptions = [
@@ -33,6 +54,10 @@ const sizeOptions = [
 ]
 
 function EdtiSetting({setting, setSetting, category}) {
+    const [isFontOpen, setIsFontOpen] = useState(false)
+    const open = () => setIsFontOpen(!isFontOpen)
+    const close = () => setIsFontOpen(false)
+
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     // 애니메이션 관련 
@@ -48,6 +73,28 @@ function EdtiSetting({setting, setSetting, category}) {
         setSetting({...setting, animation:e})
     }
 
+    // 이미지 업로드
+    const onChangeContentImage= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            setSetting(produce(setting, draft=>{
+                draft.faviconAttachment = result;             
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    // 이미지 삭제
+    const RemoveImage = () => {
+        setSetting(produce(setting, draft=>{
+            draft.faviconAttachment = '';
+        }))
+    }
+
     const returnTable = () => {
         switch(category){
             case 0:
@@ -56,10 +103,12 @@ function EdtiSetting({setting, setSetting, category}) {
                     <>
                     <div>
                         <OpenCloseCustom title="파비콘" tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지를 대표하는 아이콘입니다.">
-                            
+                            <AddContentImg text="이미지" value={setting.faviconAttachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         </OpenCloseCustom>
                         <OpenCloseCustom title="페이지 이름" tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다.">
-                            
+                            <InputCustom value={setting.title} placeholder="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다." func={(e) => setSetting(produce(setting, draft => {
+                                draft.title = e
+                            }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="플로팅 버튼" tooltip="화면 하단에 고정되어 떠다니는 버튼입니다. 내비게이션의 버튼과 플로팅 버튼 중 하나만 사용하시길 바랍니다.">
                             <OnOffCustom text="플로팅 버튼" value={setting.fta.use} func={(e) => setSetting(produce(setting, draft => {
@@ -79,19 +128,17 @@ function EdtiSetting({setting, setSetting, category}) {
                             }))}/>
                         </OpenCloseCustom>
                         <OpenCloseCustom title="URL">
-                            <div className="center-column">
-                                <div className="edit-element center-row">
-                                    <div>
-                                        <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" func={(e) => setSetting(produce(setting, draft => {
-                                            draft.urlId = e;
-                                        }))}/>
-                                    </div>
-                                    <div>
+                            <div className="edit-element" style={{flexDirection:'column'}}>
+                                <div className="center-row" style={{justifyContent: 'start'}}>
+                                    <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) => setSetting(produce(setting, draft => {
+                                        draft.urlId = e;
+                                    }))}/>
+                                    <div style={{color:'#202936'}}>
                                         .surfee.co.kr
                                     </div>
                                 </div>
-                                <div className="edit-element">
-                                    * 영문, 숫자만 사용 가능합니다.
+                                <div style={{width:'90%', justifyContent:'start', fontSize:'12px'}}>
+                                    * 영문, 숫자만 입력 가능
                                 </div>
                             </div>
                         </OpenCloseCustom>
@@ -110,14 +157,59 @@ function EdtiSetting({setting, setSetting, category}) {
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="글씨체">
-                            <div className="edit-element">
-                                <div className="left">
-                                    글씨체
-                                </div>
-                                <SelectCustom options={fontOptions} value={setting.font} onChange={(e) => setSetting(produce(setting, draft => {
+                            <ChakraProvider>
+                                <div className="edit-element" style={{flexDirection:'row'}}>
+                                    
+                                {/* <SelectCustom options={fontOptions} value={setting.font} onChange={(e) => setSetting(produce(setting, draft => {
                                     draft.font = e;
-                                }))} />
-                            </div>
+                                }))} /> */}
+                                <div className="left" style={{width:'20%'}}>제목</div>
+                                <Popover
+                                    placement='right'
+                                    closeOnBlur={false}
+                                    isOpen={isFontOpen}
+                                    onClose={close}
+                                >
+                                <PopoverTrigger>
+                                    <div className="font-button right" style={{fontFamily: `${setting.font}`}} onClick={open}>노코드 랜딩페이지 제작 툴, Surfee</div>
+                                </PopoverTrigger>
+                                <PopoverContent>
+                                    <PopoverArrow />
+
+                                    <PopoverHeader>폰트를 선택하세요.</PopoverHeader>
+                                    
+                                    <PopoverCloseButton />
+                                    
+                                    <PopoverBody>
+                                        {fontOptions.map((item, index) => {
+                                            return(
+                                                <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                                    draft.font = item.value
+                                                }))}} style={{fontFamily: `${item.value}`}}>
+                                                    <div className="left">
+                                                        {item.label}
+                                                    </div>
+                                                    {
+                                                        item.value === setting.font && 
+                                                        <div className="right">
+                                                            <Check size="20"/>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            )
+                                        })}
+                                    </PopoverBody>
+                                    
+                                    <PopoverFooter d='flex' justifyContent='flex-end'>
+                                        <ButtonGroup size='sm'>
+                                        <Button className="font-done-button" onClick={() => close()}>Apply</Button>
+                                        </ButtonGroup>
+                                    </PopoverFooter>
+
+                                </PopoverContent>
+                                </Popover>
+                                </div>
+                            </ChakraProvider>
                         </OpenCloseCustom>
                         <OpenCloseCustom title="CTA 버튼" preseen={
                             <div className="edit-element">
@@ -174,9 +266,12 @@ function EdtiSetting({setting, setSetting, category}) {
                             <OnOffCustom text="테두리" value={setting.ghost.border} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.border = !setting.ghost.border
                             }))} />
-                            <ColorCustom text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
-                                draft.ghost.borderColor = e;
-                            }))} />
+                            {
+                                setting.ghost.border && 
+                                <ColorCustom text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                    draft.ghost.borderColor = e;
+                                }))} />
+                            }
                         </OpenCloseCustom>
                     </div>
                     <OpenCloseCustom title="애니메이션">

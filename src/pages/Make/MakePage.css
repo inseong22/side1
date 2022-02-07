@@ -8,7 +8,7 @@
     overflow:hidden;
     padding-top:60px;
     position:relative;
-    background-color:rgba(200,200,200,0.2);
+    background-color:rgba(235, 235, 235, 0.2);
 }
 .section-animation{
     width: 100%;
@@ -136,7 +136,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding:3% 0%;
+    padding:20px 0%;
     z-index: 1;
     -webkit-overflow-scrolling: touch;
 }
@@ -171,4 +171,61 @@
     width:80%;
     justify-content: start;
     align-items: center;
+}
+
+.make-tab-preseen{
+    /* Surfee WG */
+    background: #F2F6FA;
+    /* 기본 섀도우 01 */
+
+    box-shadow: 2px 4px 20px #E8F0F9;
+    border-radius: 20px 20px 0px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items :center;
+    justify-content:start;
+    height:40px;
+    position: relative;
+    cursor: pointer;
+}
+
+.make-tab-circle{
+    width:9px;
+    height:9px;
+    margin-left:6px;
+    border-radius: 20px;
+    background-color:white;
+}
+
+.make-tab-one-tab{
+    display: flex;
+    flex-direction: row;
+    align-items :center;
+    justify-content:center;
+    background-color:#ffffff;
+    opacity: 0.8;
+    padding:8px 13px;
+    border-radius: 20px 20px 0px 0px;
+    position:absolute;
+    bottom:0px;
+    left:80px;
+    color:#555C67;
+    font-size: 12px;
+}
+
+.make-tab-url{
+    padding:5px 25px 5px 15px;
+    background-color:#ffffff;
+    color:#555C67;
+    border-radius: 15px;
+    opacity: 0.8;
+    font-size:12px;
+}
+
+.make-tab-favicon{
+    width:20px;
+    height:20px;
+    border-radius: 20px;
+    margin-right:8px;
+    background-color:red;
 }

@@ -14,18 +14,15 @@ const NavBarInMakePage = (props) => {
     const [open, setOpen] = useState(false)
     const {state, action} = useContext(MyContext)
     const [checkModalOpen, setCheckModalOpen] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [deviceOpen, setDeviceOpen] = useState(false);
   
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+    const handleClick = () => {
+        setDeviceOpen(!deviceOpen);
     };
   
     const handleClose = () => {
-      setAnchorEl(null);
+        setDeviceOpen(true);
     };
-
-    const openDevice = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
 
     const moveToMain = () => {
         
@@ -129,33 +126,25 @@ const NavBarInMakePage = (props) => {
                 </div>
             </div>
             <div className="make-page-nav-half" style={{justifyContent: 'end', marginRight:'1%'}}>
-                <span className="device-button" onClick={handleClick}>
+                <span className="device-button" onClick={handleClick} style={{marginRight:'20px'}}>
                     {
                         props.isPhone ? <Phone size="25" /> : <Monitor size="25" />
                     }
                 </span>
-                <Popover
-                    id={id}
-                    open={openDevice}
-                    anchorEl={anchorEl}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    }}
-                >
+                {
+                    deviceOpen && 
                     <div className="device__container">
-                        <span className="device-button" onClick={e => {props.setIsPhone(true); setAnchorEl('')}}>
+                        <span className="device-button" onClick={e => {props.setIsPhone(true); handleClick()}}>
                             <Phone size="25" />
                         </span>
-                        <span className="device-button" onClick={e => {props.setFull(!props.full); setAnchorEl('')}}>
+                        <span className="device-button" onClick={e => {props.setFull(!props.full); handleClick()}}>
                             <Fullscreen size="25" />
                         </span>
-                        <span className="device-button" onClick={e => {props.setIsPhone(false); setAnchorEl('')}}>
+                        <span className="device-button" onClick={e => {props.setIsPhone(false); handleClick()}}>
                             <Monitor size="25" />
                         </span>
                     </div>
-                </Popover>
+                }
                 <Button onClick={() => onSubmit()} className="default-button-02">
                     배포하기
                 </Button>

@@ -11,6 +11,6 @@
     width:90%;
 }
 
-.edit-input{
-    border:none;
+.edit-input:focus {
+    outline:1px solid #333333;
 }

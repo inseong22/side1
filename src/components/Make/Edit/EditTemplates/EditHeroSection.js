@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import DesignHero from './DesignHero'
 import RadioCustom from '../tools/Custom/RadioCustom'
+import ElementsTable from './tools/ElementsTable'
 import produce from 'immer';
 import {CustomSwitch} from '../tools/Custom/OnOffCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
@@ -28,44 +29,6 @@ const buttonOptions = [
 function EditHeroSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const elements = [
-        {
-            title: '제목',
-            use:content.title.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].title.use = !content.title.use;
-            }))
-        },
-        {
-            title: '본문',
-            use:content.desc.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].desc.use = !content.desc.use;
-            }))
-        },
-        {
-            title: '콘텐츠',
-            use:content.contentsUse,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].contentsUse = !content.contentsUse;
-            }))
-        },
-        {
-            title: '버튼',
-            use:content.button.ctaUse || content.button.ghostUse,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].button.ctaUse = !content.button.ctaUse;
-                draft[state.secNum].button.ghostUse = !content.button.ghostUse;
-            }))
-        },
-        {
-            title: '앱 다운로드 버튼',
-            use:content.appButton.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].appButton.use = !content.appButton.use;
-            }))
-        },
-    ]
     const changeAlignOption = e => {
         action.setContents(produce(state.contents, draft => {
             if (draft[state.secNum].button.align == '0')
@@ -112,6 +75,138 @@ function EditHeroSection({content, category}) {
         }
     }
 
+    // 콘텐츠 - 이미지 업로드
+    const onChangeContentImage= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].image.attachment = result;
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].video.use = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = true               
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    // 콘텐츠 - 이미지 삭제
+    const RemoveImage = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].image.attachment = '';
+        }))
+    }
+
+    // 슬라이드 - 이미지
+    const onChangeSlideImage1= e => {
+        let newContents = JSON.parse(JSON.stringify(state.contents))
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide1 = result;
+                draft[state.secNum].image.slide = true
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].video.use = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = false 
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide1 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide1 = '';
+        }))
+    }
+    const onChangeSlideImage2= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide2 = result;
+                draft[state.secNum].image.slide = true
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide2 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide2 = '';
+        }))
+    }
+    const onChangeSlideImage3= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide3 = result;
+                draft[state.secNum].image.slide = true
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide3 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide3 = '';
+        }))
+    }
+
+    const elements = [
+        {
+            title:'제목',
+            use:content.title.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].title.use = !content.title.use;
+            }))
+        },
+        {
+            title:'본문',
+            use:content.desc.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].desc.use = !content.desc.use;
+            }))
+        },
+        {
+            title:'콘텐츠',
+            use:content.contents.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].contents.use = !content.contents.use;
+            }))
+        },
+        {
+            title:'버튼',
+            use:content.button.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].button.use = !content.button.use;
+            }))
+        },
+        {
+            title:'앱 다운로드',
+            use:content.appDownloadButton.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].appDownloadButton.use = !content.appDownloadButton.use;
+            }))
+        },
+    ]
+
     const returnTable = () => {
         switch(category){
             case 0:
@@ -120,6 +215,12 @@ function EditHeroSection({content, category}) {
                     <>
                     <ElementsTable elements={elements} />
                     <Contents content={content} />
+                    <OpenCloseCustom title="콘텐츠">
+                    <RadioCustom options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />                   
+                    {
+                        returnImageOrVideoAdd()
+                    } 
+                    </OpenCloseCustom>
                     <OpenCloseCustom title="버튼">
                         <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
                         <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange={e => ctaOpen(e)}/>

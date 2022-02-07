@@ -263,6 +263,22 @@ const MakePageV2 = ({history, userObj}, props) => {
                             } : {}
                         }>
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
+                        <div className="make-tab-preseen" onClick={() => setSecNum(52)}>
+                            <div className="left">
+                                <div className="make-tab-circle" style={{marginLeft:'15px'}}></div>
+                                <div className="make-tab-circle"></div>
+                                <div className="make-tab-circle"></div>
+                                <div className="make-tab-one-tab">
+                                    <img src={setting.faviconAttachment} className='make-tab-favicon' />
+                                    {setting.title}
+                                </div>
+                            </div>
+                            <div className="right" style={{paddingRight:'23px'}}>
+                                <div className="make-tab-url">
+                                    https://{setting.urlId}.surfee.co.kr
+                                </div>
+                            </div>
+                        </div>
                         <div ref={targets} className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`, borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
                             
                             {/* 네비게이션 */}
@@ -276,8 +292,8 @@ const MakePageV2 = ({history, userObj}, props) => {
                             {foot.use && <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> }                             
 
                             { ( setting.fta.use ) &&
-                            <div style={{width:`${isPhone ? 300 : 600}px`}}>
-                                <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${setting.fta.size}%`, borderRadius:`${setting.fta.shape}px`}}>
+                            <div className="fta__container">
+                                <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, borderRadius:`${setting.fta.shape}px`}}>
                                     {setting.fta.text}
                                 </button>
                             </div>
