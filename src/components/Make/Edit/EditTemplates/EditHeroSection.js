@@ -12,6 +12,7 @@ import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
 import ElementsTable from './tools/ElementsTable'
 import Contents from './tools/Contents'
 import AddGhostButton from './tools/AddGhostButton'
+import AddAppButton from './tools/AddAppButton'
 
 const alignOptions = [
     {label:'왼쪽', value: '0'},
@@ -77,13 +78,7 @@ function EditHeroSection({content, category}) {
     // 버튼 관련
     const ctaOpen = () => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].button.ctaUse = !content.button.ctaUse}))
-        
-    }
-
-    const ghostOpen = () => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].button.ghostUse = !content.button.ghostUse}))
+            draft[state.secNum].button.ctaUse = !content.button.ctaUse}))     
     }
 
     const changeCtaOption = () => {
@@ -94,14 +89,7 @@ function EditHeroSection({content, category}) {
                 draft[state.secNum].button.ctaOption = 'link'
         }))
     }
-    const changeGhostOption = () => {
-        action.setContents(produce(state.contents, draft => {
-            if (draft[state.secNum].button.ghostOption == 'link')
-                draft[state.secNum].button.ghostOption = 'apply'
-            else
-                draft[state.secNum].button.ghostOption = 'link'
-        }))
-    }
+
 
     const returnCtaOptions = () => {
         switch(content.button.ctaOption){
@@ -120,27 +108,6 @@ function EditHeroSection({content, category}) {
             default:
                 return(
                     <> </>
-                )
-        }
-    }
-
-    const returnGhostOptions = () => {
-        switch(content.button.ghostOption){
-            case 'link':
-                return(
-                    <InputCustom placeholder="연결하고 싶은 URL을 선택해주세요" value={content.button.ghostLink} func = {(e) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].button.ghostLink = e
-                    }))} />
-                )
-            case 'apply':
-                return(
-                    <ApplyInputCustom placeholder="연결하고 싶은 URL을 선택해주세요" value={content.button.ghostApply} func = {(e) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].button.ghostApply = e
-                    }))} />
-                )
-            default:
-                return(
-                <> </>
                 )
         }
     }
@@ -164,7 +131,8 @@ function EditHeroSection({content, category}) {
                         )}
                         <AddGhostButton content={content}/>
                     </OpenCloseCustom>
-                    <div className="left">
+                    <AddAppButton content={content} />
+                    {/* <div className="left">
                         <div className="content__name">
                                     애니메이션
                         </div>
@@ -174,7 +142,7 @@ function EditHeroSection({content, category}) {
                                     draft[state.secNum].animation.use = !content.animation.use
                                 }))}/>
                         </div>
-                    </div>
+                    </div> */}
                     </>
                 )
 

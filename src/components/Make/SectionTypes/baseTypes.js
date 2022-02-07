@@ -31,6 +31,11 @@ const commons = {
         use:true,
         type:'none',
     },
+    appButton:{
+        use: true,
+        apple: '',
+        google: ''
+    }
 }
 
 export const base = [
@@ -87,9 +92,6 @@ export const base = [
             ghostApply: '',
             ghostUse:false,
         },
-        appButton:{
-            use: true,
-        }
     },
     {
         name:'디테일',
