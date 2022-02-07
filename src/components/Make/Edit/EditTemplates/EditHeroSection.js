@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import DesignHero from './DesignHero'
 import RadioCustom from '../tools/Custom/RadioCustom'
+import ElementsTable from './tools/ElementsTable'
 import produce from 'immer';
 import {CustomSwitch} from '../tools/Custom/OnOffCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
@@ -9,7 +10,6 @@ import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import InputCustom from '../tools/Custom/InputCustom'
 import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
 
-import ElementsTable from './tools/ElementsTable'
 import Contents from './tools/Contents'
 import AddGhostButton from './tools/AddGhostButton'
 import AddAppButton from './tools/AddAppButton'
@@ -110,6 +110,100 @@ function EditHeroSection({content, category}) {
                     <> </>
                 )
         }
+    }
+
+    // 콘텐츠 - 이미지 업로드
+    const onChangeContentImage= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].image.attachment = result;
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].video.use = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = true               
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    // 콘텐츠 - 이미지 삭제
+    const RemoveImage = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].image.attachment = '';
+        }))
+    }
+
+    // 슬라이드 - 이미지
+    const onChangeSlideImage1= e => {
+        let newContents = JSON.parse(JSON.stringify(state.contents))
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide1 = result;
+                draft[state.secNum].image.slide = true
+                draft[state.secNum].video.youtube = false
+                draft[state.secNum].video.use = false
+                draft[state.secNum].image.slide = false
+                draft[state.secNum].image.oneImg = false 
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide1 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide1 = '';
+        }))
+    }
+    const onChangeSlideImage2= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide2 = result;
+                draft[state.secNum].image.slide = true
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide2 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide2 = '';
+        }))
+    }
+    const onChangeSlideImage3= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].slide_img.slide3 = result;
+                draft[state.secNum].image.slide = true
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    const RemoveSlide3 = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].slide_img.slide3 = '';
+        }))
     }
 
     const returnTable = () => {

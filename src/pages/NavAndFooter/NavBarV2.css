@@ -46,9 +46,9 @@
     align-items : center;
     color:rgb(106, 99, 247);
     background-color:white;
-    border-bottom:1px solid rgb(196, 196, 196);
     font-family:Noto Sans KR;
     font-weight: 500;
+    background-color:rgba(255,255,255,0.8);
 }
 
 .nav-bar-left-v2{

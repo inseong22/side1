@@ -44,8 +44,6 @@ export const base = [
         ...commons,
         name:'메인',
         sectionTypeName:'HeroSection',
-        sectionTypeNumber:1,
-        templateNumber:1,
         paddingSize:'',
         paddingLeft:'',
         paddingRight:'',
@@ -81,6 +79,7 @@ export const base = [
             size: 200,
         },
         button:{
+            use : true,
             title:'버튼입니다.',
             backgroundColor:'#ffffff',
             buttonTemplate:1,
@@ -99,43 +98,31 @@ export const base = [
             ghostApply: '',
             ghostUse:false,
         },
+        contents:{
+            use:true,
+        },
+        appDownloadButton:{
+            use:true,
+        }
     },
     {
+        ...commons,
         name:'디테일',
         sectionTypeName:'DetailSection',
         sectionTypeNumber:2,
         templateNumber:1,
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
+        contents:{
+            use:true,
         },
         titles:{
             title:'<p>여기서 타이틀을 입력rhrh</p>',
             font:'Pretendard-Regular',
-        },
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
         },
         image:{
             attachment:'',
             width:70,
             shadow: true,
             shadowValue: "2px 4px 20px #E8F0F9"
-        },
-        animation:{
-            use:true,
-            type:'none',
         },
         button:{
             title:'버튼입니다.',
@@ -160,21 +147,42 @@ export const base = [
             func:1,
             link:"https://surfee.co.kr",
             first:true,
+            use:true,
         },
         backgroundImage:{
             use:false,
             attachment:'',
         },
+        appDownloadButton:{
+            use:true,
+        },
+        button:{
+            use:true,
+        },
+        inputs:[],
     },
     {
         ...commons,
         name:'신청',
         sectionTypeName:'ApplySection',
+        applyButton:{
+            use:true,
+        },
+        caution:{
+            use:true,
+        }
     },
     {
         ...commons,
         name:'앱다운로드',
         sectionTypeName:'AppDownloadSection',
+        
+        caution:{
+            use:true,
+        },
+        appDownloadButton:{
+            use:true,
+        }
     },
     {
         ...commons,
@@ -219,6 +227,18 @@ export const base = [
         templateNumber:1,
         numOfReviews:3,
         ratingColor:'red',
+        image:{
+            use:true,
+        },
+        rating:{
+            use:true,
+        },
+        writer:{
+            use:true,
+        },
+        reviewText:{
+            use:true,
+        },
         reviews:[
             {
                 title:'1의 타이틀',
@@ -244,6 +264,9 @@ export const base = [
         ...commons,
         name:'자주 묻는 질문',
         sectionTypeName:'QnaSection',
+        qna:{
+            use:true,
+        }
     },
     {
         ...commons,
@@ -254,11 +277,26 @@ export const base = [
         ...commons,
         name:'갤러리',
         sectionTypeName:'GallerySection',
+        image:{
+            use:true,
+        },
+        card:{
+            use:true,
+        },
+        text:{
+            use:true,
+        },
     },
     {
         ...commons,
         name:'동영상',
         sectionTypeName:'VideoSection',
+        video:{
+            use:true,
+        },
+        explanation:{
+            use:true,
+        }
     },
     {
         ...commons,
@@ -343,6 +381,7 @@ export const defaults = {
     },
     setting:{
         urlId:'',
+        title:'Surfee : 노코드 랜딩페이지 제작 툴',
         faviconAttachment:'',
         font:'',
         smallFont:'',

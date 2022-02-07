@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
+import { motion } from 'framer-motion';
+import { MyContext } from '../../../pages/Make/MakePageV2'
+import {produce} from 'immer'
+import TitleDesc from './TitleDesc/TitleDesc'
 
-function AppDownloadSection() {
+function AppDownloadSection({content}) {
     return (
-        <div>
-            앱다운로드
-        </div>
+        <motion.div className="template"
+            data-aos={content.animation.type} aos-duration="2000">
+            <TitleDesc content={content} />
+        </motion.div>
     )
 }
 
