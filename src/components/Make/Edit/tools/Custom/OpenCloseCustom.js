@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Tooltip from '@mui/material/Tooltip';
 import { InformationCircle } from '@styled-icons/ionicons-outline';
 import './OpenCloseCustom.css'
+import OnOffCustom from './OnOffCustom'
 // import Accordion from '@mui/material/Accordion';
 
 const Accordion = styled((props) => (
@@ -66,6 +67,14 @@ export const AccordionCustom = (props) => {
   );
 }
 
+const CustomSwitch = ({use, onChange}) => {
+  return(
+    <div className={use ? 'custom-switch' : 'custom-switch unclicked'} onClick={onChange} style={{marginLeft: '13px'}}>
+      <div className="custom-switch-thumb" style={{left : `${use ? '32px' : '2px'}`}}></div>
+    </div>
+  )
+}
+
 const OpenCloseCustom = (props) => {
   /**
    * title, tooltip, preseen 설정 가능
@@ -77,8 +86,10 @@ const OpenCloseCustom = (props) => {
       <div className="accordion">
         <div className="accordion__header" onClick={() => setOpen(!open)}>
           <div className="edit-element">
-            <div className="onoff-title">
+            <div className="title">
+              <div className="title_text">
               {props.title}
+              </div> <CustomSwitch use={props.use} onChange={props.onChange}/>
               {
                 props.tooltip && 
                   <Tooltip placement="top" title={props.tooltip} arrow>

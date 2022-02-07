@@ -1,0 +1,15 @@
+.mockup-select{
+    margin: 0 auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.select_list{
+    width: 329px;
+    height: 48px;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 13px;
+    padding: 15px 18px 15px 18px;
+    font-size: 14px;
+}

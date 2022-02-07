@@ -1,0 +1,48 @@
+.edit-input{
+    background-color:#F2F6FA;
+    border-radius: 29px;
+    border:none;
+    padding:15px 20px;
+    width:90%;
+}
+input[type="text"]{
+    background-color:#F2F6FA;
+    border-radius: 29px;
+    border:none;
+    padding:15px 20px;
+    width:90%
+}
+input[type="button"]{
+    cursor: pointer;
+    width: 52px;
+    height: 30px;
+    border:none;
+    font-size:1em;
+    color:#042AaC;
+    outline:none;
+    display:inline;
+    box-sizing: border-box;
+    margin-left: -68px;
+    background: #A89AFF;
+    border-radius: 15px;
+    font-family: Sandoll GothicNeo1;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 12px;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+input[type=button]:hover{
+    background-color: white;
+    color:#A89AFF;
+  }
+.make-button{
+    width: 52px;
+    padding: 5px 9px;
+    border: none;
+    border-radius: 15px;
+    background-color: #A89AFF;
+    position: absolute;
+}

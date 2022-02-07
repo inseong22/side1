@@ -1,16 +1,13 @@
-import React, { useContext, useEffect, useState, useRef } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import Editor from '../tools/Editor'
 import produce from 'immer';
+import { Link } from 'react-router-dom' 
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import './DetailSection.css'
 
-import appstorebutton from '../../../tools/img/appstorebutton.png'
 import playstorebutton from '../../../tools/img/playstorebutton.png'
 import './HeroSection.css'
-
-import Popover from '@mui/material/Popover';
-import {ImageAdd} from '@styled-icons/boxicons-regular';
 import ImageCarousel from '../Edit/tools/func/FuncImageCarousel'
 
 import { motion } from 'framer-motion';
@@ -60,72 +57,56 @@ function HeroSection({content}) {
     }
 
     const ImageOrSlide = () => {
-        if(content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg)
-        return(
-            <iframe src={`${content.video.link}`} width='500px' height={`${content.image.size}px`} frameborder="0" allow='autoplay'/>
-        )
-        if(!content.video.youtube && content.video.use && !content.image.slide && !content.image.oneImg)
-        return(
-            <div>
-                <video 
-                className="video"
-                src={`${content.video.file}`} 
-                type="video/mp4" 
-                autoPlay
-                muted
-                loop
-                style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}}
-                >
-                </video>
-            </div>
-        )
-        if(!content.video.youtube && !content.video.use && content.image.slide && !content.image.oneImg)
-        return(
-            <div className="slide-box">
-                <ImageCarousel content={content}/>
-            </div>
-        )
-        if(!content.video.youtube && !content.video.use && !content.image.slide && content.image.oneImg)
-        return (
-            <div >
-            {/* <Popover
-                id={Boolean(imageShow) ? 'simple-popover' : undefined} // 수정
-                open={Boolean(imageShow)} // 수정
-                anchorEl={imageShow} // 수정
-                onClose={() => setImageShow(null)} // 수정
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-                }}>
-                <div className="pop-balloon" style={{width:'100px'}}>
-                    <span className="balloon-item">
-                        <ImageAdd color="black" width={30} />
-                        { imgRef.current && 
-                            <input className="image-input" type="file" accept="image/*" id="file"
-                                onChange={ e => onChangeImage(e) } style={{width:'20px', height:'20px'}}/> }
-                    </span>
-                    <span className="balloon-item" onClick={() => {}}>
-                        동영상
-                    </span>
-                </div>
-            </Popover> */}
-            {content.image.attachment === '' ?  
-                <img ref={imgRef} src={playstorebutton} className="image" onClick={(e) =>{ setImageShow(e.currentTarget)}} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}} />
-                : 
-                <img 
-                ref={imgRef} 
-                src={`${content.image.attachment}`} 
-                className="image" 
-                onClick={(e) => setImageShow(e.currentTarget)} 
-                style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`}}
-                />
-            }
-            </div>
-    )
+        if (content.contentsUse) {
+            if(content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg && !content.mockup.use) 
+                return(
+                    <iframe src={`${content.video.link}`} width='500px' height={`${content.image.size}px`} frameborder="0" allow='autoplay'/>
+                )
+            if(!content.video.youtube && content.video.use && !content.image.slide && !content.image.oneImg && !content.mockup.use)
+                return(
+                    <div>
+                        <video 
+                        className="video"
+                        src={`${content.video.file}`} 
+                        type="video/mp4" 
+                        autoPlay
+                        muted
+                        loop
+                        style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}}
+                        >
+                        </video>
+                    </div>
+                )
+            if(!content.video.youtube && !content.video.use && content.image.slide && !content.image.oneImg && !content.mockup.use)
+                return(
+                    <div className="slide-box">
+                        <ImageCarousel content={content}/>
+                    </div>
+                )
+            if(!content.video.youtube && !content.video.use && !content.image.slide && content.image.oneImg && !content.mockup.use)
+                return (
+                    <div >
+                        {content.image.attachment === '' ?  
+                            <img ref={imgRef} src={playstorebutton} className="image" onClick={(e) =>{ setImageShow(e.currentTarget)}} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}} />
+                            : 
+                            <img 
+                            ref={imgRef} 
+                            src={`${content.image.attachment}`} 
+                            className="image" 
+                            onClick={(e) => setImageShow(e.currentTarget)} 
+                            style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`}}
+                            />
+                        }
+                    </div>
+                )
+            if(!content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg && content.mockup.use)
+            return(
+                <>
+                목업
+                </>
+            )
+        }
+       
     }
 
     const returnButton = () => {
@@ -133,16 +114,25 @@ function HeroSection({content}) {
             <>            
             <div className="button__container" style={{border:`${ anchorEl !== null ? '1px dashed rgba(0,0,0,0.4)' : '' }`}}>
                 {
-                    content.button.first && 
+                    content.button.ctaUse && 
                         <>         
-                        {content.button.link.includes("play.google.com/store") ? <img src={playstorebutton} />
-                        : 
-                        content.button.link.includes("apps.apple.com/") ? <img src={appstorebutton} />
-                        : 
-                        <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`, margin:`${content.button.align}`}}>
-                            버튼
+                        <button 
+                            className="action-button" 
+                            style={{backgroundColor:`${content.button.backgroundColor}`, margin:`${content.button.align}`}}
+                            onClick={() => {window.open(`${content.button.ctaLink}`)}}
+                        >
+                            CTA버튼
                         </button>
-                        }
+                        </>
+                }
+                {
+                    content.button.ghostUse && 
+                        <>         
+                        <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`, margin:`${content.button.align}`}}
+                            onClick={() => {window.open(`${content.button.ghostLink}`)}}
+                        >
+                            고스트버튼
+                        </button>
                         </>
                 }
             </div>

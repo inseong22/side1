@@ -6,7 +6,7 @@
 .edit-element{
     width:100%;
     display:flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items : center;
     box-sizing: border-box;
     padding:var(--edit-main-padding);

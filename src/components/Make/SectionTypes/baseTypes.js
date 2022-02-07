@@ -22,6 +22,7 @@ const commons = {
         size: 10,
         color: '#000000'
     },
+    contentsUse: false,
     padding:{
         top:10,
         bottom:10,
@@ -30,6 +31,11 @@ const commons = {
         use:true,
         type:'none',
     },
+    appButton:{
+        use: true,
+        apple: '',
+        google: ''
+    }
 }
 
 export const base = [
@@ -65,7 +71,14 @@ export const base = [
             file: '',
             youtube: false,
             link: '',
-            auto: true
+            auto: true,
+        },
+        mockup: {
+            use: false,
+            type: 'mobile',
+            file: '',
+            file2: '',
+            size: 200,
         },
         button:{
             title:'버튼입니다.',
@@ -77,7 +90,8 @@ export const base = [
             second:false,
             align:'0',
             ctaUse:true,
-            option: 'link',
+            ctaOption: 'link',
+            ghostOption: 'link',
             ctaLink:'',
             ctaApply: '',
             ghostUseOrLink: true, 
