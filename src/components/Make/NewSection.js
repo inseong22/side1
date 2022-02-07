@@ -105,6 +105,7 @@ function NewSection({content, index, contents, setContents}) {
             </div>
             <div className="section__container" 
                 // style={{backgroundImage:`url(${content.backgroundImage.attachment})`}} 
+                // style={{padding:`${content.padding.top}px 0px ${content.padding.bottom}px 0px`}} 
                 onClick={() => setThisSection()}>
                 {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                 <div style={{backgroundColor:`${content.backgroundColor}`, opacity:`${content.backgroundOpacity}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>

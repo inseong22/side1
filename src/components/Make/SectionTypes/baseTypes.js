@@ -20,9 +20,42 @@
 //     color: '#000000'
 // },
 
+const commons = {
+    backgroundColor:'#ffffff',
+    backgroundOpacity:1,
+    backgroundType:'color',
+    backgroundImage:{
+        use:false,
+        attachment:'',
+    },
+    title:{
+        use:true,
+        text: '제목',
+        align: '',
+        size: 10,
+        color: '#000000'
+    },
+    desc:{
+        use:true,
+        text: '본문',
+        align: '',
+        size: 10,
+        color: '#000000'
+    },
+    padding:{
+        top:10,
+        bottom:10,
+    },
+    animation:{
+        use:true,
+        type:'none',
+    },
+}
+
 export const base = [
     {
         // 공통적으로 들어갈 확률이 높은 것들
+        ...commons,
         name:'메인',
         sectionTypeName:'HeroSection',
         sectionTypeNumber:1,
@@ -31,30 +64,6 @@ export const base = [
         paddingLeft:'',
         paddingRight:'',
         paddingCustom: false,
-        backgroundType:'color',
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        animation:{
-            use: true,
-            type:'none',
-        },
-        // 특정 섹션에 해당할 확률이 높은 것들
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
         image:{
             oneImg:true,
             type:'image',
@@ -137,15 +146,12 @@ export const base = [
         },
     },
     {
+        ...commons,
         name:'CTA',
         sectionTypeName:'CtaSection',
         sectionTypeNumber:9,
         templateNumber:1,
         width:90,
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        title:'One Landing Page 제작 툴, 가장 먼저 이용해보세요.',
-        desc:'사전 신청하신 분들에겐 오픈 시 사용가능한 일주일 무료 이용권을 드립니다.',
         attachment:'',
         button:{
             title:'버튼입니다.',
@@ -159,87 +165,32 @@ export const base = [
             use:false,
             attachment:'',
         },
-        animation:{
-            use:true,
-            type:'none',
-        },
     },
     {
+        ...commons,
         name:'신청',
         sectionTypeName:'ApplySection',
-        backgroundColor:'#ffffff',
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
     },
     {
+        ...commons,
         name:'앱다운로드',
         sectionTypeName:'AppDownloadSection',
-        backgroundColor:'#ffffff',
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
     },
     {
+        ...commons,
         name:'특징',
         sectionTypeName:'FeaturesSection',
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        backgroundType:'color',
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
         align:'start',
-        title:{
-            use:true,
-            text: '제목',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            use:true,
-            text: '본문',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        padding:{
-            top:10,
-            bottom:10,
-        },
         featureImage:{
             use:true,
+            borderRaidus:0,
+            size:50,
         },
-        featureDesc:{
+        featureText:{
             use:true,
+            titleUse:true,
+            descUse:true,
+            color:'#000000',
         },
         features:[
             {
@@ -259,39 +210,14 @@ export const base = [
                 desc:'리뷰를 쓰는 창입니다.리뷰를 쓰는 창입니다.리뷰를 쓰는 창입니다.리뷰를 쓰는 창입니다.',
             },
         ],
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        animation:{
-            use:true,
-            type:'none',
-        },
     },
     {
+        ...commons,
         name:'리뷰/추천',
         sectionTypeName:'ReviewSection',
         sectionTypeNumber:3,
         templateNumber:1,
         numOfReviews:3,
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
         ratingColor:'red',
         reviews:[
             {
@@ -313,124 +239,31 @@ export const base = [
                 writer:'이유진',
             },
         ],
-        animation:{
-            use:true,
-            type:'none',
-        },
     },
     {
+        ...commons,
         name:'자주 묻는 질문',
         sectionTypeName:'QnaSection',
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        animation:{
-            use:true,
-            type:'none',
-        },
     },
     {
+        ...commons,
         name:'글',
         sectionTypeName:'TextSection',
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
     },
     {
+        ...commons,
         name:'갤러리',
         sectionTypeName:'GallerySection',
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
     },
     {
+        ...commons,
         name:'동영상',
         sectionTypeName:'VideoSection',
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
     },
     {
+        ...commons,
         name:'목업',
         sectionTypeName:'MockupSection',
-        backgroundColor:'#ffffff',
-        backgroundOpacity:1,
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        title:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
-        desc:{
-            text: '',
-            align: '',
-            size: 10,
-            color: '#000000'
-        },
     },
 ]
 

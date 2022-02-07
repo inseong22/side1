@@ -17,12 +17,18 @@ function FeaturesSection({content}) {
                     {item.icon && <Icon name="Adobe" />}
                     {item.attachment && <img src={item.attachment} style={{width:'50px'}} /> }
                 </div>
-                <div className="center-row" style={{fontSize:'1.4em', fontWeight: 'bold', justifyContent:`${content.align}`}}>
-                    {item.title}
-                </div>
-                <div style={{marginTop:'20px', justifyContent:`${content.align}`}}>
-                    {item.desc}
-                </div>
+                {
+                    content.featureText.titleUse && 
+                    <div className="center-row" style={{fontSize:'1.4em', fontWeight: 'bold', justifyContent:`${content.align}`}}>
+                        {item.title}
+                    </div>
+                }
+                {
+                    content.featureText.descUse && 
+                    <div style={{marginTop:'20px', justifyContent:`${content.align}`}}>
+                        {item.desc}
+                    </div>
+                }
             </div>
         )
     })

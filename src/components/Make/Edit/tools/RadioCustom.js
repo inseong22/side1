@@ -56,7 +56,7 @@ export const EditRadioContainer = ({text, options, value, func, button}) => {
                 {text ? 
                     <div className="edit-element__left">{text}</div> 
                     : 
-                    <></>
+                    <div className="edit-element__left">{text}</div> 
                 }
                 <div className="radio-container">
                     <RadioCustomButton
@@ -75,7 +75,7 @@ export const EditRadioContainer = ({text, options, value, func, button}) => {
                 {text ? 
                     <div className="edit-element__left">{text}</div> 
                     : 
-                    <></>
+                    <div className="edit-element__left">{text}</div> 
                 }
                 <div className="radio-container">
                     <RadioCustom 

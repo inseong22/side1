@@ -102,9 +102,7 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                     <Droppable droppableId="sectionsss">
                         {(provided) => 
                             (
-                            <div className="sectionsss"
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}>
+                            <div className="sectionsss" {...provided.droppableProps} ref={provided.innerRef}>
                                 {state.contents.map((item, index) => {
                                     return(
                                         <Draggable draggableId={String(index)} key={index} index={index} style={{width:'100%'}}>
@@ -133,8 +131,8 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                                                                         </div>
                                                                     </div>
                                                                     <div className="center-row">
-                                                                        <div className="left">
-
+                                                                        <div className="left" style={{width:'85%', textAlign:'left', color:'#555C67', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                                                                            {item.title.text}
                                                                         </div>
                                                                         <div className="right">
                                                                             <div className="content__button cb-delete"
@@ -196,16 +194,6 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                         </div>
                     </div>   
                 </div>
-
-                {/* <span className="make-section-button" style={{display:`${isHover}`}} onClick={() => {
-                    if(state.addingSectionAt === index){
-                        action.setAddingSectionAt(1000);
-                    }else{
-                        action.setAddingSectionAt(index)
-                    }
-                }}>
-                {parseInt(state.addingSectionAt) === parseInt(index) ? <>- 섹션 제거하기</> : <>+ 섹션 추가하기</>}
-                </span> */}
             </div>
             <AddingSection open={addOpen} setOpen={setAddOpen} />
         </div>
