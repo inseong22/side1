@@ -4,12 +4,14 @@ import DesignHero from './DesignHero'
 import {EditRadioContainer} from '../tools/RadioCustom'
 import produce from 'immer';
 import {CustomSwitch} from '../tools/OnOffCustom'
+import InputCustom from '../tools/InputCustom'
 import OpenCloseCustom from '../tools/OpenCloseCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
 import AddContentImg from '../tools/AddContentImg'
 import AddSlideImg from '../tools/AddSlideImg'
 import AddContentVideo from '../tools/AddContentVideo'
 import AddYoutubeLink from '../tools/AddYoutubeLink'
+import ApplyButton from '../tools/ApplyButton'
 import EditSlider from '../tools/EditSlider'
 
 const imageBorderOptions = [
@@ -31,6 +33,10 @@ const imageOptions = [
 const alignOptions = [
     {label:'왼쪽', value: '0'},
     {label:'중앙', value: '0 auto'}
+]
+const buttonOptions = [
+    {label: '링크 연결', value: 'link'},
+    {label: '신청', value: 'apply'},
 ]
 const animationOptions = [
     { label: '없음', value: false},
@@ -314,11 +320,42 @@ function EditHeroSection({content, category}) {
     const ctaOpen = () => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.ctaUse = !content.button.ctaUse}))
+        
     }
 
     const ghostOpen = () => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.ghostUse = !content.button.ghostUse}))
+    }
+
+    const changeButtons = () => {
+        action.setContents(produce(state.contents, draft => {
+            if (draft[state.secNum].button.option == 'link')
+                draft[state.secNum].button.option = 'apply'
+            else
+                draft[state.secNum].button.option = 'link'
+        }))
+    }
+
+    const returnCtaOptions = () => {
+        switch(content.button.option){
+            case 'link':
+                return(
+                    <InputCustom value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button.ctaLink = e
+                    }))} />
+                )
+            case 'apply':
+                return(
+                    <ApplyButton value={content.button.ctaApply} func = {(e) => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button.ctaApply = e
+                    }))} />
+                )
+            default:
+                return(
+                    <> 에러 </>
+                )
+        }
     }
 
     const returnTable = () => {
@@ -336,7 +373,12 @@ function EditHeroSection({content, category}) {
                     <OpenCloseCustom title="버튼">
                     <EditRadioContainer options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
                     <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange={e => ctaOpen(e)}/>
-                    {/* <EditRadioContainer options={linkOptions} value={} */}
+                    { content.button.ctaUse && (
+                        <>
+                            <EditRadioContainer options={buttonOptions} value={content.button.option} func={e => changeButtons(e)}/>
+                            {returnCtaOptions()}
+                        </>
+                    )}
                     <CustomSwitch text="고스트 버튼" value={content.button.ghostUse} onChange = {e => ghostOpen(e)}/>
                     </OpenCloseCustom>
                     <CheckBoxContainer text="버튼 1 사용" value={content.button.first} func={ () => action.setContents(produce(state.contents, draft => {

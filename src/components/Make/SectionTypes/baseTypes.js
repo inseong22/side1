@@ -1,3 +1,5 @@
+import { TreasureMap } from "@styled-icons/remix-fill"
+
 export const base = [
     {
         // 공통적으로 들어갈 확률이 높은 것들
@@ -66,6 +68,12 @@ export const base = [
             second:false,
             align:'0',
             ctaUse:true,
+            option: 'link',
+            ctaLink:'',
+            ctaApply: '',
+            ghostUseOrLink: true, 
+            ghostLink:'',
+            ghostApply: '',
             ghostUse:false,
         },
     },
