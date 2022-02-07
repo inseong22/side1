@@ -10,7 +10,6 @@ import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import InputCustom from '../tools/Custom/InputCustom'
 import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
 
-import ElementsTable from './tools/ElementsTable'
 import Contents from './tools/Contents'
 import AddGhostButton from './tools/AddGhostButton'
 import AddAppButton from './tools/AddAppButton'
@@ -29,6 +28,44 @@ const buttonOptions = [
 function EditHeroSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
+    const elements = [
+        {
+            title: '제목',
+            use:content.title.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].title.use = !content.title.use;
+            }))
+        },
+        {
+            title: '본문',
+            use:content.desc.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].desc.use = !content.desc.use;
+            }))
+        },
+        {
+            title: '콘텐츠',
+            use:content.contentsUse,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].contentsUse = !content.contentsUse;
+            }))
+        },
+        {
+            title: '버튼',
+            use:content.button.ctaUse || content.button.ghostUse,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].button.ctaUse = !content.button.ctaUse;
+                draft[state.secNum].button.ghostUse = !content.button.ghostUse;
+            }))
+        },
+        {
+            title: '앱 다운로드 버튼',
+            use:content.appButton.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].appButton.use = !content.appButton.use;
+            }))
+        },
+    ]
     const changeAlignOption = e => {
         action.setContents(produce(state.contents, draft => {
             if (draft[state.secNum].button.align == '0')
@@ -169,44 +206,6 @@ function EditHeroSection({content, category}) {
         }))
     }
 
-    const elements = [
-        {
-            title:'제목',
-            use:content.title.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].title.use = !content.title.use;
-            }))
-        },
-        {
-            title:'본문',
-            use:content.desc.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].desc.use = !content.desc.use;
-            }))
-        },
-        {
-            title:'콘텐츠',
-            use:content.contents.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].contents.use = !content.contents.use;
-            }))
-        },
-        {
-            title:'버튼',
-            use:content.button.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].button.use = !content.button.use;
-            }))
-        },
-        {
-            title:'앱 다운로드',
-            use:content.appDownloadButton.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].appDownloadButton.use = !content.appDownloadButton.use;
-            }))
-        },
-    ]
-
     const returnTable = () => {
         switch(category){
             case 0:
@@ -215,12 +214,6 @@ function EditHeroSection({content, category}) {
                     <>
                     <ElementsTable elements={elements} />
                     <Contents content={content} />
-                    <OpenCloseCustom title="콘텐츠">
-                    <RadioCustom options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />                   
-                    {
-                        returnImageOrVideoAdd()
-                    } 
-                    </OpenCloseCustom>
                     <OpenCloseCustom title="버튼">
                         <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
                         <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange={e => ctaOpen(e)}/>
