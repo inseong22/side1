@@ -178,12 +178,14 @@
 }
 
 .text-input{
-  width:100%;
-  border:1px solid rgba(200,200,200,0.4);
+  border:1px solid rgba(200,200,200,0.1);
   background-color:rgba(0,0,0,0);
 }
 .text-input:hover{
   border:1px solid rgba(200,200,200,0.7);
+}
+.text-input:focus {
+  outline:1px solid #d50000;
 }
 
 @font-face {

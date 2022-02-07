@@ -1,18 +1,22 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import DesignHero from './DesignHero'
-import {EditRadioContainer} from '../tools/RadioCustom'
+// import TemplateChoose from '../tools/TemplateChoose'
+import RadioCustom from '../tools/Custom/RadioCustom'
 import produce from 'immer';
-import {CustomSwitch} from '../tools/OnOffCustom'
-import InputCustom from '../tools/InputCustom'
-import OpenCloseCustom from '../tools/OpenCloseCustom'
-import CheckBoxContainer from '../tools/CheckBoxContainer'
-import AddContentImg from '../tools/AddContentImg'
-import AddSlideImg from '../tools/AddSlideImg'
-import AddContentVideo from '../tools/AddContentVideo'
-import AddYoutubeLink from '../tools/AddYoutubeLink'
+import {CustomSwitch} from '../tools/Custom/OnOffCustom'
+import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
+// import OnOffCustom from '../tools/OnOffCustom'
+import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
+import ImageAddEdit from '../tools/ImageAddEdit'
+import AddContentImg from '../tools/func/FuncContentImg'
+import AddSlideImg from '../tools/func/FuncSlideImg'
+import AddContentVideo from '../tools/func/FuncContentVideo'
+import AddYoutubeLink from '../tools/func/FuncYoutubeLink'
+import EditSlider from '../tools/Custom/SliderCustom'
+import InputCustom from '../tools/Custom/InputCustom'
 import ApplyButton from '../tools/ApplyButton'
-import EditSlider from '../tools/EditSlider'
+
 
 const imageBorderOptions = [
     { label: '원형', value: 50 },
@@ -38,6 +42,11 @@ const buttonOptions = [
     {label: '링크 연결', value: 'link'},
     {label: '신청', value: 'apply'},
 ]
+const backOptions = [
+    { label: '단색', value: 'color' },
+    { label: '이미지', value: 'image'},
+]
+
 const animationOptions = [
     { label: '없음', value: false},
     { label: '있음', value: true}
@@ -167,7 +176,7 @@ function EditHeroSection({content, category}) {
                     <div>
                         <AddContentImg text="이미지" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         <EditSlider top="크기" text="이미지" value={content.image.size} func={setImgSize} max="200"/>
-                        <EditRadioContainer text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
+                        <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                         }))} />
                         <CustomSwitch text="그림자" value={content.image.shadow} onChange={(e) => action.setContents(produce(state.contents, draft => {
@@ -192,7 +201,7 @@ function EditHeroSection({content, category}) {
                         최대 5MB까지 가능합니다.
                     </div>
                     <EditSlider top="크기" text="이미지" value={content.image.size} func={setImgSize} max="300"/>
-                    <EditRadioContainer text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
+                    <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                     }))} />
                     <CustomSwitch text="그림자" value={content.image.shadow} onChange={(e) => action.setContents(produce(state.contents, draft => {
@@ -210,7 +219,7 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     <div style={{marginTop: '40px'}}/>
-                    <EditRadioContainer text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
+                    <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
                     <div style={{marginBottom: '25px'}}/>
                     {videoType()}
                     </>
@@ -365,17 +374,17 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     <OpenCloseCustom title="콘텐츠">
-                    <EditRadioContainer options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />                   
+                    <RadioCustom options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />                   
                     {
                         returnImageOrVideoAdd()
                     } 
                     </OpenCloseCustom>
                     <OpenCloseCustom title="버튼">
-                    <EditRadioContainer options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
+                    <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
                     <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange={e => ctaOpen(e)}/>
                     { content.button.ctaUse && (
                         <>
-                            <EditRadioContainer options={buttonOptions} value={content.button.option} func={e => changeButtons(e)}/>
+                            <RadioCustom options={buttonOptions} value={content.button.option} func={e => changeButtons(e)}/>
                             {returnCtaOptions()}
                         </>
                     )}

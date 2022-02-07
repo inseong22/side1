@@ -4,6 +4,7 @@ import './ReviewSection.css'
 import Rating from '@mui/material/Rating';
 import { motion } from 'framer-motion';
 import { MyContext } from '../../../pages/Make/MakePageV2'
+import {produce} from 'immer'
 
 function ReviewSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -39,8 +40,15 @@ function ReviewSection({content}) {
         <>
             <motion.div className="template"
             data-aos={content.animation.type} aos-duration="2000">
-                <div>
-                    {content.title}
+                <div style={{color:`${content.title.color}`, fontSize:`${content.title.size}px`}}>
+                    <input className="text-input" value={content.title.text} onChange={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].title.text = e.currentTarget.value;
+                    }))}
+                    style={{color:`${content.title.color}`, fontSize:`${content.title.size}px`, width:'100%', boxSizing:`border-box`, textAlign:'center'}}
+                    />
+                </div>
+                <div style={{color:`${content.desc.color}`, fontSize:`${content.desc.size}px`}}>
+                    {content.desc.text}
                 </div>
                 <div className="reviews__container"> 
                     {returnReviewCards}

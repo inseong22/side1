@@ -1,10 +1,10 @@
 import React, {useContext} from 'react'
-import {MyContext} from '../../../../pages/Make/MakePageV2'
+import {MyContext} from '../../../../../pages/Make/MakePageV2'
 import { Template } from '@styled-icons/heroicons-outline'
 import { DesignServices } from '@styled-icons/material-outlined'
 import './EditTopBar.css'
 
-function EditTopBar({category, setCategory}) {
+function FuncTopBar({category, setCategory}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return (
@@ -19,4 +19,4 @@ function EditTopBar({category, setCategory}) {
     )
 }
 
-export default EditTopBar
+export default FuncTopBar

@@ -22,9 +22,6 @@ import { base } from '../../components/Make/SectionTypes/baseTypes'
 import { defaults } from '../../components/Make/SectionTypes/baseTypes'
 import ReactGa from 'react-ga'
 import lodash from 'lodash'
-import EditNaviSection from '../../components/Make/Edit/NavFooterSetting/EditNaviSection'
-import EditFooterSection from '../../components/Make/Edit/NavFooterSetting/EditFooterSection'
-import EditContents from '../../components/Make/Edit/NavFooterSetting/EditContents'
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import { isMobile } from 'react-device-detect';
 
@@ -79,12 +76,12 @@ const MakePageV2 = ({history, userObj}, props) => {
     const [footerOrNot, setFooterOrNot] = useState(false);
     // 반복 실행되는 useEffect
     useEffect(() => {
+        console.log("반복")
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/making/${userObj.email}`);
-        console.log(arr)
         function repeat(){
-            localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
+            // localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
         }
         // 30초에 한번 씩 자동 저장
         let id = setInterval(repeat, 30000);
@@ -93,6 +90,7 @@ const MakePageV2 = ({history, userObj}, props) => {
 
     // 처음에 한번만 실행되는 useEffect
     useEffect(() => {
+        console.log("처음에 한번만")
         
         // 관리하기 페이지에서 state.item으로 내용을 가지고 넘어왔다.
         if(location.state !== undefined){
@@ -206,7 +204,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     const sectionsReturn = contents.map((item, index) => {
         return(
             <div style={{width:'100%'}}>
-                <NewSection content={item} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} />
+                <NewSection content={item} key={index} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} />
             </div>
         )
     })

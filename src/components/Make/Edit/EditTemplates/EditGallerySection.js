@@ -1,9 +1,8 @@
-import React, {useState, useContext} from 'react'
+import React, {useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import { ctaSectionTemplateList } from './InnerTemplates'
 import EditDesign from './tools/EditDesign'
 
-function EditCtaSection({content, category}) {
+function EditGallerySection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnTable = () => {
@@ -31,4 +30,4 @@ function EditCtaSection({content, category}) {
     )
 }
 
-export default EditCtaSection
+export default EditGallerySection

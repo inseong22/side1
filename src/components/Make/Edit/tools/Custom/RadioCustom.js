@@ -1,7 +1,7 @@
 import React from 'react'
-import './custom.css'
+import '../custom.css'
 
-function RadioCustom({options, value, onChange}) {
+export function EditRadio({options, value, onChange}) {
     return (
         <div className="radio-container">
             {options.map((item, index) => {
@@ -14,13 +14,14 @@ function RadioCustom({options, value, onChange}) {
         </div>
     )
 }
-function RadioCustomButton({options, value, onChange}) {
+
+export function EditRadioButtom({options, value, onChange}) {
     const ROUNDBORDER = 5;
     const CIRCLEBORDER = 15;
 
     return (
         <div className="radio-container">
-            <div className={value === 0 ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(0)}>
+            <div className={value === 0 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(0)}>
                 <div className="radio-shape box">
 
                 </div>
@@ -28,7 +29,7 @@ function RadioCustomButton({options, value, onChange}) {
                     사각형
                 </div>
             </div>
-            <div className={value === ROUNDBORDER ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(ROUNDBORDER)}>
+            <div className={value === ROUNDBORDER ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(ROUNDBORDER)}>
                 <div className="radio-shape round">
 
                 </div>
@@ -36,7 +37,7 @@ function RadioCustomButton({options, value, onChange}) {
                     라운드
                 </div>
             </div>
-            <div className={value === CIRCLEBORDER ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(CIRCLEBORDER)}>
+            <div className={value === CIRCLEBORDER ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(CIRCLEBORDER)}>
                 <div className="radio-shape circle">
 
                 </div>
@@ -48,7 +49,7 @@ function RadioCustomButton({options, value, onChange}) {
     )
 }
 
-export const EditRadioContainer = ({text, options, value, func, button}) => {
+const RadioCustom = ({text, options, value, func, button}) => {
     if (button === true){
         return(
             <div className="edit-element">
@@ -56,10 +57,10 @@ export const EditRadioContainer = ({text, options, value, func, button}) => {
                 {text ? 
                     <div className="edit-element__left">{text}</div> 
                     : 
-                    <></>
+                    <div className="edit-element__left">{text}</div> 
                 }
                 <div className="radio-container">
-                    <RadioCustomButton
+                    <EditRadioButtom
                         options={options}
                         onChange={e => {func(e)}}
                         value={value}
@@ -75,10 +76,10 @@ export const EditRadioContainer = ({text, options, value, func, button}) => {
                 {text ? 
                     <div className="edit-element__left">{text}</div> 
                     : 
-                    <></>
+                    <div className="edit-element__left">{text}</div> 
                 }
                 <div className="radio-container">
-                    <RadioCustom 
+                    <EditRadio 
                         options={options}
                         onChange={e => {func(e)}}
                         value={value}

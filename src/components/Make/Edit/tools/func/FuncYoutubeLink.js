@@ -1,9 +1,9 @@
 import React, {useRef, useContext} from 'react'
 import produce from 'immer';
-import { MyContext } from '../../../../pages/Make/MakePageV2'
-import './InputCustom.css'
+import { MyContext } from '../../../../../pages/Make/MakePageV2'
+import '../Custom/InputCustom.css'
 
-function AddYoutubeLink({content}) {
+function FuncYoutubeLink({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const onChangeLink = e => {
@@ -43,4 +43,4 @@ function AddYoutubeLink({content}) {
     )
 }
 
-export default AddYoutubeLink
+export default FuncYoutubeLink

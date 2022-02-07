@@ -4,8 +4,10 @@
     flex-direction: row;
     justify-content :start;
     align-items :center;
+    margin-top:12px;
 }
 
 .edit-element__title{
-    font-size:20px;
+    font-size:18px;
+    color:var(--main-black-01);
 }

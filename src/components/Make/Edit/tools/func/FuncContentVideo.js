@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 
-function AddContentVideo({text, value, func}) {
+function FuncContentVideo({text, value, func}) {
     const videoInput = useRef();
     const inputClick = () => {
         videoInput.current.click();
@@ -40,4 +40,4 @@ function AddContentVideo({text, value, func}) {
     )
 }
 
-export default AddContentVideo
+export default FuncContentVideo

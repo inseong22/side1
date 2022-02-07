@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 
-function AddContentImg({text, value, func, removeFunc}) {
+function FuncContentImg({text, value, func, removeFunc}) {
     const photoInput = useRef();
     const inputClick = () => {
         photoInput.current.click();
@@ -48,4 +48,4 @@ function AddContentImg({text, value, func, removeFunc}) {
     )
 }
 
-export default AddContentImg
+export default FuncContentImg

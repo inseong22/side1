@@ -67,6 +67,9 @@ export const AccordionCustom = (props) => {
 }
 
 const OpenCloseCustom = (props) => {
+  /**
+   * title, tooltip, preseen 설정 가능
+   */
   const [open, setOpen] = useState(false)
 
   return (

@@ -6,8 +6,13 @@ import EditCtaSection from './EditTemplates/EditCtaSection'
 import EditHeroSection from './EditTemplates/EditHeroSection'
 import EditReviewSection from './EditTemplates/EditReviewSection'
 import EditFeaturesSection from './EditTemplates/EditFeaturesSection'
-import EditTopBar from './tools/EditTopBar'
-import AddingSection from './AddingSection'
+import EditAppDownloadSection from './EditTemplates/EditAppDownloadSection'
+import EditApplySection from './EditTemplates/EditApplySection'
+import EditQnaSection from './EditTemplates/EditQnaSection'
+import EditGallerySection from './EditTemplates/EditGallerySection'
+import EditTextSection from './EditTemplates/EditTextSection'
+import EditMockupSection from './EditTemplates/EditMockupSection'
+import EditTopBar from './tools/func/FuncTopBar'
 
 import EditSetting from './NavFooterSetting/EditSetting'
 import EditNaviSection from './NavFooterSetting/EditNaviSection'
@@ -38,6 +43,11 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                     <EditHeroSection content={content} category={state.category}/>
                 )
 
+            case 'CtaSection':
+                return (
+                    <EditCtaSection content={content} category={state.category}/>
+                )
+
             // 리뷰들인 경우 편집화면
             case 'ReviewSection':
                 return(
@@ -50,11 +60,38 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
 
                 )
 
-            case 'CtaSection':
+            case 'ApplySection':
                 return(
-                    <EditCtaSection content={content} category={state.category}/>
+                    <EditApplySection content={content} category={state.category}/>
+
+                )
+            
+            case 'AppDownloadSection':
+                return(
+                    <EditAppDownloadSection content={content} category={state.category}/>
+
+                )
+    
+            case 'QnaSection':
+                return(
+                    <EditQnaSection content={content} category={state.category}/>
                 )
 
+            case 'GallerySection':
+                return(
+                    <EditGallerySection content={content} category={state.category}/>
+                )
+
+            case 'TextSection':
+                return(
+                    <EditTextSection content={content} category={state.category}/>
+                )
+
+            case 'MockupSection':
+                return(
+                    <EditMockupSection content={content} category={state.category}/>
+                )
+    
             default:
                 return(
                     <div>

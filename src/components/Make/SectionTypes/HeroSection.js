@@ -11,7 +11,7 @@ import './HeroSection.css'
 
 import Popover from '@mui/material/Popover';
 import {ImageAdd} from '@styled-icons/boxicons-regular';
-import ImageCarousel from '../Edit/tools/ImageCarousel'
+import ImageCarousel from '../Edit/tools/func/FuncImageCarousel'
 
 import { motion } from 'framer-motion';
 
@@ -211,7 +211,6 @@ function HeroSection({content}) {
             <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
                 {animationDiv()}
             </div>
-
         </div>
     )
 }
