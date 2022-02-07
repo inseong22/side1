@@ -1,14 +1,11 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import DesignHero from './DesignHero'
-// import TemplateChoose from '../tools/TemplateChoose'
 import {EditRadioContainer} from '../tools/RadioCustom'
 import produce from 'immer';
 import {CustomSwitch} from '../tools/OnOffCustom'
 import OpenCloseCustom from '../tools/OpenCloseCustom'
-// import OnOffCustom from '../tools/OnOffCustom'
 import CheckBoxContainer from '../tools/CheckBoxContainer'
-import ImageAddEdit from '../tools/ImageAddEdit'
 import AddContentImg from '../tools/AddContentImg'
 import AddSlideImg from '../tools/AddSlideImg'
 import AddContentVideo from '../tools/AddContentVideo'
@@ -313,6 +310,17 @@ function EditHeroSection({content, category}) {
         }))
     }
 
+    // 버튼 관련
+    const ctaOpen = () => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].button.ctaUse = !content.button.ctaUse}))
+    }
+
+    const ghostOpen = () => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].button.ghostUse = !content.button.ghostUse}))
+    }
+
     const returnTable = () => {
         switch(category){
             case 0:
@@ -327,9 +335,9 @@ function EditHeroSection({content, category}) {
                     </OpenCloseCustom>
                     <OpenCloseCustom title="버튼">
                     <EditRadioContainer options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
-                    <CustomSwitch text="CTA 버튼"/>
+                    <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange={e => ctaOpen(e)}/>
                     {/* <EditRadioContainer options={linkOptions} value={} */}
-                    <CustomSwitch text="고스트 버튼"/>
+                    <CustomSwitch text="고스트 버튼" value={content.button.ghostUse} onChange = {e => ghostOpen(e)}/>
                     </OpenCloseCustom>
                     <CheckBoxContainer text="버튼 1 사용" value={content.button.first} func={ () => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.first = !content.button.first;
