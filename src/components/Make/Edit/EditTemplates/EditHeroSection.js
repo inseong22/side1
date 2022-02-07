@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import DesignHero from './DesignHero'
 // import TemplateChoose from '../tools/TemplateChoose'
-import {EditRadioContainer} from '../tools/Custom/RadioCustom'
+import RadioCustom from '../tools/Custom/RadioCustom'
 import produce from 'immer';
 import {CustomSwitch} from '../tools/Custom/OnOffCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
@@ -169,7 +169,7 @@ function EditHeroSection({content, category}) {
                     <div>
                         <AddContentImg text="이미지" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         <EditSlider top="크기" text="이미지" value={content.image.size} func={setImgSize} max="200"/>
-                        <EditRadioContainer text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
+                        <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                         }))} />
                         <CustomSwitch text="그림자" value={content.image.shadow} onChange={(e) => action.setContents(produce(state.contents, draft => {
@@ -194,7 +194,7 @@ function EditHeroSection({content, category}) {
                         최대 5MB까지 가능합니다.
                     </div>
                     <EditSlider top="크기" text="이미지" value={content.image.size} func={setImgSize} max="300"/>
-                    <EditRadioContainer text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
+                    <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                     }))} />
                     <CustomSwitch text="그림자" value={content.image.shadow} onChange={(e) => action.setContents(produce(state.contents, draft => {
@@ -212,7 +212,7 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     <div style={{marginTop: '40px'}}/>
-                    <EditRadioContainer text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
+                    <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
                     <div style={{marginBottom: '25px'}}/>
                     {videoType()}
                     </>
@@ -325,15 +325,15 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     <OpenCloseCustom title="콘텐츠">
-                    <EditRadioContainer options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />                   
+                    <RadioCustom options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />                   
                     {
                         returnImageOrVideoAdd()
                     } 
                     </OpenCloseCustom>
                     <OpenCloseCustom title="버튼">
-                    <EditRadioContainer options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
+                    <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
                     <CustomSwitch text="CTA 버튼"/>
-                    {/* <EditRadioContainer options={linkOptions} value={} */}
+                    {/* <RadioCustom options={linkOptions} value={} */}
                     <CustomSwitch text="고스트 버튼"/>
                     </OpenCloseCustom>
                     <CheckBoxContainer text="버튼 1 사용" value={content.button.first} func={ () => action.setContents(produce(state.contents, draft => {

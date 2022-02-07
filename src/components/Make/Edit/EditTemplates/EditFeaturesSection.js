@@ -1,20 +1,11 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import ElementsTable from './tools/ElementsTable'
-import TemplateChoose from '../tools/TemplateChoose'
-import {EditRadioContainer} from '../tools/Custom/RadioCustom'
+import RadioCustom from '../tools/Custom/RadioCustom'
 import produce from 'immer';
-import {EditColorContainer} from '../tools/Custom/ColorCustom'
+import ColorCustom from '../tools/Custom/ColorCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
-import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
-import ImageAddEdit from '../tools/ImageAddEdit'
-import AddContentImg from '../tools/func/FuncContentImg'
-import AddContentVideo from '../tools/func/FuncContentVideo'
-import AddYoutubeLink from '../tools/func/FuncYoutubeLink'
-import TextSizeCustom from '../tools/func/TextSizeCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
-import {EditSliderContainer} from '../tools/Custom/SliderCustom'
-import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 import EditDesign from './tools/EditDesign'
 
 const alignOptions = [
@@ -77,7 +68,7 @@ function EditFeaturesSection({content, category}) {
             case 'color':
                 return(
                         <>
-                            <EditColorContainer text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                            <ColorCustom text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].backgroundColor = e
                             }))} />
                         </>
@@ -100,21 +91,20 @@ function EditFeaturesSection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <OpenCloseCustom title="레이아웃">
-                            {/* <EditRadioContainer title="단 개수" /> */}
-                            <EditRadioContainer text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
+                            <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].align = e;
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="이미지">
-                            <EditRadioContainer text="프레임" button value={content.featureImage.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                            <RadioCustom text="프레임" button value={content.featureImage.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].featureImage.borderRadius = e;
                             }))} />
-                            <EditRadioContainer text="크기" value={content.featureImage.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                            <RadioCustom text="크기" value={content.featureImage.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].featureImage.size = e;
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="설명글">
-                            <EditColorContainer text="색상" value={content.featureText.color} func={e => action.setContents(produce(state.contents, draft => {
+                            <ColorCustom text="색상" value={content.featureText.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].featureText.color = e;
                             }))} />
                             <OnOffCustom text="특징 제목" value={content.featureText.titleUse} func={(e) => action.setContents(produce(state.contents, draft => {

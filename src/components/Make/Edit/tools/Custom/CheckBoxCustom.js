@@ -26,7 +26,7 @@ function CheckboxCustom({text, value, func}) {
                     {text}
                 </div>
                 <div className="edit-element__right">
-                    <CheckboxCustom
+                    <EditCheckbox
                         value={value || false}
                         func={func}
                     />

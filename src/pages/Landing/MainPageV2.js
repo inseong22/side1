@@ -88,7 +88,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
 
     const ourInfosTable = ourInfos.map((item, index) => {
         return(
-            <div className="one-desc-func" index={index}>
+            <div className="one-desc-func" key={index}>
                 <div className="func-content">
                     {item.icon}
                 </div>

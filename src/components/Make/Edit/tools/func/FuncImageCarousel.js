@@ -3,11 +3,8 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import styled from 'styled-components'
-import '../../SectionTypes/HeroSection.css'
-import prevButton from '../../../../tools/img/prevButton.png'
-import nextButton from '../../../../tools/img/nextButton.png'
-
-import { base } from '../../../SectionTypes/baseTypes'
+import prevButton from '../../../../../tools/img/prevButton.png'
+import nextButton from '../../../../../tools/img/nextButton.png'
 
 const Prev = styled.img`
 width: 50px;
@@ -26,7 +23,7 @@ margin-top: -30px;
 `
 
 
-function ImageCarousel({content}) {
+function FuncImageCarousel({content}) {
     useEffect(() => {
         console.log(content.image.border)
     })
@@ -62,4 +59,4 @@ function ImageCarousel({content}) {
 
 }
 
-export default ImageCarousel
+export default FuncImageCarousel

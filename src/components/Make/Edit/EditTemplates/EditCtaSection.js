@@ -1,7 +1,6 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import { ctaSectionTemplateList } from './InnerTemplates'
-import TemplateChoose from '../tools/TemplateChoose'
 import EditDesign from './tools/EditDesign'
 
 function EditCtaSection({content, category}) {

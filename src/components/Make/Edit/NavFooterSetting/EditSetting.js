@@ -1,7 +1,6 @@
 import React, {useState, useContext} from 'react'
 import RadioCustom from '../tools/Custom/RadioCustom'
-import {EditRadioContainer} from '../tools/Custom/RadioCustom'
-import { EditColorContainer } from '../tools/Custom/ColorCustom'
+import ColorCustom from '../tools/Custom/ColorCustom'
 import InputCustom from '../tools/Custom/InputCustom'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import SelectCustom from '../tools/Custom/SelectCustom'
@@ -11,7 +10,7 @@ import EditTopBar from '../tools/func/FuncTopBar'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import produce from 'immer';
-import {EditAnimationContainer} from '../tools/Custom/AnimationCustom'
+import AnimationCustom from '../tools/Custom/AnimationCustom'
 import { base } from '../../SectionTypes/baseTypes'
 
 const fontOptions = [
@@ -66,13 +65,13 @@ function EdtiSetting({setting, setSetting, category}) {
                             <OnOffCustom text="플로팅 버튼" value={setting.fta.use} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.use = !setting.fta.use
                             }))} />
-                            <EditRadioContainer text="사이즈" options={sizeOptions} value={setting.fta.size} func={(e) => setSetting(produce(setting, draft => {
+                            <RadioCustom text="사이즈" options={sizeOptions} value={setting.fta.size} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.size = e
                             }))} />
-                            <EditRadioContainer text="모양" options={shapeOptions} value={setting.fta.shape} func={(e) => setSetting(produce(setting, draft => {
+                            <RadioCustom text="모양" options={shapeOptions} value={setting.fta.shape} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.shape = e
                             }))} />
-                            <EditColorContainer text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                            <ColorCustom text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.backgroundColor = e;
                             }))} />
                             <InputCustom value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
@@ -106,7 +105,7 @@ function EdtiSetting({setting, setSetting, category}) {
                     <>
                     <div>
                         <OpenCloseCustom title="메인 색상">
-                            <EditColorContainer text="색상" value={setting.color} func={(e) => setSetting(produce(setting, draft => {
+                            <ColorCustom text="색상" value={setting.color} func={(e) => setSetting(produce(setting, draft => {
                                 draft.color = e;
                             }))} />
                         </OpenCloseCustom>
@@ -129,13 +128,13 @@ function EdtiSetting({setting, setSetting, category}) {
                                 </div>
                             </div>
                         }>
-                            <EditRadioContainer button text="모양" options={shapeOptions} value={setting.cta.borderRadius} func={(e) => setSetting(produce(setting, draft => {
+                            <RadioCustom button text="모양" options={shapeOptions} value={setting.cta.borderRadius} func={(e) => setSetting(produce(setting, draft => {
                                 draft.cta.borderRadius = e
                             }))} />
-                            <EditColorContainer text="배경 색상" value={setting.cta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                            <ColorCustom text="배경 색상" value={setting.cta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
                                 draft.cta.backgroundColor = e;
                             }))} />
-                            <EditColorContainer text="폰트 색상" value={setting.cta.color} func={(e) => setSetting(produce(setting, draft => {
+                            <ColorCustom text="폰트 색상" value={setting.cta.color} func={(e) => setSetting(produce(setting, draft => {
                                 draft.cta.color = e;
                             }))} />
                             <OnOffCustom text="그림자" value={setting.cta.shadow} func={(e) => setSetting(produce(setting, draft => {
@@ -146,7 +145,7 @@ function EdtiSetting({setting, setSetting, category}) {
                             }))} />
                             {
                                 setting.cta.border && 
-                                    <EditColorContainer value={setting.cta.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                    <ColorCustom value={setting.cta.borderColor} func={(e) => setSetting(produce(setting, draft => {
                                         draft.cta.borderColor = e;
                                     }))} />
                             }
@@ -160,13 +159,13 @@ function EdtiSetting({setting, setSetting, category}) {
                                 </div>
                             </div>
                         }>
-                            <EditRadioContainer text="모양" options={shapeOptions} value={setting.ghost.borderRadius} func={(e) => setSetting(produce(setting, draft => {
+                            <RadioCustom text="모양" options={shapeOptions} value={setting.ghost.borderRadius} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.borderRadius = e
                             }))} />
-                            <EditColorContainer text="배경 색상" value={setting.ghost.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                            <ColorCustom text="배경 색상" value={setting.ghost.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.backgroundColor = e;
                             }))} />
-                            <EditColorContainer text="폰트 색상" value={setting.ghost.color} func={(e) => setSetting(produce(setting, draft => {
+                            <ColorCustom text="폰트 색상" value={setting.ghost.color} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.color = e;
                             }))} />
                             <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
@@ -175,13 +174,13 @@ function EdtiSetting({setting, setSetting, category}) {
                             <OnOffCustom text="테두리" value={setting.ghost.border} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.border = !setting.ghost.border
                             }))} />
-                            <EditColorContainer text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                            <ColorCustom text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.borderColor = e;
                             }))} />
                         </OpenCloseCustom>
                     </div>
                     <OpenCloseCustom title="애니메이션">
-                        <EditAnimationContainer 
+                        <AnimationCustom 
                             text="애니메이션" 
                             options={animationOptions} 
                             value={setting.animation} 

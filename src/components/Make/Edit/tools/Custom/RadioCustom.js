@@ -1,5 +1,5 @@
 import React from 'react'
-import './custom.css'
+import '../custom.css'
 
 export function EditRadio({options, value, onChange}) {
     return (

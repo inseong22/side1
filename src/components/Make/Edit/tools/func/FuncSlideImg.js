@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 
-function AddSlideImg({text, value, func, removeFunc}) {
+function FuncSlideImg({text, value, func, removeFunc}) {
     const photoInput = useRef();
     const inputClick = () => {
         photoInput.current.click();
@@ -35,4 +35,4 @@ function AddSlideImg({text, value, func, removeFunc}) {
     )
 }
 
-export default AddSlideImg
+export default FuncSlideImg
