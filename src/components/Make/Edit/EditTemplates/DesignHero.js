@@ -1,11 +1,11 @@
 import React, {useContext} from 'react'
 import produce from 'immer';
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import {EditRadioContainer} from '../tools/RadioCustom'
-import {EditColorContainer} from '../tools/ColorCustom'
-import CheckBoxContainer from '../tools/CheckBoxContainer'
+import {EditRadioContainer} from '../tools/Custom/RadioCustom'
+import {EditColorContainer} from '../tools/Custom/ColorCustom'
+import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import ImageAddEdit from '../tools/ImageAddEdit'
-import EditSlider from '../tools/EditSlider'
+import EditSlider from '../tools/Custom/SliderCustom'
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 
 

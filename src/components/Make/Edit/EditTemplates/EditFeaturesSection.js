@@ -1,21 +1,21 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import ElementsTable from '../tools/ElementsTable'
+import ElementsTable from './tools/ElementsTable'
 import TemplateChoose from '../tools/TemplateChoose'
-import {EditRadioContainer} from '../tools/RadioCustom'
+import {EditRadioContainer} from '../tools/Custom/RadioCustom'
 import produce from 'immer';
-import {EditColorContainer} from '../tools/ColorCustom'
-import OnOffCustom from '../tools/OnOffCustom'
-import CheckBoxContainer from '../tools/CheckBoxContainer'
+import {EditColorContainer} from '../tools/Custom/ColorCustom'
+import OnOffCustom from '../tools/Custom/OnOffCustom'
+import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import ImageAddEdit from '../tools/ImageAddEdit'
-import AddContentImg from '../tools/AddContentImg'
-import AddContentVideo from '../tools/AddContentVideo'
-import AddYoutubeLink from '../tools/AddYoutubeLink'
-import TextSizeCustom from '../tools/TextSizeCustom'
-import OpenCloseCustom from '../tools/OpenCloseCustom'
-import {EditSliderContainer} from '../tools/EditSlider'
+import AddContentImg from '../tools/func/FuncContentImg'
+import AddContentVideo from '../tools/func/FuncContentVideo'
+import AddYoutubeLink from '../tools/func/FuncYoutubeLink'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
+import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
+import {EditSliderContainer} from '../tools/Custom/SliderCustom'
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
-import EditDesign from './EditDesign/EditDesign'
+import EditDesign from './tools/EditDesign'
 
 const alignOptions = [
     { label: '왼쪽', value: 'left' },

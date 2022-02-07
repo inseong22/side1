@@ -1,11 +1,11 @@
 import React, {useContext, useState, useRef} from 'react'
 import { Chrome } from '@uiw/react-color';
-import { MyContext } from '../../../../pages/Make/MakePageV2'
+import { MyContext } from '../../../../../pages/Make/MakePageV2'
 import { Alpha } from '@uiw/react-color';
 
 import Popover from '@mui/material/Popover';
 
-function EditColor({onChange, value}) {
+export function EditColor({onChange, value}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const colorRef = useRef(null)
     const [colorShow, setColorShow] = useState(null);
@@ -16,7 +16,6 @@ function EditColor({onChange, value}) {
         "rgb(255,0,0)",
         "rgb(255,255,255)",
     ]);
-
 
     return (
         <div className="center-row" style={{justifyContent: "start"}}>
@@ -88,7 +87,7 @@ function EditColor({onChange, value}) {
     )
 }
 
-export const EditColorContainer = ({text, value, func}) => {
+const ColorCustom = ({text, value, func}) => {
     return(
         <div className="edit-element">
             <div className="edit-element__one" style={{flexDirection: 'column'}}>
@@ -101,4 +100,4 @@ export const EditColorContainer = ({text, value, func}) => {
     )
 }
 
-export default EditColor
+export default ColorCustom

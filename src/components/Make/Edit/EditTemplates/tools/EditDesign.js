@@ -1,13 +1,13 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../../pages/Make/MakePageV2'
-import ElementsTable from '../../tools/ElementsTable'
+import ElementsTable from './ElementsTable'
 import TemplateChoose from '../../tools/TemplateChoose'
-import {EditRadioContainer} from '../../tools/RadioCustom'
+import {EditRadioContainer} from '../../tools/Custom/RadioCustom'
 import produce from 'immer';
-import {EditColorContainer} from '../../tools/ColorCustom'
-import TextSizeCustom from '../../tools/TextSizeCustom'
-import OpenCloseCustom from '../../tools/OpenCloseCustom'
-import {EditSliderContainer} from '../../tools/EditSlider'
+import {EditColorContainer} from '../../tools/Custom/ColorCustom'
+import TextSizeCustom from '../../tools/func/TextSizeCustom'
+import OpenCloseCustom from '../../tools/Custom/OpenCloseCustom'
+import {EditSliderContainer} from '../../tools/Custom/SliderCustom'
 
 const alignOptions = [
     { label: '왼쪽', value: 'left' },
@@ -77,10 +77,10 @@ function EditDesign({content}) {
             </OpenCloseCustom>
             <OpenCloseCustom title="여백">
                 <EditSliderContainer text="상단 여백" value={content.padding.top} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].padding.top = e;
+                    draft[state.secNum].padding.top = e.target.value;
                 }))}/>
                 <EditSliderContainer text="하단 여백" value={content.padding.bottom} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].padding.bottom = e;
+                    draft[state.secNum].padding.bottom = e.target.value;
                 }))}/>
             </OpenCloseCustom>            
         </div>

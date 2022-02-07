@@ -1,7 +1,7 @@
 import React from 'react'
 import './custom.css'
 
-function RadioCustom({options, value, onChange}) {
+export function EditRadio({options, value, onChange}) {
     return (
         <div className="radio-container">
             {options.map((item, index) => {
@@ -14,7 +14,8 @@ function RadioCustom({options, value, onChange}) {
         </div>
     )
 }
-function RadioCustomButton({options, value, onChange}) {
+
+export function EditRadioButtom({options, value, onChange}) {
     const ROUNDBORDER = 5;
     const CIRCLEBORDER = 15;
 
@@ -48,7 +49,7 @@ function RadioCustomButton({options, value, onChange}) {
     )
 }
 
-export const EditRadioContainer = ({text, options, value, func, button}) => {
+const RadioCustom = ({text, options, value, func, button}) => {
     if (button === true){
         return(
             <div className="edit-element">
@@ -59,7 +60,7 @@ export const EditRadioContainer = ({text, options, value, func, button}) => {
                     <div className="edit-element__left">{text}</div> 
                 }
                 <div className="radio-container">
-                    <RadioCustomButton
+                    <EditRadioButtom
                         options={options}
                         onChange={e => {func(e)}}
                         value={value}
@@ -78,7 +79,7 @@ export const EditRadioContainer = ({text, options, value, func, button}) => {
                     <div className="edit-element__left">{text}</div> 
                 }
                 <div className="radio-container">
-                    <RadioCustom 
+                    <EditRadio 
                         options={options}
                         onChange={e => {func(e)}}
                         value={value}

@@ -17,6 +17,7 @@ export const CustomSwitch = ({text, value, onChange}) => {
     </div>
   )
 }
+
 export const CustomSwitch2 = ({text, value, onChange}) => {
   return(
     <div className={value ? 'custom-switch' : 'custom-switch unclicked'} onClick={onChange}>

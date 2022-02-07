@@ -12,7 +12,7 @@ import EditQnaSection from './EditTemplates/EditQnaSection'
 import EditGallerySection from './EditTemplates/EditGallerySection'
 import EditTextSection from './EditTemplates/EditTextSection'
 import EditMockupSection from './EditTemplates/EditMockupSection'
-import EditTopBar from './tools/EditTopBar'
+import EditTopBar from './tools/func/FuncTopBar'
 import AddingSection from './AddingSection'
 
 import EditSetting from './NavFooterSetting/EditSetting'

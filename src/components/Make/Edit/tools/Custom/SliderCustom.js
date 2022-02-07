@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { MDBRange } from 'mdb-react-ui-kit';
 
-function EditSlider({top, text, func, value, max}) {
+function SliderCustom({top, text, func, value, max}) {
     const [range, setRange] = useState(value);
 
     const onChange = (e) => {
@@ -29,25 +29,4 @@ function EditSlider({top, text, func, value, max}) {
     )
 }
 
-export const EditSliderContainer = ({text, subtext, value, func}) => {
-  return(
-    <div className="edit-element" style={{flexDirection: 'column'}}>
-      { text && 
-        <div className="edit-element__left">
-            {text}
-        </div>
-      }
-      <div className="edit-element__right">
-        <EditSlider value={value} func={func}/>
-      </div>
-      {
-        subtext && 
-          <div>
-            {subtext}
-          </div>
-      }
-    </div>
-  )
-}
-
-export default EditSlider
+export default SliderCustom

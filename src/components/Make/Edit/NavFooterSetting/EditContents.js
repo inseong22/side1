@@ -4,7 +4,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import produce from 'immer';
 import ConfirmCustom from '../../../../tools/ConfirmCustom';
 import AddingSection from '../../Modal/AddingSection';
-import {CustomSwitch2} from '../tools/OnOffCustom'
+import {CustomSwitch2} from '../tools/Custom/OnOffCustom'
 import './EditContents.css';
 
 const BCOLOR = 'rgba(230,230,230,0)'

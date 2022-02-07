@@ -3,7 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import { reviewSectionTemplateList } from './InnerTemplates'
 import TemplateChoose from '../tools/TemplateChoose'
 import produce from 'immer';
-import EditDesign from './EditDesign/EditDesign'
+import EditDesign from './tools/EditDesign'
 
 function EditReviewSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
