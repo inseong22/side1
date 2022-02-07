@@ -22,6 +22,7 @@ const commons = {
         size: 10,
         color: '#000000'
     },
+    contentsUse: false,
     padding:{
         top:10,
         bottom:10,
@@ -77,7 +78,8 @@ export const base = [
             second:false,
             align:'0',
             ctaUse:true,
-            option: 'link',
+            ctaOption: 'link',
+            ghostOption: 'link',
             ctaLink:'',
             ctaApply: '',
             ghostUseOrLink: true, 
@@ -85,6 +87,9 @@ export const base = [
             ghostApply: '',
             ghostUse:false,
         },
+        appButton:{
+            use: true,
+        }
     },
     {
         name:'디테일',

@@ -76,7 +76,6 @@ const MakePageV2 = ({history, userObj}, props) => {
     const [footerOrNot, setFooterOrNot] = useState(false);
     // 반복 실행되는 useEffect
     useEffect(() => {
-        console.log("반복")
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/making/${userObj.email}`);
