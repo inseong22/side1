@@ -58,11 +58,11 @@ function HeroSection({content}) {
 
     const ImageOrSlide = () => {
         if (content.contentsUse) {
-            if(content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg)
+            if(content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg && !content.mockup.use) 
                 return(
                     <iframe src={`${content.video.link}`} width='500px' height={`${content.image.size}px`} frameborder="0" allow='autoplay'/>
                 )
-            if(!content.video.youtube && content.video.use && !content.image.slide && !content.image.oneImg)
+            if(!content.video.youtube && content.video.use && !content.image.slide && !content.image.oneImg && !content.mockup.use)
                 return(
                     <div>
                         <video 
@@ -77,13 +77,13 @@ function HeroSection({content}) {
                         </video>
                     </div>
                 )
-            if(!content.video.youtube && !content.video.use && content.image.slide && !content.image.oneImg)
+            if(!content.video.youtube && !content.video.use && content.image.slide && !content.image.oneImg && !content.mockup.use)
                 return(
                     <div className="slide-box">
                         <ImageCarousel content={content}/>
                     </div>
                 )
-            if(!content.video.youtube && !content.video.use && !content.image.slide && content.image.oneImg)
+            if(!content.video.youtube && !content.video.use && !content.image.slide && content.image.oneImg && !content.mockup.use)
                 return (
                     <div >
                         {content.image.attachment === '' ?  
@@ -99,6 +99,12 @@ function HeroSection({content}) {
                         }
                     </div>
                 )
+            if(!content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg && content.mockup.use)
+            return(
+                <>
+                목업
+                </>
+            )
         }
        
     }

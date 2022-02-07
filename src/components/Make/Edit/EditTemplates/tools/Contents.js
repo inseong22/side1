@@ -9,6 +9,9 @@ import AddContentVideo from '../../tools/func/FuncContentVideo'
 import AddYoutubeLink from '../../tools/func/FuncYoutubeLink'
 import EditSlider from '../../tools/Custom/SliderCustom'
 import {CustomSwitch} from '../../tools/Custom/OnOffCustom'
+import { Select } from '@chakra-ui/react'
+import './Contents.css'
+import FuncContentImg from '../../tools/func/FuncContentImg'
 
 const imageOptions = [
     { label:'이미지', value:'image'},
@@ -221,6 +224,63 @@ function Contents({content}) {
         }
     }
 
+    // 목업 타입
+    const mockOption = e => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].mockup.type = e;
+        }))
+    }
+    // 목업 이미지 업로드
+    const uploadImg = e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].mockup.file = result;               
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+
+    const returnMockup = () => {
+        switch(content.mockup.type){
+            case 'mobile':
+                return(
+                    <>
+                        <FuncContentImg text='이미지' value={content.mockup.file} func={uploadImg}/>
+                    </>
+                )
+            case 'tablet':
+                return(
+                    <>
+                        태블릿
+                    </>
+                )
+            case 'desktop':
+                return(
+                    <>
+                        데스크탑
+                    </>
+                )
+            case 'mobile2':
+                return(
+                    <>
+                        모바일 2대
+                    </>
+                )
+            case 'desk+mob':
+                return(
+                    <>
+                        데스크탑 + 모바일
+                    </>
+                )
+        }
+    }
+
     const returnImageOrVideoAdd = () => {
         switch(content.image.type){
             case 'image':
@@ -276,9 +336,31 @@ function Contents({content}) {
                     {videoType()}
                     </>
                 )
-            default:
+            case 'mockup':
                 return(
-                    <div>아니</div>
+                    <>
+                    <div className="edit-element">
+                    <div className="edit-element__one" style={{flexDirection: 'column'}}>
+                    <div className="edit-element__left">디바이스</div> 
+                    <div className='mockup-select'>
+                    <Select  
+                    className='select_list'
+                    onChange={e=>mockOption(e.target.value)}
+                    bg='white'
+                    borderColor='rgba(0, 0, 0, 0.08)'
+                    color='white'
+                    >
+                        <option value='mobile' >모바일</option>
+                        <option value='tablet'>태블릿</option>
+                        <option value='desktop'>데스크탑</option>
+                        <option value='mobile2'>모바일 2대</option>
+                        <option value='desk+mob'>데스크탑 + 모바일</option>                       
+                    </Select>
+                    </div>
+                    {returnMockup()}
+                    </div>
+                    </div>
+                    </>
                 )
         }
     }

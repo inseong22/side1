@@ -71,7 +71,14 @@ export const base = [
             file: '',
             youtube: false,
             link: '',
-            auto: true
+            auto: true,
+        },
+        mockup: {
+            use: false,
+            type: 'mobile',
+            file: '',
+            file2: '',
+            size: 200,
         },
         button:{
             title:'버튼입니다.',
