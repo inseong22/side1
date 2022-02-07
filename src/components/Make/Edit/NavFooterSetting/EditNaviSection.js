@@ -1,15 +1,13 @@
 import React, {useState} from 'react'
-import {EditRadioContainer} from '../tools/Custom/RadioCustom'
-import EditButtonTable from '../tools/EditButtonTable'
-import {EditColorContainer} from '../tools/Custom/ColorCustom'
+import RadioCustom from '../tools/Custom/RadioCustom'
+import ColorCustom from '../tools/Custom/ColorCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import InputCustom from '../tools/Custom/InputCustom'
 import ResponsiveCustom from '../tools/Custom/ResponsiveCustom'
 import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import ElementsTable from '../EditTemplates/tools/ElementsTable'
-import EditSlider from '../tools/Custom/SliderCustom'
-import {EditSliderContainer} from '../tools/Custom/SliderCustom'
+import SliderCustom from '../tools/Custom/SliderCustom'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
 import BoxCustom from '../tools/Custom/BoxCustom'
 import produce from 'immer';
@@ -18,10 +16,12 @@ const logoOptions = [
     { label: '로고 이미지', value: 'logo' },
     { label: '텍스트', value: 'text' },
 ]
+
 const logoAlignOptions = [
     { label: '왼쪽', value: 'left' },
     { label: '중앙', value: 'center' },
 ]
+
 const buttonOptions = [
     { label: '링크', value: 'link' },
     { label: '스크롤', value: 'scroll' },
@@ -78,33 +78,6 @@ function EditNaviSection({navi, setNavi, category}) {
         reader.readAsDataURL(oneFile);
     }
 
-    const returnFuncEdit = () => {
-        switch(buttonFunc){
-            case "link":
-                return(
-                    <div className="edit-element">
-                        링크 수정
-                    </div>
-                )
-            case "scroll":
-                return(
-                    <div className="edit-element">
-                        스크롤 수정
-                    </div>
-                )
-            case "popup":
-                return(
-                    <div className="edit-element">
-                        팝업 수정
-                    </div>
-                )
-        }
-    }
-
-    const returnButtonTemplates = () => {
-
-    }
-
     return (
         <div>
             { category === 0 ? 
@@ -115,7 +88,7 @@ function EditNaviSection({navi, setNavi, category}) {
                         <OnOffCustom value={navi.logoUse} func={(e) => setNavi(produce(navi, draft => {
                             draft.logoUse = !navi.logoUse;
                         }))} text="로고" />
-                        <EditRadioContainer options={logoAlignOptions} value={navi.logoAlign} func={(e) => setNavi(produce(navi, draft => {
+                        <RadioCustom options={logoAlignOptions} value={navi.logoAlign} func={(e) => setNavi(produce(navi, draft => {
                             draft.logoAlign = e;
                         }))} text="정렬" />
 
@@ -133,7 +106,7 @@ function EditNaviSection({navi, setNavi, category}) {
                                         </div>
                                     </div>
                                 </div>
-                                <EditSliderContainer text="Image 사이즈" subtext="이미지의 세로 길이를 조절해주세요." value={navi.logoImage.width} func={e => setNavi(produce(navi, draft => {
+                                <SliderCustom text="Image 사이즈" subtext="이미지의 세로 길이를 조절해주세요." value={navi.logoImage.width} func={e => setNavi(produce(navi, draft => {
                                     draft.logoImage.width = e;
                                 }))} />
                             </>
@@ -143,7 +116,7 @@ function EditNaviSection({navi, setNavi, category}) {
                         }))} text="서비스/제품명 (Text)" />
                         {
                             navi.logoText.use && <>
-                                <EditColorContainer text="Text 색상" value={navi.logoText.color} func={e =>  setNavi(produce(navi, draft => {
+                                <ColorCustom text="Text 색상" value={navi.logoText.color} func={e =>  setNavi(produce(navi, draft => {
                                     draft.logoText.color = e;
                                 }))} />
                                 <TextSizeCustom text="Text 크기" value={navi.logoText.fontSize} func={e =>  setNavi(produce(navi, draft => {
@@ -157,7 +130,8 @@ function EditNaviSection({navi, setNavi, category}) {
                         <OnOffCustom text="버튼 사용" value={navi.button.use} func={() => setNavi(produce(navi, draft => {
                             draft.button.use = !navi.button.use
                         }))} />
-                        <EditRadioContainer options={logoAlignOptions} value={navi.button.align} func={(e) => setNavi(produce(navi, draft => {
+
+                        <RadioCustom options={logoAlignOptions} value={navi.button.align} func={(e) => setNavi(produce(navi, draft => {
                             draft.button.align = e;
                         }))} text="정렬" />
                         
@@ -174,6 +148,7 @@ function EditNaviSection({navi, setNavi, category}) {
                         <OnOffCustom text="고스트 버튼" value={navi.button.ghost.use} func={() => setNavi(produce(navi, draft => {
                             draft.button.ghost.use = !navi.button.ghost.use
                         }))} />
+
                         {
                             navi.button.ghost.use && 
                                 <InputCustom placeholder="연결하고 싶은 URL을 입력해주세요." value={navi.button.ghost.link} func={(e) => setNavi(produce(navi, draft => {
@@ -181,6 +156,7 @@ function EditNaviSection({navi, setNavi, category}) {
                                 }))} />
                         }
                     </OpenCloseCustom>
+                    
                     <BoxCustom>
                         <OnOffCustom text="페이지 상단 고정" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
                         <div>
@@ -197,7 +173,7 @@ function EditNaviSection({navi, setNavi, category}) {
             <>
             <div>
                 <OpenCloseCustom title="배경색">
-                    <EditColorContainer func={(e) => setNavi({...navi, backgroundColor:e})} value={navi.backgroundColor} text="색상" />
+                    <ColorCustom func={(e) => setNavi({...navi, backgroundColor:e})} value={navi.backgroundColor} text="색상" />
                 </OpenCloseCustom>
                 <OpenCloseCustom title="구분선">
                     <CheckBoxContainer text="구분선" value={navi.bottomBorder.use} func={e => setNavi(produce(navi, draft => {
@@ -205,14 +181,14 @@ function EditNaviSection({navi, setNavi, category}) {
                     }))}/>
                     {
                         navi.bottomBorder.use && <>
-                            <EditColorContainer func={(e) => setNavi(produce(navi, draft => {
+                            <ColorCustom func={(e) => setNavi(produce(navi, draft => {
                                 draft.bottomBorder.color = e
                             }))} value={navi.bottomBorder.color} text="색상" />
                         </>
                     }
                 </OpenCloseCustom>
                 <OpenCloseCustom title="높이">
-                    <EditSlider text="높이 조정" value={navi.height} func={e => setNavi({...navi, height:e})}/>
+                    <SliderCustom text="높이 조정" value={navi.height} func={e => setNavi({...navi, height:e})}/>
                 </OpenCloseCustom>
                 <ResponsiveCustom />
             </div>

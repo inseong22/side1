@@ -1,5 +1,6 @@
 import React from 'react'
-import {CheckboxCustom} from '../../tools/Custom/CheckBoxCustom'
+import CheckboxCustom from '../../tools/Custom/CheckBoxCustom'
+import {EditCheckbox} from '../../tools/Custom/CheckBoxCustom'
 import './ElementsTable.css'
 
 function ElementsTable({elements}) {
@@ -13,7 +14,7 @@ function ElementsTable({elements}) {
                     {elements.map((item,index) => {
                         return(
                             <div className="element__container" key={index}>
-                                <CheckboxCustom value={item.use} func={item.func} />
+                                <EditCheckbox value={item.use} func={item.func} />
                                 <div>
                                     {item.title}
                                 </div>

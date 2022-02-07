@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import { detailSectionTemplateList } from './InnerTemplates'
-import TemplateChoose from '../tools/TemplateChoose'
+import EditDesign from './tools/EditDesign'
 import './EditeTemplates.css'
 import './EditContent.css'
 
@@ -34,7 +34,7 @@ function EditDetailSection({content, category}) {
                 // case 1은 템플릿 변경
                 return(
                     <>
-                        <TemplateChoose content={content} title="디테일" list={detailSectionTemplateList} />
+                        <EditDesign content={content} />
                     </>
                 )
 

@@ -1,8 +1,8 @@
 import React, {useContext} from 'react'
 import produce from 'immer';
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import {EditRadioContainer} from '../tools/Custom/RadioCustom'
-import {EditColorContainer} from '../tools/Custom/ColorCustom'
+import RadioCustom from '../tools/Custom/RadioCustom'
+import ColorCustom from '../tools/Custom/ColorCustom'
 import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import ImageAddEdit from '../tools/ImageAddEdit'
 import EditSlider from '../tools/Custom/SliderCustom'
@@ -74,7 +74,7 @@ function DesignHero({content}) {
             case 'color':
                 return(
                         <>
-                        <EditColorContainer text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                        <ColorCustom text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].backgroundColor = e
                         }))} />
                         <div className="edit-element">
@@ -159,29 +159,29 @@ function DesignHero({content}) {
 
     return (
         <>
-        <EditRadioContainer text='배경' options={backOptions} value={content.backgroundType} func={e=>changeBackgroundOption(e)} />
+        <RadioCustom text='배경' options={backOptions} value={content.backgroundType} func={e=>changeBackgroundOption(e)} />
         {
             backgroundColorOrImage()
         } 
-        <EditRadioContainer text="제목 텍스트 배치" options={alignOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
+        <RadioCustom text="제목 텍스트 배치" options={alignOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].title.align = e
         }))}/> 
-        <EditRadioContainer text="제목 크기 설정" options={textSizeOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
+        <RadioCustom text="제목 크기 설정" options={textSizeOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].title.size = e
         }))}/> 
-        <EditColorContainer text={"제목 텍스트 색상"} value={content.title.color} func={e => action.setContents(produce(state.contents, draft => {
+        <ColorCustom text={"제목 텍스트 색상"} value={content.title.color} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].title.color = e
         }))} />
-        <EditRadioContainer text="본문 텍스트 배치" options={alignOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
+        <RadioCustom text="본문 텍스트 배치" options={alignOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
             draft[state.secNum].desc.align = e
         }))}/> 
-        <EditRadioContainer text="본문 크기 설정" options={textSizeOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
+        <RadioCustom text="본문 크기 설정" options={textSizeOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
             draft[state.secNum].desc.size = e
         }))}/>      
-        <EditColorContainer text={"본문 텍스트 색상"} value={content.desc.color} func={e => action.setContents(produce(state.contents, draft => {
+        <ColorCustom text={"본문 텍스트 색상"} value={content.desc.color} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].desc.color = e
         }))} /> 
-        <EditRadioContainer text="위아래 여백" options={paddingOptions} value={content.paddingTop} func={e => changePaddingOption(e)} />
+        <RadioCustom text="위아래 여백" options={paddingOptions} value={content.paddingTop} func={e => changePaddingOption(e)} />
         {
             customPadding()
         }

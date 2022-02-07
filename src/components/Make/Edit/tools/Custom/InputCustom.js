@@ -2,7 +2,7 @@ import React from 'react'
 import {Link45deg} from '@styled-icons/bootstrap'
 import './InputCustom.css'
 
-function InputCustom({value, func, placeholder}) {
+function EditInput({value, func, placeholder}) {
     return (
         <div className="edit-element" style={{justifyContent:'start'}}>
             {/* <div>
@@ -15,7 +15,7 @@ function InputCustom({value, func, placeholder}) {
     )
 }
 
-export function EditInputContainer({value, func, placeholder, text}) {
+export function InputCustom({value, func, placeholder, text}) {
     return (
         <div className="edit-element" style={{justifyContent:'start', flexDirection:'column'}}>
             <div className="centera" style={{justifyContent:'start'}}>

@@ -1,15 +1,13 @@
 import React, {useState} from 'react'
-import {EditRadioContainer} from '../tools/Custom/RadioCustom'
-import EditButtonTable from '../tools/EditButtonTable'
-import {EditColorContainer} from '../tools/Custom/ColorCustom'
+import RadioCustom from '../tools/Custom/RadioCustom'
+import ColorCustom from '../tools/Custom/ColorCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import InputCustom from '../tools/Custom/InputCustom'
-import { EditInputContainer } from '../tools/Custom/InputCustom'
 import ResponsiveCustom from '../tools/Custom/ResponsiveCustom'
 import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import ElementsTable from '../EditTemplates/tools/ElementsTable'
-import {EditSliderContainer} from '../tools/Custom/SliderCustom'
+import SliderCustom from '../tools/Custom/SliderCustom'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
 import BoxCustom from '../tools/Custom/BoxCustom'
 import produce from 'immer';
@@ -98,7 +96,7 @@ function EditFooterSection({foot, setFoot, category}) {
             <>
                 <div>
                     <OpenCloseCustom title="레이아웃">
-                        <EditRadioContainer value={foot.layout} options={layoutOptions} func={e => {setFoot(produce(foot, draft => {
+                        <RadioCustom value={foot.layout} options={layoutOptions} func={e => {setFoot(produce(foot, draft => {
                             draft.layout = e;
                         }))}} />
                     </OpenCloseCustom>
@@ -128,13 +126,13 @@ function EditFooterSection({foot, setFoot, category}) {
                         <OnOffCustom text="소셜 아이콘" value={foot.icon.use} func={e => setFoot(produce(foot, draft => {
                             draft.icon.use = !foot.icon.use;
                         }))} />
-                        <EditColorContainer text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {
+                        <ColorCustom text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {
                             draft.icon.color = e;
                         }))}} />
                         {
                             iconsList.map((item, index) => {
                                 return(
-                                    <EditInputContainer text={item.label} value={"w"} func={e => {}} placeholder="링크를 입력해주세요." />
+                                    <InputCustom text={item.label} value={"w"} func={e => {}} placeholder="링크를 입력해주세요." />
                                 )
                             })
                         }
@@ -144,12 +142,12 @@ function EditFooterSection({foot, setFoot, category}) {
             : 
             <div>
                 <OpenCloseCustom title="배경">
-                    <EditColorContainer text="색상" value={foot.backgroundColor} func={e => {setFoot(produce(foot, draft => {
+                    <ColorCustom text="색상" value={foot.backgroundColor} func={e => {setFoot(produce(foot, draft => {
                         draft.backgroundColor = e;
                     }))}} />
                 </OpenCloseCustom>
                 <OpenCloseCustom title="여백">
-                    <EditSliderContainer text="상단여백" value={foot.padding} func={e => {setFoot(produce(foot, draft => {
+                    <SliderCustom text="상단여백" value={foot.padding} func={e => {setFoot(produce(foot, draft => {
                         draft.padding = e;
                     }))}} />
                 </OpenCloseCustom>

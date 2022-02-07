@@ -13,7 +13,6 @@ import EditGallerySection from './EditTemplates/EditGallerySection'
 import EditTextSection from './EditTemplates/EditTextSection'
 import EditMockupSection from './EditTemplates/EditMockupSection'
 import EditTopBar from './tools/func/FuncTopBar'
-import AddingSection from './AddingSection'
 
 import EditSetting from './NavFooterSetting/EditSetting'
 import EditNaviSection from './NavFooterSetting/EditNaviSection'
@@ -42,6 +41,11 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             case 'HeroSection':
                 return (
                     <EditHeroSection content={content} category={state.category}/>
+                )
+
+            case 'CtaSection':
+                return (
+                    <EditCtaSection content={content} category={state.category}/>
                 )
 
             // 리뷰들인 경우 편집화면
