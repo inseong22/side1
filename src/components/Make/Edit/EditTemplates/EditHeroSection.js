@@ -2,18 +2,18 @@ import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import DesignHero from './DesignHero'
 // import TemplateChoose from '../tools/TemplateChoose'
-import {EditRadioContainer} from '../tools/RadioCustom'
+import {EditRadioContainer} from '../tools/Custom/RadioCustom'
 import produce from 'immer';
-import {CustomSwitch} from '../tools/OnOffCustom'
-import OpenCloseCustom from '../tools/OpenCloseCustom'
+import {CustomSwitch} from '../tools/Custom/OnOffCustom'
+import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 // import OnOffCustom from '../tools/OnOffCustom'
-import CheckBoxContainer from '../tools/CheckBoxContainer'
+import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import ImageAddEdit from '../tools/ImageAddEdit'
-import AddContentImg from '../tools/AddContentImg'
-import AddSlideImg from '../tools/AddSlideImg'
-import AddContentVideo from '../tools/AddContentVideo'
-import AddYoutubeLink from '../tools/AddYoutubeLink'
-import EditSlider from '../tools/EditSlider'
+import AddContentImg from '../tools/func/FuncContentImg'
+import AddSlideImg from '../tools/func/FuncSlideImg'
+import AddContentVideo from '../tools/func/FuncContentVideo'
+import AddYoutubeLink from '../tools/func/FuncYoutubeLink'
+import EditSlider from '../tools/Custom/SliderCustom'
 
 const imageBorderOptions = [
     { label: '원형', value: 50 },
@@ -35,6 +35,11 @@ const alignOptions = [
     {label:'왼쪽', value: '0'},
     {label:'중앙', value: '0 auto'}
 ]
+const backOptions = [
+    { label: '단색', value: 'color' },
+    { label: '이미지', value: 'image'},
+]
+
 const animationOptions = [
     { label: '없음', value: false},
     { label: '있음', value: true}

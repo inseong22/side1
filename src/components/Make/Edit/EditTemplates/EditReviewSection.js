@@ -3,6 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import { reviewSectionTemplateList } from './InnerTemplates'
 import TemplateChoose from '../tools/TemplateChoose'
 import produce from 'immer';
+import EditDesign from './tools/EditDesign'
 
 function EditReviewSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -80,7 +81,7 @@ function EditReviewSection({content, category}) {
                 // case 1은 템플릿 변경
                 return(
                     <>
-                        <TemplateChoose content={content} title="디테일" list={reviewSectionTemplateList} />
+                        <EditDesign content={content} />
                     </>
                 )
 

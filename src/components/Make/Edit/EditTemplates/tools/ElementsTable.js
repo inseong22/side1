@@ -1,5 +1,5 @@
 import React from 'react'
-import {CheckboxCustom} from '../tools/CheckBoxContainer'
+import {CheckboxCustom} from '../../tools/Custom/CheckBoxCustom'
 import './ElementsTable.css'
 
 function ElementsTable({elements}) {

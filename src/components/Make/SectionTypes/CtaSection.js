@@ -12,10 +12,10 @@ function CtaSection({content}) {
         return(
             <div className="center-column">
                 <div style={{fontWeight:'500', fontSize:'1.5em'}}>
-                    {content.title}
+                    {content.title.text}
                 </div>
                 <div className="mt30">
-                    {content.desc}
+                    {content.desc.text}
                 </div>
                 <div className="center-row mt30">
                     <div style={{marginRight:'1%'}}>

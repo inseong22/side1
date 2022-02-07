@@ -1,12 +1,17 @@
 import React, {useState,useContext} from 'react'
 import DetailSection from './SectionTypes/DetailSection'
 import HeroSection from './SectionTypes/HeroSection'
-import PriceSection from './SectionTypes/PriceSection'
 import ReviewSection from './SectionTypes/ReviewSection'
 import FeaturesSection from './SectionTypes/FeaturesSection'
 import CtaSection from './SectionTypes/CtaSection'
+import ApplySection from './SectionTypes/ApplySection'
+import AppDownloadSection from './SectionTypes/AppDownloadSection'
+import QnaSection from './SectionTypes/QnaSection'
+import GallerySection from './SectionTypes/GallerySection'
+import TextSection from './SectionTypes/TextSection'
+import MockupSection from './SectionTypes/MockupSection'
+import VideoSection from './SectionTypes/VideoSection'
 
-import HorizontalSection from './SectionTypes/HorizontalSection'
 import {animations} from './tools/animations'
 import './NewSection.css'
 import { MyContext } from '../../pages/Make/MakePageV2'
@@ -14,9 +19,13 @@ import { motion } from 'framer-motion'
 import {Delete, Options} from '@styled-icons/fluentui-system-filled'
 
 function NewSection({content, index, contents, setContents}) {
-    const [adding, setAdding] = useState(false);
     const [isHover, setIsHover] = useState('none');
     const {state, action} = useContext(MyContext)
+
+    const setThisSection = () => {
+        action.setSecNum(index);
+        action.setCategory(0);
+    }
 
     const returnType = () => {
         switch(content.sectionTypeName){
@@ -40,19 +49,44 @@ function NewSection({content, index, contents, setContents}) {
                     <FeaturesSection content={content}/>
                 )
 
-            case 'PriceSection':
-                return (
-                    <PriceSection content={content}/>
-                )
-
-            case 'HorizontalSection':
-                return (
-                    <HorizontalSection content={content}/>
-                )
-
             case 'CtaSection':
                 return (
                     <CtaSection content={content}/>
+                )
+
+            case 'ApplySection' :
+                return(
+                    <ApplySection content={content} />
+                )
+
+            case 'AppDownloadSection' :
+                return(
+                    <AppDownloadSection content={content} />
+                )
+
+            case 'QnaSection' :
+                return(
+                    <QnaSection content={content} />
+                )
+
+            case 'GallerySection' :
+                return(
+                    <GallerySection content={content} />
+                )
+
+            case 'TextSection' :
+                return(
+                    <TextSection content={content} />
+                )
+
+            case 'MockupSection' :
+                return(
+                    <MockupSection content={content} />
+                )
+
+            case 'VideoSection' :
+                return(
+                    <VideoSection content={content} />
                 )
 
             default:
@@ -64,23 +98,19 @@ function NewSection({content, index, contents, setContents}) {
         }
     }
 
-    const setThisSection = () => {
-        action.setSecNum(index);
-        action.setCategory(0);
-    }
-
     return(
         <div className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
             <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
 
             </div>
             <div className="section__container" 
-            // style={{backgroundImage:`url(${content.backgroundImage.attachment})`}} 
-            onClick={() => setThisSection()}>
+                // style={{backgroundImage:`url(${content.backgroundImage.attachment})`}} 
+                // style={{padding:`${content.padding.top}px 0px ${content.padding.bottom}px 0px`}} 
+                onClick={() => setThisSection()}>
                 {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                 <div style={{backgroundColor:`${content.backgroundColor}`, opacity:`${content.backgroundOpacity}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
                 </div>
-                <div style={{fontSize:'0.6em', width:'100%', zIndex:3}}>
+                <div className="section__container-inner">
                     {returnType()}
                 </div>
             </div>

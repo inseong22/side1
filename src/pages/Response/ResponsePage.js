@@ -45,8 +45,8 @@ function ResponsePage({userObj, history}) {
     
     useEffect(() => {
         // to report page view
-        ReactGa.initialize('UA-213792742-1');
-        ReactGa.pageview(`/seeResponse/${userObj.email}`);
+        // ReactGa.initialize('UA-213792742-1');
+        // ReactGa.pageview(`/seeResponse/${userObj.email}`);
         getThisUserDatas();
     },[loading])
 

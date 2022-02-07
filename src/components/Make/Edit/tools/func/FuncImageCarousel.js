@@ -7,7 +7,7 @@ import '../../SectionTypes/HeroSection.css'
 import prevButton from '../../../../tools/img/prevButton.png'
 import nextButton from '../../../../tools/img/nextButton.png'
 
-import { base } from '../../SectionTypes/baseTypes'
+import { base } from '../../../SectionTypes/baseTypes'
 
 const Prev = styled.img`
 width: 50px;

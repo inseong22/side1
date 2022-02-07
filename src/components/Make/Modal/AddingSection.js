@@ -76,7 +76,7 @@ function AddingSection({open, setOpen}) {
                         {base.map((item,index) => {
                             return(
                                 <div className="section-modal__button" key={index} onClick={() => addSection(item.sectionTypeName)}>
-                                    {item.sectionTypeName}
+                                    {item.name}
                                 </div>
                             )
                         })} 

@@ -21,19 +21,22 @@ function NaviTemplate({navi, setNavi}) {
     return (
         <>
             <span className="make-nav-logoc centera">
-                {navi.isLogo === "logo" && 
-                    <div className="centera" style={{width:'80px'}}><img className="hover" src={navi.logo} height={30} /></div>}
-                {navi.isLogo === "text" && 
-                <input 
-                    value={navi.title} 
-                    onChange={(e) => {
-                        setNavi({...navi, title:e.currentTarget.value});
-                    }}
-                    />}
+                {navi.logoImage.use && 
+                    <div className="centera" style={{width:'80px'}}><img src={navi.logoImage.attachment} height={30} /></div>}
+                {navi.logoText.use && 
+                    <input
+                        className="text-input"
+                        value={navi.title} 
+                        onChange={(e) => {
+                            setNavi({...navi, title:e.currentTarget.value});
+                        }}
+                        style={{fontSize:`${navi.logoText.fontSize}px`, color:`${navi.logoText.color}`}}
+                        />
+                }
             </span>
             <span className="make-nav-buttonc centera">
-                { navi.cta.use && returnCtaButton() }
-                { navi.ghost.use && returnGhostButton() }
+                { navi.button.cta.use && returnCtaButton() }
+                { navi.button.ghost.use && returnGhostButton() }
             </span>
         </>
     )

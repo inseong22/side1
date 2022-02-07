@@ -9,11 +9,11 @@ function FTemplate({foot, setFoot, history}) {
 
     const onChangeText = (data) => {
         setFoot(produce(foot, draft => {
-            draft.text = data;
+            draft.text.text = data;
         }));
     }
 
-    const returnIcons = foot.icons.map((item, index) => {
+    const returnIcons = foot.icon.icons.map((item, index) => {
         switch(item.value){
             case 'facebook':
                 return(
@@ -70,7 +70,7 @@ function FTemplate({foot, setFoot, history}) {
                 <div>
                     <input
                         className="text-input"
-                        value={foot.text}
+                        value={foot.text.text}
                         onChange={(e) => {
                             onChangeText(e.currentTarget.value);
                         }}
