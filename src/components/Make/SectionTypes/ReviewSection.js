@@ -7,6 +7,8 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import {produce} from 'immer'
 import TitleDesc from './TitleDesc/TitleDesc'
 
+import ExImg from '../../../tools/img/good3d.png'
+
 function ReviewSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
@@ -14,8 +16,9 @@ function ReviewSection({content}) {
         return(
             <div key={index} className="review__card">
                 <div>
-                    <div>
-                    </div>
+                    <img src={ExImg} alt="이미지"
+                        style={{width: `${content.reviewImage.size}px`, borderRadius: `${content.reviewImage.border}`}}
+                    />
                     <div>
                         {item.title}
                     </div>

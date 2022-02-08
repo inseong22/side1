@@ -3,7 +3,18 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import EditDesign from './tools/EditDesign'
 import ElementsTable from './tools/ElementsTable'
 import produce from 'immer'
+import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
+import RadioCustom from '../tools/Custom/RadioCustom'
+import ColorCustom from '../tools/Custom/ColorCustom'
 
+const layoutOptions = [
+    {label: '카드', value: 'card'},
+    {label: '표', value: 'table'},
+]
+const shapeOptions = [
+    {label: '접혀있기', value: 'close'},
+    {label: '펼쳐있기', value: 'open'},
+]
 function EditQnaSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
@@ -31,6 +42,12 @@ function EditQnaSection({content, category}) {
         },
     ]
 
+    const changeLayoutOption = e => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].layout = e;
+        }))
+    }
+
     const returnTable = () => {
         switch(category){
             case 0:
@@ -38,6 +55,23 @@ function EditQnaSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
+                        <OpenCloseCustom title="레이아웃">
+                            <RadioCustom options={layoutOptions} value={content.layout} func={e => changeLayoutOption(e)} />
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="QnA">
+                        <div style={{marginTop: '40px'}}/>
+                        <RadioCustom text="기본 모양" options={shapeOptions} value={content.qna.shape} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].qna.shape = e;
+                        }))} />
+                        <div style={{marginTop: '40px'}}/>
+                        <ColorCustom text="질문" value={content.qna.question} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].qna.question = e;
+                        }))} />
+                        <div style={{marginTop: '40px'}}/>
+                        <ColorCustom text="답변" value={content.qna.answer} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].qna.answer = e;
+                        }))} />
+                        </OpenCloseCustom>
 
                     </div>
                 )

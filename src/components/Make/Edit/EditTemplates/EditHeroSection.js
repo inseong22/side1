@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import DesignHero from './DesignHero'
+import EditDesign from './tools/EditDesign'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import ElementsTable from './tools/ElementsTable'
 import produce from 'immer';
@@ -10,6 +10,7 @@ import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import InputCustom from '../tools/Custom/InputCustom'
 import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
 
+import Layout from './tools/Layout'
 import Contents from './tools/Contents'
 import AddGhostButton from './tools/AddGhostButton'
 import AddAppButton from './tools/AddAppButton'
@@ -101,9 +102,34 @@ function EditHeroSection({content, category}) {
                 )
             case 'apply':
                 return(
-                    <ApplyInputCustom placeholder="연결하고 싶은 URL을 선택해주세요" value={content.button.ctaApply} func = {(e) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].button.ctaApply = e
-                    }))} />
+                    <>
+                    {
+                        content.ctaApplyInputs.length > 1 ?  
+                        <ApplyInputCustom disabled /> 
+                        :
+                        <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].ctaApplyInputs.push(e)
+                        }))} /> 
+                    }
+                    
+                    { content.ctaApplyInputs.length > 0 && 
+                    <>
+                        { content.ctaApplyInputs.map((item, index) => {
+                                return(
+                                    <div key={index}>
+                                        <ApplyInputCustom made value={item} func={e => action.setContents(produce(state.contents, draft => {
+                                            if(index === 0 ){
+                                                draft[state.secNum].ctaApplyInputs.shift()
+                                            }else{
+                                                draft[state.secNum].ctaApplyInputs.splice(index, index)
+                                            }
+                                        }))} />
+                    </div>
+                                )
+                            })
+                        } 
+                    </> }
+                    </>
                 )
             default:
                 return(
@@ -112,100 +138,7 @@ function EditHeroSection({content, category}) {
         }
     }
 
-    // 콘텐츠 - 이미지 업로드
-    const onChangeContentImage= e => {
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].image.attachment = result;
-                draft[state.secNum].image.slide = false
-                draft[state.secNum].video.youtube = false
-                draft[state.secNum].video.use = false
-                draft[state.secNum].image.slide = false
-                draft[state.secNum].image.oneImg = true               
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    // 콘텐츠 - 이미지 삭제
-    const RemoveImage = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].image.attachment = '';
-        }))
-    }
-
-    // 슬라이드 - 이미지
-    const onChangeSlideImage1= e => {
-        let newContents = JSON.parse(JSON.stringify(state.contents))
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].slide_img.slide1 = result;
-                draft[state.secNum].image.slide = true
-                draft[state.secNum].video.youtube = false
-                draft[state.secNum].video.use = false
-                draft[state.secNum].image.slide = false
-                draft[state.secNum].image.oneImg = false 
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    const RemoveSlide1 = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].slide_img.slide1 = '';
-        }))
-    }
-    const onChangeSlideImage2= e => {
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].slide_img.slide2 = result;
-                draft[state.secNum].image.slide = true
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    const RemoveSlide2 = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].slide_img.slide2 = '';
-        }))
-    }
-    const onChangeSlideImage3= e => {
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].slide_img.slide3 = result;
-                draft[state.secNum].image.slide = true
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    const RemoveSlide3 = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].slide_img.slide3 = '';
-        }))
-    }
-
+    
     const returnTable = () => {
         switch(category){
             case 0:
@@ -213,6 +146,7 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     <ElementsTable elements={elements} />
+                    <Layout content={content} version='main' />
                     <Contents content={content} />
                     <OpenCloseCustom title="버튼">
                         <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
@@ -244,7 +178,7 @@ function EditHeroSection({content, category}) {
                 // case 1은 템플릿 변경
                 return(
                     <>
-                        <DesignHero content={content}/>
+                        <EditDesign content={content} />
                     </>
                 )
 

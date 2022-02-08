@@ -4,6 +4,8 @@ import EditDesign from './tools/EditDesign'
 import produce from 'immer';
 import ElementsTable from './tools/ElementsTable'
 
+import Layout from './tools/Layout'
+
 function EditGallerySection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
@@ -52,7 +54,7 @@ function EditGallerySection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
-
+                        <Layout content={content} version='gallery'/>
                     </div>
                 )
             case 1:
