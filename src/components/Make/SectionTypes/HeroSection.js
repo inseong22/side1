@@ -10,6 +10,7 @@ import './DetailSection.css'
 import playstorebutton from '../../../tools/img/playstorebutton.png'
 import './HeroSection.css'
 import ImageCarousel from '../Edit/tools/func/FuncImageCarousel'
+import TitleDesc from './TitleDesc/TitleDesc'
 
 import { motion } from 'framer-motion';
 
@@ -158,32 +159,7 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
     const returnTextAndButton = () => {
         return(
             <div className="text__container">
-                <input 
-                    className="text-input"
-                    placeholder='제목을 입력하세요'
-                    onChange={(e) => {
-                        changeText(e.currentTarget.value);
-                    }}
-                    value={content.title.text}
-                    style={{
-                        textAlign: `${content.title.align}`,
-                        fontSize: `${content.title.size}px`,
-                        color: `${content.title.color}`
-                    }}
-                />
-                <input 
-                    className="text-input"
-                    placeholder='본문을 입력하세요'
-                    onChange={(e) => {
-                        changeDesc(e.currentTarget.value);
-                    }}
-                    value={content.desc.text}
-                    style={{
-                        textAlign: `${content.desc.align}`,
-                        fontSize: `${content.desc.size}px`,
-                        color: `${content.desc.color}`
-                    }}
-                />
+                <TitleDesc content={content} />
                 {returnButton()}
             </div>
         )
