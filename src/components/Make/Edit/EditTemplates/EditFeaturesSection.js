@@ -8,6 +8,8 @@ import OnOffCustom from '../tools/Custom/OnOffCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import EditDesign from './tools/EditDesign'
 
+import Layout from './tools/Layout'
+
 const alignOptions = [
     { label: '왼쪽', value: 'left' },
     { label: '중앙', value: 'center' },
@@ -90,6 +92,7 @@ function EditFeaturesSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
+                        <Layout content={content} version='feature' />
                         <OpenCloseCustom title="레이아웃">
                             <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].align = e;

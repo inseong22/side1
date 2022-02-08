@@ -3,6 +3,10 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import EditDesign from './tools/EditDesign'
 import ElementsTable from './tools/ElementsTable'
 import produce from 'immer'
+import AddAppButton from './tools/AddAppButton'
+import EditNotice from './tools/EditNotice'
+
+import Layout from './tools/Layout'
 
 function EditAppDownloadSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -24,9 +28,9 @@ function EditAppDownloadSection({content, category}) {
         },
         {
             title:'앱 다운로드',
-            use:content.appDownloadButton.use,
+            use:content.appButton.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].appDownloadButton.use = !content.appDownloadButton.use;
+                draft[state.secNum].appButton.use = !content.appButton.use;
             }))
         },
         {
@@ -45,7 +49,9 @@ function EditAppDownloadSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
-
+                        <Layout content={content} version='app' />
+                        <AddAppButton content={content} />
+                        <EditNotice content={content} />
                     </div>
                 )
             case 1:

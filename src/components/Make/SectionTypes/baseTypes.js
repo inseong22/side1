@@ -1,6 +1,7 @@
 import { TreasureMap } from "@styled-icons/remix-fill"
 
 const commons = {
+    layout: 1,
     backgroundColor:'#ffffff',
     backgroundOpacity:1,
     backgroundType:'color',
@@ -38,7 +39,57 @@ const commons = {
         use: true,
         apple: '',
         google: ''
-    }
+    },
+    image:{
+        oneImg:true,
+        type:'image',
+        attachment:'',
+        width:70,
+        border:0,
+        size:200,
+        slide:false,
+        
+    },
+    slide_img:{
+        slide1: '',
+        slide2: '',
+        slide3: '',
+    },
+    video:{
+        use: false,
+        type: 'base',
+        file: '',
+        youtube: false,
+        link: '',
+        auto: true,
+    },
+    mockup: {
+        use: false,
+        type: 'mobile',
+        file: '',
+        file2: '',
+        size: 200,
+    },
+    button:{
+        use : true,
+        title:'버튼입니다.',
+        backgroundColor:'#ffffff',
+        buttonTemplate:1,
+        func:1,
+        link:"https://surfee.co.kr",
+        first:true,
+        second:false,
+        align:'0',
+        ctaUse:true,
+        ctaOption: 'link',
+        ghostOption: 'link',
+        ctaLink:'',
+        ghostUseOrLink: true, 
+        ghostLink:'',
+        ghostUse:false,
+    },
+    ctaApplyInputs: [],
+    ghostApplyInputs: [],
 }
 
 export const base = [
@@ -105,7 +156,7 @@ export const base = [
         contents:{
             use:true,
         },
-        appDownloadButton:{
+        appButton:{
             use:true,
         }
     },
@@ -128,13 +179,6 @@ export const base = [
             shadow: true,
             shadowValue: "2px 4px 20px #E8F0F9"
         },
-        button:{
-            title:'버튼입니다.',
-            backgroundColor:'#ffffff',
-            buttonTemplate:1,
-            func:1,
-            link:"https://surfee.co.kr"
-        },
     },
     {
         ...commons,
@@ -144,21 +188,9 @@ export const base = [
         templateNumber:1,
         width:90,
         attachment:'',
-        button:{
-            title:'버튼입니다.',
-            backgroundColor:'#ffffff',
-            buttonTemplate:1,
-            func:1,
-            link:"https://surfee.co.kr",
-            first:true,
-            use:true,
-        },
         backgroundImage:{
             use:false,
             attachment:'',
-        },
-        appDownloadButton:{
-            use:true,
         },
         button:{
             use:true,
@@ -171,22 +203,25 @@ export const base = [
         sectionTypeName:'ApplySection',
         applyButton:{
             use:true,
+            inputs:[],
         },
         caution:{
             use:true,
+            color: '#000000',
+            align: '',
+            size: 10,
         }
     },
     {
         ...commons,
         name:'앱다운로드',
-        sectionTypeName:'AppDownloadSection',
-        
+        sectionTypeName:'AppDownloadSection',    
         caution:{
             use:true,
+            color: '#000000',
+            align: '',
+            size: 10,
         },
-        appDownloadButton:{
-            use:true,
-        }
     },
     {
         ...commons,
@@ -231,14 +266,19 @@ export const base = [
         templateNumber:1,
         numOfReviews:3,
         ratingColor:'red',
-        image:{
+        reviewImage:{
             use:true,
+            border:0,
+            size:30,
         },
         rating:{
             use:true,
+            color: '#000000',
+            size: 30,
         },
         writer:{
             use:true,
+            color: '#000000',
         },
         reviewText:{
             use:true,
@@ -268,8 +308,12 @@ export const base = [
         ...commons,
         name:'자주 묻는 질문',
         sectionTypeName:'QnaSection',
+        layout: 'card',
         qna:{
             use:true,
+            shape: 'close',
+            question: '#000000',
+            answer: '#000000',
         },
         qnas:[
             {

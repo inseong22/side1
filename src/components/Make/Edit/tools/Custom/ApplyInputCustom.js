@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react'
 import './ApplyInputCustom.css'
 
@@ -37,7 +36,6 @@ function ApplyInputCustom({func, disabled, made, value}) {
                         if(addInput.length > 0){
                             func(addInput);
                             setAddInput('');
-                            console.log("생성!")
                         }
                     }} />
                 </div>

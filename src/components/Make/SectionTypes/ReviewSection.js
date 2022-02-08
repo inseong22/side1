@@ -7,12 +7,17 @@ import {produce} from 'immer'
 import TitleDesc from './components/TitleDesc'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 
+import ExImg from '../../../tools/img/good3d.png'
+
 function ReviewSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnReviewCards = content.reviews.map((item, index) => {
         return(
             <div key={index} className="feature__card" style={{boxShadow:'', backgroundColor:'red', margin:`${ index === 0 ? '0px 15px 0px 0px' : index === content.reviews.length - 1 ? '0px 0px 0px 15px' : '0px 15px' }`}}>
+                <img src={ExImg} alt="이미지"
+                    style={{width: `${content.reviewImage.size}px`, borderRadius: `${content.reviewImage.border}`}}
+                />
                 <div className="df-margin">
                     <TextareaAutosize 
                         className="text-input"  

@@ -7,6 +7,9 @@ import ElementsTable from './tools/ElementsTable'
 import produce from 'immer';
 import './EditContent.css'
 
+import Layout from './tools/Layout'
+import Contents from './tools/Contents'
+
 function EditDetailSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
@@ -46,6 +49,8 @@ function EditDetailSection({content, category}) {
                 return(
                     <div className="section-make__inner-container">
                         <ElementsTable elements={elements} />
+                        <Layout content={content} version='detail' />
+                        <Contents content={content}/>
                     </div>
                 )
 
