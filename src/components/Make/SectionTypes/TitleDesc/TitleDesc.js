@@ -10,20 +10,40 @@ function TitleDesc({content}) {
             {
                 content.title.use &&
                 <div style={{color:`${content.title.color}`, fontSize:`${content.title.size}px`}}>
-                    <input className="text-input" value={content.title.text} onChange={e => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].title.text = e.currentTarget.value;
-                    }))}
-                    style={{fontFamily:`${state.setting.font}`, color:`${content.title.color}`, fontSize:`${content.title.size}px`, width:'100%', boxSizing:`border-box`, textAlign:`${content.title.align}`}}
+                    <input 
+                        className="text-input" 
+                        value={content.title.text} 
+                        onChange={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].title.text = e.currentTarget.value;
+                        }))}
+                        style={{
+                            fontFamily:`${state.setting.font}`, 
+                            color:`${content.title.color}`, 
+                            fontSize:`${content.title.size}px`, 
+                            width:'100%', 
+                            boxSizing:`border-box`, 
+                            textAlign:`${content.title.align}`
+                        }}
                     />
                 </div>
             }
             {
                 content.desc.use &&
                 <div style={{color:`${content.desc.color}`, fontSize:`${content.desc.size}px`}}>
-                    <input className="text-input" value={content.desc.text} onChange={e => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].desc.text = e.currentTarget.value;
-                    }))}
-                    style={{color:`${content.desc.color}`, fontSize:`${content.desc.size}px`, width:'100%', boxSizing:`border-box`, textAlign:`${content.desc.align}`}}
+                    <input 
+                        className="text-input" 
+                        value={content.desc.text} 
+                        onChange={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].desc.text = e.currentTarget.value;
+                        }))}
+                        style={{
+                            fontFamily:`${state.setting.smallFont}`, 
+                            color:`${content.desc.color}`, 
+                            fontSize:`${content.desc.size}px`, 
+                            width:'100%', 
+                            boxSizing:`border-box`, 
+                            textAlign:`${content.desc.align}`
+                        }}
                     />
                 </div>
             }

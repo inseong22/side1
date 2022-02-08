@@ -386,8 +386,8 @@ export const defaults = {
         urlId:'',
         title:'Surfee : 노코드 랜딩페이지 제작 툴',
         faviconAttachment:'',
-        font:'',
-        smallFont:'',
+        font:'Noto Sans KR',
+        smallFont:'Noto Sans KR',
         color:'#63B3F7',
         fta:{
             width:50,

@@ -14,6 +14,7 @@ import AnimationCustom from '../tools/Custom/AnimationCustom'
 import { base } from '../../SectionTypes/baseTypes'
 import AddContentImg from '../tools/func/FuncContentImg'
 import {Check} from '@styled-icons/bootstrap'
+import {ChevronRight} from '@styled-icons/boxicons-regular'
 import {
     ChakraProvider,
     Popover,
@@ -55,6 +56,7 @@ const sizeOptions = [
 
 function EdtiSetting({setting, setSetting, category}) {
     const [isFontOpen, setIsFontOpen] = useState(false)
+    const [isSmallFontOpen, setIsSmallFontOpen] = useState(false)
     const open = () => setIsFontOpen(!isFontOpen)
     const close = () => setIsFontOpen(false)
 
@@ -95,6 +97,114 @@ function EdtiSetting({setting, setSetting, category}) {
         }))
     }
 
+    const FontSelect = () => {
+        return(
+        <div className="edit-element" style={{flexDirection:'row'}}>
+            <div className="left" style={{width:'20%'}}>제목</div>
+            <div className="right" style={{width:'80%'}}>
+                <Popover
+                    placement='right'
+                    closeOnBlur={false}
+                    isOpen={isFontOpen}
+                    onClose={close}
+                >
+                <PopoverTrigger>
+                    <div className="font-button" style={{fontFamily: `${setting.font}`}} onClick={() => {open(); setIsSmallFontOpen(false)}}>노코드 랜딩페이지 제작 툴, Surfee <ChevronRight size="20"/></div>
+                </PopoverTrigger>
+                <PopoverContent>
+                    <PopoverArrow />
+
+                    <PopoverHeader>폰트를 선택하세요.</PopoverHeader>
+                    
+                    <PopoverCloseButton />
+                    
+                    <PopoverBody>
+                        {fontOptions.map((item, index) => {
+                            return(
+                                <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                    draft.font = item.value
+                                }))}} style={{fontFamily: `${item.value}`}}>
+                                    <div className="left">
+                                        {item.label}
+                                    </div>
+                                    {
+                                        item.value === setting.font && 
+                                        <div className="right">
+                                            <Check size="20"/>
+                                        </div>
+                                    }
+                                </div>
+                            )
+                        })}
+                    </PopoverBody>
+                    
+                    <PopoverFooter d='flex' justifyContent='flex-end'>
+                        <ButtonGroup size='sm'>
+                            <div className="font-done-button" onClick={() => close()}>Apply</div>
+                        </ButtonGroup>
+                    </PopoverFooter>
+
+                </PopoverContent>
+                </Popover>
+            </div>
+        </div>
+        )
+    }
+
+    const SmallFontSelect = () => {
+        return(
+        <div className="edit-element" style={{flexDirection:'row'}}>
+            <div className="left" style={{width:'20%'}}>본문</div>
+            <div className="right" style={{width:'80%'}}>
+                <Popover
+                    placement='right'
+                    closeOnBlur={false}
+                    isOpen={isSmallFontOpen}
+                    onClose={() => setIsSmallFontOpen(false)}
+                >
+                <PopoverTrigger>
+                    <div className="font-button" style={{fontFamily: `${setting.smallFont}`}} onClick={() => {setIsSmallFontOpen(!isSmallFontOpen); close()}}>노코드 랜딩페이지 제작 툴, Surfee <ChevronRight size="20"/></div>
+                </PopoverTrigger>
+                <PopoverContent>
+                    <PopoverArrow />
+
+                    <PopoverHeader>폰트를 선택하세요.</PopoverHeader>
+                    
+                    <PopoverCloseButton />
+                    
+                    <PopoverBody>
+                        {fontOptions.map((item, index) => {
+                            return(
+                                <div className={item.value === setting.smallFont ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                    draft.smallFont = item.value
+                                }))}} style={{fontFamily: `${item.value}`}}>
+                                    <div className="left">
+                                        {item.label}
+                                    </div>
+                                    {
+                                        item.value === setting.smallFont && 
+                                        <div className="right">
+                                            <Check size="20"/>
+                                        </div>
+                                    }
+                                </div>
+                            )
+                        })}
+                    </PopoverBody>
+                    
+                    <PopoverFooter d='flex' justifyContent='flex-end'>
+                        <ButtonGroup size='sm'>
+                            <div className="font-done-button" onClick={() => setIsSmallFontOpen(false)}>Apply</div>
+                        </ButtonGroup>
+                    </PopoverFooter>
+
+                </PopoverContent>
+                </Popover>
+            </div>
+        </div>
+        )
+    }
+
     const returnTable = () => {
         switch(category){
             case 0:
@@ -129,10 +239,12 @@ function EdtiSetting({setting, setSetting, category}) {
                         </OpenCloseCustom>
                         <OpenCloseCustom title="URL">
                             <div className="edit-element" style={{flexDirection:'column'}}>
-                                <div className="center-row" style={{justifyContent: 'start'}}>
-                                    <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) => setSetting(produce(setting, draft => {
-                                        draft.urlId = e;
-                                    }))}/>
+                                <div className="center-row">
+                                    <div>
+                                        <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) => setSetting(produce(setting, draft => {
+                                            draft.urlId = e;
+                                        }))}/>
+                                    </div>
                                     <div style={{color:'#202936'}}>
                                         .surfee.co.kr
                                     </div>
@@ -158,57 +270,8 @@ function EdtiSetting({setting, setSetting, category}) {
                         </OpenCloseCustom>
                         <OpenCloseCustom title="글씨체">
                             <ChakraProvider>
-                                <div className="edit-element" style={{flexDirection:'row'}}>
-                                    
-                                {/* <SelectCustom options={fontOptions} value={setting.font} onChange={(e) => setSetting(produce(setting, draft => {
-                                    draft.font = e;
-                                }))} /> */}
-                                <div className="left" style={{width:'20%'}}>제목</div>
-                                <Popover
-                                    placement='right'
-                                    closeOnBlur={false}
-                                    isOpen={isFontOpen}
-                                    onClose={close}
-                                >
-                                <PopoverTrigger>
-                                    <div className="font-button right" style={{fontFamily: `${setting.font}`}} onClick={open}>노코드 랜딩페이지 제작 툴, Surfee</div>
-                                </PopoverTrigger>
-                                <PopoverContent>
-                                    <PopoverArrow />
-
-                                    <PopoverHeader>폰트를 선택하세요.</PopoverHeader>
-                                    
-                                    <PopoverCloseButton />
-                                    
-                                    <PopoverBody>
-                                        {fontOptions.map((item, index) => {
-                                            return(
-                                                <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
-                                                    draft.font = item.value
-                                                }))}} style={{fontFamily: `${item.value}`}}>
-                                                    <div className="left">
-                                                        {item.label}
-                                                    </div>
-                                                    {
-                                                        item.value === setting.font && 
-                                                        <div className="right">
-                                                            <Check size="20"/>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            )
-                                        })}
-                                    </PopoverBody>
-                                    
-                                    <PopoverFooter d='flex' justifyContent='flex-end'>
-                                        <ButtonGroup size='sm'>
-                                        <Button className="font-done-button" onClick={() => close()}>Apply</Button>
-                                        </ButtonGroup>
-                                    </PopoverFooter>
-
-                                </PopoverContent>
-                                </Popover>
-                                </div>
+                                {FontSelect()}
+                                {SmallFontSelect()}
                             </ChakraProvider>
                         </OpenCloseCustom>
                         <OpenCloseCustom title="CTA 버튼" preseen={

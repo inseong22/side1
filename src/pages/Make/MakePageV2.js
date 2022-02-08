@@ -253,7 +253,7 @@ const MakePageV2 = ({history, userObj}, props) => {
                 {/* 아래는 미리보기 화면 */}
                 <div className="make-left-landing" onClick={e => backgroundClick(e)}>
                     <div className="scroll-container" 
-                        style={{ width:`${full ? '100%' :'90%'}`}}
+                        style={{ width:`${full ? '100%' :'95%'}`}}
                         animate={
                             isPhone ? {
                                 width:['80%', '40%'],

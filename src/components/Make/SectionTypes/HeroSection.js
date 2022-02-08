@@ -192,7 +192,7 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
     const animationDiv = () => {
         if(!content.animation.use)
         return(
-            <>
+        <>
             <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
                 {returnTextAndButton()}
                 {ImageOrSlide()}
@@ -219,6 +219,5 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
         </div>
     )
 }
-
 
 export default HeroSection
