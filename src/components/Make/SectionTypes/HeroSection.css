@@ -2,10 +2,6 @@
     z-index: 1;
     width:200px;
 }
-.image{
-    z-index: 1;
-    width:200px;
-}
 .video{
     z-index: 1;
     width: 200px;
@@ -26,4 +22,26 @@
     position: absolute;
     top: 0px;
     left: 0px;
+}
+
+.text__container{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    width:100%;
+}
+
+.image__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.button__container{
+    margin-top:15px;
+    display:flex;
+    position:relative;
+    width:100%;
 }

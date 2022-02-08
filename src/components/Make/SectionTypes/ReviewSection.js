@@ -1,38 +1,78 @@
 import React, {useContext, useState} from 'react'
-import Editor from '../tools/Editor'
 import './ReviewSection.css'
 import Rating from '@mui/material/Rating';
 import { motion } from 'framer-motion';
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import {produce} from 'immer'
-import TitleDesc from './TitleDesc/TitleDesc'
+import TitleDesc from './components/TitleDesc'
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 function ReviewSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnReviewCards = content.reviews.map((item, index) => {
         return(
-            <div key={index} className="review__card">
-                <div>
-                    <div>
+            <div key={index} className="feature__card" style={{boxShadow:'', backgroundColor:'red', margin:`${ index === 0 ? '0px 15px 0px 0px' : index === content.reviews.length - 1 ? '0px 0px 0px 15px' : '0px 15px' }`}}>
+                <div className="df-margin">
+                    <TextareaAutosize 
+                        className="text-input"  
+                        style={{
+                            width:'100%',
+                            resize:'none',
+                            textAlign:`${content.align}`,
+                        }}
+                        value={item.title} 
+                        onChange={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].reviews[index].title = e.currentTarget.value;
+                        }))} 
+                        />
+                </div>
+                {
+                    content.rating.use && 
+                    <div className="df-margin">
+                        <Rating
+                            value={item.rating} 
+                            onChange={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].reviews[index].rating = e.currentTarget.value;
+                            }))}  
+                            precision={0.2}
+                        />
                     </div>
-                    <div>
-                        {item.title}
+                }
+                {
+                    content.reviewText.use && 
+                    <div className="df-margin">
+                        <TextareaAutosize 
+                            className="text-input" 
+                            style={{
+                                width:'100%',
+                                resize:'none',
+                                textAlign:`${content.align}`,
+                            }}
+                            value={item.desc} 
+                            onChange={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].reviews[index].desc = e.currentTarget.value;
+                            }))}  
+                            />
                     </div>
-                </div>
-                <div style={{marginTop:'10px'}}>
-                    <Rating
-                        readOnly
-                        value={item.rating} 
-                        precision={0.1}
-                    />
-                </div>
-                <div style={{marginTop:'10px'}}>
-                    {item.desc}
-                </div>
-                <div style={{marginTop:'10px', color:'rgba(0,0,0,0.6)'}}>
-                    {item.writer}
-                </div>
+                }
+                {
+                    content.writer.use && 
+                    <div className="df-margin" style={{color:'rgba(0,0,0,0.6)'}}>
+                        <TextareaAutosize 
+                            className="text-input" 
+                            style={{
+                                width:'100%',
+                                resize:'none',
+                                textAlign:`${content.align}`,
+                            }}
+                            value={item.writer} 
+                            onChange={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].reviews[index].writer = e.currentTarget.value;
+                            }))}  
+                            />
+                    </div>
+                }
             </div>
         )
     })
@@ -44,9 +84,10 @@ function ReviewSection({content}) {
                 
                 <TitleDesc content={content} />
 
-                <div className="reviews__container"> 
+                <div className="features__container"> 
                     {returnReviewCards}
                 </div>
+
             </motion.div>
         </>
     )

@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react'
 import Editor from '../tools/Editor'
 import './CtaSection.css'
 import { motion } from 'framer-motion';
+import TitleDesc from './components/TitleDesc'
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
 
@@ -11,12 +12,6 @@ function CtaSection({content}) {
     const returnCtaSection = () => {
         return(
             <div className="center-column">
-                <div style={{fontWeight:'500', fontSize:'1.5em'}}>
-                    {content.title.text}
-                </div>
-                <div className="mt30">
-                    {content.desc.text}
-                </div>
                 <div className="center-row mt30">
                     <div style={{marginRight:'1%'}}>
                         <input className="input" />
@@ -33,6 +28,7 @@ function CtaSection({content}) {
         <>
             <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}
             data-aos={content.animation.type} aos-duration="2000">
+                <TitleDesc content={content} />
                 {returnCtaSection()}
             </motion.div>
         </>

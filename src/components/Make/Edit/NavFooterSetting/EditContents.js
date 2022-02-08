@@ -97,7 +97,6 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                         </div>
                     </div>   
                 </div>
-                <hr className="hr" />
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
                         {(provided) => 
@@ -176,7 +175,6 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                         + 섹션 추가하기
                     </div>
                 </div>
-                <hr className="hr" />
                 <div className="one-contents-draggable">
                     <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
                         <div className="left">

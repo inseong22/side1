@@ -20,26 +20,30 @@ import {Delete, Options} from '@styled-icons/fluentui-system-filled'
 
 import styled from "styled-components";
 
+const CustomCtaButton = styled.button`
+padding:8px 15px;
+`;
+
+const CustomGhostButton = styled.button`        
+`;
+
+
+// border-radius:${state.setting.cta.borderRadius}px;
+// background-color:${state.setting.cta.backgroundColor};
+// color:${state.setting.cta.color};
+// box-shadow:${state.setting.cta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
+// border:${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'};
+
+// border-radius:${state.setting.ghost.borderRadius}px;
+// background-color:${state.setting.ghost.backgroundColor};
+// color:${state.setting.ghost.color};
+// box-shadow:${state.setting.cta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
+// border:${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'};
+
 function NewSection({content, index, contents, setContents}) {
     const [isHover, setIsHover] = useState('none');
     const {state, action} = useContext(MyContext)
 
-    const CustomCtaButton = styled.button`
-        border-radius:${state.setting.cta.borderRadius}px;
-        background-color:${state.setting.cta.backgroundColor};
-        color:${state.setting.cta.color};
-        box-shadow:${state.setting.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
-        border:${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'};
-        padding:8px 15px;
-    `;
-
-    const CustomGhostButton = styled.button`        
-        border-radius:${state.setting.ghost.borderRadius}px;
-        background-color:${state.setting.ghost.backgroundColor};
-        color:${state.setting.ghost.color};
-        box-shadow:${state.setting.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
-        border:${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'};
-    `;
 
     const setThisSection = () => {
         action.setSecNum(index);
@@ -131,7 +135,7 @@ function NewSection({content, index, contents, setContents}) {
                 <div style={{backgroundColor:`${content.backgroundColor}`, opacity:`${content.backgroundOpacity}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
                 </div>
                 <div className="section__container-inner"
-                    style={{padding:`${content.padding.top}px 0px ${content.padding.bottom}px 0px`}} >
+                    style={{padding:`${content.padding.top}vh 0px ${content.padding.bottom}vh 0px`}} >
                     {returnType()}
                 </div>
             </div>

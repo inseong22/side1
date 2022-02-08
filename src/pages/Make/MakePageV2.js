@@ -62,7 +62,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     // local storage 저장을 위한 contents 재설정 - video의 용량 초과 때문에 일단..ㅠ
     const arr = lodash.cloneDeep(base[0])
     delete arr.video.file
-    const [contents, setContents] = useState([ arr, lodash.cloneDeep(base[1]), lodash.cloneDeep(base[2]), lodash.cloneDeep(base[4]) ])
+    const [contents, setContents] = useState([ arr, lodash.cloneDeep(base[1]), lodash.cloneDeep(base[6]), lodash.cloneDeep(base[7]) ])
 
     // 네비게이션
     const [navi, setNavi] = useState(lodash.cloneDeep(defaults.navi));
@@ -79,6 +79,7 @@ const MakePageV2 = ({history, userObj}, props) => {
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/making/${userObj.email}`);
+        console.log("ㅁㅁ")
         function repeat(){
             // localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
         }
