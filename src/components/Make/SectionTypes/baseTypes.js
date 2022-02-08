@@ -1,5 +1,3 @@
-import { TreasureMap } from "@styled-icons/remix-fill"
-
 const commons = {
     layout: 1,
     backgroundColor:'#ffffff',
@@ -274,14 +272,18 @@ export const base = [
         ...commons,
         name:'갤러리',
         sectionTypeName:'GallerySection',
-        image:{
+        galleryImg:{
             use:true,
+            border:0,
+            size:30,
         },
         card:{
             use:true,
         },
         text:{
             use:true,
+            color: '#000000',
+            align: ''
         },
     },
     {
@@ -293,6 +295,8 @@ export const base = [
         },
         explanation:{
             use:true,
+            color: '#000000',
+            align: ''
         }
     },
     {
