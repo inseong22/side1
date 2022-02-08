@@ -22,7 +22,10 @@ const commons = {
         size: 10,
         color: '#000000'
     },
-    contentsUse: false,
+    contents:{
+        use: false,
+        type: 'image',
+    },
     padding:{
         top:10,
         bottom:10,

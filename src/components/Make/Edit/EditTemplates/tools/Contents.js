@@ -12,8 +12,9 @@ import {CustomSwitch} from '../../tools/Custom/OnOffCustom'
 import { Select } from '@chakra-ui/react'
 import './Contents.css'
 import FuncContentImg from '../../tools/func/FuncContentImg'
+import { StoreMallDirectoryRounded } from '@mui/icons-material';
 
-const imageOptions = [
+const contentsOptions = [
     { label:'이미지', value:'image'},
     { label:'동영상', value:'video'},
     { label:'목업', value:'mockup'},
@@ -41,13 +42,13 @@ function Contents({content}) {
 
     const usingContents = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].contentsUse = !content.contentsUse;
+            draft[state.secNum].contents.use = !content.contents.use;
         }))
     }
 
-    const changeImageOption = e => {
+    const changeContentOption = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].image.type = e;
+            draft[state.secNum].contents.type = e;
         }));
     }
     // 콘텐츠 - 이미지 업로드
@@ -58,12 +59,7 @@ function Contents({content}) {
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].image.attachment = result;
-                draft[state.secNum].image.slide = false
-                draft[state.secNum].video.youtube = false
-                draft[state.secNum].video.use = false
-                draft[state.secNum].image.slide = false
-                draft[state.secNum].image.oneImg = true               
+                draft[state.secNum].image.attachment = result;             
             }))
         }
         if(oneFile){
@@ -87,11 +83,6 @@ function Contents({content}) {
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].slide_img.slide1 = result;
-                draft[state.secNum].image.slide = true
-                draft[state.secNum].video.youtube = false
-                draft[state.secNum].video.use = false
-                draft[state.secNum].image.slide = false
-                draft[state.secNum].image.oneImg = false 
             }))
         }
         if(oneFile){
@@ -156,6 +147,12 @@ function Contents({content}) {
         }))
     }
 
+    const setMockupSize = e => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].mockup.size = e.target.value
+        }))
+    }
+
 
     // video type
     const changeVideoOption = e => {
@@ -174,11 +171,6 @@ function Contents({content}) {
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].video.file = result;
-                draft[state.secNum].video.use = true;
-                draft[state.secNum].image.slide = false
-                draft[state.secNum].video.youtube = false
-                draft[state.secNum].image.slide = false
-                draft[state.secNum].image.oneImg = false 
             }))
             // actionImgCompress(result);
         }
@@ -192,10 +184,30 @@ function Contents({content}) {
             draft[state.secNum].video.file = '';
         }))
     }
+
+    const BaseTrue = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].image.oneImg = false   
+            draft[state.secNum].video.use = true
+            draft[state.secNum].image.slide = false
+            draft[state.secNum].video.youtube = false
+            draft[state.secNum].mockup.use = false
+        }))
+    }
+    const YoutubeTrue = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].image.oneImg = false   
+            draft[state.secNum].video.use = false
+            draft[state.secNum].image.slide = false
+            draft[state.secNum].video.youtube = true
+            draft[state.secNum].mockup.use = false
+        }))
+    }
     
     const videoType = () => {
         switch(content.video.type){
             case 'base':
+                BaseTrue()
                 return(
                     <>
                     <AddContentVideo text="동영상" value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
@@ -203,6 +215,7 @@ function Contents({content}) {
                     </>
                 )
             case 'youtube':
+                YoutubeTrue()
                 return(
                     <>
                     <AddYoutubeLink content={content} value={content.video.link} />
@@ -252,6 +265,7 @@ function Contents({content}) {
                 return(
                     <>
                         <FuncContentImg text='이미지' value={content.mockup.file} func={uploadImg}/>
+                        <EditSlider top="크기" text="이미지" value={content.mockup.size} func={setMockupSize} max="500"/>
                     </>
                 )
             case 'tablet':
@@ -281,9 +295,47 @@ function Contents({content}) {
         }
     }
 
+    const ImageTrue = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].image.oneImg = true    
+            draft[state.secNum].video.use = false
+            draft[state.secNum].image.slide = false
+            draft[state.secNum].video.youtube = false
+            draft[state.secNum].mockup.use = false
+        }))
+    }
+    const SlideTrue = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].image.oneImg = false    
+            draft[state.secNum].video.use = false
+            draft[state.secNum].image.slide = true
+            draft[state.secNum].video.youtube = false
+            draft[state.secNum].mockup.use = false
+        }))
+    }
+    const VideoTrue = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].image.oneImg = false   
+            draft[state.secNum].video.use = true
+            draft[state.secNum].image.slide = false
+            draft[state.secNum].video.youtube = false
+            draft[state.secNum].mockup.use = false
+        }))
+    }
+    const MockupTrue = () =>{
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].image.oneImg = false   
+            draft[state.secNum].video.use = false
+            draft[state.secNum].image.slide = false
+            draft[state.secNum].video.youtube = false
+            draft[state.secNum].mockup.use = true
+        }))
+    }
+
     const returnImageOrVideoAdd = () => {
-        switch(content.image.type){
+        switch(content.contents.type){
             case 'image':
+                ImageTrue()
                 return(
                     <div>
                         <AddContentImg text="이미지" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
@@ -302,6 +354,7 @@ function Contents({content}) {
                     </div>
                 )
             case 'slide':
+                SlideTrue()
                 return(
                     <>
                     <div style={{display: 'flex', marginTop: '10px'}}>
@@ -325,9 +378,9 @@ function Contents({content}) {
                         }))} />
                         <div style={{marginBottom: "20px"}}/>
                     </>
-                )
-            
+                )         
             case 'video':
+                VideoTrue()
                 return(
                     <>
                     <div style={{marginTop: '40px'}}/>
@@ -337,6 +390,7 @@ function Contents({content}) {
                     </>
                 )
             case 'mockup':
+                MockupTrue()
                 return(
                     <>
                     <div className="edit-element">
@@ -367,8 +421,8 @@ function Contents({content}) {
 
 
     return (
-        <OpenCloseCustom title="콘텐츠" use={content.contentsUse} onChange={(e)=>usingContents(e)}>
-            <RadioCustom options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />                 
+        <OpenCloseCustom title="콘텐츠" use={content.contents.use} onChange={(e)=>usingContents(e)}>
+            <RadioCustom options={contentsOptions} value={content.contents.type} func={e => changeContentOption(e)} />                 
             {
                 returnImageOrVideoAdd()
             } 
