@@ -10,3 +10,20 @@
     z-index: 1;
     width: 200px;
 }
+
+.mobile-container{
+    width: 400px;
+    position: relative;
+    float: left;
+}
+.mobile-ex{
+    z-index: 99;
+    position: relative;
+}
+.upload-mobile{
+    width: 400px;
+    z-index:1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}

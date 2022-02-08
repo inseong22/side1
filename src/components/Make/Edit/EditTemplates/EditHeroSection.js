@@ -45,9 +45,9 @@ function EditHeroSection({content, category}) {
         },
         {
             title: '콘텐츠',
-            use:content.contentsUse,
+            use:content.contents.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].contentsUse = !content.contentsUse;
+                draft[state.secNum].contents.use = !content.contents.use;
             }))
         },
         {

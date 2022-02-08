@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef } from 'react'
 import Editor from '../tools/Editor'
 import produce from 'immer';
 import { Link } from 'react-router-dom' 
+import Phone from '../../../tools/img/phone.png'
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import './DetailSection.css'
@@ -57,12 +58,14 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
     }
 
     const ImageOrSlide = () => {
-        if (content.contentsUse) {
-            if(content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg && !content.mockup.use) 
+        if (content.contents.use) {
+            // 동영상 - 유튜브 링크
+            if(content.video.youtube) 
                 return(
                     <iframe src={`${content.video.link}`} width='500px' height={`${content.image.size}px`} frameborder="0" allow='autoplay'/>
                 )
-            if(!content.video.youtube && content.video.use && !content.image.slide && !content.image.oneImg && !content.mockup.use)
+            // 동영상 - 비디오 업로드
+            if(content.video.use)
                 return(
                     <div>
                         <video 
@@ -77,13 +80,15 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
                         </video>
                     </div>
                 )
-            if(!content.video.youtube && !content.video.use && content.image.slide && !content.image.oneImg && !content.mockup.use)
+            // 슬라이드
+            if(content.image.slide)
                 return(
                     <div className="slide-box">
                         <ImageCarousel content={content}/>
                     </div>
                 )
-            if(!content.video.youtube && !content.video.use && !content.image.slide && content.image.oneImg && !content.mockup.use)
+            // 이미지 업로드
+            if(content.image.oneImg)
                 return (
                     <div >
                         {content.image.attachment === '' ?  
@@ -99,11 +104,25 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
                         }
                     </div>
                 )
-            if(!content.video.youtube && !content.video.use && !content.image.slide && !content.image.oneImg && content.mockup.use)
+            // 목업
+            if(content.mockup.use)
             return(
-                <>
-                목업
-                </>
+                <div className="mobile-container">
+                <img className="mobile-ex" src={Phone} alt="목업틀"
+                    style={{width: `${content.mockup.size}px`}}
+                />
+                {content.mockup.file === '' ?  
+                            <></>
+                            : 
+                            <img 
+                            className="upload-mobile" 
+                            ref={imgRef} 
+                            src={`${content.mockup.file}`} 
+                            onClick={(e) => setImageShow(e.currentTarget)} 
+                            style={{ width:`${content.mockup.size}px`}}
+                            />
+                        }
+                </div>
             )
         }
        
