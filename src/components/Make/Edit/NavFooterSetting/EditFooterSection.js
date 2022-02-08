@@ -11,6 +11,7 @@ import SliderCustom from '../tools/Custom/SliderCustom'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
 import BoxCustom from '../tools/Custom/BoxCustom'
 import produce from 'immer';
+import Layout from '../EditTemplates/tools/Layout'
 
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 
@@ -95,11 +96,10 @@ function EditFooterSection({foot, setFoot, category}) {
             { category === 0 ? 
             <>
                 <div>
-                    <OpenCloseCustom title="레이아웃">
-                        <RadioCustom value={foot.layout} options={layoutOptions} func={e => {setFoot(produce(foot, draft => {
-                            draft.layout = e;
-                        }))}} />
-                    </OpenCloseCustom>
+                    <Layout foot={foot} setFoot={setFoot} version='footer'/>
+                    {/* <RadioCustom value={foot.layout} options={layoutOptions} func={e => {setFoot(produce(foot, draft => {
+                        draft.layout = e;
+                    }))}} /> */}
                     <OpenCloseCustom title="회사 / 팀 정보">
                     </OpenCloseCustom>
                     <OpenCloseCustom title="저작권표시">

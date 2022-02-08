@@ -38,9 +38,34 @@ function AddGhostButton({content}) {
                 )
             case 'apply':
                 return(
-                    <ApplyInputCustom placeholder="연결하고 싶은 URL을 선택해주세요" value={content.button.ghostApply} func = {(e) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].button.ghostApply = e
-                    }))} />
+                    <>
+                    {
+                        content.ghostApplyInputs.length > 1 ?  
+                        <ApplyInputCustom disabled /> 
+                        :
+                        <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].ghostApplyInputs.push(e)
+                        }))} /> 
+                    }
+                    
+                    { content.ghostApplyInputs.length > 0 && 
+                    <>
+                        { content.ghostApplyInputs.map((item, index) => {
+                                return(
+                                    <div key={index}>
+                                        <ApplyInputCustom made value={item} func={e => action.setContents(produce(state.contents, draft => {
+                                            if(index === 0 ){
+                                                draft[state.secNum].ghostApplyInputs.shift()
+                                            }else{
+                                                draft[state.secNum].ghostApplyInputs.splice(index, index)
+                                            }
+                                        }))} />
+                    </div>
+                                )
+                            })
+                        } 
+                    </> }
+                    </>
                 )
             default:
                 return(

@@ -3,6 +3,22 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import produce from 'immer';
 import EditDesign from './tools/EditDesign'
 import ElementsTable from './tools/ElementsTable'
+import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
+import RadioCustom from '../tools/Custom/RadioCustom'
+import ColorCustom from '../tools/Custom/ColorCustom'
+
+import Layout from './tools/Layout'
+
+const shapeOptions = [
+    { label: '사각형', value: 0 },
+    { label: '라운드', value: 5 },
+    { label: '원형', value: 20 },
+]
+const imageSizeOptions = [
+    { label: 'Small', value: 33 },
+    { label: 'Medium', value: 50 },
+    { label: 'Large', value: 100 },
+]
 
 function EditReviewSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -24,9 +40,9 @@ function EditReviewSection({content, category}) {
         },
         {
             title:'이미지',
-            use:content.image.use,
+            use:content.reviewImage.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].image.use = !content.image.use;
+                draft[state.secNum].reviewImage.use = !content.reviewImage.use;
             }))
         },
         {
@@ -106,14 +122,36 @@ function EditReviewSection({content, category}) {
                 return(
                     <>
                         <ElementsTable elements={elements} />
-                        <div>
+                        <Layout content={content} version='review' />
+                        <OpenCloseCustom title="이미지">
+                            <RadioCustom text="프레임" button value={content.reviewImage.border} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].reviewImage.border = e;
+                                }))} />
+                            <RadioCustom text="크기" value={content.reviewImage.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].reviewImage.size = e;
+                            }))} />
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="별점">
+                            <ColorCustom text="색상" value={content.rating.color} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].rating.color = e;
+                            }))} />
+                            <RadioCustom text="크기" value={content.rating.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].rating.size = e;
+                            }))} />
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="이름 / 닉네임">
+                            <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].writer.color = e;
+                            }))} />
+                        </OpenCloseCustom>
+                        {/* <div>
                             {returnRepeatComponents}
                             <div>
                                 <span className="add-feature-button" onClick={() => addComponent()}>
                                     Add Feature
                                 </span>
                             </div>
-                        </div>
+                        </div> */}
                     </>
                 )
 
