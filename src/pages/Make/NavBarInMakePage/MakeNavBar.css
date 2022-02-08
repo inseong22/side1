@@ -61,10 +61,12 @@
 }
 
 .device-button{
-    border:1px solid black;
-    padding:2px 5px;
-    border-radius:2px;
+    padding:10px 10px;
+    border-radius:5px;
     cursor: pointer;
+}
+.device-button:hover{
+    background-color:rgba(150,150,150,0.1);
 }
 
 .device__container{

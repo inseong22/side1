@@ -13,7 +13,7 @@ import ImageCarousel from '../Edit/tools/func/FuncImageCarousel'
 
 import { motion } from 'framer-motion';
 
-function HeroSection({content}) {
+function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const imgRef = useRef(null)
     const [imageShow, setImageShow] = useState(null);
@@ -108,7 +108,9 @@ function HeroSection({content}) {
             if(content.mockup.use)
             return(
                 <div className="mobile-container">
-                <img className="mobile-ex" src={Phone} alt="목업틀" />
+                <img className="mobile-ex" src={Phone} alt="목업틀"
+                    style={{width: `${content.mockup.size}px`}}
+                />
                 {content.mockup.file === '' ?  
                             <></>
                             : 
@@ -133,13 +135,9 @@ function HeroSection({content}) {
                 {
                     content.button.ctaUse && 
                         <>         
-                        <button 
-                            className="action-button" 
-                            style={{backgroundColor:`${content.button.backgroundColor}`, margin:`${content.button.align}`}}
-                            onClick={() => {window.open(`${content.button.ctaLink}`)}}
-                        >
-                            CTA버튼
-                        </button>
+                        <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}>
+                            버튼
+                        </CustomCtaButton>
                         </>
                 }
                 {

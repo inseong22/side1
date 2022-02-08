@@ -1,9 +1,57 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ROKAFSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts2201-3@1.0/ROKAFSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'S-CoreDream-4Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fta__container{
+    position:fixed;
+    bottom:5px;
+    z-index:1003;
+    width:100%;
+    display: flex;
+    justify-content :center;
+    align-items :center;
+}
+
 .fta-button{
     border-radius:3px;
-    position:fixed;
-    bottom:5;
-    z-index:1003;
     border:none;
+}
+
+.font-done-button{
+    background:linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
 }
 
 .select__font{
@@ -12,4 +60,18 @@
 
 .MuiSelect-select{
     background-color:red;
+}
+
+.clicked{
+    color:var(--main-color);
+}
+
+.font-button{
+    font-size:13px;
+    padding:8px 12px;
+    background-color: var(--main-gray);
+    width:70%;
+    color:var(--main-black-01);
+    border-radius: 20px;
+    cursor: pointer;
 }

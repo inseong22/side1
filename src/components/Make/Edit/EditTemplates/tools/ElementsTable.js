@@ -1,9 +1,12 @@
-import React from 'react'
-import CheckboxCustom from '../../tools/Custom/CheckBoxCustom'
+import React, {useContext} from 'react'
+import { MyContext } from '../../../../../pages/Make/MakePageV2'
 import {EditCheckbox} from '../../tools/Custom/CheckBoxCustom'
+import produce from 'immer'
 import './ElementsTable.css'
 
-function ElementsTable({elements}) {
+function ElementsTable({elements, content}) {
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+
     return (
         <div className="one-element">
             <div className="edit-element__box">

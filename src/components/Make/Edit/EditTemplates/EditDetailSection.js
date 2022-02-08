@@ -3,6 +3,8 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import { detailSectionTemplateList } from './InnerTemplates'
 import EditDesign from './tools/EditDesign'
 import './EditeTemplates.css'
+import ElementsTable from './tools/ElementsTable'
+import produce from 'immer';
 import './EditContent.css'
 
 function EditDetailSection({content, category}) {
@@ -13,20 +15,37 @@ function EditDetailSection({content, category}) {
         action.setContents(newContents);
     }
 
+    const elements = [
+        {
+            title:'제목',
+            use:content.title.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].title.use = !content.title.use;
+            }))
+        },
+        {
+            title:'본문',
+            use:content.desc.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].desc.use = !content.desc.use;
+            }))
+        },
+        {
+            title:'콘텐츠',
+            use:content.contents.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].contents.use = !content.contents.use;
+            }))
+        },
+    ]
+
     const returnTable = () => {
         switch(category){
             case 0:
                 // case 0은 디자인 수정
                 return(
                     <div className="section-make__inner-container">
-                        {state.secNum}번째 섹션이고 타입은 1번 - 텍스트 입니다.
-                        <br/>
-                        <pre dangerouslySetInnerHTML={{__html: content.titles.title}}>
-                        </pre>
-                        <div>
-                            <div>버튼링크</div>
-                            <input type="text" value={content.button.link} onChange={(e) => onChangeButtonLink(e)}/>
-                        </div>
+                        <ElementsTable elements={elements} />
                     </div>
                 )
 

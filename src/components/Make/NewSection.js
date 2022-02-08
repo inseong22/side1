@@ -18,25 +18,46 @@ import { MyContext } from '../../pages/Make/MakePageV2'
 import { motion } from 'framer-motion'
 import {Delete, Options} from '@styled-icons/fluentui-system-filled'
 
+import styled from "styled-components";
+
 function NewSection({content, index, contents, setContents}) {
     const [isHover, setIsHover] = useState('none');
     const {state, action} = useContext(MyContext)
 
+    const CustomCtaButton = styled.button`
+        border-radius:${state.setting.cta.borderRadius}px;
+        background-color:${state.setting.cta.backgroundColor};
+        color:${state.setting.cta.color};
+        box-shadow:${state.setting.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
+        border:${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'};
+        padding:8px 15px;
+    `;
+
+    const CustomGhostButton = styled.button`        
+        border-radius:${state.setting.ghost.borderRadius}px;
+        background-color:${state.setting.ghost.backgroundColor};
+        color:${state.setting.ghost.color};
+        box-shadow:${state.setting.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
+        border:${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'};
+    `;
+
     const setThisSection = () => {
         action.setSecNum(index);
-        action.setCategory(0);
+        if(index !== state.secNum){
+            action.setCategory(0);
+        }
     }
 
     const returnType = () => {
         switch(content.sectionTypeName){
             case 'DetailSection':
                 return (
-                    <DetailSection content={content}  contents={contents} setContents={setContents}/>
+                    <DetailSection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton}/>
                 )
 
             case 'HeroSection':
                 return (
-                    <HeroSection content={content}  contents={contents} setContents={setContents}/>
+                    <HeroSection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton}/>
                 )
 
             case 'ReviewSection':
@@ -51,12 +72,12 @@ function NewSection({content, index, contents, setContents}) {
 
             case 'CtaSection':
                 return (
-                    <CtaSection content={content}/>
+                    <CtaSection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton}/>
                 )
 
             case 'ApplySection' :
                 return(
-                    <ApplySection content={content} />
+                    <ApplySection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton}/>
                 )
 
             case 'AppDownloadSection' :
@@ -105,12 +126,12 @@ function NewSection({content, index, contents, setContents}) {
             </div>
             <div className="section__container" 
                 // style={{backgroundImage:`url(${content.backgroundImage.attachment})`}} 
-                // style={{padding:`${content.padding.top}px 0px ${content.padding.bottom}px 0px`}} 
-                onClick={() => setThisSection()}>
-                {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
+                    onClick={() => setThisSection()}>
+                    {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                 <div style={{backgroundColor:`${content.backgroundColor}`, opacity:`${content.backgroundOpacity}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
                 </div>
-                <div className="section__container-inner">
+                <div className="section__container-inner"
+                    style={{padding:`${content.padding.top}px 0px ${content.padding.bottom}px 0px`}} >
                     {returnType()}
                 </div>
             </div>

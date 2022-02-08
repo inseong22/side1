@@ -17,13 +17,13 @@
     float: left;
 }
 .mobile-ex{
-    width: 400px;
     z-index: 99;
+    position: relative;
 }
 .upload-mobile{
-    width:200px;
+    width: 400px;
     z-index:1;
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 0px;
+    left: 0px;
 }

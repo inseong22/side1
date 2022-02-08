@@ -12,6 +12,7 @@ import EditQnaSection from './EditTemplates/EditQnaSection'
 import EditGallerySection from './EditTemplates/EditGallerySection'
 import EditTextSection from './EditTemplates/EditTextSection'
 import EditMockupSection from './EditTemplates/EditMockupSection'
+import EditVideoSection from './EditTemplates/EditVideoSection'
 import EditTopBar from './tools/func/FuncTopBar'
 
 import EditSetting from './NavFooterSetting/EditSetting'
@@ -90,6 +91,11 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             case 'MockupSection':
                 return(
                     <EditMockupSection content={content} category={state.category}/>
+                )
+
+            case 'VideoSection':
+                return(
+                    <EditVideoSection content={content} category={state.category}/>
                 )
     
             default:

@@ -3,6 +3,7 @@ import Editor from '../tools/Editor'
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import './DetailSection.css'
+import TitleDesc from './TitleDesc/TitleDesc'
 
 import appstorebutton from '../../../tools/img/appstorebutton.png'
 import playstorebutton from '../../../tools/img/playstorebutton.png'
@@ -107,13 +108,7 @@ function DetailSection({content}) {
     const returnTextAndButton = () => {
         return(
             <div className="text__container">
-                <Editor 
-                    data={content.titles.title}
-                    onChange={(e, editor) => {
-                        const data = editor.getData();
-                        changeText(data);
-                    }}
-                    />
+                <TitleDesc content={content} />
                 {returnButton()}
             </div>
         )

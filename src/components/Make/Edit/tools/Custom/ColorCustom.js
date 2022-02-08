@@ -51,7 +51,7 @@ export function EditColor({onChange, value}) {
                         return
                     }else{
                         if(usedColors.length > 4){
-                            usedColors.pop()
+                            usedColors.shift()
                             setUsedColors([...usedColors, value])
                         }else{
                             setUsedColors([...usedColors, value])
@@ -76,6 +76,7 @@ export function EditColor({onChange, value}) {
                             {usedColors.map((item, index) => {
                                 return(
                                     <div className="color-button" style={{backgroundColor:`${item}`}} onClick={() => onChange(item)} key={index}>
+                                        {item}
                                     </div>
                                 )
                             })}
