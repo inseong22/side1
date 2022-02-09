@@ -189,7 +189,7 @@
     display: flex;
     padding-bottom:10%;
     left:0%;
-    width:30vw;
+    width:28vw;
     top:7vh;
     height:93vh;
     z-index:1;
@@ -197,25 +197,25 @@
 
 .make-page-make-space{
     font-weight:500;
-    background-color:rgb(255, 255, 255);
     flex-direction: column;
     display: flex;
-    padding-bottom:10%;
     position:fixed;
     left:0%;
-    width:30vw;
-    top:8vh;
-    height:93vh;
+    width:28vw;
+    top:0vh;
+    padding-top:8vh;
+    height:100vh;
     z-index: 2;
-    box-shadow: var(--default-shadow-01);
-    border-radius: 0px 30px 0px 0px;
 }
 
 .overflow-scrolling {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     height: 100%;
-    padding-bottom:50px;
+    box-shadow: var(--default-shadow-01);
+    background-color:rgb(255, 255, 255);
+    border-radius: 0px 30px 0px 0px;
+    padding-bottom:30px;
 }
 
 .title-desc-text{

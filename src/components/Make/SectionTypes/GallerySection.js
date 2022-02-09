@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import { motion } from 'framer-motion';
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import {produce} from 'immer'
-import TitleDesc from './TitleDesc/TitleDesc'
+import TitleDesc from './components/TitleDesc'
 
 function GallerySection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.

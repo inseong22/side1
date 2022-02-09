@@ -1,20 +1,4 @@
 
-.text__container{
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    flex-direction: column;
-    width:100%;
-    height:100%;
-    padding:2%;
-}
-
-.image__container{
-    position: relative;
-    height:100%;
-    width:100%;
-}
-
 .image{
     z-index: 1;
     width:500px;
@@ -34,11 +18,6 @@
 }
 .image-input:hover{
     border:1px dashed rgba(240,240,240,1);
-}
-.button__container{
-    display:flex;
-    position:relative;
-    width:100%;
 }
 
 .action-button{

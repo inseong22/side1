@@ -6,11 +6,11 @@
     width:90%;
 }
 input[type="text"]{
-    background-color:#F2F6FA;
+    /* background-color:#F2F6FA;
     border-radius: 29px;
     border:none;
     padding:15px 20px;
-    width:90%
+    width:90% */
 }
 input[type="button"]{
     cursor: pointer;

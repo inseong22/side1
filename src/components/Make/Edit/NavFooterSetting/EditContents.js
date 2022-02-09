@@ -76,8 +76,12 @@ function EditContents({navi, setNavi, foot, setFoot}) {
 
     return (
         <div>
-            <div className="edit-element">
-                컨텐츠 수정
+            <div className="back__container">
+                <div className="left">
+                    <span className="back-text" stlye={{padding:'5px', fontWeight:'bold'}}>
+                        컨텐츠
+                    </span>
+                </div>
             </div>
             <div>
                 <div className="one-contents-draggable" style={{backgroundColor:`${BCOLOR}`}}>
@@ -97,7 +101,6 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                         </div>
                     </div>   
                 </div>
-                <hr className="hr" />
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
                         {(provided) => 
@@ -176,7 +179,6 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                         + 섹션 추가하기
                     </div>
                 </div>
-                <hr className="hr" />
                 <div className="one-contents-draggable">
                     <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
                         <div className="left">

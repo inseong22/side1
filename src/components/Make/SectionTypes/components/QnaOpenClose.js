@@ -4,13 +4,8 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Tooltip, ChakraProvider } from '@chakra-ui/react'
-import { InformationCircle } from '@styled-icons/ionicons-outline';
-import './OpenCloseCustom.css'
-import OnOffCustom from './OnOffCustom'
-// import Accordion from '@mui/material/Accordion';
+import { ChakraProvider } from '@chakra-ui/react'
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -67,14 +62,6 @@ export const AccordionCustom = (props) => {
   );
 }
 
-const CustomSwitch = ({use, onChange}) => {
-  return(
-    <div className={use ? 'custom-switch' : 'custom-switch unclicked'} onClick={onChange} style={{marginLeft: '13px'}}>
-      <div className="custom-switch-thumb" style={{left : `${use ? '32px' : '2px'}`}}></div>
-    </div>
-  )
-}
-
 const OpenCloseCustom = (props) => {
   /**
    * title, tooltip, preseen 설정 가능
@@ -91,15 +78,6 @@ const OpenCloseCustom = (props) => {
               <div className="title_text">
               {props.title}
               </div> 
-              {
-                props.use && <CustomSwitch use={props.use} onChange={props.onChange}/>
-              }
-              {
-                props.tooltip && 
-                  <Tooltip hasArrow arrowSize={10} label={props.tooltip} placement='top' fontSize='13'>
-                    <InformationCircle size="16" style={{color:'#C4CACF', zIndex:'20', marginLeft:'6px'}}/>
-                  </Tooltip>
-              }
             </div>
             </ChakraProvider>
             <div className="centera" style={{justifyContent: 'end'}}>

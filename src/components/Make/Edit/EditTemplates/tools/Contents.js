@@ -7,7 +7,7 @@ import AddContentImg from '../../tools/func/FuncContentImg'
 import AddSlideImg from '../../tools/func/FuncSlideImg'
 import AddContentVideo from '../../tools/func/FuncContentVideo'
 import AddYoutubeLink from '../../tools/func/FuncYoutubeLink'
-import EditSlider from '../../tools/Custom/SliderCustom'
+import SliderCustom from '../../tools/Custom/SliderCustom'
 import {CustomSwitch} from '../../tools/Custom/OnOffCustom'
 import { Select } from '@chakra-ui/react'
 import './Contents.css'
@@ -137,19 +137,19 @@ function Contents({content}) {
 
     const setImgSize = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].image.size = e.target.value
+            draft[state.secNum].image.size = e
         }))
     }
 
     const setSlideSize = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].image.size = e.target.value
+            draft[state.secNum].image.size = e
         }))
     }
 
     const setMockupSize = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mockup.size = e.target.value
+            draft[state.secNum].mockup.size = e
         }))
     }
 
@@ -211,7 +211,7 @@ function Contents({content}) {
                 return(
                     <>
                     <AddContentVideo text="동영상" value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
-                    <EditSlider top="크기" text="동영상" value={content.image.size} func={setImgSize} max="500"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
                     </>
                 )
             case 'youtube':
@@ -231,7 +231,7 @@ function Contents({content}) {
                     <div className="mid-command">
                         유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
                     </div>
-                    <EditSlider top="크기" text="동영상" value={content.image.size} func={setImgSize} max="500"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
                     </>
                 )
         }
@@ -265,7 +265,7 @@ function Contents({content}) {
                 return(
                     <>
                         <FuncContentImg text='이미지' value={content.mockup.file} func={uploadImg}/>
-                        <EditSlider top="크기" text="이미지" value={content.mockup.size} func={setMockupSize} max="500"/>
+                        <SliderCustom top="크기" text="이미지" value={content.mockup.size} func={setMockupSize} max="100"/>
                     </>
                 )
             case 'tablet':
@@ -337,9 +337,9 @@ function Contents({content}) {
             case 'image':
                 ImageTrue()
                 return(
-                    <div>
+                    <div style={{width:'100%'}}>
                         <AddContentImg text="이미지" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
-                        <EditSlider top="크기" text="이미지" value={content.image.size} func={setImgSize} max="200"/>
+                        <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="100"/>
                         <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                         }))} />
@@ -365,7 +365,7 @@ function Contents({content}) {
                     <div className="small-command">
                         최대 5MB까지 가능합니다.
                     </div>
-                    <EditSlider top="크기" text="이미지" value={content.image.size} func={setImgSize} max="300"/>
+                    <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="300"/>
                     <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                     }))} />
