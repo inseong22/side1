@@ -103,9 +103,11 @@ function EditNaviSection({navi, setNavi, category}) {
                             navi.logoImage.use && 
                             <>
                                 <AddContentImg text="로고" value={navi.logoImage.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
-                                <SliderCustom text="Image 사이즈" subtext="이미지의 세로 길이를 조절해주세요." value={navi.logoImage.width} func={e => setNavi(produce(navi, draft => {
+                                <div style={{marginTop: '-20px'}}/>
+                                <SliderCustom text="Image 사이즈" subtext="이미지의 세로 길이를 조절해주세요." func={e => setNavi(produce(navi, draft => {
                                     draft.logoImage.width = e;
                                 }))} />
+                                <div style={{marginBottom: '20px'}}/>
                             </>
                         }
                         <OnOffCustom value={navi.logoText.use} func={(e) => setNavi(produce(navi, draft => {
@@ -158,9 +160,9 @@ function EditNaviSection({navi, setNavi, category}) {
                         <OnOffCustom text="페이지 상단 고정" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
                         <div className="edit-element">
                             {
-                                navi.fixed ? <p>스크롤을 내리면 내비게이션 바는 더 이상 보이지 않습니다.</p> 
+                                navi.fixed ? <p className="mid-command">스크롤을 내리면 내비게이션 바는 더 이상 보이지 않습니다.</p> 
                                     : 
-                                <p>스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.</p>
+                                <p className="mid-command">스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.</p>
                             }
                         </div>
                     </BoxCustom>

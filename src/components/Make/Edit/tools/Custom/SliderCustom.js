@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { MDBRange } from 'mdb-react-ui-kit';
 import './SliderCustom.css'
 import {
   Slider,
@@ -30,20 +29,8 @@ function SliderCustom({top, text, func, value, max}) {
           {
             top && <div className="slider-medium-command">{top}</div>
           }
-          {
-            text && <div className="slider-small-command">{text}의 세로 길이를 조절해주세요.</div>
-          }
           </div>
           <div style={{display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems: 'center', width:'100%', height:'100%'}}>
-            {/* <MDBRange
-              className="slider"
-              value={range}
-              id='customRange'
-              min='0'
-              max={max}
-              onChange={onChange}   
-              onClick={e => {func(e.target.value); setRange(e.target.value)}}   
-            /> */}
             <ChakraProvider>
                 <Slider
                   step={1}
@@ -64,6 +51,9 @@ function SliderCustom({top, text, func, value, max}) {
 
             </ChakraProvider>
           </div>
+            {
+            text && <div className="slider-small-command" style={{marginLeft:'65px'}}>{text}의 세로 길이를 조절해주세요.</div>
+            } 
         </div>
       </div>
     )

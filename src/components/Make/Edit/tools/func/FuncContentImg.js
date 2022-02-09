@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 
-function FuncContentImg({text, value, func, removeFunc}) {
+function FuncContentImg({text, value, func, removeFunc, subtext}) {
     const photoInput = useRef();
     const inputClick = () => {
         photoInput.current.click();
@@ -40,7 +40,7 @@ function FuncContentImg({text, value, func, removeFunc}) {
                 {text} 업로드
             </div>
         <div className="small-command">
-        최대 5MB 업로드 가능
+        {subtext}
         </div>
         </div>
         </div>

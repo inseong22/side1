@@ -38,21 +38,30 @@
 }
 
 .back__container{
-    height:40px;
     padding:5px;
     display: flex;
     justify-content:start;
     align-items:center;
 }
 
+.section-top{
+    padding-left: 22px;
+    padding-top: 20px;
+    margin-bottom: -10px;
+    width: 250px;
+    display: flex;
+    font-size: 18px;
+}
+
 .back-button{
     width:30px;
-    display:flex;
-    justify-content:center;
-    align-items: center;
 }
 
 .back-text{
-    margin-left:3px;
+    width: 100%;
+    height: auto;
+    padding-top: 1px;
+    font-size: var(--section-main);
+    font-weight: 800;
 }
 

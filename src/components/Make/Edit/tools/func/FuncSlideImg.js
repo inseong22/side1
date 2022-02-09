@@ -8,7 +8,7 @@ function FuncSlideImg({text, value, func, removeFunc}) {
 
     return (
         <div className="top-img-div">
-        <div className="put-img-div" 
+        <div className="put-slider-img" 
         onClick={inputClick}
         onChange={e => func(e)}
         id='attach'

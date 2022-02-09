@@ -1,10 +1,9 @@
 .one-contents-draggable{
-    border-radius: 5px;
     display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction: column;
-    margin:15px;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 .one-contents-draggable:hover{
@@ -56,8 +55,8 @@
 }
 
 .content__name{
-    font-size:1.1em;
-    font-weight: 600;
+    font-size:var(--section-main);
+    font-weight: 900;
     color:var(--main-font-color);
 }
 

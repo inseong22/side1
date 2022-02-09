@@ -3,14 +3,14 @@
     border-radius: 29px;
     border:none;
     padding:15px 20px;
-    width:90%;
+    width:100%;
 }
 input[type="text"]{
-    /* background-color:#F2F6FA;
+    background-color:#F2F6FA;
     border-radius: 29px;
     border:none;
     padding:15px 20px;
-    width:90% */
+    width:100%
 }
 input[type="button"]{
     cursor: pointer;
@@ -38,11 +38,3 @@ input[type=button]:hover{
     background-color: white;
     color:#A89AFF;
   }
-.make-button{
-    width: 52px;
-    padding: 5px 9px;
-    border: none;
-    border-radius: 15px;
-    background-color: #A89AFF;
-    position: absolute;
-}

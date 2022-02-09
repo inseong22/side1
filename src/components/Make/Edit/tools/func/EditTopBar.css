@@ -2,13 +2,14 @@
 
 .edit__top-bar{
     /* background-color:#6B63F7; */
-    padding:1% 1%;
+    padding:20px 1% 1% 1%;
     width:100%;
     box-sizing:border-box;
     display: flex;
     flex-direction: row;
     justify-content :start;
     align-items :center;
+    margin-left: 20px;
 }
 
 .edit-radios{
@@ -16,8 +17,9 @@
     padding:3px;
     margin-left:3px;
     cursor:pointer;
-    font-size: 21px;
+    font-size: var(--section-top);
     color:var(--main-gray);
+    font-weight: 700;
 }
 
 .edit-radios:hover{
@@ -25,6 +27,7 @@
 }
 
 .er-clicked{
-    color:#202936;
+    color:var(--main-black-01);
+    margin-top: 3px;
     border-bottom:3px solid var(--main-black-01);
 }

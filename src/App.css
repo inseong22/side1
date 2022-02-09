@@ -12,7 +12,6 @@
      font-style: normal;
 }
 
-
 @font-face {
      font-family: 'S-CoreDream-4Regular';
      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
@@ -79,6 +78,12 @@
   --main-dark-gray: #555C67;
   --main-black-01:#202936;
   --main-light-gray-02:#F2F6FA;
+
+  --section-top: 22px;
+  --section-main: 20px;
+  --func-title: 18px;
+  --func-subtitle: 16px;
+  --small-text: 12px;
 }
 
 
@@ -152,6 +157,7 @@
   height:100%;
   width:100%;
   box-sizing:border-box;
+  font-size: 16px;
 }
 
 .left{
@@ -160,6 +166,16 @@
   align-items: center;
   width:50%;
   padding-left:5px;
+}
+
+.left-top{
+  display:flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  padding-left: 22px;
+  padding-top: 20px;
+  margin-bottom: 20px;
 }
 
 .right{

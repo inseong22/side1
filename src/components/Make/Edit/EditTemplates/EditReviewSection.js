@@ -7,7 +7,12 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 
-import Layout from './tools/Layout'
+const layoutOptions = [
+    { label: '1', value: 1},
+    { label: '2', value: 2},
+    { label: '3', value: 3},
+    { label: '4', value: 4},
+]
 
 const shapeOptions = [
     { label: '사각형', value: 0 },
@@ -122,7 +127,11 @@ function EditReviewSection({content, category}) {
                 return(
                     <>
                         <ElementsTable elements={elements} />
-                        <Layout content={content} version='review' />
+                        <OpenCloseCustom title="레이아웃">
+                        <RadioCustom text="단 개수" options={layoutOptions} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].layout = e;
+                            }))} />
+                        </OpenCloseCustom>
                         <OpenCloseCustom title="이미지">
                             <RadioCustom text="프레임" button value={content.reviewImage.border} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].reviewImage.border = e;

@@ -9,6 +9,8 @@
 .title_text{
     display: flex;
     align-items : center;
+    font-size: var(--func-title);
+    font-weight: 700;
 }
 
 .accordion{
