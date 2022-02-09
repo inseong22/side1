@@ -10,15 +10,15 @@ const commons = {
     title:{
         use:true,
         text: '노코드 랜딩페이지 제작 툴',
-        align: 'start',
-        size: 38,
+        align: 'left',
+        size: 32,
         color: '#000000'
     },
     desc:{
         use:true,
         text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요!',
-        align: 'start',
-        size: 21,
+        align: 'left',
+        size: 16,
         color: '#000000'
     },
     contents:{

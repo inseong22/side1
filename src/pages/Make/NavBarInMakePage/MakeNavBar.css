@@ -33,7 +33,7 @@
     background-color: #6a63f7b0;
 }
 
-.nav-button{
+.make-nav-button{
     background-color:rgba(0,0,0,0);
     color:var(--main-grey);
     border:none;
@@ -48,8 +48,15 @@
     box-shadow: var(--default-shadow-01);
 }
 
-.nav-button:hover{
-    font-weight: 700;
+.make-nav-button:hover{
+    background-color:var(--main-light-gray);
+}
+
+.nb-clicked{
+    background-color:#6a63f773;
+}
+.nb-clicked:hover{
+    background-color:#6a63f773;
 }
 
 .edit-nav-home-button{

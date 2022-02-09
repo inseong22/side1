@@ -131,12 +131,6 @@
     background-color:white;
 }
 
-.slider{
-    width: 311px;
-    margin-top: 29px;
-    margin-bottom: 10px;
-}
-
 /* 아래는 콘텐트 이미지 추가 관련 css */
 .top-img-div{
     display: flex;
@@ -156,7 +150,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     input[type='range'] {
         /* overflow: hidden; */
-      width: 311px;
+      width: 290px;
       -webkit-appearance: none;
       background-color: #F2F6FA;
       border-radius: 4px;

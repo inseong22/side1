@@ -8,7 +8,7 @@
     overflow:hidden;
     padding-top:60px;
     position:relative;
-    background-color:rgba(235, 235, 235, 0.2);
+    background-color:#edf0f3;
 }
 .section-animation{
     width: 100%;
@@ -136,7 +136,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding:20px 0%;
+    padding:5px 0px 20px 0px;
     z-index: 1;
     -webkit-overflow-scrolling: touch;
 }

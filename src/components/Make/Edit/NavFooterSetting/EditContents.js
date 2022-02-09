@@ -76,8 +76,12 @@ function EditContents({navi, setNavi, foot, setFoot}) {
 
     return (
         <div>
-            <div className="edit-element">
-                컨텐츠 수정
+            <div className="back__container">
+                <div className="left">
+                    <span className="back-text" stlye={{padding:'5px', fontWeight:'bold'}}>
+                        컨텐츠
+                    </span>
+                </div>
             </div>
             <div>
                 <div className="one-contents-draggable" style={{backgroundColor:`${BCOLOR}`}}>

@@ -14,10 +14,9 @@
 .edit-radios{
     display: flex;
     padding:3px;
-    border-radius: 2px;
     margin-left:3px;
     cursor:pointer;
-    font-size: 26px;
+    font-size: 21px;
     color:var(--main-gray);
 }
 

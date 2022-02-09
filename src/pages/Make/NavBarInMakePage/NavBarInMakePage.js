@@ -169,18 +169,14 @@ const NavBarInMakePage = (props) => {
             <div className="make-page-nav">
                 <div className="make-page-nav-half" style={{justifyContent: 'start', marginLeft:'1%'}}>
                     {/* <Button onClick={e => props.setOpen(!props.open)}>설명 다시보기</Button> */}
-                    <span className="nav-button" onClick={e => {
+                    <span className={state.secNum === 52 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(52); 
-                    }}
-                    style={{fontWeight: `${state.secNum === 52 ? 'bold' : ''}`}}
-                    >
+                    }} >
                         기본설정
                     </span>
-                    <span className="nav-button" onClick={e => {
+                    <span className={state.secNum === 53 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(53);
-                    }}
-                    style={{fontWeight: `${state.secNum === 53 ? 'bold' : ''}`}}
-                    >
+                    }} >
                         페이지 구성
                     </span>
                 </div>

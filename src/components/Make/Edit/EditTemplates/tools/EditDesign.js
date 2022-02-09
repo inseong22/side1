@@ -69,16 +69,16 @@ function EditDesign({content}) {
                 <RadioCustom text="정렬" options={alignOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].desc.align = e;
                 }))} />
-                <TextSizeCustom text="크기" value={content.desc.size} func={e => action.setContents(produce(state.contents, draft => {
+                <TextSizeCustom text="크기" desc value={content.desc.size} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].desc.size = e;
                 }))} />
             </OpenCloseCustom>
             <OpenCloseCustom title="여백">
-                <SliderCustom text="상단 여백" value={content.padding.top} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].padding.top = e.target.value;
+                <SliderCustom top="상단 여백" value={content.padding.top} max={40} func={e => action.setContents(produce(state.contents, draft => {
+                    draft[state.secNum].padding.top = e;
                 }))}/>
-                <SliderCustom text="하단 여백" value={content.padding.bottom} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].padding.bottom = e.target.value;
+                <SliderCustom top="하단 여백" value={content.padding.bottom} max={40} func={e => action.setContents(produce(state.contents, draft => {
+                    draft[state.secNum].padding.bottom = e;
                 }))}/>
             </OpenCloseCustom>            
         </div>

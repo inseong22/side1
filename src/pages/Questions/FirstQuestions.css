@@ -22,17 +22,6 @@
 }
 
 .input-holder{
-    width:70%;
-    padding:17px 3%;
-    margin-top:5%;
-    font-family:Pretendard-Regular;
-    font-size:1.1em;
-    
-    background: #FFFFFF;
-    border: 1px solid #6A6A6A;
-    box-sizing: border-box;
-    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 7px;
 }
 
 .template__card{
