@@ -96,9 +96,12 @@ function EditHeroSection({content, category}) {
         switch(content.button.ctaOption){
             case 'link':
                 return(
+                    <>
                     <InputCustom placeholder="연결하고 싶은 URL을 선택해주세요" value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.ctaLink = e
                     }))} />
+                    <div className="mid-command">입력 후 엔터를 누르세요.</div>
+                    </>
                 )
             case 'apply':
                 return(
@@ -124,11 +127,13 @@ function EditHeroSection({content, category}) {
                                                 draft[state.secNum].ctaApplyInputs.splice(index, index)
                                             }
                                         }))} />
-                    </div>
+                                    </div>
                                 )
                             })
                         } 
                     </> }
+                    <div className="mid-command-light"> 최대 5개의 신청 박스만 생성 가능합니다. 
+                    </div>
                     </>
                 )
             default:

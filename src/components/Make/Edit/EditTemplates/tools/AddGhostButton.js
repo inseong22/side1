@@ -65,6 +65,8 @@ function AddGhostButton({content}) {
                             })
                         } 
                     </> }
+                    <div className="mid-command-light"> 최대 5개의 신청 박스만 생성 가능합니다. 
+                    </div>
                     </>
                 )
             default:

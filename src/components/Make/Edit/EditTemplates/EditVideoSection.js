@@ -7,7 +7,7 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import AddContentVideo from '../tools/func/FuncContentVideo'
 import AddYoutubeLink from '../tools/func/FuncYoutubeLink'
-import EditSlider from '../tools/Custom/SliderCustom'
+import SliderCustom from '../tools/Custom/SliderCustom'
 import {CustomSwitch} from '../tools/Custom/OnOffCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 
@@ -55,7 +55,7 @@ function EditVideoSection({content, category}) {
     // video size
     const setImgSize = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].image.size = e.target.value
+            draft[state.secNum].image.size = e
         }))
     }
 
@@ -65,7 +65,7 @@ function EditVideoSection({content, category}) {
                 return(
                     <>
                     <AddContentVideo text="동영상" value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
-                    <EditSlider top="크기" text="동영상" value={content.image.size} func={setImgSize} max="500"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
                     </>
                 )
             case 'youtube':
@@ -84,7 +84,7 @@ function EditVideoSection({content, category}) {
                     <div className="mid-command">
                         유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
                     </div>
-                    <EditSlider top="크기" text="동영상" value={content.image.size} func={setImgSize} max="500"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
                     </>
                 )
         }

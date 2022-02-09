@@ -34,8 +34,8 @@
 }
 
 .make-nav-button{
-    border-radius:5px;
     height:35px;
+    border-radius: 25px;
     display: flex;
     justify-content: center;
     align-items : center;

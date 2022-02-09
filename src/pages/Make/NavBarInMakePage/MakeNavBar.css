@@ -1,6 +1,5 @@
 .make-page-nav{
     height: 60px;
-    background-color: white;
     width: 100%;
     position:fixed;
     display: flex;
@@ -8,6 +7,7 @@
     font-family: Noto Sans KR;
     font-size: 14px;
     z-index:130;
+    background-color:rgba(251, 251, 251, 1);
 }
 
 .make-page-nav-half{
@@ -23,7 +23,6 @@
     margin-left:1vw;
     cursor: pointer;
     padding:3px 0px;
-    border-radius: 5px;
     text-decoration: none;
     padding:3px 10px;
 }
@@ -33,10 +32,10 @@
     background-color: #6a63f7b0;
 }
 
-.nav-button{
+.make-nav-button{
     background-color:rgba(0,0,0,0);
     color:var(--main-grey);
-    border:none;
+    border-radius: 25px;
     display: flex;
     align-items:center;
     justify-content:center;
@@ -44,12 +43,18 @@
     height: 40px;
     margin: 5px;
     cursor: pointer;
-    border-radius: var(--br-01);
     box-shadow: var(--default-shadow-01);
 }
 
-.nav-button:hover{
-    font-weight: 700;
+.make-nav-button:hover{
+    background-color:var(--main-light-gray);
+}
+
+.nb-clicked{
+    background-color:#6a63f773;
+}
+.nb-clicked:hover{
+    background-color:#6a63f773;
 }
 
 .edit-nav-home-button{
@@ -64,6 +69,11 @@
     padding:10px 10px;
     border-radius:5px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    flex-direction:row;
+    width:100%;
 }
 .device-button:hover{
     background-color:rgba(150,150,150,0.1);

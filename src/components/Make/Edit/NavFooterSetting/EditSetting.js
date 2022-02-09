@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
+import SingleColorCustom from '../tools/Custom/SingleColorCustom'
 import InputCustom from '../tools/Custom/InputCustom'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import SelectCustom from '../tools/Custom/SelectCustom'
@@ -14,6 +15,7 @@ import AnimationCustom from '../tools/Custom/AnimationCustom'
 import { base } from '../../SectionTypes/baseTypes'
 import AddContentImg from '../tools/func/FuncContentImg'
 import {Check} from '@styled-icons/bootstrap'
+import {ChevronRight} from '@styled-icons/boxicons-regular'
 import {
     ChakraProvider,
     Popover,
@@ -55,6 +57,7 @@ const sizeOptions = [
 
 function EdtiSetting({setting, setSetting, category}) {
     const [isFontOpen, setIsFontOpen] = useState(false)
+    const [isSmallFontOpen, setIsSmallFontOpen] = useState(false)
     const open = () => setIsFontOpen(!isFontOpen)
     const close = () => setIsFontOpen(false)
 
@@ -95,6 +98,114 @@ function EdtiSetting({setting, setSetting, category}) {
         }))
     }
 
+    const FontSelect = () => {
+        return(
+        <div className="edit-element" style={{flexDirection:'row'}}>
+            <div className="left" style={{width:'20%'}}>제목</div>
+            <div className="right" style={{width:'80%'}}>
+                <Popover
+                    placement='right'
+                    closeOnBlur={false}
+                    isOpen={isFontOpen}
+                    onClose={close}
+                >
+                <PopoverTrigger>
+                    <div className="font-button" style={{fontFamily: `${setting.font}`}} onClick={() => {open(); setIsSmallFontOpen(false)}}>노코드 랜딩페이지 제작 툴, Surfee <ChevronRight size="20"/></div>
+                </PopoverTrigger>
+                <PopoverContent>
+                    <PopoverArrow />
+
+                    <PopoverHeader>폰트를 선택하세요.</PopoverHeader>
+                    
+                    <PopoverCloseButton />
+                    
+                    <PopoverBody>
+                        {fontOptions.map((item, index) => {
+                            return(
+                                <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                    draft.font = item.value
+                                }))}} style={{fontFamily: `${item.value}`}}>
+                                    <div className="left">
+                                        {item.label}
+                                    </div>
+                                    {
+                                        item.value === setting.font && 
+                                        <div className="right">
+                                            <Check size="20"/>
+                                        </div>
+                                    }
+                                </div>
+                            )
+                        })}
+                    </PopoverBody>
+                    
+                    <PopoverFooter d='flex' justifyContent='flex-end'>
+                        <ButtonGroup size='sm'>
+                            <div className="font-done-button" onClick={() => close()}>Apply</div>
+                        </ButtonGroup>
+                    </PopoverFooter>
+
+                </PopoverContent>
+                </Popover>
+            </div>
+        </div>
+        )
+    }
+
+    const SmallFontSelect = () => {
+        return(
+        <div className="edit-element" style={{flexDirection:'row'}}>
+            <div className="left" style={{width:'20%'}}>본문</div>
+            <div className="right" style={{width:'80%'}}>
+                <Popover
+                    placement='right'
+                    closeOnBlur={false}
+                    isOpen={isSmallFontOpen}
+                    onClose={() => setIsSmallFontOpen(false)}
+                >
+                <PopoverTrigger>
+                    <div className="font-button" style={{fontFamily: `${setting.smallFont}`}} onClick={() => {setIsSmallFontOpen(!isSmallFontOpen); close()}}>노코드 랜딩페이지 제작 툴, Surfee <ChevronRight size="20"/></div>
+                </PopoverTrigger>
+                <PopoverContent>
+                    <PopoverArrow />
+
+                    <PopoverHeader>폰트를 선택하세요.</PopoverHeader>
+                    
+                    <PopoverCloseButton />
+                    
+                    <PopoverBody>
+                        {fontOptions.map((item, index) => {
+                            return(
+                                <div className={item.value === setting.smallFont ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                    draft.smallFont = item.value
+                                }))}} style={{fontFamily: `${item.value}`}}>
+                                    <div className="left">
+                                        {item.label}
+                                    </div>
+                                    {
+                                        item.value === setting.smallFont && 
+                                        <div className="right">
+                                            <Check size="20"/>
+                                        </div>
+                                    }
+                                </div>
+                            )
+                        })}
+                    </PopoverBody>
+                    
+                    <PopoverFooter d='flex' justifyContent='flex-end'>
+                        <ButtonGroup size='sm'>
+                            <div className="font-done-button" onClick={() => setIsSmallFontOpen(false)}>Apply</div>
+                        </ButtonGroup>
+                    </PopoverFooter>
+
+                </PopoverContent>
+                </Popover>
+            </div>
+        </div>
+        )
+    }
+
     const returnTable = () => {
         switch(category){
             case 0:
@@ -103,12 +214,29 @@ function EdtiSetting({setting, setSetting, category}) {
                     <>
                     <div>
                         <OpenCloseCustom title="파비콘" tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지를 대표하는 아이콘입니다.">
-                            <AddContentImg text="이미지" value={setting.faviconAttachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
+                            <AddContentImg text="파비콘" subtext="최대 1MB 업로드 가능, 64x64px 권장" value={setting.faviconAttachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         </OpenCloseCustom>
                         <OpenCloseCustom title="페이지 이름" tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다.">
                             <InputCustom value={setting.title} placeholder="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다." func={(e) => setSetting(produce(setting, draft => {
                                 draft.title = e
                             }))} />
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="URL">
+                            <div style={{flexDirection:'column'}}>
+                                <div style={{display:'flex'}}>
+                                    <div>
+                                        <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) => setSetting(produce(setting, draft => {
+                                            draft.urlId = e;
+                                        }))}/>
+                                    </div>
+                                    <div style={{color:'#202936', marginTop: '30px', marginRight: '30px'}}>
+                                        .surfee.co.kr
+                                    </div>
+                                </div>
+                            </div>
+                                <div style={{width:'90%', justifyContent:'center', fontSize:'12px', marginBottom:'16px'}}>
+                                    * 영문, 숫자만 입력 가능
+                                </div>
                         </OpenCloseCustom>
                         <OpenCloseCustom title="플로팅 버튼" tooltip="화면 하단에 고정되어 떠다니는 버튼입니다. 내비게이션의 버튼과 플로팅 버튼 중 하나만 사용하시길 바랍니다.">
                             <OnOffCustom text="플로팅 버튼" value={setting.fta.use} func={(e) => setSetting(produce(setting, draft => {
@@ -127,21 +255,6 @@ function EdtiSetting({setting, setSetting, category}) {
                                 draft.fta.link = e
                             }))}/>
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="URL">
-                            <div className="edit-element" style={{flexDirection:'column'}}>
-                                <div className="center-row" style={{justifyContent: 'start'}}>
-                                    <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) => setSetting(produce(setting, draft => {
-                                        draft.urlId = e;
-                                    }))}/>
-                                    <div style={{color:'#202936'}}>
-                                        .surfee.co.kr
-                                    </div>
-                                </div>
-                                <div style={{width:'90%', justifyContent:'start', fontSize:'12px'}}>
-                                    * 영문, 숫자만 입력 가능
-                                </div>
-                            </div>
-                        </OpenCloseCustom>
                     </div>
                     </>
                 )
@@ -158,63 +271,14 @@ function EdtiSetting({setting, setSetting, category}) {
                         </OpenCloseCustom>
                         <OpenCloseCustom title="글씨체">
                             <ChakraProvider>
-                                <div className="edit-element" style={{flexDirection:'row'}}>
-                                    
-                                {/* <SelectCustom options={fontOptions} value={setting.font} onChange={(e) => setSetting(produce(setting, draft => {
-                                    draft.font = e;
-                                }))} /> */}
-                                <div className="left" style={{width:'20%'}}>제목</div>
-                                <Popover
-                                    placement='right'
-                                    closeOnBlur={false}
-                                    isOpen={isFontOpen}
-                                    onClose={close}
-                                >
-                                <PopoverTrigger>
-                                    <div className="font-button right" style={{fontFamily: `${setting.font}`}} onClick={open}>노코드 랜딩페이지 제작 툴, Surfee</div>
-                                </PopoverTrigger>
-                                <PopoverContent>
-                                    <PopoverArrow />
-
-                                    <PopoverHeader>폰트를 선택하세요.</PopoverHeader>
-                                    
-                                    <PopoverCloseButton />
-                                    
-                                    <PopoverBody>
-                                        {fontOptions.map((item, index) => {
-                                            return(
-                                                <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
-                                                    draft.font = item.value
-                                                }))}} style={{fontFamily: `${item.value}`}}>
-                                                    <div className="left">
-                                                        {item.label}
-                                                    </div>
-                                                    {
-                                                        item.value === setting.font && 
-                                                        <div className="right">
-                                                            <Check size="20"/>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            )
-                                        })}
-                                    </PopoverBody>
-                                    
-                                    <PopoverFooter d='flex' justifyContent='flex-end'>
-                                        <ButtonGroup size='sm'>
-                                        <Button className="font-done-button" onClick={() => close()}>Apply</Button>
-                                        </ButtonGroup>
-                                    </PopoverFooter>
-
-                                </PopoverContent>
-                                </Popover>
-                                </div>
+                                {FontSelect()}
+                                {SmallFontSelect()}
                             </ChakraProvider>
                         </OpenCloseCustom>
                         <OpenCloseCustom title="CTA 버튼" preseen={
                             <div className="edit-element">
                                 <div className="centera" style={{padding:'5px 10px'}}>
-                                    <div className="custom-button" style={{ color:`${setting.cta.color}`, border:`${setting.cta.border ? `1px solid ${setting.cta.borderColor}` : 'none'}`, boxShadow:`${setting.cta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'}`, borderRadius:`${setting.cta.borderRadius}px`, backgroundColor:`${setting.cta.backgroundColor}`}}>
+                                    <div className="custom-button" >
                                         디자인 미리보기
                                     </div>
                                 </div>
@@ -223,29 +287,34 @@ function EdtiSetting({setting, setSetting, category}) {
                             <RadioCustom button text="모양" options={shapeOptions} value={setting.cta.borderRadius} func={(e) => setSetting(produce(setting, draft => {
                                 draft.cta.borderRadius = e
                             }))} />
-                            <ColorCustom text="배경 색상" value={setting.cta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                            <div className="edit-element">
+                            <SingleColorCustom text="배경 색상" value={setting.cta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
                                 draft.cta.backgroundColor = e;
                             }))} />
-                            <ColorCustom text="폰트 색상" value={setting.cta.color} func={(e) => setSetting(produce(setting, draft => {
+                            <div>
+                            <div className="edit-element-bar"/>
+                            </div>
+                            <SingleColorCustom text="폰트 색상" value={setting.cta.color} func={(e) => setSetting(produce(setting, draft => {
                                 draft.cta.color = e;
                             }))} />
-                            <OnOffCustom text="그림자" value={setting.cta.shadow} func={(e) => setSetting(produce(setting, draft => {
-                                draft.cta.shadow = !setting.cta.shadow
-                            }))} />
+                            </div>
                             <OnOffCustom text="테두리" value={setting.cta.border} func={(e) => setSetting(produce(setting, draft => {
                                 draft.cta.border = !setting.cta.border
                             }))} />
-                            {
-                                setting.cta.border && 
-                                    <ColorCustom value={setting.cta.borderColor} func={(e) => setSetting(produce(setting, draft => {
-                                        draft.cta.borderColor = e;
-                                    }))} />
-                            }
+                                {
+                                    setting.cta.border && 
+                                        <ColorCustom value={setting.cta.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                            draft.cta.borderColor = e;
+                                        }))} />
+                                }
+                            <OnOffCustom text="그림자" value={setting.cta.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                draft.cta.shadow = !setting.cta.shadow
+                            }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="고스트 버튼" preseen={
                             <div className="edit-element">
                                 <div className="centera" style={{padding:'5px 10px'}}>
-                                    <div className="custom-button" style={{ color:`${setting.ghost.color}`, border:`${setting.ghost.border ? `1px solid ${setting.borderColor}` : 'none'}`, boxShadow:`${setting.ghost.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'}`, borderRadius:`${setting.ghost.borderRadius}px`, backgroundColor:`${setting.ghost.backgroundColor}`}}>
+                                    <div className="custom-button">
                                         디자인 미리보기
                                     </div>
                                 </div>
@@ -254,12 +323,17 @@ function EdtiSetting({setting, setSetting, category}) {
                             <RadioCustom text="모양" options={shapeOptions} value={setting.ghost.borderRadius} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.borderRadius = e
                             }))} />
-                            <ColorCustom text="배경 색상" value={setting.ghost.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                            <div className="edit-element">
+                            <SingleColorCustom text="배경 색상" value={setting.ghost.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.backgroundColor = e;
                             }))} />
-                            <ColorCustom text="폰트 색상" value={setting.ghost.color} func={(e) => setSetting(produce(setting, draft => {
+                            <div>
+                            <div className="edit-element-bar"/>
+                            </div>
+                            <SingleColorCustom text="폰트 색상" value={setting.ghost.color} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.color = e;
                             }))} />
+                            </div>
                             <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.shadow = !setting.ghost.shadow
                             }))} />

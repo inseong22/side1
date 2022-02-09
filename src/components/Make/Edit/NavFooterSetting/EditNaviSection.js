@@ -11,6 +11,7 @@ import SliderCustom from '../tools/Custom/SliderCustom'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
 import BoxCustom from '../tools/Custom/BoxCustom'
 import produce from 'immer';
+import AddContentImg from '../tools/func/FuncContentImg'
 
 const logoOptions = [
     { label: '로고 이미지', value: 'logo' },
@@ -58,24 +59,27 @@ function EditNaviSection({navi, setNavi, category}) {
         },
     ]
 
-    const changeNaviTemplate = num => {
-        let newNavi = JSON.parse(JSON.stringify(navi))
-        newNavi.sectionTemplateNumber = num
-        setNavi(newNavi);
-    }
 
-    // 템플릿 2 이미지의 경우에는
-    const onChangeLogoImage = e => {
+    // 이미지 업로드
+    const onChangeContentImage= e => {
         const {target:{files},} = e;
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
-            setNavi(produce(navi, draft => {
-                draft.logoImage.attachment = result;
+            setNavi(produce(navi, draft=>{
+                draft.logoImage.attachment = result;             
             }))
         }
-        reader.readAsDataURL(oneFile);
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    // 이미지 삭제
+    const RemoveImage = () => {
+        setNavi(produce(navi, draft=>{
+            draft.logoImage.attachment = '';
+        }))
     }
 
     return (
@@ -98,17 +102,12 @@ function EditNaviSection({navi, setNavi, category}) {
                         {
                             navi.logoImage.use && 
                             <>
-                                <div className="edit-element no-border">
-                                    <div className="edit-element__one">
-                                        <div className="edit-element__left">로고</div>
-                                        <div className="edit-element__right">
-                                            <input type="file" accept="image/*" id="file" onChange={ e => onChangeLogoImage(e) } />
-                                        </div>
-                                    </div>
-                                </div>
-                                <SliderCustom text="Image 사이즈" subtext="이미지의 세로 길이를 조절해주세요." value={navi.logoImage.width} func={e => setNavi(produce(navi, draft => {
+                                <AddContentImg text="로고" value={navi.logoImage.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
+                                <div style={{marginTop: '-20px'}}/>
+                                <SliderCustom text="Image 사이즈" subtext="이미지의 세로 길이를 조절해주세요." func={e => setNavi(produce(navi, draft => {
                                     draft.logoImage.width = e;
                                 }))} />
+                                <div style={{marginBottom: '20px'}}/>
                             </>
                         }
                         <OnOffCustom value={navi.logoText.use} func={(e) => setNavi(produce(navi, draft => {
@@ -159,11 +158,11 @@ function EditNaviSection({navi, setNavi, category}) {
                     
                     <BoxCustom>
                         <OnOffCustom text="페이지 상단 고정" value={navi.fixed} func={e => setNavi({...navi, fixed:!navi.fixed})}/>
-                        <div>
+                        <div className="edit-element">
                             {
-                                navi.fixed ? <p>스크롤을 내리면 내비게이션 바는 더 이상 보이지 않습니다.</p> 
+                                navi.fixed ? <p className="mid-command">스크롤을 내리면 내비게이션 바는 더 이상 보이지 않습니다.</p> 
                                     : 
-                                <p>스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.</p>
+                                <p className="mid-command">스크롤을 내려도 내비게이션 바가 화면 상단에 따라 다닙니다.</p>
                             }
                         </div>
                     </BoxCustom>

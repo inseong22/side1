@@ -1,17 +1,19 @@
 import React, { useContext, useState, useRef } from 'react'
-import Editor from '../tools/Editor'
-import produce from 'immer';
 import { Link } from 'react-router-dom' 
-import Phone from '../../../tools/img/phone.png'
+import produce from 'immer';
+import { motion } from 'framer-motion';
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
-import './DetailSection.css'
-
-import playstorebutton from '../../../tools/img/playstorebutton.png'
-import './HeroSection.css'
+import TitleDesc from './components/TitleDesc'
 import ImageCarousel from '../Edit/tools/func/FuncImageCarousel'
 
-import { motion } from 'framer-motion';
+import './DetailSection.css'
+import './Default.css'
+import './HeroSection.css'
+
+import Phone from '../../../tools/img/phone.png'
+import ourA from '../../../tools/img/005.png'
+
 
 function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -22,25 +24,6 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
-
-    // 제목
-    const changeText = ( data ) => {
-        action.setContents(produce(state.contents, draft => {
-        draft[state.secNum].title.text= data}))
-    }
-    
-    // 본문
-    const changeDesc = ( data ) => {
-        action.setContents(produce(state.contents, draft => {
-        draft[state.secNum].desc.text= data}))
-    }
-
-    // 템플릿 1 텍스트의 경우
-    const changeButtonText = ( data ) => {
-        let newContents = state.contents.map((item, index) => index === state.secNum ? {...item, button: {...item.button, title : data}} : item)
-        action.setContents(newContents);
-    }
 
     // 템플릿 2 이미지의 경우에는
     const onChangeImage = e => {
@@ -87,22 +70,16 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
                         <ImageCarousel content={content}/>
                     </div>
                 )
-            // 이미지 업로드
+            // 이미지
             if(content.image.oneImg)
                 return (
-                    <div >
-                        {content.image.attachment === '' ?  
-                            <img ref={imgRef} src={playstorebutton} className="image" onClick={(e) =>{ setImageShow(e.currentTarget)}} style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`}} />
-                            : 
-                            <img 
-                            ref={imgRef} 
-                            src={`${content.image.attachment}`} 
-                            className="image" 
-                            onClick={(e) => setImageShow(e.currentTarget)} 
-                            style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`}}
-                            />
-                        }
-                    </div>
+                    <img 
+                        ref={imgRef} 
+                        src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
+                        className="image" 
+                        onClick={(e) => setImageShow(e.currentTarget)} 
+                        style={{borderRadius:`${content.image.border}px`, width:`${content.image.size}%`, boxShadow: `${content.image.shadowValue}`}}
+                        />
                 )
             // 목업
             if(content.mockup.use)
@@ -112,16 +89,16 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
                     style={{width: `${content.mockup.size}px`}}
                 />
                 {content.mockup.file === '' ?  
-                            <></>
-                            : 
-                            <img 
-                            className="upload-mobile" 
-                            ref={imgRef} 
-                            src={`${content.mockup.file}`} 
-                            onClick={(e) => setImageShow(e.currentTarget)} 
-                            style={{ width:`${content.mockup.size}px`}}
-                            />
-                        }
+                    <></>
+                    : 
+                    <img 
+                    className="upload-mobile" 
+                    ref={imgRef} 
+                    src={`${content.mockup.file}`} 
+                    onClick={(e) => setImageShow(e.currentTarget)} 
+                    style={{ width:`${content.mockup.size}px`}}
+                    />
+                }
                 </div>
             )
         }
@@ -131,23 +108,25 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
     const returnButton = () => {
         return(
             <>            
-            <div className="button__container" style={{border:`${ anchorEl !== null ? '1px dashed rgba(0,0,0,0.4)' : '' }`}}>
+            <div className="button__container">
                 {
                     content.button.ctaUse && 
                         <>         
-                        <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}>
-                            버튼
+                        {/* <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}> */}
+                        <CustomCtaButton className="action-button">
+                            <input className="text-input" value={content.button.ctaText} onChange={(e) => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].button.ctaText = e.currentTarget.value;
+                            }))}/>
                         </CustomCtaButton>
                         </>
                 }
                 {
                     content.button.ghostUse && 
                         <>         
-                        <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`, margin:`${content.button.align}`}}
-                            onClick={() => {window.open(`${content.button.ghostLink}`)}}
-                        >
+                        // onClick={() => {window.open(`${content.button.ghostLink}`)}}
+                        <CustomGhostButton className="action-button" style={{marginLeft:'10px'}}>
                             고스트버튼
-                        </button>
+                        </CustomGhostButton>
                         </>
                 }
             </div>
@@ -155,70 +134,47 @@ function HeroSection({content,  CustomCtaButton, CustomGhostButton}) {
         )
     }
 
-    const returnTextAndButton = () => {
-        return(
-            <div className="text__container">
-                <input 
-                    className="text-input"
-                    placeholder='제목을 입력하세요'
-                    onChange={(e) => {
-                        changeText(e.currentTarget.value);
-                    }}
-                    value={content.title.text}
-                    style={{
-                        textAlign: `${content.title.align}`,
-                        fontSize: `${content.title.size}px`,
-                        color: `${content.title.color}`
-                    }}
-                />
-                <input 
-                    className="text-input"
-                    placeholder='본문을 입력하세요'
-                    onChange={(e) => {
-                        changeDesc(e.currentTarget.value);
-                    }}
-                    value={content.desc.text}
-                    style={{
-                        textAlign: `${content.desc.align}`,
-                        fontSize: `${content.desc.size}px`,
-                        color: `${content.desc.color}`
-                    }}
-                />
-                {returnButton()}
-            </div>
-        )
-    }
-
     const animationDiv = () => {
         if(!content.animation.use)
         return(
-            <>
-            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-                {returnTextAndButton()}
-                {ImageOrSlide()}
+        <>
+            <div
+                style={{display:'flex', flexDirection: 'row'}} 
+                // style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}
+                >
+                <div className="text__container" style={{paddingLeft:'30px'}}>
+                    <TitleDesc content={content} />
+                    {returnButton()}
+                </div>
+                <div className="image__container">
+                    {ImageOrSlide()}
+                </div>
             </div>
         </>
         )
         else 
         return(
             <>
-            <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}} 
-            data-aos={content.animation.type} aos-duration="2000" >
-                {returnTextAndButton()}
-                {ImageOrSlide()}
+            <motion.div
+                style={{display:'flex', flexDirection: 'row'}} 
+                data-aos={content.animation.type} aos-duration="2000" >
+                <div className="text__container" style={{paddingLeft:'30px'}}>
+                    <TitleDesc content={content} />
+                    {returnButton()}
+                </div>
+                <div className="image__container">
+                    {ImageOrSlide()}
+                </div>
             </motion.div>
             </>
         )
     }
     
     return (
-        <div style={{padding:`${content.paddingTop}% 0% ${content.paddingBottom}% 0%`}}>
-            <div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}>
-                {animationDiv()}
-            </div>
+        <div style={{ width:'100%', height:'100%'}}>
+            {animationDiv()}
         </div>
     )
 }
-
 
 export default HeroSection

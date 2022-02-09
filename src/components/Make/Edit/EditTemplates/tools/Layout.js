@@ -23,17 +23,15 @@ function Layout({content, version, foot, setFoot}) {
         switch(version){
             case 'main':
                 return(
-                    <>main
-                    </>
-                    // <RadioCustom options={layout4Options} value={setting.ghost.borderRadius} func={(e) => setSetting(produce(setting, draft => {
-                    //     draft.ghost.borderRadius = e
-                    // }))} />
+                    <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].layout = e;
+                    }))} />
                 )
             case 'detail':
                 return(
-                    <>
-                    detail
-                    </>
+                    <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].layout = e;
+                    }))} />
                 )
             case 'cta':
                 return(
@@ -43,33 +41,21 @@ function Layout({content, version, foot, setFoot}) {
                 )
             case 'apply':
                 return(
-                    <>
-                    apply
-                    </>
+                    <RadioCustom layout='on' version='cta' options={layout3Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].layout = e;
+                    }))} />
                 )
             case 'app':
                 return(
-                    <>
-                    app
-                    </>
+                    <RadioCustom layout='on' version='cta' options={layout3Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].layout = e;
+                    }))} />
                 )
-            case 'feature':
+            case 'text': 
                 return(
-                    <>
-                    feature
-                    </>
-                )
-            case 'review':
-                return(
-                    <>
-                    review
-                    </>
-                )
-            case 'gallery':
-                return(
-                    <>
-                    gallery
-                    </>
+                    <RadioCustom layout='on' version='text' options={layout3Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].layout = e;
+                    }))} />
                 )
             case 'footer':
                 return(

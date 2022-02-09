@@ -4,10 +4,15 @@ import EditDesign from './tools/EditDesign'
 import produce from 'immer';
 import ElementsTable from './tools/ElementsTable'
 import RadioCustom from '../tools/Custom/RadioCustom'
-import Layout from './tools/Layout'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 
+const layoutOptions = [
+    { label: '1', value: 1},
+    { label: '2', value: 2},
+    { label: '3', value: 3},
+    { label: '4', value: 4},
+]
 const shapeOptions = [
     { label: '사각형', value: 0 },
     { label: '라운드', value: 5 },
@@ -72,7 +77,11 @@ function EditGallerySection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
-                        <Layout content={content} version='gallery'/>
+                        <OpenCloseCustom title="레이아웃">
+                        <RadioCustom text="단 개수" options={layoutOptions} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].layout = e;
+                            }))} />
+                        </OpenCloseCustom>
                         <OpenCloseCustom title="이미지">
                             <RadioCustom text="프레임" button value={content.galleryImg.border} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].galleryImg.border = e;

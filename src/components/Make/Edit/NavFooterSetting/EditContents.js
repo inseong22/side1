@@ -6,6 +6,7 @@ import ConfirmCustom from '../../../../tools/ConfirmCustom';
 import AddingSection from '../../Modal/AddingSection';
 import {CustomSwitch2} from '../tools/Custom/OnOffCustom'
 import './EditContents.css';
+import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
 
 const BCOLOR = 'rgba(230,230,230,0)'
 
@@ -76,9 +77,13 @@ function EditContents({navi, setNavi, foot, setFoot}) {
 
     return (
         <div>
-            <div className="edit-element">
-                컨텐츠 수정
-            </div>
+            {/* <div className="back__container">
+                <div className="left-top">
+                    <span stlye={{padding:'5px'}}>
+                        콘텐츠
+                    </span>
+                </div>
+            </div> */}
             <div>
                 <div className="one-contents-draggable" style={{backgroundColor:`${BCOLOR}`}}>
                     <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
@@ -97,7 +102,6 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                         </div>
                     </div>   
                 </div>
-                <hr className="hr" />
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
                         {(provided) => 
@@ -172,11 +176,12 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                     <div className="make-section-button" onClick={() => {
                         setAddOpen(true);
                         // action.setAddingSectionAt(state.contents.length - 1);
-                    }}>
+                    }}
+                    style={{fontWeight:'700'}}
+                    >
                         + 섹션 추가하기
                     </div>
                 </div>
-                <hr className="hr" />
                 <div className="one-contents-draggable">
                     <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
                         <div className="left">

@@ -30,7 +30,7 @@ const Backdrop = styled('div')`
 `;
 
 const style = {
-  width: 700,
+  width: 800,
   height: 500,
   bgcolor: 'rgba(255,255,255,1)',
   borderRadius:2,

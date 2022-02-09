@@ -7,7 +7,7 @@ import AddContentImg from '../../tools/func/FuncContentImg'
 import AddSlideImg from '../../tools/func/FuncSlideImg'
 import AddContentVideo from '../../tools/func/FuncContentVideo'
 import AddYoutubeLink from '../../tools/func/FuncYoutubeLink'
-import EditSlider from '../../tools/Custom/SliderCustom'
+import SliderCustom from '../../tools/Custom/SliderCustom'
 import {CustomSwitch} from '../../tools/Custom/OnOffCustom'
 import { Select } from '@chakra-ui/react'
 import './Contents.css'
@@ -137,19 +137,19 @@ function Contents({content}) {
 
     const setImgSize = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].image.size = e.target.value
+            draft[state.secNum].image.size = e
         }))
     }
 
     const setSlideSize = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].image.size = e.target.value
+            draft[state.secNum].image.size = e
         }))
     }
 
     const setMockupSize = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mockup.size = e.target.value
+            draft[state.secNum].mockup.size = e
         }))
     }
 
@@ -211,14 +211,17 @@ function Contents({content}) {
                 return(
                     <>
                     <AddContentVideo text="동영상" value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
-                    <EditSlider top="크기" text="동영상" value={content.image.size} func={setImgSize} max="500"/>
+                    <div style={{marginBottom: '-20px'}} />
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
                     </>
                 )
             case 'youtube':
                 YoutubeTrue()
                 return(
                     <>
+                    <div style={{marginTop: '20px'}} />
                     <AddYoutubeLink content={content} value={content.video.link} />
+                    <div style={{marginTop: '-20px'}} />
                     <CustomSwitch text="자동 재생" value={content.video.auto} 
                         onChange={ () => action.setContents(produce(state.contents, draft => {
                             if (content.video.link.includes('autoplay=1'))
@@ -231,7 +234,8 @@ function Contents({content}) {
                     <div className="mid-command">
                         유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
                     </div>
-                    <EditSlider top="크기" text="동영상" value={content.image.size} func={setImgSize} max="500"/>
+                    <div style={{marginTop: '10px'}} />
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
                     </>
                 )
         }
@@ -264,8 +268,8 @@ function Contents({content}) {
             case 'mobile':
                 return(
                     <>
-                        <FuncContentImg text='이미지' value={content.mockup.file} func={uploadImg}/>
-                        <EditSlider top="크기" text="이미지" value={content.mockup.size} func={setMockupSize} max="500"/>
+                        <FuncContentImg text='목업' subtext="최대 10MB 업로드 가능" value={content.mockup.file} func={uploadImg}/>
+                        <SliderCustom top="크기" text="목업" value={content.mockup.size} func={setMockupSize} max="100"/>
                     </>
                 )
             case 'tablet':
@@ -337,9 +341,11 @@ function Contents({content}) {
             case 'image':
                 ImageTrue()
                 return(
-                    <div>
-                        <AddContentImg text="이미지" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
-                        <EditSlider top="크기" text="이미지" value={content.image.size} func={setImgSize} max="200"/>
+                    <div style={{width:'100%'}}>
+                        <AddContentImg text="이미지" subtext="최대 5MB 업로드 가능" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
+                        <div style={{marginTop: '-10px'}}/>
+                        <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="100"/>
+                        <div style={{marginBottom: '20px'}}/>
                         <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                         }))} />
@@ -365,7 +371,7 @@ function Contents({content}) {
                     <div className="small-command">
                         최대 5MB까지 가능합니다.
                     </div>
-                    <EditSlider top="크기" text="이미지" value={content.image.size} func={setImgSize} max="300"/>
+                    <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="300"/>
                     <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                     }))} />
@@ -383,9 +389,8 @@ function Contents({content}) {
                 VideoTrue()
                 return(
                     <>
-                    <div style={{marginTop: '40px'}}/>
+                    <div style={{marginTop: '10px'}}/>
                     <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
-                    <div style={{marginBottom: '25px'}}/>
                     {videoType()}
                     </>
                 )
@@ -393,16 +398,15 @@ function Contents({content}) {
                 MockupTrue()
                 return(
                     <>
-                    <div className="edit-element">
-                    <div className="edit-element__one" style={{flexDirection: 'column'}}>
-                    <div className="edit-element__left">디바이스</div> 
+                   
+                    <div className="edit-element">디바이스</div> 
                     <div className='mockup-select'>
                     <Select  
                     className='select_list'
                     onChange={e=>mockOption(e.target.value)}
                     bg='white'
                     borderColor='rgba(0, 0, 0, 0.08)'
-                    color='white'
+                    color='gray'
                     >
                         <option value='mobile' >모바일</option>
                         <option value='tablet'>태블릿</option>
@@ -412,8 +416,6 @@ function Contents({content}) {
                     </Select>
                     </div>
                     {returnMockup()}
-                    </div>
-                    </div>
                     </>
                 )
         }

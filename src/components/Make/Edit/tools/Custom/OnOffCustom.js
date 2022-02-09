@@ -5,8 +5,8 @@ import './OnOffCustom.css'
 
 export const CustomSwitch = ({text, value, onChange}) => {
   return(
-    <div className="switch-element">
-      <div className="switch-element__left">
+    <div className="switch-element" >
+      <div className="switch-text">
           {text}
       </div>
       <div>

@@ -72,6 +72,9 @@
     font-size:12px;
     margin-top:8px;
 }
+.radio-shape-subtext{
+    font-size:8px;
+}
 
 /* 아래는 버튼 선택 테이블 */
 
@@ -131,15 +134,10 @@
     background-color:white;
 }
 
-.slider{
-    width: 311px;
-    margin-top: 29px;
-    margin-bottom: 10px;
-}
-
 /* 아래는 콘텐트 이미지 추가 관련 css */
 .top-img-div{
     display: flex;
+    margin-left: 5px;
 }
 .put-img-div{
     width: 128px;
@@ -152,11 +150,22 @@
     background-repeat : no-repeat;
     background-size : cover;
 }
+.put-slider-img{
+    width: 118px;
+    height: 118px;
+    background: #F2F6FA;
+    border-radius: 25px;
+    box-sizing: border-box;
+    margin:10px 5px 5px 1px;
+    text-align: center;
+    background-repeat : no-repeat;
+    background-size : cover;
+}
 /*Chrome*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     input[type='range'] {
         /* overflow: hidden; */
-      width: 311px;
+      width: 290px;
       -webkit-appearance: none;
       background-color: #F2F6FA;
       border-radius: 4px;
@@ -221,8 +230,8 @@
     /* 메인 섀도우 01 */
     box-shadow: 4px 4px 15px #D0CDFF;
     border-radius: 32px;
-    width: 208px;
-    height: 37px;
+    width: 190px;
+    height: 40px;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -230,8 +239,11 @@
     text-align: center;
     margin-top: 10px;
     color: #FFFFFF;
-    padding-top: 21px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
 }
+
 .small-command{
     vertical-align: middle;
     height: 48px;
@@ -244,13 +256,25 @@
 }
 .mid-command{
     vertical-align: middle;
-    height: 55px;
+    height: 30px;
     font-size: 12px;
     line-height: 12px;
     text-align: center;
     cursor: pointer;
     margin: 0 auto;
     margin-top: 12px;
+    color: var(--main-dark-gray);
+}
+.mid-command-light{
+    vertical-align: middle;
+    height: 30px;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 12px;
+    color: var(--main-gray);
 }
 .embed-command{
     vertical-align: middle;
@@ -265,10 +289,10 @@
 .text-size__input{
     background: #F2F6FA;
     border-radius: 29px;
-    padding:15px 15px;
+    padding:11px 15px;
     margin-left:10px;
     border:none;
-    width:40px;
+    width:70px;
 }
 
 /* 애니메이션 관련 */
@@ -297,4 +321,12 @@
     text-align: center;
     background-repeat : no-repeat;
     background-size : cover;
+}
+
+.text-layout2{
+   padding-top: 40px;
+   padding-right: 20px; 
+}
+.text-layout3{
+    padding-right: 20px; 
 }

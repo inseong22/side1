@@ -6,7 +6,7 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Tooltip from '@mui/material/Tooltip';
+import { Tooltip, ChakraProvider } from '@chakra-ui/react'
 import { InformationCircle } from '@styled-icons/ionicons-outline';
 import './OpenCloseCustom.css'
 import OnOffCustom from './OnOffCustom'
@@ -86,17 +86,22 @@ const OpenCloseCustom = (props) => {
       <div className="accordion">
         <div className="accordion__header" onClick={() => setOpen(!open)}>
           <div className="edit-element">
-            <div className="title">
+            <ChakraProvider>
+            <div className="accordion__title">
               <div className="title_text">
               {props.title}
-              </div> <CustomSwitch use={props.use} onChange={props.onChange}/>
+              </div> 
+              {
+                props.use && <CustomSwitch use={props.use} onChange={props.onChange}/>
+              }
               {
                 props.tooltip && 
-                  <Tooltip placement="top" title={props.tooltip} arrow>
+                  <Tooltip hasArrow arrowSize={10} label={props.tooltip} placement='top' fontSize='13'>
                     <InformationCircle size="16" style={{color:'#C4CACF', zIndex:'20', marginLeft:'6px'}}/>
                   </Tooltip>
               }
             </div>
+            </ChakraProvider>
             <div className="centera" style={{justifyContent: 'end'}}>
               { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
             </div>
