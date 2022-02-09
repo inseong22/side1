@@ -30,7 +30,7 @@ function TitleDesc({content}) {
             }
             {
                 content.desc.use &&
-                <div style={{width:'100%'}}>
+                <div style={{width:'100%', marginTop:'10px'}}>
                     <TextareaAutosize 
                         className="text-input" 
                         value={content.desc.text} 

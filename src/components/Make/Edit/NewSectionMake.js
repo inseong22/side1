@@ -27,8 +27,31 @@ const FOOTSECNUM = 51;
 const SETTINGSECNUM = 52;
 const CONTENTSSECNUM = 53;
 
+export const MakeContext = React.createContext({
+    stateC : {usedColors : [
+        "#ffffff",
+        "#00ff00",
+        "#ff0000",
+        "#0000ff",
+        "#000000",
+    ]},
+    actionC : {setUsedColors : () => {}}
+});
+
 function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+    const [usedColors, setUsedColors] = useState([
+        "#ffffff",
+        "#00ff00",
+        "#ff0000",
+        "#0000ff",
+        "#000000",
+    ]);
+
+    const contextValue = {
+        stateC: {usedColors},
+        actionC : {setUsedColors},
+    }
 
     const sectionMakeTable = () => {
 
@@ -190,9 +213,9 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
     }
 
     return (
-        <>
+        <MakeContext.Provider value={contextValue}>
             {returnMake()}
-        </>
+        </MakeContext.Provider>
     )
 }
 

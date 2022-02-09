@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import TitleDesc from './components/TitleDesc'
 import ImageCarousel from '../Edit/tools/func/FuncImageCarousel'
+import AutosizeInput from 'react-input-autosize';
 
 import appstorebutton from '../../../tools/img/appstorebutton.png'
 import playstorebutton from '../../../tools/img/playstorebutton.png'
@@ -23,45 +24,30 @@ function HeroSection({content}) {
     const imgRef = useRef(null)
     const [imageShow, setImageShow] = useState(null);
 
-    const CustomCtaButton = () => <div className="cta-button-made" style={{
+    const CustomCtaButton = () => {return (<div className="cta-button-made" style={{
         borderRadius:`${state.setting.cta.borderRadius}px`,
         backgroundColor:`${state.setting.cta.backgroundColor}`,
         color:`${state.setting.cta.color}`,
         boxShadow:`${state.setting.cta.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
         border:`${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'}`
     }}>
-        <input className="text-input" value={content.button.ctaText} onChange={(e) => action.setContents(produce(state.contents, draft => {
+        <AutosizeInput className="text-input-flex ti" value={content.button.ctaText} onChange={(e) => action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.ctaText = e.currentTarget.value;
-        }))} style={{fontFamily:`${state.setting.font}`}}/>
-    </div>
+        }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.cta.borderRadius}px`, backgroundColor:`${state.setting.cta.backgroundColor}`,}}/>
+    </div>)}
 
-    const CustomGhostButton = () => <div className="cta-button-made" style={{
-        marginLeft:`${ content.button.ctaUse.button.cta.use ? '5px' : '0px'}`,
+    const CustomGhostButton = () => {return (<div className="cta-button-made" style={{
+        marginLeft:`${ content.button.ctaUse ? '5px' : '0px'}`,
         borderRadius:`${state.setting.ghost.borderRadius}px`,
         backgroundColor:`${state.setting.ghost.backgroundColor}`,
         color:`${state.setting.ghost.color}`,
         boxShadow:`${state.setting.ghost.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
         border:`${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'}`
     }} onClick={() => {}}>
-        <input className="text-input-flex ti" value={content.button.ghostText } onChange={(e) => action.setContents(produce(state.contents, draft => {
-            draft.button.ghostText = e.currentTarget.value;
-        }))} style={{fontFamily:`${state.setting.smallFont}`}}/>
-    </div>
-
-    // 템플릿 2 이미지의 경우에는
-    const onChangeImage = e => {
-        let newContents = JSON.parse(JSON.stringify(state.contents))
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            const {currentTarget:{result}} = finishedEvent;
-            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
-            newContents[state.secNum].image.attachment = result;
-        }
-        reader.readAsDataURL(oneFile);
-        action.setContents(newContents);
-    }
+        <AutosizeInput className="text-input-flex ti" value={content.button.ghostText } onChange={(e) => action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].button.ghostText = e.target.value;
+        }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`}}/>
+    </div>)}
 
     const ImageOrSlide = () => {
         if (content.contents.use) {
@@ -127,33 +113,51 @@ function HeroSection({content}) {
         }
     }
 
+    const returnCtaInputs = () => {
+        return(
+            <>
+                <input className="input-placeholder" />
+                <CustomCtaButton />
+            </>
+        )
+    }
+
+    const returnGhostInputs = () => {
+        return(
+            <>
+                <input className="input-placeholder" />
+                <CustomGhostButton /> 
+            </>
+        )
+    }
+
     const returnButton = () => {
-        const GoogleButton = <img src={playstorebutton} />
-        const AppleButton = <img src={appstorebutton} />
+        // ctaOption === 'link' => 버튼 클릭 시 링크 이동
+        // ctaOption === 'apply' => 신청
 
         {/* <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}> */}
         return(
-            <div className="center-column">
+            <div style={{width:'100%'}}>
                 <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
                     {
                         content.button.ctaUse && 
-                            <CustomCtaButton />
+                            ( content.button.ctaOption === 'link' ? CustomCtaButton() : returnCtaInputs() )
                     }
                     {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
                     {
                         content.button.ghostUse && 
-                            <CustomGhostButton />
+                            ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
                     }
                 </div>
                 <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
                     {
-                        content.button.appButton.google.length > 0 && 
-                            <GoogleButton />
+                        content.appButton.google.length > 0 && 
+                            <img src={playstorebutton} className="store-button" />
                     }
                     {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
                     {
-                        content.button.appButton.apple.length > 0 && 
-                            <AppleButton />
+                        content.appButton.apple.length > 0 && 
+                            <img src={appstorebutton} className="store-button" />
                     }
                 </div>
             </div>
@@ -161,31 +165,10 @@ function HeroSection({content}) {
     }
 
     const returnLayout = {
-        flexDirection:`${content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : 'column'}`,
+        flexDirection:`${content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : content.layout === 3 ? 'column' : 'column-reverse'}`,
         paddingLeft:`${content.layout === 1 ? '30px' : content.layout === 2 ? '0px' : '30px'}`,
         paddingRight:`${content.layout === 1 ? '0px' : content.layout === 2 ? '30px' : '30px'}`,
     }
-
-    // const returnLayout = () => {
-    //     switch(content.layout){
-    //         case 1:
-    //             return(
-    //                 {
-    //                     flexDirection:'row',
-    //                     paddingLeft:'30px'
-    //                 }
-    //             )
-    //         case 2:
-    //             return(
-    //                 {
-    //                     flexDirection:'row-reverse',
-    //                     paddingRight:'30px'
-    //                 }
-    //             )
-    //         default:
-    //             return({})
-    //     }
-    // }
 
     const animationDiv = () => {
         if(!content.animation.use)
@@ -194,7 +177,7 @@ function HeroSection({content}) {
             <div style={{display:'flex', ...returnLayout}}
                 // style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}
                 >
-                <div className="text__container">
+                <div className="text__container" style={{marginTop:`${content.layout === 4 ? '30px' : '0px'}`}}>
                     <TitleDesc content={content} />
                     {returnButton()}
                 </div>
@@ -210,7 +193,7 @@ function HeroSection({content}) {
                 <motion.div
                     style={{display:'flex', ...returnLayout}} 
                     data-aos={content.animation.type} aos-duration="2000" >
-                    <div className="text__container">
+                    <div className="text__container" style={{marginTop:`${content.layout === 4 ? '30px' : '0px'}`}}>
                         <TitleDesc content={content} />
                         {returnButton()}
                     </div>

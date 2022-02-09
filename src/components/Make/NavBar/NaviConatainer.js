@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import Editor from '../tools/Editor'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
+import AutosizeInput from 'react-input-autosize';
 
 function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -35,9 +36,9 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                         boxShadow:`${state.setting.cta.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
                         border:`${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'}`
                     }} onClick={() => {}}>
-                        <input className="text-input-flex ti" value={navi.button.cta.text } onChange={(e) => setNavi(produce(navi, draft => {
+                        <AutosizeInput className="text-input-flex ti" value={navi.button.cta.text } onChange={(e) => setNavi(produce(navi, draft => {
                             draft.button.cta.text = e.currentTarget.value;
-                        }))} style={{fontFamily:`${state.setting.smallFont}`}}/>
+        }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.cta.borderRadius}px`,  backgroundColor:`${state.setting.cta.backgroundColor}`}}/>
                     </div>
                 }
                 { navi.button.ghost.use && 
@@ -49,9 +50,9 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                         boxShadow:`${state.setting.ghost.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
                         border:`${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'}`
                     }} onClick={() => {}}>
-                        <input className="text-input-flex ti" value={navi.button.ghost.text } onChange={(e) => setNavi(produce(navi, draft => {
+                        <AutosizeInput className="text-input-flex ti" value={navi.button.ghost.text } onChange={(e) => setNavi(produce(navi, draft => {
                             draft.button.ghost.text = e.currentTarget.value;
-                        }))} style={{fontFamily:`${state.setting.smallFont}`}}/>
+        }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`}}/>
                     </div>
                 }
             </div>

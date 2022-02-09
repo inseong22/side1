@@ -80,12 +80,12 @@
   --main-light-gray-02:#F2F6FA;
 
   --section-top: 22px;
-  --section-main: 20px;
-  --func-title: 18px;
-  --func-subtitle: 16px;
+  --section-main: 16px;
+  --func-title: 15px;
+  --func-subtitle: 14px;
   --small-text: 12px;
 
-  --button-font-size : 14px;
+  --button-font-size : 13px;
   --made-button-padding: 8px 8.5px;
 }
 
@@ -224,6 +224,7 @@
 .text-input-flex{
   border:1px solid rgba(200,200,200,0);
   background-color:rgba(0,0,0,0);
+  padding:var(--made-button-padding);
 
   font-size:var(--button-font-size);
 }

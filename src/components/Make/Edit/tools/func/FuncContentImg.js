@@ -37,7 +37,9 @@ function FuncContentImg({text, value, func, removeFunc, subtext}) {
             onChange={e => func(e)}
             id='attach'
             >
-                {text} 업로드
+                {
+                    value ? `${text} 수정` : `${text} 업로드`
+                }
             </div>
         <div className="small-command">
         {subtext}

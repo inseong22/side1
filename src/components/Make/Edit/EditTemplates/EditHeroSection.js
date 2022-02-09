@@ -173,7 +173,6 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     <ElementsTable elements={elements} />
-                    <RadioCustom options={layoutOptions} value={content.layout} func={e => changeLayoutOption(e)} />
                     <Layout content={content} version='main' />
                     <Contents content={content} />
                     <OpenCloseCustom title="버튼">

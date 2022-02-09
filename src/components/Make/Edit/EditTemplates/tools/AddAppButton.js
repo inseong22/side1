@@ -11,17 +11,17 @@ function AddAppButton({content}) {
         <OpenCloseCustom title="앱 다운로드 버튼">
             <div className="edit-element">
                 <div className="edit-element__one" style={{flexDirection: 'column'}}>
-                    <div className="edit-element__left">Apple App Store</div> 
-                    <InputCustom placeholder="링크를 입력해주세요." value={content.appButton.apple} func = {(e) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].appButton.apple = e
+                    <div className="edit-element__left">Google Play Store</div> 
+                    <InputCustom placeholder="링크를 입력해주세요." value={content.appButton.google} func = {(e) => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].appButton.google = e
                     }))} />
                 </div>
             </div>
             <div className="edit-element">
                 <div className="edit-element__one" style={{flexDirection: 'column'}}>
-                    <div className="edit-element__left">Google Play Store</div> 
-                    <InputCustom placeholder="링크를 입력해주세요." value={content.appButton.google} func = {(e) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].appButton.google = e
+                    <div className="edit-element__left">Apple App Store</div> 
+                    <InputCustom placeholder="링크를 입력해주세요." value={content.appButton.apple} func = {(e) => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].appButton.apple = e
                     }))} />
                 </div>
             </div>

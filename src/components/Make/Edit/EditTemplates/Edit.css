@@ -113,8 +113,15 @@
     padding:7px 0px;
 }
 
-
 .custom-button{
+    display: flex;
+    align-items : center;
+    justify-content : center;
+    padding:15px 25px;
+    cursor:pointer;
+    font-size:var(--button-font-size);
+}
+/* .custom-button{
     font-family: Sandoll GothicNeo1;
     font-style: normal;
     font-weight: normal;
@@ -128,7 +135,7 @@
     border-radius: 35px;
     font-size: 18px;
     color: var(--main-dark-gray);
-}
+} */
 
 .custom-button:hover{
     color: var(--main-color);

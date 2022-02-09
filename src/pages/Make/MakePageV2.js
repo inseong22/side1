@@ -24,6 +24,7 @@ import ReactGa from 'react-ga'
 import lodash from 'lodash'
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import { isMobile } from 'react-device-detect';
+import {ChakraProvider} from '@chakra-ui/react'
 
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
@@ -43,7 +44,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
     const [secNum, setSecNum] = useState(0); // 현재 수정중인 페이지를 의미.
     const [loading, setLoading] = useState(false);
-    const [open, setOpen] = useState(true); // 첫 질문을 위한 Open
+    const [open, setOpen] = useState(false); // 첫 질문을 위한 Open
 
     const [isPhone, setIsPhone] = useState(true);
     const [full, setFull] = useState(false);
