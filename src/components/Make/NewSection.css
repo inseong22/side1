@@ -67,3 +67,11 @@
     position:relative;
     overflow:visible;
 }
+
+.cta-button-made{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    padding:var(--made-button-padding);
+    cursor:pointer,
+}

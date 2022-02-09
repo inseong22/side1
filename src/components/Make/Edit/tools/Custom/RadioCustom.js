@@ -156,8 +156,8 @@ export function EditRadioLayout({options, value, onChange, version}){
 }
 
 export function EditRadioButtom({options, value, onChange}) {
-    const ROUNDBORDER = 5;
-    const CIRCLEBORDER = 15;
+    const ROUNDBORDER = 3;
+    const CIRCLEBORDER = 100;
 
     return (
         <div className="radio-container">

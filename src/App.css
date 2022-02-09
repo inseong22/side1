@@ -84,8 +84,10 @@
   --func-title: 18px;
   --func-subtitle: 16px;
   --small-text: 12px;
-}
 
+  --button-font-size : 14px;
+  --made-button-padding: 8px 8.5px;
+}
 
 .App {
   text-align: center;
@@ -210,6 +212,24 @@
 .text-input:focus {
   outline:1px solid #d50000;
 }
+
+.ti:hover{
+  border:1px solid rgba(200,200,200,0.7);
+}
+
+.ti:focus {
+  outline:1px solid #d50000;
+}
+
+.text-input-flex{
+  border:1px solid rgba(200,200,200,0);
+  background-color:rgba(0,0,0,0);
+
+  font-size:var(--button-font-size);
+}
+
+
+
 
 @font-face {
   font-family: 'ImcreSoojin';

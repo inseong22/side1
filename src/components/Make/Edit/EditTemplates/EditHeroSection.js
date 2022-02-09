@@ -19,12 +19,22 @@ const alignOptions = [
     {label:'왼쪽', value: '0'},
     {label:'중앙', value: '0 auto'}
 ]
+
+const buttonAlignOptions = [
+    {label:'왼쪽', value: 'start'},
+    {label:'중앙', value: 'center'}
+]
+
 const buttonOptions = [
     {label: '링크 연결', value: 'link'},
     {label: '신청', value: 'apply'},
 ]
 
-
+const layoutOptions = [
+    {label: '1', value: 1},
+    {label: '2', value: 2},
+    {label: '3', value: 3},
+]
 
 function EditHeroSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -73,6 +83,18 @@ function EditHeroSection({content, category}) {
                 draft[state.secNum].button.align = '0 auto'
             else
                 draft[state.secNum].button.align = '0'
+        }))
+    }
+
+    const changeButtonAlignOption = e => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].button.align = e
+        }))
+    }
+
+    const changeLayoutOption = e => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].layout = e
         }))
     }
 
@@ -151,10 +173,11 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     <ElementsTable elements={elements} />
+                    <RadioCustom options={layoutOptions} value={content.layout} func={e => changeLayoutOption(e)} />
                     <Layout content={content} version='main' />
                     <Contents content={content} />
                     <OpenCloseCustom title="버튼">
-                        <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
+                        <RadioCustom options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
                         <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange={e => ctaOpen(e)}/>
                         { content.button.ctaUse && (
                             <>

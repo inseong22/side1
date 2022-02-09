@@ -17,6 +17,7 @@ import './NewSection.css'
 import { MyContext } from '../../pages/Make/MakePageV2'
 import { motion } from 'framer-motion'
 import {Delete, Options} from '@styled-icons/fluentui-system-filled'
+import produce from 'immer'
 
 import styled from "styled-components";
 
@@ -44,7 +45,6 @@ function NewSection({content, index, contents, setContents}) {
     const [isHover, setIsHover] = useState('none');
     const {state, action} = useContext(MyContext)
 
-
     const setThisSection = () => {
         action.setSecNum(index);
         if(index !== state.secNum){
@@ -61,7 +61,7 @@ function NewSection({content, index, contents, setContents}) {
 
             case 'HeroSection':
                 return (
-                    <HeroSection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton}/>
+                    <HeroSection content={content} />
                 )
 
             case 'ReviewSection':

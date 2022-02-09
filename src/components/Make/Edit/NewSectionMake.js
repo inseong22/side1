@@ -114,14 +114,14 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             return(
                 <>
                     <div className="back__container">
-                            <div className="section-top" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                <div className="back-button">
-                                    <ChevronLeft size={23} />
-                                </div>
-                                <div className="back-text">
-                                    내비게이션 바
-                                </div>
-                            </div>
+                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                            <span className="back-button">
+                                <ChevronLeft size={16} />
+                            </span>
+                            <span className="back-text">
+                                내비게이션 바
+                            </span>
+                        </div>
                     </div>
                     <EditTopBar category={state.category} setCategory={action.setCategory} />
                     <EditNaviSection navi={navi} setNavi={setNavi} category={state.category}/>
@@ -132,14 +132,14 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             return(
                 <>
                     <div className="back__container">
-                    <div className="section-top" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                <div className="back-button">
-                                    <ChevronLeft size={23} />
-                                </div>
-                                <div className="back-text">
-                                    푸터 바
-                                </div>
-                            </div>
+                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                            <span className="back-button">
+                                <ChevronLeft size={16} />
+                            </span>
+                            <span className="back-text">
+                                푸터 바
+                            </span>
+                        </div>
                     </div>
                     <EditTopBar category={state.category} setCategory={action.setCategory} />
                     <EditFooterSection foot={foot} setFoot={setFoot} category={state.category}/>
@@ -148,6 +148,16 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
         }else if(state.secNum === SETTINGSECNUM ){
             return(
                 <>
+                    <div className="back__container">
+                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                            <span className="back-button">
+                                <ChevronLeft size={16} />
+                            </span>
+                            <span className="back-text">
+                                기본설정
+                            </span>
+                        </div>
+                    </div>
                     <EditTopBar category={state.category} setCategory={action.setCategory} />
                     <EditSetting setting={setting} setSetting={setSetting} category={state.category}/>
                 </>
@@ -162,14 +172,14 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                 {content && 
                 <>
                     <div className="back__container">
-                    <div className="section-top" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                <div className="back-button">
-                                    <ChevronLeft size={23} />
-                                </div>
-                                <div className="back-text">
-                                    {content.name}
-                                </div>
-                            </div>
+                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                            <span className="back-button">
+                                <ChevronLeft size={16} />
+                            </span>
+                            <span className="back-text">
+                                {content.name}
+                            </span>
+                        </div>
                     </div>
                     <EditTopBar category={state.category} setCategory={action.setCategory} />
                     {sectionMakeTable()}

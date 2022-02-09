@@ -19,14 +19,13 @@ const logoOptions = [
 ]
 
 const logoAlignOptions = [
-    { label: '왼쪽', value: 'left' },
+    { label: '왼쪽', value: 'start' },
     { label: '중앙', value: 'center' },
 ]
 
-const buttonOptions = [
-    { label: '링크', value: 'link' },
-    { label: '스크롤', value: 'scroll' },
-    { label: '팝업', value: 'popup' },
+const buttonAlignOptions = [
+    { label: '중앙', value: 'center' },
+    { label: '오른쪽', value: 'end' },
 ]
 
 function EditNaviSection({navi, setNavi, category}) {
@@ -45,9 +44,9 @@ function EditNaviSection({navi, setNavi, category}) {
         },
         {
             title:'로고',
-            use:navi.logoUse,
+            use:navi.logo.use,
             func:() => setNavi(produce(navi, draft => {
-                draft.logoUse = !navi.logoUse;
+                draft.logo.use = !navi.logo.use;
             }))
         },
         {
@@ -68,7 +67,7 @@ function EditNaviSection({navi, setNavi, category}) {
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
             setNavi(produce(navi, draft=>{
-                draft.logoImage.attachment = result;             
+                draft.logo.image.attachment = result;             
             }))
         }
         if(oneFile){
@@ -78,7 +77,7 @@ function EditNaviSection({navi, setNavi, category}) {
     // 이미지 삭제
     const RemoveImage = () => {
         setNavi(produce(navi, draft=>{
-            draft.logoImage.attachment = '';
+            draft.logo.image.attachment = '';
         }))
     }
 
@@ -89,37 +88,37 @@ function EditNaviSection({navi, setNavi, category}) {
                 <div>
                     <ElementsTable elements={elements} />
                     <OpenCloseCustom title="로고">
-                        <OnOffCustom value={navi.logoUse} func={(e) => setNavi(produce(navi, draft => {
-                            draft.logoUse = !navi.logoUse;
+                        <OnOffCustom value={navi.logo.use} func={(e) => setNavi(produce(navi, draft => {
+                            draft.logo.use = !navi.logo.use;
                         }))} text="로고" />
-                        <RadioCustom options={logoAlignOptions} value={navi.logoAlign} func={(e) => setNavi(produce(navi, draft => {
-                            draft.logoAlign = e;
+                        <RadioCustom options={logoAlignOptions} value={navi.logo.align} func={(e) => setNavi(produce(navi, draft => {
+                            draft.logo.align = e;
                         }))} text="정렬" />
 
-                        <OnOffCustom value={navi.logoImage.use} func={(e) => setNavi(produce(navi, draft => {
-                            draft.logoImage.use = !navi.logoImage.use;
+                        <OnOffCustom value={navi.logo.image.use} func={(e) => setNavi(produce(navi, draft => {
+                            draft.logo.image.use = !navi.logo.image.use;
                         }))} text="로고 (Image)" />
                         {
-                            navi.logoImage.use && 
+                            navi.logo.image.use && 
                             <>
-                                <AddContentImg text="로고" value={navi.logoImage.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
+                                <AddContentImg text="로고" value={navi.logo.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                                 <div style={{marginTop: '-20px'}}/>
-                                <SliderCustom text="Image 사이즈" subtext="이미지의 세로 길이를 조절해주세요." func={e => setNavi(produce(navi, draft => {
-                                    draft.logoImage.width = e;
+                                <SliderCustom text="로고 사이즈" subtext="이미지의 세로 길이를 조절해주세요." func={e => setNavi(produce(navi, draft => {
+                                    draft.logo.image.width = e;
                                 }))} />
                                 <div style={{marginBottom: '20px'}}/>
                             </>
                         }
-                        <OnOffCustom value={navi.logoText.use} func={(e) => setNavi(produce(navi, draft => {
-                            draft.logoText.use = !navi.logoText.use;
+                        <OnOffCustom value={navi.logo.text.use} func={(e) => setNavi(produce(navi, draft => {
+                            draft.logo.text.use = !navi.logo.text.use;
                         }))} text="서비스/제품명 (Text)" />
                         {
-                            navi.logoText.use && <>
-                                <ColorCustom text="Text 색상" value={navi.logoText.color} func={e =>  setNavi(produce(navi, draft => {
-                                    draft.logoText.color = e;
+                            navi.logo.text.use && <>
+                                <ColorCustom text="Text 색상" value={navi.logo.text.color} func={e =>  setNavi(produce(navi, draft => {
+                                    draft.logo.text.color = e;
                                 }))} />
-                                <TextSizeCustom text="Text 크기" value={navi.logoText.fontSize} func={e =>  setNavi(produce(navi, draft => {
-                                    draft.logoText.fontSize = e;
+                                <TextSizeCustom text="Text 크기" desc value={navi.logo.text.fontSize} func={e =>  setNavi(produce(navi, draft => {
+                                    draft.logo.text.fontSize = e;
                                 }))} />
                             </>
                         }
@@ -130,7 +129,7 @@ function EditNaviSection({navi, setNavi, category}) {
                             draft.button.use = !navi.button.use
                         }))} />
 
-                        <RadioCustom options={logoAlignOptions} value={navi.button.align} func={(e) => setNavi(produce(navi, draft => {
+                        <RadioCustom options={buttonAlignOptions} value={navi.button.align} func={(e) => setNavi(produce(navi, draft => {
                             draft.button.align = e;
                         }))} text="정렬" />
                         

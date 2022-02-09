@@ -1,19 +1,56 @@
 import React, {useContext, useState} from 'react'
 import { MyContext } from '../../../pages/Make/MakePageV2'
-import NaviTemplate from './NaviTemplate'
+import NaviConatainer from './NaviConatainer'
 import {Delete, Options} from '@styled-icons/fluentui-system-filled'
 import { motion } from 'framer-motion'
+import produce from 'immer'
 import './MakeNavigation.css'
 
 function MakeNavigationV2({full, navi, setNavi, history}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [isHover, setIsHover] = useState('none');
 
+    const CustomCtaButton = ({value, onClick, style}) => {
+        return(
+            <div style={{
+                ...style,
+                display: 'flex', justifyContent:'center', alignItems: 'center',
+                padding:'10px 10.5px',
+                borderRadius:`${state.setting.cta.borderRadius}px`,
+                backgroundColor:`${state.setting.cta.backgroundColor}`,
+                color:`${state.setting.cta.color}`,
+                boxShadow:`${state.setting.cta.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
+                border:`${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'}`
+            }} onClick={() => onClick}>
+                <input className="text-input-flex ti" value={navi.button.cta.text } onChange={(e) => setNavi(produce(navi, draft => {
+                    draft.button.cta.text = e.currentTarget.value;
+                }))} style={{fontFamily:`${state.setting.smallFont}`}}/>
+            </div>
+        )
+    }
+
+    const CustomGhostButton = (props) => {
+        return(
+            <div style={{
+                ...props.style,
+                display: 'flex', justifyContent:'center', alignItems: 'center',
+                padding:'10px 10.5px',
+                borderRadius:`${state.setting.ghost.borderRadius}px`,
+                backgroundColor:`${state.setting.ghost.backgroundColor}`,
+                color:`${state.setting.ghost.color}`,
+                boxShadow:`${state.setting.cta.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
+                border:`${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'}`
+            }} onClick={() => props.onClick}>
+                {props.child}
+            </div>
+        )
+    }
+
     return (
         <>
         <div className="make-navigation" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
-            <div className="make-nav-container" style={{borderBottom:`${navi.bottomBorder ? '1px solid rgba(150,150,150,0.3)' : '1px solid rgba(150,150,150,0)'}`, backgroundColor:`${navi.backgroundColor}`, height:`${navi.height}px`}} onClick={() => action.setSecNum(50)}>
-                <NaviTemplate navi={navi} setNavi={setNavi}/>
+            <div className="make-nav-container" style={{borderBottom:`${navi.bottomBorder.use ? `1px solid ${navi.bottomBorder.color}` : ''}`, backgroundColor:`${navi.backgroundColor}`, height:`${navi.height}px`}} onClick={() => action.setSecNum(50)}>
+                <NaviConatainer navi={navi} setNavi={setNavi} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton} />
             </div>
             <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
             </div>

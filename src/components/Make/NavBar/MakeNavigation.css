@@ -43,13 +43,30 @@
 }
 
 .make-nav-logoc{
+    display: flex;
     justify-content:start;
-    padding-left:10%;
+    align-items : center;
+    flex-direction: row;
+    width:100%;
+    padding-left:30px;
+    position:absolute;
+}
+
+.make-nav-logo-image{
+    display: flex;
+    justify-content:start;
+    align-items : center;
+    padding-left:6px;
 }
 
 .make-nav-buttonc{
+    display:flex;
+    align-items : center;
+    flex-direction: row;
     justify-content:end;
-    padding-right:10%;
+    padding-right:30px;
+    width:100%;
+    position:absolute;
 }
 
 .b-one{
