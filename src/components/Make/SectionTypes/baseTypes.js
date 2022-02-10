@@ -53,7 +53,6 @@ const contents = {
         border:0,
         size:200,
         slide:false,
-        
     },
     slide_img:{
         slide1: '',
