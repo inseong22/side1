@@ -117,7 +117,7 @@ function HeroSection({content}) {
         return(
             <>
                 <input className="input-placeholder" />
-                <CustomCtaButton />
+                {CustomCtaButton()}
             </>
         )
     }
@@ -126,7 +126,7 @@ function HeroSection({content}) {
         return(
             <>
                 <input className="input-placeholder" />
-                <CustomGhostButton /> 
+                {CustomGhostButton()}
             </>
         )
     }
@@ -166,8 +166,8 @@ function HeroSection({content}) {
 
     const returnLayout = {
         flexDirection:`${content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : content.layout === 3 ? 'column' : 'column-reverse'}`,
-        paddingLeft:`${content.layout === 1 ? '30px' : content.layout === 2 ? '0px' : '30px'}`,
-        paddingRight:`${content.layout === 1 ? '0px' : content.layout === 2 ? '30px' : '30px'}`,
+        // paddingLeft:`${content.layout === 1 ? '30px' : content.layout === 2 ? '0px' : '30px'}`,
+        // paddingRight:`${content.layout === 1 ? '0px' : content.layout === 2 ? '30px' : '30px'}`,
     }
 
     const animationDiv = () => {
