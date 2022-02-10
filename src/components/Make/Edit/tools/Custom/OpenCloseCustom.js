@@ -107,7 +107,7 @@ const OpenCloseCustom = (props) => {
             </div>
           </div>
           { props.preseen && 
-            <div className="edit-element">
+            <div>
               {props.preseen}
             </div> }
         </div>

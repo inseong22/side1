@@ -140,7 +140,7 @@ const NavBarInMakePage = (props) => {
                                     <Phone size="25" />
                                 </div>
                             </span>
-                            <span className={props.full ? "device-button clicked" : "device-button" } onClick={e => {props.setFull(!props.full); handleClick()}}>
+                            <span className={props.full ? "device-button clicked" : "device-button" } onClick={e => {props.setFull(true); handleClick()}}>
                                 <div className="left">
                                     전체화면
                                 </div>

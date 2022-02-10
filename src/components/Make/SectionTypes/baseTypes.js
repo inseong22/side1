@@ -33,11 +33,6 @@ const commons = {
         use:true,
         type:'none',
     },
-    appButton:{
-        use: true,
-        apple: '',
-        google: ''
-    },
     image:{
         oneImg:true,
         type:'image',
@@ -100,15 +95,14 @@ export const base = [
         paddingLeft:'',
         paddingRight:'',
         paddingCustom: false,
+        layout:1,
         image:{
             oneImg:true,
             type:'image',
             attachment:'',
-            width:70,
             border:0,
             size:70,
-            slide:false,
-            
+            slide:false,            
         },
         slide_img:{
             slide1: '',
@@ -134,29 +128,25 @@ export const base = [
             use : true,
             ctaText:'CTA 버튼',
             ghostText:'고스트 버튼',
-            backgroundColor:'#ffffff',
-            buttonTemplate:1,
-            func:1,
-            link:"https://surfee.co.kr",
-            first:true,
-            second:false,
-            align:'0',
+            align:'start',
             ctaUse:true,
             ctaOption: 'link',
             ghostOption: 'link',
             ctaLink:'',
             ctaApply: '',
             ghostUseOrLink: true, 
+            ghostUse:false,
             ghostLink:'',
             ghostApply: '',
-            ghostUse:false,
         },
         contents:{
             use:true,
         },
         appButton:{
-            use:true,
-        }
+            use: true,
+            apple: '',
+            google: ''
+        },
     },
     {
         ...commons,
@@ -177,6 +167,11 @@ export const base = [
             shadow: true,
             shadowValue: "2px 4px 20px #E8F0F9"
         },
+        appButton:{
+            use: true,
+            apple: '',
+            google: ''
+        },
     },
     {
         ...commons,
@@ -194,6 +189,11 @@ export const base = [
             use:true,
         },
         inputs:[],
+        appButton:{
+            use: true,
+            apple: '',
+            google: ''
+        },
     },
     {
         ...commons,
@@ -290,7 +290,7 @@ export const base = [
             },
             {
                 title:'2의 타이틀',
-                desc:'기술과 전자제품을 개발하는 회사답게 신뢰감가고 정돈된 모습을 보여주고자 했어요. 배경과 폰트 등 톤앤매너를 디테일한 부분가지 클릭 한번으로 원하는 디자인을 구현할 수 있어 좋았던 것 같아요.',
+                desc:'기술과 전자제품을 개발하는 회사답게 신뢰감가고 정돈된 모습을 보여주고자 했어요. 배경과 폰트 등 톤앤매너를 디테일한 부분까지 클릭 한번으로 원하는 디자인을 구현할 수 있어 좋았던 것 같아요.',
                 rating:5,
                 writer:'duit, 아혜진 브랜드 매니저 인터뷰',
             },
@@ -375,21 +375,23 @@ export const defaults = {
     navi:{
         sectionTypeName:'상단 바',
         sectionTemplateNumber:1,
-        height:60,
+        height:80,
         use:true,
         title:'Surfee',
-        logoUse:true,
-        logoAlign:'left',
-        logoImage:{
-            use:false,
-            attachment:'',
-            width:20,
-        },
-        logoText:{
-            use:false,
-            text:'',
-            fontSize:12,
-            color:'#000000'
+        logo:{
+            use:true,
+            align:'start',
+            image:{
+                use:false,
+                attachment:'',
+                width:60,
+            },
+            text:{
+                use:false,
+                text:'',
+                fontSize:12,
+                color:'#000000'
+            },
         },
         fixed:false,
         backgroundColor:'#ffffff', 
@@ -399,13 +401,15 @@ export const defaults = {
         },
         button:{
             use:true,
-            align:'left',
+            align:'end',
             cta:{
                 use:true,
+                text:'CTA버튼',
                 link:''
             },
             ghost:{
                 use:true,
+                text:'고스트 버튼',
                 link:''
             },
         },

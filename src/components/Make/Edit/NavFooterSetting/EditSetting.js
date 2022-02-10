@@ -278,7 +278,7 @@ function EdtiSetting({setting, setSetting, category}) {
                         <OpenCloseCustom title="CTA 버튼" preseen={
                             <div className="edit-element">
                                 <div className="centera" style={{padding:'5px 10px'}}>
-                                    <div className="custom-button" >
+                                    <div className="custom-button" style={{ color:`${setting.cta.color}`, border:`${setting.cta.border ? `1px solid ${setting.cta.borderColor}` : 'none'}`, boxShadow:`${setting.cta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'}`, borderRadius:`${setting.cta.borderRadius}px`, backgroundColor:`${setting.cta.backgroundColor}`}}>
                                         디자인 미리보기
                                     </div>
                                 </div>
@@ -314,7 +314,7 @@ function EdtiSetting({setting, setSetting, category}) {
                         <OpenCloseCustom title="고스트 버튼" preseen={
                             <div className="edit-element">
                                 <div className="centera" style={{padding:'5px 10px'}}>
-                                    <div className="custom-button">
+                                    <div className="custom-button" style={{ color:`${setting.ghost.color}`, border:`${setting.ghost.border ? `1px solid ${setting.borderColor}` : 'none'}`, boxShadow:`${setting.ghost.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'}`, borderRadius:`${setting.ghost.borderRadius}px`, backgroundColor:`${setting.ghost.backgroundColor}`}}>
                                         디자인 미리보기
                                     </div>
                                 </div>

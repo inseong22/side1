@@ -77,14 +77,14 @@ function EditContents({navi, setNavi, foot, setFoot}) {
 
     return (
         <div>
-            {/* <div className="back__container">
+            <div className="back__container">
                 <div className="left-top">
                     <span stlye={{padding:'5px'}}>
-                        콘텐츠
+                        컨텐츠
                     </span>
                 </div>
-            </div> */}
-            <div>
+            </div>
+            <div style={{width:'100%', display: 'flex', justifyContent:'center', alignItems: 'center', flexDirection:'column'}}>
                 <div className="one-contents-draggable" style={{backgroundColor:`${BCOLOR}`}}>
                     <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
                         <div className="left">
@@ -106,7 +106,7 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                     <Droppable droppableId="sectionsss">
                         {(provided) => 
                             (
-                            <div className="sectionsss" {...provided.droppableProps} ref={provided.innerRef}>
+                            <div className="sectionsss" {...provided.droppableProps} ref={provided.innerRef} style={{width:'100%', display: 'flex', justifyContent:'center', alignItems: 'center', flexDirection:'column', marginTop:'14px'}}>
                                 {state.contents.map((item, index) => {
                                     return(
                                         <Draggable draggableId={String(index)} key={index} index={index} style={{width:'100%'}}>

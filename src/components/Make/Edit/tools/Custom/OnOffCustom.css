@@ -1,6 +1,6 @@
 .custom-switch{
-    width: 64px;
-    height:34px;
+    width: 59px;
+    height:29px;
     background:var(--main-gradient);
     border-radius: 25px;
     position: relative;
@@ -9,8 +9,8 @@
 
 .custom-switch-thumb{
     background-color:white;
-    width:30px;
-    height: 30px;
+    width:25px;
+    height: 25px;
     box-shadow: var(--main-shadow-02);
     border-radius: 100px;
     left:2px;

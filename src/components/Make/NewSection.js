@@ -17,6 +17,7 @@ import './NewSection.css'
 import { MyContext } from '../../pages/Make/MakePageV2'
 import { motion } from 'framer-motion'
 import {Delete, Options} from '@styled-icons/fluentui-system-filled'
+import produce from 'immer'
 
 import styled from "styled-components";
 
@@ -40,10 +41,9 @@ const CustomGhostButton = styled.button`
 // box-shadow:${state.setting.cta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
 // border:${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'};
 
-function NewSection({content, index, contents, setContents}) {
+function NewSection({content, index, contents, setContents, full}) {
     const [isHover, setIsHover] = useState('none');
     const {state, action} = useContext(MyContext)
-
 
     const setThisSection = () => {
         action.setSecNum(index);
@@ -61,7 +61,7 @@ function NewSection({content, index, contents, setContents}) {
 
             case 'HeroSection':
                 return (
-                    <HeroSection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton}/>
+                    <HeroSection content={content} />
                 )
 
             case 'ReviewSection':
@@ -131,11 +131,11 @@ function NewSection({content, index, contents, setContents}) {
             <div className="section__container" 
                 // style={{backgroundImage:`url(${content.backgroundImage.attachment})`}} 
                     onClick={() => setThisSection()}>
-                    {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                 <div style={{backgroundColor:`${content.backgroundColor}`, opacity:`${content.backgroundOpacity}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
                 </div>
                 <div className="section__container-inner"
-                    style={{padding:`${content.padding.top}vh 0px ${content.padding.bottom}vh 0px`}} >
+                    style={{padding:`${content.padding.top}vh 30px ${content.padding.bottom}vh 30px`}} >
+                    {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                     {returnType()}
                 </div>
             </div>

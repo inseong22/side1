@@ -5,9 +5,6 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import './DetailSection.css'
 import TitleDesc from './components/TitleDesc'
 
-import appstorebutton from '../../../tools/img/appstorebutton.png'
-import playstorebutton from '../../../tools/img/playstorebutton.png'
-
 import Popover from '@mui/material/Popover';
 import {ImageAdd} from '@styled-icons/boxicons-regular';
 import surfee1 from '../../../tools/img/surfee1.png'

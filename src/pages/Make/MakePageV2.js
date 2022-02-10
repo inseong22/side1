@@ -24,6 +24,7 @@ import ReactGa from 'react-ga'
 import lodash from 'lodash'
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import { isMobile } from 'react-device-detect';
+import {ChakraProvider} from '@chakra-ui/react'
 
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
@@ -79,7 +80,6 @@ const MakePageV2 = ({history, userObj}, props) => {
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/making/${userObj.email}`);
-        console.log("ㅁㅁ")
         function repeat(){
             // localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
         }
@@ -204,7 +204,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     const sectionsReturn = contents.map((item, index) => {
         return(
             <div style={{width:'100%'}}>
-                <NewSection content={item} key={index} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} />
+                <NewSection content={item} key={index} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} full={full} />
             </div>
         )
     })
@@ -241,18 +241,21 @@ const MakePageV2 = ({history, userObj}, props) => {
             />
             <div className="make-page-container">
                 {/* 아래는 제작하는 곳 */}
-                <div style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
-                    <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
-                        <OverflowScrolling className='overflow-scrolling'>
-                            {/* 제작페이지 메인 */}
-                           <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
-                        </OverflowScrolling>
+                {
+                    !full && 
+                    <div style={{display:'flex', justifyContent:'center', alignItems: 'center', width:'28vw'}}>
+                        <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
+                            <OverflowScrolling className='overflow-scrolling'>
+                                {/* 제작페이지 메인 */}
+                               <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
+                            </OverflowScrolling>
+                        </div>
+                        <div className="fake-make">
+                        </div>
                     </div>
-                    <div className="fake-make">
-                    </div>
-                </div>
+                }
                 {/* 아래는 미리보기 화면 */}
-                <div className="make-left-landing" onClick={e => backgroundClick(e)}>
+                <div className="make-left-landing" onClick={e => backgroundClick(e)} style={{width:`${full ? '100vw' : '72vw'}`}}>
                     <div className="scroll-container" 
                         style={{ width:`${full ? '100%' :'95%'}`}}
                         animate={

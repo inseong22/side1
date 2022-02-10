@@ -67,3 +67,10 @@
     position:relative;
     overflow:visible;
 }
+
+.cta-button-made{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    cursor:pointer,
+}

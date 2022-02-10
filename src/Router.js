@@ -12,6 +12,7 @@ import ResponsePage from './pages/Response/ResponsePage';
 import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/utils/SubmitPage';
 import CustomerPage from './pages/Customer/CustomerPage'
+import MiracleMorning from './pages/UserLanding/MiracleMorning'
 import FQ from './pages/Questions/FQ'
 import { useRecoilState } from 'recoil'
 import {
@@ -83,6 +84,9 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                     </Route>
                     <Route path="/register">
                         <RegisterPage history={history}/>
+                    </Route>
+                    <Route path="/miracle">
+                        <MiracleMorning history={history}/>
                     </Route>
                 </Switch>
                 </div>
