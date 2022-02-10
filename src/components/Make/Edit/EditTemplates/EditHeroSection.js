@@ -129,7 +129,7 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     {
-                        content.ctaApplyInputs.length > 1 ?  
+                        content.ctaApplyInputs.length >= 1 ?  
                         <ApplyInputCustom disabled /> 
                         :
                         <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {

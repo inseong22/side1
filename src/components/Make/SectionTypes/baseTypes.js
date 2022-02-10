@@ -283,6 +283,7 @@ export const base = [
         },
         reviewText:{
             use:true,
+            color: '#000000',
         },
         reviews:[
             {

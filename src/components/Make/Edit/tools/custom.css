@@ -294,12 +294,14 @@
     margin-top: 60px;
 }
 .text-size__input{
-    background: #F2F6FA;
+    background: var(--main-light-gray-02);
     border-radius: 29px;
     padding:11px 15px;
     margin-left:10px;
     border:none;
+    color: var(--main-dark-gray);
     width:70px;
+    font-weight: 600;
 }
 
 /* 애니메이션 관련 */
