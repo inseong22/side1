@@ -21,7 +21,8 @@
     justify-content: center;
     color:white;
     border-radius: 30px;
-    font-size: 14px;
+    font-size: var(--button-font-size);
+    font-weight: 700;
     margin:8px;
     flex-direction: column;
     border-color:white;
@@ -69,7 +70,8 @@
 }
 
 .radio-shape-text{
-    font-size:12px;
+    font-size:var(--small-text);
+    font-weight: 700;
     margin-top:8px;
 }
 .radio-shape-subtext{
@@ -234,7 +236,8 @@
     height: 40px;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
+    font-size: var(--button-font-size);
+    font-weight: 700;
     line-height: 16px;
     text-align: center;
     margin-top: 10px;
@@ -253,11 +256,13 @@
     cursor: pointer;
     margin: 0 auto;
     margin-top: 12px;
+    font-weight: 600;
 }
 .mid-command{
     vertical-align: middle;
     height: 30px;
-    font-size: 12px;
+    font-size: var(--small-text);
+    font-weight: 700;
     line-height: 12px;
     text-align: center;
     cursor: pointer;
@@ -268,7 +273,8 @@
 .mid-command-light{
     vertical-align: middle;
     height: 30px;
-    font-size: 12px;
+    font-size: var(--small-text);
+    font-weight: 700;
     line-height: 12px;
     text-align: center;
     cursor: pointer;
@@ -277,6 +283,7 @@
     color: var(--main-gray);
 }
 .embed-command{
+    font-weight: 600;
     vertical-align: middle;
     height: 48px;
     font-size: 10px;

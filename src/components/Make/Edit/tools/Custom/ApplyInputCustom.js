@@ -12,7 +12,7 @@ function ApplyInputCustom({func, disabled, made, value}) {
                     </input>
                     <input type="button" value="삭제" onClick={() => {
                         func()
-                    }}  style={{backgroundColor:'#EB8A8A', color:'white', zIndex: 4}}/>
+                    }}  style={{backgroundColor:'#EB8A8A', color:'white', zIndex: 4, fontSize:'13px', fontWeight:700}}/>
                 </div>
         )
     }else if (disabled){

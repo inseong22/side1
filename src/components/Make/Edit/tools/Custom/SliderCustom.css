@@ -7,7 +7,8 @@
     margin-left:10px;
     border:none;
     width:60px;
-    font-size:12px;
+    font-size:var(--small-text);
+    font-weight: 600;
     border:1px solid var(--main-light-gray);
 }
 
@@ -21,7 +22,8 @@
     display: flex;
     justify-content:start;
     align-items:center;
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 600;
     line-height: 10px;
     text-align: left;
     margin: 0 auto;
@@ -32,7 +34,8 @@
     display: flex;
     justify-content:start;
     align-items:center;
-    font-size: 15px;
+    font-size: var(--func-subtitle);
+    font-weight: 700;
     padding:8px 5px 2px 5px;
     width:340px;
 }

@@ -213,7 +213,11 @@ export const base = [
     {
         ...commons,
         name:'앱다운로드',
-        sectionTypeName:'AppDownloadSection',    
+        sectionTypeName:'AppDownloadSection', 
+        appButton:{
+            use:true,
+            link:'',
+        },   
         caution:{
             use:true,
             color: '#000000',

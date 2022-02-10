@@ -249,10 +249,31 @@ function EdtiSetting({setting, setSetting, category}) {
                             <RadioCustom text="모양" options={shapeOptions} value={setting.fta.shape} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.shape = e
                             }))} />
-                            <ColorCustom text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
-                                draft.fta.backgroundColor = e;
+                            <div className="edit-element">
+                                {/* 폰트 색상 연결 안해놓음 디자인만! */}
+                                <SingleColorCustom text="폰트 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                                    draft.fta.backgroundColor = e;
+                                }))} />
+                                <div className="edit-element-bar"/>
+                                <SingleColorCustom text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                                    draft.fta.backgroundColor = e;
+                                }))} />
+                            </div>
+                            {/* 테두리 연결 안해놓음 디자인만! */}
+                            <OnOffCustom text="테두리" value={setting.ghost.border} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.border = !setting.ghost.border
                             }))} />
-                            <InputCustom value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
+                            {
+                                setting.ghost.border && 
+                                <ColorCustom text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                    draft.ghost.borderColor = e;
+                                }))} />
+                            }
+                            {/* 그림자 연결 안해놓음 디자인만! */}
+                            <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.shadow = !setting.ghost.shadow
+                            }))} />
+                            <InputCustom text="링크 연결" value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.link = e
                             }))}/>
                         </OpenCloseCustom>

@@ -19,7 +19,7 @@ import EditSetting from './NavFooterSetting/EditSetting'
 import EditNaviSection from './NavFooterSetting/EditNaviSection'
 import EditFooterSection from './NavFooterSetting/EditFooterSection'
 import EditContents from './NavFooterSetting/EditContents'
-import {ChevronLeft} from '@styled-icons/bootstrap'
+import BackButton from '../../../tools/img/backButton.png'
 import './NewSectionMake.css'
 
 const NAVSECNUM = 50;
@@ -139,7 +139,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                     <div className="back__container">
                         <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
                             <span className="back-button">
-                                <ChevronLeft size={16} />
+                                <img src={BackButton} />
                             </span>
                             <span className="back-text">
                                 내비게이션 바
@@ -157,7 +157,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                     <div className="back__container">
                         <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
                             <span className="back-button">
-                                <ChevronLeft size={16} />
+                            <img src={BackButton} />
                             </span>
                             <span className="back-text">
                                 푸터 바
@@ -174,7 +174,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                     <div className="back__container">
                         <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
                             <span className="back-button">
-                                <ChevronLeft size={16} />
+                            <img src={BackButton} />
                             </span>
                             <span className="back-text">
                                 기본설정
@@ -197,7 +197,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                     <div className="back__container">
                         <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
                             <span className="back-button">
-                                <ChevronLeft size={16} />
+                            <img src={BackButton} />
                             </span>
                             <span className="back-text">
                                 {content.name}
