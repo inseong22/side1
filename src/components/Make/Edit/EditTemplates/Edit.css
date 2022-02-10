@@ -119,23 +119,10 @@
     justify-content : center;
     padding:15px 25px;
     cursor:pointer;
-    font-size:var(--button-font-size);
-}
-/* .custom-button{
-    font-family: Sandoll GothicNeo1;
-    font-style: normal;
-    font-weight: normal;
-    width: 221px;
-    height: 89px;
-    display: flex;
-    align-items : center;
-    justify-content : center;
-    cursor:pointer;
-    box-shadow: 2px 4px 20px #E8F0F9;
-    border-radius: 35px;
-    font-size: 18px;
+    font-size: var(--button-font-size);
     color: var(--main-dark-gray);
-} */
+    font-weight: 700;
+}
 
 .custom-button:hover{
     color: var(--main-color);
