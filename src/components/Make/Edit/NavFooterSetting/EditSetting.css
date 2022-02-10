@@ -77,7 +77,7 @@
 }
 
 .font-button{
-    font-size:13px;
+    font-size:var(--small-text);
     padding:12px 18px;
     width:270px;
     color:var(--main-black-01);

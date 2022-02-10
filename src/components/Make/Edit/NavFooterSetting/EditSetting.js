@@ -71,8 +71,9 @@ function EdtiSetting({setting, setSetting, category}) {
     ]
 
     const changeAnimationOption = e => {
-        base.map((section)=>section.animation.type=e)
-        action.setContents(base)
+        state.contents.map(cont => {
+            cont.animation.type = e;
+        })
         setSetting({...setting, animation:e})
     }
 
