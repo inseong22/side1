@@ -96,11 +96,28 @@ function EditFooterSection({foot, setFoot, category}) {
             { category === 0 ? 
             <>
                 <div>
+                <ElementsTable elements={elements} />
                     <Layout foot={foot} setFoot={setFoot} version='footer'/>
                     {/* <RadioCustom value={foot.layout} options={layoutOptions} func={e => {setFoot(produce(foot, draft => {
                         draft.layout = e;
                     }))}} /> */}
                     <OpenCloseCustom title="회사 / 팀 정보">
+                        
+                    </OpenCloseCustom>
+                    <OpenCloseCustom title="소셜 아이콘">
+                        <OnOffCustom text="소셜 아이콘" value={foot.icon.use} func={e => setFoot(produce(foot, draft => {
+                            draft.icon.use = !foot.icon.use;
+                        }))} />
+                        <ColorCustom text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {
+                            draft.icon.color = e;
+                        }))}} />
+                        {
+                            iconsList.map((item, index) => {
+                                return(
+                                    <InputCustom text={item.label} value={"w"} func={e => {}} placeholder="링크를 입력해주세요." />
+                                )
+                            })
+                        }
                     </OpenCloseCustom>
                     <OpenCloseCustom title="저작권표시">
                         <OnOffCustom text="저작권표시" value={foot.copyright.use} func={e => setFoot(produce(foot, draft => {
@@ -121,21 +138,6 @@ function EditFooterSection({foot, setFoot, category}) {
                                 </div> */}
                             </div>
                         </div>
-                    </OpenCloseCustom>
-                    <OpenCloseCustom title="소셜 아이콘">
-                        <OnOffCustom text="소셜 아이콘" value={foot.icon.use} func={e => setFoot(produce(foot, draft => {
-                            draft.icon.use = !foot.icon.use;
-                        }))} />
-                        <ColorCustom text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {
-                            draft.icon.color = e;
-                        }))}} />
-                        {
-                            iconsList.map((item, index) => {
-                                return(
-                                    <InputCustom text={item.label} value={"w"} func={e => {}} placeholder="링크를 입력해주세요." />
-                                )
-                            })
-                        }
                     </OpenCloseCustom>
                 </div>
             </>

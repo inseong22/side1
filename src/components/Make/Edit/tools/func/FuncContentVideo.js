@@ -32,7 +32,7 @@ function FuncContentVideo({text, value, func}) {
                 {text} 업로드
             </div>
         <div className="small-command">
-        최대 10MB 업로드 가능
+        .mp4 파일만 지원
         </div>
         </div>
         </div>

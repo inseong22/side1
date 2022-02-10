@@ -7,7 +7,7 @@ import AddingSection from '../../Modal/AddingSection';
 import {CustomSwitch2} from '../tools/Custom/OnOffCustom'
 import './EditContents.css';
 import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
-import PlusIcon from '../../../../tools/img/plusButton.png';
+// import PlusIcon from '../../../../tools/img/plusButton.png';
 
 const BCOLOR = 'rgba(230,230,230,0)'
 
@@ -110,7 +110,8 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                                                 if(index === 0){
                                                         return(
                                                             <>
-                                                            <img className="fixed-icon" src={PlusIcon} alt="아이콘"/>
+                                                            <div style={{marginTop: '30px'}}></div>
+                                                            {/* <img className="fixed-icon" src={PlusIcon} alt="아이콘"/> */}
                                                                 <div
                                                                     className="one-contents-draggable"
                                                                     ref={provided.innerRef}

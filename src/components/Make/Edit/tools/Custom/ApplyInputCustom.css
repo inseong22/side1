@@ -16,6 +16,35 @@ input[type="text"]{
     font-size: var(--input-font-size);
     font-weight: 700;
 }
+.maked{
+    background-color:var(--main-gray);
+    border-radius: 29px;
+    border:none;
+    padding:15px 20px;
+    width:353px;
+    font-size: var(--input-font-size);
+    font-weight: 700;
+    margin-right: 20px;
+}
+.delete-button{
+    cursor: pointer;
+    width: 52px;
+    height: 30px;
+    border:none;
+    background-color:#EB8A8A;
+    color: white;
+    z-index: 4;
+    font-size: 13px;
+    font-weight: 700;
+    margin-left: -88px;
+    border-radius: 15px;
+    text-align: center;
+    padding-top: 5px;
+}
+.delete-button:hover{
+    background-color:var(--main-light-gray-02);
+    color: #EB8A8A;
+}
 input[type="button"]{
     cursor: pointer;
     width: 52px;
