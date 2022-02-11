@@ -46,8 +46,7 @@
 }
 
 .fta-button{
-    border-radius:3px;
-    border:none;
+    font-size:var(--feature-desc-size);
 }
 
 .font-done-button{
