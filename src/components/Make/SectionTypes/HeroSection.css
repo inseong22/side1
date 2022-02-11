@@ -17,13 +17,31 @@
     position: relative;
 }
 .upload-mobile{
-    width: 400px;
+    width: auto;
+    height: 100%;
     z-index:1;
     position: absolute;
     top: 0px;
     left: 0px;
+    border-radius: 20%;
 }
-
+.desk-container{
+    position: relative;
+    float: left;
+}
+.upload-desk{
+    width: 80%;
+    height: 100%;
+    z-index:1;
+    position: absolute;
+    top: 0px;
+    left: 10%;
+    border-radius: 5%;
+}
+.mobbesk-container{
+    position: relative;
+    float: left;
+}
 .text__container{
     display: flex;
     justify-content: center;

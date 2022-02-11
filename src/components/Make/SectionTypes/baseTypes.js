@@ -57,10 +57,38 @@ const commons = {
     },
     mockup: {
         use: false,
-        type: 'mobile',
+        type: '',
         file: '',
         file2: '',
         size: 200,
+    },
+    mobile: {
+        use: true,
+        file: '',
+        size: 200
+    },
+    tablet: {
+        use: false,
+        file: '',
+        size: 200
+    },
+    desktop: {
+        use: false,
+        file: '',
+        size: 400,
+    },
+    mobile2: {
+        use: false,
+        file1: '',
+        file2: '',
+        size: 200,
+    },
+    deskMobile: {
+        use: false,
+        file1: '',
+        file2: '',
+        size1: 100,
+        size2: 400,
     },
     button:{
         use : true,
