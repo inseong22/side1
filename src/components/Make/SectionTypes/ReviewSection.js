@@ -42,7 +42,7 @@ function ReviewSection({content}) {
                                 draft[state.secNum].elements[index].rating = e.currentTarget.value;
                             }))}  
                             precision={0.1}
-                            style={{ fontSize: `${content.rating.size}`, color:`${content.rating.color}` }}
+                            style={{ fontSize: `${content.rating.size}px`, color:`${content.rating.color}` }}
                             // size={content.rating.size}
                             // color={content.rating.color}
                         />

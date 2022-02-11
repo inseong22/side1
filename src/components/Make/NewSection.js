@@ -129,10 +129,17 @@ function NewSection({content, index, contents, setContents, full}) {
 
             </div>}
             <div className="section__container" 
-                style={{backgroundImage:`url(${content.backgroundImage.attachment})`, backgroundSize:'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}} 
+                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}} 
                     onClick={() => setThisSection()}>
-                <div style={{backgroundColor:`${content.backgroundColor}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
-                </div>
+                {
+                    content.backgroundType === 'color' ?
+                    <div style={{backgroundColor:`${content.backgroundColor}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
+                    </div>
+                    :
+                    (content.backgroundImage.overlay && content.backgroundType === 'image') &&
+                    <div style={{backgroundColor:`${content.backgroundColor}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
+                    </div>
+                }
                 {
                     content.box.use && 
                     <div className="section__box" style={{padding:`0px ${full ? 'calc(11vw)' : '0px'}`}}>

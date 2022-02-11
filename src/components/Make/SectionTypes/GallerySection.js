@@ -4,6 +4,7 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import {produce} from 'immer'
 import TitleDesc from './components/TitleDesc'
 import TextAuto from './components/TextAuto'
+import {Upload} from '@styled-icons/bootstrap';
 import Element from './components/Element'
 
 function GallerySection({content}) {
@@ -13,12 +14,40 @@ function GallerySection({content}) {
     const returnElementsCards = content.elements.map((item, index) => {
         // '1px 1px 3px rgba(0,0,0,0.2)'
         return(
-            <div key={index} className="feature__card" style={{boxShadow:'', margin:`${ index === 0 ? '0px 15px 0px 0px' : index === content.elements.length - 1 ? '0px 0px 0px 15px' : '0px 15px' }`}}>
-                <Element content={content} item={item} index={index} key={index} gallery/>
+        <div key={index} className="feature__card" style={{alignItems: 'center', boxShadow:`${content.card.shadow ? '2px 2px 4px rgba(0,0,0,0.4)' : ''}`, margin:`${ index === 0 ? '0px 15px 0px 0px' : index === content.elements.length - 1 ? '0px 0px 0px 15px' : '0px 15px' }`, backgroundColor: `${content.card.color}`, padding:'8px 5px'}}>
+                <div style={{width:`${content.element.size}px`, position:'relative', cursor:'pointer'}}>
+                    { item.attachment ? 
+                        <img src={item.attachment} style={{width:`${content.element.size}px`, borderRadius:`${content.element.borderRadius}px`}}/> 
+                        :
+                        <div className="feature-upload-button" style={{borderRadius:`${content.element.borderRadius}px`, backgroundColor:`${content.element.backgroundColor}`}}>
+                            <Upload size="25" />
+                        </div>
+                    }
+                    <input
+                        className="feature-upload-file"
+                        type="file" 
+                        accept="image/*" 
+                        id="file" 
+                        onChange={ e => {
+                            const {target:{files},} = e;
+                            const oneFile = files[0];
+                            const reader = new FileReader();
+                            reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+                                const {currentTarget:{result}} = finishedEvent;
+                                action.setContents(produce(state.contents, draft=>{
+                                    draft[state.secNum].elements[index].attachment = result;
+                                }))
+                            }
+                            if(oneFile){
+                                reader.readAsDataURL(oneFile);
+                            }
+                        } }
+                    />
+                </div> 
                 {
                     content.text.use && 
                     <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                            <TextAuto className="text-input" value={item.text} color = {content.text.color} align = {content.text.align}
+                            <TextAuto small className="text-input" value={item.text} color = {content.text.color} align = {content.text.align}
                                 onChange={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elements[index].text = e.currentTarget.value;
                                 }))}  

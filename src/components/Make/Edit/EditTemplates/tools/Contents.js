@@ -399,7 +399,11 @@ function Contents({content}) {
                 return(
                     <>
                    
-                    <div className="edit-element">디바이스</div> 
+                    <div className="edit-element">
+                        <div className="func-title">
+                         디바이스
+                        </div>
+                    </div> 
                     <div className='mockup-select'>
                     <Select  
                         className='select_list'

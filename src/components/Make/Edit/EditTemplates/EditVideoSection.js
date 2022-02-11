@@ -129,7 +129,6 @@ function EditVideoSection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <OpenCloseCustom title="동영상">
-                        <div style={{marginTop: '40px'}}/>
                         <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
                         <div style={{marginBottom: '25px'}}/>
                         {videoType()}

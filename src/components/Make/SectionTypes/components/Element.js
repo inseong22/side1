@@ -14,7 +14,7 @@ import {
     PopoverArrow,
   } from '@chakra-ui/react'
 
-function Element({content, item, index}) {
+function Element({content, item, index, gallery}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [open, setOpen] = useState([false, false, false]);
     const handleClick = (index) => {
@@ -36,12 +36,11 @@ function Element({content, item, index}) {
         {
         content.element.type === 'image' ? <>
         { item.attachment ? 
-        <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.borderRadius}px`}}/> 
-          :
-        <div className="feature-upload-button" style={{borderRadius:`${content.element.borderRadius}px`, backgroundColor:`${content.element.backgroundColor}`}}>
-            <Upload size="25" />
-        </div>
-        
+            <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.borderRadius}px`}}/> 
+            :
+            <div className="feature-upload-button" style={{borderRadius:`${content.element.borderRadius}px`, backgroundColor:`${content.element.backgroundColor}`}}>
+                <Upload size="25" />
+            </div>
         }
         <input
             className="feature-upload-file"

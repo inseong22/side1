@@ -13,6 +13,14 @@ function ApplyInputCustom({func, disabled, made, value}) {
                     func()
                 }}  style={{backgroundColor:'#EB8A8A', color:'white', zIndex: 4}}/>
             </div>
+                // <div className="centera" style={{justifyContent:'start', marginTop:'12px'}}>
+                    
+                //     <input readOnly type='text' value={`${value}를 입력해주세요.`} style={{backgroundColor: '#C4CACF'}}>
+                //     </input>
+                //     <input type="button" value="삭제" onClick={() => {
+                //         func()
+                //     }}  style={{backgroundColor:'#EB8A8A', color:'white', zIndex: 4, fontSize:'13px', fontWeight:700}}/>
+                // </div>
         )
     }else if (disabled){
         return (

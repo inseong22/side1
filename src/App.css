@@ -58,6 +58,36 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'SF_HambakSnow';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Cafe24Ssurround';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'LeferiPoint-BlackA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GowunBatang-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
   --make-border: rgb(192, 192, 192);
@@ -86,11 +116,12 @@
   --small-text: 12px;
 
   --button-font-size : 13px;
+  --input-font-size: 13px;
   --made-button-padding: 8px 8.5px;
 
-  --feature-title-size:1.3em;
+  --feature-title-size:1.2em;
   --feature-desc-size:0.9em;
-  --feature-person-size:0.8em;
+  --feature-writer-size:0.8em;
 
 }
 
@@ -164,7 +195,17 @@
   height:100%;
   width:100%;
   box-sizing:border-box;
-  font-size: 16px;
+  font-size: var(--func-subtitle);
+  font-weight: 700;
+}
+
+.input-centera{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  width:100%;
+  box-sizing:border-box;
 }
 .centeras{
   display:flex;

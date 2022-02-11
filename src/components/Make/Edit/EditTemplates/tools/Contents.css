@@ -13,3 +13,7 @@
     padding: 15px 18px 15px 18px;
     font-size: 14px;
 }
+.func-title{
+    font-size: var(--func-subtitle);
+    font-weight: 700;
+}

@@ -7,15 +7,14 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import SelectCustom from '../tools/Custom/SelectCustom'
 import './EditSetting.css'
 import '../EditTemplates/Edit.css'
-import EditTopBar from '../tools/func/FuncTopBar'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import produce from 'immer';
 import AnimationCustom from '../tools/Custom/AnimationCustom'
-import { base } from '../../SectionTypes/baseTypes'
 import AddContentImg from '../tools/func/FuncContentImg'
 import {Check} from '@styled-icons/bootstrap'
 import {ChevronRight} from '@styled-icons/boxicons-regular'
+import OverflowScrolling from 'react-overflow-scrolling';
 import {
     ChakraProvider,
     Popover,
@@ -40,7 +39,11 @@ const fontOptions = [
     { label: '지마켓 산스', value: 'GmarketSansMedium' },
     { label: '고운 돋움', value: 'GowunDodum-Regular' },
     { label: '에스코어 드림', value: 'S-CoreDream-4Regular' },
-    
+    { label: '함박눈체', value : 'SF_HambakSnow'},
+    { label: '카페24 서라운드', value: 'Cafe24Ssurround'},
+    { label: '레페리포인트-Black', value:'LeferiPoint-BlackA'},
+    { label: '고운바탕', value : 'GowunBatang-Regular'},
+    { label: '여기어때 잘난체', value: 'yg-jalnan'},
 ]
 
 const shapeOptions = [
@@ -121,23 +124,29 @@ function EdtiSetting({setting, setSetting, category}) {
                     <PopoverCloseButton />
                     
                     <PopoverBody>
-                        {fontOptions.map((item, index) => {
-                            return(
-                                <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
-                                    draft.font = item.value
-                                }))}} style={{fontFamily: `${item.value}`}}>
-                                    <div className="left">
-                                        {item.label}
-                                    </div>
-                                    {
-                                        item.value === setting.font && 
-                                        <div className="right">
-                                            <Check size="20"/>
+                        <div style={{height:'250px'}}>
+                        <OverflowScrolling className='overflow-scrolling2'>
+                            <div className="font-select__container">
+                            {fontOptions.map((item, index) => {
+                                return(
+                                    <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                        draft.font = item.value
+                                    }))}} style={{fontFamily: `${item.value}`}}>
+                                        <div className="left">
+                                            {item.label}
                                         </div>
-                                    }
-                                </div>
-                            )
-                        })}
+                                        {
+                                            item.value === setting.font && 
+                                            <div className="right">
+                                                <Check size="20"/>
+                                            </div>
+                                        }
+                                    </div>
+                                )
+                            })}
+                            </div>
+                        </OverflowScrolling>
+                        </div>
                     </PopoverBody>
                     
                     <PopoverFooter d='flex' justifyContent='flex-end'>
@@ -175,23 +184,30 @@ function EdtiSetting({setting, setSetting, category}) {
                     <PopoverCloseButton />
                     
                     <PopoverBody>
-                        {fontOptions.map((item, index) => {
-                            return(
-                                <div className={item.value === setting.smallFont ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
-                                    draft.smallFont = item.value
-                                }))}} style={{fontFamily: `${item.value}`}}>
-                                    <div className="left">
-                                        {item.label}
-                                    </div>
-                                    {
-                                        item.value === setting.smallFont && 
-                                        <div className="right">
-                                            <Check size="20"/>
-                                        </div>
-                                    }
+
+                        <div style={{height:'250px'}}>
+                            <OverflowScrolling className='overflow-scrolling2'>
+                                <div className="font-select__container">
+                                    {fontOptions.map((item, index) => {
+                                        return(
+                                            <div className={item.value === setting.smallFont ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                                draft.smallFont = item.value
+                                            }))}} style={{fontFamily: `${item.value}`}}>
+                                                <div className="left">
+                                                    {item.label}
+                                                </div>
+                                                {
+                                                    item.value === setting.smallFont && 
+                                                    <div className="right">
+                                                        <Check size="20"/>
+                                                    </div>
+                                                }
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                            )
-                        })}
+                            </OverflowScrolling>
+                        </div>
                     </PopoverBody>
                     
                     <PopoverFooter d='flex' justifyContent='flex-end'>
@@ -249,10 +265,31 @@ function EdtiSetting({setting, setSetting, category}) {
                             <RadioCustom text="모양" options={shapeOptions} value={setting.fta.shape} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.shape = e
                             }))} />
-                            <ColorCustom text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
-                                draft.fta.backgroundColor = e;
+                            <div className="edit-element">
+                                {/* 폰트 색상 연결 안해놓음 디자인만! */}
+                                <SingleColorCustom text="폰트 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                                    draft.fta.backgroundColor = e;
+                                }))} />
+                                <div className="edit-element-bar"/>
+                                <SingleColorCustom text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                                    draft.fta.backgroundColor = e;
+                                }))} />
+                            </div>
+                            {/* 테두리 연결 안해놓음 디자인만! */}
+                            <OnOffCustom text="테두리" value={setting.ghost.border} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.border = !setting.ghost.border
                             }))} />
-                            <InputCustom value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
+                            {
+                                setting.ghost.border && 
+                                <ColorCustom text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                    draft.ghost.borderColor = e;
+                                }))} />
+                            }
+                            {/* 그림자 연결 안해놓음 디자인만! */}
+                            <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.shadow = !setting.ghost.shadow
+                            }))} />
+                            <InputCustom text="링크 연결" value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.link = e
                             }))}/>
                         </OpenCloseCustom>

@@ -41,8 +41,8 @@ const imageSmallSizeOptions = [
 ]
 
 const ratingSizeOptions = [
-    { label: 'Small', value: 15 },
-    { label: 'Medium', value: 20 },
+    { label: 'Small', value: 20 },
+    { label: 'Medium', value: 25 },
     { label: 'Large', value: 30 },
 ]
 
@@ -131,6 +131,11 @@ function EditReviewSection({content, category}) {
                                     draft[state.secNum].element.size = e;
                                 }))} />
                             }
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="리뷰 내용">
+                            <ColorCustom text="색상" value={content.reviewText.color} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].reviewText.color = e;
+                            }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="별점">
                             <ColorCustom text="색상" value={content.rating.color} func={e => action.setContents(produce(state.contents, draft => {

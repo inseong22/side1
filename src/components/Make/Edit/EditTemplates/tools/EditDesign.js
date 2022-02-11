@@ -5,9 +5,12 @@ import produce from 'immer';
 import ColorCustom from '../../tools/Custom/ColorCustom'
 import TextSizeCustom from '../../tools/func/TextSizeCustom'
 import OpenCloseCustom from '../../tools/Custom/OpenCloseCustom'
+import BoxCustom from '../../tools/Custom/BoxCustom'
 import SliderCustom from '../../tools/Custom/SliderCustom'
 import OnOffCustom from '../../tools/Custom/OnOffCustom'
 import FuncContentImg from '../../tools/func/FuncContentImg'
+import {Phone} from '@styled-icons/bootstrap'
+import {Desktop} from '@styled-icons/fa-solid'
 
 const alignOptions = [
     { label: '왼쪽', value: 'left' },
@@ -134,7 +137,51 @@ function EditDesign({content}) {
                         }))} />
                     </>
                 }
-            </OpenCloseCustom>            
+            </OpenCloseCustom>
+            <BoxCustom title="반응형">
+                <div className="edit-element">
+                    <div className="edit-element__one" style={{flexDirection: 'column'}}>
+                        <div className="edit-element__left">반응형</div> 
+                        <div className="radio-container" style={{justifyContent:'center'}}>
+                            <div className={content.responsive.pc ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].responsive.pc = !content.responsive.pc
+                            }))}>
+                                <Desktop size="30"/>
+                                <div className="radio-shape-text">
+                                    PC
+                                </div>
+                            </div>
+                            <div className={content.responsive.mobile ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].responsive.mobile = !content.responsive.mobile
+                            }))}>
+                                <Phone size="30"/>
+                                <div className="radio-shape-text">
+                                    모바일
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{marginTop:'8px'}}>
+                            {
+                                !content.responsive.pc && !content.responsive.mobile ? 
+                                <div>
+                                    이 섹션은 유저에게 보이지 않습니다.
+                                </div>
+                                :
+                                !content.responsive.pc ?
+                                <div>
+                                    이 섹션은 PC에서는 보이지 않습니다.
+                                </div>
+                                :
+                                !content.responsive.mobile ?
+                                <div>
+                                    이 섹션은 모바일에서는 보이지 않습니다.
+                                </div>
+                                :<></>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </BoxCustom>   
         </div>
     )
 }

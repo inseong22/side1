@@ -22,7 +22,7 @@ const commons = {
         color: '#000000'
     },
     contents:{
-        use: false,
+        use: true,
         type: 'image',
     },
     padding:{
@@ -37,6 +37,10 @@ const commons = {
         use:false,
         backgroundColor:'#6CCAD0',
         borderRadius:5,
+    },
+    responsive:{
+        mobile:true,
+        pc:true,
     }
 }
 
@@ -173,7 +177,11 @@ export const base = [
     {
         ...commons,
         name:'앱다운로드',
-        sectionTypeName:'AppDownloadSection',    
+        sectionTypeName:'AppDownloadSection', 
+        appButton:{
+            use:true,
+            link:'',
+        },   
         caution:{
             use:true,
             color: '#000000',
@@ -305,6 +313,9 @@ export const base = [
         },
         card:{
             use:true,
+            color:'#ffffff',
+            shadow:false,
+            border:false,
         },
         text:{
             use:true,
