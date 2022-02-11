@@ -12,6 +12,19 @@
     cursor: pointer;
 }
 
+.nav-button-square{
+    border-radius:3px;
+    padding:11px 15px;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    background-color:#6a63f7;
+    margin-left:16vw;
+    color:white;
+    border:none;
+    cursor: pointer;
+}
+
 .nav-left-text{
     color:black;
     margin-left:2vw;
@@ -36,7 +49,7 @@
 }
 
 .nav-bar-container-v2{
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     z-index:3;
     height:60px;
@@ -48,7 +61,6 @@
     background-color:white;
     font-family:Noto Sans KR;
     font-weight: 500;
-    background-color:rgba(255,255,255,0.8);
 }
 
 .nav-bar-left-v2{

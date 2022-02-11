@@ -1,11 +1,11 @@
 const commons = {
     layout: 1,
     backgroundColor:'#ffffff',
-    backgroundOpacity:1,
     backgroundType:'color',
     backgroundImage:{
         use:false,
         attachment:'',
+        overlay:false,
     },
     title:{
         use:true,
@@ -59,30 +59,10 @@ const commons = {
     mockup: {
         use: false,
         type: 'mobile',
+        // mobile, tablet, desktop, mobile2, desk+mob 있음
         file: '',
         file2: '',
-        size: 200,
     },
-    button:{
-        use : true,
-        title:'버튼입니다.',
-        backgroundColor:'#ffffff',
-        buttonTemplate:1,
-        func:1,
-        link:"https://surfee.co.kr",
-        first:true,
-        second:false,
-        align:'0',
-        ctaUse:true,
-        ctaOption: 'link',
-        ghostOption: 'link',
-        ctaLink:'',
-        ghostUseOrLink: true, 
-        ghostLink:'',
-        ghostUse:false,
-    },
-    ctaApplyInputs: [],
-    ghostApplyInputs: [],
 }
 
 export const base = [
@@ -147,53 +127,79 @@ export const base = [
             apple: '',
             google: ''
         },
+        ctaApplyInputs: [],
+        ghostApplyInputs: [],
     },
     {
         ...commons,
         name:'디테일',
         sectionTypeName:'DetailSection',
-        sectionTypeNumber:2,
-        templateNumber:1,
+        paddingSize:'',
+        paddingLeft:'',
+        paddingRight:'',
+        paddingCustom: false,
+        layout:1,
         contents:{
             use:true,
         },
-        titles:{
-            title:'<p>여기서 타이틀을 입력rhrh</p>',
-            font:'Pretendard-Regular',
-        },
         image:{
+            oneImg:true,
+            type:'image',
             attachment:'',
-            width:70,
-            shadow: true,
-            shadowValue: "2px 4px 20px #E8F0F9"
+            border:0,
+            size:70,
+            slide:false,            
         },
-        appButton:{
-            use: true,
-            apple: '',
-            google: ''
+        slide_img:{
+            slide1: '',
+            slide2: '',
+            slide3: '',
+        },
+        video:{
+            use: false,
+            type: 'base',
+            file: '',
+            youtube: false,
+            link: '',
+            auto: true,
+        },
+        mockup: {
+            use: false,
+            type: 'mobile',
+            file: '',
+            file2: '',
+            size: 200,
         },
     },
     {
         ...commons,
         name:'CTA',
         sectionTypeName:'CtaSection',
-        sectionTypeNumber:9,
-        templateNumber:1,
-        width:90,
-        attachment:'',
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
         button:{
+            use : true,
+            ctaText:'CTA 버튼',
+            ghostText:'고스트 버튼',
+            align:'start',
+            ctaUse:true,
+            ctaOption: 'link',
+            ghostOption: 'link',
+            ctaLink:'',
+            ctaApply: '',
+            ghostUseOrLink: true, 
+            ghostUse:false,
+            ghostLink:'',
+            ghostApply: '',
+        },
+        contents:{
             use:true,
         },
-        inputs:[],
         appButton:{
             use: true,
             apple: '',
             google: ''
         },
+        ctaApplyInputs: [],
+        ghostApplyInputs: [],
     },
     {
         ...commons,
@@ -228,7 +234,9 @@ export const base = [
         align:'start',
         featureImage:{
             use:true,
-            borderRaidus:0,
+            type:'image',
+            backgroundColor:'#6CCAD0',
+            borderRaidus:5,
             size:50,
         },
         featureText:{
@@ -245,11 +253,13 @@ export const base = [
                 desc:'Set up cookie banners that help you respect your visitor\'s privacy. \n This is especially important for Europe.',
             },
             {
+                icon:'',
                 attachment:'',
                 title:'Translate your website',
                 desc:'Easily manage your website in multiple languages. \n With this feature you can \n offer your site to everyone.',
             },
             {
+                icon:'',
                 attachment:'',
                 title:'Protect your content',
                 desc:'Secure your entire website or \n single pages with passwords to protect it from unwanted eyes.',
@@ -260,19 +270,20 @@ export const base = [
         ...commons,
         name:'리뷰/추천',
         sectionTypeName:'ReviewSection',
-        sectionTypeNumber:3,
-        templateNumber:1,
+        align:'start',
         numOfReviews:3,
         ratingColor:'red',
         reviewImage:{
             use:true,
-            border:0,
-            size:30,
+            type:'image',
+            backgroundColor:'#8A8A8A',
+            borderRaidus:5,
+            size:50,
         },
         rating:{
             use:true,
-            color: '#000000',
-            size: 30,
+            color: '#ffd23a',
+            size: 15,
         },
         writer:{
             use:true,
@@ -280,21 +291,28 @@ export const base = [
         },
         reviewText:{
             use:true,
+            color:'#000000',
         },
         reviews:[
             {
+                icon:'',
+                attachment:'',
                 title:'1의 타이틀',
                 desc:'전에 어떤 분이 저희 웹사이트 디자이너 고용해서 만들었냐고 물어보시더라구요.(웃음) 우리가 필요한 기능들을 커스터마이징 할 수 있는 아임웹 디자인 모드가 정말 좋았어요. 해외 브랜드 사이트 같은 느낌도 많이 들고요.',
                 rating:4.8,
                 writer:'NOT OURS, 신하나 마케터 인터뷰',
             },
             {
+                icon:'',
+                attachment:'',
                 title:'2의 타이틀',
                 desc:'기술과 전자제품을 개발하는 회사답게 신뢰감가고 정돈된 모습을 보여주고자 했어요. 배경과 폰트 등 톤앤매너를 디테일한 부분까지 클릭 한번으로 원하는 디자인을 구현할 수 있어 좋았던 것 같아요.',
                 rating:5,
                 writer:'duit, 아혜진 브랜드 매니저 인터뷰',
             },
             {
+                icon:'',
+                attachment:'',
                 title:'3의 타이틀',
                 desc:'실제로 주변에 아임웹을 많이 소개했는데요. 요즘에는 누구나 개인 홈페이지를 만들고 싶어하는 것 같아요. 블로그나 텀블러 등의 소셜 프로그램은 완벽한 웹사이트가 될 순 없고 결국 차별화된 나만의 웹사이트를 원하게 되죠.',
                 rating:4.6,
@@ -361,7 +379,8 @@ export const base = [
         explanation:{
             use:true,
             color: '#000000',
-            align: ''
+            align: '',
+            text:''
         }
     },
     {

@@ -11,52 +11,52 @@ const buttonOptions = [
     {label: '신청', value: 'apply'},
 ]
 
-function AddGhostButton({content, num}) {
+function AddCtaButton({content, num}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const ghostOpen = () => {
+    const ctaOpen = () => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].button.ghostUse = !content.button.ghostUse}))
+            draft[state.secNum].button.ctaUse = !content.button.ctaUse}))
     }
 
-    const changeGhostOption = () => {
+    const changeCtaOption = () => {
         action.setContents(produce(state.contents, draft => {
-            if (draft[state.secNum].button.ghostOption == 'link')
-                draft[state.secNum].button.ghostOption = 'apply'
+            if (draft[state.secNum].button.ctaOption == 'link')
+                draft[state.secNum].button.ctaOption = 'apply'
             else
-                draft[state.secNum].button.ghostOption = 'link'
+                draft[state.secNum].button.ctaOption = 'link'
         }))
     }
 
-    const returnGhostOptions = () => {
-        switch(content.button.ghostOption){
+    const returnCtaOptions = () => {
+        switch(content.button.ctaOption){
             case 'link':
                 return(
-                    <InputCustom placeholder="연결하고 싶은 URL을 선택해주세요" value={content.button.ghostLink} func = {(e) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].button.ghostLink = e
+                    <InputCustom placeholder="연결하고 싶은 URL을 선택해주세요" value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button.ctaLink = e
                     }))} />
                 )
             case 'apply':
                 return(
                     <>
                     {
-                        content.ghostApplyInputs.length > num ?  
+                        content.ctaApplyInputs.length > num ?  
                         <ApplyInputCustom disabled /> 
                         :
                         <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].ghostApplyInputs.push(e)
+                            draft[state.secNum].ctaApplyInputs.push(e)
                         }))} /> 
                     }
                     
-                    { content.ghostApplyInputs.length > 0 && 
+                    { content.ctaApplyInputs.length > 0 && 
                     <>
-                        { content.ghostApplyInputs.map((item, index) => {
+                        { content.ctaApplyInputs.map((item, index) => {
                                 return(
                                     <ApplyInputCustom made value={item} func={e => action.setContents(produce(state.contents, draft => {
                                         if(index === 0 ){
-                                            draft[state.secNum].ghostApplyInputs.shift()
+                                            draft[state.secNum].ctaApplyInputs.shift()
                                         }else{
-                                            draft[state.secNum].ghostApplyInputs.splice(index, index)
+                                            draft[state.secNum].ctaApplyInputs.splice(index, index)
                                         }
                                     }))} key={index}/>
                                 )
@@ -76,15 +76,15 @@ function AddGhostButton({content, num}) {
 
     return (
         <>
-        <CustomSwitch text="고스트 버튼" value={content.button.ghostUse} onChange = {e => ghostOpen(e)}/>
-            { content.button.ghostUse && (
+        <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange = {e => ctaOpen(e)}/>
+            { content.button.ctaUse && (
                 <>
-                    <RadioCustom options={buttonOptions} value={content.button.ghostOption} func={e => changeGhostOption(e)}/>
-                    {returnGhostOptions()}
+                    <RadioCustom options={buttonOptions} value={content.button.ctaOption} func={e => changeCtaOption(e)}/>
+                    {returnCtaOptions()}
                 </>
             )}
         </>
     )
 }
 
-export default AddGhostButton
+export default AddCtaButton

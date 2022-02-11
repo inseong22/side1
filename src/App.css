@@ -87,6 +87,11 @@
 
   --button-font-size : 13px;
   --made-button-padding: 8px 8.5px;
+
+  --feature-title-size:1.3em;
+  --feature-desc-size:0.9em;
+  --feature-person-size:0.8em;
+
 }
 
 .App {
@@ -157,6 +162,14 @@
   justify-content: center;
   align-items: center;
   height:100%;
+  width:100%;
+  box-sizing:border-box;
+  font-size: 16px;
+}
+.centeras{
+  display:flex;
+  justify-content: center;
+  align-items: center;
   width:100%;
   box-sizing:border-box;
   font-size: 16px;

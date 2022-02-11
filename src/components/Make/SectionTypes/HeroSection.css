@@ -8,9 +8,10 @@
 }
 
 .mobile-container{
-    width: 400px;
+    width: 100%;
     position: relative;
-    float: left;
+    display: flex;
+    justify-content: center;
 }
 .mobile-ex{
     z-index: 99;
@@ -71,4 +72,10 @@
     margin-right:8px;
     padding:var(--made-button-padding);
     font-size:var(--button-font-size);
+}
+
+.device-galaxy-s8{
+    width:200px;
+    height:200px;
+    background-color:red;
 }

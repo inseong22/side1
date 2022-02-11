@@ -1,36 +1,34 @@
 import React, {useContext, useState} from 'react'
-import Editor from '../tools/Editor'
 import './CtaSection.css'
 import { motion } from 'framer-motion';
-import TitleDesc from './components/TitleDesc'
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
+import TitleDesc from './components/TitleDesc'
+import ImageCarousel from '../Edit/tools/func/FuncImageCarousel'
+import AutosizeInput from 'react-input-autosize';
+import ImageOrSlide from './components/ImageOrSlide'
+import ReturnButton from './components/ReturnButton'
+import AnimationDiv from './components/AnimationDiv'
 
 function CtaSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const returnCtaSection = () => {
-        return(
-            <div className="center-column">
-                <div className="center-row mt30">
-                    <div style={{marginRight:'1%'}}>
-                        <input className="input" />
-                    </div>
-                    <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`}}>
-                        {content.button.title}
-                    </button>
-                </div>
-            </div>
-        )
+    const returnLayout = {
+        flexDirection:`${content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : 'column'}`,
+        // paddingLeft:`${content.layout === 1 ? '30px' : content.layout === 2 ? '0px' : '30px'}`,
+        // paddingRight:`${content.layout === 1 ? '0px' : content.layout === 2 ? '30px' : '30px'}`,
     }
-
+    
     return (
         <>
-            <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}
-            data-aos={content.animation.type} aos-duration="2000">
-                <TitleDesc content={content} />
-                {returnCtaSection()}
-            </motion.div>
+            <div style={{ width:'100%', height:'100%'}}>
+                <AnimationDiv content={content} returnLayout={returnLayout}>
+                    <div className="text__container">
+                        <TitleDesc content={content} />
+                    </div>
+                    <ReturnButton content={content} />
+                </AnimationDiv>
+            </div>
         </>
     )
 }

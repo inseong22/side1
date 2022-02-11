@@ -45,7 +45,7 @@ function NavBarV2({history, scrollPosition, isLoggedIn}) {
                     }
                 </div>
                 <div className="nav-on-v2">
-                    <button className="nav-button-round-v2" onClick={() => window.scrollTo(0,document.body.scrollHeight)}>무료로 체험하기</button>
+                    <button className="nav-button-square" onClick={() => window.scrollTo(0,document.body.scrollHeight)}>무료로 체험하기</button>
                 </div>
             </div>
             <div style={{borderBottom: '2px solid black', width:`${(scrollPosition/window.innerHeight)*63}%`, position:'fixed', top:'58px', zIndex:'12'}}></div>

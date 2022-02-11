@@ -1,0 +1,30 @@
+
+.modal-body{
+    font-size:1.2em;
+    height:140px;
+    display:flex;
+    justify-content: center;
+    align-items : center;
+}
+
+.ask-modal-button{
+    margin-top:5px;
+    cursor: pointer;
+    border: 1px solid #6a63f7;
+    background-color:#6a63f7;
+    border-radius:5px;
+    color:white;
+    width:90%;
+    padding:8px 10px;
+    display: flex;
+    align-items:center;
+    justify-content : center;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.button-second{
+    border: 1px solid #6a63f7;
+    color:#6a63f7;
+    background-color:white;
+}

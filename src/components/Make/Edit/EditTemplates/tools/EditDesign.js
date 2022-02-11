@@ -6,6 +6,8 @@ import ColorCustom from '../../tools/Custom/ColorCustom'
 import TextSizeCustom from '../../tools/func/TextSizeCustom'
 import OpenCloseCustom from '../../tools/Custom/OpenCloseCustom'
 import SliderCustom from '../../tools/Custom/SliderCustom'
+import OnOffCustom from '../../tools/Custom/OnOffCustom'
+import FuncContentImg from '../../tools/func/FuncContentImg'
 
 const alignOptions = [
     { label: '왼쪽', value: 'left' },
@@ -20,6 +22,27 @@ const backOptions = [
 function EditDesign({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
+    // 콘텐츠 - 이미지 업로드
+    const onChangeContentImage= e => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].backgroundImage.attachment = result;             
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+    // 콘텐츠 - 이미지 삭제
+    const RemoveImage = () => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].backgroundImage.attachment = '';
+        }))
+    }
 
     const backgroundColorOrImage = () => {
         switch(content.backgroundType){
@@ -33,8 +56,18 @@ function EditDesign({content}) {
                 )           
             case 'image':
                 return(
-                    <div className='edit-element'>
-                    </div>
+                    <>
+                        <FuncContentImg text="이미지" subtext="최대 5MB 업로드 가능" value={content.backgroundImage.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
+                        <OnOffCustom value={content.backgroundImage.overlay} text="오버레이" func={e=>action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].backgroundImage.overlay = !content.backgroundImage.overlay;
+                        }))} />
+                        {
+                            content.backgroundImage.overlay && 
+                            <ColorCustom text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].backgroundColor = e
+                            }))} />
+                        }
+                    </>
                 )
             default:
                 return(<></>)

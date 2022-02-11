@@ -16,7 +16,7 @@ const layoutOptions = [
 const shapeOptions = [
     { label: '사각형', value: 0 },
     { label: '라운드', value: 5 },
-    { label: '원형', value: 20 },
+    { label: '원형', value: 500 },
 ]
 const imageSizeOptions = [
     { label: 'Small', value: 33 },

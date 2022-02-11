@@ -125,16 +125,16 @@ function NewSection({content, index, contents, setContents, full}) {
 
     return(
         <div className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
-            <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
+            {!full && <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
 
-            </div>
+            </div>}
             <div className="section__container" 
-                // style={{backgroundImage:`url(${content.backgroundImage.attachment})`}} 
+                style={{backgroundImage:`url(${content.backgroundImage.attachment})`, backgroundSize:'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}} 
                     onClick={() => setThisSection()}>
-                <div style={{backgroundColor:`${content.backgroundColor}`, opacity:`${content.backgroundOpacity}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
+                <div style={{backgroundColor:`${content.backgroundColor}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
                 </div>
                 <div className="section__container-inner"
-                    style={{padding:`${content.padding.top}vh 30px ${content.padding.bottom}vh 30px`}} >
+                    style={{padding:`${content.padding.top}vh ${full ? 'calc(14vw + 30px)' : '30px'} ${content.padding.bottom}vh ${full ? 'calc(14vw + 30px)' : '30px'} `}} >
                     {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                     {returnType()}
                 </div>
