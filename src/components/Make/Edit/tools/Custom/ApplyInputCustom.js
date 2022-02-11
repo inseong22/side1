@@ -6,23 +6,14 @@ function ApplyInputCustom({func, disabled, made, value}) {
 
     if(made){
         return (
-            <div className="centera" style={{justifyContent:'start', marginTop:'12px', width:'100%'}}>
-                <input readOnly type='text' value={value} style={{backgroundColor: '#C4CACF'}}>
-                </input>
-                <input type="button" value="삭제" onClick={() => {
-                    func()
-                }}  style={{backgroundColor:'#EB8A8A', color:'white', zIndex: 4}}/>
-            </div>
-// =======
-//                 <div className="centera" style={{justifyContent:'start', marginTop:'12px', marginRight:'18px'}}>
-//                     <div className="maked">
-//                     {value}를 입력해주세요
-//                     </div>
-//                     <div className="delete-button" onClick={() => {
-//                         func()
-//                     }}>삭제</div>
-//                 </div>
-// >>>>>>> 56a6430fd (Design edit sections)
+                <div className="centera" style={{justifyContent:'start', marginTop:'12px', marginRight:'18px'}}>
+                    <div className="maked">
+                    {value}를 입력해주세요
+                    </div>
+                    <div className="delete-button" onClick={() => {
+                        func()
+                    }}>삭제</div>
+                </div>
         )
     }else if (disabled){
         return (
