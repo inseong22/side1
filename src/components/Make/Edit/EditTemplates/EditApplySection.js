@@ -7,6 +7,8 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
 import EditNotice from './tools/EditNotice'
 
+import AddCtaButton from './tools/AddCtaButton'
+import AddGhostButton from './tools/AddGhostButton'
 import Layout from './tools/Layout'
 
 function EditApplySection({content, category}) {
@@ -43,42 +45,6 @@ function EditApplySection({content, category}) {
         },
     ]
 
-    const ApplyInputs = () => {
-        return(
-            <>
-            {
-                content.applyButton.inputs.length > 4 ?  
-                <ApplyInputCustom disabled /> 
-                :
-                <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].applyButton.inputs.push(e)
-                }))} /> 
-            }
-            
-            { content.applyButton.inputs.length > 0 && 
-            <>
-                { content.applyButton.inputs.map((item, index) => {
-                        return(
-                            <div key={index}>
-                                <ApplyInputCustom made value={item} func={e => action.setContents(produce(state.contents, draft => {
-                                    if(index === 0 ){
-                                        draft[state.secNum].applyButton.inputs.shift()
-                                    }else{
-                                        draft[state.secNum].applyButton.inputs.splice(index, index)
-                                    }
-                                }))} />
-            </div>
-                        )
-                    })
-                } 
-            </> }
-            <div className="mid-command">
-            최대 5개의 신청 박스만 생성할 수 있습니다.
-            </div>
-            </>
-        )
-    }
-
     const returnTable = () => {
         switch(category){
             case 0:
@@ -88,7 +54,8 @@ function EditApplySection({content, category}) {
                         <ElementsTable elements={elements} />
                         <Layout content={content} version='apply' />
                         <OpenCloseCustom title="신청 버튼">
-                            {ApplyInputs()}
+                            <AddCtaButton content={content} num={5}/>
+                            <AddGhostButton content={content} num={5}/>
                         </OpenCloseCustom>
                         <EditNotice content={content}/>
                     </div>

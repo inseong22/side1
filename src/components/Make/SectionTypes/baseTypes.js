@@ -84,11 +84,44 @@ const element = {
     size:50,
 }
 
+const button = {
+    button:{
+        use : true,
+        ctaText:'CTA 버튼',
+        ghostText:'고스트 버튼',
+        align:'start',
+        ctaUse:true,
+        ctaOption: 'link',
+        ghostOption: 'link',
+        ctaLink:'',
+        ctaApply: '',
+        ghostUseOrLink: true, 
+        ghostUse:false,
+        ghostLink:'',
+        ghostApply: '',
+    },
+    appButton:{
+        use: true,
+        apple: '',
+        google: ''
+    },
+    ctaApplyInputs: [],
+    ghostApplyInputs: [],
+    caution:{
+        use:true,
+        color: '#000000',
+        align: '',
+        size: 10,
+        text:'조심하세요',
+    }
+}
+
 export const base = [
     {
         // 공통적으로 들어갈 확률이 높은 것들
         ...commons,
         ...contents,
+        ...button,
         name:'메인',
         sectionTypeName:'HeroSection',
         paddingSize:'',
@@ -96,28 +129,6 @@ export const base = [
         paddingRight:'',
         paddingCustom: false,
         layout:1,
-        button:{
-            use : true,
-            ctaText:'CTA 버튼',
-            ghostText:'고스트 버튼',
-            align:'start',
-            ctaUse:true,
-            ctaOption: 'link',
-            ghostOption: 'link',
-            ctaLink:'',
-            ctaApply: '',
-            ghostUseOrLink: true, 
-            ghostUse:false,
-            ghostLink:'',
-            ghostApply: '',
-        },
-        appButton:{
-            use: true,
-            apple: '',
-            google: ''
-        },
-        ctaApplyInputs: [],
-        ghostApplyInputs: [],
     },
     {
         ...commons,
@@ -133,60 +144,26 @@ export const base = [
     {
         ...commons,
         ...contents,
+        ...button,
         name:'CTA',
         sectionTypeName:'CtaSection',
-        button:{
-            use : true,
-            ctaText:'CTA 버튼',
-            ghostText:'고스트 버튼',
-            align:'start',
-            ctaUse:true,
-            ctaOption: 'link',
-            ghostOption: 'link',
-            ctaLink:'',
-            ctaApply: '',
-            ghostUseOrLink: true, 
-            ghostUse:false,
-            ghostLink:'',
-            ghostApply: '',
-        },
-        appButton:{
-            use: true,
-            apple: '',
-            google: ''
-        },
-        ctaApplyInputs: [],
-        ghostApplyInputs: [],
     },
     {
         ...commons,
+        ...button,
         name:'신청',
         sectionTypeName:'ApplySection',
-        applyButton:{
-            use:true,
-            inputs:[],
-        },
-        caution:{
-            use:true,
-            color: '#000000',
-            align: '',
-            size: 10,
-        }
     },
     {
         ...commons,
-        name:'앱다운로드',
-        sectionTypeName:'AppDownloadSection', 
-        appButton:{
-            use:true,
-            link:'',
-        },   
-        caution:{
-            use:true,
-            color: '#000000',
-            align: '',
-            size: 10,
+        ...button,
+        button:{
+            ...button.button,
+            ctaUse:false,
+            ghostUse:false,
         },
+        name:'앱 다운로드',
+        sectionTypeName:'AppDownloadSection', 
     },
     {
         ...commons,
@@ -452,11 +429,15 @@ export const defaults = {
         color:'#63B3F7',
         fta:{
             width:50,
-            borderRadius:5,
+            borderRadius:0,
             use:false,
-            backgroundColor:'#ffffff',
+            backgroundColor:'#6CCAD0',
+            color:'#ffffff',
+            border:false,
+            borderColor:'#000000',
             text:'fta 버튼',
             link:'',
+            shadow:false,
         },
         cta:{
             borderRadius:5,

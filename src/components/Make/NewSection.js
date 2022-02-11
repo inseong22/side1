@@ -76,17 +76,17 @@ function NewSection({content, index, contents, setContents, full}) {
 
             case 'CtaSection':
                 return (
-                    <CtaSection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton}/>
+                    <CtaSection content={content} type="cta"/>
                 )
 
             case 'ApplySection' :
                 return(
-                    <ApplySection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton}/>
+                    <CtaSection content={content} type="apply"/>
                 )
 
             case 'AppDownloadSection' :
                 return(
-                    <AppDownloadSection content={content} />
+                    <CtaSection content={content} type="appDownload"/>
                 )
 
             case 'QnaSection' :

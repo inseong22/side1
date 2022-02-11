@@ -79,17 +79,20 @@ function ReturnButton({content}){
                             ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
                     }
                 </div>
-                <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
-                    {
-                        content.appButton.google.length > 0 && 
-                            <img src={playstorebutton} className="store-button" />
-                    }
-                    {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
-                    {
-                        content.appButton.apple.length > 0 && 
-                            <img src={appstorebutton} className="store-button" />
-                    }
-                </div>
+                {
+                    content.appButton.use && 
+                    <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
+                        {
+                            content.appButton.google.length > 0 && 
+                                <img src={playstorebutton} className="store-button" />
+                        }
+                        {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
+                        {
+                            content.appButton.apple.length > 0 && 
+                                <img src={appstorebutton} className="store-button" />
+                        }
+                    </div>
+                }
             </div>
         )
     }else{

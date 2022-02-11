@@ -8,6 +8,7 @@ import AddAppButton from './tools/AddAppButton'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import InputCustom from '../tools/Custom/InputCustom'
+import EditNotice from './tools/EditNotice'
 
 import AddCtaButton from './tools/AddCtaButton'
 import AddGhostButton from './tools/AddGhostButton'
@@ -18,7 +19,7 @@ const alignOptions = [
     {label:'중앙', value: 'center'}
 ]
 
-function EditCtaSection({content, category}) {
+function EditCtaSection({content, category, type}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const elements = [
@@ -50,13 +51,18 @@ function EditCtaSection({content, category}) {
                 draft[state.secNum].appButton.use = !content.appButton.use;
             }))
         },
+        {
+            title:'안내사항',
+            use:content.caution.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].caution.use = !content.caution.use;
+            }))
+        },
     ]
-    const changeAlignOption = () => {
+    
+    const changeAlignOption = (e) => {
         action.setContents(produce(state.contents, draft => {
-            if (draft[state.secNum].button.align == '0')
-                draft[state.secNum].button.align = '0 auto'
-            else
-                draft[state.secNum].button.align = '0'
+            draft[state.secNum].button.align = e
         }))
     }
 
@@ -68,13 +74,19 @@ function EditCtaSection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <Layout content={content} version="cta"/>
-                        <OpenCloseCustom title="버튼">
-                            <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
-                            <AddCtaButton content={content} num={5}/>
-                            <AddGhostButton content={content} num={5}/>
-                        </OpenCloseCustom>
-                        <AddAppButton content={content} />
-                        
+                        {
+                            !(type === 'appDownload') &&
+                            <OpenCloseCustom title="버튼">
+                                <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
+                                <AddCtaButton content={content} num={5}/>
+                                <AddGhostButton content={content} num={5}/>
+                            </OpenCloseCustom>
+                        }
+                        {
+                            !(type === 'apply') &&
+                            <AddAppButton content={content} />
+                        }
+                        <EditNotice content={content}/>
                     </div>
                 )
             case 1:
