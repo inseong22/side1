@@ -147,12 +147,6 @@ function Contents({content}) {
         }))
     }
 
-    const setMockupSize = e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mockup.size = e
-        }))
-    }
-
 
     // video type
     const changeVideoOption = e => {
@@ -264,39 +258,45 @@ function Contents({content}) {
     }
 
     const returnMockup = () => {
-        switch(content.mockup.type){
-            case 'mobile':
-                return(
-                    <>
-                        <FuncContentImg text='목업' subtext="최대 10MB 업로드 가능" value={content.mockup.file} func={uploadImg}/>
-                        <SliderCustom top="크기" text="목업" value={content.mockup.size} func={setMockupSize} max="100"/>
-                    </>
-                )
-            case 'tablet':
-                return(
-                    <>
-                        태블릿
-                    </>
-                )
-            case 'desktop':
-                return(
-                    <>
-                        데스크탑
-                    </>
-                )
-            case 'mobile2':
-                return(
-                    <>
-                        모바일 2대
-                    </>
-                )
-            case 'desk+mob':
-                return(
-                    <>
-                        데스크탑 + 모바일
-                    </>
-                )
-        }
+        return(
+            <>
+                <FuncContentImg text='목업' subtext="최대 10MB 업로드 가능" value={content.mockup.file} func={uploadImg}/>
+                <SliderCustom top="크기" text="목업" value={content.image.size} func={setImgSize} max="100"/>
+            </>
+        )
+        // switch(content.mockup.type){
+        //     case 'mobile':
+        //         return(
+        //             <>
+        //                 <FuncContentImg text='목업' subtext="최대 10MB 업로드 가능" value={content.mockup.file} func={uploadImg}/>
+        //                 <SliderCustom top="크기" text="목업" value={content.image.size} func={setImgSize} max="100"/>
+        //             </>
+        //         )
+        //     case 'tablet':
+        //         return(
+        //             <>
+        //                 태블릿
+        //             </>
+        //         )
+        //     case 'desktop':
+        //         return(
+        //             <>
+        //                 데스크탑
+        //             </>
+        //         )
+        //     case 'macbook':
+        //         return(
+        //             <>
+        //                 맥북
+        //             </>
+        //         )
+        //     case 'iphone':
+        //         return(
+        //             <>
+        //                 아이폰
+        //             </>
+        //         )
+        // }
     }
 
     const ImageTrue = () => {
@@ -399,20 +399,24 @@ function Contents({content}) {
                 return(
                     <>
                    
-                    <div className="edit-element">디바이스</div> 
+                    <div className="edit-element">
+                        <div className="func-title">
+                         디바이스
+                        </div>
+                    </div> 
                     <div className='mockup-select'>
                     <Select  
-                    className='select_list'
-                    onChange={e=>mockOption(e.target.value)}
-                    bg='white'
-                    borderColor='rgba(0, 0, 0, 0.08)'
-                    color='gray'
+                        className='select_list'
+                        onChange={e=>mockOption(e.target.value)}
+                        bg='white'
+                        borderColor='rgba(0, 0, 0, 0.08)'
+                        color='gray'
                     >
                         <option value='mobile' >모바일</option>
                         <option value='tablet'>태블릿</option>
                         <option value='desktop'>데스크탑</option>
-                        <option value='mobile2'>모바일 2대</option>
-                        <option value='desk+mob'>데스크탑 + 모바일</option>                       
+                        <option value='iphone'>아이폰</option>
+                        <option value='macbook'>맥북</option>                       
                     </Select>
                     </div>
                     {returnMockup()}

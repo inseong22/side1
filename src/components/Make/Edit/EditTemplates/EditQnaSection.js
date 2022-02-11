@@ -59,18 +59,15 @@ function EditQnaSection({content, category}) {
                             <RadioCustom options={layoutOptions} value={content.layout} func={e => changeLayoutOption(e)} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="QnA">
-                        <div style={{marginTop: '40px'}}/>
-                        <RadioCustom text="기본 모양" options={shapeOptions} value={content.qna.shape} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].qna.shape = e;
-                        }))} />
-                        <div style={{marginTop: '40px'}}/>
-                        <ColorCustom text="질문" value={content.qna.question} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].qna.question = e;
-                        }))} />
-                        <div style={{marginTop: '40px'}}/>
-                        <ColorCustom text="답변" value={content.qna.answer} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].qna.answer = e;
-                        }))} />
+                            <RadioCustom text="기본 모양" options={shapeOptions} value={content.qna.shape} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].qna.shape = e;
+                            }))} />
+                            <ColorCustom text="질문" value={content.qna.question} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].qna.question = e;
+                            }))} />
+                            <ColorCustom text="답변" value={content.qna.answer} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].qna.answer = e;
+                            }))} />
                         </OpenCloseCustom>
 
                     </div>

@@ -43,16 +43,27 @@ function FuncImageCarousel({content}) {
         speed: 500, // 애미메이션의 속도, 단위는 milliseconds
         slidesToShow: 1, // 한번에 몇개의 슬라이드를 보여줄 지
         slidesToScroll: 1, // 한번 스크롤시 몇장의 슬라이드를 넘길지
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,	
+        // nextArrow: <NextArrow />,
+        // prevArrow: <PrevArrow />,
+        autoplay: true,
+        autoPlaySpeed: 5000,	
       };
 
     return (
         <div className="slide-box" style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}>
             <Slider {...settings}> 
-            <img className="image" ref={imgRef} src={`${content.slide_img.slide1}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
-            <img className="image" ref={imgRef} src={`${content.slide_img.slide2}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/> 
-            <img className="image" ref={imgRef} src={`${content.slide_img.slide3}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
+            {
+                (content.slide_img.slide1) &&
+                    <img className="image" ref={imgRef} src={`${content.slide_img.slide1}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
+            }
+            {
+                (content.slide_img.slide2) &&
+                    <img className="image" ref={imgRef} src={`${content.slide_img.slide2}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
+            }
+            {
+                (content.slide_img.slide3) &&
+                    <img className="image" ref={imgRef} src={`${content.slide_img.slide3}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
+            }
             </Slider>
         </div>
     )

@@ -9,7 +9,7 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import EditDesign from './tools/EditDesign'
 
 const alignOptions = [
-    { label: '왼쪽', value: 'left' },
+    { label: '왼쪽', value: 'start' },
     { label: '중앙', value: 'center' },
 ]
 const layoutOptions = [
@@ -19,20 +19,25 @@ const layoutOptions = [
     { label: '5', value: 5},
 ]
 
-const backOptions = [
-    { label: '단색', value: 'color' },
+const featureOptions = [
+    { label: '아이콘', value: 'icon' },
     { label: '이미지', value: 'image'},
 ]
 
 const shapeOptions = [
     { label: '사각형', value: 0 },
     { label: '라운드', value: 5 },
-    { label: '원형', value: 20 },
+    { label: '원형', value: 500 },
 ]
 const imageSizeOptions = [
-    { label: 'Small', value: 33 },
-    { label: 'Medium', value: 50 },
-    { label: 'Large', value: 100 },
+    { label: 'Small', value: 50 },
+    { label: 'Medium', value: 100 },
+    { label: 'Large', value: 150 },
+]
+const imageSmallSizeOptions = [
+    { label: 'Small', value: 55 },
+    { label: 'Medium', value: 70 },
+    { label: 'Large', value: 90 },
 ]
 
 function EditFeaturesSection({content, category}) {
@@ -55,9 +60,9 @@ function EditFeaturesSection({content, category}) {
         },
         {
             title:'이미지',
-            use:content.featureImage.use,
+            use:content.element.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].featureImage.use = !content.featureImage.use;
+                draft[state.secNum].element.use = !content.element.use;
             }))
         },
         {
@@ -100,17 +105,32 @@ function EditFeaturesSection({content, category}) {
                         <RadioCustom text="단 개수" options={layoutOptions} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].layout = e;
                             }))} />
-                            <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].align = e;
-                            }))} />
+                        <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].align = e;
+                        }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="이미지">
-                            <RadioCustom text="프레임" button value={content.featureImage.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].featureImage.borderRadius = e;
+                            <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].element.type = e;
                             }))} />
-                            <RadioCustom text="크기" value={content.featureImage.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].featureImage.size = e;
+                            {
+                                content.element.type === 'icon' && 
+                                <ColorCustom text="색상" value={content.element.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.backgroundColor = e;
+                                }))} />
+                            }
+                            <RadioCustom text="프레임" button value={content.element.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].element.borderRadius = e;
                             }))} />
+                            {
+                                content.element.type === 'icon' ? 
+                                <RadioCustom text="크기" value={content.element.size} options={imageSmallSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.size = e;
+                                }))} /> : 
+                                <RadioCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.size = e;
+                                }))} />
+                            }
                         </OpenCloseCustom>
                         <OpenCloseCustom title="설명글">
                             <ColorCustom text="색상" value={content.featureText.color} func={e => action.setContents(produce(state.contents, draft => {

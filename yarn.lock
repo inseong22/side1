@@ -6463,6 +6463,11 @@
     "defined" "^1.0.0"
     "minimist" "^1.1.1"
 
+"devices.css@^0.1.15":
+  "integrity" "sha1-bk+hLAK0kPcQEfi+7una6QrDrYA="
+  "resolved" "https://registry.npmjs.org/devices.css/-/devices.css-0.1.15.tgz"
+  "version" "0.1.15"
+
 "didyoumean@^1.2.2":
   "integrity" "sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw=="
   "version" "1.2.2"

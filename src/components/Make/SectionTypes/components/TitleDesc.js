@@ -25,6 +25,7 @@ function TitleDesc({content}) {
                             textAlign:`${content.title.align}`,
                             resize:'none'
                         }}
+                        spellcheck="false"
                     />
                 </div>
             }
@@ -45,6 +46,7 @@ function TitleDesc({content}) {
                             textAlign:`${content.desc.align}`,
                             resize:'none'
                         }}
+                        spellcheck="false"
                     />
                 </div>
             }

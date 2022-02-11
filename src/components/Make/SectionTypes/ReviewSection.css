@@ -8,6 +8,10 @@
 }
 
 .df-margin{
+    margin-top:5px;
+    width:100%;
+}
+.df-margin-big{
     margin-top:8px;
     width:100%;
 }

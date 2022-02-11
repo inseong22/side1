@@ -8,6 +8,11 @@
 }
 
 .edit-element__title{
-    font-size:18px;
-    color:var(--main-black-01);
+    font-size: var(--func-title);
+    font-weight: 700;
+}
+
+.element_list_text{
+    font-size: var(--func-subtitle);
+    font-weight: 700;
 }

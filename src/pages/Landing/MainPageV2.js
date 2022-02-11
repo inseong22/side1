@@ -8,6 +8,8 @@ import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import { ToolOutlined, PieChartOutlined, MobileOutlined, GroupOutlined, FormatPainterOutlined, BranchesOutlined, PicLeftOutlined, AlertOutlined, PictureOutlined, FormOutlined } from '@ant-design/icons';
 import { motion } from "framer-motion"
 import Icons from '../../components/Make/tools/Icons'
+import AskLoginModal from './tools/AskLoginModal'
+import NavBarV2 from '../NavAndFooter/NavBarV2'
 
 import s1 from '../../tools/img/surfee1.png';
 
@@ -56,6 +58,7 @@ const ourInfos = [
 
 function MainPageV2({history, isLoggedIn, userObj}) {
     const [email,setEmail] = useState("");
+    const [askOpen,setAskOpen] = useState(false);
     const targets = useRef(null)
     // const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -112,7 +115,6 @@ function MainPageV2({history, isLoggedIn, userObj}) {
 
     const SomeoneClickMoveToMake = async () => {
         const isNew = localStorage.getItem('isNew');
-        console.log("isNew", isNew);
         if(isNew === null){
             localStorage.setItem('isNew', false);
             if(userObj !== null){
@@ -152,6 +154,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
 
     return (
         <>
+        <NavBarV2 history={history} isLoggedIn={isLoggedIn} />
         <div className="main-page-container">
             <div className="main-page-section-topbottom" style={{backgroundColor:'white'}}>
                 <div className="main-section-left-topbottom" style={{color:'black'}}>
@@ -260,7 +263,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     <div style={{flexDirection:'row', display:'flex', justifyContent:'center', width:'100%', marginTop:'5%'}}>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span>Let's Build Your Page!</span>
-                            <Link to="/make" className="apply-button-v2" onClick={() => SomeoneClickMoveToMake()}>제작하러가기</Link>
+                            <div to="/make" className="apply-button-v2" onClick={() => setAskOpen(true)}>제작하러가기</div>
                         </div>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span style={{color:'#6a63f7'}}>이미 제작을 완료하셨다면</span>
@@ -271,6 +274,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             </div>
         </div>
         <Footer />
+        <AskLoginModal open={askOpen} setOpen={setAskOpen} SomeoneClickMoveToMake={SomeoneClickMoveToMake}/>
         </>
     )
 }

@@ -22,7 +22,7 @@ export function EditColor({onChange, value}) {
     const {stateC, actionC} = useContext(MakeContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [color, setColor] = useColor("hex", value);
     const [open, setOpen] = useState(null);
-    const popover = useRef();
+
     const handleClick = () => {
         setOpen(!open);
     };
@@ -70,7 +70,7 @@ export function EditColor({onChange, value}) {
                 </PopoverTrigger>
                 <PopoverContent>
                     <PopoverArrow />
-                    
+                    <PopoverHeader>색상을 선택하세요.</PopoverHeader>
                     <PopoverBody>
                         <div className="center-column">
                             <ColorPicker
@@ -84,6 +84,7 @@ export function EditColor({onChange, value}) {
                                 hideHSV
                                 alpha
                             />
+                            <div style={{width:'95%', textAlign:'left'}}>최근에 사용한 색상</div>
                             <div className="center-row">
                                 {stateC.usedColors.map((item, index) => {
                                     return(
@@ -102,59 +103,6 @@ export function EditColor({onChange, value}) {
                     </PopoverBody>
                 </PopoverContent>
                 </Popover>
-{/* 
-            <Popover
-                id={Boolean(colorShow) ? 'simple-popover' : undefined} // 수정
-                open={Boolean(colorShow)} // 수정
-                anchorEl={colorShow} // 수정 // 수정
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                }}
-                transformOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-
-                onClose={() => {
-                    setColorShow(null)
-                    if(usedColors.includes(value)){
-                        return
-                    }else{
-                        if(usedColors.length > 4){
-                            usedColors.shift()
-                            setUsedColors([...usedColors, value])
-                        }else{
-                            setUsedColors([...usedColors, value])
-                        }
-                    }
-                }}>
-                <div>
-                    <div>
-                        <div>
-                            <Chrome
-                                color={value}
-                                // placement={GithubPlacement.Right}
-                                onChange={(color) => {
-                                    onChange(color.hex);
-                                }}
-                            />
-                        </div>
-                        <div>
-                            사용한 색상
-                        </div>
-                        <div className="center-row">
-                            {usedColors.map((item, index) => {
-                                return(
-                                    <div className="color-button" style={{backgroundColor:`${item}`}} onClick={() => onChange(item)} key={index}>
-                                        {item}
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </div>
-            </Popover> */}
         </div>
         </ChakraProvider>
     )

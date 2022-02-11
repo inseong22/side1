@@ -18,7 +18,7 @@ function ElementsTable({elements, content}) {
                         return(
                             <div className="element__container" key={index}>
                                 <EditCheckbox value={item.use} func={item.func} />
-                                <div>
+                                <div className="element_list_text">
                                     {item.title}
                                 </div>
                             </div>

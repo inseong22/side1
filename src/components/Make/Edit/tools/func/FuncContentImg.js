@@ -10,11 +10,11 @@ function FuncContentImg({text, value, func, removeFunc, subtext}) {
         <div className="edit-element">
         <div className="top-img-div">
         <div className="put-img-div" 
-        onClick={inputClick}
-        onChange={e => func(e)}
-        id='attach'
-        style={{backgroundImage: `url(${value}`}}
-        >
+            onClick={inputClick}
+            onChange={e => func(e)}
+            id='attach'
+            style={{backgroundImage: `url(${value}`}}
+            >
             {/* <div 
                 className="img-remove"
                 onClick={ e => removeFunc(e) }

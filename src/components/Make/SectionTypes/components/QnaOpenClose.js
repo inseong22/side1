@@ -1,11 +1,15 @@
-import React, {useState} from 'react'
+import React, { useContext, useState, useRef } from 'react'
+import { MyContext } from '../../../../pages/Make/MakePageV2'
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import TextAuto from './TextAuto'
+import produce from 'immer'
 import { ChakraProvider } from '@chakra-ui/react'
+import './QnaOpenClose.css'
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -66,17 +70,26 @@ const OpenCloseCustom = (props) => {
   /**
    * title, tooltip, preseen 설정 가능
    */
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(props.open)
+  const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
   return (
     <div className="one-element">
-      <div className="accordion">
-        <div className="accordion__header" onClick={() => setOpen(!open)}>
+      <div className={props.type === 'card' ? 'accordion__card' : 'accordion__plain'}>
+        <div className="accordion__header-qna" onClick={() => setOpen(!open)}>
           <div className="edit-element">
             <ChakraProvider>
             <div className="accordion__title">
-              <div className="title_text">
-              {props.title}
+              <div className="title_text qna__question" style={{color:`${props.color}`, width:'100%'}}>
+              <span className="qna__word">Q.</span>
+                <div style={{width:'100%'}}>
+                  <TextAuto 
+                  value={props.title} 
+                  onChange={e => action.setContents(produce(state.contents, draft => {
+                      draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
+                  }))}
+                  color={props.color} align="start" />
+                  </div>
               </div> 
             </div>
             </ChakraProvider>
@@ -84,13 +97,9 @@ const OpenCloseCustom = (props) => {
               { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
             </div>
           </div>
-          { props.preseen && 
-            <div className="edit-element">
-              {props.preseen}
-            </div> }
         </div>
-        <div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`}}>
-          {props.children}
+        <div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>
+         {props.children}
         </div>
       </div>
     </div>
