@@ -8,8 +8,9 @@ import googlelogo from '../googlelogo.png'
 import s1 from '../../../tools/img/surfee1.png';
 import Footer from '../../NavAndFooter/Footer';
 import {Link} from 'react-router-dom';
+import NavBarV2 from '../../NavAndFooter/NavBarV2'
 
-function LoginPage({history}) {
+function LoginPage({history, isLoggedIn}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [done, setDone] = useState(false);
@@ -81,6 +82,7 @@ function LoginPage({history}) {
         </div>
         :
         <div>
+        <NavBarV2 history={history} isLoggedIn={isLoggedIn}/>
         <div className="login-container">
             <div className="login-container__container">
                 <div className="login__inner">
@@ -95,7 +97,6 @@ function LoginPage({history}) {
                             Email
                         </span>
                         <Input 
-                            type="text" 
                             className="login-input"
                             placeholder="아이디를 입력해주세요." 
                             required

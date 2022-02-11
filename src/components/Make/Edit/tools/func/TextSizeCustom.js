@@ -52,13 +52,19 @@ export function NumberInputCustom({value, func}) {
     )
 }
 
-function TextSizeCustom({text, value, func, desc}) {
+function TextSizeCustom({text, value, func, desc, options}) {
     return (
         <div className="edit-element">
             <div className="edit-element__one" style={{flexDirection: 'column'}}>
                 <div className="edit-element__left">{text}</div>
                 <div className="edit-element__right" style={{flexDirection: 'row'}}>
                     {
+                        options ? 
+                        <RadioCustom 
+                            options={options}
+                            onChange={e => func(e)}
+                            value={value}
+                        /> :
                         desc ? 
                         <RadioCustom 
                             options={subTextSizeOptions}

@@ -1,11 +1,11 @@
 const commons = {
     layout: 1,
     backgroundColor:'#ffffff',
-    backgroundOpacity:1,
     backgroundType:'color',
     backgroundImage:{
         use:false,
         attachment:'',
+        overlay:false,
     },
     title:{
         use:true,
@@ -22,7 +22,7 @@ const commons = {
         color: '#000000'
     },
     contents:{
-        use: false,
+        use: true,
         type: 'image',
     },
     padding:{
@@ -33,6 +33,18 @@ const commons = {
         use:true,
         type:'none',
     },
+    box:{
+        use:false,
+        backgroundColor:'#6CCAD0',
+        borderRadius:5,
+    },
+    responsive:{
+        mobile:true,
+        pc:true,
+    }
+}
+
+const contents = {
     image:{
         oneImg:true,
         type:'image',
@@ -49,18 +61,18 @@ const commons = {
     },
     video:{
         use: false,
+        youtube: false,
         type: 'base',
         file: '',
-        youtube: false,
         link: '',
         auto: true,
     },
     mockup: {
         use: false,
-        type: '',
+        type: 'mobile',
+        // mobile, tablet, desktop, mobile2, desk+mob 있음
         file: '',
         file2: '',
-        size: 200,
     },
     mobile: {
         use: true,
@@ -90,32 +102,54 @@ const commons = {
         size1: 100,
         size2: 400,
     },
+}
+
+const element = {
+    use:true,
+    type:'image',
+    backgroundColor:'#6CCAD0',
+    borderRaidus:5,
+    size:50,
+}
+
+const button = {
     button:{
         use : true,
-        title:'버튼입니다.',
-        backgroundColor:'#ffffff',
-        buttonTemplate:1,
-        func:1,
-        link:"https://surfee.co.kr",
-        first:true,
-        second:false,
-        align:'0',
+        ctaText:'CTA 버튼',
+        ghostText:'고스트 버튼',
+        align:'start',
         ctaUse:true,
         ctaOption: 'link',
         ghostOption: 'link',
         ctaLink:'',
+        ctaApply: '',
         ghostUseOrLink: true, 
-        ghostLink:'',
         ghostUse:false,
+        ghostLink:'',
+        ghostApply: '',
+    },
+    appButton:{
+        use: true,
+        apple: '',
+        google: ''
     },
     ctaApplyInputs: [],
     ghostApplyInputs: [],
+    caution:{
+        use:true,
+        color: '#000000',
+        align: '',
+        size: 10,
+        text:'조심하세요',
+    }
 }
 
 export const base = [
     {
         // 공통적으로 들어갈 확률이 높은 것들
         ...commons,
+        ...contents,
+        ...button,
         name:'메인',
         sectionTypeName:'HeroSection',
         paddingSize:'',
@@ -123,152 +157,55 @@ export const base = [
         paddingRight:'',
         paddingCustom: false,
         layout:1,
-        image:{
-            oneImg:true,
-            type:'image',
-            attachment:'',
-            border:0,
-            size:70,
-            slide:false,            
-        },
-        slide_img:{
-            slide1: '',
-            slide2: '',
-            slide3: '',
-        },
-        video:{
-            use: false,
-            type: 'base',
-            file: '',
-            youtube: false,
-            link: '',
-            auto: true,
-        },
-        mockup: {
-            use: false,
-            type: 'mobile',
-            file: '',
-            file2: '',
-            size: 200,
-        },
-        button:{
-            use : true,
-            ctaText:'CTA 버튼',
-            ghostText:'고스트 버튼',
-            align:'start',
-            ctaUse:true,
-            ctaOption: 'link',
-            ghostOption: 'link',
-            ctaLink:'',
-            ctaApply: '',
-            ghostUseOrLink: true, 
-            ghostUse:false,
-            ghostLink:'',
-            ghostApply: '',
-        },
-        contents:{
-            use:true,
-        },
-        appButton:{
-            use: true,
-            apple: '',
-            google: ''
-        },
     },
     {
         ...commons,
+        ...contents,
         name:'디테일',
         sectionTypeName:'DetailSection',
-        sectionTypeNumber:2,
-        templateNumber:1,
-        contents:{
-            use:true,
-        },
-        titles:{
-            title:'<p>여기서 타이틀을 입력rhrh</p>',
-            font:'Pretendard-Regular',
-        },
-        image:{
-            attachment:'',
-            width:70,
-            shadow: true,
-            shadowValue: "2px 4px 20px #E8F0F9"
-        },
-        appButton:{
-            use: true,
-            apple: '',
-            google: ''
-        },
+        paddingSize:'',
+        paddingLeft:'',
+        paddingRight:'',
+        paddingCustom: false,
+        layout:1,
     },
     {
         ...commons,
+        ...contents,
+        ...button,
         name:'CTA',
         sectionTypeName:'CtaSection',
-        sectionTypeNumber:9,
-        templateNumber:1,
-        width:90,
-        attachment:'',
-        backgroundImage:{
-            use:false,
-            attachment:'',
-        },
-        button:{
-            use:true,
-        },
-        inputs:[],
-        appButton:{
-            use: true,
-            apple: '',
-            google: ''
-        },
     },
     {
         ...commons,
+        ...button,
         name:'신청',
         sectionTypeName:'ApplySection',
-        applyButton:{
-            use:true,
-            inputs:[],
-        },
-        caution:{
-            use:true,
-            color: '#000000',
-            align: '',
-            size: 10,
-        }
     },
     {
         ...commons,
-        name:'앱다운로드',
+        ...button,
+        button:{
+            ...button.button,
+            ctaUse:false,
+            ghostUse:false,
+        },
+        name:'앱 다운로드',
         sectionTypeName:'AppDownloadSection', 
-        appButton:{
-            use:true,
-            link:'',
-        },   
-        caution:{
-            use:true,
-            color: '#000000',
-            align: '',
-            size: 10,
-        },
     },
     {
         ...commons,
+        element:element,
         name:'특징',
         sectionTypeName:'FeaturesSection',
         align:'start',
-        featureImage:{
-            use:true,
-            borderRaidus:0,
-            size:50,
-        },
         featureText:{
             use:true,
             titleUse:true,
             descUse:true,
             color:'#000000',
         },
-        features:[
+        elements:[
             {
                 icon:'',
                 attachment:'',
@@ -276,11 +213,13 @@ export const base = [
                 desc:'Set up cookie banners that help you respect your visitor\'s privacy. \n This is especially important for Europe.',
             },
             {
+                icon:'',
                 attachment:'',
                 title:'Translate your website',
                 desc:'Easily manage your website in multiple languages. \n With this feature you can \n offer your site to everyone.',
             },
             {
+                icon:'',
                 attachment:'',
                 title:'Protect your content',
                 desc:'Secure your entire website or \n single pages with passwords to protect it from unwanted eyes.',
@@ -289,21 +228,16 @@ export const base = [
     },
     {
         ...commons,
+        element:element,
         name:'리뷰/추천',
         sectionTypeName:'ReviewSection',
-        sectionTypeNumber:3,
-        templateNumber:1,
+        align:'start',
         numOfReviews:3,
         ratingColor:'red',
-        reviewImage:{
-            use:true,
-            border:0,
-            size:30,
-        },
         rating:{
             use:true,
-            color: '#000000',
-            size: 30,
+            color: '#ffd23a',
+            size: 15,
         },
         writer:{
             use:true,
@@ -313,20 +247,26 @@ export const base = [
             use:true,
             color: '#000000',
         },
-        reviews:[
+        elements:[
             {
+                icon:'',
+                attachment:'',
                 title:'1의 타이틀',
                 desc:'전에 어떤 분이 저희 웹사이트 디자이너 고용해서 만들었냐고 물어보시더라구요.(웃음) 우리가 필요한 기능들을 커스터마이징 할 수 있는 아임웹 디자인 모드가 정말 좋았어요. 해외 브랜드 사이트 같은 느낌도 많이 들고요.',
                 rating:4.8,
                 writer:'NOT OURS, 신하나 마케터 인터뷰',
             },
             {
+                icon:'',
+                attachment:'',
                 title:'2의 타이틀',
                 desc:'기술과 전자제품을 개발하는 회사답게 신뢰감가고 정돈된 모습을 보여주고자 했어요. 배경과 폰트 등 톤앤매너를 디테일한 부분까지 클릭 한번으로 원하는 디자인을 구현할 수 있어 좋았던 것 같아요.',
                 rating:5,
                 writer:'duit, 아혜진 브랜드 매니저 인터뷰',
             },
             {
+                icon:'',
+                attachment:'',
                 title:'3의 타이틀',
                 desc:'실제로 주변에 아임웹을 많이 소개했는데요. 요즘에는 누구나 개인 홈페이지를 만들고 싶어하는 것 같아요. 블로그나 텀블러 등의 소셜 프로그램은 완벽한 웹사이트가 될 순 없고 결국 차별화된 나만의 웹사이트를 원하게 되죠.',
                 rating:4.6,
@@ -367,6 +307,7 @@ export const base = [
     },
     {
         ...commons,
+        element:element,
         name:'갤러리',
         sectionTypeName:'GallerySection',
         galleryImg:{
@@ -376,28 +317,54 @@ export const base = [
         },
         card:{
             use:true,
+            color:'#ffffff',
+            shadow:false,
+            border:false,
         },
         text:{
             use:true,
             color: '#000000',
             align: ''
         },
+        elements:[
+            {
+                attachment:'',
+                text:'1의 타이틀',
+            },
+            {
+                attachment:'',
+                text:'2의 타이틀',
+            },
+            {
+                attachment:'',
+                text:'3의 타이틀',
+            }
+        ]
     },
     {
         ...commons,
+        ...contents,
+        contents:{
+            use:true,
+            type:'video',
+        },
+        video:{
+            ...contents.video,
+            type:'base',
+        },
         name:'동영상',
         sectionTypeName:'VideoSection',
-        video:{
-            use:true,
-        },
         explanation:{
             use:true,
             color: '#000000',
-            align: ''
-        }
+            align: '',
+            text:'비디오에 대한 추가 설명을 작성해보세요.'
+        },
     },
     {
         ...commons,
+        ...contents,
+
         name:'목업',
         sectionTypeName:'MockupSection',
     },
@@ -490,11 +457,15 @@ export const defaults = {
         color:'#63B3F7',
         fta:{
             width:50,
-            borderRadius:5,
+            borderRadius:0,
             use:false,
-            backgroundColor:'#ffffff',
+            backgroundColor:'#6CCAD0',
+            color:'#ffffff',
+            border:false,
+            borderColor:'#000000',
             text:'fta 버튼',
             link:'',
+            shadow:false,
         },
         cta:{
             borderRadius:5,

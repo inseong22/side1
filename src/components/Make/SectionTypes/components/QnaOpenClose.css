@@ -1,0 +1,37 @@
+.qna__word{
+    font-weight:bold;
+    font-size: 27px;
+    margin-right:5px;
+}
+
+
+.accordion__card{
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: var(--default-shadow-01);
+    width:95%;
+    box-sizing: border-box;
+    /* 전체 온오프 패딩 조절 */
+    padding:10px 15px;
+}
+
+
+.accordion__plain{
+    box-sizing: border-box;
+    width:95%;
+    box-sizing: border-box;
+    /* 전체 온오프 패딩 조절 */
+    padding:10px 15px;
+    border-bottom: 1px solid var(--main-gray);
+}
+
+.accordion__header-qna:hover{
+    color:black;
+}
+
+.qna__answer{
+    font-size:var(--feature-desc-size);
+}
+.qna__question{
+    font-size:var(--feature-title-size);
+}

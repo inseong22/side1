@@ -11,7 +11,7 @@ const buttonOptions = [
     {label: '신청', value: 'apply'},
 ]
 
-function AddGhostButton({content}) {
+function AddGhostButton({content, num}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const ghostOpen = () => {
@@ -40,7 +40,7 @@ function AddGhostButton({content}) {
                 return(
                     <>
                     {
-                        content.ghostApplyInputs.length > 1 ?  
+                        content.ghostApplyInputs.length > num ?  
                         <ApplyInputCustom disabled /> 
                         :
                         <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {
@@ -52,20 +52,18 @@ function AddGhostButton({content}) {
                     <>
                         { content.ghostApplyInputs.map((item, index) => {
                                 return(
-                                    <div key={index}>
-                                        <ApplyInputCustom made value={item} func={e => action.setContents(produce(state.contents, draft => {
-                                            if(index === 0 ){
-                                                draft[state.secNum].ghostApplyInputs.shift()
-                                            }else{
-                                                draft[state.secNum].ghostApplyInputs.splice(index, index)
-                                            }
-                                        }))} />
-                    </div>
+                                    <ApplyInputCustom made value={item} func={e => action.setContents(produce(state.contents, draft => {
+                                        if(index === 0 ){
+                                            draft[state.secNum].ghostApplyInputs.shift()
+                                        }else{
+                                            draft[state.secNum].ghostApplyInputs.splice(index, index)
+                                        }
+                                    }))} key={index}/>
                                 )
                             })
                         } 
                     </> }
-                    <div className="mid-command-light"> 최대 5개의 신청 박스만 생성 가능합니다. 
+                    <div className="mid-command-light"> 최대 {num}개의 신청 박스만 생성 가능합니다. 
                     </div>
                     </>
                 )

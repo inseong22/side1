@@ -46,8 +46,7 @@
 }
 
 .fta-button{
-    border-radius:3px;
-    border:none;
+    font-size:var(--feature-desc-size);
 }
 
 .font-done-button{
@@ -89,4 +88,16 @@
     
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
     border-radius: 13px;
+}
+
+.icon-select__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    flex-wrap:wrap;
+    z-index:2000;
 }

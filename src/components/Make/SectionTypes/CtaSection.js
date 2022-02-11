@@ -1,36 +1,42 @@
 import React, {useContext, useState} from 'react'
-import Editor from '../tools/Editor'
 import './CtaSection.css'
 import { motion } from 'framer-motion';
-import TitleDesc from './components/TitleDesc'
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
+import TitleDesc from './components/TitleDesc'
+import ReturnButton from './components/ReturnButton'
+import AnimationDiv from './components/AnimationDiv'
+import TextAuto from './components/TextAuto'
+import produce from 'immer'
 
 function CtaSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const returnCtaSection = () => {
-        return(
-            <div className="center-column">
-                <div className="center-row mt30">
-                    <div style={{marginRight:'1%'}}>
-                        <input className="input" />
-                    </div>
-                    <button className="action-button" style={{backgroundColor:`${content.button.backgroundColor}`}}>
-                        {content.button.title}
-                    </button>
-                </div>
-            </div>
-        )
+    const returnLayout = {
+        flexDirection:`${content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : 'column'}`,
     }
-
+    
     return (
         <>
-            <motion.div className="template" style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}
-            data-aos={content.animation.type} aos-duration="2000">
-                <TitleDesc content={content} />
-                {returnCtaSection()}
-            </motion.div>
+            <div style={{ width:'100%', height:'100%'}}>
+                <AnimationDiv content={content} returnLayout={returnLayout}>
+                    <div className="text__container">
+                        <TitleDesc content={content} />
+                    </div>
+                    <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
+                    <ReturnButton content={content} />
+                    {content.caution.use && 
+                        <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                            <TextAuto className="text-input" small value={content.caution.text} color = {content.caution.color} align = {content.caution.align}
+                                onChange={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].caution.text = e.currentTarget.value;
+                                }))}  
+                            />
+                        </div>
+                    }
+                    </div>
+                </AnimationDiv>
+            </div>
         </>
     )
 }

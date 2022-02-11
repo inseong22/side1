@@ -25,6 +25,9 @@ import lodash from 'lodash'
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import { isMobile } from 'react-device-detect';
 import {ChakraProvider} from '@chakra-ui/react'
+import {Prompt} from 'react-router-dom';
+import produce from 'immer'
+import TextAuto from '../../components/Make/SectionTypes/components/TextAuto'
 
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
@@ -63,7 +66,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     // local storage 저장을 위한 contents 재설정 - video의 용량 초과 때문에 일단..ㅠ
     const arr = lodash.cloneDeep(base[0])
     delete arr.video.file
-    const [contents, setContents] = useState([ arr, lodash.cloneDeep(base[1]), lodash.cloneDeep(base[6]), lodash.cloneDeep(base[7]) ])
+    const [contents, setContents] = useState([ arr, lodash.cloneDeep(base[1]), lodash.cloneDeep(base[4]), lodash.cloneDeep(base[5]), lodash.cloneDeep(base[6]) ])
 
     // 네비게이션
     const [navi, setNavi] = useState(lodash.cloneDeep(defaults.navi));
@@ -209,14 +212,32 @@ const MakePageV2 = ({history, userObj}, props) => {
         )
     })
 
-    const backgroundClick = e => {
-        // if(e.target.className === "make-left-landing" || e.target.className === "for-section-hover"){
-        //     setSecNum(CONTENTSSECNUM)
-        //     setAddingSectionAt(NOTADDING);
-        // }
-        // else{
-        //     return;
-        // }
+    const FTA = () => {
+        return(
+            <>
+            { 
+            ( setting.fta.use ) &&
+            <div className="fta__container">
+                <button className="fta-button" 
+                    style={{
+                        backgroundColor:`${setting.fta.backgroundColor}`, 
+                        width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, 
+                        borderRadius:`${setting.fta.shape}px`, 
+                        border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
+                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
+                    }}>
+                    <TextAuto 
+                        small
+                        value={setting.fta.text} 
+                        onChange={e => setSetting(produce(setting, draft => {
+                            draft.fta.text = e.currentTarget.value;
+                        }))}
+                        color={setting.fta.color} align="center" />
+                </button>
+            </div>
+            }
+            </>
+        )
     }
 
     return (<>
@@ -230,21 +251,28 @@ const MakePageV2 = ({history, userObj}, props) => {
         :
     <>
        <MyContext.Provider value={contextValue}>
-            <NavBarInMakePage 
-                doLoad={doLoad} history={history} userObj={userObj}
-                open={open} setOpen={setOpen}
-                full={full} setFull={setFull}
-                isPhone={isPhone} setIsPhone={setIsPhone} doSave={doSave}
-                nowState={nowState}
-                loading={loading} setLoading={setLoading}
-                navi={navi} foot={foot} setting={setting}
+            <Prompt 
+                when={true}
+                message="작업 중이던 정보들이 저장되지 않을 수 있습니다. 페이지를 떠나시겠습니까?"
             />
-            <div className="make-page-container">
+           {
+               !full &&
+               <NavBarInMakePage 
+                   doLoad={doLoad} history={history} userObj={userObj}
+                   open={open} setOpen={setOpen}
+                   full={full} setFull={setFull}
+                   isPhone={isPhone} setIsPhone={setIsPhone} doSave={doSave}
+                   nowState={nowState}
+                   loading={loading} setLoading={setLoading}
+                   navi={navi} foot={foot} setting={setting}
+               />
+           }
+            <div className="make-page-container" style={{paddingTop:`${full ? '0px' : '60px'}`}}>
                 {/* 아래는 제작하는 곳 */}
                 {
                     !full && 
                     <div style={{display:'flex', justifyContent:'center', alignItems: 'center', width:'28vw'}}>
-                        <div className="make-page-make-space" style={{display:`${full ? 'none' : 'flex'}`}}>
+                        <div className="make-page-make-space">
                             <OverflowScrolling className='overflow-scrolling'>
                                 {/* 제작페이지 메인 */}
                                <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
@@ -255,9 +283,12 @@ const MakePageV2 = ({history, userObj}, props) => {
                     </div>
                 }
                 {/* 아래는 미리보기 화면 */}
-                <div className="make-left-landing" onClick={e => backgroundClick(e)} style={{width:`${full ? '100vw' : '72vw'}`}}>
+                <div className="make-left-landing" style={{width:`${full ? '100vw' : '72vw'}`}}>
                     <div className="scroll-container" 
-                        style={{ width:`${full ? '100%' :'95%'}`}}
+                        style={{ 
+                            width:`${full ? '100vw' :'70vw'}`,
+                            paddingBottom:`${full ? '0px' : '30px'}`
+                        }}
                         animate={
                             isPhone ? {
                                 width:['80%', '40%'],
@@ -267,7 +298,7 @@ const MakePageV2 = ({history, userObj}, props) => {
                             } : {}
                         }>
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
-                        <div className="make-tab-preseen" onClick={() => setSecNum(52)}>
+                        {!full && <div className="make-tab-preseen" onClick={() => setSecNum(52)}>
                             <div className="left">
                                 <div className="make-tab-circle" style={{marginLeft:'15px'}}></div>
                                 <div className="make-tab-circle"></div>
@@ -282,8 +313,8 @@ const MakePageV2 = ({history, userObj}, props) => {
                                     https://{setting.urlId}.surfee.co.kr
                                 </div>
                             </div>
-                        </div>
-                        <div ref={targets} className="make-main-page-container" style={{fontSize:`${full ? `${bigfont}` : `${smallfont}`}`, borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
+                        </div>}
+                        <div ref={targets} className="make-main-page-container" style={{fontSize:`${smallfont}`, borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
                             
                             {/* 네비게이션 */}
                             {navi.use && <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} /> }
@@ -295,13 +326,10 @@ const MakePageV2 = ({history, userObj}, props) => {
                             {/* 푸터 */}
                             {foot.use && <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> }                             
 
-                            { ( setting.fta.use ) &&
-                            <div className="fta__container">
-                                <button className="fta-button" style={{backgroundColor:`${setting.fta.backgroundColor}`, width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, borderRadius:`${setting.fta.shape}px`}}>
-                                    {setting.fta.text}
-                                </button>
-                            </div>
-                            }
+                            <FTA />
+                            {full && <div className="cancel-full-screen" onClick={() => setFull(false)}>
+                                전체화면<br/>취소
+                            </div>}
                         </div>
                     </div>
                 </div>
@@ -312,7 +340,7 @@ const MakePageV2 = ({history, userObj}, props) => {
                 <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
                 <LoadingModal loading={loading} />
             </div>
-            <ConfirmCustom open={footerOrNot} setOpen={setFooterOrNot} message={"제작 중이던 페이지가 있습니다. 불러오시겠습니까? 취소 시 이전에 작업하던 내용은 사라집니다."} callback={ loadLocalStorage } />
+            <ConfirmCustom open={footerOrNot} setOpen={setFooterOrNot} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />
         </MyContext.Provider>
         </> }
         </>)

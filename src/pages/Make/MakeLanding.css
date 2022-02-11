@@ -205,7 +205,7 @@
     top:0vh;
     padding-top:8vh;
     height:100vh;
-    z-index: 2;
+    z-index: 5;
 }
 
 .overflow-scrolling {

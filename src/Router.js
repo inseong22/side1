@@ -52,7 +52,6 @@ const AppRouter = ({userObj, isLoggedIn}) => {
         return(
             <Router history={history}>
                 <>
-                <NavBarV2 history={history} isLoggedIn={isLoggedIn} />
                 <div className="Container" style={{ minHeight: 'calc(100vh - 80px)', zIndex:-1 }}>
                 <Switch>
                     <Route exact path="/">
@@ -77,13 +76,13 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                         <FQ history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
                     </Route>
                     <Route path="/login">
-                        <LoginPage history={history}/>
+                        <LoginPage history={history} isLoggedIn={isLoggedIn}/>
                     </Route>
                     <Route path="/customer">
-                        <CustomerPage history={history}/>
+                        <CustomerPage history={history} isLoggedIn={isLoggedIn}/>
                     </Route>
                     <Route path="/register">
-                        <RegisterPage history={history}/>
+                        <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
                     </Route>
                     <Route path="/miracle">
                         <MiracleMorning history={history}/>

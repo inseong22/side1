@@ -6,8 +6,9 @@ import { Input } from 'antd';
 import googlelogo from '../googlelogo.png'
 import s1 from '../../../tools/img/surfee1.png';
 import {Link} from 'react-router-dom';
+import NavBarV2 from '../../NavAndFooter/NavBarV2'
 
-function RegisterPage({history}) {
+function RegisterPage({history, isLoggedIn}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [done, setDone] = useState(false);
@@ -84,6 +85,7 @@ function RegisterPage({history}) {
 
     return (
         <>
+        <NavBarV2 history={history} isLoggedIn={isLoggedIn}/>
         {done ? 
         <div className="login-container">
             <div className="login__inner">

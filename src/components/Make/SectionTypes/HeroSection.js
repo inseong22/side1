@@ -7,9 +7,9 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import TitleDesc from './components/TitleDesc'
 import ImageCarousel from '../Edit/tools/func/FuncImageCarousel'
 import AutosizeInput from 'react-input-autosize';
-
-import appstorebutton from '../../../tools/img/appstorebutton.png'
-import playstorebutton from '../../../tools/img/playstorebutton.png'
+import ImageOrSlide from './components/ImageOrSlide'
+import ReturnButton from './components/ReturnButton'
+import AnimationDiv from './components/AnimationDiv'
 
 import './DetailSection.css'
 import './Default.css'
@@ -273,44 +273,17 @@ function HeroSection({content}) {
         // paddingRight:`${content.layout === 1 ? '0px' : content.layout === 2 ? '30px' : '30px'}`,
     }
 
-    const animationDiv = () => {
-        if(!content.animation.use)
-        return(
-        <>
-            <div style={{display:'flex', ...returnLayout}}
-                // style={{flexDirection: `${state.isPhone ? 'column' : 'row'}`}}
-                >
-                <div className="text__container" style={{marginTop:`${content.layout === 4 ? '30px' : '0px'}`}}>
-                    <TitleDesc content={content} />
-                    {returnButton()}
-                </div>
-                <div className="image__container">
-                    {ImageOrSlide()}
-                </div>
-            </div>
-        </>
-        )
-        else 
-            return(
-                <>
-                <motion.div
-                    style={{display:'flex', ...returnLayout}} 
-                    data-aos={content.animation.type} aos-duration="2000" >
-                    <div className="text__container" style={{marginTop:`${content.layout === 4 ? '30px' : '0px'}`}}>
-                        <TitleDesc content={content} />
-                        {returnButton()}
-                    </div>
-                    <div className="image__container">
-                        {ImageOrSlide()}
-                    </div>
-                </motion.div>
-                </>
-            )
-    }
-    
     return (
         <div style={{ width:'100%', height:'100%'}}>
-            {animationDiv()}
+            <AnimationDiv content={content} returnLayout={returnLayout}>
+                <div className="text__container" style={{marginTop:`${content.layout === 4 ? '30px' : '0px'}`}}>
+                    <TitleDesc content={content} />
+                    <ReturnButton content={content} />
+                </div>
+                <div className="image__container">
+                    <ImageOrSlide content={content} />
+                </div>
+            </AnimationDiv>
         </div>
     )
 }

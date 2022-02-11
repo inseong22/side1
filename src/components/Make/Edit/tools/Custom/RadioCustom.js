@@ -156,8 +156,8 @@ export function EditRadioLayout({options, value, onChange, version}){
 }
 
 export function EditRadioButtom({options, value, onChange}) {
-    const ROUNDBORDER = 3;
-    const CIRCLEBORDER = 100;
+    const ROUNDBORDER = 5;
+    const CIRCLEBORDER = 500;
 
     return (
         <div className="radio-container">
@@ -229,7 +229,7 @@ const RadioCustom = ({text, options, value, func, button, layout, version}) => {
             )
         }else{
             return(
-                <div className="edit-element">
+            <div className="edit-element">
                 <div className="edit-element__one" style={{flexDirection: 'column'}}>
                     {text ? 
                         <div className="edit-element__left">{text}</div> 
