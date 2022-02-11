@@ -69,7 +69,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
 
             case 'CtaSection':
                 return (
-                    <EditCtaSection content={content} category={state.category}/>
+                    <EditCtaSection content={content} category={state.category} type="cta"/>
                 )
 
             // 리뷰들인 경우 편집화면
@@ -86,13 +86,13 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
 
             case 'ApplySection':
                 return(
-                    <EditApplySection content={content} category={state.category}/>
+                    <EditCtaSection content={content} category={state.category} type="apply"/>
 
                 )
             
             case 'AppDownloadSection':
                 return(
-                    <EditAppDownloadSection content={content} category={state.category}/>
+                    <EditCtaSection content={content} category={state.category} type="appDownload"/>
 
                 )
     

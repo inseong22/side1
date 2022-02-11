@@ -4,19 +4,16 @@ import { motion } from 'framer-motion';
 
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import TitleDesc from './components/TitleDesc'
-import ImageCarousel from '../Edit/tools/func/FuncImageCarousel'
-import AutosizeInput from 'react-input-autosize';
-import ImageOrSlide from './components/ImageOrSlide'
 import ReturnButton from './components/ReturnButton'
 import AnimationDiv from './components/AnimationDiv'
+import TextAuto from './components/TextAuto'
+import produce from 'immer'
 
 function CtaSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnLayout = {
         flexDirection:`${content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : 'column'}`,
-        // paddingLeft:`${content.layout === 1 ? '30px' : content.layout === 2 ? '0px' : '30px'}`,
-        // paddingRight:`${content.layout === 1 ? '0px' : content.layout === 2 ? '30px' : '30px'}`,
     }
     
     return (
@@ -26,7 +23,18 @@ function CtaSection({content}) {
                     <div className="text__container">
                         <TitleDesc content={content} />
                     </div>
+                    <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
                     <ReturnButton content={content} />
+                    {content.caution.use && 
+                        <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                            <TextAuto className="text-input" small value={content.caution.text} color = {content.caution.color} align = {content.caution.align}
+                                onChange={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].caution.text = e.currentTarget.value;
+                                }))}  
+                            />
+                        </div>
+                    }
+                    </div>
                 </AnimationDiv>
             </div>
         </>

@@ -6,6 +6,23 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import { Close } from '@styled-icons/evaicons-solid';
 import './AddingSection.css'
 
+import hero from '../../../tools/img/addSection/01hero.png'
+import detail from '../../../tools/img/addSection/02detail.png'
+import cta from '../../../tools/img/addSection/03cta.png'
+import apply from '../../../tools/img/addSection/04apply.png'
+import appDownload from '../../../tools/img/addSection/05appDownload.png'
+import feature from '../../../tools/img/addSection/06feature.png'
+import review from '../../../tools/img/addSection/07review.png'
+import qna from '../../../tools/img/addSection/08qna.png'
+import text from '../../../tools/img/addSection/09text.png'
+import gallery from '../../../tools/img/addSection/10gallery.png'
+import video from '../../../tools/img/addSection/11video.png'
+import mockup from '../../../tools/img/addSection/12mockup.png'
+
+const IMGS = [
+    hero, detail, cta, apply, appDownload, feature, review, qna, text, gallery, video, mockup
+]
+
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -66,7 +83,7 @@ function AddingSection({open, setOpen}) {
                 <Box sx={style}>
                     <div className="modal-top__title">
                         <div className="centera" style={{width:"95%"}}>
-                            섹션 추가
+                            원하는 섹션을 추가하세요
                         </div>
                         <div style={{width:"5%", cursor:"pointer"}} onClick={() => setOpen(false)}>
                             <Close size="30" />
@@ -76,6 +93,7 @@ function AddingSection({open, setOpen}) {
                         {base.map((item,index) => {
                             return(
                                 <div className="section-modal__button" key={index} onClick={() => addSection(item.sectionTypeName)}>
+                                    <img src={IMGS[index]} width={90} />
                                     {item.name}
                                 </div>
                             )
