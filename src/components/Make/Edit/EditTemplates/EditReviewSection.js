@@ -66,9 +66,9 @@ function EditReviewSection({content, category}) {
         },
         {
             title:'이미지',
-            use:content.reviewImage.use,
+            use:content.element.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].reviewImage.use = !content.reviewImage.use;
+                draft[state.secNum].element.use = !content.element.use;
             }))
         },
         {
@@ -110,25 +110,25 @@ function EditReviewSection({content, category}) {
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="이미지">
-                            <RadioCustom text="특징" value={content.reviewImage.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].reviewImage.type = e;
+                            <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].element.type = e;
                             }))} />
                             {
-                                content.reviewImage.type === 'icon' && 
-                                <ColorCustom text="색상" value={content.reviewImage.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].reviewImage.backgroundColor = e;
+                                content.element.type === 'icon' && 
+                                <ColorCustom text="색상" value={content.element.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.backgroundColor = e;
                                 }))} />
                             }
-                            <RadioCustom text="프레임" button value={content.reviewImage.borderRaidus} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].reviewImage.borderRaidus = e;
+                            <RadioCustom text="프레임" button value={content.element.borderRaidus} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].element.borderRaidus = e;
                             }))} />
                             {
-                                content.reviewImage.type === 'image' ? 
-                                <RadioCustom text="크기" value={content.reviewImage.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].reviewImage.size = e;
+                                content.element.type === 'image' ? 
+                                <RadioCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.size = e;
                                 }))} /> : 
-                                <RadioCustom text="크기" value={content.reviewImage.size} options={imageSmallSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].reviewImage.size = e;
+                                <RadioCustom text="크기" value={content.element.size} options={imageSmallSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.size = e;
                                 }))} />
                             }
                         </OpenCloseCustom>

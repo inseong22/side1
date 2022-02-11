@@ -1,20 +1,21 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import ImageCarousel from '../../Edit/tools/func/FuncImageCarousel'
 
 import Phone from '../../../../tools/img/phone.png'
 import ourA from '../../../../tools/img/005.png'
 
 function ImageOrSlide({content}){
+    const imgRef=useRef(null)
     if(content.contents.use){
     // 동영상 - 유튜브 링크
-    if(content.video.youtube) 
+    if(content.video.type==='youtube' && content.contents.type === 'video') {
         return(
-            <div id="video-area" style={{ width:`${content.image.size}%` }}>
-                <iframe id="video-content" src={`${content.video.link}`} frameborder="0" allow='autoplay' allowfullscreen/>
+            <div ref={imgRef} className="video-area" style={{ width:`${content.image.size}%`, height:`${imgRef.current.scrollWidth * 0.56}px` }}>
+                <iframe className="video-content" src={`${content.video.link}`} frameborder="0" allow='autoplay' allowfullscreen/>
             </div>
-        )
+        )}
     // 동영상 - 비디오 업로드
-    if(content.video.use)
+    if(content.video.type==='base' && content.contents.type === 'video')
         return(
             <video 
             className="video"
@@ -23,19 +24,19 @@ function ImageOrSlide({content}){
             autoPlay
             muted
             loop
-            style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}%`}}
+            style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}%`, height:'auto'}}
             >
             </video>
         )
     // 슬라이드
-    if(content.image.slide)
+    if(content.image.slide  && content.contents.type === 'slide')
         return(
             <div className="slide-box">
                 <ImageCarousel content={content}/>
             </div>
         )
     // 이미지
-    if(content.image.oneImg)
+    if(content.image.oneImg  && content.contents.type === 'image')
         return (
             <img 
                 src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
@@ -44,7 +45,7 @@ function ImageOrSlide({content}){
                 />
         )
     // 목업
-    if(content.mockup.use)
+    if(content.mockup.use  && content.contents.type === 'mockup')
         return(
             <div className="mobile-container">
                 {/* <img className="mobile-ex" src={Phone} alt="목업틀"

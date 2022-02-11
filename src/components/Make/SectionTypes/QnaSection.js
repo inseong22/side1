@@ -4,6 +4,7 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import {produce} from 'immer'
 import TitleDesc from './components/TitleDesc'
 import QnaOpenClose from './components/QnaOpenClose'
+import TextAuto from './components/TextAuto'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 function QnaSection({content}) {
@@ -11,23 +12,18 @@ function QnaSection({content}) {
 
     const returnQnaCards = content.qnas.map((item, index) => {
         return(
-            <QnaOpenClose key={index} title={item.question} open={content.qna.shape === 'open'} color={content.qna.question} type={content.layout}>
+            <QnaOpenClose key={index} title={item.question} open={content.qna.shape === 'open'} color={content.qna.question} content={content} type={content.layout} index={index}>
                 <div className="edit-element">
-                    <span className="qna__word">A. <></></span>
-                    
-                    <TextareaAutosize 
-                        className="text-input qna__answer" 
+                    <div style={{display:'flex', alignItems: 'start', height:'100%'}}>
+                        <span className="qna__word">A. <></></span>
+                    </div>
+                    <TextAuto 
+                        small
                         value={item.answer} 
                         onChange={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].qnas[index].answer = e.currentTarget.value;
                         }))}
-                        style={{
-                            fontFamily:`${state.setting.smallFont}`, 
-                            color:`${content.qna.answer}`, 
-                            resize:'none'
-                        }}
-                        spellcheck="false"
-                    />
+                        color={content.qna.answer} align="start" />
                 </div>
             </QnaOpenClose>
         )

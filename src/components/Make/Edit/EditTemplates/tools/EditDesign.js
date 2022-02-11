@@ -19,6 +19,12 @@ const backOptions = [
     { label: '이미지', value: 'image'},
 ]
 
+const shapeOptions = [
+    { label: '사각형', value: 0 },
+    { label: '약간 둥글게', value: 5 },
+    { label: '많이 둥글게', value: 50 },
+]
+
 function EditDesign({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
@@ -113,6 +119,21 @@ function EditDesign({content}) {
                 <SliderCustom top="하단 여백" value={content.padding.bottom} max={40} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].padding.bottom = e;
                 }))}/>
+            </OpenCloseCustom> 
+            <OpenCloseCustom title="박스">
+                <OnOffCustom text="박스 사용" value={content.box.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                    draft[state.secNum].box.use = !content.box.use;
+                }))} />
+                {
+                    content.box.use && <>
+                        <ColorCustom text="색상" value={content.box.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].box.backgroundColor = e;
+                        }))} />
+                        <RadioCustom text="테두리" options={shapeOptions} value={content.box.borderRadius} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].box.borderRadius = e;
+                        }))} />
+                    </>
+                }
             </OpenCloseCustom>            
         </div>
     )

@@ -49,9 +49,9 @@ function EditGallerySection({content, category}) {
         },
         {
             title:'이미지',
-            use:content.galleryImg.use,
+            use:content.element.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].galleryImg.use = !content.galleryImg.use;
+                draft[state.secNum].element.use = !content.element.use;
             }))
         },
         {
@@ -83,20 +83,20 @@ function EditGallerySection({content, category}) {
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="이미지">
-                            <RadioCustom text="프레임" button value={content.galleryImg.border} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].galleryImg.border = e;
+                            <RadioCustom text="프레임" button value={content.element.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.borderRadius = e;
                                 }))} />
-                            <RadioCustom text="크기" value={content.galleryImg.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].galleryImg.size = e;
+                            <RadioCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].element.size = e;
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title='설명'>
-                        <ColorCustom text="색상" value={content.text.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].text.color = e;
+                            <ColorCustom text="색상" value={content.text.color} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].text.color = e;
+                                }))} />
+                            <RadioCustom text="정렬" options={alignOptions} value={content.text.align} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].text.align = e;
                             }))} />
-                        <RadioCustom text="정렬" options={alignOptions} value={content.text.align} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].text.align = e;
-                        }))} />
                         </OpenCloseCustom>
                     </div>
                 )

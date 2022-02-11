@@ -33,6 +33,14 @@ const commons = {
         use:true,
         type:'none',
     },
+    box:{
+        use:false,
+        backgroundColor:'#6CCAD0',
+        borderRadius:5,
+    }
+}
+
+const contents = {
     image:{
         oneImg:true,
         type:'image',
@@ -50,9 +58,9 @@ const commons = {
     },
     video:{
         use: false,
+        youtube: false,
         type: 'base',
         file: '',
-        youtube: false,
         link: '',
         auto: true,
     },
@@ -65,10 +73,19 @@ const commons = {
     },
 }
 
+const element = {
+    use:true,
+    type:'image',
+    backgroundColor:'#6CCAD0',
+    borderRaidus:5,
+    size:50,
+}
+
 export const base = [
     {
         // 공통적으로 들어갈 확률이 높은 것들
         ...commons,
+        ...contents,
         name:'메인',
         sectionTypeName:'HeroSection',
         paddingSize:'',
@@ -76,34 +93,6 @@ export const base = [
         paddingRight:'',
         paddingCustom: false,
         layout:1,
-        image:{
-            oneImg:true,
-            type:'image',
-            attachment:'',
-            border:0,
-            size:70,
-            slide:false,            
-        },
-        slide_img:{
-            slide1: '',
-            slide2: '',
-            slide3: '',
-        },
-        video:{
-            use: false,
-            type: 'base',
-            file: '',
-            youtube: false,
-            link: '',
-            auto: true,
-        },
-        mockup: {
-            use: false,
-            type: 'mobile',
-            file: '',
-            file2: '',
-            size: 200,
-        },
         button:{
             use : true,
             ctaText:'CTA 버튼',
@@ -119,9 +108,6 @@ export const base = [
             ghostLink:'',
             ghostApply: '',
         },
-        contents:{
-            use:true,
-        },
         appButton:{
             use: true,
             apple: '',
@@ -132,6 +118,7 @@ export const base = [
     },
     {
         ...commons,
+        ...contents,
         name:'디테일',
         sectionTypeName:'DetailSection',
         paddingSize:'',
@@ -139,40 +126,10 @@ export const base = [
         paddingRight:'',
         paddingCustom: false,
         layout:1,
-        contents:{
-            use:true,
-        },
-        image:{
-            oneImg:true,
-            type:'image',
-            attachment:'',
-            border:0,
-            size:70,
-            slide:false,            
-        },
-        slide_img:{
-            slide1: '',
-            slide2: '',
-            slide3: '',
-        },
-        video:{
-            use: false,
-            type: 'base',
-            file: '',
-            youtube: false,
-            link: '',
-            auto: true,
-        },
-        mockup: {
-            use: false,
-            type: 'mobile',
-            file: '',
-            file2: '',
-            size: 200,
-        },
     },
     {
         ...commons,
+        ...contents,
         name:'CTA',
         sectionTypeName:'CtaSection',
         button:{
@@ -189,9 +146,6 @@ export const base = [
             ghostUse:false,
             ghostLink:'',
             ghostApply: '',
-        },
-        contents:{
-            use:true,
         },
         appButton:{
             use: true,
@@ -229,23 +183,17 @@ export const base = [
     },
     {
         ...commons,
+        element:element,
         name:'특징',
         sectionTypeName:'FeaturesSection',
         align:'start',
-        featureImage:{
-            use:true,
-            type:'image',
-            backgroundColor:'#6CCAD0',
-            borderRaidus:5,
-            size:50,
-        },
         featureText:{
             use:true,
             titleUse:true,
             descUse:true,
             color:'#000000',
         },
-        features:[
+        elements:[
             {
                 icon:'',
                 attachment:'',
@@ -268,18 +216,12 @@ export const base = [
     },
     {
         ...commons,
+        element:element,
         name:'리뷰/추천',
         sectionTypeName:'ReviewSection',
         align:'start',
         numOfReviews:3,
         ratingColor:'red',
-        reviewImage:{
-            use:true,
-            type:'image',
-            backgroundColor:'#8A8A8A',
-            borderRaidus:5,
-            size:50,
-        },
         rating:{
             use:true,
             color: '#ffd23a',
@@ -293,7 +235,7 @@ export const base = [
             use:true,
             color:'#000000',
         },
-        reviews:[
+        elements:[
             {
                 icon:'',
                 attachment:'',
@@ -353,6 +295,7 @@ export const base = [
     },
     {
         ...commons,
+        element:element,
         name:'갤러리',
         sectionTypeName:'GallerySection',
         galleryImg:{
@@ -368,23 +311,45 @@ export const base = [
             color: '#000000',
             align: ''
         },
+        elements:[
+            {
+                attachment:'',
+                text:'1의 타이틀',
+            },
+            {
+                attachment:'',
+                text:'2의 타이틀',
+            },
+            {
+                attachment:'',
+                text:'3의 타이틀',
+            }
+        ]
     },
     {
         ...commons,
+        ...contents,
+        contents:{
+            use:true,
+            type:'video',
+        },
+        video:{
+            ...contents.video,
+            type:'base',
+        },
         name:'동영상',
         sectionTypeName:'VideoSection',
-        video:{
-            use:true,
-        },
         explanation:{
             use:true,
             color: '#000000',
             align: '',
-            text:''
-        }
+            text:'비디오에 대한 추가 설명을 작성해보세요.'
+        },
     },
     {
         ...commons,
+        ...contents,
+
         name:'목업',
         sectionTypeName:'MockupSection',
     },

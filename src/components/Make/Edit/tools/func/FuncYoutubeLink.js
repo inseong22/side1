@@ -7,11 +7,13 @@ function FuncYoutubeLink({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const onChangeLink = e => {
+        e.preventDefault()
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].video.link = e.target.value
         }))
     }
     const onYoutube = e => {
+        e.preventDefault()
         const submitLink = content.video.link.replace('watch?v=', 'embed/');
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].video.youtube = true

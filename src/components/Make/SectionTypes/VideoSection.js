@@ -4,6 +4,7 @@ import {produce} from 'immer'
 
 import TitleDesc from './components/TitleDesc'
 import ImageOrSlide from './components/ImageOrSlide'
+import TextAuto from './components/TextAuto'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import AnimationDiv from './components/AnimationDiv'
 
@@ -27,19 +28,13 @@ function VideoSection({content}) {
                 {
                 content.explanation.use &&
                 <div style={{width:'100%'}}>
-                    <TextareaAutosize 
-                        className="text-input" 
+                    <TextAuto small  className="text-input" 
                         value={content.explanation.text} 
                         onChange={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].explanation.text = e.currentTarget.value;
                         }))}
-                        style={{
-                            fontFamily:`${state.setting.smallFont}`, 
-                            color:`${content.explanation.color}`, 
-                            textAlign:`${content.explanation.align}`,
-                            resize:'none'
-                        }}
-                        spellcheck="false"
+                        color={content.explanation.color}
+                        align={content.explanation.align}
                     />
                 </div>
                 }
