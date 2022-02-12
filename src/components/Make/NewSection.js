@@ -41,7 +41,7 @@ const CustomGhostButton = styled.button`
 // box-shadow:${state.setting.cta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
 // border:${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'};
 
-function NewSection({content, index, contents, setContents, full}) {
+function NewSection({setting, content, index, contents, setContents, full}) {
     const [isHover, setIsHover] = useState('none');
     const {state, action} = useContext(MyContext)
 
@@ -56,62 +56,62 @@ function NewSection({content, index, contents, setContents, full}) {
         switch(content.sectionTypeName){
             case 'DetailSection':
                 return (
-                    <DetailSection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton}/>
+                    <DetailSection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton} setting={setting}/>
                 )
 
             case 'HeroSection':
                 return (
-                    <HeroSection content={content} />
+                    <HeroSection content={content} setting={setting}/>
                 )
 
             case 'ReviewSection':
                 return (
-                    <ReviewSection content={content}/>
+                    <ReviewSection content={content} setting={setting}/>
                 )
 
             case 'FeaturesSection':
                 return (
-                    <FeaturesSection content={content}/>
+                    <FeaturesSection content={content}  setting={setting}/>
                 )
 
             case 'CtaSection':
                 return (
-                    <CtaSection content={content} type="cta"/>
+                    <CtaSection content={content} type="cta" setting={setting}/>
                 )
 
             case 'ApplySection' :
                 return(
-                    <CtaSection content={content} type="apply"/>
+                    <CtaSection content={content} type="apply" setting={setting}/>
                 )
 
             case 'AppDownloadSection' :
                 return(
-                    <CtaSection content={content} type="appDownload"/>
+                    <CtaSection content={content} type="appDownload" setting={setting}/>
                 )
 
             case 'QnaSection' :
                 return(
-                    <QnaSection content={content} />
+                    <QnaSection content={content} setting={setting}/>
                 )
 
             case 'GallerySection' :
                 return(
-                    <GallerySection content={content} />
+                    <GallerySection content={content} setting={setting}/>
                 )
 
             case 'TextSection' :
                 return(
-                    <TextSection content={content} />
+                    <TextSection content={content} setting={setting}/>
                 )
 
             case 'MockupSection' :
                 return(
-                    <MockupSection content={content} />
+                    <MockupSection Section content={content} setting={setting}/>
                 )
 
             case 'VideoSection' :
                 return(
-                    <VideoSection content={content} />
+                    <VideoSection content={content} setting={setting}/>
                 )
 
             default:

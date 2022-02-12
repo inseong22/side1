@@ -627,7 +627,7 @@ function Contents({content}) {
 
 
     return (
-        <OpenCloseCustom title="콘텐츠" use={content.contents.use} onChange={(e)=>usingContents(e)}>
+        <OpenCloseCustom title="콘텐츠">
             <RadioCustom options={contentsOptions} value={content.contents.type} func={e => changeContentOption(e)} />                 
             {
                 returnImageOrVideoAdd()

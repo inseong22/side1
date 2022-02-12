@@ -145,11 +145,6 @@ function EditReviewSection({content, category}) {
                                 draft[state.secNum].rating.size = e;
                             }))} />
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="리뷰 내용">
-                            <ColorCustom text="색상" value={content.reviewText.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].reviewText.color = e;
-                            }))} />
-                        </OpenCloseCustom>
                         <OpenCloseCustom title="이름 / 닉네임">
                             <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].writer.color = e;

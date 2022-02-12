@@ -8,7 +8,6 @@
 }
 
 .mobile-container{
-    width: 100%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -54,7 +53,6 @@
 .image__container{
     display: flex;
     justify-content: center;
-    align-items: center;
     width:100%;
 }
 

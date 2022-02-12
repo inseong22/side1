@@ -7,7 +7,7 @@ import QnaOpenClose from './components/QnaOpenClose'
 import TextAuto from './components/TextAuto'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 
-function QnaSection({content}) {
+function QnaSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnQnaCards = content.qnas.map((item, index) => {
@@ -31,7 +31,7 @@ function QnaSection({content}) {
 
     return (
         <motion.div className="template"
-            data-aos={content.animation.type} aos-duration="2000">
+            data-aos={setting.animation} aos-duration="4000">
 
             <TitleDesc content={content} />
 

@@ -48,21 +48,28 @@ function FuncImageCarousel({content}) {
         autoplay: true,
         autoPlaySpeed: 5000,	
       };
+    
+      useEffect(() => {
+        const list = document.querySelector(".slick-list");
+        list.style.setProperty("border-radius", `${content.image.border}%`);
+        const track = document.querySelector(".slick-track");
+        track.style.setProperty("height", "auto")
+      });
 
     return (
-        <div className="slide-box" style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}>
+        <div className="slide-box" style={{zIndex: 3,width:`${content.image.size}px`, height:`${content.image.size}px`}}>
             <Slider {...settings}> 
             {
                 (content.slide_img.slide1) &&
-                    <img className="image" ref={imgRef} src={`${content.slide_img.slide1}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
+                    <img ref={imgRef} src={`${content.slide_img.slide1}`} style={{zIndex: 3,width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`, height:`${content.image.size}px`}}/>
             }
             {
                 (content.slide_img.slide2) &&
-                    <img className="image" ref={imgRef} src={`${content.slide_img.slide2}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
+                    <img ref={imgRef} src={`${content.slide_img.slide2}`} style={{width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`, height:`${content.image.size}px`}}/>
             }
             {
                 (content.slide_img.slide3) &&
-                    <img className="image" ref={imgRef} src={`${content.slide_img.slide3}`} style={{width:`${content.image.size}px`,borderRadius:`${content.image.border}%`, boxShadow: `${content.image.shadowValue}`}}/>
+                    <img ref={imgRef} src={`${content.slide_img.slide3}`} style={{width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`, height:`${content.image.size}px`}}/>
             }
             </Slider>
         </div>

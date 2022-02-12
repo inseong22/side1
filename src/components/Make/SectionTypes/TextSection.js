@@ -1,13 +1,14 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { motion } from 'framer-motion';
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import {produce} from 'immer'
 import TitleDesc from './components/TitleDesc'
 
-function TextSection({content}) {
+function TextSection({content, setting}) {
+
     return (
         <motion.div className="centera"
-            data-aos={content.animation.type} aos-duration="2000">
+            data-aos={setting.animation} aos-duration="4000">
 
             <TitleDesc content={content} />
 

@@ -17,7 +17,7 @@ const AnimationDiv = ({content, children, returnLayout}) => {
             <>
             <motion.div
                 style={{display:'flex', ...returnLayout}} 
-                data-aos={content.animation.type} aos-duration="2000" >
+                data-aos={content.animation.type} aos-duration="4000" >
                 {children}
             </motion.div>
             </>

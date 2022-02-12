@@ -7,7 +7,7 @@ import TextAuto from './components/TextAuto'
 import {Upload} from '@styled-icons/bootstrap';
 import Element from './components/Element'
 
-function GallerySection({content}) {
+function GallerySection({content,setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const heightRef = useRef(null)
 
@@ -60,7 +60,7 @@ function GallerySection({content}) {
 
     return (
         <motion.div className="template"
-            data-aos={content.animation.type} aos-duration="2000">
+            data-aos={setting.animation} aos-duration="4000">
 
             <TitleDesc content={content} />
 
