@@ -9,31 +9,10 @@ import { Table, Tag, Space } from 'antd';
 import MadeLandingCard from '../../components/Response/MadeLandingCard'
 import gadata from '../../components/Response/data/gadata.json';
 
-const columns = [
-    {
-      title: '이메일',
-      dataIndex: 'email',
-      key: 'email',
-      render: text => <a>{text}</a>,
-    },
-    {
-      title: '신청한 날짜',
-      dataIndex: 'date',
-      key: 'date',
-      render: date => <span>2021년 {date.getMonth()+1}월 {date.getDate()}일 {date.getHours()}시에 신청 </span>
-    },
-    {
-      title: '유입 URL',
-      dataIndex: 'urlId',
-      key: 'urlId',
-      render: text => <span>{text}</span>
-    },
-  ];
-  
 function ResponsePage({userObj, history}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [responses, setResponses] = useState([[]]);
     const [mylandings, setMylandings] = useState([]);
     const [part, setPart] = useState(1);
@@ -47,12 +26,12 @@ function ResponsePage({userObj, history}) {
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/seeResponse/${userObj.email}`);
-        getThisUserDatas();
+        // getThisUserDatas();
     },[loading])
 
     const getThisUserDatas = async () => {
         const thisuserDatas = await dbService
-            .collection('made-page')
+            .collection('saved-page')
             .where("makerEmail", "==", userObj.email)
             .get();
         
@@ -73,13 +52,13 @@ function ResponsePage({userObj, history}) {
         setResponses(tempDatas);
 
         setLoading(true);
-}
+    }
 
     const getDatas = async (urlId) => {
         const reDatas = await dbService
             .collection("apply-datas") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
             .orderBy("created", "desc")
-            // .where("urlId", "==", urlId)
+            .where("urlId", "==", urlId)
             .get();
 
         let reData = reDatas.docs.map(doc => {
@@ -87,37 +66,36 @@ function ResponsePage({userObj, history}) {
             return({...doc.data(), id:doc.id, date:day})
         });
 
-        console.log(reData);
-
         return reData;
     }
 
-    const getMyData = (path) => {
-        let all_data = gadata.reports[0].data.rows;
+    // const getMyData = (path) => {
+    //     let all_data = gadata.reports[0].data.rows;
         
-        const myData = all_data.filter(item => item.dimensions[2] === `${path}`);
-        let all_sessions = 0;
-        let all_pageViews = 0;
-        myData.map((item, index) => {
-            console.log("여기서", item.dimensions);
-            console.log("세션 수 : ", item.metrics[0].values[0]);
-            console.log("페이지 뷰 수 : ", item.metrics[0].values[1]);
-            console.log("세션 머무르는 : ", item.metrics[0].values[2]);
-            all_sessions += parseInt(item.metrics[0].values[0]);
-            all_pageViews += parseInt(item.metrics[0].values[1]);
-        })
-        console.log("총 세션 수 : ", all_sessions );
-        console.log("총 페이지 뷰 수 : ", all_pageViews );
-        const body = {
-            all_sessions,
-            all_pageViews,
-        }
-        setMyDatas(body);
-    }
+    //     const myData = all_data.filter(item => item.dimensions[2] === `${path}`);
+    //     let all_sessions = 0;
+    //     let all_pageViews = 0;
+    //     myData.map((item, index) => {
+    //         console.log("여기서", item.dimensions);
+    //         console.log("세션 수 : ", item.metrics[0].values[0]);
+    //         console.log("페이지 뷰 수 : ", item.metrics[0].values[1]);
+    //         console.log("세션 머무르는 : ", item.metrics[0].values[2]);
+    //         all_sessions += parseInt(item.metrics[0].values[0]);
+    //         all_pageViews += parseInt(item.metrics[0].values[1]);
+    //     })
+    //     console.log("총 세션 수 : ", all_sessions );
+    //     console.log("총 페이지 뷰 수 : ", all_pageViews );
+    //     const body = {
+    //         all_sessions,
+    //         all_pageViews,
+    //     }
+    //     setMyDatas(body);
+    // }
 
     const returnMylandingsTable = mylandings.map((item, index) => {
         return(
-            <MadeLandingCard history={history} item={item} key={item.id} index={index} setNowChecking={setNowChecking} />
+            <></>
+            // <MadeLandingCard history={history} item={item} key={item.id} index={index} setNowChecking={setNowChecking} />
         )
     })
         if(loading === true){
@@ -142,21 +120,23 @@ function ResponsePage({userObj, history}) {
                         <div className="response-container">
                             <div className="response-table">
                                 <div className="response-table-top">
-                                    <span className="response-table-title"> {nowChecking === 10000 ? "응답을 볼 페이지를 클릭하세요." : <div>총 목표액션 전환 수 : {responses[nowChecking].length} 명</div>} </span>
+                                    <span className="response-table-title"> 
+                                        {nowChecking === 10000 ? 
+                                        "응답을 볼 페이지를 클릭하세요." : 
+                                        <div>총 목표액션 전환 수 : {responses[nowChecking].length} 명</div> } 
+                                    </span>
                                 </div>
-                                {responses.length === 0 ? <></> : <Table columns={columns} dataSource={responses[nowChecking]} className="response-table-datas"/>}
                             </div>
                         </div>
                         :
                         <>
                         {/* 데이터 파트 */}
-                        <div style={{height:'100vh'}}>
-                            <button onClick={() => getMyData()}>데이터 불러오기</button>
+                        {/* <div style={{height:'100vh'}}>
                             <div>
                                 <span className="data-one-mini-card">총 페이지 뷰 수 {myDatas.all_pageViews}</span>
                                 <span className="data-one-mini-card">총 세션 수 {myDatas.all_sessions}</span>
                             </div>
-                        </div>
+                        </div> */}
                         </>
                         }
                     </div>

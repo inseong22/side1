@@ -103,7 +103,6 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     })
 
     const checkLoggedIn = () => {
-        console.log("로그인했나?", isLoggedIn)
         if(isLoggedIn === false){
             alert("로그인하셔야 이용가능한 페이지입니다.");
         }else{
@@ -263,7 +262,13 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     <div style={{flexDirection:'row', display:'flex', justifyContent:'center', width:'100%', marginTop:'5%'}}>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span>Let's Build Your Page!</span>
-                            <div to="/make" className="apply-button-v2" onClick={() => setAskOpen(true)}>제작하러가기</div>
+                            <div to="/make" className="apply-button-v2" onClick={() => {
+                                if(isLoggedIn){
+                                    history.push('/#/seeResponse')
+                                    history.go()
+                                }else{
+                                    setAskOpen(true)
+                                }}}>제작하러가기</div>
                         </div>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span style={{color:'#6a63f7'}}>이미 제작을 완료하셨다면</span>

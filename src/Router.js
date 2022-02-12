@@ -12,9 +12,7 @@ import ResponsePage from './pages/Response/ResponsePage';
 import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/utils/SubmitPage';
 import CustomerPage from './pages/Customer/CustomerPage'
-import MiracleMorning from './pages/UserLanding/MiracleMorning'
 import FQ from './pages/Questions/FQ'
-import { useRecoilState } from 'recoil'
 import {
     atom,
 } from 'recoil';
@@ -23,18 +21,7 @@ import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
 
-export const userState = atom({
-    key:'userState',
-    default:'',
-})
-
-
 const AppRouter = ({userObj, isLoggedIn}) => {
-    const [userData, setUserData] = useRecoilState(userState);
-
-    useEffect(() => {
-        setUserData(userObj);
-    },[])
 
     if (window.location.host.split(".")[0] !== "surfee" && window.location.host.split(".")[0] !== 'localhost:3000') {
         return(
@@ -83,9 +70,6 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                     </Route>
                     <Route path="/register">
                         <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
-                    </Route>
-                    <Route path="/miracle">
-                        <MiracleMorning history={history}/>
                     </Route>
                 </Switch>
                 </div>

@@ -42,7 +42,7 @@ const rate = 0.63;
 
 const NOTADDING = 1000;
 
-const MakePageV2 = ({history, userObj}, props) => {
+const MakePageV2 = ({history, userObj}) => {
     const targets = useRef(null);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
     const [secNum, setSecNum] = useState(0); // 현재 수정중인 페이지를 의미.
@@ -56,6 +56,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     const [nowState, setNowState] = useState('new');
     const [load, setLoad] = useState(false);
     const [editing, setEditing] = useState(false);
+    const [makingTypeByUser, setMakingTypeByUser] = useState("");
     const [category, setCategory] = useState(0);
     const location = useLocation();
       
@@ -94,7 +95,6 @@ const MakePageV2 = ({history, userObj}, props) => {
     // 처음에 한번만 실행되는 useEffect
     useEffect(() => {
         console.log("처음에 한번만")
-        
         // 관리하기 페이지에서 state.item으로 내용을 가지고 넘어왔다.
         if(location.state !== undefined){
 
@@ -240,6 +240,51 @@ const MakePageV2 = ({history, userObj}, props) => {
         )
     }
 
+    const saveTo = async () => {
+        setLoading(true);
+
+        const urlDatas = await dbService
+            .collection("urlStores")
+            .where("urlId", "==", setting.urlId)
+            .get(); // uid를 creatorId로 줬었으니까.
+        
+        let urlData = urlDatas.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+
+        if(setting.urlId === ''){
+            alert("url을 설정해야 합니다.");
+            setLoading(false);
+        }else if(urlData.length > 0){
+            alert("이미 존재하는 url입니다. 다른 url을 사용해주세요.");
+            setLoading(false);
+        }else{
+            const body = {
+                contents:contents,
+                navi:navi,
+                foot:foot,
+                setting:setting,
+                created:Date.now(),
+                makerEmail:userObj.email,
+                makingTypeByUser:makingTypeByUser
+            }
+
+            await dbService.collection("saved-page").add(body);
+
+            await dbService.collection("urlStores").add({urlId:body.setting.urlId});
+
+            // 자동저장 하던 걸 지운다.
+            window.localStorage.removeItem("temp");
+            
+            setTimeout(() => {
+                setLoading(false);
+                history.push('/#/seeResponse');
+                history.go();
+            },1000)
+        }
+
+    }
+
     return (<>
     { isMobile ? 
         <div className="mobile-hide">
@@ -253,7 +298,7 @@ const MakePageV2 = ({history, userObj}, props) => {
        <MyContext.Provider value={contextValue}>
             <Prompt 
                 when={true}
-                message="작업 중이던 정보들이 저장되지 않을 수 있습니다. 페이지를 떠나시겠습니까?"
+                message="편집내용이 저장되지 않았습니다. 정말로 제작을 그만두시겠습니까?"
             />
            {
                !full &&
@@ -265,6 +310,7 @@ const MakePageV2 = ({history, userObj}, props) => {
                    nowState={nowState}
                    loading={loading} setLoading={setLoading}
                    navi={navi} foot={foot} setting={setting}
+                   saveTo={saveTo}
                />
            }
             <div className="make-page-container" style={{paddingTop:`${full ? '0px' : '60px'}`}}>
@@ -336,8 +382,8 @@ const MakePageV2 = ({history, userObj}, props) => {
             </div>
             
             {/* 모달 모아두기 */}
-            <div style={{display: 'flex', width:'80%', justifyContent: 'center', alignItems:'center', marginTop:'10%', position:'absolute', bottom:'70px'}}>
-                <FirstQuestions open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
+            <div>
+                <FirstQuestions type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
                 <LoadingModal loading={loading} />
             </div>
             <ConfirmCustom open={footerOrNot} setOpen={setFooterOrNot} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />

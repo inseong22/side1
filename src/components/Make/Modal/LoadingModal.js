@@ -26,18 +26,16 @@ const Backdrop = styled('div')`
 `;
 
 const style = {
-  width: 500,
-  bgcolor: 'rgba(255,255,255,0.2)',
-  border: '2px solid #000',
+  width: 300,
+  width: 300,
+  bgcolor: 'rgba(255,255,255,0.1)',
+  border: '0px solid #000',
   p: 2,
   px: 4,
   pb: 3,
 };
 
 function LoadingModal({loading, setLoading}) {
-    const [cnum, setCnum] = useState(1);
-    const handleOpen = () => setLoading(true);
-    const handleClose = () => setLoading(false);
 
     return (
         <div>
@@ -48,7 +46,7 @@ function LoadingModal({loading, setLoading}) {
                 BackdropComponent={Backdrop}
             >
                 <Box sx={style}>
-                    <span>로딩중</span>
+                  <iframe src="https://giphy.com/embed/tsX3YMWYzDPjAARfeg" width="150" height="230" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/tiktok-bear-tsX3YMWYzDPjAARfeg">via GIPHY</a></p>
                 </Box>
             </StyledModal>
         </div>
