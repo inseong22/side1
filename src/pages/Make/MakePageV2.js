@@ -78,14 +78,14 @@ const MakePageV2 = ({history, userObj}) => {
     const [addingSectionAt, setAddingSectionAt] = useState(NOTADDING); // 1000은 추가하고 있지 않다는 것을 의미.
 
     // 푸터
-    const [footerOrNot, setFooterOrNot] = useState(false);
+    const [openConfirm, setOpenConfirm] = useState(false);
     // 반복 실행되는 useEffect
     useEffect(() => {
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/making/${userObj.email}`);
         function repeat(){
-            // localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
+            localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
         }
         // 30초에 한번 씩 자동 저장
         let id = setInterval(repeat, 30000);
@@ -94,27 +94,30 @@ const MakePageV2 = ({history, userObj}) => {
 
     // 처음에 한번만 실행되는 useEffect
     useEffect(() => {
-        console.log("처음에 한번만")
+        console.log(location);
+
         // 관리하기 페이지에서 state.item으로 내용을 가지고 넘어왔다.
         if(location.state !== undefined){
+            if(location.state.newMake){
+                setOpen(true);
+            }else{
+                console.log(location.state);
 
-            const arr = location.pathname.split('/');
-            setNowState(arr[arr.length -1]);
-
-            const item = location.state.item;
-            setContents(item[0]);
-            setNavi(item[1]);
-            setFoot(item[2]);
-            setSetting(item[3]);
-            setOpen(false);
-            setEditing(true);
+                const item = location.state.item;
+                setContents(item[0]);
+                setNavi(item[1]);
+                setFoot(item[2]);
+                setSetting(item[3]);
+                setOpen(false);
+                setEditing(true);
+            }
         }else{
             // 로컬스토리지에 저장되어인게 있다면
             if(localStorage.getItem('temp') !== null){
                 
                 // const cf = window.confirm("작업중이던 페이지가 있습니다. 불러오시겠습니까? 취소 시 이전에 작업하던 내용은 사라집니다.");
 
-                setFooterOrNot(true);
+                setOpenConfirm(true);
 
                 // if(cf){
                 //     const temp = JSON.parse(localStorage.getItem('temp'));
@@ -125,6 +128,7 @@ const MakePageV2 = ({history, userObj}) => {
                 //     setOpen(false);
                 //     setEditing(true);
                 // }else{
+                //     return
                 // }
             }else{
                 localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
@@ -386,7 +390,7 @@ const MakePageV2 = ({history, userObj}) => {
                 <FirstQuestions type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
                 <LoadingModal loading={loading} />
             </div>
-            <ConfirmCustom open={footerOrNot} setOpen={setFooterOrNot} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />
+            <ConfirmCustom open={openConfirm} setOpen={setOpenConfirm} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />
         </MyContext.Provider>
         </> }
         </>)

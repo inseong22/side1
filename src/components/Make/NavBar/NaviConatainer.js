@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import Editor from '../tools/Editor'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
 import AutosizeInput from 'react-input-autosize';

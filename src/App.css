@@ -153,6 +153,22 @@
 .mobile-hide{
   display: none;
 }
+.default-button-01{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background: linear-gradient(0deg, #FFFFFF, #FFFFFF);
+  box-shadow: 4px 4px 15px #E8F0F9;
+  border-radius: var(--br-02);
+  color:black;
+  font-family: Noto Sans KR;
+  font-weight: normal;
+  font-size: 15px;
+  border:none;
+  padding:0px 25px;
+  height:38px;
+  cursor: pointer;
+}
 
 .default-button-02{
   display: flex;
@@ -164,9 +180,11 @@
   color:white;
   font-size: 15px;
   border:none;
-  padding:0px 35px;
-  height:40px;
+  padding:0px 25px;
+  height:38px;
   cursor: pointer;
+  font-family: Noto Sans KR;
+  font-weight: normal;
 }
 
 .center-row{

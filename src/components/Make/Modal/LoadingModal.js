@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
+import "@lottiefiles/lottie-player";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -28,7 +29,7 @@ const Backdrop = styled('div')`
 const style = {
   width: 300,
   width: 300,
-  bgcolor: 'rgba(255,255,255,0.1)',
+  bgcolor: 'rgba(255,255,255,0)',
   border: '0px solid #000',
   p: 2,
   px: 4,
@@ -45,9 +46,16 @@ function LoadingModal({loading, setLoading}) {
                 open={loading}
                 BackdropComponent={Backdrop}
             >
-                <Box sx={style}>
-                  <iframe src="https://giphy.com/embed/tsX3YMWYzDPjAARfeg" width="150" height="230" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/tiktok-bear-tsX3YMWYzDPjAARfeg">via GIPHY</a></p>
-                </Box>
+              <Box sx={style}>
+                <lottie-player
+                    autoplay
+                    loop
+                    mode="normal"
+                    src="https://assets7.lottiefiles.com/packages/lf20_8y9IYf.json"
+                    style={{width:'320px'}}
+                >
+                </lottie-player>
+              </Box>
             </StyledModal>
         </div>
     )

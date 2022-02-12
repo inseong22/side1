@@ -17,6 +17,7 @@
     "@ckeditor/ckeditor5-paste-from-office": "^31.1.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@lottiefiles/lottie-player": "^1.5.5",
     "@mui/icons-material": "^5.2.1",
     "@mui/material": "^5.2.2",
     "@testing-library/react": "^11.1.0",

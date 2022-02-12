@@ -60,31 +60,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     const [email,setEmail] = useState("");
     const [askOpen,setAskOpen] = useState(false);
     const targets = useRef(null)
-    // const [scrollPosition, setScrollPosition] = useState(0);
-
-    // const updateScroll = () => {
-    //     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
-    // }
-
-    useEffect(()=>{
-        // window.addEventListener('scroll', updateScroll);
-    });
-
-    const sendData = async () => {
-        console.log(dbService);
-        if(email.length < 4){
-            alert("올바른 이메일 양식을 입력해주세요!");
-            return;
-        }
-        await dbService.collection("apply-datas").add({
-            email:email,
-            created:Date.now(),
-        });
-
-        alert("신청되셨습니다. 감사합니다. 빠른 시일내로 연락드리겠습니다.");
-        setEmail("");
-    }
-
+    
     const scrollDown = () => {
         targets.current.scrollIntoView({behavior: 'smooth'})
     }

@@ -44,15 +44,28 @@
     border-radius: 20px;
     color:white;
     margin:2%;
+    cursor: pointer;
+    border:none;
+}
+
+.content__button:hover{
+    background-color:#8b79ff;
 }
 
 .cb-delete{
     background-color:#EB8A8A;
 }
 
+.cb-delete:hover{
+    background-color:#e26a6a;
+}
+
 .cb-duplicate{
     background-color:#F2F6FA;
     color:var(--main-dark-gray);
+}
+.cb-duplicate:hover{
+    background-color:#d0d6db;
 }
 
 .content__name{

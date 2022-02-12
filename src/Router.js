@@ -10,13 +10,9 @@ import MakePageV2 from './pages/Make/MakePageV2';
 import NavBarV2 from './pages/NavAndFooter/NavBarV2';
 import ResponsePage from './pages/Response/ResponsePage';
 import RegisterPage from './pages/Login/Register/RegisterPage'
-import SubmitPage from './components/Make/utils/SubmitPage';
+import SubmitPage from './components/Make/unused/SubmitPage';
 import CustomerPage from './pages/Customer/CustomerPage'
 import FQ from './pages/Questions/FQ'
-import {
-    atom,
-} from 'recoil';
-
 import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();

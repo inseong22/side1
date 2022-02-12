@@ -32,7 +32,7 @@ const style = {
   width: 400,
   height: 300,
   bgcolor: 'rgba(255,255,255,1)',
-  borderRadius:5,
+  borderRadius:'20px',
   p: 2,
   px: 4,
   pb: 3,
@@ -54,7 +54,7 @@ function AskLoginModal({open, setOpen, SomeoneClickMoveToMake}) {
                             
                         </div>
                         <div style={{width:"5%", cursor:"pointer"}} onClick={() => setOpen(false)}>
-                            <Close size="30" />
+                            <Close size="30" color="#C4CACF"/>
                         </div>
                     </div>
                     <div className="centeras">
