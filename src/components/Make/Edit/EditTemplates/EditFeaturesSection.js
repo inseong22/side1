@@ -115,21 +115,28 @@ function EditFeaturesSection({content, category}) {
                             }))} />
                             {
                                 content.element.type === 'icon' && 
+                                <>
                                 <ColorCustom text="색상" value={content.element.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].element.backgroundColor = e;
                                 }))} />
-                            }
-                            <RadioCustom text="프레임" button value={content.element.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].element.borderRadius = e;
-                            }))} />
-                            {
-                                content.element.type === 'icon' ? 
+                                <RadioCustom text="프레임" button value={content.element.iconBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.iconBorder = e;
+                                }))} />
                                 <RadioCustom text="크기" value={content.element.size} options={imageSmallSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].element.size = e;
-                                }))} /> : 
+                                }))} />
+                                </>
+                            }
+                            {
+                                content.element.type === 'image' &&
+                                <>
+                                <RadioCustom text="프레임" button value={content.element.imageBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.imageBorder = e;
+                                }))} />
                                 <RadioCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].element.size = e;
                                 }))} />
+                                </>
                             }
                         </OpenCloseCustom>
                         <OpenCloseCustom title="설명글">

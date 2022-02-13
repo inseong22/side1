@@ -19,6 +19,7 @@ function QnaSection({content, setting}) {
                     </div>
                     <TextAuto 
                         small
+                        style={{fontFamily:`${state.setting.smallFont}`}}
                         value={item.answer} 
                         onChange={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].qnas[index].answer = e.currentTarget.value;
@@ -34,10 +35,11 @@ function QnaSection({content, setting}) {
             data-aos={setting.animation} aos-duration="4000">
 
             <TitleDesc content={content} />
-
-            <div className="features__container" style={{flexDirection: 'column', marginTop:'20px'}}>
-                {returnQnaCards}
-            </div>
+            {content.qna.use && 
+                <div className="features__container" style={{flexDirection: 'column', marginTop:'20px'}}>
+                    {returnQnaCards}
+                </div>
+            }
 
         </motion.div>
     )

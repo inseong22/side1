@@ -115,21 +115,30 @@ function EditReviewSection({content, category}) {
                             }))} />
                             {
                                 content.element.type === 'icon' && 
-                                <ColorCustom text="색상" value={content.element.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.backgroundColor = e;
-                                }))} />
+                                (
+                                    <>
+                                    <ColorCustom text="색상" value={content.element.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].element.backgroundColor = e;
+                                    }))} />
+                                    <RadioCustom text="프레임" button value={content.element.iconBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].element.iconBorder = e;
+                                    }))} />
+                                    <RadioCustom text="크기" value={content.element.size} options={imageSmallSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].element.size = e;
+                                    }))} />
+                                    </>
+                                )
                             }
-                            <RadioCustom text="프레임" button value={content.element.borderRaidus} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].element.borderRaidus = e;
-                            }))} />
                             {
-                                content.element.type === 'image' ? 
+                                content.element.type === 'image' &&
+                                <>
+                                <RadioCustom text="프레임" button value={content.element.imageBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.imageBorder = e;
+                                }))} />
                                 <RadioCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].element.size = e;
-                                }))} /> : 
-                                <RadioCustom text="크기" value={content.element.size} options={imageSmallSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.size = e;
                                 }))} />
+                                </>
                             }
                         </OpenCloseCustom>
                         <OpenCloseCustom title="리뷰 내용">

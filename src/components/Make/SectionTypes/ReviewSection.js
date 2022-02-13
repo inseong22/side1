@@ -78,6 +78,7 @@ function ReviewSection({content, setting}) {
                                 resize:'none',
                                 textAlign:`${content.align}`,
                                 color:`${content.writer.color}`,
+                                fontFamily:`${state.setting.smallFont}`,
                             }}
                             value={item.writer} 
                             onChange={e => action.setContents(produce(state.contents, draft => {

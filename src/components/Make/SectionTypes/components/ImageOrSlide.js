@@ -35,7 +35,7 @@ function ImageOrSlide({content}){
         // 슬라이드
         if(content.image.slide)
             return(
-                <div className="slide-box">
+                <div>
                     <ImageCarousel content={content}/>
                 </div>
             )

@@ -30,7 +30,7 @@ function EditNotice({content}) {
             <RadioCustom text="정렬" options={alignOptions} value={content.caution.align} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.align = e;
             }))} />
-            <TextSizeCustom text="크기" options={sizeOptions} value={content.caution.size} func={e => action.setContents(produce(state.contents, draft => {
+            <TextSizeCustom text="크기" value={content.caution.size} func={e => action.setContents(produce(state.contents, draft => {
             draft[state.secNum].caution.size = e;
             }))} />
             </>

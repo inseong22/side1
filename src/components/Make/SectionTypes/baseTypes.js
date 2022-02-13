@@ -108,7 +108,9 @@ const element = {
     use:true,
     type:'image',
     backgroundColor:'#6CCAD0',
-    borderRaidus:5,
+    // borderRaidus:5,
+    iconBorder:5,
+    imageBorder:5,
     size:50,
 }
 

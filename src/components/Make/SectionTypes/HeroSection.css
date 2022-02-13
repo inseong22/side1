@@ -1,6 +1,7 @@
 .slide-box{
     z-index: 1;
-    width:200px;
+    /* height: auto; */
+    overflow: hidden;
 }
 .video{
     z-index: 1;

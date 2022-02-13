@@ -30,13 +30,13 @@ function FuncImageCarousel({content}) {
 
     const imgRef = useRef(null)
 
-    const PrevArrow=({currentSlide,slideCount,...props})=>(
-        <Prev {...props} src={prevButton} className="slick-prev" /> 
-    )
+    // const PrevArrow=({currentSlide,slideCount,...props})=>(
+    //     <Prev {...props} src={prevButton} className="slick-prev" /> 
+    // )
 
-    const NextArrow=({currentSlide,slideCount,...props})=>(
-        <Next {...props} src={nextButton} className="slick-next" /> 
-    )
+    // const NextArrow=({currentSlide,slideCount,...props})=>(
+    //     <Next {...props} src={nextButton} className="slick-next" /> 
+    // )
 
     const settings = {
         dots: false, // 캐러셀이미지가 몇번째인지 알려주는 점을 보여줄지 정한다.
@@ -48,28 +48,21 @@ function FuncImageCarousel({content}) {
         autoplay: true,
         autoPlaySpeed: 5000,	
       };
-    
-      useEffect(() => {
-        const list = document.querySelector(".slick-list");
-        list.style.setProperty("border-radius", `${content.image.border}%`);
-        const track = document.querySelector(".slick-track");
-        track.style.setProperty("height", "auto")
-      });
 
     return (
-        <div className="slide-box" style={{zIndex: 3,width:`${content.image.size}px`, height:`${content.image.size}px`}}>
+        <div className="slide-box" style={{borderRadius: `${content.image.border}%`, width:`${content.image.size}px`,height:`${content.image.size}px`}}>
             <Slider {...settings}> 
             {
                 (content.slide_img.slide1) &&
-                    <img ref={imgRef} src={`${content.slide_img.slide1}`} style={{zIndex: 3,width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`, height:`${content.image.size}px`}}/>
+                    <img ref={imgRef} src={`${content.slide_img.slide1}`} style={{width:`${content.image.size}px`,height:`${content.image.size}px`,boxShadow: `${content.image.shadowValue}`}}/>
             }
             {
                 (content.slide_img.slide2) &&
-                    <img ref={imgRef} src={`${content.slide_img.slide2}`} style={{width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`, height:`${content.image.size}px`}}/>
+                    <img ref={imgRef} src={`${content.slide_img.slide2}`} style={{ width:`${content.image.size}px`,height:`${content.image.size}px`,boxShadow: `${content.image.shadowValue}`}}/>
             }
             {
                 (content.slide_img.slide3) &&
-                    <img ref={imgRef} src={`${content.slide_img.slide3}`} style={{width:`${content.image.size}px`, boxShadow: `${content.image.shadowValue}`, height:`${content.image.size}px`}}/>
+                    <img ref={imgRef} src={`${content.slide_img.slide3}`} style={{ width:`${content.image.size}px`,height:`${content.image.size}px`,boxShadow: `${content.image.shadowValue}`}}/>
             }
             </Slider>
         </div>
