@@ -32,7 +32,7 @@ function FuncContentImg({text, value, func, removeFunc, subtext}) {
             </div> */}
         </div>
         <div className="upload-div">
-            <div className="upload-click"
+            <div className="upload-img-click"
             onClick={inputClick}
             onChange={e => func(e)}
             id='attach'

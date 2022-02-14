@@ -249,6 +249,26 @@
     align-items: center;
     justify-content:center;
 }
+.upload-img-click{
+    cursor: pointer;
+    background: linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
+    /* 메인 섀도우 01 */
+    box-shadow: 4px 4px 15px #D0CDFF;
+    border-radius: 32px;
+    width: 190px;
+    height: 40px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: var(--button-font-size);
+    font-weight: 700;
+    line-height: 16px;
+    text-align: center;
+    margin-top: 40px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
 
 .small-command{
     vertical-align: middle;
