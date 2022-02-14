@@ -488,7 +488,7 @@ export const defaults = {
     },
     foot:{
         sectionTypeName:'푸터 바',
-        sectionTemplateNumber:1,
+        sectionTemplateNmber:1,
         use:true,
         layout:1,
         backgroundColor:'#ffffff', 
@@ -498,6 +498,8 @@ export const defaults = {
             use:true,
             text:'',
             color:'#ffffff',
+            align: 'left',
+            size: 12,
         },
         icon:{
             use:true,
