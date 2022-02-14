@@ -92,20 +92,24 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
                 </div>
                 <div style={{width:`${published ? '40%' : '20%'}`, fontSize:'0.6em', textAlign:'end'}}>
                     {published ? 
-                    <>
-                    <span style={{
+                    <div style={{display: 'flex', justifyContent:'end', alignItems: 'center', flexDirection:'row'}}>
+                    <div style={{
                         width: '8px',
                         height: '8px',
-                        background: '#11E533'}}></span>
+                        borderRadius:'10px',
+                        marginRight:'5px',
+                        background: '#11E533'}}></div>
                     {returnDate(published.created)} 마지막 배포
-                    </>
+                    </div>
                     :
-                    <>
-                    <span style={{
+                    <div style={{display: 'flex', justifyContent:'end', alignItems: 'center', flexDirection:'row'}}>
+                    <div style={{
                         width: '8px',
                         height: '8px',
-                        background: '#C4C4C4'}}></span>배포 전
-                    </>
+                        borderRadius:'10px',
+                        marginRight:'5px',
+                        background: '#C4C4C4'}}></div>배포 전
+                    </div>
                     }
                 </div>
             </div>

@@ -11,6 +11,7 @@
 .get-all-container{
     width:90%;
     font-family: Noto Sans KR;
+    padding-top:30px;
 }
 
 .get-up-container{
@@ -73,7 +74,8 @@
     width: 100%;
     padding:10px 30px;
     box-sizing: border-box;
-    border-radius:20px;
+    z-index:3;
+    border-radius:0px 0px 20px 20px;
 }
 .response-table-top{
     display: flex;

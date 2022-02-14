@@ -7,11 +7,13 @@ import NavBarV2 from '../NavAndFooter/NavBarV2'
 import Footer from '../NavAndFooter/Footer'
 import { Table, Tag, Space } from 'antd';
 import MadeLandingCard from '../../components/Response/MadeLandingCard'
-import gadata from '../../components/Response/data/gadata.json';
 import ResponseNavBar from '../../components/Response/ResponseNavBar'
 import ChromeTapBar from '../../components/Response/ChromeTapBar'
 import LoadingDisplay from '../../tools/LoadingDisplay'
 import {Link } from 'react-router-dom'
+import gadata from '../../tools/datacodes/gadata.json'
+import { Tooltip, ChakraProvider } from '@chakra-ui/react'
+import { InformationCircle } from '@styled-icons/ionicons-outline';
 
 const NOTCLICKED = 10000
 
@@ -29,6 +31,7 @@ function ResponsePage({userObj, history}) {
     const [nowChecking, setNowChecking] = useState(NOTCLICKED);
     
     useEffect(() => {
+        
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/response/${userObj.email}`);
@@ -112,6 +115,7 @@ function ResponsePage({userObj, history}) {
     // }
 
     const doPublish = async () => {
+        console.log(gadata['/' + mylandings[nowChecking].urlId], "테스트")
         // 이미 있는거면 수정
         await dbService.collection('published-page')
             .where('urlId', "==", mylandings[nowChecking].urlId)
@@ -166,7 +170,7 @@ function ResponsePage({userObj, history}) {
                         클릭
                     </div>
                     <div className="response__user-datas-one">   
-                        {item.from}에서 클릭
+                        <span style={{color:'rgb(10,10,10)'}}>{item.from}</span>에서 클릭
                     </div>
                     <div className="response__user-datas-one" style={{textAlign:'right'}}>
                         {date}
@@ -183,7 +187,7 @@ function ResponsePage({userObj, history}) {
                         item.values.map((doc, index) => {
                             if(doc.length > 1){
                                 return(
-                                    <div className="response__user-datas-one">
+                                    <div className="response__user-datas-one" key={index}>
                                         {doc}
                                     </div>
                                 )
@@ -217,6 +221,7 @@ function ResponsePage({userObj, history}) {
 
         if(loading === true){
             return (
+                <ChakraProvider>
                 <div className="response__container">
                 <ResponseNavBar />
                 <div className="get-all-container">
@@ -235,10 +240,6 @@ function ResponsePage({userObj, history}) {
                                 <MadeLandingCard addNew />
                             }
                         </div>
-                        {/* <div className="get-buttons-container">
-                            <button className="get-part-button" style={{backgroundColor:`${part === 1 ? "#6a63f76e" : "white"}`}} onClick={e => setPart(1)}>응답</button>
-                            <button className="get-part-button" style={{backgroundColor:`${part === 2 ? "#6a63f76e" : "white"}`}} onClick={e => setPart(2)}>데이터</button>
-                        </div> */}
                     </div>
                     {
                     nowChecking !== NOTCLICKED ? 
@@ -253,9 +254,23 @@ function ResponsePage({userObj, history}) {
                                             {
                                                 checkPublished(mylandings[nowChecking].urlId) ? 
                                                 <div>
-                                                    유입 수 : N 명
+                                                    {
+                                                        gadata['/' + mylandings[nowChecking].urlId] ? 
+                                                        <>
+                                                            유입 수 : {gadata['/' + mylandings[nowChecking].urlId].users}명
+                                                            신청 전환 율 : {numOfPerson('apply') / gadata['/' + mylandings[nowChecking].urlId].users} %
+                                                            클릭 전환 율 : {numOfPerson('click') / gadata['/' + mylandings[nowChecking].urlId].users} %
+                                                        </>
+                                                        :
+                                                        <>
+                                                            아직 기록된 데이터가 없습니다. 
+                                                            <Tooltip hasArrow arrowSize={10} label={"데이터는 Google Analytics의 업데이트 주기에 맞춰 \n 30분마다 업데이트 됩니다."} placement='top' fontSize='13'>
+                                                                <InformationCircle size="16" style={{color:'#C4CACF', zIndex:'20', marginLeft:'6px'}}/>
+                                                            </Tooltip>
+                                                        </>
+                                                    }
                                                     버튼 클릭 수 : {numOfPerson('click')} 명
-                                                    전환율 : {numOfPerson('apply')} 명
+                                                    신청 수 : {numOfPerson('apply')} 명
                                                 </div>
                                                 :
                                                 <div>
@@ -332,6 +347,7 @@ function ResponsePage({userObj, history}) {
                     <Footer />
                 </div>
                 </div>
+                </ChakraProvider>
             )
         }else{
             return(
