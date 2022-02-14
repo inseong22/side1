@@ -8,6 +8,7 @@ import { MyContext } from '../Make/MakePageV2'
 import {dbService} from '../../tools/fbase';
 import OverflowScrolling from 'react-overflow-scrolling';
 import produce from 'immer';
+import { Input } from 'antd';
 
 import good from '../../tools/info/good3d.png';
 
@@ -196,19 +197,16 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
         })
         setOpen(false)
     };
-
-    useEffect(() => {
-        
-        setCnum(1);
-    },[open]);
-
+    
     const onChangeTitle = e => {
+        e.preventDefault();
         setNavi(produce(navi, draft => {
             draft.title = e.currentTarget.value
         }))
     }
 
     const onUrlChange = e => {
+        e.preventDefault();
         setSetting(produce(setting, draft => {
             draft.urlId = e.currentTarget.value
         }))
@@ -281,12 +279,22 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
         switch(cnum){
             case 1:
                 return(
-                    <ModalBox
-                        title={<>안녕하세요 <span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을 환영합니다 <br/>
-                        당신의 서비스 / 제품 명을 알려주세요.</>}>
-                        <form onSubmit={() => setCnum(cnum + 1)} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
-                            <input className="input-holder" type="text" placeholder="한글은 8자 이내, 영문 10자 이내일 때 가장 좋습니다." value={navi.title} onChange={e => onChangeTitle(e)} />
-                        </form>
+                    <div className="modal-flex-column">
+                        <div className="modal-title">
+                            안녕하세요 <span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을 환영합니다 <br/>
+                            당신의 서비스 / 제품 명을 알려주세요.
+                        </div>
+                        <div className="modal-main-card">
+                        {/* <form onSubmit={() => setCnum(cnum + 1)} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}> */}
+                        <Input 
+                            className="input-holder input-focus" 
+                            placeholder="한글은 8자 이내, 영문 10자 이내일 때 가장 좋습니다." 
+                            value={navi.title} 
+                            onChange={e => 
+                                setNavi(produce(navi, draft => {
+                                    draft.title = e.currentTarget.value
+                                }))} />
+                        {/* </form> */}
                         <div className="modal-mini-text">
                             수정가능하니 편하게 정해주세요 :)
                         </div>
@@ -294,8 +302,9 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                             <div className="modal-move-button" 
                                 onSubmit={e => setCnum(cnum + 1)} style={{visibility:`${navi.title.length > 0 ? 'visible' : 'hidden'}`, display:'flex'}} 
                                 onClick={e => setCnum(cnum + 1)}>확인</div>  
+                            </div>
                         </div>
-                    </ModalBox>
+                    </div>
                 )
                 break;
 
@@ -433,26 +442,29 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
 
             case 5:
                 return(
-                    <ModalBox title={<>
-                            마지막으로, <span style={{color:'#6C63FF'}}>{navi.title}</span> 랜딩페이지의 URL을 설정해주세요.
-                    </>}>
-                        <div className="modal-title" style={{fontSize:'25px'}}>
-                            <input className="input-holder" type="text" value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
+                    <div className="modal-flex-column">
+                        <div className="modal-title">
+                            마지막으로, <span style={{color:'#6C63FF'}}>{navi.title}</span> 랜딩페이지의 URL을 설정해주세요.                            
                         </div>
-                        <div style={{color:'gray', paddingLeft:'0%',marginTop:'3%', fontSize:'18px', textAlign:'left', fontFamily:'Pretendard-Regular'}}>
-                            <div>
-                                - 영문과 숫자만 사용 가능합니다.<br/>
-                                - 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.<br/>
-                                - 수정 가능하니 편하게 설정해주세요 :)<br/>
+                        <div className="modal-main-card">
+                            <div className="modal-title" style={{fontSize:'25px'}}>
+                                <input className="input-holder input-focus" value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
+                            </div>
+                            <div style={{color:'gray', paddingLeft:'0%',marginTop:'3%', fontSize:'18px', textAlign:'left', fontFamily:'Pretendard-Regular'}}>
+                                <div>
+                                    - 영문과 숫자만 사용 가능합니다.<br/>
+                                    - 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.<br/>
+                                    - 수정 가능하니 편하게 설정해주세요 :)<br/>
+                                </div>
+                            </div>
+                            <div className="modal-button-container">
+                                <div className="modal-move-button-back" onClick={e => setCnum(cnum - 1)}>이전</div>
+                                <div className="modal-move-button" onClick={() => {
+                                    nextAndSetDone();
+                                }}>시작하기</div>
                             </div>
                         </div>
-                        <div className="modal-button-container">
-                            <div className="modal-move-button-back" onClick={e => setCnum(cnum - 1)}>이전</div>
-                            <div className="modal-move-button" onClick={() => {
-                                nextAndSetDone();
-                            }}>시작하기</div>
-                        </div>
-                    </ModalBox>
+                    </div>
                 )
                 break;
         }
@@ -473,7 +485,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                 <div className="progress-bar__container">
                     {progressList.map((item, index) => {
                         let backColor = 'rgba(100,100,100,0.2)'
-                        let fontColor = 'rgba(0,0,0,0.6)'
+                        let fontColor = '#C4C4C4'
                         let fontColor2 = 'rgba(0,0,0,0.6)'
 
                         if(item.num < cnum){

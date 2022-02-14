@@ -49,7 +49,7 @@ const MakePageV2 = ({history, userObj}) => {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false); // 첫 질문을 위한 Open
 
-    const [isPhone, setIsPhone] = useState(true);
+    const [isPhone, setIsPhone] = useState(false);
     const [full, setFull] = useState(false);
     const [isWidget, setIsWidget] = useState(true);
     const [password, setPassword] = useState("");
@@ -224,6 +224,11 @@ const MakePageV2 = ({history, userObj}) => {
         }
 
         if(editing){
+            if(urlData.length < 1 ){
+                alert("url은 수정하실 수 없습니다. 새로 제작해주세요.")
+                setLoading(false);
+                return
+            }
             // 업데이트 하기
             await dbService.doc(`saved-page/${urlData[0].id}`).update(body);
             // 자동저장 하던 걸 지운다.
@@ -304,19 +309,11 @@ const MakePageV2 = ({history, userObj}) => {
                 <div className="make-left-landing" style={{width:`${full ? '100vw' : '72vw'}`}}>
                     <div className="scroll-container" 
                         style={{ 
-                            width:`${full ? '100vw' :'70vw'}`,
+                            width:`${full ? '100vw' : isPhone ? '30vw' : '70vw'}`,
                             paddingBottom:`${full ? '0px' : '30px'}`
-                        }}
-                        animate={
-                            isPhone ? {
-                                width:['80%', '40%'],
-                                transition:{
-                                    duration:0.3
-                                }
-                            } : {}
-                        }>
+                        }}>
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
-                        {!full && <div className="make-tab-preseen" onClick={() => setSecNum(52)}>
+                        {(!full && !isPhone) && <div className="make-tab-preseen" onClick={() => setSecNum(52)}>
                             <div className="left">
                                 <div className="make-tab-circle" style={{marginLeft:'15px'}}></div>
                                 <div className="make-tab-circle"></div>
