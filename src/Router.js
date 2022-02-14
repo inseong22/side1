@@ -14,7 +14,6 @@ import SubmitPage from './components/Make/unused/SubmitPage';
 import CustomerPage from './pages/Customer/CustomerPage'
 import FQ from './pages/Questions/FQ'
 import { createBrowserHistory } from 'history';
-
 const history = createBrowserHistory();
 
 const AppRouter = ({userObj, isLoggedIn}) => {

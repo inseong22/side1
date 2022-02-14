@@ -27,7 +27,6 @@ const UserLandingPage = (props) => {
     const urltitle = document.getElementById("urltitle");
 
     useEffect(() => {
-        console.log(window.location.host.split(".")[0])
         loadData()
         ReactGa.initialize('UA-213792742-1');
         // to report page view

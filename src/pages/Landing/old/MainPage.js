@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { dbService } from '../../../tools/fbase';
 import NavBar from '../../NavAndFooter/NavBar/NavBar'
 import Footer from '../../NavAndFooter/Footer'
+import gadata from '../../../tools/datacodes/gadata.json'
 
 import section1 from '../../../tools/img/001.png';
 import section0 from '../../../tools/img/005.png';
@@ -33,7 +34,12 @@ function MainPage({history}) {
         setEmail("");
     }
 
-    const scrollDown = () => {
+    const scrollDown = async () => {
+        console.log(gadata);
+        for (var i = 0; i < gadata.length; i++) {
+            await dbService.collection('gadata').add(gadata[i])
+            //Do something
+        }
         targets.current.scrollIntoView({behavior: 'smooth'})
     }
 

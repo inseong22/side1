@@ -9,6 +9,7 @@
 }
 
 .get-all-container{
+    padding-top:5vh;
     width:90%;
     font-family: Noto Sans KR;
     padding-top:30px;
@@ -24,8 +25,8 @@
 
 .get-up-title{
     width:100%;
-    padding:1% 3%;
-    font-size:0.8em;
+    padding:1% 0%;
+    font-size:0.9em;
     color:black;
     font-weight:bold;
     display: flex;

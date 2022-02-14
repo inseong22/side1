@@ -166,7 +166,7 @@
   font-weight: normal;
   font-size: 15px;
   border:none;
-  padding:0px 25px;
+  padding:0px 1.5vw;
   height:38px;
   cursor: pointer;
   text-decoration: none;
@@ -182,7 +182,7 @@
   color:white;
   font-size: 15px;
   border:none;
-  padding:0px 25px;
+  padding:0px 1.5vw;
   height:38px;
   cursor: pointer;
   font-family: Noto Sans KR;
@@ -312,6 +312,15 @@
   cursor: pointer;
 }
 
+.row{
+  display: flex;
+  flex-direction:row;
+}
+
+.column{
+  display:flex;
+  flex-direction:column;
+}
 
 
 
