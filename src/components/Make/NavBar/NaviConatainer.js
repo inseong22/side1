@@ -1,8 +1,8 @@
 import React, {useContext} from 'react'
-import Editor from '../tools/Editor'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
 import AutosizeInput from 'react-input-autosize';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -16,14 +16,24 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                         <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
                     </div>}
                 {navi.logo.text.use && 
-                    <div className="make-nav-logo-image">
-                        <input
+                    <div className="make-nav-logo-image" style={{
+                        paddingLeft:`${navi.logo.image.use ? '1px' : '8px'}`
+                    }}>
+                        <TextareaAutosize
                             className="text-input-flex ti"
-                            value={navi.title} 
+                            value={navi.title}
                             onChange={(e) => {
-                                setNavi({...navi, title:e.currentTarget.value});
+                                setNavi(produce(navi, draft => {
+                                    draft.title = e.currentTarget.value;
+                                }))
                             }}
-                            style={{fontSize:`${navi.logo.text.fontSize}px`, color:`${navi.logo.text.color}`, fontFamily:`${state.setting.font}`, width:''}}
+                            style={{
+                                fontSize:`${navi.logo.text.fontSize}px`, 
+                                color:`${navi.logo.text.color}`, 
+                                fontFamily:`${state.setting.font}`,
+                                resize:'none'
+                            }}
+                            spellcheck="false"
                         />
                     </div>
                 }

@@ -60,31 +60,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     const [email,setEmail] = useState("");
     const [askOpen,setAskOpen] = useState(false);
     const targets = useRef(null)
-    // const [scrollPosition, setScrollPosition] = useState(0);
-
-    // const updateScroll = () => {
-    //     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
-    // }
-
-    useEffect(()=>{
-        // window.addEventListener('scroll', updateScroll);
-    });
-
-    const sendData = async () => {
-        console.log(dbService);
-        if(email.length < 4){
-            alert("올바른 이메일 양식을 입력해주세요!");
-            return;
-        }
-        await dbService.collection("apply-datas").add({
-            email:email,
-            created:Date.now(),
-        });
-
-        alert("신청되셨습니다. 감사합니다. 빠른 시일내로 연락드리겠습니다.");
-        setEmail("");
-    }
-
+    
     const scrollDown = () => {
         targets.current.scrollIntoView({behavior: 'smooth'})
     }
@@ -103,11 +79,10 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     })
 
     const checkLoggedIn = () => {
-        console.log("로그인했나?", isLoggedIn)
         if(isLoggedIn === false){
             alert("로그인하셔야 이용가능한 페이지입니다.");
         }else{
-            history.push('/#/seeResponse');
+            history.push('/#/response');
             history.go();
             return;
         }
@@ -263,7 +238,13 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     <div style={{flexDirection:'row', display:'flex', justifyContent:'center', width:'100%', marginTop:'5%'}}>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span>Let's Build Your Page!</span>
-                            <div to="/make" className="apply-button-v2" onClick={() => setAskOpen(true)}>제작하러가기</div>
+                            <div to="/make" className="apply-button-v2" onClick={() => {
+                                if(isLoggedIn){
+                                    history.push('/#/response')
+                                    history.go()
+                                }else{
+                                    setAskOpen(true)
+                                }}}>제작하러가기</div>
                         </div>
                         <div style={{width:'30%', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                         <span style={{color:'#6a63f7'}}>이미 제작을 완료하셨다면</span>

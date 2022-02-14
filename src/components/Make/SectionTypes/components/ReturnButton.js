@@ -37,7 +37,7 @@ function ReturnButton({content}){
 
     const returnCtaInputs = () => {
         return(
-            <div className="centera" style={{flexDirection:`${content.ctaApplyInputs.length > 1 ? 'column' : 'row'}`}}>
+            <div className="centera" style={{flexDirection:`${content.ctaApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${content.button.align}`}}>
                 {content.ctaApplyInputs.map((item, index) => {
                     return(
                         <input className="input-placeholder" placeholder={item} key={index} style={{marginTop:`${content.ctaApplyInputs.length > 1 ? '8px' : '0px'}`}}/>
@@ -50,7 +50,7 @@ function ReturnButton({content}){
 
     const returnGhostInputs = () => {
         return(
-            <div className="centera" style={{flexDirection:`${content.ghostApplyInputs.length > 1 ? 'column' : 'row'}`}}>
+            <div className="centera" style={{flexDirection:`${content.ghostApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${content.button.align}`}}>
                 {content.ghostApplyInputs.map((item, index) => {
                     return(
                         <input className="input-placeholder" placeholder={item} key={index} style={{marginTop:`${content.ghostApplyInputs.length > 1 ? '8px' : '0px'}`}}/>
