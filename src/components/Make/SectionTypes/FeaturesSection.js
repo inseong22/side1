@@ -8,7 +8,7 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 
-function FeaturesSection({content}) {
+function FeaturesSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const heightRef = useRef(null)
 
@@ -44,7 +44,7 @@ function FeaturesSection({content}) {
     return (
         <>
             <motion.div className="template"
-                data-aos={content.animation.type} aos-duration="2000" >
+                data-aos={setting.animation} aos-duration="4000" >
                 <TitleDesc content={content} />
 
                 <div className="features__container" ref={heightRef} >

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
@@ -70,11 +70,15 @@ const OpenCloseCustom = (props) => {
   /**
    * title, tooltip, preseen 설정 가능
    */
+  const isopen = props.content.qna.shape
   const [open, setOpen] = useState(props.open)
   const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
+  useEffect(() => {
+    console.log(isopen)
+  })
   return (
-    <div className="one-element">
+    <div className="one-element" >
       <div className={props.type === 'card' ? 'accordion__card' : 'accordion__plain'}>
         <div className="accordion__header-qna" onClick={() => setOpen(!open)}>
           <div className="edit-element">
@@ -98,9 +102,14 @@ const OpenCloseCustom = (props) => {
             </div>
           </div>
         </div>
-        <div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>
-         {props.children}
-        </div>
+        {isopen === 'open' ? 
+          (<div className="accordion__body" style={{display:`${!open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>
+          {props.children}
+          </div>):
+          (<div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>
+          {props.children}
+          </div>)
+        }
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import AppRouter from './Router';
 import NavBarV2 from './pages/NavAndFooter/NavBarV2';
 import { authService } from './tools/fbase'
 import {RecoilRoot} from 'recoil';
-
+import LoadingDisplay from './tools/LoadingDisplay'
 
 function App() {
   const [init, setInit] = useState(false);
@@ -18,7 +18,7 @@ function App() {
       authService.onAuthStateChanged((user) => {
         if(user){
           setIsLoggedIn(true)
-          // setUserObj(user.multiFactor.user);
+          setUserObj(user.multiFactor.user);
         }else{
           setIsLoggedIn(false)
         }
@@ -32,7 +32,7 @@ function App() {
   return (
     <>
     <RecoilRoot className="App">
-      {init ? <AppRouter userObj={userObj} isLoggedIn={isLoggedIn} /> : "Initializing..."}
+      {init ? <AppRouter userObj={userObj} isLoggedIn={isLoggedIn} /> : <LoadingDisplay />}
     </RecoilRoot>
     </>
   );

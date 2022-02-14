@@ -4,10 +4,10 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import {produce} from 'immer'
 import TitleDesc from './components/TitleDesc'
 
-function MockupSection({content}) {
+function MockupSection({content, setting}) {
     return (
         <motion.div className="template"
-            data-aos={content.animation.type} aos-duration="2000">
+            data-aos={setting.animation} aos-duration="4000">
 
             <TitleDesc content={content} />
 

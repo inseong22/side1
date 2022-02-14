@@ -36,7 +36,7 @@ function Element({content, item, index, gallery}) {
         {
         content.element.type === 'image' ? <>
         { item.attachment ? 
-            <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.borderRadius}px`}}/> 
+            <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.imageBorder}px`}}/> 
             :
             <div className="feature-upload-button" style={{borderRadius:`${content.element.borderRadius}px`, backgroundColor:`${content.element.backgroundColor}`}}>
                 <Upload size="25" />
@@ -69,7 +69,7 @@ function Element({content, item, index, gallery}) {
             isOpen={open[index]}
             onClose={() => handleClose(index)}>
         <PopoverTrigger>
-                <div className="feature-upload-button" style={{borderRadius:`${content.element.borderRadius}px`, backgroundColor:`${content.element.backgroundColor}`}} onClick={() => handleClick(index)}>
+                <div className="feature-upload-button" style={{borderRadius:`${content.element.iconBorder}px`, backgroundColor:`${content.element.backgroundColor}`}} onClick={() => handleClick(index)}>
                     {item.icon ? 
                         <>{item.icon}</> 
                         :

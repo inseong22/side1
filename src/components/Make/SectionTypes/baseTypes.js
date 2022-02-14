@@ -51,7 +51,7 @@ const contents = {
         attachment:'',
         width:70,
         border:0,
-        size:200,
+        size:150,
         slide:false,
     },
     slide_img:{
@@ -108,7 +108,9 @@ const element = {
     use:true,
     type:'image',
     backgroundColor:'#6CCAD0',
-    borderRaidus:5,
+    // borderRaidus:5,
+    iconBorder:5,
+    imageBorder:5,
     size:50,
 }
 
@@ -124,7 +126,7 @@ const button = {
         ctaLink:'',
         ctaApply: '',
         ghostUseOrLink: true, 
-        ghostUse:false,
+        ghostUse:true,
         ghostLink:'',
         ghostApply: '',
     },
@@ -483,9 +485,6 @@ export const defaults = {
             borderColor:'#000000',
             border:false,
         },
-        animation:{
-            use:true,
-            type:'none',
-        }
+        animation:'none'
     }
 }

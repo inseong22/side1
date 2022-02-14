@@ -4,15 +4,12 @@ import Term from '../../components/Customer/Term'
 import PersonalInformation from '../../components/Customer/PersonalInformation'
 import Footer from '../NavAndFooter/Footer'
 import ReactGa from 'react-ga'
-import { useRecoilState } from 'recoil'
-import {userState} from '../../Router'
 
 import './CustomerPage.css'
 
 function CustomerPage() {
     const [cnum, setCnum] = useState(1);
     const [cnums, setCnums] = useState([1,2,3]);
-    const [userData, setUserData] = useRecoilState(userState);
     
     useEffect(()=>{
 

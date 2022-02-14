@@ -1,5 +1,4 @@
 import React from 'react'
-import Editor from '../tools/Editor'
 import produce from 'immer'
 import {FacebookCircle, FacebookSquare, Youtube, Twitter, InstagramAlt} from '@styled-icons/boxicons-logos';
 import { Mail } from '@styled-icons/entypo';

@@ -9,7 +9,7 @@ import AnimationDiv from './components/AnimationDiv'
 import TextAuto from './components/TextAuto'
 import produce from 'immer'
 
-function CtaSection({content}) {
+function CtaSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnLayout = {
@@ -18,7 +18,7 @@ function CtaSection({content}) {
     
     return (
         <>
-            <div style={{ width:'100%', height:'100%'}}>
+            <motion.div data-aos={setting.animation} aos-duration="4000" tyle={{ width:'100%', height:'100%'}}>
                 <AnimationDiv content={content} returnLayout={returnLayout}>
                     <div className="text__container">
                         <TitleDesc content={content} />
@@ -36,7 +36,7 @@ function CtaSection({content}) {
                     }
                     </div>
                 </AnimationDiv>
-            </div>
+            </motion.div>
         </>
     )
 }

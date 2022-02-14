@@ -1,14 +1,14 @@
 import React, {useContext, useState} from 'react'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import {produce} from 'immer'
-
+import { motion } from 'framer-motion';
 import TitleDesc from './components/TitleDesc'
 import ImageOrSlide from './components/ImageOrSlide'
 import TextAuto from './components/TextAuto'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import AnimationDiv from './components/AnimationDiv'
 
-function VideoSection({content}) {
+function VideoSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const returnLayout = {
         flexDirection:`${'column'}`,
@@ -17,7 +17,7 @@ function VideoSection({content}) {
     }
     
     return (
-        <div style={{ width:'100%', height:'100%'}}>
+        <motion.div data-aos={setting.animation} aos-duration="4000" style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout}>
                 <div className="text__container">
                     <TitleDesc content={content} />
@@ -39,7 +39,7 @@ function VideoSection({content}) {
                 </div>
                 }
             </AnimationDiv>
-        </div>
+        </motion.div>
     )
 }
 
