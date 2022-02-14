@@ -40,7 +40,7 @@ function AddCtaButton({content, num}) {
                 return(
                     <>
                     {
-                        content.ctaApplyInputs.length > num ?  
+                        content.ctaApplyInputs.length == num ?  
                         <ApplyInputCustom disabled /> 
                         :
                         <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {

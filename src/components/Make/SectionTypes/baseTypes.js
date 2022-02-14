@@ -399,10 +399,43 @@ export const base = [
     },
     {
         ...commons,
-        ...contents,
-
         name:'목업',
         sectionTypeName:'MockupSection',
+        mockup: {
+            use: true,
+            type: 'mobile',
+            // mobile, tablet, desktop, mobile2, desk+mob 있음
+            file: '',
+            file2: '',
+        },
+        mobile: {
+            use: true,
+            file: '',
+            size: 200
+        },
+        tablet: {
+            use: false,
+            file: '',
+            size: 200
+        },
+        desktop: {
+            use: false,
+            file: '',
+            size: 400,
+        },
+        mobile2: {
+            use: false,
+            file1: '',
+            file2: '',
+            size: 200,
+        },
+        deskMobile: {
+            use: false,
+            file1: '',
+            file2: '',
+            size1: 100,
+            size2: 400,
+        },
     },
 ]
 
