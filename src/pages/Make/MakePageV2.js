@@ -207,7 +207,7 @@ const MakePageV2 = ({history, userObj}, props) => {
     const sectionsReturn = contents.map((item, index) => {
         return(
             <div style={{width:'100%'}}>
-                <NewSection content={item} key={index} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} full={full} />
+                <NewSection content={item} key={index} index={index} setSecNum={setSecNum} contents={contents} setContents={setContents} full={full} setting={setting}/>
             </div>
         )
     })

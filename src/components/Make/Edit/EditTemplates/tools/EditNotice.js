@@ -11,6 +11,13 @@ const alignOptions = [
     { label: '중앙', value: 'center' },
 ]
 
+const sizeOptions = [
+    { label: 'small', value: 50 },
+    { label: 'medium', value: 75 },
+    { label: 'large', value: 100 },
+]
+
+
 function EditNotice({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 

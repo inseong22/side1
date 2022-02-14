@@ -6,7 +6,7 @@ function ApplyInputCustom({func, disabled, made, value}) {
 
     if(made){
         return (
-                <div className="centera" style={{justifyContent:'start', marginTop:'12px', marginRight:'18px'}}>
+                <div className="centera" style={{justifyContent:'start', marginTop:'12px'}}>
                     <div className="maked">
                     {value}를 입력해주세요
                     </div>

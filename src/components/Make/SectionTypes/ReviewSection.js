@@ -8,7 +8,7 @@ import TitleDesc from './components/TitleDesc'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Element from './components/Element'
 
-function ReviewSection({content}) {
+function ReviewSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnReviewCards = content.elements.map((item, index) => {
@@ -78,6 +78,7 @@ function ReviewSection({content}) {
                                 resize:'none',
                                 textAlign:`${content.align}`,
                                 color:`${content.writer.color}`,
+                                fontFamily:`${state.setting.smallFont}`,
                             }}
                             value={item.writer} 
                             onChange={e => action.setContents(produce(state.contents, draft => {
@@ -92,7 +93,7 @@ function ReviewSection({content}) {
 
     return (
         <>
-            <motion.div className="template" data-aos={content.animation.type} aos-duration="2000">
+            <motion.div className="template" data-aos={setting.animation} aos-duration="4000">
                 
                 <TitleDesc content={content} />
 

@@ -25,7 +25,7 @@ function AppDownloadSection({content}) {
                     <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
                         <ReturnButton content={content} />
                         <div className="df-margin-big feature-desc" style={{width:'100%'}}>
-                            <TextAuto className="text-input" small value={content.caution.text} color = {content.caution.color} align = {content.caution.align}
+                            <TextAuto className="text-input" desc value={content.caution.text} color = {content.caution.color} align = {content.caution.align} size = {content.caution.size}
                                 onChange={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].caution.text = e.currentTarget.value;
                                 }))}  

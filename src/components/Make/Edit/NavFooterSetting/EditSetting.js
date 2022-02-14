@@ -74,10 +74,11 @@ function EdtiSetting({setting, setSetting, category}) {
     ]
 
     const changeAnimationOption = e => {
-        state.contents.map(cont => {
-            cont.animation.type = e;
-        })
-        setSetting({...setting, animation:e})
+        // action.setContents(produce(state.contents, draft => {
+        //     draft[state.secNum].animation.type = e;
+        // }))
+        setSetting({...setting, animation : e})
+        console.log(setting)
     }
 
     // 이미지 업로드

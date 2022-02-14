@@ -79,9 +79,9 @@ export function EditRadioLayout({options, value, onChange, version}){
                 <div className="radio-container">
                     <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(1)}>
                         {value === 1 ? (
-                            <img src={Clay11} />
+                            <img src={Clay31} />
                         ):(
-                            <img src={Clay12} />
+                            <img src={Clay32} />
                         )}
                     </div>
                     <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(2)}>
@@ -93,9 +93,9 @@ export function EditRadioLayout({options, value, onChange, version}){
                     </div>
                     <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(3)}>
                     {value === 3 ? (
-                            <img src={Clay31} />
+                            <img src={Clay11} />
                         ):(
-                            <img src={Clay32} />
+                            <img src={Clay12} />
                         )}
                     </div>
                 </div>
