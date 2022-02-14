@@ -282,10 +282,10 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
             case 1:
                 return(
                     <ModalBox
-                        title={<>안녕하세요! <span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을 환영합니다! <br/>
-                        당신의 서비스 / 제품 명을 알려주세요. 😊</>}>
+                        title={<>안녕하세요 <span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을 환영합니다 <br/>
+                        당신의 서비스 / 제품 명을 알려주세요.</>}>
                         <form onSubmit={() => setCnum(cnum + 1)} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
-                            <input className="input-holder" type="text" placeholder="한글은 8자 이내, 영문 10자 이내일 때 가장 이뻐요!" value={navi.title} onChange={e => onChangeTitle(e)} />
+                            <input className="input-holder" type="text" placeholder="한글은 8자 이내, 영문 10자 이내일 때 가장 좋습니다." value={navi.title} onChange={e => onChangeTitle(e)} />
                         </form>
                         <div className="modal-mini-text">
                             수정가능하니 편하게 정해주세요 :)
@@ -337,7 +337,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
             case 3:
                 return(
                     <ModalBox title={<>
-                        <span style={{color:'#6C63FF'}}>[{navi.title}]</span>의 랜딩페이지는 주로 어떤 화면으로 보여질까요? 🤓
+                        <span style={{color:'#6C63FF'}}>[{navi.title}]</span>의 랜딩페이지는 주로 어떤 화면으로 보여질까요?
                     </>}>
                         <div className="modal-row" style={{flexWrap:'nowrap'}}>
                             <div className="template__card"
@@ -346,7 +346,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                 }}
                                 style={{border: `${device === 'pc' ? '1px solid #6C63FF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
-                                    🖥 PC<br/><br/> PC 화면을 중심으로 편집하고 모바일 화면은 간단한 수정만 가능해요!
+                                    🖥 PC<br/><br/> PC 화면을 중심으로 편집하고 모바일 화면은 간단한 수정만 가능해요.
                                 </div>
                             </div>
                             <div className="template__card"
@@ -355,7 +355,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                 }}
                                 style={{border: `${device === 'mobile' ? '1px solid #6C63FF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
-                                    📱모바일<br/><br/> 모바일 화면을 중심으로 편집하고 PC 화면은 간단한 수정만 가능해요!
+                                    📱모바일<br/><br/> 모바일 화면을 중심으로 편집하고 PC 화면은 간단한 수정만 가능해요.
                                 </div>
                             </div>
                         </div>
@@ -434,7 +434,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
             case 5:
                 return(
                     <ModalBox title={<>
-                            마지막으로, <span style={{color:'#6C63FF'}}>{navi.title}</span> 랜딩페이지의 URL을 설정해주세요!
+                            마지막으로, <span style={{color:'#6C63FF'}}>{navi.title}</span> 랜딩페이지의 URL을 설정해주세요.
                     </>}>
                         <div className="modal-title" style={{fontSize:'25px'}}>
                             <input className="input-holder" type="text" value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
@@ -442,7 +442,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                         <div style={{color:'gray', paddingLeft:'0%',marginTop:'3%', fontSize:'18px', textAlign:'left', fontFamily:'Pretendard-Regular'}}>
                             <div>
                                 - 영문과 숫자만 사용 가능합니다.<br/>
-                                - 개인 도메인 연결은 다음 버전에 빠르게 업데이트 해올게요!<br/>
+                                - 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.<br/>
                                 - 수정 가능하니 편하게 설정해주세요 :)<br/>
                             </div>
                         </div>

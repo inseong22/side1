@@ -5,25 +5,45 @@ import {dbService, stService} from '../../tools/fbase'
 import './MadeLandingCard.css'
 import {Copy} from '@styled-icons/boxicons-regular'
 
-function MadeLandingCard({item, index, setNowChecking, history, addNew}) {
+function MadeLandingCard({item, index, setNowChecking, history, addNew, num, update, setUpdate}) {
     const [deleteopen, setDeleteOpen] = useState(false)
 
     const deletePage = async () => {
-        const dbgallery = await dbService
-        .collection("made-page")
-        .where("urlId", "==", item.setting.urlId)
-        .get()
-        
-        let dbgal = dbgallery.docs.map(doc => {return({...doc.data(), gal_id:doc.id})})
-        
-        //delete 파일도 같이 지워져야만 한다.
-        await dbService.doc(`apply-landing-data/${item.id}`).delete();
-        // await stService.refFromURL(item.attachmentURL).delete(); // URL만 가지고도 refence를 획득할 수 있게 해준다.
 
-        // like에서도 지워야됨.
+        var saved_delete = await dbService.collection('saved-page').where('urlId','==', item.setting.urlId).get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              doc.ref.delete();
+            });
+          });;
+
+        var published_delete = await dbService.collection('published-page').where('urlId','==', item.setting.urlId).get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              doc.ref.delete();
+            });
+          });
+        
+        var urlStores = await dbService.collection('urlStores').where('urlId','==', item.setting.urlId).get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              doc.ref.delete();
+            });
+          });
 
         // 새로고침 시키기
         alert("삭제했습니다.")
+        setUpdate(!update)
+    }
+
+    const duplicate = async () => {
+        if(num > 2){
+            alert("최대 3개의 페이지만 만들 수 있습니다.")
+        }else{
+            await dbService.collection("saved-page").add(item);
+
+            // await dbService.collection("urlStores").add({urlId:item.setting.urlId});
+
+            setUpdate(!update)
+            alert("복제되었습니다.")
+        }
     }
 
     if(addNew){
@@ -61,7 +81,7 @@ function MadeLandingCard({item, index, setNowChecking, history, addNew}) {
                 </div>
                 <div className="right" style={{fontSize:'15px', width:'30%'}}>
                     <button className="content__button cb-delete" onClick={() => {setDeleteOpen(true)}}>삭제</button>
-                    <button className="content__button">복제</button>
+                    <button className="content__button" onClick={() => duplicate()}>복제</button>
                 </div>
             </div>
             {/* <Link to={{

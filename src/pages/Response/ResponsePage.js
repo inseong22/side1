@@ -11,11 +11,13 @@ import gadata from '../../components/Response/data/gadata.json';
 import ResponseNavBar from '../../components/Response/ResponseNavBar'
 import ChromeTapBar from '../../components/Response/ChromeTapBar'
 import LoadingDisplay from '../../tools/LoadingDisplay'
+import {Link } from 'react-router-dom'
 
 const NOTCLICKED = 10000
 
 function ResponsePage({userObj, history}) {
     const [loading, setLoading] = useState(false);
+    const [update, setUpdate] = useState(false);
     const [responses, setResponses] = useState([[]]);
     const [mylandings, setMylandings] = useState([]);
     const [part, setPart] = useState(1);
@@ -28,9 +30,9 @@ function ResponsePage({userObj, history}) {
     useEffect(() => {
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
-        // ReactGa.pageview(`/seeResponse/${userObj.email}`);
+        // ReactGa.pageview(`/response/${userObj.email}`);
         getThisUserDatas();
-    },[loading])
+    },[loading, update])
 
     const getThisUserDatas = async () => {
         const thisuserDatas = await dbService
@@ -96,25 +98,45 @@ function ResponsePage({userObj, history}) {
     // }
 
     const doPublish = async () => {
-        await dbService.collection('publised-page').add(mylandings[nowChecking]);
-
+        // 이미 있는거면 수정
+        const published__search = await dbService.collection('published-page').where('urlId', "==", mylandings[nowChecking].urlId)
+        .get().then( querySnapshot => 
+            { 
+                if(querySnapshot.empty){
+                    console.log("새 배포")
+                    let body = {
+                        ...mylandings[nowChecking],
+                        created:Date.now(),
+                    }
+                    dbService.collection('published-page').add(body)
+                }else{
+                    console.log("배포 수정")
+                    querySnapshot.forEach(function(doc) {
+                        dbService.doc(`published-page/${doc.id}`).update(mylandings[nowChecking])
+                    });
+                }
+            }
+        )
         alert("배포 완료되었습니다.")
     }
 
     const returnMylandingsTable = mylandings.map((item, index) => {
         return(
-            <MadeLandingCard history={history} item={item} key={item.id} index={index} setNowChecking={setNowChecking} />
+            <MadeLandingCard history={history} item={item} key={item.id} index={index} setNowChecking={setNowChecking} num={mylandings.length} setUpdate={setUpdate} update={update}/>
         )
     })
         if(loading === true){
             return (
-                <div style={{fontSize:'20px', backgroundColor:'white', display:'flex', justifyContent:'center',alignItems:'center', width:'100%', flexDirection:'column'}}>
+                <div className="response__container">
                 <ResponseNavBar />
                 <div className="get-all-container">
                     <div className="get-up-container">
                         <div className="get-up-title">
                             {userObj.displayName} 님의 랜딩페이지를 관리해보세요 :)
-                            <span className="response-subtext">현재 버전에서 랜딩페이지는 최대 3개까지 만들 수 있습니다. 새로운 페이지를 만들고 싶다면 기존의 페이지를 삭제해주세요.</span>
+                            {
+                                mylandings.length > 2 &&
+                               <span className="response-subtext">현재 버전에서 랜딩페이지는 최대 3개까지 만들 수 있습니다. 새로운 페이지를 만들고 싶다면 기존의 페이지를 삭제해주세요.</span>
+                        }
                         </div>
                         <div className="get__mylandings-cantainer">
                             {returnMylandingsTable}
@@ -123,10 +145,10 @@ function ResponsePage({userObj, history}) {
                                 <MadeLandingCard addNew />
                             }
                         </div>
-                        <div className="get-buttons-container">
+                        {/* <div className="get-buttons-container">
                             <button className="get-part-button" style={{backgroundColor:`${part === 1 ? "#6a63f76e" : "white"}`}} onClick={e => setPart(1)}>응답</button>
                             <button className="get-part-button" style={{backgroundColor:`${part === 2 ? "#6a63f76e" : "white"}`}} onClick={e => setPart(2)}>데이터</button>
-                        </div>
+                        </div> */}
                     </div>
                     {
                     nowChecking !== NOTCLICKED ? 
@@ -134,7 +156,7 @@ function ResponsePage({userObj, history}) {
                         <ChromeTapBar content={mylandings[nowChecking]}/>
                         { part === 1 ? 
                         // 응답 파트
-                        <div className="response-container">
+                        <div className="response-display__container">
                             <div className="response-table">
                                 <div className="response-table-top">
                                     <span className="response-table-title"> 
@@ -144,7 +166,12 @@ function ResponsePage({userObj, history}) {
                                             전환율 : N 명
                                         </div>
                                         <div className="right" style={{flexDirection: 'row'}}>
-                                            <div className="default-button-01" style={{marginLeft:'15px'}}>편집하기</div>
+                                            <Link to={{
+                                                pathname:`/make`,
+                                                state:{
+                                                    item:mylandings[nowChecking],
+                                                }}} 
+                                                className="default-button-01" style={{marginLeft:'15px'}}>편집하기</Link>
                                             <div className="default-button-02" style={{marginLeft:'15px'}} onClick={() => doPublish()}>배포하기</div>
                                         </div>
                                     </span>
@@ -178,7 +205,7 @@ function ResponsePage({userObj, history}) {
                     </div>
                     }
                 </div>
-                <div style={{fontSize:'15px', width:'100%', marginTop:'10vh'}}>
+                <div style={{fontSize:'15px', width:'100%', marginTop:'40vh'}}>
                     <Footer />
                 </div>
                 </div>

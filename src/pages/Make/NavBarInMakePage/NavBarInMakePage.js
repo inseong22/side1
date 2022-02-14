@@ -57,46 +57,6 @@ const NavBarInMakePage = (props) => {
         }
     }
 
-    const onSubmitFromCheckModal = async () => {
-        props.setLoading(true);
-
-        const urlDatas = await dbService
-            .collection("urlStores")
-            .where("urlId", "==", props.setting.urlId)
-            .get(); // uid를 creatorId로 줬었으니까.
-        
-        let urlData = urlDatas.docs.map(doc => {
-            return({...doc.data(), id:doc.id})
-        });
-
-        if(urlData.length > 0){
-            alert("이미 존재하는 url입니다. 다른 url을 사용해주세요.");
-            props.setLoading(false);
-        }else{
-            const body = {
-                contents:state.contents,
-                navi:props.navi,
-                foot:props.foot,
-                setting:props.setting,
-                created:Date.now(),
-                makerEmail:props.userObj.email,
-            }
-
-            await dbService.collection("made-page").add(body);
-
-            await dbService.collection("urlStores").add({urlId:body.setting.urlId});
-
-            // 자동저장 하던 걸 지운다.
-            window.localStorage.removeItem("temp");
-            
-            setTimeout(() => {
-                props.setLoading(false);
-                props.history.push('/#/submit');
-                props.history.go();
-            },1000)
-        }
-    }
-
     const deviceSelect = () => {
         return(
             <div style={{width:'15%', paddingRight:'20px'}}>
@@ -180,7 +140,7 @@ const NavBarInMakePage = (props) => {
                     </Button>
                 </div>
                 {/* <ConfirmCustom open={open} setOpen={setOpen} message={"홈"} callback={deletePage}/> */}
-                <CheckModal ch={checkModalOpen} setCh={setCheckModalOpen} onSubmit2={onSubmitFromCheckModal}/>
+                {/* <CheckModal ch={checkModalOpen} setCh={setCheckModalOpen} onSubmit2={onSubmitFromCheckModal}/> */}
             </div>
         </ChakraProvider>
     )

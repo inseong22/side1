@@ -46,7 +46,7 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                     {/* <Route path="/make">
                         <MakePage history={history}/>
                     </Route>             */}
-                    <Route path="/seeResponse">
+                    <Route path="/response">
                         <ResponsePage history={history} userObj={userObj}/> 
                     </Route>
                     <Route path="/submit">

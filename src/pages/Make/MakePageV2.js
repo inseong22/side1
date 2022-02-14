@@ -94,22 +94,25 @@ const MakePageV2 = ({history, userObj}) => {
 
     // 처음에 한번만 실행되는 useEffect
     useEffect(() => {
-        console.log(location);
-
         // 관리하기 페이지에서 state.item으로 내용을 가지고 넘어왔다.
         if(location.state !== undefined){
             if(location.state.newMake){
                 setOpen(true);
             }else{
+                setLoading(true)
                 console.log(location.state);
 
                 const item = location.state.item;
-                setContents(item[0]);
-                setNavi(item[1]);
-                setFoot(item[2]);
-                setSetting(item[3]);
+                setContents(item.contents);
+                setNavi(item.navi);
+                setFoot(item.foot);
+                setSetting(item.setting);
                 setOpen(false);
                 setEditing(true);
+                
+                setTimeout(() => {
+                    setLoading(false);
+                },700)
             }
         }else{
             // 로컬스토리지에 저장되어인게 있다면
@@ -144,6 +147,7 @@ const MakePageV2 = ({history, userObj}) => {
     }
 
     const loadLocalStorage = () => {
+        setLoading(true);
         const temp = JSON.parse(localStorage.getItem('temp'));
         setContents(temp[0]);
         setNavi(temp[1]);
@@ -151,61 +155,9 @@ const MakePageV2 = ({history, userObj}) => {
         setSetting(temp[3]);
         setOpen(false);
         setEditing(true);
-    }
-
-    const doSave = async () => {
-        // 저장하기
-        if(password.length < 4){
-            alert("4글자 이상 입력해주시기 바랍니다.");
-            return;
-        }else{
-            setLoading(true);
-            const checkDatas = await dbService
-                .collection("apply-landing")
-                .get(); // uid를 creatorId로 줬었으니까.
-            let checkData = checkDatas.docs.map(doc => {
-                return({...doc.data(), id:doc.id})
-            });
-
-            const attachmentRef = stService.ref().child(`${setting.urlId}/${uuidv4()}`)
-
-            const oneLandingPage = {
-
-            }
-
-            if(checkData.length === 0){
-                // 없으면 새로 저장
-                await dbService.collection("apply-landing").add(oneLandingPage);
-                alert("저장되었습니다!");
-                setLoading(false);
-                return;
-            }else{
-                // 있으면 업데이트                
-                await dbService.doc(`apply-landing/${checkData[0].id}`)
-                .update(oneLandingPage)
-                alert("저장되었습니다!");
-                setLoading(false);
-                return;
-            }
-        }
-    }
-
-    const doLoad = async () => {
-        setLoading(true);
-        const checkDatas = await dbService
-            .collection("apply-landing")
-            .where("password", "==", password)
-            .get(); // uid를 creatorId로 줬었으니까.
-        let checkData = checkDatas.docs.map(doc => {
-            return({...doc.data(), id:doc.id})
-        });
-
-        if(checkData.length === 0){
-            alert("해당하는 불러오기 정보가 없습니다!");
-            return;
-        }else{
-
-        }
+        setTimeout(() => {
+            setLoading(false);
+        },1000)
     }
 
     const sectionsReturn = contents.map((item, index) => {
@@ -270,19 +222,24 @@ const MakePageV2 = ({history, userObj}) => {
                 setting:setting,
                 created:Date.now(),
                 makerEmail:userObj.email,
-                makingTypeByUser:makingTypeByUser
+                makingTypeByUser:makingTypeByUser,
+                urlId:setting.urlId,
             }
-
-            await dbService.collection("saved-page").add(body);
-
-            await dbService.collection("urlStores").add({urlId:body.setting.urlId});
+            if(editing){
+                // 업데이트 하기
+                await dbService.collection("saved-page").add(body);
+            }else{
+                await dbService.collection("saved-page").add(body);
+    
+                await dbService.collection("urlStores").add({urlId:body.setting.urlId});
+            }
 
             // 자동저장 하던 걸 지운다.
             window.localStorage.removeItem("temp");
             
             setTimeout(() => {
                 setLoading(false);
-                history.push('/#/seeResponse');
+                history.push('/#/response');
                 history.go();
             },1000)
         }
@@ -307,10 +264,10 @@ const MakePageV2 = ({history, userObj}) => {
            {
                !full &&
                <NavBarInMakePage 
-                   doLoad={doLoad} history={history} userObj={userObj}
+                    history={history} userObj={userObj}
                    open={open} setOpen={setOpen}
                    full={full} setFull={setFull}
-                   isPhone={isPhone} setIsPhone={setIsPhone} doSave={doSave}
+                   isPhone={isPhone} setIsPhone={setIsPhone}
                    nowState={nowState}
                    loading={loading} setLoading={setLoading}
                    navi={navi} foot={foot} setting={setting}

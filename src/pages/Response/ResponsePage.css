@@ -1,4 +1,12 @@
-
+.response__container{
+    font-size:20px;
+    background-color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    flex-direction:column;
+}
 
 .get-all-container{
     width:90%;
@@ -56,13 +64,15 @@
     margin:1%;
 }
 
-.response-container{
+.response-display__container{
     background-color: rgba(255, 255, 255, 0);
     display: flex;
     justify-content:center;
     align-items:center;
     flex-direction: column;
     width: 100%;
+    padding:10px 20px;
+    box-sizing: border-box;
 }
 
 .response-table{
@@ -141,6 +151,7 @@
     background: #F2F6FA;
     box-shadow: var(--main-shadow-01);
     border-radius: 10px 10px 10px 10px;
+    margin-top:5vh;
 }
 
 @media screen and (max-width:800px){

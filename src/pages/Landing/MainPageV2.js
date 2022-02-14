@@ -82,7 +82,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
         if(isLoggedIn === false){
             alert("로그인하셔야 이용가능한 페이지입니다.");
         }else{
-            history.push('/#/seeResponse');
+            history.push('/#/response');
             history.go();
             return;
         }
@@ -240,7 +240,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                         <span>Let's Build Your Page!</span>
                             <div to="/make" className="apply-button-v2" onClick={() => {
                                 if(isLoggedIn){
-                                    history.push('/#/seeResponse')
+                                    history.push('/#/response')
                                     history.go()
                                 }else{
                                     setAskOpen(true)

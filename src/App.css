@@ -168,6 +168,7 @@
   padding:0px 25px;
   height:38px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .default-button-02{
@@ -270,12 +271,20 @@
   word-wrap:break-word;
 }
 
+.text-no-input{
+  border:1px solid rgba(200,200,200,0);
+  background-color:rgba(0,0,0,0);
+  width:100%;
+  overflow:hidden;
+  word-wrap:break-word;
+}
+
 .text-input:hover{
   border:1px solid rgba(200,200,200,0.7);
 }
 
 .text-input:focus {
-  outline:1px solid #d50000;
+  outline:1px solid #383838;
 }
 
 .ti:hover{
@@ -283,7 +292,7 @@
 }
 
 .ti:focus {
-  outline:1px solid #d50000;
+  outline:1px solid #6e5c5c;
 }
 
 .text-input-flex{
