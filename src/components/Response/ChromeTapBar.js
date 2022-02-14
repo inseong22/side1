@@ -10,7 +10,7 @@ function ChromeTapBar({content}) {
                 <div className="make-tab-circle"></div>
                 <div className="make-tab-circle"></div>
                 <div className="make-tab-one-tab">
-                    <img src={content.setting.faviconAttachment} className='make-tab-favicon' alt="x" />
+                    <img src={content.setting.faviconAttachment} className='make-tab-favicon' />
                     {content.setting.title}
                 </div>
             </div>

@@ -136,7 +136,7 @@ function ResponsePage({userObj, history}) {
             }
         )
         alert("배포 완료되었습니다.")
-        setUpdate(!update)
+        history.go();
     }
 
     const checkPublished = (urlId) => {
@@ -150,6 +150,43 @@ function ResponsePage({userObj, history}) {
             return found
         }else{
             return false
+        }
+    }
+
+    const userOneLine = (item) => {
+        let day = new Date(item.created)
+        let date = `${day.getMonth() + 1}월 ${day.getDate()}일 ${day.getHours()}시 ${day.getMinutes()}분`
+
+        if(item.type === 'click'){
+            return(
+                <div className="response__user-datas">
+                    <div className="response__user-datas-one">
+                        {date}
+                    </div>
+                    <div className="response__user-datas-one">   
+                        {item.from}
+                    </div>
+                </div>
+            )
+        }else{
+            return(
+                <div className="response__user-datas">
+                    {
+                        item.values.map((doc, index) => {
+                            if(doc.length > 1){
+                                return(
+                                    <div className="response__user-datas-one">
+                                        {doc}
+                                    </div>
+                                )
+                            }
+                        })
+                    }
+                    <div className="response__user-datas-one">
+                        {date}
+                    </div>
+                </div>
+            )
         }
     }
 
@@ -195,7 +232,7 @@ function ResponsePage({userObj, history}) {
                             <div className="response-table">
                                 <div className="response-table-top">
                                     <span className="response-table-title"> 
-                                        <div className="left">
+                                        <div className="left" style={{width:'80%'}}>
                                             {
                                                 checkPublished(mylandings[nowChecking].urlId) ? 
                                                 <div>
@@ -209,7 +246,7 @@ function ResponsePage({userObj, history}) {
                                                 </div>
                                             }
                                         </div>
-                                        <div className="right" style={{flexDirection: 'row'}}>
+                                        <div className="right" style={{flexDirection: 'row', width:'20%'}}>
                                             <Link to={{
                                                 pathname:`/make`,
                                                 state:{
@@ -226,21 +263,11 @@ function ResponsePage({userObj, history}) {
                                         <>
                                             {
                                             responses[nowChecking].map((item, index) => {
-                                            if(item.type === 'click'){
                                                 return(
                                                     <>
-                                                        {item.created}
-                                                        {item.from}
+                                                        {userOneLine(item)}
                                                     </>
                                                 )
-                                            }else{
-                                                return(
-                                                    <>
-                                                        {item.created}
-                                                        {item.values[0]}
-                                                    </>
-                                                )
-                                            }
                                         })}
                                         </>
                                     }

@@ -141,12 +141,24 @@ function ReturnButton({content, setting}){
                     <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
                         {
                             content.appButton.google.length > 0 && 
-                                <img src={playstorebutton} className="store-button" />
+                                <img src={playstorebutton} className="store-button" onClick={e => {
+                                    window.open(
+                                        content.appButton.google,
+                                        '_blank' // <- This is what makes it open in a new window.
+                                      )
+                                      moveToPage()
+                                    }}/>
                         }
                         {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
                         {
                             content.appButton.apple.length > 0 && 
-                                <img src={appstorebutton} className="store-button" />
+                                <img src={appstorebutton} className="store-button" onClick={e => {
+                                    window.open(
+                                        content.appButton.google,
+                                        '_blank' // <- This is what makes it open in a new window.
+                                      )
+                                      moveToPage()
+                                    }}/>
                         }
                     </div>
                 }

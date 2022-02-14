@@ -46,8 +46,7 @@ function AskLoginModal({open, setOpen, SomeoneClickMoveToMake}) {
                 aria-describedby="unstyled-modal-description"
                 open={open}
                 onClose={() => setOpen(!open)}
-                BackdropComponent={Backdrop}
-            >
+                BackdropComponent={Backdrop}>
                 <Box sx={style}>
                     <div className="modal-top__title">
                         <div className="centera" style={{width:"95%"}}>

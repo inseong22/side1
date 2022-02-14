@@ -10,19 +10,19 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
 
     const deletePage = async () => {
 
-        var saved_delete = await dbService.collection('saved-page').where('urlId','==', item.setting.urlId).get().then(function(querySnapshot) {
+        var saved_delete = await dbService.collection('saved-page').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
               doc.ref.delete();
             });
           });;
 
-        var published_delete = await dbService.collection('published-page').where('urlId','==', item.setting.urlId).get().then(function(querySnapshot) {
+        var published_delete = await dbService.collection('published-page').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
               doc.ref.delete();
             });
           });
         
-        var urlStores = await dbService.collection('urlStores').where('urlId','==', item.setting.urlId).get().then(function(querySnapshot) {
+        var urlStores = await dbService.collection('urlStores').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
               doc.ref.delete();
             });
@@ -32,7 +32,7 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
         alert("삭제했습니다.")
         setUpdate(!update)
 
-        history.go(-1)
+        history.go()
     }
 
     const duplicate = async () => {
@@ -84,7 +84,7 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
                 <div className="card__title">
                     {item.setting.title}
                 </div>
-                <div style={{width:'40%', fontSize:'0.6em'}}>
+                <div style={{width:`${published ? '40%' : '20%'}`, fontSize:'0.6em', textAlign:'end'}}>
                     {published ? 
                     <>
                     <span style={{

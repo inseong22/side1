@@ -89,7 +89,6 @@
     justify-content: start;
     align-items: start;
     flex-direction: column;
-    font-weight: 600;
     width: 100%;
 }
 
@@ -152,6 +151,19 @@
     box-shadow: var(--main-shadow-01);
     border-radius: 10px 10px 10px 10px;
     margin-top:5vh;
+}
+
+.response__user-datas{
+    display: flex;
+    flex-direction: row;
+    justify-content:start;
+    align-items : center;
+}
+
+.response__user-datas-one{
+    text-align:left;
+    width:100%;
+    font-size:0.8em;
 }
 
 @media screen and (max-width:800px){
