@@ -29,17 +29,16 @@ const Backdrop = styled('div')`
 `;
 
 const style = {
-  width: 500,
-  height: 250,
+  width: 400,
+  height: 300,
   bgcolor: 'rgba(255,255,255,1)',
-  borderRadius:1,
+  borderRadius:'20px',
   p: 2,
   px: 4,
   pb: 3,
 };
 
 function AskLoginModal({open, setOpen, SomeoneClickMoveToMake}) {
-
     return (
         <div>
             <StyledModal
@@ -47,29 +46,35 @@ function AskLoginModal({open, setOpen, SomeoneClickMoveToMake}) {
                 aria-describedby="unstyled-modal-description"
                 open={open}
                 onClose={() => setOpen(!open)}
-                BackdropComponent={Backdrop}
-            >
+                BackdropComponent={Backdrop}>
                 <Box sx={style}>
                     <div className="modal-top__title">
                         <div className="centera" style={{width:"95%"}}>
                             
                         </div>
                         <div style={{width:"5%", cursor:"pointer"}} onClick={() => setOpen(false)}>
-                            <Close size="30" />
+                            <Close size="30" color="#C4CACF"/>
                         </div>
                     </div>
-                    <div className="section-modal__container" style={{fontFamily:'Noto Sans KR'}}>
-                        <div className="modal-body">
-                            로그인 하시면 만들던 페이지를 나중에 이어서 만들 수 있습니다.<br/>
-                            로그인 하시겠습니까?
-                        </div>
-                        <div className="center-column" style={{height:'30%'}}>
-                            <Link to='/login' className="ask-modal-button">
-                                네 ( 로그인/회원가입 하러 가기 ) 
-                            </Link>
-                            <Link to='make' className="ask-modal-button button-second" onClick={() => SomeoneClickMoveToMake()}>
-                                오늘은 구경만 할게요 ( 비회원으로 이용하기 )
-                            </Link>
+                    <div className="centeras">
+                        <div className="section-login-modal__container">
+                            <div className="modal-body">
+                                로그인 하시면 만들던 페이지를 나중에 <br/>이어서 만들 수 있습니다.<br/><br/>
+                                로그인 하시겠습니까?
+                            </div>
+                            <div className="center-column" style={{height:'30%'}}>
+                                <Link to='/login' className="ask-modal-button">
+                                    네 ( 로그인/회원가입 하러 가기 ) 
+                                </Link>
+                                <Link to={{
+                                    pathname:`/make`,
+                                    state:{
+                                        newMake:true,
+                                    }}}  
+                                    className="ask-modal-button button-second" onClick={() => SomeoneClickMoveToMake()}>
+                                    오늘은 구경만 할게요 ( 비회원으로 이용하기 )
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </Box>

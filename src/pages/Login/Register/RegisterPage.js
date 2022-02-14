@@ -3,7 +3,7 @@ import { authService } from '../../../tools/fbase'
 import { firebaseInstance } from '../../../tools/fbase'
 import { dbService } from '../../../tools/fbase'
 import { Input } from 'antd';
-import googlelogo from '../googlelogo.png'
+import googlelogo from '../../../tools/img/googlelogo.png'
 import s1 from '../../../tools/img/surfee1.png';
 import {Link} from 'react-router-dom';
 import NavBarV2 from '../../NavAndFooter/NavBarV2'
