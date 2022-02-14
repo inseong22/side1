@@ -102,8 +102,9 @@ function EditReviewSection({content, category}) {
                     <>
                         <ElementsTable elements={elements} />
                         <OpenCloseCustom title="레이아웃">
-                            <RadioCustom text="단 개수" options={layoutOptions} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                            <RadioCustom text="단 개수" options={layoutOptions} value={content.numOfReviews} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].layout = e;
+                                    draft[state.secNum].numOfReviews = e;
                                 }))} />
                             <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].align = e;

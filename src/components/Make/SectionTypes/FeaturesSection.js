@@ -13,9 +13,9 @@ function FeaturesSection({content, setting}) {
     const heightRef = useRef(null)
 
     const returnFeatureCards = content.elements.map((item, index) => {
-        // '1px 1px 3px rgba(0,0,0,0.2)'
+        if (index < content.numOfFeatures){
         return(
-            <div key={index} className="feature__card" style={{boxShadow:'', margin:`${ index === 0 ? '0px 15px 0px 0px' : index === content.elements.length - 1 ? '0px 0px 0px 15px' : '0px 15px' }`}}>
+            <div key={index} className="feature__card" style={{alignItems: `${content.align}`,boxShadow:'', margin:`${ index === 0 ? '0px 15px 0px 0px' : index === content.elements.length - 1 ? '0px 0px 0px 15px' : '0px 15px' }`}}>
                 <Element content={content} item={item} index={index} key={index}/>
                 {
                     content.featureText.titleUse && 
@@ -38,7 +38,9 @@ function FeaturesSection({content, setting}) {
                     </div>
                 }
             </div>
-        )
+        )}
+        else{
+        }
     })
 
     return (
