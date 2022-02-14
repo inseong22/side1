@@ -22,7 +22,13 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
             });
           });
         
-        var urlStores = await dbService.collection('urlStores').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
+          var urlStores = await dbService.collection('urlStores').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              doc.ref.delete();
+            });
+          });
+
+          var datas = await dbService.collection('datas').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
               doc.ref.delete();
             });

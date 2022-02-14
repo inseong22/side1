@@ -9,7 +9,7 @@ function UserNavBar({setting, navi}) {
         await dbService.collection('datas').add({
             urlId:setting.urlId,
             type:'click',
-            from:'navi',
+            from:'내비게이션',
             created:Date.now(),
         })
     }

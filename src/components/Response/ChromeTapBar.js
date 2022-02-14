@@ -1,4 +1,5 @@
 import React from 'react'
+import surfeelogo from '../../tools/img/surfeelogo.png'
 
 function ChromeTapBar({content}) {
     return (
@@ -10,7 +11,12 @@ function ChromeTapBar({content}) {
                 <div className="make-tab-circle"></div>
                 <div className="make-tab-circle"></div>
                 <div className="make-tab-one-tab">
-                    <img src={content.setting.faviconAttachment} className='make-tab-favicon' />
+                    {
+                        content.setting.faviconAttachment === '' ? 
+                        <img src={surfeelogo} className='make-tab-favicon' />
+                        :
+                        <img src={content.setting.faviconAttachment} className='make-tab-favicon' />
+                    }
                     {content.setting.title}
                 </div>
             </div>

@@ -113,30 +113,32 @@ function ResponsePage({userObj, history}) {
 
     const doPublish = async () => {
         // 이미 있는거면 수정
-        const published__search = await dbService.collection('published-page').where('urlId', "==", mylandings[nowChecking].urlId)
-        .get().then( querySnapshot => 
-            { 
-                if(querySnapshot.empty){
-                    console.log("새 배포")
-                    let body = {
-                        ...mylandings[nowChecking],
-                        created:Date.now(),
+        await dbService.collection('published-page')
+            .where('urlId', "==", mylandings[nowChecking].urlId)
+            .get().then( querySnapshot => 
+                { 
+                    if(querySnapshot.empty){
+                        console.log("새 배포")
+                        let body = {
+                            ...mylandings[nowChecking],
+                            created:Date.now(),
+                        }
+                        dbService.collection('published-page').add(body)
+                    }else{
+                        console.log("배포 수정")
+                        let body = {
+                            ...mylandings[nowChecking],
+                            created:Date.now(),
+                        }
+                        querySnapshot.forEach(async (doc) => {
+                            await dbService.doc(`published-page/${doc.id}`).update(body).then(() => {
+                                alert("배포 완료되었습니다.")
+                                history.go();
+                            })
+                        });
                     }
-                    dbService.collection('published-page').add(body)
-                }else{
-                    console.log("배포 수정")
-                    let body = {
-                        ...mylandings[nowChecking],
-                        created:Date.now(),
-                    }
-                    querySnapshot.forEach(function(doc) {
-                        dbService.doc(`published-page/${doc.id}`).update(body)
-                    });
                 }
-            }
-        )
-        alert("배포 완료되었습니다.")
-        history.go();
+            )
     }
 
     const checkPublished = (urlId) => {
@@ -160,17 +162,23 @@ function ResponsePage({userObj, history}) {
         if(item.type === 'click'){
             return(
                 <div className="response__user-datas">
-                    <div className="response__user-datas-one">
-                        {date}
+                    <div className="response__user-datas-one" style={{width:'150px'}}> 
+                        클릭
                     </div>
                     <div className="response__user-datas-one">   
-                        {item.from}
+                        {item.from}에서 클릭
+                    </div>
+                    <div className="response__user-datas-one" style={{textAlign:'right'}}>
+                        {date}
                     </div>
                 </div>
             )
         }else{
             return(
                 <div className="response__user-datas">
+                    <div className="response__user-datas-one" style={{width:'170px'}}> 
+                        신청
+                    </div>
                     {
                         item.values.map((doc, index) => {
                             if(doc.length > 1){
@@ -182,7 +190,7 @@ function ResponsePage({userObj, history}) {
                             }
                         })
                     }
-                    <div className="response__user-datas-one">
+                    <div className="response__user-datas-one" style={{textAlign:'right'}}>
                         {date}
                     </div>
                 </div>
@@ -195,6 +203,16 @@ function ResponsePage({userObj, history}) {
             <MadeLandingCard history={history} item={item} key={item.id} index={index} published={checkPublished(item.urlId)} setNowChecking={setNowChecking} num={mylandings.length} setUpdate={setUpdate} update={update}/>
         )
     })
+
+    const numOfPerson = (type) => {
+        let numClick = 0
+        responses[nowChecking].forEach(doc => doc.type === type ? numClick += 1 : numClick)
+        return(
+            <>
+                {numClick}
+            </>
+        )
+    }
 
 
         if(loading === true){
@@ -229,7 +247,6 @@ function ResponsePage({userObj, history}) {
                         { part === 1 ? 
                         // 응답 파트
                         <div className="response-display__container">
-                            <div className="response-table">
                                 <div className="response-table-top">
                                     <span className="response-table-title"> 
                                         <div className="left" style={{width:'80%'}}>
@@ -237,8 +254,8 @@ function ResponsePage({userObj, history}) {
                                                 checkPublished(mylandings[nowChecking].urlId) ? 
                                                 <div>
                                                     유입 수 : N 명
-                                                    버튼 클릭 수 : N 명
-                                                    전환율 : N 명
+                                                    버튼 클릭 수 : {numOfPerson('click')} 명
+                                                    전환율 : {numOfPerson('apply')} 명
                                                 </div>
                                                 :
                                                 <div>
@@ -257,9 +274,20 @@ function ResponsePage({userObj, history}) {
                                         </div>
                                     </span>
                                 </div>
-                                <div>
+                                <div className="response-table-middle">
+                                    <div className="response__user-datas-top">
+                                        <div className="response__user-datas-one" style={{width:'150px'}}> 
+                                            타입
+                                        </div>
+                                        <div className="response__user-datas-one">
+                                            유저의 행동 데이터
+                                        </div>
+                                        <div className="response__user-datas-one" style={{textAlign:'right'}}>
+                                            시간
+                                        </div>
+                                    </div>
                                     {
-                                        nowChecking !== NOTCLICKED && 
+                                        typeof responses[nowChecking] !== undefined && 
                                         <>
                                             {
                                             responses[nowChecking].map((item, index) => {
@@ -272,7 +300,6 @@ function ResponsePage({userObj, history}) {
                                         </>
                                     }
                                 </div>
-                            </div>
                         </div>
                         :
                         <>
