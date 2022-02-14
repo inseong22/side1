@@ -74,6 +74,34 @@ const contents = {
         file: '',
         file2: '',
     },
+    mobile: {
+        use: true,
+        file: '',
+        size: 200
+    },
+    tablet: {
+        use: false,
+        file: '',
+        size: 200
+    },
+    desktop: {
+        use: false,
+        file: '',
+        size: 400,
+    },
+    mobile2: {
+        use: false,
+        file1: '',
+        file2: '',
+        size: 200,
+    },
+    deskMobile: {
+        use: false,
+        file1: '',
+        file2: '',
+        size1: 100,
+        size2: 400,
+    },
 }
 
 const element = {
@@ -217,7 +245,7 @@ export const base = [
         },
         reviewText:{
             use:true,
-            color:'#000000',
+            color: '#000000',
         },
         elements:[
             {
