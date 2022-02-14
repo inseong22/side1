@@ -497,18 +497,24 @@ export const defaults = {
         text:{
             use:true,
             text:'',
-            color:'#ffffff',
+            color:'#000000',
             align: 'left',
-            size: 12,
+            size: 15,
         },
         icon:{
             use:true,
             style:'circle',
             color:'#ffffff',
             align:'start',
-            icons:[
-                
-            ],
+            facebook: '',
+            naver: '',
+            instagram: '',
+            notion: '',
+            mail: '',
+            kakaotalk: '',
+            twitter: '',
+            youtube: '',
+            
         },
         copyright:{
             use:true,

@@ -52,6 +52,7 @@
     "react-scripts": "4.0.3",
     "react-select": "^5.2.1",
     "react-slick": "^0.28.1",
+    "react-textarea-autosize": "^8.3.3",
     "reactstrap": "^9.0.1",
     "recoil": "^0.5.2",
     "slick-carousel": "^1.8.1",
