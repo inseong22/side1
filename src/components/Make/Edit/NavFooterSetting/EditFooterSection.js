@@ -28,6 +28,11 @@ const iconsList = [
     { value: 'naver', label: "네이버" , link:''},
 ]
 
+const alignOptions = [
+    { label: '왼쪽', value: 'left' },
+    { label: '중앙', value: 'center' },
+]
+
 const layoutOptions = [
     { label: '1', value: 1 },
     { label: '2', value: 2 },
@@ -45,11 +50,11 @@ const paddingOptions = [
     { label: '넓게', value: 5 },
 ]
 
-const alignOptions = [
-    { label: <AlignStart width={30} />, value: 'start' },
-    { label: <AlignCenter width={30} />, value: 'center' },
-    { label: <AlignEnd width={30} />, value: 'end' },
-]
+// const alignOptions = [
+//     { label: <AlignStart width={30} />, value: 'start' },
+//     { label: <AlignCenter width={30} />, value: 'center' },
+//     { label: <AlignEnd width={30} />, value: 'end' },
+// ]
 
 function EditFooterSection({foot, setFoot, category}) {
 
@@ -102,7 +107,15 @@ function EditFooterSection({foot, setFoot, category}) {
                         draft.layout = e;
                     }))}} /> */}
                     <OpenCloseCustom title="회사 / 팀 정보">
-                        
+                        <ColorCustom text="색상" value={foot.text.color} func={e => setFoot(produce(foot, draft => {
+                            draft.text.color = e;
+                        }))} />
+                        <RadioCustom text="정렬" options={alignOptions} value={foot.text.align} func={e => setFoot(produce(foot, draft => {
+                            draft.text.align = e;
+                        }))} />
+                        <TextSizeCustom text="크기" desc value={foot.text.size} func={e => setFoot(produce(foot, draft => {
+                            draft.text.size = e;
+                        }))} />
                     </OpenCloseCustom>
                     <OpenCloseCustom title="소셜 아이콘">
                         <OnOffCustom text="소셜 아이콘" value={foot.icon.use} func={e => setFoot(produce(foot, draft => {

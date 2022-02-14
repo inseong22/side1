@@ -201,6 +201,7 @@ export const base = [
         name:'특징',
         sectionTypeName:'FeaturesSection',
         align:'start',
+        numOfFeatures:3,
         featureText:{
             use:true,
             titleUse:true,
@@ -219,6 +220,18 @@ export const base = [
                 attachment:'',
                 title:'Translate your website',
                 desc:'Easily manage your website in multiple languages. \n With this feature you can \n offer your site to everyone.',
+            },
+            {
+                icon:'',
+                attachment:'',
+                title:'Protect your content',
+                desc:'Secure your entire website or \n single pages with passwords to protect it from unwanted eyes.',
+            },
+            {
+                icon:'',
+                attachment:'',
+                title:'Protect your content',
+                desc:'Secure your entire website or \n single pages with passwords to protect it from unwanted eyes.',
             },
             {
                 icon:'',
@@ -274,6 +287,22 @@ export const base = [
                 rating:4.6,
                 writer:'Achim, 윤진 대표 인터뷰',
             },
+            {
+                icon:'',
+                attachment:'',
+                title:'4의 타이틀',
+                desc:'실제로 주변에 아임웹을 많이 소개했는데요. 요즘에는 누구나 개인 홈페이지를 만들고 싶어하는 것 같아요. 블로그나 텀블러 등의 소셜 프로그램은 완벽한 웹사이트가 될 순 없고 결국 차별화된 나만의 웹사이트를 원하게 되죠.',
+                rating:4.6,
+                writer:'Achim, 윤진 대표 인터뷰',
+            },
+            {
+                icon:'',
+                attachment:'',
+                title:'5의 타이틀',
+                desc:'실제로 주변에 아임웹을 많이 소개했는데요. 요즘에는 누구나 개인 홈페이지를 만들고 싶어하는 것 같아요. 블로그나 텀블러 등의 소셜 프로그램은 완벽한 웹사이트가 될 순 없고 결국 차별화된 나만의 웹사이트를 원하게 되죠.',
+                rating:4.6,
+                writer:'Achim, 윤진 대표 인터뷰',
+            },
         ],
     },
     {
@@ -310,6 +339,7 @@ export const base = [
     {
         ...commons,
         element:element,
+        numOfElements: 3,
         name:'갤러리',
         sectionTypeName:'GallerySection',
         galleryImg:{
@@ -340,7 +370,11 @@ export const base = [
             {
                 attachment:'',
                 text:'3의 타이틀',
-            }
+            },
+            {
+                attachment:'',
+                text:'4의 타이틀',
+            },
         ]
     },
     {
@@ -365,10 +399,43 @@ export const base = [
     },
     {
         ...commons,
-        ...contents,
-
         name:'목업',
         sectionTypeName:'MockupSection',
+        mockup: {
+            use: true,
+            type: 'mobile',
+            // mobile, tablet, desktop, mobile2, desk+mob 있음
+            file: '',
+            file2: '',
+        },
+        mobile: {
+            use: true,
+            file: '',
+            size: 200
+        },
+        tablet: {
+            use: false,
+            file: '',
+            size: 200
+        },
+        desktop: {
+            use: false,
+            file: '',
+            size: 400,
+        },
+        mobile2: {
+            use: false,
+            file1: '',
+            file2: '',
+            size: 200,
+        },
+        deskMobile: {
+            use: false,
+            file1: '',
+            file2: '',
+            size1: 100,
+            size2: 400,
+        },
     },
 ]
 
@@ -421,7 +488,7 @@ export const defaults = {
     },
     foot:{
         sectionTypeName:'푸터 바',
-        sectionTemplateNumber:1,
+        sectionTemplateNmber:1,
         use:true,
         layout:1,
         backgroundColor:'#ffffff', 
@@ -431,6 +498,8 @@ export const defaults = {
             use:true,
             text:'',
             color:'#ffffff',
+            align: 'left',
+            size: 12,
         },
         icon:{
             use:true,

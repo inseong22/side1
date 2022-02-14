@@ -80,8 +80,9 @@ function EditGallerySection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <OpenCloseCustom title="레이아웃">
-                            <RadioCustom text="단 개수" options={layoutOptions} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                            <RadioCustom text="단 개수" options={layoutOptions} value={content.numOfElements} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].layout = e;
+                                draft[state.secNum].numOfElements = e;
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="이미지">
