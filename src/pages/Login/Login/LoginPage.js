@@ -97,7 +97,7 @@ function LoginPage({history, isLoggedIn}) {
                             Email
                         </span>
                         <Input 
-                            className="login-input"
+                            className="login-input input-focus"
                             placeholder="아이디를 입력해주세요." 
                             required
                             value={id}   
@@ -108,7 +108,7 @@ function LoginPage({history, isLoggedIn}) {
                         </span>
                         <Input  
                             type="password" 
-                            className="login-input"
+                            className="login-input input-focus"
                             placeholder="비밀번호를 입력해주세요." 
                             required
                             value={password} 

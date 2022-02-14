@@ -36,17 +36,17 @@ function EditNaviSection({navi, setNavi, category}) {
 
     const elements = [
         {
-            title:'버튼',
-            use:navi.button.use,
-            func:() => setNavi(produce(navi, draft => {
-                draft.button.use = !navi.button.use;
-            }))
-        },
-        {
             title:'로고',
             use:navi.logo.use,
             func:() => setNavi(produce(navi, draft => {
                 draft.logo.use = !navi.logo.use;
+            }))
+        },
+        {
+            title:'버튼',
+            use:navi.button.use,
+            func:() => setNavi(produce(navi, draft => {
+                draft.button.use = !navi.button.use;
             }))
         },
         {
@@ -88,9 +88,6 @@ function EditNaviSection({navi, setNavi, category}) {
                 <div>
                     <ElementsTable elements={elements} />
                     <OpenCloseCustom title="로고">
-                        <OnOffCustom value={navi.logo.use} func={(e) => setNavi(produce(navi, draft => {
-                            draft.logo.use = !navi.logo.use;
-                        }))} text="로고" />
                         <RadioCustom options={logoAlignOptions} value={navi.logo.align} func={(e) => setNavi(produce(navi, draft => {
                             draft.logo.align = e;
                         }))} text="정렬" />
@@ -124,11 +121,6 @@ function EditNaviSection({navi, setNavi, category}) {
                         }
                     </OpenCloseCustom>
                     <OpenCloseCustom title="버튼 사용">
-
-                        <OnOffCustom text="버튼 사용" value={navi.button.use} func={() => setNavi(produce(navi, draft => {
-                            draft.button.use = !navi.button.use
-                        }))} />
-
                         <RadioCustom options={buttonAlignOptions} value={navi.button.align} func={(e) => setNavi(produce(navi, draft => {
                             draft.button.align = e;
                         }))} text="정렬" />

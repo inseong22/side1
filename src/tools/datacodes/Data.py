@@ -40,17 +40,17 @@ def get_report(analytics):
                 {
                     'viewId': VIEW_ID,
                     'dateRanges': [{
-                        'startDate': '7daysAgo',
+                        'startDate': '30daysAgo',
                         'endDate': 'today'
                     }],
                     'metrics': [
-                        {'expression': 'ga:sessions'},
                         {'expression': 'ga:pageViews'},
-                        {'expression': 'ga:sessionDuration'}
+                        {'expression': 'ga:avgSessionDuration'},
+                        {'expression': 'ga:users'},
+                        {'expression': 'ga:newUsers'},
+                        {'expression': 'ga:sessions'},
                     ],
                     'dimensions': [
-                        {'name': 'ga:userType'},
-                        {'name': 'ga:fullReferrer'},
                         {'name': 'ga:pagePath'}
                     ]
                     # dimensions에 해당하는 카테고리에서
@@ -71,26 +71,54 @@ def print_response(response):
         dimensionHeaders = columnHeader.get('dimensions', [])
         metricHeaders = columnHeader.get(
             'metricHeader', {}).get('metricHeaderEntries', [])
-
+        tempDimension = []
         for row in report.get('data', {}).get('rows', []):
             dimensions = row.get('dimensions', [])
             dateRangeValues = row.get('metrics', [])
 
+            tempNum = 0
+            tempMetric = []
+            print('--------------')
+
             for header, dimension in zip(dimensionHeaders, dimensions):
+                # 이건 디멘션 : pagePath, fullReferrer 등이 보여짐
                 print(header + ': ', dimension)
+                tempMetric.append([header, dimension])
 
             for i, values in enumerate(dateRangeValues):
                 print('Date range:', str(i))
                 for metricHeader, value in zip(metricHeaders, values.get('values')):
-                    print(metricHeader.get('name') + ':', value)
+                    # 이건 매트릭 : users, sessions 등이 보여짐
+                    print(metricHeader.get('name') + ': ', value)
+                    tempMetric.append([metricHeader.get('name'), value])
+            tempDimension.append(tempMetric)
+
+        result = {}
+        for onePath in tempDimension:
+            temp = {}
+            for oneMetric in onePath:
+                if oneMetric[0] == 'ga:pageViews':
+                    temp['pageViews'] = oneMetric[1]
+                if oneMetric[0] == 'ga:avgSessionDuration':
+                    temp['avgSessionDuration'] = oneMetric[1]
+                if oneMetric[0] == 'ga:users':
+                    temp['users'] = oneMetric[1]
+                if oneMetric[0] == 'ga:newUsers':
+                    temp['newUsers'] = oneMetric[1]
+                if oneMetric[0] == 'ga:sessions':
+                    temp['sessions'] = oneMetric[1]
+                if oneMetric[0] == 'ga:pagePath':
+                    result[oneMetric[1]] = temp
+            temp = []
+        return result
 
 
 def main():
     analytics = initialize_analyticsreporting()
     response = get_report(analytics)
-    print_response(response)
+    result = print_response(response)
     with open(FILE_PATH, 'w') as f:
-        json.dump(response, f)
+        json.dump(result, f)
 
 
 if __name__ == '__main__':
