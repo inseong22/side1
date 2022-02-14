@@ -14,14 +14,16 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                         <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
                     </div>}
                 {navi.logo.text.use && 
-                    <div className="make-nav-logo-image">
-                        <input
+                    <div className="make-nav-logo-image" style={{
+                        paddingLeft:`${navi.logo.image.use ? '1px' : '8px'}`
+                    }}>
+                        <AutosizeInput
                             className="text-input-flex ti"
                             value={navi.title} 
                             onChange={(e) => {
                                 setNavi({...navi, title:e.currentTarget.value});
                             }}
-                            style={{fontSize:`${navi.logo.text.fontSize}px`, color:`${navi.logo.text.color}`, fontFamily:`${state.setting.font}`, width:''}}
+                            inputStyle={{fontSize:`${navi.logo.text.fontSize}px`, color:`${navi.logo.text.color}`, fontFamily:`${state.setting.font}`}}
                         />
                     </div>
                 }
@@ -51,7 +53,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                     }} onClick={() => {}}>
                         <AutosizeInput className="text-input-flex ti" value={navi.button.ghost.text } onChange={(e) => setNavi(produce(navi, draft => {
                             draft.button.ghost.text = e.currentTarget.value;
-        }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`}}/>
+                        }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`}}/>
                     </div>
                 }
             </div>

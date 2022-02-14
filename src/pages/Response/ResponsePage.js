@@ -20,6 +20,7 @@ function ResponsePage({userObj, history}) {
     const [update, setUpdate] = useState(false);
     const [responses, setResponses] = useState([[]]);
     const [mylandings, setMylandings] = useState([]);
+    const [published, setPublished] = useState([]);
     const [part, setPart] = useState(1);
     const [myDatas, setMyDatas] = useState({
         all_sessions:0,
@@ -35,6 +36,7 @@ function ResponsePage({userObj, history}) {
     },[loading, update])
 
     const getThisUserDatas = async () => {
+        // setLoading(false);
         const thisuserDatas = await dbService
             .collection('saved-page')
             .where("makerEmail", "==", userObj.email)
@@ -44,7 +46,8 @@ function ResponsePage({userObj, history}) {
             return({...doc.data(), id:doc.id})
         });
         setMylandings(thisuserData);
-        
+
+        getThisPublished();
         let tempApplyDatas = []
         
         thisuserData.map(item => {
@@ -59,9 +62,20 @@ function ResponsePage({userObj, history}) {
         setLoading(true);
     }
 
+    const getThisPublished = async () => {
+        const publishedDatas = await dbService
+            .collection('published-page')
+            .where("makerEmail", "==", userObj.email)
+            .get();
+        let publishedData = publishedDatas.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+        setPublished(publishedData);
+    }
+
     const getDatas = async (urlId) => {
         const reDatas = await dbService
-            .collection("apply-datas") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
+            .collection("datas") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
             .orderBy("created", "desc")
             .where("urlId", "==", urlId)
             .get();
@@ -111,20 +125,41 @@ function ResponsePage({userObj, history}) {
                     dbService.collection('published-page').add(body)
                 }else{
                     console.log("배포 수정")
+                    let body = {
+                        ...mylandings[nowChecking],
+                        created:Date.now(),
+                    }
                     querySnapshot.forEach(function(doc) {
-                        dbService.doc(`published-page/${doc.id}`).update(mylandings[nowChecking])
+                        dbService.doc(`published-page/${doc.id}`).update(body)
                     });
                 }
             }
         )
         alert("배포 완료되었습니다.")
+        setUpdate(!update)
+    }
+
+    const checkPublished = (urlId) => {
+        let found = false
+        published.map((item,index) => {
+            if(item.urlId === urlId){
+                found = item
+            }
+        })
+        if(found){
+            return found
+        }else{
+            return false
+        }
     }
 
     const returnMylandingsTable = mylandings.map((item, index) => {
         return(
-            <MadeLandingCard history={history} item={item} key={item.id} index={index} setNowChecking={setNowChecking} num={mylandings.length} setUpdate={setUpdate} update={update}/>
+            <MadeLandingCard history={history} item={item} key={item.id} index={index} published={checkPublished(item.urlId)} setNowChecking={setNowChecking} num={mylandings.length} setUpdate={setUpdate} update={update}/>
         )
     })
+
+
         if(loading === true){
             return (
                 <div className="response__container">
@@ -161,9 +196,18 @@ function ResponsePage({userObj, history}) {
                                 <div className="response-table-top">
                                     <span className="response-table-title"> 
                                         <div className="left">
-                                            유입 수 : N 명
-                                            버튼 클릭 수 : N 명
-                                            전환율 : N 명
+                                            {
+                                                checkPublished(mylandings[nowChecking].urlId) ? 
+                                                <div>
+                                                    유입 수 : N 명
+                                                    버튼 클릭 수 : N 명
+                                                    전환율 : N 명
+                                                </div>
+                                                :
+                                                <div>
+                                                    이 랜딩페이지는 아직 배포되지 않았습니다. 오른쪽의 ‘배포하기' 버튼을 눌러 페이지를 배포하고, 전환율 및 신청을 확인하세요
+                                                </div>
+                                            }
                                         </div>
                                         <div className="right" style={{flexDirection: 'row'}}>
                                             <Link to={{
@@ -175,6 +219,31 @@ function ResponsePage({userObj, history}) {
                                             <div className="default-button-02" style={{marginLeft:'15px'}} onClick={() => doPublish()}>배포하기</div>
                                         </div>
                                     </span>
+                                </div>
+                                <div>
+                                    {
+                                        nowChecking !== NOTCLICKED && 
+                                        <>
+                                            {
+                                            responses[nowChecking].map((item, index) => {
+                                            if(item.type === 'click'){
+                                                return(
+                                                    <>
+                                                        {item.created}
+                                                        {item.from}
+                                                    </>
+                                                )
+                                            }else{
+                                                return(
+                                                    <>
+                                                        {item.created}
+                                                        {item.values[0]}
+                                                    </>
+                                                )
+                                            }
+                                        })}
+                                        </>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -191,7 +260,7 @@ function ResponsePage({userObj, history}) {
                         }
                     </div>
                     :
-                    <div>
+                    <div style={{marginTop:'15px'}}>
                         {
                             mylandings.length === 0 ?
                             <div>

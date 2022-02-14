@@ -6,6 +6,7 @@ import CheckModal from '../../../components/Make/Modal/CheckModal'
 import {Monitor} from '@styled-icons/feather'
 import { Phone } from '@styled-icons/bootstrap'
 import {Fullscreen} from '@styled-icons/bootstrap'
+import LoginModal from '../../../components/Login/LoginModal'
 import {
     ChakraProvider,
     Popover,
@@ -45,10 +46,12 @@ const NavBarInMakePage = (props) => {
     const onSubmit = async () => {
         // 배포하기 클릭
         // 관리페이지에서 수정하기를 누른 거라면
-        console.log(props.userObj)
+        
+        props.saveLocalStorage()
+
         if(props.userObj === null){
             alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
-            props.setLoading(false);
+            setLoginModal(true);
         }else{
             // 새로 업로드 해야한다.
             // 파이어 베이스에 저장한다.
@@ -114,7 +117,6 @@ const NavBarInMakePage = (props) => {
         <ChakraProvider>
             <div className="make-page-nav">
                 <div className="make-page-nav-half" style={{justifyContent: 'start', marginLeft:'1%'}}>
-                    {/* <Button onClick={e => props.setOpen(!props.open)}>설명 다시보기</Button> */}
                     <span className={state.secNum === 52 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(52); 
                     }} >
@@ -139,9 +141,8 @@ const NavBarInMakePage = (props) => {
                         저장하기
                     </Button>
                 </div>
-                {/* <ConfirmCustom open={open} setOpen={setOpen} message={"홈"} callback={deletePage}/> */}
-                {/* <CheckModal ch={checkModalOpen} setCh={setCheckModalOpen} onSubmit2={onSubmitFromCheckModal}/> */}
             </div>
+            <LoginModal open={loginModal} setOpen={setLoginModal} />
         </ChakraProvider>
     )
 }

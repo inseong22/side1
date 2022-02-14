@@ -41,6 +41,7 @@
     line-height: 33px;
     display: flex;
     align-items: center;
+    width: 80%;
 
     color: #202936;
 }

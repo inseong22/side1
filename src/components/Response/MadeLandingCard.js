@@ -5,7 +5,7 @@ import {dbService, stService} from '../../tools/fbase'
 import './MadeLandingCard.css'
 import {Copy} from '@styled-icons/boxicons-regular'
 
-function MadeLandingCard({item, index, setNowChecking, history, addNew, num, update, setUpdate}) {
+function MadeLandingCard({item,published, index, setNowChecking, history, addNew, num, update, setUpdate}) {
     const [deleteopen, setDeleteOpen] = useState(false)
 
     const deletePage = async () => {
@@ -31,6 +31,8 @@ function MadeLandingCard({item, index, setNowChecking, history, addNew, num, upd
         // 새로고침 시키기
         alert("삭제했습니다.")
         setUpdate(!update)
+
+        history.go(-1)
     }
 
     const duplicate = async () => {
@@ -43,7 +45,23 @@ function MadeLandingCard({item, index, setNowChecking, history, addNew, num, upd
 
             setUpdate(!update)
             alert("복제되었습니다.")
+            history.go(-1)
         }
+    }
+
+    const returnDate = (made) => {
+        let day = new Date(Date.now() - made);
+
+        return(
+            <>
+            {
+            day.getDate()-1 > 0 ? <>
+            {day.getDate()-1} 일전</> :
+            day.getHours()-9 > 0 ? <>
+                {day.getHours()-9} 시간전 </> : 
+                <>{day.getMinutes()}분전</>}
+            </>
+        )
     }
 
     if(addNew){
@@ -66,18 +84,33 @@ function MadeLandingCard({item, index, setNowChecking, history, addNew, num, upd
                 <div className="card__title">
                     {item.setting.title}
                 </div>
-                <div>
-                    배포 전
+                <div style={{width:'40%', fontSize:'0.6em'}}>
+                    {published ? 
+                    <>
+                    <span style={{
+                        width: '8px',
+                        height: '8px',
+                        background: '#11E533'}}></span>
+                    {returnDate(published.created)} 마지막 배포
+                    </>
+                    :
+                    <>
+                    <span style={{
+                        width: '8px',
+                        height: '8px',
+                        background: '#C4C4C4'}}></span>배포 전
+                    </>
+                    }
                 </div>
             </div>
             <div className="center-row">
                 <div className="left" style={{fontSize:'0.7em', width:'70%'}}>
-                    https://{item.setting.urlId}.surfee.co.kr <Copy size={15} color="#6B63F7" onClick={() => {
-                        document.execCommand('copy');
-                        alert("Copied!");
+                    https://{item.setting.urlId}.surfee.co.kr 
+                    {/* <Copy size={15} color="#6B63F7" onClick={(e) => {
+                        alert("링크가 복사되었습니다");
                     }}
                     style={{marginLeft:'5px'}}
-                    />
+                    /> */}
                 </div>
                 <div className="right" style={{fontSize:'15px', width:'30%'}}>
                     <button className="content__button cb-delete" onClick={() => {setDeleteOpen(true)}}>삭제</button>

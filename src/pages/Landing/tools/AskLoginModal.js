@@ -67,7 +67,12 @@ function AskLoginModal({open, setOpen, SomeoneClickMoveToMake}) {
                                 <Link to='/login' className="ask-modal-button">
                                     네 ( 로그인/회원가입 하러 가기 ) 
                                 </Link>
-                                <Link to='make' className="ask-modal-button button-second" onClick={() => SomeoneClickMoveToMake()}>
+                                <Link to={{
+                                    pathname:`/make`,
+                                    state:{
+                                        newMake:true,
+                                    }}}  
+                                    className="ask-modal-button button-second" onClick={() => SomeoneClickMoveToMake()}>
                                     오늘은 구경만 할게요 ( 비회원으로 이용하기 )
                                 </Link>
                             </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 
 function ChromeTapBar({content}) {
-    console.log(content," 뭐가 넘어오지?")
     return (
         <div className="make-tab-preseen" style={{
                 borderRadius: '10px 10px 10px 10px'

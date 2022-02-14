@@ -134,7 +134,7 @@ const MakePageV2 = ({history, userObj}) => {
                 //     return
                 // }
             }else{
-                localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
+                saveLocalStorage();
             }
         }
 
@@ -146,6 +146,10 @@ const MakePageV2 = ({history, userObj}) => {
         action : {setAddingSectionAt, setSecNum, setContents, setIsPhone, setCategory, setSetting},
     }
 
+    const saveLocalStorage = () => {
+        localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
+    }
+
     const loadLocalStorage = () => {
         setLoading(true);
         const temp = JSON.parse(localStorage.getItem('temp'));
@@ -154,7 +158,7 @@ const MakePageV2 = ({history, userObj}) => {
         setFoot(temp[2]);
         setSetting(temp[3]);
         setOpen(false);
-        setEditing(true);
+        // setEditing(true);
         setTimeout(() => {
             setLoading(false);
         },1000)
@@ -200,7 +204,7 @@ const MakePageV2 = ({history, userObj}) => {
         setLoading(true);
 
         const urlDatas = await dbService
-            .collection("urlStores")
+            .collection("saved-page")
             .where("urlId", "==", setting.urlId)
             .get(); // uid를 creatorId로 줬었으니까.
         
@@ -208,32 +212,20 @@ const MakePageV2 = ({history, userObj}) => {
             return({...doc.data(), id:doc.id})
         });
 
-        if(setting.urlId === ''){
-            alert("url을 설정해야 합니다.");
-            setLoading(false);
-        }else if(urlData.length > 0){
-            alert("이미 존재하는 url입니다. 다른 url을 사용해주세요.");
-            setLoading(false);
-        }else{
-            const body = {
-                contents:contents,
-                navi:navi,
-                foot:foot,
-                setting:setting,
-                created:Date.now(),
-                makerEmail:userObj.email,
-                makingTypeByUser:makingTypeByUser,
-                urlId:setting.urlId,
-            }
-            if(editing){
-                // 업데이트 하기
-                await dbService.collection("saved-page").add(body);
-            }else{
-                await dbService.collection("saved-page").add(body);
-    
-                await dbService.collection("urlStores").add({urlId:body.setting.urlId});
-            }
+        const body = {
+            contents:contents,
+            navi:navi,
+            foot:foot,
+            setting:setting,
+            created:Date.now(),
+            makerEmail:userObj.email,
+            makingTypeByUser:makingTypeByUser,
+            urlId:setting.urlId,
+        }
 
+        if(editing){
+            // 업데이트 하기
+            await dbService.doc(`saved-page/${urlData[0].id}`).update(body);
             // 자동저장 하던 걸 지운다.
             window.localStorage.removeItem("temp");
             
@@ -242,8 +234,28 @@ const MakePageV2 = ({history, userObj}) => {
                 history.push('/#/response');
                 history.go();
             },1000)
-        }
+        }else{
+            if(setting.urlId === ''){
+                alert("url을 설정해야 합니다.");
+                setLoading(false);
+            }else if(urlData.length > 0){
+                alert("이미 존재하는 url입니다. 다른 url을 사용해주세요.");
+                setLoading(false);
+            }else{
+                await dbService.collection("saved-page").add(body);
 
+                await dbService.collection("urlStores").add({urlId:body.setting.urlId});
+
+                // 자동저장 하던 걸 지운다.
+                window.localStorage.removeItem("temp");
+                
+                setTimeout(() => {
+                    setLoading(false);
+                    history.push('/#/response');
+                    history.go();
+                },1000)
+            }
+        }
     }
 
     return (<>
@@ -265,13 +277,12 @@ const MakePageV2 = ({history, userObj}) => {
                !full &&
                <NavBarInMakePage 
                     history={history} userObj={userObj}
-                   open={open} setOpen={setOpen}
                    full={full} setFull={setFull}
                    isPhone={isPhone} setIsPhone={setIsPhone}
                    nowState={nowState}
                    loading={loading} setLoading={setLoading}
                    navi={navi} foot={foot} setting={setting}
-                   saveTo={saveTo}
+                   saveTo={saveTo} saveLocalStorage={saveLocalStorage}
                />
            }
             <div className="make-page-container" style={{paddingTop:`${full ? '0px' : '60px'}`}}>
@@ -311,7 +322,7 @@ const MakePageV2 = ({history, userObj}) => {
                                 <div className="make-tab-circle"></div>
                                 <div className="make-tab-circle"></div>
                                 <div className="make-tab-one-tab">
-                                    <img src={setting.faviconAttachment} className='make-tab-favicon' />
+                                    <img src={setting.faviconAttachment} className='make-tab-favicon'/>
                                     {setting.title}
                                 </div>
                             </div>

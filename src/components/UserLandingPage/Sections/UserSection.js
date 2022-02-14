@@ -12,8 +12,6 @@ import VideoSection from './VideoSection'
 
 function UserSection({content, setting, CustomCta, CustomGhost}) {
 
-    console.log(content, '테스트');
-
     const returnType = () => {
         switch(content.sectionTypeName){
             case 'DetailSection':

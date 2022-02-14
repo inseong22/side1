@@ -13,17 +13,17 @@ function ReviewSection({content, setting}) {
                 <Element content={content} item={item} index={index} key={index}/>
 
                 <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                    <TextareaAutosize 
-                        className="text-input"  
+                    <div 
+                        className="text-input-flex"  
                         style={{
                             width:'100%',
                             resize:'none',
                             textAlign:`${content.align}`,
                             fontFamily:`${setting.smallFont}`,
                             color:`${content.reviewText.color}`,
-                        }}
-                        value={item.title} 
-                        />
+                        }}>
+                        {item.title} 
+                    </div>
                 </div>
                 {
                     content.rating.use && 
@@ -33,8 +33,7 @@ function ReviewSection({content, setting}) {
                             value={item.rating} 
                             precision={0.1}
                             style={{ fontSize: `${content.rating.size}px`, color:`${content.rating.color}` }}
-                            // size={content.rating.size}
-                            // color={content.rating.color}
+                            disabled
                         />
                         </div>
                     </div>
@@ -42,32 +41,32 @@ function ReviewSection({content, setting}) {
                 {
                     content.reviewText.use && 
                     <div className="df-margin-big feature-desc" style={{width:'100%'}}>
-                        <TextareaAutosize 
-                            className="text-input" 
+                        <div 
+                            className="text-input-flex" 
                             style={{
                                 width:'100%',
                                 resize:'none',
                                 textAlign:`${content.align}`,
                                 fontFamily:`${setting.smallFont}`,
                                 color:`${content.reviewText.color}`,
-                            }}
-                            value={item.desc} 
-                            />
+                            }}>
+                            {item.desc} 
+                        </div>
                     </div>
                 }
                 {
                     content.writer.use && 
                     <div className="df-margin-big feature-writer" style={{width:'100%'}}>
-                        <TextareaAutosize 
-                            className="text-input" 
+                        <div 
+                            className="text-input-flex" 
                             style={{
                                 width:'100%',
                                 resize:'none',
                                 textAlign:`${content.align}`,
                                 color:`${content.writer.color}`,
-                            }}
-                            value={item.writer} 
-                            />
+                            }}>
+                            {item.writer} 
+                        </div>
                     </div>
                 }
             </div>

@@ -1,16 +1,49 @@
-import React, {useState, useEffect} from 'react';
-import './LoginRegister.css'
-import { authService } from '../../../tools/fbase'
-import { firebaseInstance } from '../../../tools/fbase'
-import { dbService } from '../../../tools/fbase'
+import React, {useState, useContext} from 'react'
+import { styled, Box } from '@mui/system';
+import ModalUnstyled from '@mui/base/ModalUnstyled';
+import { Close } from '@styled-icons/evaicons-solid';
+import {Link} from 'react-router-dom'
+import { authService } from '../../tools/fbase'
+import { firebaseInstance } from '../../tools/fbase'
+import { dbService } from '../../tools/fbase'
 import { Input } from 'antd';
-import googlelogo from '../../../tools/img/googlelogo.png'
-import s1 from '../../../tools/img/surfee1.png';
-import Footer from '../../NavAndFooter/Footer';
-import {Link} from 'react-router-dom';
-import NavBarV2 from '../../NavAndFooter/NavBarV2'
+import googlelogo from '../../tools/img/googlelogo.png'
+import './LoginModal.css'
 
-function LoginPage({history, isLoggedIn}) {
+const StyledModal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Backdrop = styled('div')`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  -webkit-tap-highlight-color: transparent;
+`;
+
+const style = {
+  width: 450,
+  height: 500,
+  bgcolor: 'rgba(255,255,255,1)',
+  borderRadius:'20px',
+  p: 2,
+  px: 4,
+  pb: 3,
+};
+
+function LoginModal({open, setOpen}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [done, setDone] = useState(false);
@@ -28,8 +61,6 @@ function LoginPage({history, isLoggedIn}) {
 
         const data = await authService.signInWithPopup(provider);
         await checkRegister(data.user.multiFactor.user.email);
-        history.push('/');
-        history.go();
     }
 
     const submit = async (e) => {
@@ -59,38 +90,34 @@ function LoginPage({history, isLoggedIn}) {
         console.log("일단 로그인 성공", email, usersExist)
 
 
-        if(usersExist.length === 0){
-            // 구글 아이디로 로그인했는데 회원가입에 정보가 없을 때
-            console.log("회원가입 정보를 받습니다.");
-            setDone(true);
-        }else{
-            console.log("로그인 완료");
-            localStorage.setItem("name", usersExist[0].name);
-            localStorage.setItem("job", usersExist[0].job);
-
-            history.push('/');
-            history.go();
-        }
+        // if(usersExist.length === 0){
+        //     // 구글 아이디로 로그인했는데 회원가입에 정보가 없을 때
+        //     console.log("회원가입 정보를 받습니다.");
+        //     setDone(true);
+        // }else{
+        //     console.log("로그인 완료");
+        //     localStorage.setItem("name", usersExist[0].name);
+        //     localStorage.setItem("job", usersExist[0].job);
+        // }
     }
 
     return (
-        <>
-        {done ? 
         <div>
-            Initializing... 
-            {/* 여기에 회원가입 페이지랑 똑같이 입력받는걸 넣어야 하는 건가..? */}
-        </div>
-        :
-        <div>
-        <NavBarV2 history={history} isLoggedIn={isLoggedIn}/>
-        <div className="login-container">
-            <div className="login-container__container">
-                <div className="login__inner">
-                    <div className="login-title" style={{color:'#6a63f7'}}>
-                        Surfee
-                    </div>
-                    <div className="login-title">
-                        로그인 페이지에 오신 것을 환영합니다.
+            <StyledModal
+            aria-labelledby="unstyled-modal-title"
+            aria-describedby="unstyled-modal-description"
+            open={open}
+            onClose={() => setOpen(!open)}
+            BackdropComponent={Backdrop}>
+            <Box sx={style}>
+                <div className="login-modal__inner">
+                    <div className="modal-top__title">
+                        <div className="login-title" style={{width:"95%"}}>
+                            로그인
+                        </div>
+                        <div style={{width:"5%", cursor:"pointer"}} onClick={() => setOpen(false)}>
+                            <Close size="30" />
+                        </div>
                     </div>
                     <form onSubmit={e => submit(e)} className="center">
                         <span className="login-label">
@@ -114,37 +141,25 @@ function LoginPage({history, isLoggedIn}) {
                             value={password} 
                             onChange={e => setPassword(e.currentTarget.value)}
                         />
-                        <Input className="login-form-button" type="submit" value="로그인" />
+                        <Input className="login-form-button hover-shadow" type="submit" value="로그인" />
                     </form>
-                    <button className="google-login-button" name="googleLogin" onClick={e => socialLogin(e)} style={{marginTop:'2%'}}>
+                    <button className="google-login-button hover-shadow" name="googleLogin" onClick={e => socialLogin(e)} style={{marginTop:'2%'}}>
                         <img src={googlelogo} width={20}/>
                         <span style={{marginLeft:'5%'}}>구글 로그인</span>
                     </button>
                     <div style={{padding:'2% 0%', justifyContent:'flex-start', display:'flex', width:'100%'}}>
-                        <Link to="/customer" className="footer-text-click">
+                        <a href="https://surfee.co.kr/#/customer" className="footer-text-click">
                             개인정보 처리방침
-                        </Link>
-                        <Link to="/customer" className="footer-text-click" style={{marginLeft:'2%'}}>
+                        </a>
+                        <a href="https://surfee.co.kr/#/customer" className="footer-text-click" style={{marginLeft:'2%'}}>
                             이용약관
-                        </Link>
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div className="login-background">
-                <img src={s1} width={600} />
-                <div className="login-background__desc" style={{fontFamily:'Pretendard-ExtraBold', marginTop:'2%'}}>
-                    Surfee와 함께 1분만에 완성하는 랜딩페이지
-                </div>
-                <div className="login-background__desc">
-                    Surfee와 함께 1분만에 완성하는 랜딩페이지
-                </div>
-            </div>
+            </Box>
+        </StyledModal>
         </div>
-        <Footer />
-        </div>
-     }</>
-        
     )
 }
 
-export default LoginPage
+export default LoginModal

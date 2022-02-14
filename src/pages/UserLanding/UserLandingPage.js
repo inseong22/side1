@@ -93,7 +93,9 @@ const UserLandingPage = (props) => {
         {loading ? 
         <div style={{fontSize:'30px'}}>
             <UserNavBar navi={item.navi} setting={item.setting} CustomCta={CustomCta} CustomGhost={CustomGhost} />
-            <UserContents contents={item.contents} setting={item.setting} CustomCta={CustomCta} CustomGhost={CustomGhost}/>
+            <div style={{paddingTop:`${item.navi.fixed ? `${item.navi.height}px` : '0px'}`}}>
+                <UserContents contents={item.contents} setting={item.setting} CustomCta={CustomCta} CustomGhost={CustomGhost}/>
+            </div>
             <UserFoot foot={item.foot} setting={item.setting}/>
         </div> 
             : 
