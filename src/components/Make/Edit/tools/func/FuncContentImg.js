@@ -1,4 +1,5 @@
 import React, {useRef} from 'react'
+import ourA from '../../../../../tools/img/005.png'
 
 function FuncContentImg({text, value, func, removeFunc, subtext}) {
     const photoInput = useRef();
@@ -13,7 +14,7 @@ function FuncContentImg({text, value, func, removeFunc, subtext}) {
             onClick={inputClick}
             onChange={e => func(e)}
             id='attach'
-            style={{backgroundImage: `url(${value}`}}
+            style={{backgroundImage: `url(${value === '' ? ourA : value}`}}
             >
             {/* <div 
                 className="img-remove"

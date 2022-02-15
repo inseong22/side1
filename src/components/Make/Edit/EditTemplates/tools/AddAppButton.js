@@ -12,7 +12,7 @@ function AddAppButton({content}) {
             <div className="edit-element">
                 <div className="edit-element__one" style={{flexDirection: 'column'}}>
                     <div className="edit-element__left">Google Play Store</div> 
-                    <InputCustom placeholder="링크를 입력해주세요." value={content.appButton.google} func = {(e) => action.setContents(produce(state.contents, draft => {
+                    <InputCustom placeholder="링크를 입력해 주세요." value={content.appButton.google} func = {(e) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].appButton.google = e
                     }))} />
                 </div>
@@ -20,7 +20,7 @@ function AddAppButton({content}) {
             <div className="edit-element">
                 <div className="edit-element__one" style={{flexDirection: 'column'}}>
                     <div className="edit-element__left">Apple App Store</div> 
-                    <InputCustom placeholder="링크를 입력해주세요." value={content.appButton.apple} func = {(e) => action.setContents(produce(state.contents, draft => {
+                    <InputCustom placeholder="링크를 입력해 주세요." value={content.appButton.apple} func = {(e) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].appButton.apple = e
                     }))} />
                 </div>

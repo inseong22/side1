@@ -23,14 +23,21 @@ function Layout({content, version, foot, setFoot}) {
         switch(version){
             case 'main':
                 return(
-                    <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                    <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={(e, align, contAlign) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].layout = e;
+                        draft[state.secNum].title.align = align;
+                        draft[state.secNum].desc.align = align;
+                        draft[state.secNum].button.align = align;
+                        draft[state.secNum].contents.align= contAlign;
                     }))} />
                 )
             case 'detail':
                 return(
-                    <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                    <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={(e,align, contAlign) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].layout = e;
+                        draft[state.secNum].title.align = align;
+                        draft[state.secNum].desc.align = align;
+                        draft[state.secNum].contents.align= contAlign;
                     }))} />
                 )
             case 'cta':
@@ -53,8 +60,12 @@ function Layout({content, version, foot, setFoot}) {
                 )
             case 'text': 
                 return(
-                    <RadioCustom layout='on' version='text' options={layout3Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                    <RadioCustom layout='on' version='text' options={layout3Options} value={content.layout} func={(e,align,top,bottom) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].layout = e;
+                        draft[state.secNum].title.align=align;
+                        draft[state.secNum].desc.align=align;
+                        draft[state.secNum].padding.top= top;
+                        draft[state.secNum].padding.bottom= bottom;
                     }))} />
                 )
             case 'footer':

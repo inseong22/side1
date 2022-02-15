@@ -230,7 +230,7 @@ function FQ(props) {
 
     const nextAndSetTemplates = async (e) => {
         if(type === ""){
-            alert("위의 보기 중 한가지를 선택해주세요.");
+            alert("위의 보기 중 한가지를 선택해 주세요.");
             return
         }else{
             const typeTemplatesdata = await dbService
@@ -249,7 +249,7 @@ function FQ(props) {
 
     const nextAndSetTemplate = async (e) => {
         if(templateNum === 0){
-            alert("위의 보기 중 한가지를 선택해주세요.");
+            alert("위의 보기 중 한가지를 선택해 주세요.");
             return
         }else{
             // templates.filter(doc => doc.type === type && doc.templateNum === templateNum)[0]
@@ -262,7 +262,7 @@ function FQ(props) {
 
     const nextAndSetFont = async e => {
         if(font === ''){
-            alert("위의 보기 중 한가지를 선택해주세요.");
+            alert("위의 보기 중 한가지를 선택해 주세요.");
             return
         }else{
             setCnum(cnum + 1);
@@ -279,15 +279,15 @@ function FQ(props) {
         });
 
         if(urlId === ''){
-            alert("URL을 입력해주세요. 이후 페이지에서 수정가능합니다.");
+            alert("URL을 입력해 주세요. 이후 페이지에서 수정가능합니다.");
             return
         }else if(urlData.length > 0){
-            alert("이미 존재하는 url입니다. 다른 url을 사용해주세요.");
+            alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
             return;
         }
         
         // if(urlId === ''){
-        //     alert("URL을 입력해주세요. 이후 페이지에서 수정가능합니다.");
+        //     alert("URL을 입력해 주세요. 이후 페이지에서 수정가능합니다.");
         //     return
         // }else if(editing === true){
         //     const real = window.confirm("템플릿을 새로 설정하면 이전에 작성한 내용이 사라집니다. 괜찮으신가요?")
@@ -441,7 +441,7 @@ function FQ(props) {
                         <div className="modal-main-card">
                             <div style={{width:'48%'}}>
                                 <div style={{width:'100%', textAlign:'center', margin:'2% 0%'}}>
-                                    폰트를 선택해주세요.
+                                    폰트를 선택해 주세요.
                                 </div>
                                 <OverflowScrolling className="font-selections__container">
                                     {fontList.map((item, index) => {
@@ -469,7 +469,7 @@ function FQ(props) {
                             </div>
                             <div style={{width:'48%', marginLeft:'2%'}}>
                                 <div style={{width:'100%', textAlign:'center', margin:'2% 0%'}}>
-                                    색상을 선택해주세요.
+                                    색상을 선택해 주세요.
                                 </div>
                                 <OverflowScrolling className="font-selections__container">
                                     {colorList.map((item, index) => {
@@ -508,7 +508,7 @@ function FQ(props) {
                 return(
                     <div style={{display:'flex', flexDirection:'column'}}>
                         <div className="modal-title">
-                            마지막으로, <span style={{color:'#6C63FF'}}>{title}</span> 랜딩페이지의 URL을 설정해주세요!
+                            마지막으로, <span style={{color:'#6C63FF'}}>{title}</span> 랜딩페이지의 URL을 설정해 주세요!
                         </div>
                         <div className="modal-title" style={{fontSize:'25px'}}>
                             <Input className="input-holder" type="text" value={urlId} onChange={e => setUrlId(e.currentTarget.value)} />.surfee.co.kr
@@ -517,7 +517,7 @@ function FQ(props) {
                                 <div>
                                     - 영문과 숫자만 사용 가능합니다.<br/><br/>
                                     - 개인 도메인 연결은 다음 버전에 빠르게 업데이트 해올게요!<br/><br/>
-                                    - 수정 가능하니 편하게 설정해주세요 :)<br/><br/>
+                                    - 수정 가능하니 편하게 설정해 주세요 :)<br/><br/>
                                 </div>
                             </div>
                         <div className="modal-button-container">

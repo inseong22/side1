@@ -53,9 +53,9 @@ const shapeOptions = [
 ]
 
 const sizeOptions = [
-    { label: 'small', value: 50 },
-    { label: 'medium', value: 75 },
-    { label: 'large', value: 100 },
+    { label: 'Small', value: 10 },
+    { label: 'Medium', value: 20 },
+    { label: 'Large', value: 40 },
 ]
 
 function EdtiSetting({setting, setSetting, category}) {
@@ -276,19 +276,17 @@ function EdtiSetting({setting, setSetting, category}) {
                                     draft.fta.backgroundColor = e;
                                 }))} />
                             </div>
-                            {/* 테두리 연결 안해놓음 디자인만! */}
-                            <OnOffCustom text="테두리" value={setting.ghost.border} func={(e) => setSetting(produce(setting, draft => {
-                                draft.ghost.border = !setting.ghost.border
+                            <OnOffCustom text="테두리" value={setting.fta.border} func={(e) => setSetting(produce(setting, draft => {
+                                draft.fta.border = !setting.fta.border
                             }))} />
                             {
                                 setting.ghost.border && 
-                                <ColorCustom text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
-                                    draft.ghost.borderColor = e;
+                                <ColorCustom text="테두리 색상" value={setting.fta.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                    draft.fta.borderColor = e;
                                 }))} />
                             }
-                            {/* 그림자 연결 안해놓음 디자인만! */}
-                            <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
-                                draft.ghost.shadow = !setting.ghost.shadow
+                            <OnOffCustom text="그림자" value={setting.fta.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                draft.fta.shadow = !setting.fta.shadow
                             }))} />
                             <InputCustom text="링크 연결" value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.link = e
@@ -304,7 +302,7 @@ function EdtiSetting({setting, setSetting, category}) {
                     <>
                     <div>
                         <OpenCloseCustom title="메인 색상">
-                            <ColorCustom text="색상" value={setting.color} func={(e) => setSetting(produce(setting, draft => {
+                            <SingleColorCustom text="색상" value={setting.color} func={(e) => setSetting(produce(setting, draft => {
                                 draft.color = e;
                             }))} />
                         </OpenCloseCustom>

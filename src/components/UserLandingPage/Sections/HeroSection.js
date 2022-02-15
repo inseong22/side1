@@ -9,7 +9,7 @@ import AnimationDiv from './components/AnimationDiv'
 
 function HeroSection({content, setting}) {
     const returnLayout = {
-        flexDirection:`${content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : content.layout === 3 ? 'column' : 'column-reverse'}`,
+        flexDirection:`${content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : content.layout === 3 ? 'column' : 'column-reverse'}`
    }
 
     return (

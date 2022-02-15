@@ -13,14 +13,14 @@ function InputInfoPage() {
                 <form className="form-container" onSubmit={e => submit(e)}>
                     <input 
                         type="text" 
-                        placeholder="이름을 입력해주세요." 
+                        placeholder="이름을 입력해 주세요." 
                         required
                         value={name}   
                         onChange={e => setName(e.currentTarget.value)}
                     />
                     <input  
                         type="text" 
-                        placeholder="직업을 입력해주세요." 
+                        placeholder="직업을 입력해 주세요." 
                         required
                         value={job} 
                         onChange={e => setJob(e.currentTarget.value)}

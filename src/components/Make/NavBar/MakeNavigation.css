@@ -81,3 +81,8 @@
 .b-four{
     border-radius:0px;
 }
+
+.default-logo{
+    font-size: 18px;
+    float: left;
+}

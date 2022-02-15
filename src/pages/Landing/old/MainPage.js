@@ -21,7 +21,7 @@ function MainPage({history}) {
     const sendData = async () => {
         console.log(dbService);
         if(email.length < 4){
-            alert("올바른 이메일 양식을 입력해주세요!");
+            alert("올바른 이메일 양식을 입력해 주세요!");
             return;
         }
         await dbService.collection("apply-datas").add({

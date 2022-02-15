@@ -8,12 +8,21 @@ function ImageOrSlide({content}){
     const imgRef=useRef(null)
     if(content.contents.use){
     // 동영상 - 유튜브 링크
-    if(content.video.type==='youtube' && content.contents.type === 'video') {
+    if(content.video.type==='youtube' && content.contents.type === 'video' && content.video.link.includes('www.youtube.com')) {
         return(
-            <div ref={imgRef} className="video-area" style={{ width:`${content.image.size}%`, height:`${imgRef.current.scrollWidth * 0.56}px` }}>
-                <iframe className="video-content" src={`${content.video.link}`} frameborder="0" allow='autoplay' allowfullscreen/>
+            <div style={{margin: '0 auto'}}>
+            <div ref={imgRef} className="video-area" style={{ width:`${content.image.size}%` }}>
+                <iframe src={`${content.video.link}`} frameborder="0" allow='autoplay' allowfullscreen/>
+            </div>
             </div>
         )}
+    else{
+        return(
+            <> 유튜브 링크를 넣어주세요.
+            </>
+        )
+        }
+    }
     // 동영상 - 비디오 업로드
     if(content.video.type==='base' && content.contents.type === 'video')
         return(
@@ -62,9 +71,7 @@ function ImageOrSlide({content}){
                 } */}
             </div>
         )
-    }else{
-        return(<></>)
     }
-}
+
 
 export default ImageOrSlide

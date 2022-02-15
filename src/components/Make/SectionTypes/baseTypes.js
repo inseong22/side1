@@ -16,7 +16,7 @@ const commons = {
     },
     desc:{
         use:true,
-        text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요!',
+        text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해 보세요!',
         align: 'left',
         size: 16,
         color: '#000000'
@@ -24,6 +24,7 @@ const commons = {
     contents:{
         use: true,
         type: 'image',
+        align: 'space-between',
     },
     padding:{
         top:15,
@@ -66,6 +67,7 @@ const contents = {
         file: '',
         link: '',
         auto: true,
+        align: ''
     },
     mockup: {
         use: false,
@@ -115,6 +117,7 @@ const element = {
 }
 
 const button = {
+
     button:{
         use : true,
         ctaText:'CTA 버튼',
@@ -394,7 +397,7 @@ export const base = [
             use:true,
             color: '#000000',
             align: '',
-            text:'비디오에 대한 추가 설명을 작성해보세요.'
+            text:'비디오에 대한 추가 설명을 작성해 보세요.'
         },
     },
     {
@@ -441,6 +444,10 @@ export const base = [
 
 export const defaults = {
     navi:{
+        responsive:{
+            mobile:true,
+            pc:true,
+        },
         sectionTypeName:'상단 바',
         sectionTemplateNumber:1,
         height:80,
@@ -540,9 +547,11 @@ export const defaults = {
             color:'#ffffff',
             border:false,
             borderColor:'#000000',
-            text:'fta 버튼',
+            text:'Floating',
             link:'',
             shadow:false,
+            size:10,
+            shape:0,
         },
         cta:{
             borderRadius:5,

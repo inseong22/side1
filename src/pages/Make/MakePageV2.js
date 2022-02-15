@@ -45,7 +45,7 @@ const NOTADDING = 1000;
 const MakePageV2 = ({history, userObj}) => {
     const targets = useRef(null);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
-    const [secNum, setSecNum] = useState(0); // 현재 수정중인 페이지를 의미.
+    const [secNum, setSecNum] = useState(52); // 현재 수정중인 페이지를 의미.
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false); // 첫 질문을 위한 Open
 
@@ -225,7 +225,7 @@ const MakePageV2 = ({history, userObj}) => {
 
         if(editing){
             if(urlData.length < 1 ){
-                alert("url은 수정하실 수 없습니다. 새로 제작해주세요.")
+                alert("url은 수정하실 수 없습니다. 새로 제작해 주세요.")
                 setLoading(false);
                 return
             }
@@ -244,7 +244,7 @@ const MakePageV2 = ({history, userObj}) => {
                 alert("url을 설정해야 합니다.");
                 setLoading(false);
             }else if(urlData.length > 0){
-                alert("이미 존재하는 url입니다. 다른 url을 사용해주세요.");
+                alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
                 setLoading(false);
             }else{
                 await dbService.collection("saved-page").add(body);
@@ -268,7 +268,7 @@ const MakePageV2 = ({history, userObj}) => {
         <div className="mobile-hide">
             <div>
                 본 사이트는 PC환경에 최적화되어있습니다. <br />
-                PC로 이동해서 랜딩페이지 제작을 시작해보세요. 😁
+                PC로 이동해서 랜딩페이지 제작을 시작해 보세요. 😁
             </div>
         </div> 
         :
@@ -278,8 +278,6 @@ const MakePageV2 = ({history, userObj}) => {
                 when={true}
                 message="편집내용이 저장되지 않았습니다. 정말로 제작을 그만두시겠습니까?"
             />
-           {
-               !full &&
                <NavBarInMakePage 
                     history={history} userObj={userObj}
                    full={full} setFull={setFull}
@@ -289,7 +287,6 @@ const MakePageV2 = ({history, userObj}) => {
                    navi={navi} foot={foot} setting={setting}
                    saveTo={saveTo} saveLocalStorage={saveLocalStorage}
                />
-           }
             <div className="make-page-container" style={{paddingTop:`${full ? '0px' : '60px'}`}}>
                 {/* 아래는 제작하는 곳 */}
                 {
@@ -310,7 +307,7 @@ const MakePageV2 = ({history, userObj}) => {
                     <div className="scroll-container" 
                         style={{ 
                             width:`${full ? '100vw' : isPhone ? '30vw' : '70vw'}`,
-                            paddingBottom:`${full ? '0px' : '30px'}`
+                            // paddingBottom:`${full ? '0px' : '30px'}`
                         }}>
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
                         {(!full && !isPhone) && <div className="make-tab-preseen" onClick={() => setSecNum(52)}>
@@ -342,9 +339,9 @@ const MakePageV2 = ({history, userObj}) => {
                             {foot.use && <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> }                             
 
                             <FTA />
-                            {full && <div className="cancel-full-screen" onClick={() => setFull(false)}>
+                            {/* {full && <div className="cancel-full-screen" onClick={() => setFull(false)}>
                                 전체화면<br/>취소
-                            </div>}
+                            </div>} */}
                         </div>
                     </div>
                 </div>

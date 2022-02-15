@@ -60,44 +60,37 @@ function ReturnButton({content}){
             </div>
         )
     }
-
-    if(content.button.use){
-        // ctaOption === 'link' => 버튼 클릭 시 링크 이동
-        // ctaOption === 'apply' => 신청
-
-        {/* <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}> */}
-        return(
-            <div style={{width:'100%'}}>
-                <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
-                    {
-                        content.button.ctaUse && 
-                            ( content.button.ctaOption === 'link' ? CustomCtaButton() : returnCtaInputs() )
-                    }
-                    {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
-                    {
-                        content.button.ghostUse && 
-                            ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
-                    }
-                </div>
-                {
-                    content.appButton.use && 
+    return(
+        <>
+        {content.button.use &&
+                <div style={{width:'100%'}}>
                     <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
                         {
-                            content.appButton.google.length > 0 && 
-                                <img src={playstorebutton} className="store-button" />
+                            content.button.ctaUse && 
+                                ( content.button.ctaOption === 'link' ? CustomCtaButton() : returnCtaInputs() )
                         }
-                        {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
                         {
-                            content.appButton.apple.length > 0 && 
-                                <img src={appstorebutton} className="store-button" />
+                            content.button.ghostUse && 
+                                ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
                         }
                     </div>
+                </div>
+        }
+        {
+            content.appButton.use && 
+            <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
+                {
+                    content.appButton.google.length > 0 && 
+                        <img src={playstorebutton} className="store-button" />
+                }
+                {
+                    content.appButton.apple.length > 0 && 
+                        <img src={appstorebutton} className="store-button" />
                 }
             </div>
-        )
-    }else{
-        return(<></>)
-    }
+        }
+    </>
+    )
 }
 
 export default ReturnButton

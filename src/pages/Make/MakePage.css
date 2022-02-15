@@ -134,9 +134,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding:5px 0px 20px 0px;
+    padding:5px 0px 0px 0px;
     z-index: 4;
     -webkit-overflow-scrolling: touch;
+    border-radius: 0px 0px 20px 20px;
 }
 
 .make-main-page-container{
@@ -151,12 +152,12 @@
   }
 
 .scroll-container{
-    border-radius:10px;
     overflow: auto;
     z-index:4;
-    /* box-shadow: 3px 3px 8px rgba(0,0,0,0.4); */
-    overflow:visible;
+    border-radius: 20px;
+    overflow: visible;
 }
+
 .make-left-bottom-container{
     justify-content: center;
     align-items: center;
@@ -177,7 +178,7 @@
     /* 기본 섀도우 01 */
 
     box-shadow: 2px 4px 20px #E8F0F9;
-    border-radius: 3px 3px 0px 0px;
+    border-radius: 20px 20px 0px 0px;
     display: flex;
     flex-direction: row;
     align-items :center;

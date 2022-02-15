@@ -27,7 +27,7 @@ function SubmitPage() {
                 저희 Surfee를 이용해주셔서 감사합니다 :)
                 <br/><br/>
                 👉 Surfee가 도움이 되었다면 / 개선을 바라는 점이 있다면<br/>
-                피드백에 참여해주세요!
+                피드백에 참여해 주세요!
                 </div>
                 <div className="after-page-button-container">
                     <a className="after-page-button" href="https://6cetqycakbc.typeform.com/to/oRcv6Qdu">🙋🏻‍♂️ 피드백 하러 가기!</a>

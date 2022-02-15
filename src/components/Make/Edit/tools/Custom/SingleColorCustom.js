@@ -60,11 +60,15 @@ export function EditColor({onChange, value}) {
                 </PopoverTrigger>
                 <PopoverContent>
                     <PopoverArrow />
-                    
+                    <PopoverHeader>
+                            <div className="color-close" onClick={handleClick}>
+                                x
+                            </div>
+                    </PopoverHeader>
                     <PopoverBody>
                         <div className="center-column">
                             <ColorPicker
-                                width={300}
+                              width={300}
                                 height={150}
                                 color={color}
                                 onChange={(e) => {

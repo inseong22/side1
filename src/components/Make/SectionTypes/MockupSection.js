@@ -137,7 +137,7 @@ function MockupSection({content, setting}) {
     }
     return (
         <motion.div className="template"
-            data-aos={setting.animation} aos-duration="4000">
+            data-aos={setting.animation} aos-duration="2000">
 
             <TitleDesc content={content} />
             <div className="image__container" style={{marginTop: '30px'}}>

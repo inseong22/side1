@@ -13,12 +13,10 @@ function DetailSection({content, setting}) {
 
     const returnLayout = {
         flexDirection:`${content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : content.layout === 3 ? 'column' : 'column-reverse'}`,
-        // paddingLeft:`${content.layout === 1 ? '30px' : content.layout === 2 ? '0px' : '30px'}`,
-        // paddingRight:`${content.layout === 1 ? '0px' : content.layout === 2 ? '30px' : '30px'}`,
     }
     
     return (
-        <motion.div data-aos={setting.animation} aos-duration="4000" style={{ width:'100%', height:'100%'}}>
+        <motion.div data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout}>
                 <div className="text__container" style={{marginTop:`${content.layout === 4 ? '30px' : '0px'}`}}>
                     <TitleDesc content={content} />

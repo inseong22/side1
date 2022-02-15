@@ -37,7 +37,7 @@
 
 .fta__container{
     position:fixed;
-    bottom:5px;
+    bottom:50px;
     z-index:1003;
     width:100%;
     display: flex;
@@ -47,6 +47,7 @@
 
 .fta-button{
     font-size:var(--feature-desc-size);
+    padding-top: 10px;
 }
 
 .font-done-button{

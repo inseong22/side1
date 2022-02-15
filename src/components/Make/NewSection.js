@@ -129,7 +129,7 @@ function NewSection({setting, content, index, contents, setContents, full}) {
 
             </div>}
             <div className="section__container" 
-                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}} 
+                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat'}} 
                     onClick={() => setThisSection()}>
                 {
                     content.backgroundType === 'color' ?
