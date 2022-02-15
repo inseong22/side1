@@ -9,7 +9,6 @@ import { stService } from '../../tools/fbase';
 import {Link} from 'react-router-dom';
 import NewSection from '../../components/Make/NewSection'
 import NewSectionMake from '../../components/Make/Edit/NewSectionMake'
-import EditSetting from '../../components/Make/Edit/NavFooterSetting/EditSetting'
 import NavBarInMakePage from './NavBarInMakePage/NavBarInMakePage'
 import MakeNavigationV2 from '../../components/Make/NavBar/MakeNavigationV2'
 import MakeFooterV2 from '../../components/Make/Footer/MakeFooterV2'
@@ -33,12 +32,6 @@ export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
     action : {setAddingSectionAt : () => {}}
 });
-
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
-
-const smallfont = `28px`;
-const bigfont = '50px';
-const rate = 0.63;
 
 const NOTADDING = 1000;
 
@@ -197,6 +190,33 @@ const MakePageV2 = ({history, userObj}) => {
         )
     }
 
+    const checkUnSaved = (attach) => {
+        return attach.length > 1000;
+    }
+
+    const saveImages = async (naviF) => {
+
+        if(navi.logo.use && navi.logo.image.use && checkUnSaved(navi.logo.image.attachment)){
+            // 사진을 먼저 업로드하고 그 URL을 받아서 데이터로 넣어줘야한다.
+            const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
+
+            const response = await attachmentRef.putString(navi.logo.image.attachment, "data_url");
+            const attachmentURL = await response.ref.getDownloadURL();
+            naviF = attachmentURL
+        }
+        if(checkUnSaved(setting.faviconAttachment)){
+            // 사진을 먼저 업로드하고 그 URL을 받아서 데이터로 넣어줘야한다.
+            const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
+
+            const response = await attachmentRef.putString(navi.logo.image.attachment, "data_url");
+            const attachmentURL = await response.ref.getDownloadURL();
+            setSetting(produce(setting, draft => {
+                draft.faviconAttachment = attachmentURL;
+            }))
+        }
+
+    }
+
     const saveTo = async () => {
         setLoading(true);
 
@@ -209,24 +229,24 @@ const MakePageV2 = ({history, userObj}) => {
             return({...doc.data(), id:doc.id})
         });
 
-        const body = {
-            contents:contents,
-            navi:navi,
-            foot:foot,
-            setting:setting,
-            created:Date.now(),
-            makerEmail:userObj.email,
-            makingTypeByUser:makingTypeByUser,
-            urlId:setting.urlId,
-        }
-
         if(editing){
             if(urlData.length < 1 ){
                 alert("url은 수정하실 수 없습니다. 새로 제작해 주세요.")
                 setLoading(false);
                 return
             }
-            // 업데이트 하기
+
+            const body = {
+                contents:contents,
+                navi:navi,
+                foot:foot,
+                setting:setting,
+                created:Date.now(),
+                makerEmail:userObj.email,
+                makingTypeByUser:makingTypeByUser,
+                urlId:setting.urlId,
+            }
+
             await dbService.doc(`saved-page/${savedPage[0].id}`).update(body);
             // 자동저장 하던 걸 지운다.
             window.localStorage.removeItem("temp");
@@ -244,6 +264,22 @@ const MakePageV2 = ({history, userObj}) => {
                 alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
                 setLoading(false);
             }else{
+                // saveImages()
+                const body = {
+                    contents:contents,
+                    navi:navi,
+                    foot:foot,
+                    setting:setting,
+                    created:Date.now(),
+                    makerEmail:userObj.email,
+                    makingTypeByUser:makingTypeByUser,
+                    urlId:setting.urlId,
+                }
+                // const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
+
+                // const response = await attachmentRef.putString(attachment, "data_url");
+                // const attachmentURL = await response.ref.getDownloadURL();
+
                 await dbService.collection("saved-page").add(body);
 
                 await dbService.collection("urlStores").add({urlId:body.urlId});

@@ -22,11 +22,19 @@
     cursor: pointer;
     margin:5px;
     background: #C4C4C4;
-    box-shadow: 4px 4px 15px #D0CDFF;
+    box-shadow: 4px 4px 15px #E5E5E5;
     text-align: center;
     display:flex;
     align-items : center;
     justify-content:center;
+    font-weight: normal;
+}
+
+.modal-move-button:hover{
+    font-weight: bold;
+}
+.modal-move-button-back{
+    font-weight: bold;
 }
 
 .modal-mini-text{
@@ -82,7 +90,7 @@
     box-shadow: 2px 4px 20px #E8F0F9;
     border-radius: 10px;
     padding:2% 2%;
-    width:380px;
+    width:27vw;
     margin:10px;
     cursor:pointer;
     display: flex;
@@ -109,7 +117,7 @@
 
 .modal-title{
     text-align: center;
-    font-size: 25px;
+    font-size: 18px;
     line-height: 40px;
     font-family:Pretendard-ExtraBold;
 }

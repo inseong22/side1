@@ -259,37 +259,42 @@ function EdtiSetting({setting, setSetting, category}) {
                             <OnOffCustom text="플로팅 버튼" value={setting.fta.use} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.use = !setting.fta.use
                             }))} />
-                            <RadioCustom text="사이즈" options={sizeOptions} value={setting.fta.size} func={(e) => setSetting(produce(setting, draft => {
-                                draft.fta.size = e
-                            }))} />
-                            <RadioCustom text="모양" options={shapeOptions} value={setting.fta.shape} func={(e) => setSetting(produce(setting, draft => {
-                                draft.fta.shape = e
-                            }))} />
-                            <div className="edit-element">
-                                {/* 폰트 색상 연결 안해놓음 디자인만! */}
-                                <SingleColorCustom text="폰트 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
-                                    draft.fta.backgroundColor = e;
-                                }))} />
-                                <div className="edit-element-bar"/>
-                                <SingleColorCustom text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
-                                    draft.fta.backgroundColor = e;
-                                }))} />
-                            </div>
-                            <OnOffCustom text="테두리" value={setting.fta.border} func={(e) => setSetting(produce(setting, draft => {
-                                draft.fta.border = !setting.fta.border
-                            }))} />
                             {
-                                setting.ghost.border && 
-                                <ColorCustom text="테두리 색상" value={setting.fta.borderColor} func={(e) => setSetting(produce(setting, draft => {
-                                    draft.fta.borderColor = e;
-                                }))} />
+                                setting.fta.use && 
+                                <>
+                                    <RadioCustom text="사이즈" options={sizeOptions} value={setting.fta.size} func={(e) => setSetting(produce(setting, draft => {
+                                        draft.fta.size = e
+                                    }))} />
+                                    <RadioCustom text="모양" options={shapeOptions} value={setting.fta.shape} func={(e) => setSetting(produce(setting, draft => {
+                                        draft.fta.shape = e
+                                    }))} />
+                                    <div className="edit-element">
+                                        {/* 폰트 색상 연결 안해놓음 디자인만! */}
+                                        <SingleColorCustom text="폰트 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                                            draft.fta.backgroundColor = e;
+                                        }))} />
+                                        <div className="edit-element-bar"/>
+                                        <SingleColorCustom text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
+                                            draft.fta.backgroundColor = e;
+                                        }))} />
+                                    </div>
+                                    <OnOffCustom text="테두리" value={setting.ghost.border} func={(e) => setSetting(produce(setting, draft => {
+                                        draft.ghost.border = !setting.ghost.border
+                                    }))} />
+                                    {
+                                        setting.ghost.border && 
+                                        <ColorCustom text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                            draft.ghost.borderColor = e;
+                                        }))} />
+                                    }
+                                    <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                        draft.ghost.shadow = !setting.ghost.shadow
+                                    }))} />
+                                    <InputCustom text="링크 연결" value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
+                                        draft.fta.link = e
+                                    }))}/>
+                                </>
                             }
-                            <OnOffCustom text="그림자" value={setting.fta.shadow} func={(e) => setSetting(produce(setting, draft => {
-                                draft.fta.shadow = !setting.fta.shadow
-                            }))} />
-                            <InputCustom text="링크 연결" value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
-                                draft.fta.link = e
-                            }))}/>
                         </OpenCloseCustom>
                     </div>
                     </>

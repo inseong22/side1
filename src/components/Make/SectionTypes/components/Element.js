@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import produce from 'immer'
 import IconTable from '../components/IconTable'
+import {icons} from '../components/IconTable'
 import {Upload} from '@styled-icons/bootstrap';
 import {
     ChakraProvider,
@@ -29,6 +30,10 @@ function Element({content, item, index, gallery}) {
         }));
     };
 
+    const returnIcon = (name) => {
+        return icons.filter(doc => doc.name === name)[0].icon
+    }
+
     return (
 <ChakraProvider>
     <div className="centeras" style={{justifyContent: `${content.align}`}}>
@@ -36,7 +41,7 @@ function Element({content, item, index, gallery}) {
         {
         content.element.type === 'image' ? <>
         { item.attachment ? 
-            <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.imageBorder}px`}}/> 
+            <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.imageBorder}px`, objectFit:'cover'}}/> 
             :
             <div className="feature-upload-button" style={{borderRadius:`${content.element.borderRadius}px`, backgroundColor:`${content.element.backgroundColor}`}}>
                 <Upload size="25" />
@@ -52,6 +57,10 @@ function Element({content, item, index, gallery}) {
                 const oneFile = files[0];
                 const reader = new FileReader();
                 reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+                    if(oneFile.size > 3000000){
+                        alert("파일의 크기가 3MB를 초과합니다.")
+                        return;
+                    }
                     const {currentTarget:{result}} = finishedEvent;
                     action.setContents(produce(state.contents, draft=>{
                         draft[state.secNum].elements[index].attachment = result;
@@ -71,7 +80,7 @@ function Element({content, item, index, gallery}) {
         <PopoverTrigger>
                 <div className="feature-upload-button" style={{borderRadius:`${content.element.iconBorder}px`, backgroundColor:`${content.element.backgroundColor}`}} onClick={() => handleClick(index)}>
                     {item.icon ? 
-                        <>{item.icon}</> 
+                        <>{returnIcon(item.icon)}</> 
                         :
                         <Upload size="25" />
                     }
@@ -82,6 +91,7 @@ function Element({content, item, index, gallery}) {
             <PopoverHeader>아이콘을 선택하세요.</PopoverHeader>
             <PopoverBody>
                 <IconTable func={ e => action.setContents(produce(state.contents, draft => {
+                    console.log("아이콘이 왜 안되지?", e)
                     draft[state.secNum].elements[index].icon = e;
                 })) } handleClose={() => handleClose(index)}/>
             </PopoverBody>

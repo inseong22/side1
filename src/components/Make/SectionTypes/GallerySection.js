@@ -55,6 +55,10 @@ function GallerySection({content,setting}) {
                                    const oneFile = files[0];
                                    const reader = new FileReader();
                                    reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+                                        if(oneFile.size > 3000000){
+                                            alert("파일의 크기가 3MB를 초과합니다.")
+                                            return;
+                                        }
                                        const {currentTarget:{result}} = finishedEvent;
                                        action.setContents(produce(state.contents, draft=>{
                                            draft[state.secNum].elements[index].attachment = result;

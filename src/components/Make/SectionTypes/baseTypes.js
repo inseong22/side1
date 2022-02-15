@@ -461,7 +461,7 @@ export const defaults = {
         sectionTemplateNumber:1,
         height:80,
         use:true,
-        title:'Surfee',
+        title:'',
         logo:{
             use:true,
             align:'start',

@@ -26,7 +26,7 @@ function FuncContentImg({text, value, func, removeFunc, subtext}) {
                 id="file" 
                 onChange={ e => func(e) }
                 ref={photoInput}
-                style={{display: 'none', cursor: 'pointer'}}
+                style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
             /> 
             {/* <div className="img-command">
             5MB 이하, <br />가로 1200px를 권장합니다!

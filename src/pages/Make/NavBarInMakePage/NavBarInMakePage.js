@@ -1,8 +1,7 @@
 import React, {useContext, useState} from 'react';
-import { Input, Button } from 'antd';
+import { Button } from 'antd';
 import './MakeNavBar.css';
 import { MyContext } from '../MakePageV2'
-import CheckModal from '../../../components/Make/Modal/CheckModal'
 import {Monitor} from '@styled-icons/feather'
 import { Phone } from '@styled-icons/bootstrap'
 import {Fullscreen} from '@styled-icons/bootstrap'
@@ -21,13 +20,10 @@ import {
     ButtonGroup,
     Portal,
   } from '@chakra-ui/react'
-import { dbService } from '../../../tools/fbase';
-import { stService } from '../../../tools/fbase';
 
 const NavBarInMakePage = (props) => {
     const [loginModal, setLoginModal] = useState(false)
     const {state, action} = useContext(MyContext)
-    const [checkModalOpen, setCheckModalOpen] = useState(false);
     const [deviceOpen, setDeviceOpen] = useState(false);
   
     const handleClick = () => {
@@ -89,7 +85,14 @@ const NavBarInMakePage = (props) => {
                                     <Phone size="25" />
                                 </div>
                             </span>
-                            <span className={props.full ? "device-button clicked" : "device-button" } onClick={e => {props.setFull(true); handleClick()}}>
+                            <span className={props.full ? "device-button clicked" : "device-button" } onClick={e => {
+                                if(state.isPhone){
+                                    return
+                                }else{
+                                props.setFull(true); 
+                                handleClick()
+                                }   
+                            }}>
                                 <div className="left">
                                     전체화면
                                 </div>

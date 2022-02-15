@@ -12,7 +12,6 @@ import ResponsePage from './pages/Response/ResponsePage';
 import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/unused/SubmitPage';
 import CustomerPage from './pages/Customer/CustomerPage'
-import FQ from './pages/Questions/FQ'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
@@ -53,9 +52,6 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                     </Route>
                     <Route path="/make">
                         <MakePageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
-                    </Route>
-                    <Route path="/setting">
-                        <FQ history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
                     </Route>
                     <Route path="/login">
                         <LoginPage history={history} isLoggedIn={isLoggedIn}/>
