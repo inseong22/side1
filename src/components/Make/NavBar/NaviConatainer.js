@@ -3,6 +3,7 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
 import AutosizeInput from 'react-input-autosize';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import TextAuto from '../SectionTypes/components/TextAuto'
 
 function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -40,7 +41,6 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                                 fontFamily:`${state.setting.font}`,
                                 resize:'none'
                             }}
-                            spellcheck="false"
                         />
                     </div>
                 }

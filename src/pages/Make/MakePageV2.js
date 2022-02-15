@@ -326,7 +326,7 @@ const MakePageV2 = ({history, userObj}) => {
                                 </div>
                             </div>
                         </div>}
-                        <div ref={targets} className="make-main-page-container" style={{fontSize:`${smallfont}`, borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
+                        <div ref={targets} className="make-main-page-container" style={{borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
                             
                             {/* 네비게이션 */}
                             {navi.use && <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} /> }
