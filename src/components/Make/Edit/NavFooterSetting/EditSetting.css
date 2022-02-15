@@ -46,8 +46,11 @@
 }
 
 .fta-button{
-    font-size:var(--feature-desc-size);
-    padding-top: 10px;
+    display: flex;
+    align-items : center;
+    justify-content :center;
+    font-size:var(--feature-title-size);
+    padding:5px;
 }
 
 .font-done-button{

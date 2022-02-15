@@ -93,7 +93,7 @@ def print_response(response):
                     tempMetric.append([metricHeader.get('name'), value])
             tempDimension.append(tempMetric)
 
-        result = {}
+        result = []
         for onePath in tempDimension:
             temp = {}
             for oneMetric in onePath:
@@ -108,7 +108,8 @@ def print_response(response):
                 if oneMetric[0] == 'ga:sessions':
                     temp['sessions'] = oneMetric[1]
                 if oneMetric[0] == 'ga:pagePath':
-                    result[oneMetric[1]] = temp
+                    temp['path'] = oneMetric[1]
+            result.append(temp)
             temp = []
         return result
 

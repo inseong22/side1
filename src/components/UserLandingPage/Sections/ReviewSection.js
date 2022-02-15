@@ -20,7 +20,7 @@ function ReviewSection({content, setting}) {
                             resize:'none',
                             textAlign:`${content.align}`,
                             fontFamily:`${setting.smallFont}`,
-                            color:`${content.reviewText.color}`,
+                            color:`${content.elementText.color}`,
                         }}>
                         {item.title} 
                     </div>
@@ -39,7 +39,7 @@ function ReviewSection({content, setting}) {
                     </div>
                 }
                 {
-                    content.reviewText.use && 
+                    content.elementText.use && 
                     <div className="df-margin-big feature-desc" style={{width:'100%'}}>
                         <div 
                             className="text-input-flex" 
@@ -48,7 +48,7 @@ function ReviewSection({content, setting}) {
                                 resize:'none',
                                 textAlign:`${content.align}`,
                                 fontFamily:`${setting.smallFont}`,
-                                color:`${content.reviewText.color}`,
+                                color:`${content.elementText.color}`,
                             }}>
                             {item.desc} 
                         </div>

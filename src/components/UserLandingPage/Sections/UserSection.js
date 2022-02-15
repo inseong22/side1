@@ -84,7 +84,7 @@ function UserSection({content, setting, CustomCta, CustomGhost}) {
     }
 
     return(
-        <div className="new-section">
+        <div className="new-section" style={{fontSize:'28px'}}>
             <div className="section__container" 
                 style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}} >
                 {

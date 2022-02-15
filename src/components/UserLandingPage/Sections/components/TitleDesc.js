@@ -8,33 +8,32 @@ function TitleDesc({content, setting}) {
             {
                 content.title.use &&
                 <div style={{width:'100%'}}>
-                    <div 
+                    <TextareaAutosize 
                         className="text-no-input" 
                         style={{
                             fontFamily:`${setting.font}`, 
                             color:`${content.title.color}`, 
-                            fontSize:`${content.title.size}px`, 
+                            fontSize:`${content.title.size/20}em`, 
                             textAlign:`${content.title.align}`,
-                        }}>
-                            {content.title.text}
-                    </div>
+                        }}
+                        value = {content.title.text}
+                        />
                 </div>
             }
             {
                 content.desc.use &&
                 <div style={{width:'100%', marginTop:'10px'}}>
-                    <div 
+                    <TextareaAutosize 
                         className="text-no-input" 
-                        value={content.desc.text}
                         style={{
                             fontFamily:`${setting.smallFont}`, 
                             color:`${content.desc.color}`, 
-                            fontSize:`${content.desc.size}px`, 
+                            fontSize:`${content.desc.size/20}em`, 
                             // boxSizing:`border-box`, 
                             textAlign:`${content.desc.align}`,
-                        }}>
-                            {content.desc.text}
-                    </div>
+                        }}
+                        value = {content.desc.text}
+                        />
                 </div>
             }
         </div>

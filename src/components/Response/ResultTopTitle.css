@@ -1,0 +1,25 @@
+.data-result__card{
+    display: flex;
+    flex-direction: column;
+    justify-content : end;
+    align-items : center;
+    text-align:center;
+    width:10vw;
+    color:var(--main-black-01);
+}
+
+.data-result__data{
+    font-size:1.3em;
+}
+
+.data-result__name{
+    font-size:0.9em;
+    margin-top:5px;
+}
+
+.ga-data__container{
+    display: flex;
+    flex-direction:row;
+    align-items :center;
+    justify-content:center;
+}

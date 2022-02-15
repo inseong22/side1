@@ -2,6 +2,7 @@
 .image{
     z-index: 1;
     width:500px;
+    height:auto;
 }
 
 .image-input{

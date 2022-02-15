@@ -16,7 +16,7 @@ import Layout from '../EditTemplates/tools/Layout'
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 
 const alignOptions = [
-    { label: '왼쪽', value: 'left' },
+    { label: '왼쪽', value: 'start' },
     { label: '중앙', value: 'center' },
 ]
 

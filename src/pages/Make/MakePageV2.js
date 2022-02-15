@@ -9,7 +9,6 @@ import { stService } from '../../tools/fbase';
 import {Link} from 'react-router-dom';
 import NewSection from '../../components/Make/NewSection'
 import NewSectionMake from '../../components/Make/Edit/NewSectionMake'
-import EditSetting from '../../components/Make/Edit/NavFooterSetting/EditSetting'
 import NavBarInMakePage from './NavBarInMakePage/NavBarInMakePage'
 import MakeNavigationV2 from '../../components/Make/NavBar/MakeNavigationV2'
 import MakeFooterV2 from '../../components/Make/Footer/MakeFooterV2'
@@ -34,12 +33,6 @@ export const MyContext = React.createContext({
     action : {setAddingSectionAt : () => {}}
 });
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
-
-const smallfont = `28px`;
-const bigfont = '50px';
-const rate = 0.63;
-
 const NOTADDING = 1000;
 
 const MakePageV2 = ({history, userObj}) => {
@@ -51,8 +44,6 @@ const MakePageV2 = ({history, userObj}) => {
 
     const [isPhone, setIsPhone] = useState(false);
     const [full, setFull] = useState(false);
-    const [isWidget, setIsWidget] = useState(true);
-    const [password, setPassword] = useState("");
     const [nowState, setNowState] = useState('new');
     const [load, setLoad] = useState(false);
     const [editing, setEditing] = useState(false);
@@ -110,9 +101,7 @@ const MakePageV2 = ({history, userObj}) => {
                 setOpen(false);
                 setEditing(true);
                 
-                setTimeout(() => {
-                    setLoading(false);
-                },700)
+                setLoading(false);
             }
         }else{
             // 로컬스토리지에 저장되어인게 있다면
@@ -147,7 +136,7 @@ const MakePageV2 = ({history, userObj}) => {
     }
 
     const saveLocalStorage = () => {
-        localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
+        localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting, editing]));
     }
 
     const loadLocalStorage = () => {
@@ -157,11 +146,9 @@ const MakePageV2 = ({history, userObj}) => {
         setNavi(temp[1]);
         setFoot(temp[2]);
         setSetting(temp[3]);
+        setEditing(temp[4]);
         setOpen(false);
-        // setEditing(true);
-        setTimeout(() => {
-            setLoading(false);
-        },1000)
+        setLoading(false);
     }
 
     const sectionsReturn = contents.map((item, index) => {
@@ -175,8 +162,7 @@ const MakePageV2 = ({history, userObj}) => {
     const FTA = () => {
         return(
             <>
-            { 
-            ( setting.fta.use ) &&
+            {  ( setting.fta.use ) &&
             <div className="fta__container">
                 <button className="fta-button" 
                     style={{
@@ -200,37 +186,64 @@ const MakePageV2 = ({history, userObj}) => {
         )
     }
 
+    const checkUnSaved = (attach) => {
+        return attach.length > 1000;
+    }
+
+    const saveImages = async (naviF) => {
+
+        if(navi.logo.use && navi.logo.image.use && checkUnSaved(navi.logo.image.attachment)){
+            // 사진을 먼저 업로드하고 그 URL을 받아서 데이터로 넣어줘야한다.
+            const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
+
+            const response = await attachmentRef.putString(navi.logo.image.attachment, "data_url");
+            const attachmentURL = await response.ref.getDownloadURL();
+            naviF = attachmentURL
+        }
+        if(checkUnSaved(setting.faviconAttachment)){
+            // 사진을 먼저 업로드하고 그 URL을 받아서 데이터로 넣어줘야한다.
+            const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
+
+            const response = await attachmentRef.putString(navi.logo.image.attachment, "data_url");
+            const attachmentURL = await response.ref.getDownloadURL();
+            setSetting(produce(setting, draft => {
+                draft.faviconAttachment = attachmentURL;
+            }))
+        }
+
+    }
+
     const saveTo = async () => {
         setLoading(true);
 
-        const urlDatas = await dbService
+        const savedPages = await dbService
             .collection("saved-page")
             .where("urlId", "==", setting.urlId)
             .get(); // uid를 creatorId로 줬었으니까.
         
-        let urlData = urlDatas.docs.map(doc => {
+        let savedPage = savedPages.docs.map(doc => {
             return({...doc.data(), id:doc.id})
         });
 
-        const body = {
-            contents:contents,
-            navi:navi,
-            foot:foot,
-            setting:setting,
-            created:Date.now(),
-            makerEmail:userObj.email,
-            makingTypeByUser:makingTypeByUser,
-            urlId:setting.urlId,
-        }
-
         if(editing){
-            if(urlData.length < 1 ){
+            if(savedPage.length < 1 ){
                 alert("url은 수정하실 수 없습니다. 새로 제작해 주세요.")
                 setLoading(false);
                 return
             }
-            // 업데이트 하기
-            await dbService.doc(`saved-page/${urlData[0].id}`).update(body);
+
+            const body = {
+                contents:contents,
+                navi:navi,
+                foot:foot,
+                setting:setting,
+                created:Date.now(),
+                makerEmail:userObj.email,
+                makingTypeByUser:makingTypeByUser,
+                urlId:setting.urlId,
+            }
+
+            await dbService.doc(`saved-page/${savedPage[0].id}`).update(body);
             // 자동저장 하던 걸 지운다.
             window.localStorage.removeItem("temp");
             
@@ -238,18 +251,34 @@ const MakePageV2 = ({history, userObj}) => {
                 setLoading(false);
                 history.push('/#/response');
                 history.go();
-            },1000)
+            },200)
         }else{
             if(setting.urlId === ''){
                 alert("url을 설정해야 합니다.");
                 setLoading(false);
-            }else if(urlData.length > 0){
+            }else if(savedPage.length > 0){
                 alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
                 setLoading(false);
             }else{
+                // saveImages()
+                const body = {
+                    contents:contents,
+                    navi:navi,
+                    foot:foot,
+                    setting:setting,
+                    created:Date.now(),
+                    makerEmail:userObj.email,
+                    makingTypeByUser:makingTypeByUser,
+                    urlId:setting.urlId,
+                }
+                // const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
+
+                // const response = await attachmentRef.putString(attachment, "data_url");
+                // const attachmentURL = await response.ref.getDownloadURL();
+
                 await dbService.collection("saved-page").add(body);
 
-                await dbService.collection("urlStores").add({urlId:body.setting.urlId});
+                await dbService.collection("urlStores").add({urlId:body.urlId});
 
                 // 자동저장 하던 걸 지운다.
                 window.localStorage.removeItem("temp");
@@ -258,7 +287,7 @@ const MakePageV2 = ({history, userObj}) => {
                     setLoading(false);
                     history.push('/#/response');
                     history.go();
-                },1000)
+                },200)
             }
         }
     }
@@ -276,7 +305,7 @@ const MakePageV2 = ({history, userObj}) => {
        <MyContext.Provider value={contextValue}>
             <Prompt 
                 when={true}
-                message="편집내용이 저장되지 않았습니다. 정말로 제작을 그만두시겠습니까?"
+                message="편집내용이 저장되지 않았을 수 있습니다. 정말로 제작을 그만두시겠습니까?"
             />
                <NavBarInMakePage 
                     history={history} userObj={userObj}
@@ -306,8 +335,8 @@ const MakePageV2 = ({history, userObj}) => {
                 <div className="make-left-landing" style={{width:`${full ? '100vw' : '72vw'}`}}>
                     <div className="scroll-container" 
                         style={{ 
-                            width:`${full ? '100vw' : isPhone ? '30vw' : '70vw'}`,
-                            // paddingBottom:`${full ? '0px' : '30px'}`
+                            width:`${full ? '100vw' : isPhone ? '26vw' : '70vw'}`,
+                            paddingBottom:`${full ? '0px' : '30px'}`
                         }}>
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
                         {(!full && !isPhone) && <div className="make-tab-preseen" onClick={() => setSecNum(52)}>

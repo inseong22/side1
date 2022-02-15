@@ -28,7 +28,7 @@ const Backdrop = styled('div')`
 `;
 
 const style = {
-  width: '35vw',
+  width: '30vw',
   height: '30vh',
   bgcolor: 'rgba(255,255,255,1)',
   border: '0px solid #000',
@@ -44,7 +44,7 @@ const style = {
 }
 
 
-function ConfirmCustom({open, setOpen, message, callback}) {
+function ConfirmCustom({open, setOpen, message, callback, warn}) {
     return (
         <div>
         <StyledModal    
@@ -54,8 +54,16 @@ function ConfirmCustom({open, setOpen, message, callback}) {
             BackdropComponent={Backdrop}
         >
             <Box sx={style}>
-                <div className="centera confirm-message" style={{height:'80%'}}>
-                    {message}
+                <div className="center-column confirm-message" style={{height:'80%'}}>
+                    {
+                        warn && 
+                        <div style={{marginBottom:'12px'}}>
+                            주의
+                        </div>
+                    }
+                    <div>
+                        {message}
+                    </div>
                 </div>
                 <div className="center-row confirm-button__container">
                     <button className="confirm-button" style={{border:'1px solid #6C63FF', color:'#6C63FF'}} onClick={() => {setOpen(false)}}>

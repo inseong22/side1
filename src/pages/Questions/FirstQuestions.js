@@ -206,10 +206,14 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
     }
 
     const onUrlChange = e => {
-        e.preventDefault();
-        setSetting(produce(setting, draft => {
-            draft.urlId = e.currentTarget.value
-        }))
+        if (isNotNumber(e.nativeEvent.data)){ 
+            setSetting(produce(setting, draft => {
+                draft.urlId = e.currentTarget.value
+            }))
+        }else{
+            e.preventDefault(); 
+            return null; 
+        }
     }
 
     const nextAndSetTemplates = async (e) => {
@@ -231,10 +235,15 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
     }
 
     const nextAndSetFont = async e => {
-        if(font === ''){
-            alert("위의 보기 중 한가지를 선택해 주세요.");
+        if(font === '' || color === ''){
+            alert("위의 보기 중 한가지를 선택해주세요.");
             return
         }else{
+            setSetting(produce(setting, draft => {
+                draft.font = font;
+                draft.smallFont = font;
+                draft.color = color;
+            }))
             setCnum(cnum + 1);
         }
     }
@@ -275,20 +284,25 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
         )
     }
 
+    const isNotNumber = (v) => {
+        const regExp = /[a-zA-Z0-9]/g; 
+        return regExp.test(v);
+    }
+
     const content = () => {
         switch(cnum){
             case 1:
                 return(
                     <div className="modal-flex-column">
                         <div className="modal-title">
-                            안녕하세요 <span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을 환영합니다 <br/>
+                            안녕하세요, <span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을 환영합니다!<br/>
                             당신의 서비스 / 제품 명을 알려주세요.
                         </div>
                         <div className="modal-main-card">
                         {/* <form onSubmit={() => setCnum(cnum + 1)} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}> */}
                         <Input 
                             className="input-holder input-focus" 
-                            placeholder="한글은 8자 이내, 영문 10자 이내일 때 가장 좋습니다." 
+                            placeholder="서비스/제품 명이 로고 자리에 들어갑니다." 
                             value={navi.title} 
                             onChange={e => 
                                 setNavi(produce(navi, draft => {
@@ -296,12 +310,12 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                 }))} />
                         {/* </form> */}
                         <div className="modal-mini-text">
-                            수정가능하니 편하게 정해 주세요 :)
+                            수정 가능하니 편하게 정해주세요 :)
                         </div>
                         <div className="modal-button-container">
                             <div className="modal-move-button" 
                                 onSubmit={e => setCnum(cnum + 1)} style={{visibility:`${navi.title.length > 0 ? 'visible' : 'hidden'}`, display:'flex'}} 
-                                onClick={e => setCnum(cnum + 1)}>확인</div>  
+                                onClick={e => setCnum(cnum + 1)}>다음</div>  
                             </div>
                         </div>
                     </div>
@@ -311,7 +325,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
             case 2:
                 return(
                     <ModalBox 
-                        title={<><span style={{color:'#6C63FF'}}>[{navi.title}]</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀</>}>
+                        title={<><span style={{color:'#6C63FF'}}>{navi.title}</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀</>}>
                         <>
                             <div className="modal-row">
                             {
@@ -346,7 +360,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
             case 3:
                 return(
                     <ModalBox title={<>
-                        <span style={{color:'#6C63FF'}}>[{navi.title}]</span>의 랜딩페이지는 주로 어떤 화면으로 보여질까요?
+                        <span style={{color:'#6C63FF'}}>{navi.title}</span>의 랜딩페이지는 주로 어떤 화면으로 보여질까요?
                     </>}>
                         <div className="modal-row" style={{flexWrap:'nowrap'}}>
                             <div className="template__card"
@@ -355,7 +369,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                 }}
                                 style={{border: `${device === 'pc' ? '1px solid #6C63FF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
-                                    🖥 PC<br/><br/> PC 화면을 중심으로 편집하고 모바일 화면은 간단한 수정만 가능해요.
+                                    🖥 PC<br/><br/> PC 화면을 중심으로 편집하고<br/> 모바일 화면은 간단한 수정만 가능해요.
                                 </div>
                             </div>
                             <div className="template__card"
@@ -364,7 +378,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                 }}
                                 style={{border: `${device === 'mobile' ? '1px solid #6C63FF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
-                                    📱모바일<br/><br/> 모바일 화면을 중심으로 편집하고 PC 화면은 간단한 수정만 가능해요.
+                                    📱모바일<br/><br/> 모바일 화면을 중심으로 편집하고<br/> PC 화면은 간단한 수정만 가능해요.
                                 </div>
                             </div>
                         </div>
@@ -448,11 +462,10 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                         </div>
                         <div className="modal-main-card">
                             <div className="modal-title" style={{fontSize:'25px'}}>
-                                <input className="input-holder input-focus" value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
+                                <input className="input-holder input-focus" placeholder="영문과 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
                             </div>
                             <div style={{color:'gray', paddingLeft:'0%',marginTop:'3%', fontSize:'18px', textAlign:'left', fontFamily:'Pretendard-Regular'}}>
                                 <div>
-                                    - 영문과 숫자만 사용 가능합니다.<br/>
                                     - 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.<br/>
                                     - 수정 가능하니 편하게 설정해 주세요 :)<br/>
                                 </div>
