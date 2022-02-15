@@ -101,9 +101,7 @@ const MakePageV2 = ({history, userObj}) => {
                 setOpen(false);
                 setEditing(true);
                 
-                setTimeout(() => {
-                    setLoading(false);
-                },700)
+                setLoading(false);
             }
         }else{
             // 로컬스토리지에 저장되어인게 있다면
@@ -150,9 +148,7 @@ const MakePageV2 = ({history, userObj}) => {
         setSetting(temp[3]);
         setEditing(temp[4]);
         setOpen(false);
-        setTimeout(() => {
-            setLoading(false);
-        },1000)
+        setLoading(false);
     }
 
     const sectionsReturn = contents.map((item, index) => {
@@ -255,7 +251,7 @@ const MakePageV2 = ({history, userObj}) => {
                 setLoading(false);
                 history.push('/#/response');
                 history.go();
-            },1000)
+            },200)
         }else{
             if(setting.urlId === ''){
                 alert("url을 설정해야 합니다.");
@@ -291,7 +287,7 @@ const MakePageV2 = ({history, userObj}) => {
                     setLoading(false);
                     history.push('/#/response');
                     history.go();
-                },1000)
+                },200)
             }
         }
     }
