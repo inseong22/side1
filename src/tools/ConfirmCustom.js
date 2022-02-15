@@ -28,7 +28,7 @@ const Backdrop = styled('div')`
 `;
 
 const style = {
-  width: '35vw',
+  width: '30vw',
   height: '30vh',
   bgcolor: 'rgba(255,255,255,1)',
   border: '0px solid #000',

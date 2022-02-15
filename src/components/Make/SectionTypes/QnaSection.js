@@ -17,7 +17,7 @@ function QnaSection({content, setting}) {
                     <div style={{display:'flex', alignItems: 'start', height:'100%'}}>
                         <span className="qna__word" style={{fontFamily:`${state.setting.smallFont}`}}>A. <></></span>
                     </div>
-                    <TextAuto 
+                    <TextAuto
                         small
                         value={item.answer} 
                         onChange={e => action.setContents(produce(state.contents, draft => {
@@ -33,7 +33,10 @@ function QnaSection({content, setting}) {
         <motion.div className="template"
             data-aos={setting.animation} aos-duration="2000">
 
-            <TitleDesc content={content} />
+            {/* 큐앤에이 카드의 그림자때문에 텍스트와 정렬이 맞지 않아서 */}
+            <div style={{width : `${state.isPhone ? '100%' : '95%'}` }}>  
+                <TitleDesc content={content} />
+            </div>
 
             <div className="features__container" style={{flexDirection: 'column', marginTop:'20px'}}>
                 {returnQnaCards}

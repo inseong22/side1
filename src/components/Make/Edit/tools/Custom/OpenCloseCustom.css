@@ -9,8 +9,15 @@
 .title_text{
     display: flex;
     align-items : center;
-    font-size: var(--func-title);
     font-weight: 700;
+}
+
+.title_subtext{
+    display: flex;
+    align-items : center;
+    font-weight: 500;
+    margin-left:8px;
+    color:var(--main-gray);
 }
 
 .accordion{
@@ -46,5 +53,4 @@
     box-sizing: border-box;
     width:100%;
     color:#757E8A;
-    font-size:16px;
 }

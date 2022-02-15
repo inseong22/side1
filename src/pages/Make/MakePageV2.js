@@ -51,8 +51,6 @@ const MakePageV2 = ({history, userObj}) => {
 
     const [isPhone, setIsPhone] = useState(false);
     const [full, setFull] = useState(false);
-    const [isWidget, setIsWidget] = useState(true);
-    const [password, setPassword] = useState("");
     const [nowState, setNowState] = useState('new');
     const [load, setLoad] = useState(false);
     const [editing, setEditing] = useState(false);
@@ -147,7 +145,7 @@ const MakePageV2 = ({history, userObj}) => {
     }
 
     const saveLocalStorage = () => {
-        localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
+        localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting, editing]));
     }
 
     const loadLocalStorage = () => {
@@ -157,8 +155,8 @@ const MakePageV2 = ({history, userObj}) => {
         setNavi(temp[1]);
         setFoot(temp[2]);
         setSetting(temp[3]);
+        setEditing(temp[4]);
         setOpen(false);
-        // setEditing(true);
         setTimeout(() => {
             setLoading(false);
         },1000)
@@ -175,8 +173,7 @@ const MakePageV2 = ({history, userObj}) => {
     const FTA = () => {
         return(
             <>
-            { 
-            ( setting.fta.use ) &&
+            {  ( setting.fta.use ) &&
             <div className="fta__container">
                 <button className="fta-button" 
                     style={{
@@ -203,12 +200,12 @@ const MakePageV2 = ({history, userObj}) => {
     const saveTo = async () => {
         setLoading(true);
 
-        const urlDatas = await dbService
+        const savedPages = await dbService
             .collection("saved-page")
             .where("urlId", "==", setting.urlId)
             .get(); // uid를 creatorId로 줬었으니까.
         
-        let urlData = urlDatas.docs.map(doc => {
+        let savedPage = savedPages.docs.map(doc => {
             return({...doc.data(), id:doc.id})
         });
 
@@ -230,7 +227,7 @@ const MakePageV2 = ({history, userObj}) => {
                 return
             }
             // 업데이트 하기
-            await dbService.doc(`saved-page/${urlData[0].id}`).update(body);
+            await dbService.doc(`saved-page/${savedPage[0].id}`).update(body);
             // 자동저장 하던 걸 지운다.
             window.localStorage.removeItem("temp");
             
@@ -249,7 +246,7 @@ const MakePageV2 = ({history, userObj}) => {
             }else{
                 await dbService.collection("saved-page").add(body);
 
-                await dbService.collection("urlStores").add({urlId:body.setting.urlId});
+                await dbService.collection("urlStores").add({urlId:body.urlId});
 
                 // 자동저장 하던 걸 지운다.
                 window.localStorage.removeItem("temp");
@@ -276,7 +273,7 @@ const MakePageV2 = ({history, userObj}) => {
        <MyContext.Provider value={contextValue}>
             <Prompt 
                 when={true}
-                message="편집내용이 저장되지 않았습니다. 정말로 제작을 그만두시겠습니까?"
+                message="편집내용이 저장되지 않았을 수 있습니다. 정말로 제작을 그만두시겠습니까?"
             />
                <NavBarInMakePage 
                     history={history} userObj={userObj}
@@ -306,8 +303,8 @@ const MakePageV2 = ({history, userObj}) => {
                 <div className="make-left-landing" style={{width:`${full ? '100vw' : '72vw'}`}}>
                     <div className="scroll-container" 
                         style={{ 
-                            width:`${full ? '100vw' : isPhone ? '30vw' : '70vw'}`,
-                            // paddingBottom:`${full ? '0px' : '30px'}`
+                            width:`${full ? '100vw' : isPhone ? '26vw' : '70vw'}`,
+                            paddingBottom:`${full ? '0px' : '30px'}`
                         }}>
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
                         {(!full && !isPhone) && <div className="make-tab-preseen" onClick={() => setSecNum(52)}>

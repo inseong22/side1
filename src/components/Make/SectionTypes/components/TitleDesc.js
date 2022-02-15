@@ -22,7 +22,7 @@ function TitleDesc({content}) {
                             fontFamily:`${state.setting.font}`, 
                             color:`${content.title.color}`, 
                             fontSize:`${content.title.size/20}em`, 
-                            textAlign:`${content.title.align}`,
+                            textAlign:`${state.isPhone ? content.mobile.align : content.title.align}`,
                             resize:'none'
                         }}
                         spellcheck="false"
@@ -43,7 +43,7 @@ function TitleDesc({content}) {
                             color:`${content.desc.color}`, 
                             fontSize:`${content.desc.size/20}em`, 
                             // boxSizing:`border-box`, 
-                            textAlign:`${content.desc.align}`,
+                            textAlign:`${state.isPhone ? content.mobile.align : content.desc.align}`,
                             resize:'none'
                         }}
                         spellcheck="false"

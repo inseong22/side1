@@ -6,13 +6,7 @@ import ElementsTable from './tools/ElementsTable'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
-
-const layoutOptions = [
-    { label: '1', value: 1},
-    { label: '2', value: 2},
-    { label: '3', value: 3},
-    { label: '4', value: 4},
-]
+import LayoutRFG from './tools/LayoutRFG'
 
 const featureOptions = [
     { label: '아이콘', value: 'icon' },
@@ -28,10 +22,6 @@ const imageSizeOptions = [
     { label: 'Small', value: 50 },
     { label: 'Medium', value: 100 },
     { label: 'Large', value: 150 },
-]
-const alignOptions = [
-    { label: '왼쪽', value: 'start' },
-    { label: '중앙', value: 'center' },
 ]
 
 const imageSmallSizeOptions = [
@@ -80,9 +70,9 @@ function EditReviewSection({content, category}) {
         },
         {
             title:'리뷰 내용',
-            use:content.reviewText.use,
+            use:content.elementText.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].reviewText.use = !content.reviewText.use;
+                draft[state.secNum].elementText.use = !content.elementText.use;
             }))
         },
         {
@@ -101,15 +91,7 @@ function EditReviewSection({content, category}) {
                 return(
                     <>
                         <ElementsTable elements={elements} />
-                        <OpenCloseCustom title="레이아웃">
-                            <RadioCustom text="단 개수" options={layoutOptions} value={content.numOfReviews} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].layout = e;
-                                    draft[state.secNum].numOfReviews = e;
-                                }))} />
-                            <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].align = e;
-                            }))} />
-                        </OpenCloseCustom>
+                        <LayoutRFG content={content} />
                         <OpenCloseCustom title="이미지">
                             <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].element.type = e;
@@ -143,8 +125,8 @@ function EditReviewSection({content, category}) {
                             }
                         </OpenCloseCustom>
                         <OpenCloseCustom title="리뷰 내용">
-                            <ColorCustom text="색상" value={content.reviewText.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].reviewText.color = e;
+                            <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.color = e;
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="별점">

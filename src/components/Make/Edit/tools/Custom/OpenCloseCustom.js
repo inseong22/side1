@@ -9,7 +9,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Tooltip, ChakraProvider } from '@chakra-ui/react'
 import { InformationCircle } from '@styled-icons/ionicons-outline';
 import './OpenCloseCustom.css'
-import OnOffCustom from './OnOffCustom'
 // import Accordion from '@mui/material/Accordion';
 
 const Accordion = styled((props) => (
@@ -89,10 +88,13 @@ const OpenCloseCustom = (props) => {
             <ChakraProvider>
             <div className="accordion__title">
               <div className="title_text">
-              {props.title}
+                {props.title}
               </div> 
               {
-                props.use && <CustomSwitch use={props.use} onChange={props.onChange}/>
+                props.subtext && 
+                <div className="title_subtext">
+                  {props.subtext}
+                </div> 
               }
               {
                 props.tooltip && 

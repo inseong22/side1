@@ -15,6 +15,13 @@ const layout4Options = [
     {label: '3', value: 3},
     {label: '4', value: 4},
 ]
+
+const alignOptions = [
+    { label: '왼쪽', value: 'left' },
+    { label: '중앙', value: 'center' },
+    { label: '오른쪽', value: 'right' },
+]
+
 function Layout({content, version, foot, setFoot}) {
 
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -23,28 +30,70 @@ function Layout({content, version, foot, setFoot}) {
         switch(version){
             case 'main':
                 return(
-                    <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={(e, align, contAlign) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].layout = e;
-                        draft[state.secNum].title.align = align;
-                        draft[state.secNum].desc.align = align;
-                        draft[state.secNum].button.align = align;
-                        draft[state.secNum].contents.align= contAlign;
-                    }))} />
+                    <>
+                    {
+                        state.isPhone ? 
+                        <>
+                            <RadioCustom layout='on' version='two' options={layout4Options} value={content.mobile.layout} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].mobile.layout = e;
+                            }))} />
+                            <RadioCustom text="정렬" options={alignOptions} value={content.mobile.align} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].mobile.align = e;
+                            }))} />
+                        </>
+                        :
+                        <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={(e, align, contAlign) => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].layout = e;
+                            draft[state.secNum].title.align = align;
+                            draft[state.secNum].desc.align = align;
+                            draft[state.secNum].button.align = align;
+                            draft[state.secNum].contents.align= contAlign;
+                        }))} />
+                    }
+                    </>
                 )
             case 'detail':
                 return(
-                    <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={(e,align, contAlign) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].layout = e;
-                        draft[state.secNum].title.align = align;
-                        draft[state.secNum].desc.align = align;
-                        draft[state.secNum].contents.align= contAlign;
-                    }))} />
+                    <>
+                    {
+                        state.isPhone ? 
+                        <>
+                            <RadioCustom layout='on' version='two' options={layout4Options} value={content.mobile.layout} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].mobile.layout = e;
+                            }))} />
+                            <RadioCustom text="정렬" options={alignOptions} value={content.mobile.align} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].mobile.align = e;
+                            }))} />
+                        </>
+                        :
+                        <RadioCustom layout='on' version='main' options={layout4Options} value={content.layout} func={(e,align, contAlign) => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].layout = e;
+                            draft[state.secNum].title.align = align;
+                            draft[state.secNum].desc.align = align;
+                            draft[state.secNum].contents.align= contAlign;
+                        }))} />
+                    }
+                    </>
                 )
             case 'cta':
                 return(
-                    <RadioCustom layout='on' version='cta' options={layout3Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].layout = e;
-                    }))} />
+                    <>
+                    {
+                        state.isPhone ? 
+                        <>
+                            <RadioCustom layout='on' version='two' options={layout4Options} value={content.mobile.layout} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].mobile.layout = e;
+                            }))} />
+                            <RadioCustom text="정렬" options={alignOptions} value={content.mobile.align} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].mobile.align = e;
+                            }))} />
+                        </>
+                        :
+                        <RadioCustom layout='on' version='cta' options={layout4Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].layout = e;
+                        }))} />
+                    }
+                    </>
                 )
             case 'apply':
                 return(
@@ -80,7 +129,7 @@ function Layout({content, version, foot, setFoot}) {
     }
 
     return (
-        <OpenCloseCustom title="레이아웃">
+        <OpenCloseCustom title="레이아웃" subtext={state.isPhone ? '모바일' : 'PC'}>
             {ReturnLayout()}
         </OpenCloseCustom>
     )

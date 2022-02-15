@@ -78,7 +78,6 @@ function EdtiSetting({setting, setSetting, category}) {
         //     draft[state.secNum].animation.type = e;
         // }))
         setSetting({...setting, animation : e})
-        console.log(setting)
     }
 
     // 이미지 업로드

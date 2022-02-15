@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import './ReviewSection.css'
 import Rating from '@mui/material/Rating';
 import { motion } from 'framer-motion';
@@ -12,9 +12,16 @@ function ReviewSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnReviewCards = content.elements.map((item, index) => {
-        if(index < content.numOfReviews){
+        if(index < content.numOfElements){
             return(
-                <div key={index} className="feature__card" style={{alignItems: `${content.align}`, boxShadow:'', margin:`${ index === 0 ? '0px 15px 0px 0px' : index === content.elements.length - 1 ? '0px 0px 0px 15px' : '0px 15px' }`}}>
+                <div key={index} className="feature__card" 
+                    style={{
+                        alignItems: `${state.isPhone ? content.mobile.align : content.align}`,
+                        boxShadow : '', 
+                        margin : `${ state.isPhone ? '5px 5px' : '0px 15px' }`,
+                        height : `${state.isPhone ? '' : '100%'}`,
+                        width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`
+                    }}>
                     <Element content={content} item={item} index={index} key={index}/>
     
                     <div className="df-margin-big feature-title" style={{width:'100%'}}>
@@ -23,9 +30,9 @@ function ReviewSection({content, setting}) {
                             style={{
                                 width:'100%',
                                 resize:'none',
-                                textAlign:`${content.align}`,
+                                textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                 fontFamily:`${state.setting.smallFont}`,
-                                color:`${content.reviewText.color}`,
+                                color:`${content.elementText.color}`,
                             }}
                             value={item.title} 
                             onChange={e => action.setContents(produce(state.contents, draft => {
@@ -36,7 +43,10 @@ function ReviewSection({content, setting}) {
                     {
                         content.rating.use && 
                         <div className="df-margin">
-                            <div style={{width:'100%', textAlign:`${content.align}`}}>
+                            <div style={{
+                                width:'100%', 
+                                textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`
+                            }}>
                             <Rating
                                 value={item.rating} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {
@@ -51,16 +61,16 @@ function ReviewSection({content, setting}) {
                         </div>
                     }
                     {
-                        content.reviewText.use && 
+                        content.elementText.use && 
                         <div className="df-margin-big feature-desc" style={{width:'100%'}}>
                             <TextareaAutosize 
                                 className="text-input" 
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${content.align}`,
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                     fontFamily:`${state.setting.smallFont}`,
-                                    color:`${content.reviewText.color}`,
+                                    color:`${content.elementText.color}`,
                                 }}
                                 value={item.desc} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {
@@ -77,7 +87,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${content.align}`,
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                     color:`${content.writer.color}`,
                                     fontFamily:`${state.setting.smallFont}`,
                                 }}
@@ -99,7 +109,7 @@ function ReviewSection({content, setting}) {
                 
                 <TitleDesc content={content} />
 
-                <div className="features__container"> 
+                <div className="features__container" style={{flexWrap : `${state.isPhone ? 'wrap' : ''}`}}> 
                     {returnReviewCards}
                 </div>
 

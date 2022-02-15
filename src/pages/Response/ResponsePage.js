@@ -1,11 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import './ResponsePage.css';
 import {dbService} from '../../tools/fbase';
-import {authService} from '../../tools/fbase';
 import ReactGa from 'react-ga'
-import NavBarV2 from '../NavAndFooter/NavBarV2'
 import Footer from '../NavAndFooter/Footer'
-import { Table, Tag, Space } from 'antd';
 import MadeLandingCard from '../../components/Response/MadeLandingCard'
 import ResponseNavBar from '../../components/Response/ResponseNavBar'
 import ChromeTapBar from '../../components/Response/ChromeTapBar'
@@ -27,10 +24,6 @@ function ResponsePage({userObj, history}) {
     const [mylandings, setMylandings] = useState([]);
     const [published, setPublished] = useState([]);
     const [part, setPart] = useState(1);
-    const [myDatas, setMyDatas] = useState({
-        all_sessions:0,
-        all_pageViews:0
-    });
     const [nowChecking, setNowChecking] = useState(NOTCLICKED);
     
     useEffect(() => {

@@ -106,6 +106,25 @@ export function EditRadioLayout({content, options, value, onChange, version}){
                     </div>
                 </div>
             )
+        case 'two': 
+            return(
+                <div className="radio-container">
+                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(3)}>
+                    {value === 3 ? (
+                            <img src={Blay3W} />
+                        ):(
+                            <img src={Blay3G} />
+                        )}
+                    </div>
+                    <div className={value === 4 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(4)}>
+                    {value === 4 ? (
+                            <img src={Blay4W} />
+                        ):(
+                            <img src={Blay4G} />
+                        )}
+                    </div>
+                </div>
+            )
         case 'text':
             return (
                 <div className="radio-container">

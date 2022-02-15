@@ -115,15 +115,16 @@
   --section-main: 16px;
   --func-title: 15px;
   --func-subtitle: 14px;
+  --func-subtitle-mini: 12px;
   --small-text: 12px;
 
   --button-font-size : 13px;
   --input-font-size: 13px;
   --made-button-padding: 8px 8.5px;
 
-  --feature-title-size:1.2em;
-  --feature-desc-size:0.9em;
-  --feature-writer-size:0.8em;
+  --feature-title-size:1.1em;
+  --feature-desc-size:0.95em;
+  --feature-writer-size:0.85em;
 
 }
 

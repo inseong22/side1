@@ -13,16 +13,16 @@ function FeaturesSection({content, setting}) {
             <div key={index} className="feature__card" style={{boxShadow:'', margin:`${ index === 0 ? '0px 15px 0px 0px' : index === content.elements.length - 1 ? '0px 0px 0px 15px' : '0px 15px' }`}}>
                 <Element content={content} item={item} index={index} key={index}/>
                 {
-                    content.featureText.titleUse && 
+                    content.elementText.titleUse && 
                     <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                            <TextAuto className="text-input" value={item.title} color = {content.featureText.color} align = {content.featureText.align}
+                            <TextAuto className="text-input" value={item.title} color = {content.elementText.color} align = {content.elementText.align}
                             />
                     </div>
                 }
                 {
-                    content.featureText.descUse && 
+                    content.elementText.descUse && 
                     <div className="df-margin">
-                        <TextAuto small className="text-input"  value={item.desc} color = {content.featureText.color} align = {content.featureText.align}
+                        <TextAuto small className="text-input"  value={item.desc} color = {content.elementText.color} align = {content.elementText.align}
                         />
                     </div>
                 }

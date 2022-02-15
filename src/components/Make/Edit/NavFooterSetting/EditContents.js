@@ -7,6 +7,7 @@ import AddingSection from '../../Modal/AddingSection';
 import {CustomSwitch2} from '../tools/Custom/OnOffCustom'
 import './EditContents.css';
 import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
+import {DragIndicator} from '@styled-icons/material-outlined'
 // import PlusIcon from '../../../../tools/img/plusButton.png';
 
 const BCOLOR = 'rgba(230,230,230,0)'
@@ -51,7 +52,6 @@ function EditContents({navi, setNavi, foot, setFoot}) {
     }
 
     const deleteSection = (index) => {
-        console.log("index", index);
         if(index === 0){
             action.setContents([
                 ...state.contents.slice(1,state.contents.length)
@@ -123,36 +123,39 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                                                                     provided.draggableProps.style,
                                                                     )}>
                                                                         <div className="center-column hoverback one-contents__inner">
-                                                                            <div className="center-row">
-                                                                                <div className="left">
-                                                                                    <div className="content__name">
-                                                                                        {item.name}
+                                                                            {/* <div className="centera" style={{width:'5%'}}>
+                                                                                <DragIndicator size="30" />
+                                                                            </div> */}
+                                                                                <div className="center-row">
+                                                                                    <div className="left">
+                                                                                        <div className="content__name">
+                                                                                            {item.name}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="right">
+                                                                                        {optionButton(index)}
                                                                                     </div>
                                                                                 </div>
-                                                                                <div className="right">
-                                                                                    {optionButton(index)}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="center-row">
-                                                                                <div className="left" style={{width:'85%', textAlign:'left', color:'#555C67', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                                                                                    {item.title.text}
-                                                                                </div>
-                                                                                <div className="right">
-                                                                                    <div className="content__button cb-delete"
-                                                                                        onClick={() => {
-                                                                                            const yes = window.confirm("정말 삭제하시겠습니까?");
-                                                                                            if(yes){
-                                                                                                deleteSection(index);
-                                                                                            }
-                                                                                        } }>
-                                                                                        삭제
+                                                                                <div className="center-row">
+                                                                                    <div className="left" style={{width:'85%', textAlign:'left', color:'#555C67', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                                                                                        {item.title.text}
                                                                                     </div>
-                                                                                    <div className="content__button cb-duplicate"
-                                                                                        onClick={() => pasteThisSection(state.contents[index], index) }>
-                                                                                        복제
+                                                                                    <div className="right">
+                                                                                        <div className="content__button cb-delete"
+                                                                                            onClick={() => {
+                                                                                                const yes = window.confirm("정말 삭제하시겠습니까?");
+                                                                                                if(yes){
+                                                                                                    deleteSection(index);
+                                                                                                }
+                                                                                            } }>
+                                                                                            삭제
+                                                                                        </div>
+                                                                                        <div className="content__button cb-duplicate"
+                                                                                            onClick={() => pasteThisSection(state.contents[index], index) }>
+                                                                                            복제
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
                                                                         </div>   
                                                                 </div>
                                                                 {/* <div className="centera small-button__container">

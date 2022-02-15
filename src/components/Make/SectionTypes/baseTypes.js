@@ -42,6 +42,11 @@ const commons = {
     responsive:{
         mobile:true,
         pc:true,
+    },
+    mobile:{
+        align:'center',
+        layout:3,
+        contentSize:50,
     }
 }
 
@@ -204,8 +209,8 @@ export const base = [
         name:'특징',
         sectionTypeName:'FeaturesSection',
         align:'start',
-        numOfFeatures:3,
-        featureText:{
+        numOfElements:3,
+        elementText:{
             use:true,
             titleUse:true,
             descUse:true,
@@ -250,7 +255,7 @@ export const base = [
         name:'리뷰/추천',
         sectionTypeName:'ReviewSection',
         align:'start',
-        numOfReviews:3,
+        numOfElements:3,
         ratingColor:'red',
         rating:{
             use:true,
@@ -261,7 +266,7 @@ export const base = [
             use:true,
             color: '#000000',
         },
-        reviewText:{
+        elementText:{
             use:true,
             color: '#000000',
         },
@@ -354,12 +359,16 @@ export const base = [
             use:true,
             color:'#ffffff',
             shadow:false,
-            border:false,
+            borderRadius:0,
         },
         text:{
             use:true,
             color: '#000000',
             align: ''
+        },
+        elementText:{
+            align:'start',
+            color:'#000000'
         },
         elements:[
             {

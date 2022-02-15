@@ -7,17 +7,7 @@ import ColorCustom from '../tools/Custom/ColorCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import EditDesign from './tools/EditDesign'
-
-const alignOptions = [
-    { label: '왼쪽', value: 'start' },
-    { label: '중앙', value: 'center' },
-]
-const layoutOptions = [
-    { label: '2', value: 2},
-    { label: '3', value: 3},
-    { label: '4', value: 4},
-    { label: '5', value: 5},
-]
+import LayoutRFG from './tools/LayoutRFG'
 
 const featureOptions = [
     { label: '아이콘', value: 'icon' },
@@ -67,32 +57,12 @@ function EditFeaturesSection({content, category}) {
         },
         {
             title:'설명글',
-            use:content.featureText.use,
+            use:content.elementText.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].featureText.use = !content.featureText.use;
+                draft[state.secNum].elementText.use = !content.elementText.use;
             }))
         },
     ]
-
-    const backgroundColorOrImage = () => {
-        switch(content.backgroundType){
-            case 'color':
-                return(
-                        <>
-                            <ColorCustom text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].backgroundColor = e
-                            }))} />
-                        </>
-                )           
-            case 'image':
-                return(
-                    <div className='edit-element'>
-                    </div>
-                )
-            default:
-                return(<></>)
-        }
-    }
 
     const returnTable = () => {
         switch(category){
@@ -101,16 +71,7 @@ function EditFeaturesSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
-                        <OpenCloseCustom title="레이아웃">
-                        <RadioCustom text="단 개수" options={layoutOptions} value={content.numOfFeatures} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].layout = e;
-                                draft[state.secNum].numOfFeatures = e;
-                            }))} />
-                        <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].featureText.align = e;
-                            draft[state.secNum].align = e
-                        }))} />
-                        </OpenCloseCustom>
+                        <LayoutRFG content={content} />
                         <OpenCloseCustom title="이미지">
                             <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].element.type = e;
@@ -142,14 +103,14 @@ function EditFeaturesSection({content, category}) {
                             }
                         </OpenCloseCustom>
                         <OpenCloseCustom title="설명글">
-                            <ColorCustom text="색상" value={content.featureText.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].featureText.color = e;
+                            <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.color = e;
                             }))} />
-                            <OnOffCustom text="특징 제목" value={content.featureText.titleUse} func={(e) => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].featureText.titleUse = !content.featureText.titleUse;
+                            <OnOffCustom text="특징 제목" value={content.elementText.titleUse} func={(e) => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.titleUse = !content.elementText.titleUse;
                             }))} />
-                            <OnOffCustom text="특징 본문" value={content.featureText.descUse} func={(e) => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].featureText.descUse = !content.featureText.descUse;
+                            <OnOffCustom text="특징 본문" value={content.elementText.descUse} func={(e) => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.descUse = !content.elementText.descUse;
                             }))} />
                         </OpenCloseCustom>
                     </div>

@@ -35,7 +35,6 @@ function MainPage({history}) {
     }
 
     const scrollDown = async () => {
-        console.log(gadata);
         for (var i = 0; i < gadata.length; i++) {
             await dbService.collection('gadata').add(gadata[i])
             //Do something
