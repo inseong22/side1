@@ -28,7 +28,7 @@ function FeaturesSection({content, setting}) {
                         <TextAuto className="text-input" 
                             value={item.title} 
                             color = {content.elementText.color} 
-                            align = {state.isPhone ? content.mobile.align : content.elementText.align}
+                            align = {state.isPhone ? content.mobile.align : content.align}
                             onChange={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elements[index].title = e.currentTarget.value;
                             }))}  
@@ -41,7 +41,7 @@ function FeaturesSection({content, setting}) {
                         <TextAuto small className="text-input"  
                             value={item.desc} 
                             color = {content.elementText.color} 
-                            align = {state.isPhone ? content.mobile.align : content.elementText.align}
+                            align = {state.isPhone ? content.mobile.align : content.align}
                             onChange={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elements[index].desc = e.currentTarget.value;
                             }))}  

@@ -10,14 +10,14 @@ const commons = {
     title:{
         use:true,
         text: '노코드 랜딩페이지 제작 툴',
-        align: 'left',
+        align: 'start',
         size: 32,
         color: '#000000'
     },
     desc:{
         use:true,
         text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해 보세요!',
-        align: 'left',
+        align: 'start',
         size: 16,
         color: '#000000'
     },
@@ -119,6 +119,7 @@ const element = {
     iconBorder:5,
     imageBorder:5,
     size:50,
+    color:'#ffffff',
 }
 
 const button = {
@@ -349,6 +350,7 @@ export const base = [
         element:element,
         numOfElements: 3,
         name:'갤러리',
+        align:'start',
         sectionTypeName:'GallerySection',
         galleryImg:{
             use:true,
@@ -367,7 +369,6 @@ export const base = [
             align: ''
         },
         elementText:{
-            align:'start',
             color:'#000000'
         },
         elements:[
@@ -514,7 +515,7 @@ export const defaults = {
             use:true,
             text:'',
             color:'#000000',
-            align: 'left',
+            align: 'start',
             size: 15,
         },
         icon:{

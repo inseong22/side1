@@ -226,7 +226,7 @@ const MakePageV2 = ({history, userObj}) => {
         });
 
         if(editing){
-            if(urlData.length < 1 ){
+            if(savedPage.length < 1 ){
                 alert("url은 수정하실 수 없습니다. 새로 제작해 주세요.")
                 setLoading(false);
                 return
@@ -256,7 +256,7 @@ const MakePageV2 = ({history, userObj}) => {
             if(setting.urlId === ''){
                 alert("url을 설정해야 합니다.");
                 setLoading(false);
-            }else if(urlData.length > 0){
+            }else if(savedPage.length > 0){
                 alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
                 setLoading(false);
             }else{

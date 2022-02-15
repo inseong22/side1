@@ -47,7 +47,6 @@
 }
 
 .make-nav-button:hover{
-    border-radius: 0px;
     background-color:var(--main-light-gray);
     box-shadow: var(--default-shadow-01);
 }

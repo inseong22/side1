@@ -112,7 +112,7 @@
   --main-light-gray-02:#F2F6FA;
 
   --section-top: 22px;
-  --section-main: 16px;
+  --section-main: 15px;
   --func-title: 15px;
   --func-subtitle: 14px;
   --func-subtitle-mini: 12px;
@@ -191,7 +191,6 @@
 }
 
 .default-button-02:hover{
-  border-radius: 0px;
   box-shadow:var(--default-shadow-01);
 }
 

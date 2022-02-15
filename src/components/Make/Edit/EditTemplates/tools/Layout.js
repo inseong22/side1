@@ -17,7 +17,7 @@ const layout4Options = [
 ]
 
 const alignOptions = [
-    { label: '왼쪽', value: 'left' },
+    { label: '왼쪽', value: 'start' },
     { label: '중앙', value: 'center' },
     { label: '오른쪽', value: 'right' },
 ]

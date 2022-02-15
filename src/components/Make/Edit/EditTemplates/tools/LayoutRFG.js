@@ -32,6 +32,8 @@ function LayoutRFG({content}) {
                     }))} />
                 <RadioCustom text="정렬" options={alignOptions} value={content.mobile.align} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].mobile.align = e;
+                    draft[state.secNum].title.align = e;
+                    draft[state.secNum].desc.align = e;
                 }))} />
                 </>
                 :
@@ -41,8 +43,9 @@ function LayoutRFG({content}) {
                         draft[state.secNum].numOfElements = e;
                     }))} />
                 <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].elementText.align = e;
                     draft[state.secNum].align = e
+                    draft[state.secNum].title.align = e;
+                    draft[state.secNum].desc.align = e;
                 }))} />
                 </>
             }

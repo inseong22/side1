@@ -91,7 +91,6 @@ function Element({content, item, index, gallery}) {
             <PopoverHeader>아이콘을 선택하세요.</PopoverHeader>
             <PopoverBody>
                 <IconTable func={ e => action.setContents(produce(state.contents, draft => {
-                    console.log("아이콘이 왜 안되지?", e)
                     draft[state.secNum].elements[index].icon = e;
                 })) } handleClose={() => handleClose(index)}/>
             </PopoverBody>

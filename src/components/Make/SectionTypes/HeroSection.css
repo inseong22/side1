@@ -46,8 +46,8 @@
 }
 .text__container{
     display: flex;
-    /* justify-content: c; */
-    /* align-items: center; */
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     width:100%;
 }

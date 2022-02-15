@@ -46,16 +46,11 @@
 }
 
 .fta-button{
-<<<<<<< HEAD
-    font-size:var(--feature-desc-size);
-    padding-top: 10px;
-=======
     display: flex;
     align-items : center;
     justify-content :center;
     font-size:var(--feature-title-size);
     padding:5px;
->>>>>>> b598e255a (Design : Mobile Displays)
 }
 
 .font-done-button{

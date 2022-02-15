@@ -35,8 +35,10 @@ const NavBarInMakePage = (props) => {
     };
 
     const moveToMain = () => {
-        
-        window.location.replace('/');
+        window.open(
+            'https://surfee.co.kr',
+            '_blank' // <- This is what makes it open in a new window.
+        );
     }
     
     const onSubmit = async () => {

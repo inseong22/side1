@@ -27,7 +27,7 @@ const imageSizeOptions = [
     { label: 'Large', value: 270 },
 ]
 const alignOptions = [
-    { label: '왼쪽', value: 'left' },
+    { label: '왼쪽', value: 'start' },
     { label: '중앙', value: 'center' },
 ]
 
@@ -87,7 +87,7 @@ function EditGallerySection({content, category}) {
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title='카드'>
-                            <RadioCustom text="프레임" button value={content.card.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                            <RadioCustom text="프레임" value={content.card.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].card.borderRadius = e;
                                 }))} />
                             <ColorCustom text="색상" value={content.card.color} func={e => action.setContents(produce(state.contents, draft => {

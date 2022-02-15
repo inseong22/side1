@@ -8,7 +8,7 @@ function TitleDesc({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return (
-        <div className="title-desc__container" onClick={() => action.setCategory(1)}>
+        <div className="title-desc__container">
             {
                 content.title.use &&
                 <div style={{width:'100%'}}>

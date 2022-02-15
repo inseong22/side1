@@ -7,7 +7,7 @@ import TextSizeCustom from '../../tools/func/TextSizeCustom'
 import RadioCustom from '../../tools/Custom/RadioCustom'
 
 const alignOptions = [
-    { label: '왼쪽', value: 'left' },
+    { label: '왼쪽', value: 'start' },
     { label: '중앙', value: 'center' },
 ]
 

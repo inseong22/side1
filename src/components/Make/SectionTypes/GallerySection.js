@@ -77,7 +77,7 @@ function GallerySection({content,setting}) {
                                    <TextAuto small className="text-input" 
                                         value={item.text} 
                                         color = {content.text.color} 
-                                        align = {state.isPhone ? content.mobile.align : content.elementText.align}
+                                        align = {state.isPhone ? content.mobile.align : content.align}
                                         onChange={e => action.setContents(produce(state.contents, draft => {
                                             draft[state.secNum].elements[index].text = e.currentTarget.value;
                                         }))}  

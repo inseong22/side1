@@ -79,6 +79,7 @@ function EditFeaturesSection({content, category}) {
                             {
                                 content.element.type === 'icon' && 
                                 <>
+                                
                                 <ColorCustom text="색상" value={content.element.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].element.backgroundColor = e;
                                 }))} />
