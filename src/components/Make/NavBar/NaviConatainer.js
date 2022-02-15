@@ -10,12 +10,18 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
 
     return (
         <>
-        {navi.logo.use && 
-            <div className="make-nav-logoc" style={{height:`${navi.height}px`, justifyContent:`${navi.logo.align}`, paddingLeft:`${state.isPhone ? '10px' : '30px'}`}}>
-                {navi.logo.image.use && 
-                    <div className="make-nav-logo-image">
+        {!navi.logo.image.use && !navi.logo.text.use && (
+            <div className="make-nav-logoc" style={{height:`${navi.height}px`, justifyContent:`${navi.logo.align}`}}> 
+                <div className="default-logo" style={{fontFamily:`${state.setting.font}`}}>{state.setting.urlId}</div>
+            </div>
+        )}
+        {navi.logo.use &&  
+            <div className="make-nav-logoc" style={{height:`${navi.height}px`, justifyContent:`${navi.logo.align}`}}>
+                {navi.logo.image.use &&  
+                    (<div className="make-nav-logo-image">
                         <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
-                    </div>}
+                    </div>)
+                }
                 {navi.logo.text.use && 
                     <div className="make-nav-logo-image" style={{
                         paddingLeft:`${navi.logo.image.use ? '1px' : '8px'}`
@@ -29,6 +35,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                                 }))
                             }}
                             style={{
+                                zIndex: 5,
                                 fontSize:`${navi.logo.text.fontSize}px`, 
                                 color:`${navi.logo.text.color}`, 
                                 fontFamily:`${state.setting.font}`,

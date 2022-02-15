@@ -52,7 +52,7 @@ function SliderCustom({top, text, func, value, max}) {
             </ChakraProvider>
           </div>
             {
-            text && <div className="slider-small-command" style={{marginLeft:'65px'}}>{text}의 세로 길이를 조절해주세요.</div>
+            text && <div className="slider-small-command" style={{marginLeft:'65px'}}>{text}의 세로 길이를 조절해 주세요.</div>
             } 
         </div>
       </div>

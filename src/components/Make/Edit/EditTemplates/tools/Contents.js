@@ -240,7 +240,7 @@ function Contents({content}) {
                     <>
                     <AddContentVideo text="동영상" value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
                     <div style={{marginBottom: '-20px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="320"/>
                     </>
                 )
             case 'youtube':
@@ -263,7 +263,7 @@ function Contents({content}) {
                         유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
                     </div>
                     <div style={{marginTop: '10px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="320"/>
                     </>
                 )
         }

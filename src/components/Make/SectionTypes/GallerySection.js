@@ -67,7 +67,7 @@ function GallerySection({content,setting}) {
 
     return (
         <motion.div className="template"
-            data-aos={setting.animation} aos-duration="4000">
+            data-aos={setting.animation} aos-duration="2000">
 
             <TitleDesc content={content} />
 

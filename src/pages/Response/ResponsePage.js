@@ -227,10 +227,10 @@ function ResponsePage({userObj, history}) {
                 <div className="get-all-container">
                     <div className="get-up-container">
                         <div className="get-up-title">
-                            {userObj.displayName} 님의 랜딩페이지를 관리해보세요 :)
+                            {userObj.displayName} 님의 랜딩페이지를 관리해 보세요 :)
                             {
                                 mylandings.length > 2 &&
-                               <span className="response-subtext">현재 버전에서 랜딩페이지는 최대 3개까지 만들 수 있습니다. 새로운 페이지를 만들고 싶다면 기존의 페이지를 삭제해주세요.</span>
+                               <span className="response-subtext">현재 버전에서 랜딩페이지는 최대 3개까지 만들 수 있습니다. 새로운 페이지를 만들고 싶다면 기존의 페이지를 삭제해 주세요.</span>
                         }
                         </div>
                         <div className="get__mylandings-cantainer">
@@ -333,7 +333,7 @@ function ResponsePage({userObj, history}) {
                         {
                             mylandings.length === 0 ?
                             <div>
-                                1분만에 새로운 랜딩페이지를 만들고 유저의 반응을 테스트 해보세요!
+                                1분만에 새로운 랜딩페이지를 만들고 유저의 반응을 테스트 해 보세요!
                             </div>
                             :
                             <div>

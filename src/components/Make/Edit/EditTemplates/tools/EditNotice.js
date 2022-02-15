@@ -12,9 +12,9 @@ const alignOptions = [
 ]
 
 const sizeOptions = [
-    { label: 'small', value: 50 },
-    { label: 'medium', value: 75 },
-    { label: 'large', value: 100 },
+    { label: 'Small', value: 50 },
+    { label: 'Medium', value: 75 },
+    { label: 'Large', value: 100 },
 ]
 
 

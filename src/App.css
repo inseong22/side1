@@ -97,6 +97,7 @@
   --main-hover-color: #b3b0f5;
 
   --default-shadow-01: 2px 4px 20px #E8F0F9;
+  --non-hover-button-shadow: 2px 4px 20px #E5E5E5;
   --br-01: 25px;
   --br-02:32px;
   --main-gradient:linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
@@ -176,7 +177,7 @@
   align-items: center;
   justify-content:center;
   background:var(--main-gradient);
-  box-shadow: var(--main-shadow-01);
+  box-shadow: var(--non-hover-button-shadow);
   border-radius: var(--br-02);
   color:white;
   font-size: 15px;
@@ -186,6 +187,11 @@
   cursor: pointer;
   font-family: Noto Sans KR;
   font-weight: normal;
+}
+
+.default-button-02:hover{
+  border-radius: 0px;
+  box-shadow:var(--default-shadow-01);
 }
 
 .center-row{

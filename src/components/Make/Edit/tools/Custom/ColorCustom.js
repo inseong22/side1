@@ -70,7 +70,11 @@ export function EditColor({onChange, value}) {
                 </PopoverTrigger>
                 <PopoverContent>
                     <PopoverArrow />
-                    <PopoverHeader>색상을 선택하세요.</PopoverHeader>
+                    <PopoverHeader>
+                        <div className="color-close" onClick={handleClick}>
+                                x
+                        </div>
+                    </PopoverHeader>
                     <PopoverBody>
                         <div className="center-column">
                             <ColorPicker

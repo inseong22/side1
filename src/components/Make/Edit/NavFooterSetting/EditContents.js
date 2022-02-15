@@ -84,7 +84,7 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                     <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
                         <div className="left">
                             <div className="content__name">
-                                네비 바
+                                내비게이션 바
                             </div>
                             <div style={{paddingLeft:'7%'}}>
                                 <CustomSwitch2 value={navi.use} onChange={e => setNavi(produce(navi, draft => {

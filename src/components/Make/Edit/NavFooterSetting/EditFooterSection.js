@@ -21,9 +21,9 @@ const alignOptions = [
 ]
 
 const sizeOptions = [
-    { label: 'S', value: 10 },
-    { label: 'M', value: 15 },
-    { label: 'L', value: 20 },   
+    { label: 'Small', value: 10 },
+    { label: 'Medium', value: 15 },
+    { label: 'Large', value: 20 },   
 ]
 const layoutOptions = [
     { label: '1', value: 1 },
@@ -115,28 +115,28 @@ function EditFooterSection({foot, setFoot, category}) {
                         }))}} />
                         <InputCustom text='페이스북' value={foot.icon.facebook} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.facebook = e;
-                        }))}} placeholder='링크를 입력해주세요.'/>
+                        }))}} placeholder='링크를 입력해 주세요.'/>
                        <InputCustom text='인스타그램' value={foot.icon.instagram} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.instagram = e;
-                        }))}} placeholder='링크를 입력해주세요.'/>
+                        }))}} placeholder='링크를 입력해 주세요.'/>
                         <InputCustom text='네이버' value={foot.icon.naver} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.naver = e;
-                        }))}} placeholder='링크를 입력해주세요.'/>
+                        }))}} placeholder='링크를 입력해 주세요.'/>
                         <InputCustom text='노션' value={foot.icon.notion} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.notion = e;
-                        }))}} placeholder='링크를 입력해주세요.'/>
+                        }))}} placeholder='링크를 입력해 주세요.'/>
                         <InputCustom text='메일' value={foot.icon.mail} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.mail = e;
-                        }))}} placeholder='링크를 입력해주세요.'/>
+                        }))}} placeholder='링크를 입력해 주세요.'/>
                         <InputCustom text='카카오톡' value={foot.icon.kakaotalk} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.kakaotalk = e;
-                        }))}} placeholder='링크를 입력해주세요.'/>
+                        }))}} placeholder='링크를 입력해 주세요.'/>
                         <InputCustom text='트위터' value={foot.icon.twitter} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.twitter = e;
-                        }))}} placeholder='링크를 입력해주세요.'/>
+                        }))}} placeholder='링크를 입력해 주세요.'/>
                         <InputCustom text='유튜브' value={foot.icon.youtube} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.youtube = e;
-                        }))}} placeholder='링크를 입력해주세요.'/>
+                        }))}} placeholder='링크를 입력해 주세요.'/>
                     </OpenCloseCustom>
                     <OpenCloseCustom title="저작권표시">
                         <div className="center-column">

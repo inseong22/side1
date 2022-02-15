@@ -214,7 +214,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
 
     const nextAndSetTemplates = async (e) => {
         if(type === ""){
-            alert("위의 보기 중 한가지를 선택해주세요.");
+            alert("위의 보기 중 한가지를 선택해 주세요.");
             return
         }else{
             setCnum(cnum + 1);
@@ -223,7 +223,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
 
     const nextAndSetTemplate = async (e) => {
         if(device === ""){
-            alert("위의 보기 중 한가지를 선택해주세요.");
+            alert("위의 보기 중 한가지를 선택해 주세요.");
             return
         }else{
             setCnum(cnum + 1);
@@ -232,7 +232,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
 
     const nextAndSetFont = async e => {
         if(font === ''){
-            alert("위의 보기 중 한가지를 선택해주세요.");
+            alert("위의 보기 중 한가지를 선택해 주세요.");
             return
         }else{
             setCnum(cnum + 1);
@@ -250,10 +250,10 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
         });
 
         if(setting.urlId === ''){
-            alert("URL을 입력해주세요. 이후 페이지에서 수정가능합니다.");
+            alert("URL을 입력해 주세요. 이후 페이지에서 수정가능합니다.");
             return
         }else if(urlData.length > 0){
-            alert("이미 존재하는 url입니다. 다른 url을 사용해주세요.");
+            alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
             return;
         }else{
 
@@ -296,7 +296,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                 }))} />
                         {/* </form> */}
                         <div className="modal-mini-text">
-                            수정가능하니 편하게 정해주세요 :)
+                            수정가능하니 편하게 정해 주세요 :)
                         </div>
                         <div className="modal-button-container">
                             <div className="modal-move-button" 
@@ -382,7 +382,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                             <div className="modal-row" style={{flexWrap:'nowrap'}}>
                             <div className="modal-column">
                                 <div>
-                                    폰트를 선택해주세요.
+                                    폰트를 선택해 주세요.
                                 </div>
                                 <OverflowScrolling className="font-selections__container">
                                     {fontList.map((item, index) => {
@@ -408,7 +408,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                             </div>
                             <div className="modal-column">
                                 <div>
-                                    색상을 선택해주세요.
+                                    색상을 선택해 주세요.
                                 </div>
                                 <OverflowScrolling className="font-selections__container">
                                     {colorList.map((item, index) => {
@@ -444,7 +444,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                 return(
                     <div className="modal-flex-column">
                         <div className="modal-title">
-                            마지막으로, <span style={{color:'#6C63FF'}}>{navi.title}</span> 랜딩페이지의 URL을 설정해주세요.                            
+                            마지막으로, <span style={{color:'#6C63FF'}}>{navi.title}</span> 랜딩페이지의 URL을 설정해 주세요.                            
                         </div>
                         <div className="modal-main-card">
                             <div className="modal-title" style={{fontSize:'25px'}}>
@@ -454,7 +454,7 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                 <div>
                                     - 영문과 숫자만 사용 가능합니다.<br/>
                                     - 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.<br/>
-                                    - 수정 가능하니 편하게 설정해주세요 :)<br/>
+                                    - 수정 가능하니 편하게 설정해 주세요 :)<br/>
                                 </div>
                             </div>
                             <div className="modal-button-container">

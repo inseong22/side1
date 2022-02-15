@@ -12,6 +12,8 @@ import TextSizeCustom from '../tools/func/TextSizeCustom'
 import BoxCustom from '../tools/Custom/BoxCustom'
 import produce from 'immer';
 import AddContentImg from '../tools/func/FuncContentImg'
+import {Phone} from '@styled-icons/bootstrap'
+import {Desktop} from '@styled-icons/fa-solid'
 
 const logoOptions = [
     { label: '로고 이미지', value: 'logo' },
@@ -47,13 +49,6 @@ function EditNaviSection({navi, setNavi, category}) {
             use:navi.button.use,
             func:() => setNavi(produce(navi, draft => {
                 draft.button.use = !navi.button.use;
-            }))
-        },
-        {
-            title:'앱 다운로드',
-            use:navi.appButton.use,
-            func:() => setNavi(produce(navi, draft => {
-                draft.appButton.use = !navi.appButton.use;
             }))
         },
     ]
@@ -100,7 +95,7 @@ function EditNaviSection({navi, setNavi, category}) {
                             <>
                                 <AddContentImg text="로고" value={navi.logo.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                                 <div style={{marginTop: '-20px'}}/>
-                                <SliderCustom text="로고 사이즈" subtext="이미지의 세로 길이를 조절해주세요." func={e => setNavi(produce(navi, draft => {
+                                <SliderCustom text="로고 사이즈" max='80' subtext="이미지의 세로 길이를 조절해 주세요." func={e => setNavi(produce(navi, draft => {
                                     draft.logo.image.width = e;
                                 }))} />
                                 <div style={{marginBottom: '20px'}}/>
@@ -130,7 +125,7 @@ function EditNaviSection({navi, setNavi, category}) {
                         }))} />
                         {
                             navi.button.cta.use && 
-                                <InputCustom placeholder="연결하고 싶은 URL을 입력해주세요." value={navi.button.cta.link} func={(e) => setNavi(produce(navi, draft => {
+                                <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요." value={navi.button.cta.link} func={(e) => setNavi(produce(navi, draft => {
                                     draft.button.cta.link = e
                                 }))} />
                         }
@@ -141,7 +136,7 @@ function EditNaviSection({navi, setNavi, category}) {
 
                         {
                             navi.button.ghost.use && 
-                                <InputCustom placeholder="연결하고 싶은 URL을 입력해주세요." value={navi.button.ghost.link} func={(e) => setNavi(produce(navi, draft => {
+                                <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요." value={navi.button.ghost.link} func={(e) => setNavi(produce(navi, draft => {
                                     draft.button.ghost.link = e
                                 }))} />
                         }
@@ -180,7 +175,50 @@ function EditNaviSection({navi, setNavi, category}) {
                 <OpenCloseCustom title="높이">
                     <SliderCustom text="높이 조정" value={navi.height} func={e => setNavi({...navi, height:e})}/>
                 </OpenCloseCustom>
-                <ResponsiveCustom />
+                <BoxCustom title="반응형">
+                <div className="edit-element">
+                    <div className="edit-element__one" style={{flexDirection: 'column'}}>
+                        <div className="edit-element__left">반응형</div> 
+                        <div className="radio-container" style={{justifyContent:'center'}}>
+                            <div className={navi.responsive.pc ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => setNavi(produce(navi, draft => {
+                                draft.responsive.pc = !navi.responsive.pc
+                            }))}>
+                                <Desktop size="30"/>
+                                <div className="radio-shape-text">
+                                    PC
+                                </div>
+                            </div>
+                            <div className={navi.responsive.mobile ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => setNavi(produce(navi, draft => {
+                                draft.responsive.mobile = !navi.responsive.mobile
+                            }))}>
+                                <Phone size="30"/>
+                                <div className="radio-shape-text">
+                                    모바일
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{marginTop:'8px'}}>
+                            {
+                                !navi.responsive.pc && !navi.responsive.mobile ? 
+                                <div>
+                                    이 섹션은 유저에게 보이지 않습니다.
+                                </div>
+                                :
+                                !navi.responsive.pc ?
+                                <div>
+                                    이 섹션은 PC에서는 보이지 않습니다.
+                                </div>
+                                :
+                                !navi.responsive.mobile ?
+                                <div>
+                                    이 섹션은 모바일에서는 보이지 않습니다.
+                                </div>
+                                :<></>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </BoxCustom>
             </div>
             </>
             }

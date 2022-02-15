@@ -43,11 +43,11 @@ function RegisterPage({history, isLoggedIn}) {
             console.log(data)
         } catch (err){
             if(err.code === "auth/email-already-in-use"){
-                alert("이미 존재하는 아이디입니다. 로그인 해주세요.");
+                alert("이미 존재하는 아이디입니다. 로그인 해 주세요.");
                 history.push('/#/login');
                 history.go();
             }else if(err.code === "auth/invalid-email"){
-                alert("이메일 양식에 맞게 작성해주세요.");
+                alert("이메일 양식에 맞게 작성해 주세요.");
             }else{
                 alert("옳바르지 않은 회원가입 시도입니다.");
             }
@@ -95,14 +95,14 @@ function RegisterPage({history, isLoggedIn}) {
                 <form className="form-container" onSubmit={e => submitInfo(e)}>
                     <input 
                         type="text" 
-                        placeholder="이름을 입력해주세요." 
+                        placeholder="이름을 입력해 주세요." 
                         required
                         value={name}   
                         onChange={e => setName(e.currentTarget.value)}
                     />
                     <input  
                         type="text" 
-                        placeholder="직업을 입력해주세요." 
+                        placeholder="직업을 입력해 주세요." 
                         required
                         value={job} 
                         onChange={e => setJob(e.currentTarget.value)}
@@ -129,7 +129,7 @@ function RegisterPage({history, isLoggedIn}) {
                         <Input 
                             type="text" 
                             className="login-input"
-                            placeholder="아이디를 입력해주세요." 
+                            placeholder="아이디를 입력해 주세요." 
                             required
                             value={id}   
                             onChange={e => setId(e.currentTarget.value)}
@@ -140,7 +140,7 @@ function RegisterPage({history, isLoggedIn}) {
                         <Input  
                             type="password" 
                             className="login-input"
-                            placeholder="비밀번호를 입력해주세요." 
+                            placeholder="비밀번호를 입력해 주세요." 
                             required
                             value={password} 
                             onChange={e => setPassword(e.currentTarget.value)}

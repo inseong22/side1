@@ -9,7 +9,6 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import InputCustom from '../tools/Custom/InputCustom'
 import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
-
 import Layout from './tools/Layout'
 import Contents from './tools/Contents'
 import AddGhostButton from './tools/AddGhostButton'
@@ -64,10 +63,9 @@ function EditHeroSection({content, category}) {
         },
         {
             title: '버튼',
-            use:content.button.ctaUse || content.button.ghostUse,
+            use:content.button.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].button.ctaUse = !content.button.ctaUse;
-                draft[state.secNum].button.ghostUse = !content.button.ghostUse;
+                draft[state.secNum].button.use = !content.button.use;
             }))
         },
         {
@@ -78,6 +76,7 @@ function EditHeroSection({content, category}) {
             }))
         },
     ]
+
     const changeAlignOption = e => {
         action.setContents(produce(state.contents, draft => {
             if (draft[state.secNum].button.align == '0')
@@ -93,11 +92,6 @@ function EditHeroSection({content, category}) {
         }))
     }
 
-    const changeLayoutOption = e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].layout = e
-        }))
-    }
 
     // 버튼 관련
     const ctaOpen = () => {
@@ -120,7 +114,7 @@ function EditHeroSection({content, category}) {
             case 'link':
                 return(
                     <>
-                    <InputCustom placeholder="연결하고 싶은 URL을 선택해주세요" value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
+                    <InputCustom placeholder="연결하고 싶은 URL을 선택해 주세요" value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.ctaLink = e
                     }))} />
                     <div className="mid-command">입력 후 엔터를 누르세요.</div>
@@ -177,7 +171,7 @@ function EditHeroSection({content, category}) {
                     <Layout content={content} version='main' />
                     <Contents content={content} />
                     <OpenCloseCustom title="버튼">
-                        <RadioCustom options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
+                        <RadioCustom content={content} options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
                         <AddCtaButton content={content} num={1} />
                         <AddGhostButton content={content} num={1} />
                     </OpenCloseCustom>

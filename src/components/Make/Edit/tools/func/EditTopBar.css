@@ -1,7 +1,6 @@
 
 
 .edit__top-bar{
-    /* background-color:#6B63F7; */
     padding:5px 15px 0px 15px;
     width:100%;
     box-sizing:border-box;
@@ -9,13 +8,13 @@
     flex-direction: row;
     justify-content :start;
     align-items :center;
-    /* border-bottom: 1px solid var(--main-light-gray); */
 }
 
 .edit-radios{
     display: flex;
     padding:3px;
     margin-left:3px;
+    margin-right: 10px;
     cursor:pointer;
     font-size: var(--section-top);
     color:var(--main-gray);
