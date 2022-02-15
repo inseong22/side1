@@ -15,24 +15,16 @@ import Layout from '../EditTemplates/tools/Layout'
 
 import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
 
-const iconsList = [
-    { value: 'facebook', label: `페이스북` , link:''},
-    { value: 'instagram', label: "인스타그램" , link:''},
-    { value: 'website', label: "웹사이트" , link:''},
-    { value: 'mail', label: "메일", link:''},
-    { value: 'youtube', label: "유튜브", link:''},
-    { value: 'twitter', label: "트위터" , link:''},
-    { value: 'appstore', label: "카카오톡" , link:''},
-    { value: 'playstore', label: "플레이스토어" , link:''},
-    { value: 'notion', label: "노션" , link:''},
-    { value: 'naver', label: "네이버" , link:''},
-]
-
 const alignOptions = [
     { label: '왼쪽', value: 'left' },
     { label: '중앙', value: 'center' },
 ]
 
+const sizeOptions = [
+    { label: 'S', value: 10 },
+    { label: 'M', value: 15 },
+    { label: 'L', value: 20 },   
+]
 const layoutOptions = [
     { label: '1', value: 1 },
     { label: '2', value: 2 },
@@ -113,29 +105,40 @@ function EditFooterSection({foot, setFoot, category}) {
                         <RadioCustom text="정렬" options={alignOptions} value={foot.text.align} func={e => setFoot(produce(foot, draft => {
                             draft.text.align = e;
                         }))} />
-                        <TextSizeCustom text="크기" desc value={foot.text.size} func={e => setFoot(produce(foot, draft => {
+                        <TextSizeCustom text="크기" options={sizeOptions} value={foot.text.size} func={e => setFoot(produce(foot, draft => {
                             draft.text.size = e;
                         }))} />
                     </OpenCloseCustom>
                     <OpenCloseCustom title="소셜 아이콘">
-                        <OnOffCustom text="소셜 아이콘" value={foot.icon.use} func={e => setFoot(produce(foot, draft => {
-                            draft.icon.use = !foot.icon.use;
-                        }))} />
                         <ColorCustom text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {
                             draft.icon.color = e;
                         }))}} />
-                        {
-                            iconsList.map((item, index) => {
-                                return(
-                                    <InputCustom text={item.label} value={"w"} func={e => {}} placeholder="링크를 입력해주세요." />
-                                )
-                            })
-                        }
+                        <InputCustom text='페이스북' value={foot.icon.facebook} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.facebook = e;
+                        }))}} placeholder='링크를 입력해주세요.'/>
+                       <InputCustom text='인스타그램' value={foot.icon.instagram} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.instagram = e;
+                        }))}} placeholder='링크를 입력해주세요.'/>
+                        <InputCustom text='네이버' value={foot.icon.naver} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.naver = e;
+                        }))}} placeholder='링크를 입력해주세요.'/>
+                        <InputCustom text='노션' value={foot.icon.notion} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.notion = e;
+                        }))}} placeholder='링크를 입력해주세요.'/>
+                        <InputCustom text='메일' value={foot.icon.mail} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.mail = e;
+                        }))}} placeholder='링크를 입력해주세요.'/>
+                        <InputCustom text='카카오톡' value={foot.icon.kakaotalk} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.kakaotalk = e;
+                        }))}} placeholder='링크를 입력해주세요.'/>
+                        <InputCustom text='트위터' value={foot.icon.twitter} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.twitter = e;
+                        }))}} placeholder='링크를 입력해주세요.'/>
+                        <InputCustom text='유튜브' value={foot.icon.youtube} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.youtube = e;
+                        }))}} placeholder='링크를 입력해주세요.'/>
                     </OpenCloseCustom>
                     <OpenCloseCustom title="저작권표시">
-                        <OnOffCustom text="저작권표시" value={foot.copyright.use} func={e => setFoot(produce(foot, draft => {
-                            draft.copyright.use = !foot.copyright.use;
-                        }))} />
                         <div className="center-column">
                             <div className="edit-element center-row" style={{fontSize:'13px', justifyContent:'start'}}>
                                 <div>
