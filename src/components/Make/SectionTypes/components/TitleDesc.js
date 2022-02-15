@@ -21,7 +21,7 @@ function TitleDesc({content}) {
                         style={{
                             fontFamily:`${state.setting.font}`, 
                             color:`${content.title.color}`, 
-                            fontSize:`${content.title.size}px`, 
+                            fontSize:`${content.title.size/20}em`, 
                             textAlign:`${content.title.align}`,
                             resize:'none'
                         }}
@@ -41,7 +41,7 @@ function TitleDesc({content}) {
                         style={{
                             fontFamily:`${state.setting.smallFont}`, 
                             color:`${content.desc.color}`, 
-                            fontSize:`${content.desc.size}px`, 
+                            fontSize:`${content.desc.size/20}em`, 
                             // boxSizing:`border-box`, 
                             textAlign:`${content.desc.align}`,
                             resize:'none'
