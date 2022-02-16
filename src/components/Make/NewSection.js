@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react'
+import React, {useState} from 'react'
 import DetailSection from './SectionTypes/DetailSection'
 import HeroSection from './SectionTypes/HeroSection'
 import ReviewSection from './SectionTypes/ReviewSection'
@@ -14,41 +14,19 @@ import VideoSection from './SectionTypes/VideoSection'
 
 import {animations} from './tools/animations'
 import './NewSection.css'
-import { MyContext } from '../../pages/Make/MakePageV2'
 import { motion } from 'framer-motion'
 import {Delete, Options} from '@styled-icons/fluentui-system-filled'
 import produce from 'immer'
 
 import styled from "styled-components";
 
-const CustomCtaButton = styled.button`
-padding:8px 15px;
-`;
-
-const CustomGhostButton = styled.button`        
-`;
-
-
-// border-radius:${state.setting.cta.borderRadius}px;
-// background-color:${state.setting.cta.backgroundColor};
-// color:${state.setting.cta.color};
-// box-shadow:${state.setting.cta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
-// border:${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'};
-
-// border-radius:${state.setting.ghost.borderRadius}px;
-// background-color:${state.setting.ghost.backgroundColor};
-// color:${state.setting.ghost.color};
-// box-shadow:${state.setting.cta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'};
-// border:${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'};
-
-function NewSection({setting, content, index, contents, setContents, full}) {
+function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCategory, full}) {
     const [isHover, setIsHover] = useState('none');
-    const {state, action} = useContext(MyContext)
 
     const setThisSection = () => {
-        action.setSecNum(index);
-        if(index !== state.secNum){
-            action.setCategory(0);
+        setSecNum(index);
+        if(index !== secNum){
+            setCategory(0);
         }
     }
 
@@ -56,7 +34,7 @@ function NewSection({setting, content, index, contents, setContents, full}) {
         switch(content.sectionTypeName){
             case 'DetailSection':
                 return (
-                    <DetailSection content={content} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton} setting={setting}/>
+                    <DetailSection content={content} setting={setting}/>
                 )
 
             case 'HeroSection':
@@ -124,7 +102,7 @@ function NewSection({setting, content, index, contents, setContents, full}) {
     }
 
     return(
-        <div style={{fontSize:`${state.isPhone ? '22px' : '28px'}`}} className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
+        <div style={{fontSize:`${isPhone ? '22px' : '28px'}`}} className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
             {!full && <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
 
             </div>}
@@ -149,10 +127,10 @@ function NewSection({setting, content, index, contents, setContents, full}) {
                 }
                 <div className="section__container-inner"
                     style={{padding:`${
-                        state.isPhone ? content.padding.top/2.5 : content.padding.top}vh 
-                        ${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`} 
-                        ${state.isPhone ? content.padding.top/2.5 : content.padding.bottom}vh 
-                        ${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`} `}} >
+                        isPhone ? content.padding.top/2.5 : content.padding.top}vh 
+                        ${full ? 'calc(14vw + 30px)' : `${isPhone ? '15px' : '30px'}`} 
+                        ${isPhone ? content.padding.top/2.5 : content.padding.bottom}vh 
+                        ${full ? 'calc(14vw + 30px)' : `${isPhone ? '15px' : '30px'}`} `}} >
                     {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                     {returnType()}
                 </div>
@@ -160,25 +138,5 @@ function NewSection({setting, content, index, contents, setContents, full}) {
         </div>
     )
 }
-
-{/* 
-    <div className="section-selection-container" style={{display:`${isHover}`}}>
-{ state.contents.length > 0 && 
-    <span className="section-option" onClick={() => deleteThisSection()}>
-        <Delete size="20" />
-    </span> }
-<span className="section-option" onClick={() => { action.setSecNum(index); action.setAddingSectionAt(1000); }}>
-    <Options size="20" />
-</span>
-{ index !== 0 && 
-    <span className="section-option" onClick={() => moveUp()}>
-        <ArrowUpShort size="20" />
-    </span> }
-{ index !== state.contents.length-1 && 
-    <span className="section-option" onClick={() => moveDown()}>
-        <ArrowDownShort size="20" />
-    </span> }
-</div> 
-*/}
 
 export default NewSection

@@ -9,7 +9,6 @@ function ReturnButton({content}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const CustomCtaButton = () => {return (<div className="cta-button-made" style={{
-        marginTop:`${content.ctaApplyInputs.length > 1 ? '8px' : '0px'}`,
         borderRadius:`${state.setting.cta.borderRadius}px`,
         backgroundColor:`${state.setting.cta.backgroundColor}`,
         color:`${state.setting.cta.color}`,
@@ -22,8 +21,6 @@ function ReturnButton({content}){
     </div>)}
 
     const CustomGhostButton = () => {return (<div className="cta-button-made" style={{
-        marginTop:`${content.ghostApplyInputs.length > 1 ? '8px' : '0px'}`,
-        marginLeft:`${ content.button.ctaUse ? '5px' : '0px'}`,
         borderRadius:`${state.setting.ghost.borderRadius}px`,
         backgroundColor:`${state.setting.ghost.backgroundColor}`,
         color:`${state.setting.ghost.color}`,
@@ -40,7 +37,7 @@ function ReturnButton({content}){
             <div className="centera" style={{flexDirection:`${content.ctaApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
                 {content.ctaApplyInputs.map((item, index) => {
                     return(
-                        <input className="input-placeholder" placeholder={item} key={index} style={{marginTop:`${content.ctaApplyInputs.length > 1 ? '8px' : '0px'}`}}/>
+                        <input className="input-placeholder" placeholder={item} key={index} style={{margin:'4px'}}/>
                     )
                 })}
                 {CustomCtaButton()}
@@ -53,7 +50,7 @@ function ReturnButton({content}){
             <div className="centera" style={{flexDirection:`${content.ghostApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
                 {content.ghostApplyInputs.map((item, index) => {
                     return(
-                        <input className="input-placeholder" placeholder={item} key={index} style={{marginTop:`${content.ghostApplyInputs.length > 1 ? '8px' : '0px'}`}}/>
+                        <input className="input-placeholder" placeholder={item} key={index} style={{margin:'4px'}}/>
                     )
                 })}
                 {CustomGhostButton()}
@@ -67,16 +64,26 @@ if(content.button.use){
     {/* <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}> */}
     return(
         <div style={{width:'100%'}}>
-            <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
+            <div className="button__container" style={{
+                justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`,
+                flexDirection:`${ 
+                    content.button.ctaUse && content.button.ctaOption === 'apply' && 
+                    content.button.ghostUse && content.button.ghostOption === 'apply' ? 'column' : 'row'
+                    }`
+                }}>
+                <>
                 {
                     content.button.ctaUse && 
                         ( content.button.ctaOption === 'link' ? CustomCtaButton() : returnCtaInputs() )
                 }
+                </>
+                <>
                 {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
                 {
                     content.button.ghostUse && 
                         ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
                 }
+                </>
             </div>
             {
                 content.appButton.use && 

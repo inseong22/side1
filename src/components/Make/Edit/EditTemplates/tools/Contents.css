@@ -17,3 +17,12 @@
     font-size: var(--func-subtitle);
     font-weight: 700;
 }
+
+.box-gray__container{
+    width:100%;
+    border-bottom:1px solid var(--main-light-gray);
+    border-radius: 5px;
+    padding-bottom:10px;
+    box-sizing: border-box;
+    margin-bottom:12px;
+}

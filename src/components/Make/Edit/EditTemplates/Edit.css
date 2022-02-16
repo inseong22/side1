@@ -27,7 +27,6 @@
     align-items : center;
     box-sizing: border-box;
     padding:var(--edit-main-padding);
-    margin-top: 40px;
 }
 .switch-text{
     width: 75px;

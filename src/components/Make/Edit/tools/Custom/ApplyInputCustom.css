@@ -21,15 +21,12 @@ input[type="text"]{
     border-radius: 29px;
     border:none;
     padding:15px 20px;
-    width:353px;
+    width:100%;
     font-size: var(--input-font-size);
     font-weight: 700;
-    margin-right: 20px;
 }
 .delete-button{
     cursor: pointer;
-    width: 52px;
-    height: 30px;
     border:none;
     background-color:#EB8A8A;
     color: white;
@@ -39,35 +36,24 @@ input[type="text"]{
     margin-left: -88px;
     border-radius: 15px;
     text-align: center;
-    padding-top: 5px;
+    padding: 8 15px;
 }
 .delete-button:hover{
     background-color:var(--main-light-gray-02);
     color: #EB8A8A;
 }
 input[type="button"]{
+    padding:7px 14px;
+    font-size:0.8em;
+    background-color:#A89AFF;
+    border-radius: 30px;
+    color:white;
     cursor: pointer;
-    width: 52px;
-    height: 30px;
     border:none;
-    color:#042AaC;
-    outline:none;
-    display:inline;
-    box-sizing: border-box;
-    margin-left: -68px;
+    margin-left: -65px;
     background: #A89AFF;
     border-radius: 15px;
-    font-family: Sandoll GothicNeo1;
-    font-style: normal;
-    font-weight: normal;
-    font-size: var(--button-font-size);
-    font-weight: 700;
-    line-height: 12px;
-    align-items: center;
-    text-align: center;
-    color: #FFFFFF;
 }
 input[type=button]:hover{
-    background-color: white;
-    color:#A89AFF;
+    background-color:#8b79ff;
   }
