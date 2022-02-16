@@ -57,11 +57,23 @@
     justify-content: center;
     align-items: center;
     width:100%;
+    margin-top: 30px;
+}
+
+.video__container{ 
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.full-button-container{
+    width: 100%;
 }
 
 .button__container{
     margin-top:15px;
-    align-content: center;
     position:relative;
 }
 
@@ -76,11 +88,6 @@
     /* position: relative; absolute는 부모가 relative일 때 부모를 따라간다. */
   }
   
-.video-content {
-    width: 100%; /* 부모에 맞게 꽉 채운다. */
-    height: 100%;
-}
-
 .input-placeholder{
     background-color:white;
     border : 1px solid var(--main-light-gray);

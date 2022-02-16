@@ -125,7 +125,7 @@ const NavBarInMakePage = (props) => {
                     <span className={state.secNum === 52 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(52); 
                     }} >
-                        기본설정
+                        기본 설정
                     </span>
                     <span className={state.secNum === 53 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(53);

@@ -82,7 +82,7 @@
 
 .button-made{
     cursor:pointer;
-    width: 100px;
+    width: auto;
     text-align: center;
 }
 

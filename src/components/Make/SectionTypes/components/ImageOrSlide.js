@@ -14,13 +14,14 @@ function ImageOrSlide({content}){
         // 동영상 - 유튜브 링크
         if(content.video.youtube) 
             return(
-                <div>
-                    <iframe style={{ zIndex: 1, width:`${content.image.size}%`, height:`${content.image.size}%` }} id="video-content" src={`${content.video.link}`} frameborder="0" allow='autoplay' allowfullscreen/>
+                <div className="video__container">
+                    <iframe style={{ width:`${content.image.size}px`, height:`${content.image.size*55/100}px` }} src={`${content.video.link}`} frameborder="0" allow='autoplay' allowfullscreen/>
                 </div>
             )
         // 동영상 - 비디오 업로드
         if(content.video.use)
             return(
+                <div className="image__container">
                 <video 
                 className="video"
                 src={`${content.video.file}`} 
@@ -31,18 +32,19 @@ function ImageOrSlide({content}){
                 style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}%`}}
                 >
                 </video>
+                </div>
             )
         // 슬라이드
         if(content.image.slide)
             return(
-                <div>
+                <div className="image__container">
                     <ImageCarousel content={content}/>
                 </div>
             )
         // 이미지
         if(content.image.oneImg)
             return (
-                // <div style={{width:'100%'}}>
+                <div className="image__container">
                 <img 
                     ref={imgRef} 
                     src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
@@ -54,11 +56,12 @@ function ImageOrSlide({content}){
                         boxShadow: `${content.image.shadowValue}`
                     }}
                     />
-                // </div>
+                </div>
             )
         // 목업 - 모바일
         if(content.mobile.use)
             return(
+                <div className="image__container">
                 <div className="mobile-container">
                     <img className="mobile-ex" src={Phone} alt="목업틀"
                         style={{width: `${content.mobile.size}%`}}
@@ -75,17 +78,21 @@ function ImageOrSlide({content}){
                         />
                     }
                 </div>
+                </div>
             )
         // 목업 - 태블릿
         if(content.tablet.use)
             return(
+                <div className="image__container">
                 <div className="mobile-container">
                    tablet
+                </div>
                 </div>
             )
         // 목업 - 데스크탑
         if(content.desktop.use)
             return(
+                <div className="image__container">
                 <div className="desk-container">
                     <img className="mobile-ex" src={Desktop} alt="목업틀"
                         style={{width: `${content.desktop.size}px`}}
@@ -102,11 +109,12 @@ function ImageOrSlide({content}){
                         />
                     }
                 </div>
+                </div>
             )
         // 목업 - 모바일 2개
         if(content.mobile2.use)
         return(
-            <>
+            <div className="image__container">
             <div className="desk-container">
                     <img className="mobile-ex" src={Phone} alt="목업틀"
                         style={{width: `${content.mobile2.size}px`}}
@@ -139,12 +147,12 @@ function ImageOrSlide({content}){
                         />
                     }
             </div>
-            </>
+            </div>
         )
         // 목업 - desk + mobile
         if(content.deskMobile.use)
         return(
-            <>
+            <div className="image__container">
             <div className="mobile-container">
                     <img className="mobile-ex" src={Phone} alt="목업틀"
                         style={{width: `${content.deskMobile.size1}px`}}
@@ -176,7 +184,7 @@ function ImageOrSlide({content}){
                         />
                     }
             </div>
-            </>
+            </div>
         )
     }
     else{

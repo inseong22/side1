@@ -14,6 +14,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from '@chakra-ui/react'
+import { RamenDiningOutlined } from '@mui/icons-material';
 
 function SliderCustom({top, text, func, value, max}) {
     const [range, setRange] = useState(value);
@@ -45,16 +46,17 @@ function SliderCustom({top, text, func, value, max}) {
                 {/* <NumberInput className="number-input" size='md' maxW='50px' step={1} max={max ? max : 100} value={range} onChange={e => {func(e); setRange(e)}}> */}
                 <input className="number-input" type="number" value={range} min={1} max={max ? max : 100} onChange={e => {
                   setRange(e.currentTarget.value);
-                  if(range > max){
+                  if(range <= max){
                     func(e.currentTarget.value);
+                    console.log(range)
+                  }
+                  else{
+                    func(max)
                   }
                   }}/>
 
             </ChakraProvider>
           </div>
-            {
-            text && <div className="slider-small-command">{text} 조절해 주세요.</div>
-            } 
         </div>
       </div>
     )

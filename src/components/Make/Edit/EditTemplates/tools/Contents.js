@@ -276,7 +276,7 @@ function Contents({content}) {
                         유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
                     </div>
                     <div style={{marginTop: '10px'}} />
-                    <SliderCustom top="크기" text="동영상을" value={content.image.size} func={e => setImgSize(e)} max="320"/>
+                    <SliderCustom top="크기" text="동영상을" value={content.image.size} func={e => setImgSize(e)} max="520"/>
                     </>
                 )
         }
@@ -640,17 +640,17 @@ function Contents({content}) {
                     <div className='mockup-select'>
                     <Select  
                     className='select_list'
-                    iconSize='none'
                     onChange={e=>mockOption(e.target.value)}
                     bg='white'
                     borderColor='rgba(0, 0, 0, 0.08)'
+                    icon='none'
                     color='gray'>
                     <option value='mobile'>모바일</option>
                     <option value='tablet'>태블릿</option>
                     <option value='desktop'>데스크탑</option>
                     <option value='mobile2'>모바일 2대</option>
                     <option value='desk+mob'>데스크탑 + 모바일</option>                       
-                </Select>
+                    </Select>
                     </div>
                     {returnMockup()}
                     </>
@@ -660,7 +660,7 @@ function Contents({content}) {
 
 
     return (
-        <OpenCloseCustom title="콘텐츠">
+        <OpenCloseCustom title="콘텐츠" use={content.contents.use}>
             <RadioCustom options={contentsOptions} value={content.contents.type} func={e => changeContentOption(e)} />                 
             {
                 returnImageOrVideoAdd()

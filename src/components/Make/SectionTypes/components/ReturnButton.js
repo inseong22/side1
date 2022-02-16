@@ -73,10 +73,10 @@ if(content.button.use){
     // ctaOption === 'link' => 버튼 클릭 시 링크 이동
     // ctaOption === 'apply' => 신청
 
-    {/* <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}> */}
     return(
         <>
         {content.button.use &&
+        <div className="full-button-container">
             <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
                 {
                     content.button.ctaUse && 
@@ -88,20 +88,7 @@ if(content.button.use){
                             ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
                 }
             </div>
-        }
-        {
-            content.appButton.use && 
-            <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
-                {
-                    content.button.ctaUse && 
-                        ( content.button.ctaOption === 'link' ? CustomCtaButton() : returnCtaInputs() )
-                }
-                {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
-                {
-                    content.button.ghostUse && 
-                        ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
-                }
-            </div>
+        </div>
         }
         {
             content.appButton.use && 

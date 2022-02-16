@@ -128,12 +128,12 @@ function EditVideoSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
-                        <OpenCloseCustom title="동영상">
+                        <OpenCloseCustom title="동영상" use={content.video.use}>
                         <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
                         <div style={{marginBottom: '25px'}}/>
                         {videoType()}
                         </OpenCloseCustom>
-                        <OpenCloseCustom title='설명'>
+                        <OpenCloseCustom title='설명' use={content.explanation.use}>
                         <ColorCustom text="색상" value={content.explanation.color} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].explanation.color = e;
                         }))} />

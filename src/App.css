@@ -234,6 +234,14 @@
   box-sizing:border-box;
 }
 
+.comment{
+  margin-top: 20px;
+  margin-bottom:-20px;
+  font-size: var(--func-subtitle);
+  color: var(--main-black-01);
+  font-weight: 500;
+}
+
 .left{
   display:flex;
   justify-content: start;

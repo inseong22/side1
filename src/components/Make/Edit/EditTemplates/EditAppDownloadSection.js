@@ -50,8 +50,8 @@ function EditAppDownloadSection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <Layout content={content} version='app' />
-                        <AddAppButton content={content} />
-                        <EditNotice content={content} />
+                        <AddAppButton content={content} use={content.appButton.use}/>
+                        <EditNotice content={content}/>
                     </div>
                 )
             case 1:

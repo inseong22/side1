@@ -72,7 +72,8 @@ const contents = {
         file: '',
         link: '',
         auto: true,
-        align: ''
+        align: '',
+        size: 300,
     },
     mockup: {
         use: false,
@@ -123,7 +124,6 @@ const element = {
 }
 
 const button = {
-
     button:{
         use : true,
         ctaText:'CTA 버튼',
@@ -474,7 +474,7 @@ export const defaults = {
                 width:60,
             },
             text:{
-                use:false,
+                use:true,
                 text:'',
                 fontSize:12,
                 color:'#000000'
@@ -530,13 +530,12 @@ export const defaults = {
             color:'#ffffff',
             align:'start',
             facebook: '',
-            naver: '',
             instagram: '',
             notion: '',
-            mail: '',
             kakaotalk: '',
             twitter: '',
             youtube: '',
+            linkedIn: '',
             
         },
         copyright:{
@@ -550,7 +549,7 @@ export const defaults = {
     },
     setting:{
         urlId:'',
-        title:'Surfee : 노코드 랜딩페이지 제작 툴',
+        title:'',
         faviconAttachment:'',
         font:'Noto Sans KR',
         smallFont:'Noto Sans KR',
@@ -563,7 +562,7 @@ export const defaults = {
             color:'#ffffff',
             border:false,
             borderColor:'#000000',
-            text:'Floating',
+            text:'',
             link:'',
             shadow:false,
             size:10,
