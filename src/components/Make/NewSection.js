@@ -148,7 +148,11 @@ function NewSection({setting, content, index, contents, setContents, full}) {
                     </div>
                 }
                 <div className="section__container-inner"
-                    style={{padding:`${content.padding.top}vh ${full ? 'calc(14vw + 30px)' : '30px'} ${content.padding.bottom}vh ${full ? 'calc(14vw + 30px)' : '30px'} `}} >
+                    style={{padding:`${
+                        state.isPhone ? content.padding.top/2.5 : content.padding.top}vh 
+                        ${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`} 
+                        ${state.isPhone ? content.padding.top/2.5 : content.padding.bottom}vh 
+                        ${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`} `}} >
                     {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                     {returnType()}
                 </div>

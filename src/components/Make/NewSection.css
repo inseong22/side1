@@ -93,4 +93,5 @@
     left:1.5%;
     z-index:3;
     position:absolute;
+    box-sizing: border-box;
 }

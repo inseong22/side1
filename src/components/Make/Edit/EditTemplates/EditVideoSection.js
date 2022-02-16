@@ -16,7 +16,7 @@ const videoOptions = [
     { label: '유튜브 링크', value: 'youtube'}
 ]
 const alignOptions = [
-    { label: '왼쪽', value: 'left' },
+    { label: '왼쪽', value: 'start' },
     { label: '중앙', value: 'center' },
 ]
 

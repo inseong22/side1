@@ -199,7 +199,7 @@ function IconTable({func, handleClose}) {
                 icons.map((item, i) => {
                     return(
                         <div className="one-icon-select" onClick={() => {
-                            func(item.icon)
+                            func(item.name)
                             handleClose()
                         }} key={i}>
                             {item.icon}

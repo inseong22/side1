@@ -18,7 +18,6 @@ function TextAuto({small, value, onChange, color, align, size}) {
                     color:`${color}`, 
                     textAlign:`${align}`,
                     resize:'none',
-                    fontSize: `${size}px`,
                     fontFamily:`${state.setting.smallFont}`
                 }}
                 spellcheck="false"

@@ -48,7 +48,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
             </div>
         }  
         {navi.button.use && 
-            <div className="make-nav-buttonc" style={{justifyContent:`${navi.button.align}`}}>
+            <div className="make-nav-buttonc" style={{justifyContent:`${navi.button.align}`, paddingRight:`${state.isPhone ? '10px' : '30px'}`}}>
             { navi.button.cta.use && 
                 <div className="cta-button-made" style={{
                     borderRadius:`${state.setting.cta.borderRadius}px`,

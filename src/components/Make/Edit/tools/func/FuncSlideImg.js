@@ -24,7 +24,7 @@ function FuncSlideImg({text, value, func, removeFunc}) {
                 id="file" 
                 onChange={ e => func(e) }
                 ref={photoInput}
-                style={{display: 'none', cursor: 'pointer'}}
+                style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
             /> 
             <div className="embed-command">
                 파일 선택

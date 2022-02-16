@@ -27,7 +27,6 @@ const UserLandingPage = (props) => {
     const urltitle = document.getElementById("urltitle");
 
     useEffect(() => {
-        console.log(window.location.host.split(".")[0])
         loadData()
         ReactGa.initialize('UA-213792742-1');
         // to report page view
@@ -91,7 +90,7 @@ const UserLandingPage = (props) => {
     return (
         <UserContext.Provider value={contextValue}>
         {loading ? 
-        <div style={{fontSize:'30px'}}>
+        <div>
             <UserNavBar navi={item.navi} setting={item.setting} CustomCta={CustomCta} CustomGhost={CustomGhost} />
             <div style={{paddingTop:`${item.navi.fixed ? `${item.navi.height}px` : '0px'}`}}>
                 <UserContents contents={item.contents} setting={item.setting} CustomCta={CustomCta} CustomGhost={CustomGhost}/>
