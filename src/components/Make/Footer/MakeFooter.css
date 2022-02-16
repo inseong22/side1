@@ -6,6 +6,7 @@
   align-items : center;
   flex-direction: row;
   position:relative;
+  border-radius: 0px 0px 20px 20px;
 }
 
 .make-footer__container{
@@ -17,6 +18,7 @@
   align-items : center;
   flex-direction: row;
   position:relative;
+  border-radius: 0px 0px 20px 20px;
 }
 
 .footer-item{

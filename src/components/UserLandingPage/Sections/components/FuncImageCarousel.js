@@ -22,9 +22,6 @@ margin-top: -30px;
 
 
 function FuncImageCarousel({content}) {
-    useEffect(() => {
-        console.log(content.image.border)
-    })
 
     const imgRef = useRef(null)
 

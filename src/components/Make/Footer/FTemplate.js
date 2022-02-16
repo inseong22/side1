@@ -120,7 +120,9 @@ function FTemplate({foot, setFoot, history }) {
                                 fontFamily:`${state.setting.font}`, 
                                 color: `${foot.text.color}`,
                                 fontSize: `${foot.text.size}px`,
-                                textAlign:`${foot.text.align}`
+                                textAlign:`${foot.text.align}`,
+                                resize: 'none',
+                                backgroundColor: `${foot.backgroundColor}`
                             }}
                             placeholder='회사 또는 팀 정보를 입력하세요.'
                             onChange={(e) => {

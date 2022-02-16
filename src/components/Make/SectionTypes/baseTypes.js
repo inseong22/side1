@@ -10,20 +10,21 @@ const commons = {
     title:{
         use:true,
         text: '노코드 랜딩페이지 제작 툴',
-        align: 'left',
+        align: 'start',
         size: 32,
         color: '#000000'
     },
     desc:{
         use:true,
-        text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요!',
-        align: 'left',
+        text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해 보세요!',
+        align: 'start',
         size: 16,
         color: '#000000'
     },
     contents:{
         use: true,
         type: 'image',
+        align: 'space-between',
     },
     padding:{
         top:15,
@@ -41,6 +42,11 @@ const commons = {
     responsive:{
         mobile:true,
         pc:true,
+    },
+    mobile:{
+        align:'center',
+        layout:3,
+        contentSize:50,
     }
 }
 
@@ -66,6 +72,7 @@ const contents = {
         file: '',
         link: '',
         auto: true,
+        align: ''
     },
     mockup: {
         use: false,
@@ -112,9 +119,11 @@ const element = {
     iconBorder:5,
     imageBorder:5,
     size:50,
+    color:'#ffffff',
 }
 
 const button = {
+
     button:{
         use : true,
         ctaText:'CTA 버튼',
@@ -201,8 +210,8 @@ export const base = [
         name:'특징',
         sectionTypeName:'FeaturesSection',
         align:'start',
-        numOfFeatures:3,
-        featureText:{
+        numOfElements:3,
+        elementText:{
             use:true,
             titleUse:true,
             descUse:true,
@@ -247,7 +256,7 @@ export const base = [
         name:'리뷰/추천',
         sectionTypeName:'ReviewSection',
         align:'start',
-        numOfReviews:3,
+        numOfElements:3,
         ratingColor:'red',
         rating:{
             use:true,
@@ -258,7 +267,7 @@ export const base = [
             use:true,
             color: '#000000',
         },
-        reviewText:{
+        elementText:{
             use:true,
             color: '#000000',
         },
@@ -341,6 +350,7 @@ export const base = [
         element:element,
         numOfElements: 3,
         name:'갤러리',
+        align:'start',
         sectionTypeName:'GallerySection',
         galleryImg:{
             use:true,
@@ -351,12 +361,15 @@ export const base = [
             use:true,
             color:'#ffffff',
             shadow:false,
-            border:false,
+            borderRadius:0,
         },
         text:{
             use:true,
             color: '#000000',
             align: ''
+        },
+        elementText:{
+            color:'#000000'
         },
         elements:[
             {
@@ -394,7 +407,7 @@ export const base = [
             use:true,
             color: '#000000',
             align: '',
-            text:'비디오에 대한 추가 설명을 작성해보세요.'
+            text:'비디오에 대한 추가 설명을 작성해 보세요.'
         },
     },
     {
@@ -441,11 +454,15 @@ export const base = [
 
 export const defaults = {
     navi:{
+        responsive:{
+            mobile:true,
+            pc:true,
+        },
         sectionTypeName:'상단 바',
         sectionTemplateNumber:1,
         height:80,
         use:true,
-        title:'Surfee',
+        title:'',
         logo:{
             use:true,
             align:'start',
@@ -498,7 +515,7 @@ export const defaults = {
             use:true,
             text:'',
             color:'#000000',
-            align: 'left',
+            align: 'start',
             size: 15,
         },
         icon:{
@@ -540,9 +557,11 @@ export const defaults = {
             color:'#ffffff',
             border:false,
             borderColor:'#000000',
-            text:'fta 버튼',
+            text:'Floating',
             link:'',
             shadow:false,
+            size:10,
+            shape:0,
         },
         cta:{
             borderRadius:5,

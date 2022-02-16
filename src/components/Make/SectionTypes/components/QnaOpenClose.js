@@ -74,9 +74,6 @@ const OpenCloseCustom = (props) => {
   const [open, setOpen] = useState(props.open)
   const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-  useEffect(() => {
-    console.log(isopen)
-  })
   return (
     <div className="one-element" >
       <div className={props.type === 'card' ? 'accordion__card' : 'accordion__plain'}>
@@ -84,15 +81,15 @@ const OpenCloseCustom = (props) => {
           <div className="edit-element">
             <ChakraProvider>
             <div className="accordion__title">
-              <div className="title_text qna__question" style={{color:`${props.color}`, width:'100%'}}>
-              <span className="qna__word">Q.</span>
+              <div className="title_text" style={{color:`${props.color}`, width:'100%'}}>
+                <span className="qna__word">Q.</span>
                 <div style={{width:'100%'}}>
                   <TextAuto 
-                  value={props.title} 
-                  onChange={e => action.setContents(produce(state.contents, draft => {
-                      draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
-                  }))}
-                  color={props.color} align="start" />
+                    value={props.title} 
+                    onChange={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
+                    }))}
+                    color={props.color} align="start" />
                   </div>
               </div> 
             </div>

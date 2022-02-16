@@ -98,7 +98,7 @@ function LoginPage({history, isLoggedIn}) {
                         </span>
                         <Input 
                             className="login-input input-focus"
-                            placeholder="아이디를 입력해주세요." 
+                            placeholder="아이디를 입력해 주세요." 
                             required
                             value={id}   
                             onChange={e => setId(e.currentTarget.value)}
@@ -109,7 +109,7 @@ function LoginPage({history, isLoggedIn}) {
                         <Input  
                             type="password" 
                             className="login-input input-focus"
-                            placeholder="비밀번호를 입력해주세요." 
+                            placeholder="비밀번호를 입력해 주세요." 
                             required
                             value={password} 
                             onChange={e => setPassword(e.currentTarget.value)}

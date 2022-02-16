@@ -62,7 +62,7 @@ export const settingState = atom({
         fta:{
             use:false,
             backgroundColor:'rgba(150,150,0,1)',
-            text:'fta 버튼'
+            text:'Floating'
         }
     }
 })

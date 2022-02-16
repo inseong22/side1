@@ -16,3 +16,10 @@
 .recent-color-text{
     font-size: 11px;
 }
+.color-close{
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'S-CoreDream-7ExtraBold';
+    color: black;
+}

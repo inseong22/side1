@@ -135,7 +135,7 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
                 }}>
                 편집하기
             </Link> */}
-            <ConfirmCustom open={deleteopen} setOpen={setDeleteOpen} message={"한번 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?"} callback={deletePage}/>
+            <ConfirmCustom warn open={deleteopen} setOpen={setDeleteOpen} message={"한번 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?"} callback={deletePage}/>
         </div>
     )
 }

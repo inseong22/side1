@@ -171,16 +171,6 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
         }else if(state.secNum === SETTINGSECNUM ){
             return(
                 <>
-                    <div className="back__container">
-                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                            <span className="back-button">
-                            <img src={BackButton} />
-                            </span>
-                            <span className="back-text">
-                                기본설정
-                            </span>
-                        </div>
-                    </div>
                     <EditTopBar category={state.category} setCategory={action.setCategory} />
                     <EditSetting setting={setting} setSetting={setSetting} category={state.category}/>
                 </>

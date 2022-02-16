@@ -15,11 +15,9 @@ function TextAuto({small, value, onChange, color, align, size, caution}) {
                 value={value} 
                 onChange={e => onChange(e)}
                 style={{
-                    // fontFamily:`${state.setting.smallFont}`, 
                     color:`${color}`, 
                     textAlign:`${align}`,
                     resize:'none',
-                    fontSize: `${size}px`,
                     fontFamily:`${state.setting.smallFont}`
                 }}
                 spellcheck="false"
@@ -30,11 +28,10 @@ function TextAuto({small, value, onChange, color, align, size, caution}) {
                 value={value} 
                 onChange={e => onChange(e)}
                 style={{
-                    // fontFamily:`${state.setting.font}`, 
+                    // fontFamily:`${state.setting.font}`,
                     color:`${color}`, 
                     textAlign:`${align}`,
                     resize:'none',
-                    fontSize: `${size}px`,
                     fontFamily:`${state.setting.smallFont}`
                 }}
                 spellcheck="false"

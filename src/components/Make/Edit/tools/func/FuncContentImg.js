@@ -1,4 +1,5 @@
 import React, {useRef} from 'react'
+import ourA from '../../../../../tools/img/005.png'
 
 function FuncContentImg({text, value, func, removeFunc, subtext}) {
     const photoInput = useRef();
@@ -13,7 +14,7 @@ function FuncContentImg({text, value, func, removeFunc, subtext}) {
             onClick={inputClick}
             onChange={e => func(e)}
             id='attach'
-            style={{backgroundImage: `url(${value}`}}
+            style={{backgroundImage: `url(${value === '' ? ourA : value}`}}
             >
             {/* <div 
                 className="img-remove"
@@ -25,7 +26,7 @@ function FuncContentImg({text, value, func, removeFunc, subtext}) {
                 id="file" 
                 onChange={ e => func(e) }
                 ref={photoInput}
-                style={{display: 'none', cursor: 'pointer'}}
+                style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
             /> 
             {/* <div className="img-command">
             5MB 이하, <br />가로 1200px를 권장합니다!

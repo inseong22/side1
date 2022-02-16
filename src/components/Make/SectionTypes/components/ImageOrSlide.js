@@ -42,20 +42,26 @@ function ImageOrSlide({content}){
         // 이미지
         if(content.image.oneImg)
             return (
+                // <div style={{width:'100%'}}>
                 <img 
                     ref={imgRef} 
                     src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
                     className="image" 
                     onClick={(e) => setImageShow(e.currentTarget)} 
-                    style={{borderRadius:`${content.image.border}px`, width:`${content.image.size}%`, boxShadow: `${content.image.shadowValue}`}}
+                    style={{
+                        borderRadius:`${content.image.border}px`,
+                        width:`${state.isPhone ? content.image.size/2.7 + 60 : content.image.size}%`, 
+                        boxShadow: `${content.image.shadowValue}`
+                    }}
                     />
+                // </div>
             )
         // 목업 - 모바일
         if(content.mobile.use)
             return(
                 <div className="mobile-container">
                     <img className="mobile-ex" src={Phone} alt="목업틀"
-                        style={{width: `${content.mobile.size}px`}}
+                        style={{width: `${content.mobile.size}%`}}
                     />
                     {content.mobile.file === '' ?  
                         <></>
@@ -65,7 +71,7 @@ function ImageOrSlide({content}){
                         ref={imgRef} 
                         src={`${content.mobile.file}`} 
                         onClick={(e) => setImageShow(e.currentTarget)} 
-                        style={{ width:`${content.mobile.size}px`}}
+                        style={{ width:`${content.mobile.size}%`}}
                         />
                     }
                 </div>

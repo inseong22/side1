@@ -97,6 +97,7 @@
   --main-hover-color: #b3b0f5;
 
   --default-shadow-01: 2px 4px 20px #E8F0F9;
+  --non-hover-button-shadow: 2px 4px 20px #E5E5E5;
   --br-01: 25px;
   --br-02:32px;
   --main-gradient:linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
@@ -111,18 +112,19 @@
   --main-light-gray-02:#F2F6FA;
 
   --section-top: 22px;
-  --section-main: 16px;
+  --section-main: 15px;
   --func-title: 15px;
   --func-subtitle: 14px;
+  --func-subtitle-mini: 12px;
   --small-text: 12px;
 
   --button-font-size : 13px;
   --input-font-size: 13px;
   --made-button-padding: 8px 8.5px;
 
-  --feature-title-size:1.2em;
-  --feature-desc-size:0.9em;
-  --feature-writer-size:0.8em;
+  --feature-title-size:1.1em;
+  --feature-desc-size:0.95em;
+  --feature-writer-size:0.85em;
 
 }
 
@@ -165,7 +167,7 @@
   font-weight: normal;
   font-size: 15px;
   border:none;
-  padding:0px 25px;
+  padding:0px 1.5vw;
   height:38px;
   cursor: pointer;
   text-decoration: none;
@@ -176,16 +178,20 @@
   align-items: center;
   justify-content:center;
   background:var(--main-gradient);
-  box-shadow: var(--main-shadow-01);
+  box-shadow: var(--non-hover-button-shadow);
   border-radius: var(--br-02);
   color:white;
   font-size: 15px;
   border:none;
-  padding:0px 25px;
+  padding:0px 1.5vw;
   height:38px;
   cursor: pointer;
   font-family: Noto Sans KR;
   font-weight: normal;
+}
+
+.default-button-02:hover{
+  box-shadow:var(--default-shadow-01);
 }
 
 .center-row{
@@ -306,6 +312,15 @@
   cursor: pointer;
 }
 
+.row{
+  display: flex;
+  flex-direction:row;
+}
+
+.column{
+  display:flex;
+  flex-direction:column;
+}
 
 
 

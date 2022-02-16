@@ -135,7 +135,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                 <div className="main-section-left-topbottom" style={{color:'black'}}>
                     <span className="one-section-big-topbottom">
                         '타이핑'과 '이미지'로만<br/>
-                        빠르고 간단하게 랜딩페이지를 제작해보세요
+                        빠르고 간단하게 랜딩페이지를 제작해 보세요
                         {/* <Icons /> */}
                     </span>
                     {/* <span className="one-section-small">

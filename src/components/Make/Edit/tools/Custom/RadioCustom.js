@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { MyContext } from '../../../../../pages/Make/MakePageV2'
 import '../custom.css'
+import produce from 'immer';
 import Blay1G from '../../../../../tools/img/layoutMainDetail/base1G.png'
 import Blay1W from '../../../../../tools/img/layoutMainDetail/base1W.png'
 import Blay2G from '../../../../../tools/img/layoutMainDetail/base2G.png'
@@ -39,33 +41,37 @@ export function EditRadio({options, value, onChange}) {
     )
 }
 
-export function EditRadioLayout({options, value, onChange, version}){
+export function EditRadioLayout({content, options, value, onChange, version}){
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+    
     switch(version){
         case 'main':
             return(
                 <div className="radio-container">
-                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(1)}>
+                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, contAlign) => onChange(e=1, align='start', contAlign='space-between')}>
                         {value === 1 ? (
                             <img src={Blay1W} />
                         ):(
                             <img src={Blay1G} />
                         )}
                     </div>
-                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(2)}>
+                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align,contAlign) => onChange(e=2, align='start', contAlign='space-between')}>
                         {value === 2 ? (
                             <img src={Blay2W} />
                         ):(
                             <img src={Blay2G} />
                         )}
                     </div>
-                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(3)}>
+                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, contAlign) => {
+                        onChange(e=3, align='center', contAlign='center') 
+                    }}>
                     {value === 3 ? (
                             <img src={Blay3W} />
                         ):(
                             <img src={Blay3G} />
                         )}
                     </div>
-                    <div className={value === 4 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(4)}>
+                    <div className={value === 4 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, contAlign) => onChange(e=4, align='center', contAlign='center')}>
                     {value === 4 ? (
                             <img src={Blay4W} />
                         ):(
@@ -100,24 +106,43 @@ export function EditRadioLayout({options, value, onChange, version}){
                     </div>
                 </div>
             )
+        case 'two': 
+            return(
+                <div className="radio-container">
+                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(3)}>
+                    {value === 3 ? (
+                            <img src={Blay3W} />
+                        ):(
+                            <img src={Blay3G} />
+                        )}
+                    </div>
+                    <div className={value === 4 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(4)}>
+                    {value === 4 ? (
+                            <img src={Blay4W} />
+                        ):(
+                            <img src={Blay4G} />
+                        )}
+                    </div>
+                </div>
+            )
         case 'text':
             return (
                 <div className="radio-container">
-                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(1)}>
+                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, top, bottom) => onChange(e=1, align='center', top=15, bottom=15)}>
                         {value === 1 ? (
                             <img src={Tlay1W} />
                         ):(
                             <img src={Tlay1G} />
                         )}
                     </div>
-                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(2)}>
+                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, top, bottom) => onChange(e=2, align='start', top=25, bottom=5)}>
                         {value === 2 ? (
                             <img className='text-layout2' src={Tlay23W} />
                         ):(
                             <img className='text-layout2' src={Tlay23G} />
                         )}
                     </div>
-                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(3)}>
+                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, top, bottom) => onChange(e=3, align='start', top=15, bottom=15)}>
                     {value === 3 ? (
                             <img className='text-layout3' src={Tlay23W} />
                         ):(
@@ -218,7 +243,7 @@ const RadioCustom = ({text, options, value, func, button, layout, version}) => {
                         <div className="radio-container">
                             <EditRadioLayout 
                                 options={options}
-                                onChange={e => {func(e)}}
+                                onChange={(e,align,contAlign) => {func(e, align, contAlign)}}
                                 value={value}
                                 version={version}
                             />

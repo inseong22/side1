@@ -40,12 +40,6 @@ function Contents({content}) {
 
     const {state, action} = useContext(MyContext) 
 
-    const usingContents = e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].contents.use = !content.contents.use;
-        }))
-    }
-
     const changeContentOption = e => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].contents.type = e;
@@ -57,6 +51,10 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].image.attachment = result;             
@@ -75,11 +73,14 @@ function Contents({content}) {
 
     // 슬라이드 - 이미지
     const onChangeSlideImage1= e => {
-        let newContents = JSON.parse(JSON.stringify(state.contents))
         const {target:{files},} = e;
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].slide_img.slide1 = result;
@@ -99,6 +100,10 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].slide_img.slide2 = result;
@@ -119,6 +124,10 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].slide_img.slide3 = result;
@@ -187,6 +196,10 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].video.file = result;
@@ -240,7 +253,7 @@ function Contents({content}) {
                     <>
                     <AddContentVideo text="동영상" value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
                     <div style={{marginBottom: '-20px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="320"/>
                     </>
                 )
             case 'youtube':
@@ -263,7 +276,7 @@ function Contents({content}) {
                         유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
                     </div>
                     <div style={{marginTop: '10px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="320"/>
                     </>
                 )
         }
@@ -296,6 +309,10 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].desktop.file = result;               
@@ -311,6 +328,10 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].mobile2.file1 = result;               
@@ -326,6 +347,10 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].mobile2.file2 = result;               
@@ -341,6 +366,10 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].deskMobile.file1 = result;               
@@ -356,6 +385,10 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
                 draft[state.secNum].deskMobile.file2 = result;               
@@ -437,7 +470,7 @@ function Contents({content}) {
                 MobileTrue()
                 return(
                     <>
-                        <FuncContentImg text='목업' subtext="최대 10MB 업로드 가능" value={content.mobile.file} func={uploadMobile}/>
+                        <FuncContentImg text='목업' subtext="최대 3MB 업로드 가능" value={content.mobile.file} func={uploadMobile}/>
                         <SliderCustom top="크기" text="목업" value={content.mobile.size} func={setMobileSize} max="100"/>
                     </>
                 )
@@ -452,7 +485,7 @@ function Contents({content}) {
                 DesktopTrue()
                 return(
                     <>
-                        <FuncContentImg text='목업' subtext="최대 10MB 업로드 가능" value={content.desktop.file} func={uploadDesk}/>
+                        <FuncContentImg text='목업' subtext="최대 3MB 업로드 가능" value={content.desktop.file} func={uploadDesk}/>
                         <SliderCustom top="크기" text="목업" value={content.desktop.size} func={setDesktopSize} max="100"/>   
                     </>
                 )
@@ -460,8 +493,8 @@ function Contents({content}) {
                 Mobile2True()
                 return(
                     <>
-                    <FuncContentImg text='모바일1' subtext="최대 10MB 업로드 가능" value={content.mobile2.file1} func={uploadM1}/>
-                    <FuncContentImg text='모바일2' subtext="최대 10MB 업로드 가능" value={content.mobile2.file2} func={uploadM2}/>
+                    <FuncContentImg text='모바일1' subtext="최대 3MB 업로드 가능" value={content.mobile2.file1} func={uploadM1}/>
+                    <FuncContentImg text='모바일2' subtext="최대 3MB 업로드 가능" value={content.mobile2.file2} func={uploadM2}/>
                     <SliderCustom top="크기" text="목업" value={content.mobile2.size} func={setM2Size} max="100"/>   
                     </>
                 )
@@ -469,8 +502,8 @@ function Contents({content}) {
                 DeskMobTrue()
                 return(
                     <>
-                    <FuncContentImg text='모바일' subtext="최대 10MB 업로드 가능" value={content.deskMobile.file1} func={uploadDM1}/>
-                    <FuncContentImg text='데스크탑' subtext="최대 10MB 업로드 가능" value={content.deskMobile.file2} func={uploadDM2}/>
+                    <FuncContentImg text='모바일' subtext="최대 3MB 업로드 가능" value={content.deskMobile.file1} func={uploadDM1}/>
+                    <FuncContentImg text='데스크탑' subtext="최대 3MB 업로드 가능" value={content.deskMobile.file2} func={uploadDM2}/>
                     <SliderCustom top="모바일 크기" text="모바일" value={content.deskMobile.size1} func={setMSize} max="100"/>  
                     <SliderCustom top="데스크탑 크기" text="데스크탑" value={content.deskMobile.size2} func={setDSize} max="100"/>   
                     </>
@@ -543,7 +576,7 @@ function Contents({content}) {
                 ImageTrue()
                 return(
                     <div style={{width:'100%'}}>
-                        <AddContentImg text="이미지" subtext="최대 5MB 업로드 가능" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
+                        <AddContentImg text="이미지" subtext="최대 3MB 업로드 가능" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         <div style={{marginTop: '-10px'}}/>
                         <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="100"/>
                         <div style={{marginBottom: '20px'}}/>
@@ -570,7 +603,7 @@ function Contents({content}) {
                     <AddSlideImg value={content.slide_img.slide3} func={e => onChangeSlideImage3(e)} removeFunc={e => RemoveSlide3(e)}/>
                     </div>
                     <div className="small-command">
-                        최대 5MB까지 가능합니다.
+                        최대 3MB까지 가능합니다.
                     </div>
                     <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="300"/>
                     <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {

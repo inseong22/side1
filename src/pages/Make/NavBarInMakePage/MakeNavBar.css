@@ -43,11 +43,12 @@
     height: 40px;
     margin: 5px;
     cursor: pointer;
-    box-shadow: var(--default-shadow-01);
+    box-shadow: var(--non-hover-button-shadow);
 }
 
 .make-nav-button:hover{
     background-color:var(--main-light-gray);
+    box-shadow: var(--default-shadow-01);
 }
 
 .nb-clicked{

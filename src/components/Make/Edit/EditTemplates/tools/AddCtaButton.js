@@ -32,7 +32,7 @@ function AddCtaButton({content, num}) {
         switch(content.button.ctaOption){
             case 'link':
                 return(
-                    <InputCustom placeholder="연결하고 싶은 URL을 선택해주세요" value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
+                    <InputCustom placeholder="연결하고 싶은 URL을 선택해 주세요" value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.ctaLink = e
                     }))} />
                 )

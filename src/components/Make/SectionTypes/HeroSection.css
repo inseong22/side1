@@ -6,6 +6,7 @@
 .video{
     z-index: 1;
     width: 200px;
+    margin: 0 auto;
 }
 
 .mobile-container{
@@ -54,6 +55,7 @@
 .image__container{
     display: flex;
     justify-content: center;
+    align-items: center;
     width:100%;
 }
 
@@ -71,11 +73,12 @@
 }
 
 .video-area {
-    position: relative; /* absolute는 부모가 relative일 때 부모를 따라간다. */
+    /* z-index: 1; */
+    margin: 0 auto;
+    /* position: relative; absolute는 부모가 relative일 때 부모를 따라간다. */
   }
   
 .video-content {
-    position: absolute;
     width: 100%; /* 부모에 맞게 꽉 채운다. */
     height: 100%;
 }

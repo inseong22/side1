@@ -32,6 +32,3 @@
 .qna__answer{
     font-size:var(--feature-desc-size);
 }
-.qna__question{
-    font-size:var(--feature-title-size);
-}

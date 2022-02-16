@@ -124,12 +124,12 @@ function NewSection({setting, content, index, contents, setContents, full}) {
     }
 
     return(
-        <div style={{fontSize:'28px'}} className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
+        <div style={{fontSize:`${state.isPhone ? '22px' : '28px'}`}} className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
             {!full && <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
 
             </div>}
             <div className="section__container" 
-                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}} 
+                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat'}} 
                     onClick={() => setThisSection()}>
                 {
                     content.backgroundType === 'color' ?
@@ -148,7 +148,11 @@ function NewSection({setting, content, index, contents, setContents, full}) {
                     </div>
                 }
                 <div className="section__container-inner"
-                    style={{padding:`${content.padding.top}vh ${full ? 'calc(14vw + 30px)' : '30px'} ${content.padding.bottom}vh ${full ? 'calc(14vw + 30px)' : '30px'} `}} >
+                    style={{padding:`${
+                        state.isPhone ? content.padding.top/2.5 : content.padding.top}vh 
+                        ${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`} 
+                        ${state.isPhone ? content.padding.top/2.5 : content.padding.bottom}vh 
+                        ${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`} `}} >
                     {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                     {returnType()}
                 </div>
