@@ -1,5 +1,5 @@
 import React, {useRef, useState, useContext} from 'react';
-import ImageCarousel from '../../Edit/tools/func/FuncImageCarousel'
+import FuncImageCarousel from '../../Edit/tools/func/FuncImageCarousel'
 import produce from 'immer';
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import Phone from '../../../../tools/img/mockup/mobile.png'
@@ -10,20 +10,21 @@ function ImageOrSlide({content}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const imgRef=useRef(null)
     const [imageShow, setImageShow] = useState(null);
+
     if (content.contents.use) {
         // 동영상 - 유튜브 링크
-        if(content.video.youtube) 
+        if(content.video.type === 'youtube' && content.contents.type === 'video' ) 
             return(
-                <div>
-                    <iframe style={{ zIndex: 1, width:`${content.image.size}%`, height:`${content.image.size}%` }} id="video-content" src={`${content.video.link}`} frameborder="0" allow='autoplay' allowfullscreen/>
-                </div>
+            <div ref={imgRef} className="video-area" style={{ width:`${content.image.size}%`, height:`${imgRef.current && imgRef.current.scrollWidth * 0.56}px` }}>
+                <iframe className="video-content" src={`${content.video.link}`} frameborder="0" allow='autoplay' allowfullscreen/>
+            </div>
             )
         // 동영상 - 비디오 업로드
-        if(content.video.use)
+        if(content.video.type === 'base' && content.contents.type === 'video' )
             return(
                 <video 
                 className="video"
-                src={`${content.video.file}`} 
+                src={`${content.video.attachment}`} 
                 type="video/mp4" 
                 autoPlay
                 muted
@@ -33,14 +34,14 @@ function ImageOrSlide({content}){
                 </video>
             )
         // 슬라이드
-        if(content.image.slide)
+        if( content.contents.type === 'slide' )
             return(
-                <div>
-                    <ImageCarousel content={content}/>
+                <div className="centera">
+                    <FuncImageCarousel content={content}/>
                 </div>
             )
         // 이미지
-        if(content.image.oneImg)
+        if( content.contents.type === 'image' )
             return (
                 // <div style={{width:'100%'}}>
                 <img 
@@ -57,46 +58,39 @@ function ImageOrSlide({content}){
                 // </div>
             )
         // 목업 - 모바일
-        if(content.mobile.use)
+        if(content.mockup.type === 'mobile' && content.contents.type === 'mockup' )
             return(
                 <div className="mobile-container">
+                    모바일
                     <img className="mobile-ex" src={Phone} alt="목업틀"
-                        style={{width: `${content.mobile.size}%`}}
+                        style={{width: `${content.image.size}%`}}
                     />
-                    {content.mobile.file === '' ?  
+                    {content.mobile.attachment === '' ?  
                         <></>
                         : 
                         <img 
                         className="upload-mobile" 
                         ref={imgRef} 
-                        src={`${content.mobile.file}`} 
+                        src={`${content.mobile.attachment}`} 
                         onClick={(e) => setImageShow(e.currentTarget)} 
-                        style={{ width:`${content.mobile.size}%`}}
+                        style={{ width:`${content.image.size}%`}}
                         />
                     }
                 </div>
             )
-        // 목업 - 태블릿
-        if(content.tablet.use)
-            return(
-                <div className="mobile-container">
-                   tablet
-                </div>
-            )
         // 목업 - 데스크탑
-        if(content.desktop.use)
+        if(content.mockup.type === 'desktop' && content.contents.type === 'mockup' )
             return(
                 <div className="desk-container">
+                    데스크탑
                     <img className="mobile-ex" src={Desktop} alt="목업틀"
-                        style={{width: `${content.desktop.size}px`}}
+                        style={{width: `${content.image.size}px`}}
                     />
-                    {content.desktop.file === '' ?  
-                        <></>
-                        : 
+                    {!content.mockup.attachment === '' &&
                         <img 
                         className="upload-desk" 
                         ref={imgRef} 
-                        src={`${content.desktop.file}`} 
+                        src={`${content.image.attachment}`} 
                         onClick={(e) => setImageShow(e.currentTarget)} 
                         // style={{ width:`${content.desktop.size}px`}}
                         />
@@ -104,75 +98,35 @@ function ImageOrSlide({content}){
                 </div>
             )
         // 목업 - 모바일 2개
-        if(content.mobile2.use)
+        if(content.mockup.type === 'mobile2' && content.contents.type === 'mockup' )
         return(
             <>
             <div className="desk-container">
+                모바일 2개
                     <img className="mobile-ex" src={Phone} alt="목업틀"
-                        style={{width: `${content.mobile2.size}px`}}
+                        style={{width: `${content.image.size}px`}}
                     />
-                    {content.mobile2.file1 === '' ?  
-                        <></>
-                        : 
+                    {!content.mockup.attachment === '' &&
                         <img 
-                        className="upload-mobile" 
-                        ref={imgRef} 
-                        src={`${content.mobile2.file1}`} 
-                        onClick={(e) => setImageShow(e.currentTarget)} 
-                        style={{ width:`${content.mobile2.size}px`}}
+                            className="upload-mobile" 
+                            ref={imgRef} 
+                            src={`${content.mockup.attachment1}`} 
+                            onClick={(e) => setImageShow(e.currentTarget)} 
+                            style={{ width:`${content.image.size}px`}}
                         />
                     }
             </div>
             <div className="desk-container">
                     <img className="mobile-ex" src={Phone} alt="목업틀"
-                        style={{width: `${content.mobile2.size}px`}}
+                        style={{width: `${content.image.size}px`}}
                     />
-                    {content.mobile2.file2 === '' ?  
-                        <></>
-                        : 
+                    {!content.mockup.attachment2 === '' &&
                         <img 
                         className="upload-mobile" 
                         ref={imgRef} 
-                        src={`${content.mobile2.file2}`} 
+                        src={`${content.mockup.attachment2}`} 
                         onClick={(e) => setImageShow(e.currentTarget)} 
-                        style={{ width:`${content.mobile2.size}px`}}
-                        />
-                    }
-            </div>
-            </>
-        )
-        // 목업 - desk + mobile
-        if(content.deskMobile.use)
-        return(
-            <>
-            <div className="mobile-container">
-                    <img className="mobile-ex" src={Phone} alt="목업틀"
-                        style={{width: `${content.deskMobile.size1}px`}}
-                    />
-                    {content.deskMobile.file1 === '' ?  
-                        <></>
-                        : 
-                        <img 
-                        className="upload-mobile" 
-                        ref={imgRef} 
-                        src={`${content.deskMobile.file1}`} 
-                        onClick={(e) => setImageShow(e.currentTarget)} 
-                        style={{ width:`${content.deskMobile.size1}px`}}
-                        />
-                    }
-            </div>
-            <div className="desk-container">
-                    <img className="mobile-ex" src={Desktop} alt="목업틀"
-                        style={{width: `${content.deskMobile.size2}px`}}
-                    />
-                    {content.deskMobile.file2 === '' ?  
-                        <></>
-                        : 
-                        <img 
-                        className="upload-desk" 
-                        ref={imgRef} 
-                        src={`${content.deskMobile.file2}`} 
-                        onClick={(e) => setImageShow(e.currentTarget)} 
+                        style={{ width:`${content.image.size}px`}}
                         />
                     }
             </div>
