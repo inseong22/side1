@@ -125,20 +125,30 @@ function EditNaviSection({navi, setNavi, category}) {
                         }))} />
                         {
                             navi.button.cta.use && 
+                            <>
                                 <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요." value={navi.button.cta.link} func={(e) => setNavi(produce(navi, draft => {
                                     draft.button.cta.link = e
                                 }))} />
+                                <SliderCustom top="CTA 여백" value={navi.button.cta.padding} max={26} func={e => setNavi(produce(navi, draft => {
+                                    draft.button.cta.padding = e;
+                                }))}/>
+                            </>
                         }
-                        
+                        <div></div>
                         <OnOffCustom text="고스트 버튼" value={navi.button.ghost.use} func={() => setNavi(produce(navi, draft => {
                             draft.button.ghost.use = !navi.button.ghost.use
                         }))} />
 
                         {
                             navi.button.ghost.use && 
+                            <>
                                 <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요." value={navi.button.ghost.link} func={(e) => setNavi(produce(navi, draft => {
                                     draft.button.ghost.link = e
                                 }))} />
+                                <SliderCustom top="고스트 여백" value={navi.button.ghost.padding} max={26} func={e => setNavi(produce(navi, draft => {
+                                    draft.button.ghost.padding = e;
+                                }))}/>
+                            </>
                         }
                     </OpenCloseCustom>
                     
@@ -173,7 +183,7 @@ function EditNaviSection({navi, setNavi, category}) {
                     }
                 </OpenCloseCustom>
                 <OpenCloseCustom title="높이">
-                    <SliderCustom text="높이 조정" value={navi.height} func={e => setNavi({...navi, height:e})}/>
+                    <SliderCustom text="높이를" value={navi.height} func={e => setNavi({...navi, height:e})}/>
                 </OpenCloseCustom>
                 <BoxCustom title="반응형">
                 <div className="edit-element">

@@ -165,8 +165,11 @@ function EditFooterSection({foot, setFoot, category}) {
                     }))}} />
                 </OpenCloseCustom>
                 <OpenCloseCustom title="여백">
-                    <SliderCustom text="상단여백" value={foot.padding} func={e => {setFoot(produce(foot, draft => {
-                        draft.padding = e;
+                    <SliderCustom top="상단 여백" max={100} value={foot.paddingTop} func={e => {setFoot(produce(foot, draft => {
+                        draft.paddingTop = e;
+                    }))}} />
+                    <SliderCustom top="상단 여백" max={100} value={foot.paddingBottom} func={e => {setFoot(produce(foot, draft => {
+                        draft.paddingBottom = e;
                     }))}} />
                 </OpenCloseCustom>
             </div>

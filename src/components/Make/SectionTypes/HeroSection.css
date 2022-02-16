@@ -60,10 +60,8 @@
 
 .button__container{
     margin-top:15px;
-    display:flex;
     align-content: center;
     position:relative;
-    width:100%;
 }
 
 .store-button{

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, createContext} from 'react'
+import React, {useEffect, useState, useRef, createContext, useContext} from 'react'
 import './MakePage.css'
 import './MakeLanding.css'
 // Recoil , Immer JS 적용
@@ -43,6 +43,7 @@ const rate = 0.63;
 const NOTADDING = 1000;
 
 const MakePageV2 = ({history, userObj}) => {
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const targets = useRef(null);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
     const [secNum, setSecNum] = useState(52); // 현재 수정중인 페이지를 의미.
@@ -180,18 +181,19 @@ const MakePageV2 = ({history, userObj}) => {
             <div className="fta__container">
                 <button className="fta-button" 
                     style={{
+                        fontFamily: `${setting.font}`,
                         backgroundColor:`${setting.fta.backgroundColor}`, 
                         width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, 
                         borderRadius:`${setting.fta.shape}px`, 
                         border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
                         boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
                     }}>
-                    <TextAuto 
-                        small
+                    <TextAuto
+                    className='text-input' 
                         value={setting.fta.text} 
-                        onChange={e => setSetting(produce(setting, draft => {
+                        onChange={e => {setSetting(produce(setting, draft => {
                             draft.fta.text = e.currentTarget.value;
-                        }))}
+                        }))}}
                         color={setting.fta.color} align="center" />
                 </button>
             </div>

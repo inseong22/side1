@@ -5,6 +5,7 @@ import {CustomSwitch} from '../../tools/Custom/OnOffCustom'
 import RadioCustom from '../../tools/Custom/RadioCustom'
 import InputCustom from '../../tools/Custom/InputCustom'
 import ApplyInputCustom from '../../tools/Custom/ApplyInputCustom'
+import SliderCustom from '../../tools/Custom/SliderCustom'
 
 const buttonOptions = [
     {label: '링크 연결', value: 'link'},
@@ -32,9 +33,14 @@ function AddGhostButton({content, num}) {
         switch(content.button.ghostOption){
             case 'link':
                 return(
+                    <>
                     <InputCustom placeholder="연결하고 싶은 URL을 선택해 주세요" value={content.button.ghostLink} func = {(e) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.ghostLink = e
                     }))} />
+                    <SliderCustom top="고스트 여백" value={content.button.ghostPadding} max={24} func={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button.ghostPadding = e
+                    }))}/>
+                    </>
                 )
             case 'apply':
                 return(
@@ -65,6 +71,9 @@ function AddGhostButton({content, num}) {
                     </> }
                     <div className="mid-command-light"> 최대 {num}개의 신청 박스만 생성 가능합니다. 
                     </div>
+                    <SliderCustom top="고스트 여백" value={content.button.ghostPadding} max={24} func={e => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button.ghostPadding = e
+                    }))}/>
                     </>
                 )
             default:

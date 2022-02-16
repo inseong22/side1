@@ -39,7 +39,8 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                                 fontSize:`${navi.logo.text.fontSize}px`, 
                                 color:`${navi.logo.text.color}`, 
                                 fontFamily:`${state.setting.font}`,
-                                resize:'none'
+                                resize:'none',
+                                padding: '10px'
                             }}
                         />
                     </div>
@@ -58,7 +59,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                 }} onClick={() => {}}>
                     <AutosizeInput className="text-input-flex ti" value={navi.button.cta.text } onChange={(e) => setNavi(produce(navi, draft => {
                         draft.button.cta.text = e.currentTarget.value;
-                    }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.cta.borderRadius}px`,  backgroundColor:`${state.setting.cta.backgroundColor}`}}/>
+                    }))} inputStyle={{fontFamily:`${state.setting.font}`, borderRadius:`${state.setting.cta.borderRadius}px`,  backgroundColor:`${state.setting.cta.backgroundColor}`, padding: `${navi.button.cta.padding}px`}}/>
                 </div>
             }
             { navi.button.ghost.use && 
@@ -72,7 +73,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                 }} onClick={() => {}}>
                     <AutosizeInput className="text-input-flex ti" value={navi.button.ghost.text } onChange={(e) => setNavi(produce(navi, draft => {
                         draft.button.ghost.text = e.currentTarget.value;
-                }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`}}/>
+                }))} inputStyle={{fontFamily:`${state.setting.font}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`,  padding: `${navi.button.ghost.padding}px`}}/>
                             </div>
                         }
                 </div>

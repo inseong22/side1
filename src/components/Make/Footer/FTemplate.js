@@ -117,7 +117,7 @@ function FTemplate({foot, setFoot, history }) {
                             className="footer-text-input"
                             value={foot.text.text}
                             style={{
-                                fontFamily:`${state.setting.font}`, 
+                                fontFamily:`${state.setting.smallFont}`, 
                                 color: `${foot.text.color}`,
                                 fontSize: `${foot.text.size}px`,
                                 textAlign:`${foot.text.align}`,
@@ -152,7 +152,7 @@ function FTemplate({foot, setFoot, history }) {
                         style={{
                             fontFamily:`${state.setting.font}`
                         }}>
-                        2022 Copyright © {foot.copyright.text}
+                        Copyright 2022 {foot.copyright.text}
                     </div>
                 }
             </div>

@@ -240,7 +240,7 @@ function Contents({content}) {
                     <>
                     <AddContentVideo text="동영상" value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
                     <div style={{marginBottom: '-20px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="320"/>
+                    <SliderCustom top="크기" text="동영상을" value={content.image.size} func={e => setImgSize(e)} max="320"/>
                     </>
                 )
             case 'youtube':
@@ -263,7 +263,7 @@ function Contents({content}) {
                         유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
                     </div>
                     <div style={{marginTop: '10px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="320"/>
+                    <SliderCustom top="크기" text="동영상을" value={content.image.size} func={e => setImgSize(e)} max="320"/>
                     </>
                 )
         }
@@ -438,7 +438,7 @@ function Contents({content}) {
                 return(
                     <>
                         <FuncContentImg text='목업' subtext="최대 10MB 업로드 가능" value={content.mobile.file} func={uploadMobile}/>
-                        <SliderCustom top="크기" text="목업" value={content.mobile.size} func={setMobileSize} max="100"/>
+                        <SliderCustom top="크기" text="목업을" value={content.mobile.size} func={setMobileSize} max="100"/>
                     </>
                 )
             case 'tablet':
@@ -545,7 +545,7 @@ function Contents({content}) {
                     <div style={{width:'100%'}}>
                         <AddContentImg text="이미지" subtext="최대 5MB 업로드 가능" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         <div style={{marginTop: '-10px'}}/>
-                        <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="100"/>
+                        <SliderCustom top="크기" text="이미지를" value={content.image.size} func={setImgSize} max="100"/>
                         <div style={{marginBottom: '20px'}}/>
                         <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
@@ -572,7 +572,7 @@ function Contents({content}) {
                     <div className="small-command">
                         최대 5MB까지 가능합니다.
                     </div>
-                    <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="300"/>
+                    <SliderCustom top="크기" text="이미지를" value={content.image.size} func={setImgSize} max="300"/>
                     <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                     }))} />

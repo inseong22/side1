@@ -76,7 +76,14 @@
     display: flex;
     justify-content:center;
     align-items: center;
-    cursor:pointer,
+    cursor:pointer;
+    width: auto;
+}
+
+.button-made{
+    cursor:pointer;
+    width: 100px;
+    text-align: center;
 }
 
 .section__box{
