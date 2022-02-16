@@ -8,11 +8,13 @@ function ApplyInputCustom({func, disabled, made, value}) {
         return (
                 <div className="centera" style={{justifyContent:'start', marginTop:'12px'}}>
                     <div className="maked">
-                    {value}를 입력해 주세요
+                        {value}
                     </div>
-                    <div className="delete-button" onClick={() => {
+                    <div className="content__button cb-delete" style={{zIndex:4, marginLeft:'-65px'}} onClick={() => {
                         func()
-                    }}>삭제</div>
+                    }}>
+                        삭제
+                    </div>
                 </div>
         )
     }else if (disabled){

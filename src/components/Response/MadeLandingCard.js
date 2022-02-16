@@ -127,14 +127,6 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
                     <button className="content__button" onClick={() => duplicate()}>복제</button>
                 </div>
             </div>
-            {/* <Link to={{
-                pathname:`/make/edit`,
-                state:{
-                    item:item
-                }
-                }}>
-                편집하기
-            </Link> */}
             <ConfirmCustom warn open={deleteopen} setOpen={setDeleteOpen} message={"한번 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?"} callback={deletePage}/>
         </div>
     )

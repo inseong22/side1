@@ -337,10 +337,10 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                     return(
                                         <div className="template__card" onClick={() => {setType(item.type);}} key={index} 
                                             style={{border:`${color}`}}>
-                                            <div style={{fontSize:'17px'}}>
+                                            <div style={{fontSize:'18px'}}>
                                                 {item.typequestion}
                                             </div>
-                                            <div style={{marginTop:'4%'}}>
+                                            <div style={{marginTop:'4%', fontSize:'16px'}}>
                                                 {item.question}
                                             </div>
                                         </div>
@@ -464,11 +464,9 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                             <div className="modal-title" style={{fontSize:'25px'}}>
                                 <input className="input-holder input-focus" placeholder="영문과 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
                             </div>
-                            <div style={{color:'gray', paddingLeft:'0%',marginTop:'3%', fontSize:'18px', textAlign:'left', fontFamily:'Pretendard-Regular'}}>
-                                <div>
-                                    - 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.<br/>
-                                    - 수정 가능하니 편하게 설정해 주세요 :)<br/>
-                                </div>
+                            <div style={{color:'gray', paddingLeft:'0%',marginTop:'3%', fontSize:'18px', textAlign:'center', fontFamily:'Pretendard-Regular'}}>
+                                개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.
+                                수정 가능하니 편하게 설정해 주세요 :)
                             </div>
                             <div className="modal-button-container">
                                 <div className="modal-move-button-back" onClick={e => setCnum(cnum - 1)}>이전</div>

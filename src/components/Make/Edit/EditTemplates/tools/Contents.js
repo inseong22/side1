@@ -72,7 +72,16 @@ function Contents({content}) {
     }
 
     // 슬라이드 - 이미지
-    const onChangeSlideImage1= e => {
+    const onChangeSlideImage= (num, e) => {
+        console.log(num, "번째 슬라이드 추가하기")
+        let numName = ''
+        if(num === 1){
+            numName = 'attachment1'
+        }else if(num === 2){
+            numName = 'attachment2'
+        }else{
+            numName = 'attachment3'
+        }
         const {target:{files},} = e;
         const oneFile = files[0];
         const reader = new FileReader();
@@ -83,102 +92,31 @@ function Contents({content}) {
             }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].slide_img.slide1 = result;
+                draft[state.secNum].slide_img[numName] = result;
             }))
         }
         if(oneFile){
             reader.readAsDataURL(oneFile);
         }
     }
-    const RemoveSlide1 = () => {
+    const RemoveSlide = (num) => {
+        console.log(num, "번째 슬라이드 지우기")
+        let numName = ''
+        if(num === 1){
+            numName = 'attachment1'
+        }else if(num === 2){
+            numName = 'attachment2'
+        }else{
+            numName = 'attachment3'
+        }
         action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].slide_img.slide1 = '';
-        }))
-    }
-    const onChangeSlideImage2= e => {
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            if(oneFile.size > 3000000){
-                alert("파일의 크기가 3MB를 초과합니다.")
-                return;
-            }
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].slide_img.slide2 = result;
-                draft[state.secNum].image.slide = true
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    const RemoveSlide2 = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].slide_img.slide2 = '';
-        }))
-    }
-    const onChangeSlideImage3= e => {
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            if(oneFile.size > 3000000){
-                alert("파일의 크기가 3MB를 초과합니다.")
-                return;
-            }
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].slide_img.slide3 = result;
-                draft[state.secNum].image.slide = true
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    const RemoveSlide3 = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].slide_img.slide3 = '';
+            draft[state.secNum].slide_img[numName] = '';
         }))
     }
 
     const setImgSize = e => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].image.size = e
-        }))
-    }
-
-    const setSlideSize = e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].image.size = e
-        }))
-    }
-
-    const setMobileSize = e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mobile.size = e
-        }))
-    }
-    const setDesktopSize = e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].desktop.size = e
-        }))
-    }
-    const setM2Size =e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mobile2.size = e
-        }))
-    }
-    const setMSize =e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].deskMobile.size1 = e
-        }))
-    }
-    const setDSize =e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].deskMobile.size2 = e
         }))
     }
 
@@ -196,13 +134,9 @@ function Contents({content}) {
         const oneFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            if(oneFile.size > 3000000){
-                alert("파일의 크기가 3MB를 초과합니다.")
-                return;
-            }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].video.file = result;
+                draft[state.secNum].video.attachment = result;
             }))
             // actionImgCompress(result);
         }
@@ -213,56 +147,26 @@ function Contents({content}) {
     // video remove
     const RemoveVideo = () => {
         action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].video.file = '';
+            draft[state.secNum].video.attachment = '';
         }))
     }
 
-    const BaseTrue = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].image.oneImg = false   
-            draft[state.secNum].video.use = true
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = false
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = false
-        }))
-    }
-    const YoutubeTrue = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].image.oneImg = false   
-            draft[state.secNum].video.use = false
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = true
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = false
-            
-        }))
-    }
-    
     const videoType = () => {
         switch(content.video.type){
             case 'base':
-                BaseTrue()
                 return(
                     <>
-                    <AddContentVideo text="동영상" value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
+                    <AddContentVideo text="동영상" value={content.video.attachment} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
                     <div style={{marginBottom: '-20px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="320"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="100"/>
                     </>
                 )
             case 'youtube':
-                YoutubeTrue()
                 return(
                     <>
                     <div style={{marginTop: '20px'}} />
                     <AddYoutubeLink content={content} value={content.video.link} />
-                    <div style={{marginTop: '-20px'}} />
+                    <div style={{marginTop: '0px'}} />
                     <CustomSwitch text="자동 재생" value={content.video.auto} 
                         onChange={ () => action.setContents(produce(state.contents, draft => {
                             if (content.video.link.includes('autoplay=1'))
@@ -276,7 +180,7 @@ function Contents({content}) {
                         유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
                     </div>
                     <div style={{marginTop: '10px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="320"/>
+                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="100"/>
                     </>
                 )
         }
@@ -288,23 +192,9 @@ function Contents({content}) {
             draft[state.secNum].mockup.type = e;
         }))
     }
-    // 목업 모바일 이미지 업로드
-    const uploadMobile = e => {
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].mobile.file = result;               
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    // 목업 데스크탑 이미지 업로드
-    const uploadDesk= e => {
+
+    // 목업 모바일 2 이미지 업로드
+    const uploadMockup= e => {
         const {target:{files},} = e;
         const oneFile = files[0];
         const reader = new FileReader();
@@ -315,26 +205,7 @@ function Contents({content}) {
             }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].desktop.file = result;               
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    // 목업 모바일 1 이미지 업로드
-    const uploadM1= e => {
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            if(oneFile.size > 3000000){
-                alert("파일의 크기가 3MB를 초과합니다.")
-                return;
-            }
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].mobile2.file1 = result;               
+                draft[state.secNum].mockup.attachment = result;               
             }))
         }
         if(oneFile){
@@ -342,7 +213,7 @@ function Contents({content}) {
         }
     }
     // 목업 모바일 2 이미지 업로드
-    const uploadM2= e => {
+    const uploadMockup2= e => {
         const {target:{files},} = e;
         const oneFile = files[0];
         const reader = new FileReader();
@@ -353,227 +224,58 @@ function Contents({content}) {
             }
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].mobile2.file2 = result;               
+                draft[state.secNum].mockup.attachment2 = result;               
             }))
         }
         if(oneFile){
             reader.readAsDataURL(oneFile);
         }
-    }
-    // 목업 모바일 이미지 업로드
-    const uploadDM1= e => {
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            if(oneFile.size > 3000000){
-                alert("파일의 크기가 3MB를 초과합니다.")
-                return;
-            }
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].deskMobile.file1 = result;               
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    // 목업 데스크탑 이미지 업로드
-    const uploadDM2= e => {
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            if(oneFile.size > 3000000){
-                alert("파일의 크기가 3MB를 초과합니다.")
-                return;
-            }
-            const {currentTarget:{result}} = finishedEvent;
-            action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].deskMobile.file2 = result;               
-            }))
-        }
-        if(oneFile){
-            reader.readAsDataURL(oneFile);
-        }
-    }
-    const MobileTrue = () => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mobile.use = true
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = false
-            draft[state.secNum].image.oneImg = false   
-            draft[state.secNum].video.use = false
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = false
-        }))
-    }
-    const TabletTrue = () => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = true
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = false
-            draft[state.secNum].image.oneImg = false   
-            draft[state.secNum].video.use = false
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = false
-        }))
-    }
-    const DesktopTrue = () => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = true
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = false
-            draft[state.secNum].image.oneImg = false   
-            draft[state.secNum].video.use = false
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = false
-        }))
-    }
-    const Mobile2True = () => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = true
-            draft[state.secNum].deskMobile.use = false
-            draft[state.secNum].image.oneImg = false   
-            draft[state.secNum].video.use = false
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = false
-        }))
-    }
-    const DeskMobTrue = () => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = true
-            draft[state.secNum].image.oneImg = false   
-            draft[state.secNum].video.use = false
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = false
-        }))
     }
 
     const returnMockup = () => {
         switch(content.mockup.type){
             case 'mobile':
-                MobileTrue()
                 return(
                     <>
-                        <FuncContentImg text='목업' subtext="최대 3MB 업로드 가능" value={content.mobile.file} func={uploadMobile}/>
-                        <SliderCustom top="크기" text="목업" value={content.mobile.size} func={setMobileSize} max="100"/>
-                    </>
-                )
-            case 'tablet':
-                TabletTrue()
-                return(
-                    <>
-                        태블릿
+                        <FuncContentImg text='목업' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment} func={uploadMockup}/>
+                        <SliderCustom top="크기" text="목업" value={content.image.size} func={e =>
+                            action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].image.size = e
+                            }))} max="100"/>
                     </>
                 )
             case 'desktop':
-                DesktopTrue()
                 return(
                     <>
-                        <FuncContentImg text='목업' subtext="최대 3MB 업로드 가능" value={content.desktop.file} func={uploadDesk}/>
-                        <SliderCustom top="크기" text="목업" value={content.desktop.size} func={setDesktopSize} max="100"/>   
+                        <FuncContentImg text='목업' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment} func={uploadMockup}/>
+                        <SliderCustom top="크기" text="목업" value={content.image.size} func={e =>
+                            action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].image.size = e
+                            }))} max="100"/>   
                     </>
                 )
             case 'mobile2':
-                Mobile2True()
                 return(
                     <>
-                    <FuncContentImg text='모바일1' subtext="최대 3MB 업로드 가능" value={content.mobile2.file1} func={uploadM1}/>
-                    <FuncContentImg text='모바일2' subtext="최대 3MB 업로드 가능" value={content.mobile2.file2} func={uploadM2}/>
-                    <SliderCustom top="크기" text="목업" value={content.mobile2.size} func={setM2Size} max="100"/>   
-                    </>
-                )
-            case 'desk+mob':
-                DeskMobTrue()
-                return(
-                    <>
-                    <FuncContentImg text='모바일' subtext="최대 3MB 업로드 가능" value={content.deskMobile.file1} func={uploadDM1}/>
-                    <FuncContentImg text='데스크탑' subtext="최대 3MB 업로드 가능" value={content.deskMobile.file2} func={uploadDM2}/>
-                    <SliderCustom top="모바일 크기" text="모바일" value={content.deskMobile.size1} func={setMSize} max="100"/>  
-                    <SliderCustom top="데스크탑 크기" text="데스크탑" value={content.deskMobile.size2} func={setDSize} max="100"/>   
+                    <FuncContentImg text='모바일1' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment1} func={uploadMockup}/>
+                    <FuncContentImg text='모바일2' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment2} func={uploadMockup2}/>
+                    <SliderCustom top="크기" text="목업" value={content.image.size} func={e =>
+                        action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].image.size = e
+                        }))} max="100"/>   
                     </>
                 )
             default:
-            return(
-                <>
-                </>
-            )
+                return(
+                    <>
+                    </>
+                )
         }
-    }
-
-    const ImageTrue = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].image.oneImg = true    
-            draft[state.secNum].video.use = false
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = false
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = false
-        }))
-    }
-    const SlideTrue = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].image.oneImg = false    
-            draft[state.secNum].video.use = false
-            draft[state.secNum].image.slide = true
-            draft[state.secNum].video.youtube = false
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = false
-        }))
-    }
-    const VideoTrue = () => {
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].image.oneImg = false   
-            draft[state.secNum].video.use = true
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = false
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = false
-        }))
-    }
-    const MockupTrue = () =>{
-        action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].image.oneImg = false   
-            draft[state.secNum].video.use = false
-            draft[state.secNum].image.slide = false
-            draft[state.secNum].video.youtube = false
-            draft[state.secNum].mockup.use = true
-            draft[state.secNum].mobile.use = false
-            draft[state.secNum].tablet.use = false
-            draft[state.secNum].desktop.use = false
-            draft[state.secNum].mobile2.use = false
-            draft[state.secNum].deskMobile.use = false
-        }))
     }
 
     const returnImageOrVideoAdd = () => {
         switch(content.contents.type){
             case 'image':
-                ImageTrue()
                 return(
                     <div style={{width:'100%'}}>
                         <AddContentImg text="이미지" subtext="최대 3MB 업로드 가능" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
@@ -594,18 +296,17 @@ function Contents({content}) {
                     </div>
                 )
             case 'slide':
-                SlideTrue()
                 return(
                     <>
                     <div style={{display: 'flex', marginTop: '10px'}}>
-                    <AddSlideImg value={content.slide_img.slide1} func={e => onChangeSlideImage1(e)} removeFunc={e => RemoveSlide1(e)}/>
-                    <AddSlideImg value={content.slide_img.slide2} func={e => onChangeSlideImage2(e)} removeFunc={e => RemoveSlide2(e)}/>
-                    <AddSlideImg value={content.slide_img.slide3} func={e => onChangeSlideImage3(e)} removeFunc={e => RemoveSlide3(e)}/>
+                    <AddSlideImg value={content.slide_img.attachment1} func={e => onChangeSlideImage(1, e)} removeFunc={e => RemoveSlide(1)}/>
+                    <AddSlideImg value={content.slide_img.attachment2} func={e => onChangeSlideImage(2, e)} removeFunc={e => RemoveSlide(2)}/>
+                    <AddSlideImg value={content.slide_img.attachment3} func={e => onChangeSlideImage(3, e)} removeFunc={e => RemoveSlide(3)}/>
                     </div>
                     <div className="small-command">
                         최대 3MB까지 가능합니다.
                     </div>
-                    <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="300"/>
+                    <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="100"/>
                     <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                     }))} />
@@ -620,7 +321,6 @@ function Contents({content}) {
                     </>
                 )         
             case 'video':
-                VideoTrue()
                 return(
                     <>
                     <div style={{marginTop: '10px'}}/>
@@ -629,7 +329,6 @@ function Contents({content}) {
                     </>
                 )
             case 'mockup':
-                MockupTrue()
                 return(
                     <>
                     <div className="edit-element">
@@ -638,7 +337,7 @@ function Contents({content}) {
                         </div>
                     </div> 
                     <div className='mockup-select'>
-                    <Select  
+                <Select  
                     className='select_list'
                     iconSize='none'
                     onChange={e=>mockOption(e.target.value)}
@@ -646,10 +345,8 @@ function Contents({content}) {
                     borderColor='rgba(0, 0, 0, 0.08)'
                     color='gray'>
                     <option value='mobile'>모바일</option>
-                    <option value='tablet'>태블릿</option>
                     <option value='desktop'>데스크탑</option>
-                    <option value='mobile2'>모바일 2대</option>
-                    <option value='desk+mob'>데스크탑 + 모바일</option>                       
+                    <option value='mobile2'>모바일 2대</option>                     
                 </Select>
                     </div>
                     {returnMockup()}

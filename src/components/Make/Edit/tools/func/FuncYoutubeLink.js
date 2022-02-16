@@ -20,12 +20,11 @@ function FuncYoutubeLink({content}) {
         if (text.includes('www.youtube.com')) {
             const submitLink = text.replace('watch?v=', 'embed/');
             action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].video.youtube = true
                 draft[state.secNum].video.link = submitLink+'?autoplay=1'+'&mute=1'
                 draft[state.secNum].image.slide = false
                 draft[state.secNum].video.use = false
                 draft[state.secNum].image.slide = false
-                draft[state.secNum].image.oneImg = false 
+                draft[state.secNum].image.use = false 
             }))
         }
     }

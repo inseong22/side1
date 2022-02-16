@@ -22,10 +22,34 @@ margin-right: -40px;
 margin-top: -30px;
 `
 
+export const StyledSlider = styled(Slider)`
+   height: 90%; //슬라이드 컨테이너 영역
+
+  .slick-list {  //슬라이드 스크린
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    background: green;
+  }
+
+  .slick-slide div { //슬라이더  컨텐츠
+    /* cursor: pointer; */
+  }
+
+  .slick-dots {  //슬라이드의 위치
+    bottom: 20px;
+    margin-top: 200px;
+  }
+
+  .slick-track { //이건 잘 모르겠음
+    width: 100%;
+  }
+`;
 
 function FuncImageCarousel({content}) {
 
-    const imgRef = useRef(null)
+    const imgRef2 = useRef(null)
 
     // const PrevArrow=({currentSlide,slideCount,...props})=>(
     //     <Prev {...props} src={prevButton} className="slick-prev" /> 
@@ -44,23 +68,18 @@ function FuncImageCarousel({content}) {
         // prevArrow: <PrevArrow />,
         autoplay: true,
         autoPlaySpeed: 5000,	
+        className: 's'
       };
 
     return (
-        <div className="slide-box" style={{borderRadius: `${content.image.border}%`, width:`${content.image.size}px`,height:`${content.image.size}px`}}>
-            <Slider {...settings}> 
-            {
-                (content.slide_img.slide1) &&
-                    <img ref={imgRef} src={`${content.slide_img.slide1}`} style={{width:`${content.image.size}px`,height:`${content.image.size}px`,boxShadow: `${content.image.shadowValue}`}}/>
-            }
-            {
-                (content.slide_img.slide2) &&
-                    <img ref={imgRef} src={`${content.slide_img.slide2}`} style={{ width:`${content.image.size}px`,height:`${content.image.size}px`,boxShadow: `${content.image.shadowValue}`}}/>
-            }
-            {
-                (content.slide_img.slide3) &&
-                    <img ref={imgRef} src={`${content.slide_img.slide3}`} style={{ width:`${content.image.size}px`,height:`${content.image.size}px`,boxShadow: `${content.image.shadowValue}`}}/>
-            }
+        <div className="slide-box" ref={imgRef2} style={{position:'relative', borderRadius: `${content.image.border}%`, width:`${content.image.size}%`, height:`${imgRef2.current && imgRef2.current.scrollWidth * 0.56}px`, backgroundColor:'red'}}>    
+            <Slider {...settings} style={{backgroundColor:'blue', width:'100%', height:`100%`}}>
+                <div>
+                    1
+                </div>
+                <div>
+                    2
+                </div>
             </Slider>
         </div>
     )

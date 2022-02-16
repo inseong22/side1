@@ -36,8 +36,7 @@ function GallerySection({content,setting}) {
                                     borderRadius:`${content.card.borderRadius}px ${content.card.borderRadius}px 0px 0px`
                                 }}/> 
                                :
-                            <div 
-                                className="feature-upload-button" 
+                            <div className="feature-upload-button uphover" 
                                 style={{ 
                                     height:`${content.element.size}px`, 
                                     backgroundColor:`${content.element.backgroundColor}`
