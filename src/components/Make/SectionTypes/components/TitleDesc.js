@@ -25,7 +25,7 @@ function TitleDesc({content}) {
                             textAlign:`${state.isPhone ? content.mobile.align : content.title.align}`,
                             resize:'none'
                         }}
-                        spellcheck="false"
+                        spellCheck="false"
                     />
                 </div>
             }
@@ -46,7 +46,7 @@ function TitleDesc({content}) {
                             textAlign:`${state.isPhone ? content.mobile.align : content.desc.align}`,
                             resize:'none'
                         }}
-                        spellcheck="false"
+                        spellCheck="false"
                     />
                 </div>
             }

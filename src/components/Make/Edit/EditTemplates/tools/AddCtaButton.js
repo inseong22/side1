@@ -84,7 +84,7 @@ function AddCtaButton({content, num}) {
     }
 
     return (
-        <>
+        <div className="box-gray__container">
         <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange = {e => ctaOpen(e)}/>
             { content.button.ctaUse && (
                 <>
@@ -92,7 +92,7 @@ function AddCtaButton({content, num}) {
                     {returnCtaOptions()}
                 </>
             )}
-        </>
+        </div>
     )
 }
 

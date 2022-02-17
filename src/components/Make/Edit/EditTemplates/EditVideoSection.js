@@ -38,7 +38,7 @@ function EditVideoSection({content, category}) {
         reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
             const {currentTarget:{result}} = finishedEvent;
             action.setContents(produce(state.contents, draft=>{
-                draft[state.secNum].video.file = result;
+                draft[state.secNum].video.attachment = result;
             }))
             // actionImgCompress(result);
         }
@@ -49,7 +49,7 @@ function EditVideoSection({content, category}) {
     // video remove
     const RemoveVideo = () => {
         action.setContents(produce(state.contents, draft=>{
-            draft[state.secNum].video.file = '';
+            draft[state.secNum].video.attachment = '';
         }))
     }
     // video size
@@ -64,7 +64,7 @@ function EditVideoSection({content, category}) {
             case 'base':
                 return(
                     <>
-                    <AddContentVideo text="동영상" value={content.video.file} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
+                    <AddContentVideo text="동영상" value={content.video.attachment} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
                     <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
                     </>
                 )

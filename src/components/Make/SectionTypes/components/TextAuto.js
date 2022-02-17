@@ -20,7 +20,7 @@ function TextAuto({small, value, onChange, color, align, size}) {
                     resize:'none',
                     fontFamily:`${state.setting.smallFont}`
                 }}
-                spellcheck="false"
+                spellCheck="false"
             />
             : 
             <TextareaAutosize 
@@ -34,7 +34,7 @@ function TextAuto({small, value, onChange, color, align, size}) {
                     fontSize: `${size}px`,
                     fontFamily:`${state.setting.font}`
                 }}
-                spellcheck="false"
+                spellCheck="false"
             />
         }
         </>

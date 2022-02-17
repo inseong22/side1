@@ -3,7 +3,6 @@ const commons = {
     backgroundColor:'#ffffff',
     backgroundType:'color',
     backgroundImage:{
-        use:false,
         attachment:'',
         overlay:false,
     },
@@ -23,7 +22,7 @@ const commons = {
     },
     contents:{
         use: true,
-        type: 'image',
+        type: 'image', // image, mockup, video, slide
         align: 'space-between',
     },
     padding:{
@@ -52,8 +51,7 @@ const commons = {
 
 const contents = {
     image:{
-        oneImg:true,
-        type:'image',
+        use:true,
         attachment:'',
         width:70,
         border:0,
@@ -61,15 +59,15 @@ const contents = {
         slide:false,
     },
     slide_img:{
-        slide1: '',
-        slide2: '',
-        slide3: '',
+        attachment1: '',
+        attachment2: '',
+        attachment3: '',
     },
     video:{
         use: false,
         youtube: false,
         type: 'base',
-        file: '',
+        attachment: '',
         link: '',
         auto: true,
         align: '',
@@ -78,43 +76,16 @@ const contents = {
     mockup: {
         use: false,
         type: 'mobile',
-        // mobile, tablet, desktop, mobile2, desk+mob 있음
-        file: '',
-        file2: '',
-    },
-    mobile: {
-        use: true,
-        file: '',
-        size: 200
-    },
-    tablet: {
-        use: false,
-        file: '',
-        size: 200
-    },
-    desktop: {
-        use: false,
-        file: '',
-        size: 400,
-    },
-    mobile2: {
-        use: false,
-        file1: '',
-        file2: '',
-        size: 200,
-    },
-    deskMobile: {
-        use: false,
-        file1: '',
-        file2: '',
-        size1: 100,
-        size2: 400,
+        size:200,
+        attachment: '',
+        attachment2: '',
+        // mobile, desktop, mobile2 있음
     },
 }
 
 const element = {
     use:true,
-    type:'image',
+    type:'image', // image or icon
     backgroundColor:'#6CCAD0',
     // borderRaidus:5,
     iconBorder:5,
@@ -165,10 +136,6 @@ export const base = [
         ...button,
         name:'메인',
         sectionTypeName:'HeroSection',
-        paddingSize:'',
-        paddingLeft:'',
-        paddingRight:'',
-        paddingCustom: false,
         layout:1,
     },
     {
@@ -176,10 +143,6 @@ export const base = [
         ...contents,
         name:'디테일',
         sectionTypeName:'DetailSection',
-        paddingSize:'',
-        paddingLeft:'',
-        paddingRight:'',
-        paddingCustom: false,
         layout:1,
     },
     {
@@ -398,6 +361,7 @@ export const base = [
         contents:{
             use:true,
             type:'video',
+            align:'space-between',
         },
         video:{
             ...contents.video,
@@ -414,43 +378,9 @@ export const base = [
     },
     {
         ...commons,
+        ...contents,
         name:'목업',
         sectionTypeName:'MockupSection',
-        mockup: {
-            use: true,
-            type: 'mobile',
-            // mobile, tablet, desktop, mobile2, desk+mob 있음
-            file: '',
-            file2: '',
-        },
-        mobile: {
-            use: true,
-            file: '',
-            size: 200
-        },
-        tablet: {
-            use: false,
-            file: '',
-            size: 200
-        },
-        desktop: {
-            use: false,
-            file: '',
-            size: 400,
-        },
-        mobile2: {
-            use: false,
-            file1: '',
-            file2: '',
-            size: 200,
-        },
-        deskMobile: {
-            use: false,
-            file1: '',
-            file2: '',
-            size1: 100,
-            size2: 400,
-        },
     },
 ]
 

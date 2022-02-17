@@ -49,7 +49,7 @@ function ReturnButton({content}){
             <div className="cta-button-made" style={{flexDirection:`${content.ctaApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
                 {content.ctaApplyInputs.map((item, index) => {
                     return(
-                        <input className="input-placeholder" placeholder={item} key={index} style={{marginTop:`${content.ctaApplyInputs.length > 1 ? '8px' : '0px'}`}}/>
+                        <input className="input-placeholder" placeholder={item} key={index} style={{margin:'4px'}}/>
                     )
                 })}
                 {CustomCtaButton()}
@@ -62,7 +62,7 @@ function ReturnButton({content}){
             <div className="centera" style={{flexDirection:`${content.ghostApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
                 {content.ghostApplyInputs.map((item, index) => {
                     return(
-                        <input className="input-placeholder" placeholder={item} key={index} style={{marginTop:`${content.ghostApplyInputs.length > 1 ? '8px' : '0px'}`}}/>
+                        <input className="input-placeholder" placeholder={item} key={index} style={{margin:'4px'}}/>
                     )
                 })}
                 {CustomGhostButton()}
@@ -88,7 +88,7 @@ if(content.button.use){
                             ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
                 }
             </div>
-        </div>
+            </div>
         }
         {
             content.appButton.use && 

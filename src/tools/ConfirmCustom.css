@@ -9,7 +9,6 @@
     align-items:center;
     cursor:pointer;
     border:none;
-    font-family: Noto Sans KR;
     border-radius: 5px;
 }
 
@@ -18,7 +17,6 @@
 }
 
 .confirm-message{
-    font-family: Noto Sans KR;
     font-size:1em;
     font-weight: normal;
 }

@@ -3,7 +3,6 @@
 .modal-desc{
     text-align: center;
     font-size:1.1em;
-    font-family:Pretendard-Regular;
     margin:1% 0%;
 }
 
@@ -39,7 +38,6 @@
 }
 .check-container{
     padding:10px 10px;
-    font-family: Pretendard-Regular;
     font-size:15px;
     display: flex;
     justify-content:center;
@@ -54,7 +52,6 @@
 
 .check-title{
     font-size:1.4em;
-    font-family: Pretendard-ExtraBold;
 }
 .check-desc{
     font-size:1.1em;

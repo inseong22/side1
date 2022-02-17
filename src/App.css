@@ -152,6 +152,17 @@
 .insta:hover{
   color:rgb(50,50,50);
 }
+
+.uphover{
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.uphover:hover{
+  transform: translate(0px, -4px);
+  box-shadow:0px 3px 8px rgba(50,50,50,0.2);
+}
+
 .mobile-hide{
   display: none;
 }

@@ -21,7 +21,6 @@
 
 .response-card-main-color{
     font-size:0.8em;
-    font-family: Noto Sans KR;
     font-style: normal;
     font-weight: normal;
     line-height: 27px;
@@ -34,7 +33,6 @@
 }
 
 .card__title{
-    font-family: Noto Sans KR;
     font-style: normal;
     font-weight: 800;
     font-size: 0.85em;
