@@ -82,7 +82,7 @@ function EditNaviSection({navi, setNavi, category}) {
             <>
                 <div>
                     <ElementsTable elements={elements} />
-                    <OpenCloseCustom title="로고">
+                    <OpenCloseCustom title="로고" use={navi.logo.use}>
                         <RadioCustom options={logoAlignOptions} value={navi.logo.align} func={(e) => setNavi(produce(navi, draft => {
                             draft.logo.align = e;
                         }))} text="정렬" />
@@ -95,7 +95,7 @@ function EditNaviSection({navi, setNavi, category}) {
                             <>
                                 <AddContentImg text="로고" value={navi.logo.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                                 <div style={{marginTop: '-20px'}}/>
-                                <SliderCustom text="로고 사이즈" max='80' subtext="이미지의 세로 길이를 조절해 주세요." func={e => setNavi(produce(navi, draft => {
+                                <SliderCustom text="로고 사이즈" max='53' func={e => setNavi(produce(navi, draft => {
                                     draft.logo.image.width = e;
                                 }))} />
                                 <div style={{marginBottom: '20px'}}/>
@@ -115,7 +115,7 @@ function EditNaviSection({navi, setNavi, category}) {
                             </>
                         }
                     </OpenCloseCustom>
-                    <OpenCloseCustom title="버튼 사용">
+                    <OpenCloseCustom title="버튼 사용" use={navi.button.use}>
                         <RadioCustom options={buttonAlignOptions} value={navi.button.align} func={(e) => setNavi(produce(navi, draft => {
                             draft.button.align = e;
                         }))} text="정렬" />
@@ -125,20 +125,30 @@ function EditNaviSection({navi, setNavi, category}) {
                         }))} />
                         {
                             navi.button.cta.use && 
+                            <>
                                 <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요." value={navi.button.cta.link} func={(e) => setNavi(produce(navi, draft => {
                                     draft.button.cta.link = e
                                 }))} />
+                                <SliderCustom top="CTA 여백" value={navi.button.cta.padding} max={26} func={e => setNavi(produce(navi, draft => {
+                                    draft.button.cta.padding = e;
+                                }))}/>
+                            </>
                         }
-                        
+                        <div></div>
                         <OnOffCustom text="고스트 버튼" value={navi.button.ghost.use} func={() => setNavi(produce(navi, draft => {
                             draft.button.ghost.use = !navi.button.ghost.use
                         }))} />
 
                         {
                             navi.button.ghost.use && 
+                            <>
                                 <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요." value={navi.button.ghost.link} func={(e) => setNavi(produce(navi, draft => {
                                     draft.button.ghost.link = e
                                 }))} />
+                                <SliderCustom top="고스트 여백" value={navi.button.ghost.padding} max={26} func={e => setNavi(produce(navi, draft => {
+                                    draft.button.ghost.padding = e;
+                                }))}/>
+                            </>
                         }
                     </OpenCloseCustom>
                     
@@ -157,10 +167,10 @@ function EditNaviSection({navi, setNavi, category}) {
             : 
             <>
             <div>
-                <OpenCloseCustom title="배경색">
+                <OpenCloseCustom title="배경색" use={true}>
                     <ColorCustom func={(e) => setNavi({...navi, backgroundColor:e})} value={navi.backgroundColor} text="색상" />
                 </OpenCloseCustom>
-                <OpenCloseCustom title="구분선">
+                <OpenCloseCustom title="구분선" use={true}>
                     <CheckBoxContainer text="구분선" value={navi.bottomBorder.use} func={e => setNavi(produce(navi, draft => {
                         draft.bottomBorder.use = !navi.bottomBorder.use;
                     }))}/>
@@ -172,8 +182,8 @@ function EditNaviSection({navi, setNavi, category}) {
                         </>
                     }
                 </OpenCloseCustom>
-                <OpenCloseCustom title="높이">
-                    <SliderCustom text="높이 조정" value={navi.height} func={e => setNavi({...navi, height:e})}/>
+                <OpenCloseCustom title="높이" use={true}>
+                    <SliderCustom text="높이를" value={navi.height} func={e => setNavi({...navi, height:e})}/>
                 </OpenCloseCustom>
                 <BoxCustom title="반응형">
                 <div className="edit-element">

@@ -624,7 +624,7 @@
 //                 <span index={index} style={{backgroundColor:`${backColor}`}} className="make-page-section-selector" onClick={(e) => {
 //                     setSecNum(item);
 //                     }}>
-//                     기본설정
+//                     기본 설정
 //                 </span>
 //             )
 //         }else{

@@ -8,19 +8,29 @@ import produce from 'immer';
 function ReturnButton({content}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const CustomCtaButton = () => {return (<div className="cta-button-made" style={{
+    const CustomCtaButton = () => {
+        return (
+            <div className="cta-button-made" style={{flexDirection:`${content.ctaApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${content.button.align}`}}>
+        <div className="button-made" style={{
+        marginTop:`${content.ctaApplyInputs.length > 1 ? '8px' : '0px'}`,
         borderRadius:`${state.setting.cta.borderRadius}px`,
         backgroundColor:`${state.setting.cta.backgroundColor}`,
         color:`${state.setting.cta.color}`,
         boxShadow:`${state.setting.cta.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
-        border:`${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'}`
+        border:`${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'}`,
+        width: `${content.button.ctaPadding}`
     }}>
         <AutosizeInput className="text-input-flex ti" value={ content.button.ctaText} onChange={(e) => action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.ctaText = e.currentTarget.value;
-        }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.cta.borderRadius}px`, backgroundColor:`${state.setting.cta.backgroundColor}`,}}/>
-    </div>)}
+        }))} inputStyle={{fontFamily:`${state.setting.font}`, borderRadius:`${state.setting.cta.borderRadius}px`, backgroundColor:`${state.setting.cta.backgroundColor}`, padding: `${content.button.ctaPadding}px`}}/>
+    </div>
+    </div>
+    )}
 
-    const CustomGhostButton = () => {return (<div className="cta-button-made" style={{
+    const CustomGhostButton = () => {return (
+        <div className="cta-button-made" style={{flexDirection:`${content.ctaApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${content.button.align}`}}>
+    <div className="button-made" style={{
+        marginTop:`${content.ctaApplyInputs.length > 1 ? '8px' : '0px'}`,
         borderRadius:`${state.setting.ghost.borderRadius}px`,
         backgroundColor:`${state.setting.ghost.backgroundColor}`,
         color:`${state.setting.ghost.color}`,
@@ -29,12 +39,14 @@ function ReturnButton({content}){
     }} onClick={() => {}}>
         <AutosizeInput className="text-input-flex ti" value={ content.button.ghostText } onChange={(e) => action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.ghostText = e.currentTarget.value;
-        }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`}}/>
-    </div>)}
+        }))} inputStyle={{fontFamily:`${state.setting.font}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`, padding: `${content.button.ghostPadding}px`}}/>
+    </div>
+    </div>
+    )}
 
     const returnCtaInputs = () => {
         return(
-            <div className="centera" style={{flexDirection:`${content.ctaApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
+            <div className="cta-button-made" style={{flexDirection:`${content.ctaApplyInputs.length > 1 ? 'column' : 'row'}`, justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
                 {content.ctaApplyInputs.map((item, index) => {
                     return(
                         <input className="input-placeholder" placeholder={item} key={index} style={{margin:'4px'}}/>
@@ -61,48 +73,39 @@ if(content.button.use){
     // ctaOption === 'link' => 버튼 클릭 시 링크 이동
     // ctaOption === 'apply' => 신청
 
-    {/* <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}> */}
     return(
-        <div style={{width:'100%'}}>
-            <div className="button__container" style={{
-                justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`,
-                flexDirection:`${ 
-                    content.button.ctaUse && content.button.ctaOption === 'apply' && 
-                    content.button.ghostUse && content.button.ghostOption === 'apply' ? 'column' : 'row'
-                    }`
-                }}>
-                <>
+        <>
+        {content.button.use &&
+        <div className="full-button-container">
+            <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
                 {
                     content.button.ctaUse && 
-                        ( content.button.ctaOption === 'link' ? CustomCtaButton() : returnCtaInputs() )
+                            ( content.button.ctaOption === 'link' ? CustomCtaButton() : returnCtaInputs() )
                 }
-                </>
-                <>
-                {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
+                 <div style={{marginTop:'10px'}}></div>
                 {
                     content.button.ghostUse && 
-                        ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
+                            ( content.button.ghostOption === 'link' ? CustomGhostButton() : returnGhostInputs() )
                 }
-                </>
             </div>
-            {
-                content.appButton.use && 
-                <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
-                    {
-                        content.appButton.google.length > 0 && 
-                            <img src={playstorebutton} className="store-button" />
-                    }
-                    {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
-                    {
-                        content.appButton.apple.length > 0 && 
-                            <img src={appstorebutton} className="store-button" />
-                    }
-                </div>
-            }
-        </div>
+            </div>
+        }
+        {
+            content.appButton.use && 
+            <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
+                {
+                    content.appButton.google.length > 0 && 
+                        <img src={playstorebutton} className="store-button" />
+                }
+                {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
+                {
+                    content.appButton.apple.length > 0 && 
+                        <img src={appstorebutton} className="store-button" />
+                }
+            </div>
+        }
+        </>
     )
-}else{
-    return(<></>)
 }
 }
 

@@ -77,7 +77,13 @@
     justify-content:center;
     align-items: center;
     cursor:pointer;
-    margin:4px;
+    width: auto;
+}
+
+.button-made{
+    cursor:pointer;
+    width: 100px;
+    text-align: center;
 }
 
 .section__box{

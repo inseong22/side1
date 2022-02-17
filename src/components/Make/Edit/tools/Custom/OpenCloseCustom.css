@@ -30,6 +30,17 @@
     padding:10px 15px;
 }
 
+.dis-accordion{
+    border-radius: var(--br-01);
+    box-sizing: border-box;
+    box-shadow: var(--default-shadow-01);
+    width:95%;
+    box-sizing: border-box;
+    /* 전체 온오프 패딩 조절 */
+    padding:10px 15px;
+    background-color: var(--main-light-gray);
+}
+
 .accordion__header{
     display: flex;
     flex-direction: column;
@@ -40,6 +51,13 @@
 .accordion__header:hover{
     color:var(--main-color);
 }
+.dis-accordion__header{
+    display: flex;
+    flex-direction: column;
+    cursor:pointer;
+    box-sizing: border-box;
+}
+
 
 #panel1a-header:hover{
     color:var(--main-color);

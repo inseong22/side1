@@ -22,7 +22,7 @@ function EditNotice({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return (
-        <OpenCloseCustom title="유의 사항 안내">
+        <OpenCloseCustom title="유의 사항 안내" use={content.caution.use}>
            <>
             <ColorCustom text="색상" value={content.caution.color} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.color = e;

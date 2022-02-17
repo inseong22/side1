@@ -97,6 +97,9 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                         </div>
                     </div>   
                 </div>
+                <div className="comment">
+                드래그 앤 드랍으로 순서를 바꿀 수 있습니다
+                </div>
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
                         {(provided) => 

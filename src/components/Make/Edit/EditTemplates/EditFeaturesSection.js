@@ -72,7 +72,7 @@ function EditFeaturesSection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
-                        <OpenCloseCustom title="이미지">
+                        <OpenCloseCustom title="이미지" use={content.element.use}>
                             <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].element.type = e;
                             }))} />
@@ -103,7 +103,7 @@ function EditFeaturesSection({content, category}) {
                                 </>
                             }
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="설명글">
+                        <OpenCloseCustom title="설명글" use={content.elementText.use}>
                             <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.color = e;
                             }))} />

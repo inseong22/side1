@@ -245,6 +245,14 @@
   box-sizing:border-box;
 }
 
+.comment{
+  margin-top: 20px;
+  margin-bottom:-20px;
+  font-size: var(--func-subtitle);
+  color: var(--main-black-01);
+  font-weight: 500;
+}
+
 .left{
   display:flex;
   justify-content: start;
@@ -315,7 +323,6 @@
 .text-input-flex{
   border:1px solid rgba(200,200,200,0);
   background-color:rgba(0,0,0,0);
-  padding:var(--made-button-padding);
   font-size:var(--button-font-size);
 }
 

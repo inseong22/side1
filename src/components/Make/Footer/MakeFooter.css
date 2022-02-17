@@ -11,14 +11,12 @@
 
 .make-footer__container{
   width:100%;
-  padding:30% 5%;
   z-index:13;
   display: flex;
   justify-content: center;
   align-items : center;
   flex-direction: row;
   position:relative;
-  border-radius: 0px 0px 20px 20px;
 }
 
 .footer-item{
@@ -33,7 +31,6 @@
   display: flex;
   flex-direction: column;
   justify-content :end;
-  padding:0% 3%;
 }
 
 .footer-icon{

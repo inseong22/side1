@@ -22,6 +22,7 @@ function ImageOrSlide({content}){
         // 동영상 - 비디오 업로드
         if(content.video.type === 'base' && content.contents.type === 'video' )
             return(
+                <div className="image__container">
                 <video 
                 className="video"
                 src={`${content.video.attachment}`} 
@@ -32,6 +33,7 @@ function ImageOrSlide({content}){
                 style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}%`}}
                 >
                 </video>
+                </div>
             )
         // 슬라이드
         if( content.contents.type === 'slide' )
@@ -43,7 +45,7 @@ function ImageOrSlide({content}){
         // 이미지
         if( content.contents.type === 'image' )
             return (
-                // <div style={{width:'100%'}}>
+                <div className="image__container">
                 <img 
                     ref={imgRef} 
                     src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
@@ -55,11 +57,12 @@ function ImageOrSlide({content}){
                         boxShadow: `${content.image.shadowValue}`
                     }}
                     />
-                // </div>
+                </div>
             )
         // 목업 - 모바일
         if(content.mockup.type === 'mobile' && content.contents.type === 'mockup' )
             return(
+                <div className="image__container">
                 <div className="mobile-container">
                     모바일
                     <img className="mobile-ex" src={Phone} alt="목업틀"
@@ -77,10 +80,12 @@ function ImageOrSlide({content}){
                         />
                     }
                 </div>
+                </div>
             )
         // 목업 - 데스크탑
         if(content.mockup.type === 'desktop' && content.contents.type === 'mockup' )
             return(
+                <div className="image__container">
                 <div className="desk-container">
                     데스크탑
                     <img className="mobile-ex" src={Desktop} alt="목업틀"
@@ -96,11 +101,12 @@ function ImageOrSlide({content}){
                         />
                     }
                 </div>
+                </div>
             )
         // 목업 - 모바일 2개
         if(content.mockup.type === 'mobile2' && content.contents.type === 'mockup' )
         return(
-            <>
+            <div className="image__container">
             <div className="desk-container">
                 모바일 2개
                     <img className="mobile-ex" src={Phone} alt="목업틀"
@@ -130,7 +136,7 @@ function ImageOrSlide({content}){
                         />
                     }
             </div>
-            </>
+            </div>
         )
     }
     else{

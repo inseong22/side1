@@ -81,6 +81,7 @@ const OpenCloseCustom = (props) => {
   const [open, setOpen] = useState(false)
 
   return (
+    props.use ? ( 
     <div className="one-element">
       <div className="accordion">
         <div className="accordion__header" onClick={() => setOpen(!open)}>
@@ -118,6 +119,25 @@ const OpenCloseCustom = (props) => {
         </div>
       </div>
     </div>
+    ) : 
+    <div className="one-element">
+    <div className="dis-accordion">
+      <div className="dis-accordion__header">
+        <div className="edit-element">
+          <ChakraProvider>
+          <div className="accordion__title">
+            <div className="title_text">
+              {props.title}
+            </div>      
+          </div>
+          </ChakraProvider>
+          <div className="centera" style={{justifyContent: 'end'}}>
+             <ExpandMoreIcon />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   );
 }
 

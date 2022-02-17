@@ -49,10 +49,21 @@ function MakeNavigationV2({full, navi, setNavi, history}) {
     return (
         <>
         <div className="make-navigation" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
-            <div className="make-nav-container" style={{borderBottom:`${navi.bottomBorder.use ? `1px solid ${navi.bottomBorder.color}` : ''}`, backgroundColor:`${navi.backgroundColor}`, height:`${navi.height}px`}} onClick={() => action.setSecNum(50)}>
+            <div className="make-nav-container" 
+            style={{
+                paddingRight: `${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`}`,
+                paddingLeft: `${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`}`,
+                // padding-right:`${state.isPhone ? navi.height/2.5 : navi.height}vh 
+                // ${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`} 
+                // ${state.isPhone ? navi.height/2.5 : navi.height}vh 
+                // ${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`} `,
+                borderBottom:`${navi.bottomBorder.use ? `1px solid ${navi.bottomBorder.color}` : ''}`, 
+                backgroundColor:`${navi.backgroundColor}`, 
+                height:`${navi.height}px`}} 
+                onClick={() => action.setSecNum(50)}>
                 <NaviConatainer navi={navi} setNavi={setNavi} CustomCtaButton={CustomCtaButton} CustomGhostButton={CustomGhostButton} />
             </div>
-            <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(200,200,200,0.7)' : 'rgba(0,0,0,0)'}`}}>
+            <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? '#6C63FF' : 'rgba(0,0,0,0)'}`}}>
             </div>
         </div>
         </>

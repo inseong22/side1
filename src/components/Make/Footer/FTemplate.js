@@ -1,10 +1,13 @@
 import React,{useContext} from 'react'
 import produce from 'immer'
 import { MyContext } from '../../../pages/Make/MakePageV2'
-import {FacebookCircle, FacebookSquare, Youtube, Twitter, InstagramAlt} from '@styled-icons/boxicons-logos';
-import { Mail } from '@styled-icons/entypo';
-import { Naver, Notion, Kakaotalk } from '@styled-icons/simple-icons';
+import {Youtube, Twitter} from '@styled-icons/boxicons-logos';
+import {Facebook} from '@styled-icons/entypo-social/Facebook'
+import {Instagram} from '@styled-icons/boxicons-logos/Instagram'
+import {KakaoTalk} from '@styled-icons/remix-fill/KakaoTalk'
+import { Notion } from '@styled-icons/simple-icons';
 import TextareaAutosize from 'react-textarea-autosize';
+import {Linkedin} from '@styled-icons/fa-brands/Linkedin'
 
 function FTemplate({foot, setFoot, history }) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -23,7 +26,7 @@ function FTemplate({foot, setFoot, history }) {
         return(
             <>
         {foot.icon.facebook !== '' && 
-                    <FacebookCircle color={foot.icon.color} className="footer-icon" 
+                    <Facebook color={foot.icon.color} className="footer-icon" 
                         onClick={()=>{
                             window.open(
                                 foot.icon.facebook,
@@ -33,50 +36,10 @@ function FTemplate({foot, setFoot, history }) {
                     />
         }
         {foot.icon.instagram !== '' && 
-                    <InstagramAlt color={foot.icon.color} className="footer-icon" 
+                    <Instagram color={foot.icon.color} className="footer-icon" 
                     onClick={()=>{
                         window.open(
                             foot.icon.instagram,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
-        }
-        {foot.icon.naver !== '' && 
-                    <Naver color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.naver,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
-        }
-        {foot.icon.notion !== '' && 
-                    <Notion color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.notion,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
-        }
-        {foot.icon.mail !== '' && 
-                    <Mail color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.mail,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
-        }
-        {foot.icon.kakaotalk !== '' && 
-                    <Kakaotalk color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.kakaotalk,
                             '_blank' // <- This is what makes it open in a new window.
                         );
                     }}
@@ -92,11 +55,41 @@ function FTemplate({foot, setFoot, history }) {
                     }}
                     />
         }
-        {foot.icon.youtube !== '' && 
+         {foot.icon.kakaotalk !== '' && 
+                    <KakaoTalk color={foot.icon.color} className="footer-icon" 
+                    onClick={()=>{
+                        window.open(
+                            foot.icon.kakaotalk,
+                            '_blank' // <- This is what makes it open in a new window.
+                        );
+                    }}
+                    />
+        }
+         {foot.icon.youtube !== '' && 
                     <Youtube color={foot.icon.color} className="footer-icon" 
                     onClick={()=>{
                         window.open(
                             foot.icon.youtube,
+                            '_blank' // <- This is what makes it open in a new window.
+                        );
+                    }}
+                    />
+        }
+        {foot.icon.notion !== '' && 
+                    <Notion color={foot.icon.color} className="footer-icon" 
+                    onClick={()=>{
+                        window.open(
+                            foot.icon.notion,
+                            '_blank' // <- This is what makes it open in a new window.
+                        );
+                    }}
+                    />
+        }
+        {foot.icon.linkedIn !== '' && 
+                    <Linkedin color={foot.icon.color} className="footer-icon" 
+                    onClick={()=>{
+                        window.open(
+                            foot.icon.linkedIn,
                             '_blank' // <- This is what makes it open in a new window.
                         );
                     }}
@@ -117,7 +110,7 @@ function FTemplate({foot, setFoot, history }) {
                             className="footer-text-input"
                             value={foot.text.text}
                             style={{
-                                fontFamily:`${state.setting.font}`, 
+                                fontFamily:`${state.setting.smallFont}`, 
                                 color: `${foot.text.color}`,
                                 fontSize: `${foot.text.size}px`,
                                 textAlign:`${foot.text.align}`,
@@ -152,7 +145,7 @@ function FTemplate({foot, setFoot, history }) {
                         style={{
                             fontFamily:`${state.setting.font}`
                         }}>
-                        2022 Copyright © {foot.copyright.text}
+                        Copyright 2022 {foot.copyright.text}
                     </div>
                 }
             </div>
