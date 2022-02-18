@@ -98,7 +98,7 @@ function EditFooterSection({foot, setFoot, category}) {
                     {/* <RadioCustom value={foot.layout} options={layoutOptions} func={e => {setFoot(produce(foot, draft => {
                         draft.layout = e;
                     }))}} /> */}
-                    <OpenCloseCustom title="회사 / 팀 정보">
+                    <OpenCloseCustom title="회사 / 팀 정보" use={foot.text.use}>
                         <ColorCustom text="색상" value={foot.text.color} func={e => setFoot(produce(foot, draft => {
                             draft.text.color = e;
                         }))} />
@@ -109,7 +109,7 @@ function EditFooterSection({foot, setFoot, category}) {
                             draft.text.size = e;
                         }))} />
                     </OpenCloseCustom>
-                    <OpenCloseCustom title="소셜 아이콘">
+                    <OpenCloseCustom title="소셜 아이콘" use={foot.icon.use}>
                         <ColorCustom text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {
                             draft.icon.color = e;
                         }))}} />
@@ -119,26 +119,23 @@ function EditFooterSection({foot, setFoot, category}) {
                        <InputCustom text='인스타그램' value={foot.icon.instagram} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.instagram = e;
                         }))}} placeholder='링크를 입력해 주세요.'/>
-                        <InputCustom text='네이버' value={foot.icon.naver} func={e=>{setFoot(produce(foot, draft => {
-                            draft.icon.naver = e;
-                        }))}} placeholder='링크를 입력해 주세요.'/>
-                        <InputCustom text='노션' value={foot.icon.notion} func={e=>{setFoot(produce(foot, draft => {
-                            draft.icon.notion = e;
-                        }))}} placeholder='링크를 입력해 주세요.'/>
-                        <InputCustom text='메일' value={foot.icon.mail} func={e=>{setFoot(produce(foot, draft => {
-                            draft.icon.mail = e;
+                        <InputCustom text='트위터' value={foot.icon.twitter} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.twitter = e;
                         }))}} placeholder='링크를 입력해 주세요.'/>
                         <InputCustom text='카카오톡' value={foot.icon.kakaotalk} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.kakaotalk = e;
                         }))}} placeholder='링크를 입력해 주세요.'/>
-                        <InputCustom text='트위터' value={foot.icon.twitter} func={e=>{setFoot(produce(foot, draft => {
-                            draft.icon.twitter = e;
-                        }))}} placeholder='링크를 입력해 주세요.'/>
                         <InputCustom text='유튜브' value={foot.icon.youtube} func={e=>{setFoot(produce(foot, draft => {
                             draft.icon.youtube = e;
                         }))}} placeholder='링크를 입력해 주세요.'/>
+                        <InputCustom text='노션' value={foot.icon.notion} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.notion = e;
+                        }))}} placeholder='링크를 입력해 주세요.'/>
+                        <InputCustom text='링크드인' value={foot.icon.linkedIn} func={e=>{setFoot(produce(foot, draft => {
+                            draft.icon.linkedIn = e;
+                        }))}} placeholder='링크를 입력해 주세요.'/>
                     </OpenCloseCustom>
-                    <OpenCloseCustom title="저작권표시">
+                    <OpenCloseCustom title="저작권 표시" use={foot.copyright.use}>
                         <div className="center-column">
                             <div className="edit-element center-row" style={{fontSize:'13px', justifyContent:'start'}}>
                                 <div>
@@ -159,14 +156,17 @@ function EditFooterSection({foot, setFoot, category}) {
             </>
             : 
             <div>
-                <OpenCloseCustom title="배경">
+                <OpenCloseCustom title="배경" use={true}>
                     <ColorCustom text="색상" value={foot.backgroundColor} func={e => {setFoot(produce(foot, draft => {
                         draft.backgroundColor = e;
                     }))}} />
                 </OpenCloseCustom>
-                <OpenCloseCustom title="여백">
-                    <SliderCustom text="상단여백" value={foot.padding} func={e => {setFoot(produce(foot, draft => {
-                        draft.padding = e;
+                <OpenCloseCustom title="여백" use={true}>
+                    <SliderCustom top="상단 여백" max={100} value={foot.paddingTop} func={e => {setFoot(produce(foot, draft => {
+                        draft.paddingTop = e;
+                    }))}} />
+                    <SliderCustom top="상단 여백" max={100} value={foot.paddingBottom} func={e => {setFoot(produce(foot, draft => {
+                        draft.paddingBottom = e;
                     }))}} />
                 </OpenCloseCustom>
             </div>

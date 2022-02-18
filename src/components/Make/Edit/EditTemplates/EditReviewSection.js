@@ -92,7 +92,7 @@ function EditReviewSection({content, category}) {
                     <>
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
-                        <OpenCloseCustom title="이미지">
+                        <OpenCloseCustom title="이미지" use={content.element.use}>
                             <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].element.type = e;
                             }))} />
@@ -124,12 +124,7 @@ function EditReviewSection({content, category}) {
                                 </>
                             }
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="리뷰 내용">
-                            <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elementText.color = e;
-                            }))} />
-                        </OpenCloseCustom>
-                        <OpenCloseCustom title="별점">
+                        <OpenCloseCustom title="별점" use={content.rating.use}>
                             <ColorCustom text="색상" value={content.rating.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].rating.color = e;
                             }))} />
@@ -137,7 +132,12 @@ function EditReviewSection({content, category}) {
                                 draft[state.secNum].rating.size = e;
                             }))} />
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="이름 / 닉네임">
+                        <OpenCloseCustom title="리뷰 내용" use={content.elementText.use}>
+                            <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.color = e;
+                            }))} />
+                        </OpenCloseCustom>
+                        <OpenCloseCustom title="이름 / 닉네임" use={content.writer.use}>
                             <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].writer.color = e;
                             }))} />

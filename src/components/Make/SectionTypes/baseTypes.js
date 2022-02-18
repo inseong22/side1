@@ -70,7 +70,8 @@ const contents = {
         attachment: '',
         link: '',
         auto: true,
-        align: ''
+        align: '',
+        size: 300,
     },
     mockup: {
         use: false,
@@ -108,9 +109,11 @@ const button = {
         ghostUse:true,
         ghostLink:'',
         ghostApply: '',
+        ctaPadding: 10,
+        ghostPadding: 10,
     },
     appButton:{
-        use: true,
+        use: false,
         apple: '',
         google: ''
     },
@@ -401,7 +404,7 @@ export const defaults = {
                 width:60,
             },
             text:{
-                use:false,
+                use:true,
                 text:'',
                 fontSize:12,
                 color:'#000000'
@@ -419,12 +422,14 @@ export const defaults = {
             cta:{
                 use:true,
                 text:'CTA버튼',
-                link:''
+                link:'',
+                padding: 10,
             },
             ghost:{
                 use:true,
                 text:'고스트 버튼',
-                link:''
+                link:'',
+                padding: 10,
             },
         },
         appButton:{
@@ -440,6 +445,8 @@ export const defaults = {
         backgroundColor:'#ffffff', 
         text:"copyright 2022",
         padding:10,
+        paddingTop:10,
+        paddingBottom:10,
         text:{
             use:true,
             text:'',
@@ -453,13 +460,12 @@ export const defaults = {
             color:'#ffffff',
             align:'start',
             facebook: '',
-            naver: '',
             instagram: '',
             notion: '',
-            mail: '',
             kakaotalk: '',
             twitter: '',
             youtube: '',
+            linkedIn: '',
             
         },
         copyright:{
@@ -473,7 +479,7 @@ export const defaults = {
     },
     setting:{
         urlId:'',
-        title:'Surfee : 노코드 랜딩페이지 제작 툴',
+        title:'',
         faviconAttachment:'',
         font:'Noto Sans KR',
         smallFont:'Noto Sans KR',
@@ -486,7 +492,7 @@ export const defaults = {
             color:'#ffffff',
             border:false,
             borderColor:'#000000',
-            text:'Floating',
+            text:'',
             link:'',
             shadow:false,
             size:10,

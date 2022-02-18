@@ -85,7 +85,7 @@ function EditDesign({content}) {
     
     return (
         <div>
-            <OpenCloseCustom title="배경">
+            <OpenCloseCustom title="배경" use={true}>
                 <RadioCustom options={backOptions} value={content.backgroundType} func={e=>action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].backgroundType = e;
                 }))} />
@@ -93,7 +93,7 @@ function EditDesign({content}) {
                     backgroundColorOrImage() 
                 }
             </OpenCloseCustom>
-            <OpenCloseCustom title="제목">
+            <OpenCloseCustom title="제목" use={true}>
                 <ColorCustom text="색상" value={content.title.color} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].title.color = e;
                 }))} />
@@ -104,7 +104,7 @@ function EditDesign({content}) {
                     draft[state.secNum].title.size = e;
                 }))} />
             </OpenCloseCustom>
-            <OpenCloseCustom title="본문">
+            <OpenCloseCustom title="본문" use={true}>
                 <ColorCustom text="색상" value={content.desc.color} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].desc.color = e;
                 }))} />
@@ -115,7 +115,7 @@ function EditDesign({content}) {
                     draft[state.secNum].desc.size = e;
                 }))} />
             </OpenCloseCustom>
-            <OpenCloseCustom title="여백">
+            <OpenCloseCustom title="여백" use={true}>
                 <SliderCustom top="상단 여백" value={content.padding.top} max={40} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].padding.top = e;
                 }))}/>
@@ -123,7 +123,7 @@ function EditDesign({content}) {
                     draft[state.secNum].padding.bottom = e;
                 }))}/>
             </OpenCloseCustom> 
-            <OpenCloseCustom title="박스">
+            <OpenCloseCustom title="박스" use={true}>
                 <OnOffCustom text="박스 사용" value={content.box.use} func={(e) => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].box.use = !content.box.use;
                 }))} />

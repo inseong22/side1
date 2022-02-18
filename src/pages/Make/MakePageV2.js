@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, createContext} from 'react'
+import React, {useMemo, useEffect, useState, useRef, createContext, useContext} from 'react'
 import './MakePage.css'
 import './MakeLanding.css'
 // Recoil , Immer JS 적용
@@ -26,7 +26,7 @@ import { isMobile } from 'react-device-detect';
 import {ChakraProvider} from '@chakra-ui/react'
 import {Prompt} from 'react-router-dom';
 import produce from 'immer'
-import TextAuto from '../../components/Make/SectionTypes/components/TextAuto'
+import TextareaAutosize from '../../components/Make/SectionTypes/components/TextAuto'
 
 export const MyContext = React.createContext({
     state : {addingSectionAt : 1000},
@@ -36,6 +36,7 @@ export const MyContext = React.createContext({
 const NOTADDING = 1000;
 
 const MakePageV2 = ({history, userObj}) => {
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const targets = useRef(null);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
     const [secNum, setSecNum] = useState(52); // 현재 수정중인 페이지를 의미.
@@ -54,6 +55,7 @@ const MakePageV2 = ({history, userObj}) => {
     // 메인 세팅
     const [setting, setSetting] = useState(lodash.cloneDeep(defaults.setting));
 
+    const [text, setText] = useState('');
     // 새로운 세팅
     // local storage 저장을 위한 contents 재설정 - video의 용량 초과 때문에 일단..ㅠ
     const arr = lodash.cloneDeep(base[0])
@@ -150,32 +152,33 @@ const MakePageV2 = ({history, userObj}) => {
         )
     })
 
-    const FTA = () => {
-        return(
-            <>
-            {  ( setting.fta.use ) &&
-            <div className="fta__container">
-                <div className="fta-button" 
-                    style={{
-                        backgroundColor:`${setting.fta.backgroundColor}`, 
-                        width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, 
-                        borderRadius:`${setting.fta.shape}px`, 
-                        border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
-                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
-                    }}>
-                    <TextAuto 
-                        small
-                        value={setting.fta.text} 
-                        onChange={e => setSetting(produce(setting, draft => {
-                            draft.fta.text = e.currentTarget.value;
-                        }))}
-                        color={setting.fta.color} align="center" />
-                </div>
-            </div>
-            }
-            </>
-        )
-    }
+    // const FTA = () => {
+    //     return(
+    //         <>
+    //         {  ( setting.fta.use ) &&
+    //         <div className="fta__container">
+    //             <div className="fta-button" 
+    //                 style={{
+    //                     fontFamily: `${setting.font}`,
+    //                     backgroundColor:`${setting.fta.backgroundColor}`, 
+    //                     width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, 
+    //                     borderRadius:`${setting.fta.shape}px`, 
+    //                     border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
+    //                     boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
+    //                 }}>
+    //                 <TextareaAutosize
+    //                 className='text-input' 
+    //                     value={setting.fta.text} 
+    //                     onChange={e => setSetting(produce(setting, draft => {
+    //                         draft.fta.text = e.target.value;
+    //                     }))}
+    //                     color={setting.fta.color} align="center" />
+    //             </div>
+    //         </div>
+    //         }
+    //         </>
+    //     )
+    // }
 
     return (<>
     { isMobile ? 
@@ -201,7 +204,7 @@ const MakePageV2 = ({history, userObj}) => {
                    navi={navi} foot={foot} setting={setting} setNavi={setNavi}
                    saveLocalStorage={saveLocalStorage}
                />
-            <div className="make-page-container" style={{paddingTop:`${full ? '0px' : '60px'}`}}>
+            <div className="make-page-container" style={{paddingTop:`${full ? '55px' : '60px'}`}}>
                 {/* 아래는 제작하는 곳 */}
                 {
                     !full && 
@@ -221,7 +224,6 @@ const MakePageV2 = ({history, userObj}) => {
                     <div className="scroll-container" 
                         style={{ 
                             width:`${full ? '100vw' : isPhone ? '26vw' : '70vw'}`,
-                            paddingBottom:`${full ? '0px' : '30px'}`
                         }}>
                         {/* 실시간으로 바뀌는 모습이 보이는 랜딩페이지 */}
                         {(!full && !isPhone) && <div className="make-tab-preseen" onClick={() => setSecNum(52)}>
@@ -231,7 +233,7 @@ const MakePageV2 = ({history, userObj}) => {
                                 <div className="make-tab-circle"></div>
                                 <div className="make-tab-one-tab">
                                     <img src={setting.faviconAttachment} className='make-tab-favicon'/>
-                                    {setting.title}
+                                    {navi.title}
                                 </div>
                             </div>
                             <div className="right" style={{paddingRight:'23px'}}>
@@ -251,7 +253,29 @@ const MakePageV2 = ({history, userObj}) => {
                             {/* 푸터 */}
                             {foot.use && <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> }                             
 
-                            <FTA />
+                            <>
+            {  ( setting.fta.use ) &&
+            <div className="fta__container">
+                <div className="fta-button" 
+                    style={{
+                        fontFamily: `${setting.font}`,
+                        backgroundColor:`${setting.fta.backgroundColor}`, 
+                        width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, 
+                        borderRadius:`${setting.fta.shape}px`, 
+                        border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
+                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
+                    }}>
+                    <TextareaAutosize
+                    className='text-input' 
+                        value={setting.fta.text} 
+                        onChange={e => setSetting(produce(setting, draft => {
+                            draft.fta.text = e.target.value;
+                        }))}
+                        color={setting.fta.color} align="center" />
+                </div>
+            </div>
+            }
+            </>
                             {/* {full && <div className="cancel-full-screen" onClick={() => setFull(false)}>
                                 전체화면<br/>취소
                             </div>} */}

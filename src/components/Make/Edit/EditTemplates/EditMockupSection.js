@@ -40,7 +40,7 @@ function EditMockupSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
-                        <OpenCloseCustom title='목업'>
+                        <OpenCloseCustom title='목업' use={content.mockup.use}>
                             <AddMockup content={content} />
                         </OpenCloseCustom>
                     </div>

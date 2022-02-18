@@ -36,9 +36,7 @@ function HeroSection({content, setting}) {
                     <TitleDesc content={content} />
                     <ReturnButton content={content} />
                 </div>
-                <div className="image__container">
                     <ImageOrSlide content={content} />
-                </div>
             </AnimationDiv>
         </motion.div>
     )

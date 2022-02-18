@@ -28,18 +28,12 @@ function EditAnimation({options, value, onChange}) {
                         <div className="radio-shape-text">
                             떠오르기
                         </div>
-                        <div className="radio-shape-subtext">
-                            0.8초
-                        </div>
                     </>
                     ):(
                         <>
                         <img src={RiseG} />
                         <div className="radio-shape-text">
                             떠오르기
-                        </div>
-                        <div className="radio-shape-subtext">
-                            0.8초
                         </div>
                         </>
                     )}
@@ -52,18 +46,12 @@ function EditAnimation({options, value, onChange}) {
                         <div className="radio-shape-text">
                             페이드 인                           
                         </div>
-                        <div className="radio-shape-subtext">
-                            0.8초
-                        </div>
                     </>
                     ):(
                         <>
                         <img src={FadeG} />
                         <div className="radio-shape-text">
                             페이드 인
-                        </div>
-                        <div className="radio-shape-subtext">
-                            0.8초
                         </div>
                         </>
                     )}

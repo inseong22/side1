@@ -14,13 +14,10 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from '@chakra-ui/react'
+import { RamenDiningOutlined } from '@mui/icons-material';
 
 function SliderCustom({top, text, func, value, max}) {
     const [range, setRange] = useState(value);
-
-    const onChange = (e) => {
-        setRange(e.target.value)
-      }
 
     return (
       <div className="edit-element slider__container">
@@ -47,13 +44,19 @@ function SliderCustom({top, text, func, value, max}) {
                   <SliderThumb bg='linear-gradient(180deg, #9281FF 0%, #6C63FF 100%)' fontSize='sm' boxSize='26px' style={{boxShadow: '4px 4px 15px #D0CDFF'}}/>
                 </Slider>
                 {/* <NumberInput className="number-input" size='md' maxW='50px' step={1} max={max ? max : 100} value={range} onChange={e => {func(e); setRange(e)}}> */}
-                <input className="number-input" type="number" value={range} min={1} max={max ? max : 100} onChange={e => {func(e.currentTarget.value); setRange(e.currentTarget.value)}}/>
+                <input className="number-input" type="number" value={range} min={1} max={max ? max : 100} onChange={e => {
+                  setRange(e.currentTarget.value);
+                  if(range <= max){
+                    func(e.currentTarget.value);
+                    console.log(range)
+                  }
+                  else{
+                    func(max)
+                  }
+                  }}/>
 
             </ChakraProvider>
           </div>
-            {
-            text && <div className="slider-small-command" style={{marginLeft:'65px'}}>{text}의 세로 길이를 조절해 주세요.</div>
-            } 
         </div>
       </div>
     )

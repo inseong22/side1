@@ -12,6 +12,7 @@ import OnOffCustom from '../tools/Custom/OnOffCustom'
 import produce from 'immer';
 import AnimationCustom from '../tools/Custom/AnimationCustom'
 import AddContentImg from '../tools/func/FuncContentImg'
+import AddFaviconImg from '../tools/func/FuncFaviconImg'
 import {Check} from '@styled-icons/bootstrap'
 import {ChevronRight} from '@styled-icons/boxicons-regular'
 import OverflowScrolling from 'react-overflow-scrolling';
@@ -53,9 +54,9 @@ const shapeOptions = [
 ]
 
 const sizeOptions = [
-    { label: 'Small', value: 10 },
-    { label: 'Medium', value: 20 },
-    { label: 'Large', value: 40 },
+    { label: 'Small', value: 50 },
+    { label: 'Medium', value: 75 },
+    { label: 'Large', value: 100 },
 ]
 
 function EdtiSetting({setting, setSetting, category}) {
@@ -230,15 +231,15 @@ function EdtiSetting({setting, setSetting, category}) {
                 return(
                     <>
                     <div>
-                        <OpenCloseCustom title="파비콘" tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지를 대표하는 아이콘입니다.">
-                            <AddContentImg text="파비콘" subtext="최대 1MB 업로드 가능, 64x64px 권장" value={setting.faviconAttachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
+                        <OpenCloseCustom title="파비콘" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지를 대표하는 아이콘입니다.">
+                            <AddFaviconImg text="파비콘" subtext="최대 1MB 업로드 가능, 64x64px 권장" value={setting.faviconAttachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="페이지 이름" tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다.">
+                        <OpenCloseCustom title="페이지 이름" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다.">
                             <InputCustom value={setting.title} placeholder="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다." func={(e) => setSetting(produce(setting, draft => {
                                 draft.title = e
                             }))} />
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="URL">
+                        <OpenCloseCustom title="URL" use={true}>
                             <div style={{flexDirection:'column'}}>
                                 <div style={{display:'flex'}}>
                                     <div>
@@ -252,11 +253,11 @@ function EdtiSetting({setting, setSetting, category}) {
                                 </div>
                             </div>
                                 <div style={{width:'90%', justifyContent:'center', fontSize:'12px', marginBottom:'16px'}}>
-                                    * 영문, 숫자만 입력 가능
+                                    * 영문 소문자와 숫자만 입력 가능합니다.
                                 </div>
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="플로팅 버튼" tooltip="화면 하단에 고정되어 떠다니는 버튼입니다. 내비게이션의 버튼과 플로팅 버튼 중 하나만 사용하시길 바랍니다.">
-                            <OnOffCustom text="플로팅 버튼" value={setting.fta.use} func={(e) => setSetting(produce(setting, draft => {
+                        <OpenCloseCustom title="플로팅 버튼" use={true} tooltip="화면 하단에 고정되어 떠다니는 버튼입니다. 내비게이션의 버튼과 플로팅 버튼 중 하나만 사용하시길 바랍니다.">
+                            <OnOffCustom text="ON/OFF" value={setting.fta.use} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.use = !setting.fta.use
                             }))} />
                             {
@@ -305,18 +306,18 @@ function EdtiSetting({setting, setSetting, category}) {
                 return(
                     <>
                     <div>
-                        <OpenCloseCustom title="메인 색상">
+                        <OpenCloseCustom title="메인 색상" use={true}>
                             <SingleColorCustom text="색상" value={setting.color} func={(e) => setSetting(produce(setting, draft => {
                                 draft.color = e;
                             }))} />
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="글씨체">
+                        <OpenCloseCustom title="글씨체" use={true}>
                             <ChakraProvider>
                                 {FontSelect()}
                                 {SmallFontSelect()}
                             </ChakraProvider>
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="CTA 버튼" preseen={
+                        <OpenCloseCustom title="CTA 버튼" use={true} preseen={
                             <div className="edit-element">
                                 <div className="centera" style={{padding:'5px 10px'}}>
                                     <div className="custom-button" style={{ color:`${setting.cta.color}`, border:`${setting.cta.border ? `1px solid ${setting.cta.borderColor}` : 'none'}`, boxShadow:`${setting.cta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'}`, borderRadius:`${setting.cta.borderRadius}px`, backgroundColor:`${setting.cta.backgroundColor}`}}>
@@ -352,7 +353,7 @@ function EdtiSetting({setting, setSetting, category}) {
                                 draft.cta.shadow = !setting.cta.shadow
                             }))} />
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="고스트 버튼" preseen={
+                        <OpenCloseCustom title="고스트 버튼" use={true} preseen={
                             <div className="edit-element">
                                 <div className="centera" style={{padding:'5px 10px'}}>
                                     <div className="custom-button" style={{ color:`${setting.ghost.color}`, border:`${setting.ghost.border ? `1px solid ${setting.borderColor}` : 'none'}`, boxShadow:`${setting.ghost.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'}`, borderRadius:`${setting.ghost.borderRadius}px`, backgroundColor:`${setting.ghost.backgroundColor}`}}>
@@ -389,7 +390,7 @@ function EdtiSetting({setting, setSetting, category}) {
                             }
                         </OpenCloseCustom>
                     </div>
-                    <OpenCloseCustom title="애니메이션">
+                    <OpenCloseCustom title="애니메이션" use={true}>
                         <AnimationCustom 
                             text="애니메이션" 
                             options={animationOptions} 

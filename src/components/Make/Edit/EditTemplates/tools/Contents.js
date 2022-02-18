@@ -158,7 +158,7 @@ function Contents({content}) {
                     <>
                     <AddContentVideo text="동영상" value={content.video.attachment} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
                     <div style={{marginBottom: '-20px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="100"/>
+                    <SliderCustom top="크기" text="동영상을" value={content.image.size} func={e => setImgSize(e)} max="100"/>
                     </>
                 )
             case 'youtube':
@@ -180,7 +180,7 @@ function Contents({content}) {
                         유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
                     </div>
                     <div style={{marginTop: '10px'}} />
-                    <SliderCustom top="크기" text="동영상" value={content.image.size} func={e => setImgSize(e)} max="100"/>
+                    <SliderCustom top="크기" text="동영상을" value={content.image.size} func={e => setImgSize(e)} max="100"/>
                     </>
                 )
         }
@@ -280,7 +280,7 @@ function Contents({content}) {
                     <div style={{width:'100%'}}>
                         <AddContentImg text="이미지" subtext="최대 3MB 업로드 가능" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         <div style={{marginTop: '-10px'}}/>
-                        <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="100"/>
+                        <SliderCustom top="크기" text="이미지를" value={content.image.size} func={setImgSize} max="100"/>
                         <div style={{marginBottom: '20px'}}/>
                         <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
@@ -306,7 +306,7 @@ function Contents({content}) {
                     <div className="small-command">
                         최대 3MB까지 가능합니다.
                     </div>
-                    <SliderCustom top="크기" text="이미지" value={content.image.size} func={setImgSize} max="100"/>
+                    <SliderCustom top="크기" text="이미지를" value={content.image.size} func={setImgSize} max="300"/>
                     <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                     }))} />
@@ -339,10 +339,10 @@ function Contents({content}) {
                     <div className='mockup-select'>
                 <Select  
                     className='select_list'
-                    iconSize='none'
                     onChange={e=>mockOption(e.target.value)}
                     bg='white'
                     borderColor='rgba(0, 0, 0, 0.08)'
+                    icon='none'
                     color='gray'>
                     <option value='mobile'>모바일</option>
                     <option value='desktop'>데스크탑</option>
@@ -357,7 +357,7 @@ function Contents({content}) {
 
 
     return (
-        <OpenCloseCustom title="콘텐츠">
+        <OpenCloseCustom title="콘텐츠" use={content.contents.use}>
             <RadioCustom options={contentsOptions} value={content.contents.type} func={e => changeContentOption(e)} />                 
             {
                 returnImageOrVideoAdd()

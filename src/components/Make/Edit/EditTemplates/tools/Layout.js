@@ -129,7 +129,7 @@ function Layout({content, version, foot, setFoot}) {
     }
 
     return (
-        <OpenCloseCustom title="레이아웃" subtext={state.isPhone ? '모바일' : 'PC'}>
+        <OpenCloseCustom title="레이아웃" use={true} subtext={state.isPhone ? '모바일' : 'PC'}>
             {ReturnLayout()}
         </OpenCloseCustom>
     )

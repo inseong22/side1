@@ -66,6 +66,7 @@ function EditHeroSection({content, category}) {
             use:content.button.use,
             func:() => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].button.use = !content.button.use;
+                console.log(content.button.use)
             }))
         },
         {
@@ -168,9 +169,9 @@ function EditHeroSection({content, category}) {
                 return(
                     <>
                     <ElementsTable elements={elements} />
-                    <Layout content={content} version='main' />
+                    <Layout content={content} version='main'/>
                     <Contents content={content} />
-                    <OpenCloseCustom title="버튼">
+                    <OpenCloseCustom title="버튼" use={content.button.use}>
                         <RadioCustom content={content} options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
                         <AddCtaButton content={content} num={1} />
                         <AddGhostButton content={content} num={1} />

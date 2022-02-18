@@ -58,7 +58,7 @@ export function EditColor({onChange, value}) {
                         {value}
                     </div>
                 </PopoverTrigger>
-                <PopoverContent>
+                <PopoverContent style={{zIndex: 100}}>
                     <PopoverArrow />
                     <PopoverHeader>
                             <div className="color-close" onClick={handleClick}>

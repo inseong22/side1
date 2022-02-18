@@ -23,7 +23,7 @@ function LayoutRFG({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return (
-        <OpenCloseCustom title="레이아웃" subtext={state.isPhone ? '모바일' : 'PC'}>
+        <OpenCloseCustom title="레이아웃" use={true} subtext={state.isPhone ? '모바일' : 'PC'}>
             {
                 state.isPhone ? 
                 <>

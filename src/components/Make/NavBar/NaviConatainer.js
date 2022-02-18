@@ -10,11 +10,11 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
 
     return (
         <>
-        {!navi.logo.image.use && !navi.logo.text.use && (
-            <div className="make-nav-logoc" style={{height:`${navi.height}px`, justifyContent:`${navi.logo.align}`}}> 
+        {/* {!navi.logo.image.use && !navi.logo.text.use && (
+            <div className="make-nav-logoc" style={{height:`${navi.height}px`, justifyContent:`${navi.logo.align}`, paddingLeft:`${state.isPhone ? '10px' : '30px'}`}}> 
                 <div className="default-logo" style={{fontFamily:`${state.setting.font}`}}>{state.setting.urlId}</div>
             </div>
-        )}
+        )} */}
         {navi.logo.use &&  
             <div className="make-nav-logoc" style={{height:`${navi.height}px`, justifyContent:`${navi.logo.align}`}}>
                 {navi.logo.image.use &&  
@@ -39,7 +39,9 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                                 fontSize:`${navi.logo.text.fontSize}px`, 
                                 color:`${navi.logo.text.color}`, 
                                 fontFamily:`${state.setting.font}`,
-                                resize:'none'
+                                resize:'none',
+                                padding: '10px',
+                                paddingLeft: '0px'
                             }}
                         />
                     </div>
@@ -47,7 +49,8 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
             </div>
         }  
         {navi.button.use && 
-            <div className="make-nav-buttonc" style={{justifyContent:`${navi.button.align}`, paddingRight:`${state.isPhone ? '10px' : '30px'}`}}>
+            <div className="make-nav-buttonc" 
+            style={{justifyContent:`${navi.button.align}`}}>
             { navi.button.cta.use && 
                 <div className="cta-button-made" style={{
                     borderRadius:`${state.setting.cta.borderRadius}px`,
@@ -58,7 +61,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                 }} onClick={() => {}}>
                     <AutosizeInput className="text-input-flex ti" value={navi.button.cta.text } onChange={(e) => setNavi(produce(navi, draft => {
                         draft.button.cta.text = e.currentTarget.value;
-                    }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.cta.borderRadius}px`,  backgroundColor:`${state.setting.cta.backgroundColor}`}}/>
+                    }))} inputStyle={{fontFamily:`${state.setting.font}`, borderRadius:`${state.setting.cta.borderRadius}px`,  backgroundColor:`${state.setting.cta.backgroundColor}`, padding: `${navi.button.cta.padding}px`}}/>
                 </div>
             }
             { navi.button.ghost.use && 
@@ -72,7 +75,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                 }} onClick={() => {}}>
                     <AutosizeInput className="text-input-flex ti" value={navi.button.ghost.text } onChange={(e) => setNavi(produce(navi, draft => {
                         draft.button.ghost.text = e.currentTarget.value;
-                }))} inputStyle={{fontFamily:`${state.setting.smallFont}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`}}/>
+                }))} inputStyle={{fontFamily:`${state.setting.font}`, borderRadius:`${state.setting.ghost.borderRadius}px`,  backgroundColor:`${state.setting.ghost.backgroundColor}`,  padding: `${navi.button.ghost.padding}px`}}/>
                             </div>
                         }
                 </div>

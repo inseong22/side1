@@ -8,7 +8,7 @@ function AddAppButton({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     
     return (
-        <OpenCloseCustom title="앱 다운로드 버튼">
+        <OpenCloseCustom title="앱 다운로드 버튼" use={content.appButton.use}>
             <div className="edit-element">
                 <div className="edit-element__one" style={{flexDirection: 'column'}}>
                     <div className="edit-element__left">Google Play Store</div> 
