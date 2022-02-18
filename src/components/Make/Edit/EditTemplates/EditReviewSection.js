@@ -7,30 +7,9 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import LayoutRFG from './tools/LayoutRFG'
-import OnOffCustom from '../tools/Custom/OnOffCustom'
+import SingleColorCustom from '../tools/Custom/SingleColorCustom'
+import {EditImageIcon} from './EditFeaturesSection'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
-
-const featureOptions = [
-    { label: '아이콘', value: 'icon' },
-    { label: '이미지', value: 'image'},
-]
-
-const shapeOptions = [
-    { label: '사각형', value: 0 },
-    { label: '라운드', value: 5 },
-    { label: '원형', value: 500 },
-]
-const imageSizeOptions = [
-    { label: 'Small', value: 50 },
-    { label: 'Medium', value: 100 },
-    { label: 'Large', value: 150 },
-]
-
-const imageSmallSizeOptions = [
-    { label: 'Small', value: 55 },
-    { label: 'Medium', value: 70 },
-    { label: 'Large', value: 90 },
-]
 
 const ratingSizeOptions = [
     { label: 'Small', value: 20 },
@@ -57,7 +36,7 @@ function EditReviewSection({content, category}) {
             }))
         },
         {
-            title:'이미지',
+            title:'요소',
             use:content.element.use,
             func:() => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].element.use = !content.element.use;
@@ -101,46 +80,7 @@ function EditReviewSection({content, category}) {
                     <>
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
-                        <OpenCloseCustom title="이미지" use={content.element.use}>
-                            <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].element.type = e;
-                            }))} />
-                            {
-                                content.element.type === 'icon' && 
-                                (
-                                    <>
-                                    <ColorCustom text="색상" value={content.element.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
-                                        draft[state.secNum].element.backgroundColor = e;
-                                    }))} />
-                                    <RadioCustom text="프레임" button value={content.element.iconBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                        draft[state.secNum].element.iconBorder = e;
-                                    }))} />
-                                    <RadioCustom text="크기" value={content.element.size} options={imageSmallSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                        draft[state.secNum].element.size = e;
-                                    }))} />
-                                    </>
-                                )
-                            }
-                            {
-                                content.element.type === 'image' &&
-                                <>
-                                <RadioCustom text="프레임" button value={content.element.imageBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.imageBorder = e;
-                                }))} />
-                                <RadioCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.size = e;
-                                }))} />
-                                </>
-                            }
-                        </OpenCloseCustom>
-                        <OpenCloseCustom title="리뷰 제목" use={content.elementTitle.use}>
-                            <ColorCustom text="색상" value={content.elementTitle.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elementTitle.color = e;
-                            }))} />
-                            <TextSizeCustom text="크기" value={content.elementTitle.size} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elementTitle.size = e;
-                            }))} />
-                        </OpenCloseCustom>
+                        <EditImageIcon content={content} />
                         <OpenCloseCustom title="별점" use={content.rating.use}>
                             <ColorCustom text="색상" value={content.rating.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].rating.color = e;

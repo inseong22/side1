@@ -68,8 +68,7 @@ function AddingSection({open, setOpen, isScroll}) {
             body,
         ])
         setOpen(false)
-        // action.setSecNum(state.contents.length)
-        // action.setCategory(0);
+        action.setSecNum(state.contents.length)
     }
 
     return (

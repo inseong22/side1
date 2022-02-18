@@ -16,14 +16,16 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
     }
 
     const doPublish = async () => {
-        await dbService.collection('published-page')
-            .where('urlId', "==", content.urlId)
-                .get().then( querySnapshot => 
+        await dbService
+            .collection('published-page')
+            .where('pageId', "==", content.id)
+            .get().then( querySnapshot => 
                 { 
                     if(querySnapshot.empty){
                         console.log("새 배포")
                         let body = {
                             ...content,
+                            pageId:content.id,
                             created:Date.now(),
                         }
                         dbService.collection('published-page').add(body)
@@ -100,7 +102,7 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
                     state:{
                         item:content,
                     }}} 
-                    className="default-button-01" style={{marginLeft:'15px'}}>편집하기</Link>
+                    className="default-button-01 opacity-hover" style={{marginLeft:'15px'}}>편집하기</Link>
                 <div className="default-button-02" style={{marginLeft:'15px'}} onClick={() => doPublish()}>배포하기</div>
             </div>
         </span>

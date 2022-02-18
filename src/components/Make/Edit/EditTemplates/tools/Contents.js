@@ -21,9 +21,9 @@ const contentsOptions = [
     { label:'슬라이드', value:'slide'},
 ]
 const imageBorderOptions = [
-    { label: '원형', value: 50 },
-    { label: '라운드', value: 7 },
     { label: '사각형', value: 0 },
+    { label: '라운드', value: 5 },
+    { label: '원형', value: 15 },
 ]
 const imageSizeOptions = [
     { label: '작게', value: 250 },
@@ -157,29 +157,33 @@ function Contents({content}) {
                 return(
                     <>
                     <AddContentVideo text="동영상" value={content.video.attachment} func={e => onChangeContentVideo(e)} removeFunc={e => RemoveVideo(e)}/>
-                    <div style={{marginBottom: '-20px'}} />
                     <SliderCustom top="크기" text="동영상을" value={content.image.size} func={e => setImgSize(e)} max="100"/>
                     </>
                 )
             case 'youtube':
                 return(
                     <>
-                    <div style={{marginTop: '20px'}} />
                     <AddYoutubeLink content={content} value={content.video.link} />
-                    <div style={{marginTop: '0px'}} />
-                    <CustomSwitch text="자동 재생" value={content.video.auto} 
-                        onChange={ () => action.setContents(produce(state.contents, draft => {
-                            if (content.video.link.includes('autoplay=1'))
-                                {draft[state.secNum].video.link = content.video.link.replace('autoplay=1', 'autoplay=0');
-                                draft[state.secNum].video.auto = false;}
-                            else
-                                {draft[state.secNum].video.link = content.video.link.replace('autoplay=0', 'autoplay=1');
-                                draft[state.secNum].video.auto = true;}
-                        }))}/>
-                    <div className="mid-command">
-                        유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
-                    </div>
-                    <div style={{marginTop: '10px'}} />
+                    {
+                        content.video.link.length !== 0 && 
+                    <>
+                        <CustomSwitch text="자동 재생" value={content.video.auto} 
+                            onChange={ () => action.setContents(produce(state.contents, draft => {
+                                if (content.video.link.includes('autoplay=1'))
+                                    {draft[state.secNum].video.link = content.video.link.replace('autoplay=1', 'autoplay=0');
+                                    draft[state.secNum].video.auto = false;}
+                                else if (content.video.link.includes('autoplay=0'))
+                                    {draft[state.secNum].video.link = content.video.link.replace('autoplay=0', 'autoplay=1');
+                                    draft[state.secNum].video.auto = true;}
+                            }))}/>
+                        <div className="mid-command">
+                            {
+                                content.video.auto ? <> 유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다. </>
+                                : <> 유저가 페이지에 들어온 후 동영상을 클릭하면 재생됩니다. </>
+                            }
+                        </div>
+                    </>
+                    }
                     <SliderCustom top="크기" text="동영상을" value={content.image.size} func={e => setImgSize(e)} max="100"/>
                     </>
                 )
@@ -254,17 +258,6 @@ function Contents({content}) {
                             }))} max="100"/>   
                     </>
                 )
-            case 'mobile2':
-                return(
-                    <>
-                    <FuncContentImg text='모바일1' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment1} func={uploadMockup}/>
-                    <FuncContentImg text='모바일2' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment2} func={uploadMockup2}/>
-                    <SliderCustom top="크기" text="목업" value={content.image.size} func={e =>
-                        action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].image.size = e
-                        }))} max="100"/>   
-                    </>
-                )
             default:
                 return(
                     <>
@@ -279,9 +272,7 @@ function Contents({content}) {
                 return(
                     <div style={{width:'100%'}}>
                         <AddContentImg text="이미지" subtext="최대 3MB 업로드 가능" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
-                        <div style={{marginTop: '-10px'}}/>
                         <SliderCustom top="크기" text="이미지를" value={content.image.size} func={setImgSize} max="100"/>
-                        <div style={{marginBottom: '20px'}}/>
                         <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                         }))} />
@@ -292,7 +283,6 @@ function Contents({content}) {
                                 else
                                 draft[state.secNum].image.shadowValue = "none"
                         }))} />
-                        <div style={{marginBottom: "20px"}}/>
                     </div>
                 )
             case 'slide':
@@ -306,7 +296,7 @@ function Contents({content}) {
                     <div className="small-command">
                         최대 3MB까지 가능합니다.
                     </div>
-                    <SliderCustom top="크기" text="이미지를" value={content.image.size} func={setImgSize} max="300"/>
+                    <SliderCustom top="크기" text="이미지를" value={content.image.size} func={setImgSize} max="100"/>
                     <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.border = e;
                     }))} />
@@ -317,13 +307,11 @@ function Contents({content}) {
                                 else
                                 draft[state.secNum].image.shadowValue = "none"
                         }))} />
-                        <div style={{marginBottom: "20px"}}/>
                     </>
                 )         
             case 'video':
                 return(
                     <>
-                    <div style={{marginTop: '10px'}}/>
                     <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
                     {videoType()}
                     </>
@@ -337,17 +325,16 @@ function Contents({content}) {
                         </div>
                     </div> 
                     <div className='mockup-select'>
-                <Select  
-                    className='select_list'
-                    onChange={e=>mockOption(e.target.value)}
-                    bg='white'
-                    borderColor='rgba(0, 0, 0, 0.08)'
-                    icon='none'
-                    color='gray'>
-                    <option value='mobile'>모바일</option>
-                    <option value='desktop'>데스크탑</option>
-                    <option value='mobile2'>모바일 2대</option>                     
-                </Select>
+                        <Select  
+                            className='select_list'
+                            onChange={e=>mockOption(e.target.value)}
+                            bg='white'
+                            borderColor='rgba(0, 0, 0, 0.08)'
+                            icon='none'
+                            color='gray'>
+                            <option value='mobile'>모바일</option>
+                            <option value='desktop'>데스크탑</option>                 
+                        </Select>
                     </div>
                     {returnMockup()}
                     </>

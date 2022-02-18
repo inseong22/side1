@@ -10,7 +10,7 @@ const commons = {
         use:true,
         text: '노코드 랜딩페이지 제작 툴',
         align: 'start',
-        size: 32,
+        size: 40,
         color: '#000000'
     },
     desc:{
@@ -56,6 +56,8 @@ const contents = {
         width:70,
         border:0,
         size:60,
+        shadow:false,
+        shadowValue:'none',
         slide:false,
     },
     slide_img:{
@@ -87,8 +89,7 @@ const element = {
     use:true,
     type:'image', // image or icon
     backgroundColor:'#6CCAD0',
-    // borderRaidus:5,
-    iconBorder:5,
+    // borderRaidus:5,'    iconBorder:5,
     imageBorder:5,
     size:50,
     color:'#ffffff',
@@ -106,7 +107,7 @@ const button = {
         ctaLink:'',
         ctaApply: '',
         ghostUseOrLink: true, 
-        ghostUse:true,
+        ghostUse:false,
         ghostLink:'',
         ghostApply: '',
         ctaPadding: 10,
@@ -415,7 +416,7 @@ export const defaults = {
             text:{
                 use:true,
                 text:'',
-                fontSize:12,
+                fontSize:16,
                 color:'#000000'
             },
         },
@@ -426,16 +427,16 @@ export const defaults = {
             color:'#F0F0F0',
         },
         button:{
-            use:true,
+            use:false,
             align:'end',
             cta:{
-                use:true,
+                use:false,
                 text:'CTA버튼',
                 link:'',
                 padding: 10,
             },
             ghost:{
-                use:true,
+                use:false,
                 text:'고스트 버튼',
                 link:'',
                 padding: 10,
@@ -494,8 +495,7 @@ export const defaults = {
         smallFont:'Noto Sans KR',
         color:'#63B3F7',
         fta:{
-            width:50,
-            borderRadius:0,
+            borderRadius:5,
             use:false,
             backgroundColor:'#6CCAD0',
             color:'#ffffff',
@@ -504,7 +504,7 @@ export const defaults = {
             text:'',
             link:'',
             shadow:false,
-            size:10,
+            size:50,
             shape:0,
         },
         cta:{
@@ -514,6 +514,7 @@ export const defaults = {
             shadow:true,
             borderColor:'#000000',
             border:false,
+            padding:10,
         },
         ghost:{
             borderRadius:5,
@@ -522,6 +523,7 @@ export const defaults = {
             shadow:true,
             borderColor:'#000000',
             border:false,
+            padding:10,
         },
         animation:'none'
     }

@@ -21,11 +21,15 @@ function FeaturesSection({content, setting}) {
                 height : `${state.isPhone ? '' : '100%'}`,
                 width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`
                 }}>
-                <Element content={content} item={item} index={index} key={index}/>
                 {
-                    content.elementText.titleUse && 
-                    <div className="df-margin-big" style={{width:'100%'}}>
-                        <TextAuto className="text-input feature-title" 
+                    content.element.use && 
+                    <Element content={content} item={item} index={index} key={index}/>
+                }
+                {
+                    content.elementText.use && 
+                    <>
+                    <div className="df-margin-big feature-title" style={{width:'100%'}}>
+                        <TextAuto className="text-input" 
                             value={item.title} 
                             color = {content.elementText.color} 
                             align = {state.isPhone ? content.mobile.align : content.align}
@@ -35,9 +39,6 @@ function FeaturesSection({content, setting}) {
                             size={content.elementText.titleSize/20} 
                         />
                     </div>
-                }
-                {
-                    content.elementText.descUse && 
                     <div className="df-margin feature-desc">
                         <TextareaAutosize 
                             className="text-input"  
@@ -58,6 +59,7 @@ function FeaturesSection({content, setting}) {
                             spellCheck="false"
                         />
                     </div>
+                    </>
                 }
             </div>
         )}

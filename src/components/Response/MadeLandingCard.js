@@ -5,7 +5,7 @@ import {dbService, stService} from '../../tools/fbase'
 import './MadeLandingCard.css'
 import {Copy} from '@styled-icons/boxicons-regular'
 
-function MadeLandingCard({item,published, index, setNowChecking, history, addNew, num, update, setUpdate}) {
+function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking, history, addNew, num, update, setUpdate}) {
     const [deleteopen, setDeleteOpen] = useState(false)
 
     const deletePage = async () => {
@@ -28,11 +28,11 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
             });
           });
 
-          var datas = await dbService.collection('datas').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-              doc.ref.delete();
-            });
-          });
+        //   var datas = await dbService.collection('datas').where('pageId','==', item.id).get().then(function(querySnapshot) {
+        //     querySnapshot.forEach(function(doc) {
+        //       doc.ref.delete();
+        //     });
+        //   });
 
         // 새로고침 시키기
         alert("삭제했습니다.")
@@ -77,7 +77,7 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
                 state:{
                     newMake:true,
                 }}} 
-                className="response-page-card hover-shadow">
+                className="response-page-card uphover">
                 <div className="response-card-main-color">
                 + 새로운 랜딩페이지 만들기
                 </div>
@@ -85,7 +85,7 @@ function MadeLandingCard({item,published, index, setNowChecking, history, addNew
         )
     }
     return (
-        <div className="response-page-card hover-shadow" onClick={() => setNowChecking(index)}>
+        <div className="response-page-card uphover" onClick={() => setNowChecking(index)} style={{border:`${index === nowChecking ? '0.6px solid #A89AFF' : 'none'}`}}>
             <div className="center-row" style={{justifyContent: "start"}}>
                 <div className="card__title">
                     {item.setting.title}
