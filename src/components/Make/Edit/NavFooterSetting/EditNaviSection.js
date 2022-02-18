@@ -94,11 +94,9 @@ function EditNaviSection({navi, setNavi, category}) {
                             navi.logo.image.use && 
                             <>
                                 <AddContentImg text="로고" value={navi.logo.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
-                                <div style={{marginTop: '-20px'}}/>
                                 <SliderCustom text="로고 사이즈" max='53' func={e => setNavi(produce(navi, draft => {
                                     draft.logo.image.width = e;
                                 }))} />
-                                <div style={{marginBottom: '20px'}}/>
                             </>
                         }
                         <OnOffCustom value={navi.logo.text.use} func={(e) => setNavi(produce(navi, draft => {

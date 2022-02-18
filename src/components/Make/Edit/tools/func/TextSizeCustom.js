@@ -7,6 +7,11 @@ import {
     NumberDecrementStepper,
 } from '@chakra-ui/react'
 
+const titleSizeOptions = [
+    { label: 'Small', value: 40 },
+    { label: 'Medium', value: 52 },
+    { label: 'Large', value: 64 },
+]
 const textSizeOptions = [
     { label: 'Small', value: 24 },
     { label: 'Medium', value: 32 },
@@ -52,7 +57,7 @@ export function NumberInputCustom({value, func}) {
     )
 }
 
-function TextSizeCustom({text, value, func, desc, options}) {
+function TextSizeCustom({text, value, func, desc, title, options}) {
     return (
         <div className="edit-element">
             <div className="edit-element__one" style={{flexDirection: 'column'}}>
@@ -71,6 +76,13 @@ function TextSizeCustom({text, value, func, desc, options}) {
                             onChange={e => func(e)}
                             value={value}
                         /> : 
+                        title ?
+                        <RadioCustom 
+                            options={titleSizeOptions}
+                            onChange={e => func(e)}
+                            value={value}
+                        />
+                        :
                         <RadioCustom 
                             options={textSizeOptions}
                             onChange={e => func(e)}

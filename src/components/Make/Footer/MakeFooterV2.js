@@ -19,11 +19,10 @@ function MakeFooterV2({full, history, foot, setFoot}) {
                 ${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '15px' : '30px'}`} `
             // paddingTop: `${foot.paddingTop}px`, 
             // paddingBottom: `${foot.paddingBottom}px`
-        }} 
-            onClick={() => action.setSecNum(51)}>
+        }} onClick={() => action.setSecNum(51)}>
                     <FTemplate foot={foot} history={history} setFoot={setFoot} />
             </footer>
-            <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? '#6C63FF' : 'rgba(0,0,0,0)'}`}}>
+            <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0)'}`}}>
             </div>
         </div>
     )

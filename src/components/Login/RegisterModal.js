@@ -1,12 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Close } from '@styled-icons/evaicons-solid';
+import {Link} from 'react-router-dom'
 import { authService } from '../../tools/fbase'
 import { firebaseInstance } from '../../tools/fbase'
 import { dbService } from '../../tools/fbase'
 import { Input } from 'antd';
 import googlelogo from '../../tools/img/googlelogo.png'
+import {Check} from '@styled-icons/bootstrap'
 import './LoginModal.css'
 
 const StyledModal = styled(ModalUnstyled)`
@@ -34,7 +36,7 @@ const Backdrop = styled('div')`
 
 const style = {
   width: 400,
-  height: 450,
+  height: 550,
   bgcolor: 'rgba(255,255,255,1)',
   borderRadius:'10px',
   p: 2,
@@ -42,9 +44,11 @@ const style = {
   pb: 3,
 };
 
-function LoginModal({open, setOpen}) {
+function RegisterModal({open, setOpen, history, loginOpen, setLoginOpen}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordCheck, setPasswordCheck] = useState("");
+    const [done, setDone] = useState(false);
 
     const socialLogin = async (e) => {
         const { 
@@ -65,13 +69,25 @@ function LoginModal({open, setOpen}) {
         var data = '';
         e.preventDefault();
         try{
-            data = await authService.signInWithEmailAndPassword(
+            data = await authService.createUserWithEmailAndPassword(
                 id, password
             )
-            checkRegister(data.user.multiFactor.user.email)
+            console.log(data)
         } catch (err){
-            console.log(err)
+            if(err.code === "auth/email-already-in-use"){
+                alert("이미 존재하는 아이디입니다. 로그인 해 주세요.");
+                setOpen(false)
+                setLoginOpen(true)
+            }else if(err.code === "auth/invalid-email"){
+                alert("이메일 양식에 맞게 작성해 주세요.");
+            }else{
+                alert("옳바르지 않은 회원가입 시도입니다.");
+            }
+            return;
         }
+        setOpen(false)
+        history.push('/');
+        history.go();
     }
 
     const checkRegister = async (email) => {
@@ -84,20 +100,10 @@ function LoginModal({open, setOpen}) {
             return({...doc.data(), id: doc.id})
         })
 
-        setOpen(!open);
-        
-        console.log("일단 로그인 성공", email, usersExist)
-
-
-        // if(usersExist.length === 0){
-        //     // 구글 아이디로 로그인했는데 회원가입에 정보가 없을 때
-        //     console.log("회원가입 정보를 받습니다.");
-        //     setDone(true);
-        // }else{
-        //     console.log("로그인 완료");
-        //     localStorage.setItem("name", usersExist[0].name);
-        //     localStorage.setItem("job", usersExist[0].job);
-        // }
+        if(usersExist.length === 0){
+            // 구글 아이디로 로그인했는데 회원가입에 정보가 없을 때
+            console.log("회원가입 정보를 받습니다.");
+        }
     }
 
     return (
@@ -112,7 +118,7 @@ function LoginModal({open, setOpen}) {
                 <div className="login-modal__inner">
                     <div className="modal-top__title">
                         <div className="login-title" style={{width:"95%"}}>
-                            로그인
+                            회원가입
                         </div>
                         <div style={{width:"5%", cursor:"pointer"}} onClick={() => setOpen(false)}>
                             <Close size="30" />
@@ -140,6 +146,17 @@ function LoginModal({open, setOpen}) {
                             value={password} 
                             onChange={e => setPassword(e.currentTarget.value)}
                         />
+                        <div className="login-label">
+                            <div>비밀번호 확인</div> {password === passwordCheck && passwordCheck !== '' && <Check size="20" style={{color:'#6C63FF'}} />}
+                        </div>
+                        <Input  
+                            type="password" 
+                            className="login-input input-focus"
+                            placeholder="비밀번호를 입력해 주세요." 
+                            required
+                            value={passwordCheck} 
+                            onChange={e => setPasswordCheck(e.currentTarget.value)}
+                        />
                         <Input className="login-form-button our-hover" type="submit" value="로그인" />
                     </form>
                     <button className="google-login-button opacity-hover" name="googleLogin" onClick={e => socialLogin(e)} style={{marginTop:'2%'}}>
@@ -161,4 +178,4 @@ function LoginModal({open, setOpen}) {
     )
 }
 
-export default LoginModal
+export default RegisterModal

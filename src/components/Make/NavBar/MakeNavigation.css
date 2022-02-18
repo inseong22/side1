@@ -15,6 +15,7 @@
     justify-content: center;
     align-items : center;
     flex-direction: row;
+    box-sizing: border-box;
     position:relative;
 }
 
@@ -27,7 +28,6 @@
 .make-nav-on{
     display: flex;
     align-items :center;
-    width:50%;
     cursor:pointer;
     justify-content : center;
     width:100%;
@@ -47,6 +47,7 @@
     justify-content:start;
     align-items : center;
     flex-direction: row;
+    box-sizing: border-box;
     width:100%;
 }
 
@@ -54,7 +55,7 @@
     display: flex;
     justify-content:start;
     align-items : center;
-    margin-right: 20px;
+    margin-right:5px;
 }
 
 .make-nav-buttonc{
@@ -63,6 +64,7 @@
     flex-direction: row;
     justify-content:end;
     width:100%;
+    box-sizing: border-box;
 }
 
 .b-one{

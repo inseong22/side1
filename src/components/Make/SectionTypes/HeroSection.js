@@ -14,9 +14,6 @@ import './DetailSection.css'
 import './Default.css'
 import './HeroSection.css'
 
-import playstorebutton from '../../../tools/img/playstorebutton.png'
-import appstorebutton from '../../../tools/img/appstorebutton.png'
-
 function HeroSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
@@ -32,11 +29,13 @@ function HeroSection({content, setting}) {
     return (
         <motion.div  data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout}>
-                <div className="text__container" style={{marginTop:`${content.layout === 4 ? '30px' : '0px'}`}}>
+                <div className="text__container" style={{marginTop:`${ !state.isPhone && content.layout === 4 ? '20px'  : state.isPhone && content.mobile.layout === 4 ? '10px' : '0px'}` }}>
                     <TitleDesc content={content} />
                     <ReturnButton content={content} />
                 </div>
+                <div className="image__container">
                     <ImageOrSlide content={content} />
+                </div>
             </AnimationDiv>
         </motion.div>
     )

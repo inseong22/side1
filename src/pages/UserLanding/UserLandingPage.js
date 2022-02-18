@@ -28,9 +28,12 @@ const UserLandingPage = (props) => {
 
     useEffect(() => {
         loadData()
+        console.log(item)
         ReactGa.initialize('UA-213792742-1');
         // to report page view
-        ReactGa.pageview(`/${window.location.host.split(".")[0]}`);
+        if(item !== undefined && item !== null){
+            ReactGa.pageview(`/${item.pageId}`)
+        }
     }, [loading])
 
     const loadData = async () => {
@@ -42,9 +45,6 @@ const UserLandingPage = (props) => {
         let orderData = userOrder.docs.map(doc => {
             return({...doc.data(), id:doc.id})
         });
-
-        console.log(orderData)
-        console.log(window.location.host.split(".")[0])
 
         favicon.href = orderData[0].setting.faviconAttachment;   
         urltitle.innerText = orderData[0].setting.title;

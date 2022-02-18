@@ -39,7 +39,8 @@ function GallerySection({content,setting}) {
                             <div className="feature-upload-button uphover" 
                                 style={{ 
                                     height:`${content.element.size}px`, 
-                                    backgroundColor:`${content.element.backgroundColor}`
+                                    backgroundColor:`${content.element.backgroundColor}`, 
+                                    borderRadius:`${content.card.borderRadius}px ${content.card.borderRadius}px 0px 0px`
                                 }}>
                                 <Upload size="25" />
                             </div>
@@ -72,7 +73,7 @@ function GallerySection({content,setting}) {
                        }
                        {
                            content.text.use && 
-                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'end', display: 'flex', padding:'8px 5px'}}>
+                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', padding:'8px 5px'}}>
                                    <TextAuto small className="text-input" 
                                         value={item.text} 
                                         color = {content.text.color} 

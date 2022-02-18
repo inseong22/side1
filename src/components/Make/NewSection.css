@@ -76,14 +76,6 @@
     overflow:visible;
 }
 
-.cta-button-made{
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    cursor:pointer;
-    width: auto;
-}
-
 .button-made{
     cursor:pointer;
     width: 100px;

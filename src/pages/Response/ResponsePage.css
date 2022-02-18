@@ -12,6 +12,7 @@
     padding-top:5vh;
     width:90%;
     padding-top:30px;
+    font-size:0.9em;
 }
 
 .get-up-container{
@@ -25,7 +26,6 @@
 .get-up-title{
     width:100%;
     padding:1% 0%;
-    font-size:0.9em;
     color:black;
     font-weight:bold;
     display: flex;
@@ -149,7 +149,7 @@
 
 .response-down__container{
     background: #F2F6FA;
-    box-shadow: var(--main-shadow-01);
+    box-shadow: var(--default-shadow-01);
     border-radius: 10px 10px 10px 10px;
     margin-top:5vh;
 }

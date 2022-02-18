@@ -4,13 +4,10 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import '../../components/Make/Modal/Modal.css';
 import './FirstQuestions.css'
 import {Link} from 'react-router-dom'
-import { MyContext } from '../Make/MakePageV2'
 import {dbService} from '../../tools/fbase';
 import OverflowScrolling from 'react-overflow-scrolling';
 import produce from 'immer';
 import { Input } from 'antd';
-
-import good from '../../tools/info/good3d.png';
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -178,17 +175,19 @@ const colorList = [
     },
 ]
 
-function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, setSetting}) {
+function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting}) {
     // 모달
     const [cnum, setCnum] = useState(1);
+    const [title, setTitle] = useState("");
     const [device, setDevice] = useState("");
-    const [templateNum, setTemplateNum] = useState(0);
     const [font, setFont] = useState('');
     const [color, setColor] = useState('');
     const [tmodalOpen, setTmodalOpen] = useState(false);
-    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const handleOpen = () => setOpen(true);
+    useEffect(() => {
+        console.log("리렌더링")
+    }, [])
+
     const handleClose = async () => {
         // 마지막에는 입력한 정보도 저장한다. 근데 한명껄 여러번 저장해서 헷갈리지 않게..!
 
@@ -197,13 +196,6 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
         })
         setOpen(false)
     };
-    
-    const onChangeTitle = e => {
-        e.preventDefault();
-        setNavi(produce(navi, draft => {
-            draft.title = e.currentTarget.value
-        }))
-    }
 
     const onUrlChange = e => {
         if (isNotNumber(e.nativeEvent.data)){ 
@@ -241,7 +233,6 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
         }else{
             setSetting(produce(setting, draft => {
                 draft.font = font;
-                draft.smallFont = font;
                 draft.color = color;
             }))
             setCnum(cnum + 1);
@@ -265,8 +256,28 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
             alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
             return;
         }else{
+            
+            const body = {
+                type: type,
+                name: navi.title,
+                font: font,
+                color:color
+            }
 
-            localStorage.setItem('editing', true);
+            const done = await dbService.collection('after-questions').add(body);
+
+            setNavi(produce(navi, draft => {
+                draft.title = title;
+            }))
+
+            setSetting(produce(setting, draft => {
+                draft.title = title;
+            }))
+
+            setFoot(produce(foot, draft => {
+                draft.copyright.text = title;
+            }))
+
             handleClose();
         }
     }
@@ -303,18 +314,15 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                         <Input 
                             className="input-holder input-focus" 
                             placeholder="서비스/제품 명이 로고 자리에 들어갑니다." 
-                            value={navi.title} 
-                            onChange={e => 
-                                setNavi(produce(navi, draft => {
-                                    draft.title = e.currentTarget.value
-                                }))} />
+                            value={title} 
+                            onChange={e => setTitle(e.currentTarget.value)} />
                         {/* </form> */}
                         <div className="modal-mini-text">
                             수정 가능하니 편하게 정해주세요 :)
                         </div>
                         <div className="modal-button-container">
-                            <div className="modal-move-button" 
-                                onSubmit={e => setCnum(cnum + 1)} style={{visibility:`${navi.title.length > 0 ? 'visible' : 'hidden'}`, display:'flex'}} 
+                            <div className="modal-move-button"
+                                onSubmit={e => setCnum(cnum + 1)} style={{visibility:`${title.length > 0 ? 'visible' : 'hidden'}`, display:'flex'}} 
                                 onClick={e => setCnum(cnum + 1)}>다음</div>  
                             </div>
                         </div>
@@ -325,17 +333,17 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
             case 2:
                 return(
                     <ModalBox 
-                        title={<><span style={{color:'#6C63FF'}}>{navi.title}</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀</>}>
+                        title={<><span style={{color:'#6C63FF'}}>{title}</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀</>}>
                         <>
                             <div className="modal-row">
                             {
                                 secondQuestion.map((item, index) => {
                                     let color = 'none';
                                     if(item.type === type){
-                                        color = '1px solid #6C63FF';
+                                        color = '1px solid #A89AFF';
                                     }
                                     return(
-                                        <div className="template__card" onClick={() => {setType(item.type);}} key={index} 
+                                        <div className="template__card uphover" onClick={() => {setType(item.type);}} key={index} 
                                             style={{border:`${color}`}}>
                                             <div style={{fontSize:'18px'}}>
                                                 {item.typequestion}
@@ -360,23 +368,23 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
             case 3:
                 return(
                     <ModalBox title={<>
-                        <span style={{color:'#6C63FF'}}>{navi.title}</span>의 랜딩페이지는 주로 어떤 화면으로 보여질까요?
+                        <span style={{color:'#6C63FF'}}>{title}</span>의 랜딩페이지는 주로 어떤 화면으로 보여질까요?
                     </>}>
                         <div className="modal-row" style={{flexWrap:'nowrap'}}>
-                            <div className="template__card"
+                            <div className="template__card uphover"
                                 onClick={() => {
                                     setDevice('pc')
                                 }}
-                                style={{border: `${device === 'pc' ? '1px solid #6C63FF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
+                                style={{border: `${device === 'pc' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
                                     🖥 PC<br/><br/> PC 화면을 중심으로 편집하고<br/> 모바일 화면은 간단한 수정만 가능해요.
                                 </div>
                             </div>
-                            <div className="template__card"
+                            <div className="template__card uphover"
                                 onClick={() => {
                                     setDevice('mobile')
                                 }}
-                                style={{border: `${device === 'mobile' ? '1px solid #6C63FF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
+                                style={{border: `${device === 'mobile' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
                                     📱모바일<br/><br/> 모바일 화면을 중심으로 편집하고<br/> PC 화면은 간단한 수정만 가능해요.
                                 </div>
@@ -401,11 +409,11 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                 <OverflowScrolling className="font-selections__container">
                                     {fontList.map((item, index) => {
                                         return(
-                                            <div className="template__card" key={index}
+                                            <div className="template__card uphover" key={index}
                                                 onClick={() => {
                                                     setFont(item.value);
                                                 }}
-                                                style={{border: `${font === item.value ? '1px solid #6C63FF' : 'none'}`, 
+                                                style={{border: `${font === item.value ? '1px solid #A89AFF' : 'none'}`, 
                                                 fontFamily:`${item.value}`, 
                                                 padding:'5% 3%'}}
                                             >
@@ -428,10 +436,10 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                                     {colorList.map((item, index) => {
                                         let bor = 'none';
                                         if(item.color === color){
-                                            bor = '1px solid #6C63FF';
+                                            bor = '1px solid #A89AFF';
                                         }
                                         return(
-                                            <div className="template__card" key={index}
+                                            <div className="template__card uphover" key={index}
                                                 onClick={() => {
                                                     setColor(item.color);
                                                 }}
@@ -458,13 +466,13 @@ function FirstQuestions({type, setType, open, setOpen, navi, setNavi, setting, s
                 return(
                     <div className="modal-flex-column">
                         <div className="modal-title">
-                            마지막으로, <span style={{color:'#6C63FF'}}>{navi.title}</span> 랜딩페이지의 URL을 설정해 주세요.                            
+                            마지막으로, <span style={{color:'#6C63FF'}}>{title}</span> 랜딩페이지의 URL을 설정해 주세요.                            
                         </div>
                         <div className="modal-main-card">
                             <div className="modal-title" style={{fontSize:'25px'}}>
-                                <input className="input-holder input-focus" placeholder="영문과 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
+                                <input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
                             </div>
-                            <div style={{color:'gray', paddingLeft:'0%',marginTop:'3%', fontSize:'18px', textAlign:'center', fontFamily:'Pretendard-Regular'}}>
+                            <div style={{color:'gray', paddingLeft:'0%',marginTop:'1%', fontSize:'14px', textAlign:'center', fontFamily:'Pretendard-Regular'}}>
                                 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.
                                 수정 가능하니 편하게 설정해 주세요 :)
                             </div>

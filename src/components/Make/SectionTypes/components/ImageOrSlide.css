@@ -1,0 +1,45 @@
+.back-image-fit{
+    object-fit:cover;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.slide-box{
+    z-index: 1;
+    /* height: auto; */
+    overflow: hidden;
+}
+
+.mock-container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+}
+
+.mobile-ex{
+    z-index: 99;
+}
+
+.upload-mobile{
+    width: auto;
+    height: 100%;
+    z-index:3;
+    position: absolute;
+    top: 0px;
+    border-radius: 18%;
+}
+
+
+.upload-desk{
+    width: auto;
+    height: 100%;
+    z-index:3;
+    position: absolute;
+    top: 0px;
+    border-radius: 5%;
+}
+
+.video-content{
+    width:100%;
+}

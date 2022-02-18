@@ -3,6 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import ElementsTable from './tools/ElementsTable'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import produce from 'immer';
+import SingleColorCustom from '../tools/Custom/SingleColorCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
@@ -22,14 +23,46 @@ const shapeOptions = [
 ]
 const imageSizeOptions = [
     { label: 'Small', value: 50 },
-    { label: 'Medium', value: 100 },
-    { label: 'Large', value: 150 },
+    { label: 'Medium', value: 75 },
+    { label: 'Large', value: 100 },
 ]
-const imageSmallSizeOptions = [
-    { label: 'Small', value: 55 },
-    { label: 'Medium', value: 70 },
-    { label: 'Large', value: 90 },
-]
+
+export const EditImageIcon = ({content}) => {
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+
+    return(
+        <OpenCloseCustom title="요소" use={content.element.use}>
+            <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].element.type = e;
+            }))} />
+            {
+                content.element.type === 'icon' && 
+                <>
+                <ColorCustom text="색상" value={content.element.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                    draft[state.secNum].element.backgroundColor = e;
+                }))} />
+                <RadioCustom text="프레임" button value={content.element.iconBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                    draft[state.secNum].element.iconBorder = e;
+                }))} />
+                <RadioCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                    draft[state.secNum].element.size = e;
+                }))} />
+                </>
+            }
+            {
+                content.element.type === 'image' &&
+                <>
+                <RadioCustom text="프레임" button value={content.element.imageBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                    draft[state.secNum].element.imageBorder = e;
+                }))} />
+                <RadioCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                    draft[state.secNum].element.size = e;
+                }))} />
+                </>
+            }
+        </OpenCloseCustom>
+    )
+}
 
 function EditFeaturesSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -50,7 +83,7 @@ function EditFeaturesSection({content, category}) {
             }))
         },
         {
-            title:'이미지',
+            title:'요소',
             use:content.element.use,
             func:() => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].element.use = !content.element.use;
@@ -73,37 +106,7 @@ function EditFeaturesSection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
-                        <OpenCloseCustom title="이미지" use={content.element.use}>
-                            <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].element.type = e;
-                            }))} />
-                            {
-                                content.element.type === 'icon' && 
-                                <>
-                                
-                                <ColorCustom text="색상" value={content.element.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.backgroundColor = e;
-                                }))} />
-                                <RadioCustom text="프레임" button value={content.element.iconBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.iconBorder = e;
-                                }))} />
-                                <RadioCustom text="크기" value={content.element.size} options={imageSmallSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.size = e;
-                                }))} />
-                                </>
-                            }
-                            {
-                                content.element.type === 'image' &&
-                                <>
-                                <RadioCustom text="프레임" button value={content.element.imageBorder} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.imageBorder = e;
-                                }))} />
-                                <RadioCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.size = e;
-                                }))} />
-                                </>
-                            }
-                        </OpenCloseCustom>
+                        <EditImageIcon content={content} />
                         <OpenCloseCustom title="설명글" use={content.elementText.use}>
                             <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.color = e;
