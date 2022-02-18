@@ -10,7 +10,6 @@ function ReturnButton({content}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const CustomButton = (type) => { return (
-    
     <div className="cta-button-made" style={{
         borderRadius:`${state.setting[type].borderRadius}px`,
         backgroundColor:`${state.setting[type].backgroundColor}`,
