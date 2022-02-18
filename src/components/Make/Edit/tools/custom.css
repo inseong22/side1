@@ -28,6 +28,11 @@
     border-color:white;
 }
 
+.radio-element:hover{
+    background-color:var(--main-light-gray);
+    box-shadow: var(--default-shadow-01);
+}
+
 .radio-element-b{
     cursor: pointer;
     width:100px;
@@ -43,6 +48,33 @@
     margin:8px;
     flex-direction: column;
     border-color:white;
+}
+
+.radio-element-b:hover{
+    background-color:var(--main-light-gray);
+    box-shadow: var(--default-shadow-01);
+}
+
+.radio-element-f{
+    cursor: pointer;
+    width:67.26px;
+    height:67.26px;
+    background:var(--main-gradient);
+    box-shadow: var(--main-shadow-01);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    border-radius: 10px;
+    font-size: 14px;
+    margin:8px;
+    flex-direction: column;
+    border-color:white;
+}
+
+.radio-element-f:hover{
+    background-color:var(--main-light-gray);
+    box-shadow: var(--default-shadow-01);
 }
 
 .r-unclicked{

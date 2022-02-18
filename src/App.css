@@ -112,13 +112,13 @@
   --main-light-gray-02:#F2F6FA;
 
   --section-top: 22px;
-  --section-main: 15px;
+  --section-main: 20px;
   --func-title: 15px;
   --func-subtitle: 14px;
   --func-subtitle-mini: 12px;
   --small-text: 12px;
 
-  --button-font-size : 13px;
+  --button-font-size : 0.6vw;
   --input-font-size: 13px;
   --made-button-padding: 8px 8.5px;
 
@@ -314,10 +314,12 @@
 
 .ti:hover{
   border:1px solid rgba(200,200,200,0.7);
+  z-index: 10;
 }
 
 .ti:focus {
   outline:1px solid #6e5c5c;
+  z-index: 10;
 }
 
 .text-input-flex{

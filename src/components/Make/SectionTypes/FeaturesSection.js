@@ -24,27 +24,38 @@ function FeaturesSection({content, setting}) {
                 <Element content={content} item={item} index={index} key={index}/>
                 {
                     content.elementText.titleUse && 
-                    <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                        <TextAuto className="text-input" 
+                    <div className="df-margin-big" style={{width:'100%'}}>
+                        <TextAuto className="text-input feature-title" 
                             value={item.title} 
                             color = {content.elementText.color} 
                             align = {state.isPhone ? content.mobile.align : content.align}
                             onChange={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elements[index].title = e.currentTarget.value;
-                            }))}  
+                            }))} 
+                            size={content.elementText.titleSize/20} 
                         />
                     </div>
                 }
                 {
                     content.elementText.descUse && 
-                    <div className="df-margin">
-                        <TextAuto small className="text-input"  
+                    <div className="df-margin feature-desc">
+                        <TextareaAutosize 
+                            className="text-input"  
                             value={item.desc} 
                             color = {content.elementText.color} 
-                            align = {state.isPhone ? content.mobile.align : content.align}
+                            // align = {state.isPhone ? content.mobile.align : content.align}
                             onChange={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elements[index].desc = e.currentTarget.value;
                             }))}  
+                            style={{
+                                fontFamily:`${state.setting.smallFont}`, 
+                                color:`${content.desc.color}`, 
+                                fontSize:`${content.elementText.descSize/20}em`, 
+                                // boxSizing:`border-box`, 
+                                textAlign:`${state.isPhone ? content.mobile.align : content.desc.align}`,
+                                resize:'none'
+                            }}
+                            spellCheck="false"
                         />
                     </div>
                 }

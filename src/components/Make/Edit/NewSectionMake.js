@@ -38,7 +38,7 @@ export const MakeContext = React.createContext({
     actionC : {setUsedColors : () => {}}
 });
 
-function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting}) {
+function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting, isScroll}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [usedColors, setUsedColors] = useState([
         "#ffffff",
@@ -177,7 +177,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             )
         }else if(state.secNum === CONTENTSSECNUM ){
             return(
-                <EditContents navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot}/>
+                <EditContents navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot} isScroll={isScroll}/>
             )
         }else{
             return (

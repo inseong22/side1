@@ -1,4 +1,4 @@
-import React, {useMemo, useEffect, useState, useRef, createContext, useContext} from 'react'
+import React, {useMemo, useEffect, useState, useRef, createContext, useContext, useCallback} from 'react'
 import './MakePage.css'
 import './MakeLanding.css'
 // Recoil , Immer JS 적용
@@ -38,6 +38,8 @@ const NOTADDING = 1000;
 const MakePageV2 = ({history, userObj}) => {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const targets = useRef(null);
+    const scrollRef = useRef();
+    const [scroll, setScroll] = useState(false);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
     const [secNum, setSecNum] = useState(52); // 현재 수정중인 페이지를 의미.
     const [loading, setLoading] = useState(false);
@@ -151,34 +153,13 @@ const MakePageV2 = ({history, userObj}) => {
             </div>
         )
     })
-
-    // const FTA = () => {
-    //     return(
-    //         <>
-    //         {  ( setting.fta.use ) &&
-    //         <div className="fta__container">
-    //             <div className="fta-button" 
-    //                 style={{
-    //                     fontFamily: `${setting.font}`,
-    //                     backgroundColor:`${setting.fta.backgroundColor}`, 
-    //                     width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, 
-    //                     borderRadius:`${setting.fta.shape}px`, 
-    //                     border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
-    //                     boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
-    //                 }}>
-    //                 <TextareaAutosize
-    //                 className='text-input' 
-    //                     value={setting.fta.text} 
-    //                     onChange={e => setSetting(produce(setting, draft => {
-    //                         draft.fta.text = e.target.value;
-    //                     }))}
-    //                     color={setting.fta.color} align="center" />
-    //             </div>
-    //         </div>
-    //         }
-    //         </>
-    //     )
-    // }
+    const isScroll = useCallback((scroll)=>{
+        setScroll(scroll);
+        if(scroll){
+            // 스크롤 내리기
+            scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+        }
+    },[scroll])
 
     return (<>
     { isMobile ? 
@@ -212,7 +193,7 @@ const MakePageV2 = ({history, userObj}) => {
                         <div className="make-page-make-space">
                             <OverflowScrolling className='overflow-scrolling'>
                                 {/* 제작페이지 메인 */}
-                               <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
+                               <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} isScroll={isScroll} />
                             </OverflowScrolling>
                         </div>
                         <div className="fake-make">
@@ -242,47 +223,55 @@ const MakePageV2 = ({history, userObj}) => {
                                 </div>
                             </div>
                         </div>}
-                        <div ref={targets} className="make-main-page-container" style={{borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
-                            {/* 네비게이션 */}
-                            {navi.use && <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} /> }
-                            
-                            {/* 섹션 디스플레이 */}
-                            
-                            {sectionsReturn}
+                            <div ref={targets, scrollRef} className="make-main-page-container" style={{borderRadius:`${isPhone ? '7px' : '0px'}` }}>  
+                                {/* 네비게이션 */}
+                                {navi.use && <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} /> }
+                                
+                                {/* 섹션 디스플레이 */}
+                                
+                                {contents.map((item, index) => {
+                                    return(
+                                        <div style={{width:'100%'}}>
+                                            <NewSection setCategory={setCategory} content={item} key={index} index={index} secNum={secNum} isPhone={isPhone} setSecNum={setSecNum} contents={contents} setContents={setContents} full={full} setting={setting}/>
+                                        </div>
+                                    )
+                                })}
+                                {/* 푸터 */}
+                                {foot.use && 
+                                <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> 
+                                }                             
+                            </div>
 
-                            {/* 푸터 */}
-                            {foot.use && <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> }                             
-
-                            <>
-            {  ( setting.fta.use ) &&
-            <div className="fta__container">
-                <div className="fta-button" 
-                    style={{
-                        fontFamily: `${setting.font}`,
-                        backgroundColor:`${setting.fta.backgroundColor}`, 
-                        width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, 
-                        borderRadius:`${setting.fta.shape}px`, 
-                        border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
-                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
-                    }}>
-                    <TextareaAutosize
-                    className='text-input' 
-                        value={setting.fta.text} 
-                        onChange={e => setSetting(produce(setting, draft => {
-                            draft.fta.text = e.target.value;
-                        }))}
-                        color={setting.fta.color} align="center" />
-                </div>
-            </div>
-            }
-            </>
+                            {/* 플로팅 */}
+                                <>
+                                    {  ( setting.fta.use ) &&
+                                    <div className="fta__container">
+                                        <div className="fta-button" 
+                                            style={{
+                                                fontFamily: `${setting.font}`,
+                                                backgroundColor:`${setting.fta.backgroundColor}`, 
+                                                width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, 
+                                                borderRadius:`${setting.fta.shape}px`, 
+                                                border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
+                                                boxShadow:`${setting.fta.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`
+                                            }}>
+                                            <TextareaAutosize
+                                            className='text-input' 
+                                                value={setting.fta.text} 
+                                                onChange={e => setSetting(produce(setting, draft => {
+                                                    draft.fta.text = e.target.value;
+                                                }))}
+                                                color={setting.fta.color} align="center" />
+                                        </div>
+                                    </div>
+                                    }
+                                </>
                             {/* {full && <div className="cancel-full-screen" onClick={() => setFull(false)}>
                                 전체화면<br/>취소
                             </div>} */}
                         </div>
                     </div>
                 </div>
-            </div>
             
             {/* 모달 모아두기 */}
             <div>
@@ -291,7 +280,8 @@ const MakePageV2 = ({history, userObj}) => {
             </div>
             <ConfirmCustom open={openConfirm} setOpen={setOpenConfirm} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />
         </MyContext.Provider>
-        </> }
+        </> 
+        }
         </>)
 }
 

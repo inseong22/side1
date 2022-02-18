@@ -32,23 +32,27 @@ function FuncYoutubeLink({content}) {
     return (
         <>
         <form className="center-row">
-           <input
+           {/* <input
                 className="edit-input"
                 type="text"
                 onChange={e=>onChangeLink(e)}
                 style={{width: '100%'}}
                 placeholder="유튜브 링크를 입력해 주세요."
                 onKeyPress={e => onYoutube(e)}
-           /> 
-           {/* <div 
-           type="submit" 
-           style={{width: '30px', cursor: 'pointer' , border: 'solid 1px'}}
-           onClick = {e => onYoutube(e)}
-           >
-           확인
-        </div> */}
+           />  */}
+            <div className="centera" style={{justifyContent:'start', marginTop:'12px'}}>
+                    <input type='text' placeholder="유튜브 링크를 입력해 주세요."
+                     onChange={e => setText(e.currentTarget.value)} 
+                     value={text}
+                     onKeyPress={e => onYoutube(e)}
+                    >
+                    </input>
+                    <input type="button" value="입력" className="content__button" style={{zIndex:4, marginLeft:'-65px'}} onClick={(e) => {
+                        onYoutube(e)
+                    }}/>
+                </div>
         </form>
-        <div className="mid-command">입력 후 엔터를 누르세요.</div>
+        <div className="mid-command"/>
         </>
     )
 }

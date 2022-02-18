@@ -30,7 +30,7 @@ function ImageOrSlide({content}){
                 autoPlay
                 muted
                 loop
-                style={{borderRadius:`${content.image.border}%`, width:`${content.image.size}%`}}
+                style={{width:`${content.image.size}%`}}
                 >
                 </video>
                 </div>
@@ -64,7 +64,6 @@ function ImageOrSlide({content}){
             return(
                 <div className="image__container">
                 <div className="mobile-container">
-                    모바일
                     <img className="mobile-ex" src={Phone} alt="목업틀"
                         style={{width: `${content.image.size}%`}}
                     />
@@ -87,7 +86,6 @@ function ImageOrSlide({content}){
             return(
                 <div className="image__container">
                 <div className="desk-container">
-                    데스크탑
                     <img className="mobile-ex" src={Desktop} alt="목업틀"
                         style={{width: `${content.image.size}px`}}
                     />
@@ -108,7 +106,6 @@ function ImageOrSlide({content}){
         return(
             <div className="image__container">
             <div className="desk-container">
-                모바일 2개
                     <img className="mobile-ex" src={Phone} alt="목업틀"
                         style={{width: `${content.image.size}px`}}
                     />

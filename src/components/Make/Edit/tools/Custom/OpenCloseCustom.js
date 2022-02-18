@@ -66,14 +66,6 @@ export const AccordionCustom = (props) => {
   );
 }
 
-const CustomSwitch = ({use, onChange}) => {
-  return(
-    <div className={use ? 'custom-switch' : 'custom-switch unclicked'} onClick={onChange} style={{marginLeft: '13px'}}>
-      <div className="custom-switch-thumb" style={{left : `${use ? '32px' : '2px'}`}}></div>
-    </div>
-  )
-}
-
 const OpenCloseCustom = (props) => {
   /**
    * title, tooltip, preseen 설정 가능

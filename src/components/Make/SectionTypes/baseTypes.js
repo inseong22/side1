@@ -55,7 +55,7 @@ const contents = {
         attachment:'',
         width:70,
         border:0,
-        size:150,
+        size:60,
         slide:false,
     },
     slide_img:{
@@ -115,7 +115,8 @@ const button = {
     appButton:{
         use: false,
         apple: '',
-        google: ''
+        google: '',
+        align:''
     },
     ctaApplyInputs: [],
     ghostApplyInputs: [],
@@ -179,7 +180,9 @@ export const base = [
         elementText:{
             use:true,
             titleUse:true,
+            titleSize: 24,
             descUse:true,
+            descSize: 16,
             color:'#000000',
         },
         elements:[
@@ -232,9 +235,15 @@ export const base = [
             use:true,
             color: '#000000',
         },
+        elementTitle:{
+            use:true,
+            color: '#000000',
+            size: 24,
+        },
         elementText:{
             use:true,
             color: '#000000',
+            size: 16,
         },
         elements:[
             {

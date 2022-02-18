@@ -11,7 +11,7 @@ export const CustomSwitch = ({text, value, onChange}) => {
       </div>
       <div>
         <div className={value ? 'custom-switch' : 'custom-switch unclicked'} onClick={onChange}>
-          <div className="custom-switch-thumb" style={{left : `${value ? '32px' : '2px'}`}}></div>
+          <div className="custom-switch-thumb" style={{left : `${value ? '30px' : '2px'}`}}></div>
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@ export const CustomSwitch = ({text, value, onChange}) => {
 export const CustomSwitch2 = ({text, value, onChange}) => {
   return(
     <div className={value ? 'custom-switch' : 'custom-switch unclicked'} onClick={onChange}>
-      <div className="custom-switch-thumb" style={{left : `${value ? '32px' : '2px'}`}}></div>
+      <div className="custom-switch-thumb" style={{left : `${value ? '30px' : '2px'}`}}></div>
     </div>
   )
 }
