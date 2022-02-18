@@ -270,9 +270,8 @@ function EdtiSetting({setting, setSetting, category}) {
                                         draft.fta.shape = e
                                     }))} />
                                     <div className="edit-element">
-                                        {/* 폰트 색상 연결 안해놓음 디자인만! */}
-                                        <SingleColorCustom text="폰트 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
-                                            draft.fta.backgroundColor = e;
+                                        <SingleColorCustom text="폰트 색상" value={setting.fta.color} func={(e) => setSetting(produce(setting, draft => {
+                                            draft.fta.color = e;
                                         }))} />
                                         <div className="edit-element-bar"/>
                                         <SingleColorCustom text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
@@ -288,8 +287,8 @@ function EdtiSetting({setting, setSetting, category}) {
                                             draft.ghost.borderColor = e;
                                         }))} />
                                     }
-                                    <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
-                                        draft.ghost.shadow = !setting.ghost.shadow
+                                    <OnOffCustom text="그림자" value={setting.fta.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                        draft.fta.shadow = !setting.fta.shadow
                                     }))} />
                                     <InputCustom text="링크 연결" value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
                                         draft.fta.link = e

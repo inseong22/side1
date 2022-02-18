@@ -48,21 +48,21 @@ export function EditRadioLayout({content, options, value, onChange, version}){
         case 'main':
             return(
                 <div className="radio-container">
-                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, contAlign) => onChange(e=1, align='start', contAlign='space-between')}>
+                    <div className={value === 1 ? 'radio-element-f' : 'radio-element-f r-unclicked'} onClick={(e, align, contAlign) => onChange(e=1, align='start', contAlign='space-between')}>
                         {value === 1 ? (
                             <img src={Blay1W} />
                         ):(
                             <img src={Blay1G} />
                         )}
                     </div>
-                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align,contAlign) => onChange(e=2, align='start', contAlign='space-between')}>
+                    <div className={value === 2 ? 'radio-element-f' : 'radio-element-f r-unclicked'} onClick={(e, align,contAlign) => onChange(e=2, align='start', contAlign='space-between')}>
                         {value === 2 ? (
                             <img src={Blay2W} />
                         ):(
                             <img src={Blay2G} />
                         )}
                     </div>
-                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, contAlign) => {
+                    <div className={value === 3 ? 'radio-element-f' : 'radio-element-f r-unclicked'} onClick={(e, align, contAlign) => {
                         onChange(e=3, align='center', contAlign='center') 
                     }}>
                     {value === 3 ? (
@@ -71,7 +71,7 @@ export function EditRadioLayout({content, options, value, onChange, version}){
                             <img src={Blay3G} />
                         )}
                     </div>
-                    <div className={value === 4 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, contAlign) => onChange(e=4, align='center', contAlign='center')}>
+                    <div className={value === 4 ? 'radio-element-f' : 'radio-element-f r-unclicked'} onClick={(e, align, contAlign) => onChange(e=4, align='center', contAlign='center')}>
                     {value === 4 ? (
                             <img src={Blay4W} />
                         ):(

@@ -76,10 +76,10 @@
 }
 
 .feature-title{
-    font-size:var(--feature-title-size);
+    /* font-size:var(--feature-title-size); */
 }
 .feature-desc{
-    font-size:var(--feature-desc-size);
+    /* font-size:var(--feature-desc-size); */
 }
 .feature-writer{
     font-size:var(--feature-writer-size);

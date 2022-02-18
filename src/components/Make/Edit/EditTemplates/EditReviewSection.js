@@ -7,6 +7,8 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import LayoutRFG from './tools/LayoutRFG'
+import OnOffCustom from '../tools/Custom/OnOffCustom'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
 
 const featureOptions = [
     { label: '아이콘', value: 'icon' },
@@ -59,6 +61,13 @@ function EditReviewSection({content, category}) {
             use:content.element.use,
             func:() => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].element.use = !content.element.use;
+            }))
+        },
+        {
+            title:'리뷰 제목',
+            use:content.elementTitle.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].elementTitle.use = !content.elementTitle.use;
             }))
         },
         {
@@ -124,6 +133,14 @@ function EditReviewSection({content, category}) {
                                 </>
                             }
                         </OpenCloseCustom>
+                        <OpenCloseCustom title="리뷰 제목" use={content.elementTitle.use}>
+                            <ColorCustom text="색상" value={content.elementTitle.color} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementTitle.color = e;
+                            }))} />
+                            <TextSizeCustom text="크기" value={content.elementTitle.size} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementTitle.size = e;
+                            }))} />
+                        </OpenCloseCustom>
                         <OpenCloseCustom title="별점" use={content.rating.use}>
                             <ColorCustom text="색상" value={content.rating.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].rating.color = e;
@@ -135,6 +152,9 @@ function EditReviewSection({content, category}) {
                         <OpenCloseCustom title="리뷰 내용" use={content.elementText.use}>
                             <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.color = e;
+                            }))} />
+                            <TextSizeCustom text="크기" desc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.size = e;
                             }))} />
                         </OpenCloseCustom>
                         <OpenCloseCustom title="이름 / 닉네임" use={content.writer.use}>

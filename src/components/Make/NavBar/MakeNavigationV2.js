@@ -10,21 +10,19 @@ function MakeNavigationV2({full, navi, setNavi, history}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [isHover, setIsHover] = useState('none');
 
-    const CustomCtaButton = ({value, onClick, style}) => {
+    const CustomCtaButton = (props) => {
         return(
             <div style={{
-                ...style,
+                ...props.style,
                 display: 'flex', justifyContent:'center', alignItems: 'center',
                 padding:'10px 10.5px',
-                borderRadius:`${state.setting.cta.borderRadius}px`,
-                backgroundColor:`${state.setting.cta.backgroundColor}`,
-                color:`${state.setting.cta.color}`,
+                borderRadius:`${state.setting.ghost.borderRadius}px`,
+                backgroundColor:`${state.setting.ghost.backgroundColor}`,
+                color:`${state.setting.ghost.color}`,
                 boxShadow:`${state.setting.cta.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
-                border:`${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'}`
-            }} onClick={() => onClick}>
-                <input className="text-input-flex ti" value={navi.button.cta.text } onChange={(e) => setNavi(produce(navi, draft => {
-                    draft.button.cta.text = e.currentTarget.value;
-                }))} style={{fontFamily:`${state.setting.smallFont}`}}/>
+                border:`${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'}`
+            }} onClick={() => props.onClick}>
+                {props.child}
             </div>
         )
     }

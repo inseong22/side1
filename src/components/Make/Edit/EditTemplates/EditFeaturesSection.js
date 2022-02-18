@@ -5,6 +5,7 @@ import RadioCustom from '../tools/Custom/RadioCustom'
 import produce from 'immer';
 import ColorCustom from '../tools/Custom/ColorCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import EditDesign from './tools/EditDesign'
 import LayoutRFG from './tools/LayoutRFG'
@@ -110,8 +111,14 @@ function EditFeaturesSection({content, category}) {
                             <OnOffCustom text="특징 제목" value={content.elementText.titleUse} func={(e) => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.titleUse = !content.elementText.titleUse;
                             }))} />
+                            <TextSizeCustom text="제목 크기" value={content.elementText.titleSize} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.titleSize = e;
+                            }))} />
                             <OnOffCustom text="특징 본문" value={content.elementText.descUse} func={(e) => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.descUse = !content.elementText.descUse;
+                            }))} />
+                            <TextSizeCustom text="본문 크기" desc value={content.elementText.descSize} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.descSize = e;
                             }))} />
                         </OpenCloseCustom>
                     </div>

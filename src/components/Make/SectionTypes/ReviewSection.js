@@ -23,23 +23,27 @@ function ReviewSection({content, setting}) {
                         width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`
                     }}>
                     <Element content={content} item={item} index={index} key={index}/>
-    
-                    <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                        <TextareaAutosize 
-                            className="text-input"  
-                            style={{
-                                width:'100%',
-                                resize:'none',
-                                textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
-                                fontFamily:`${state.setting.smallFont}`,
-                                color:`${content.elementText.color}`,
-                            }}
-                            value={item.title} 
-                            onChange={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elements[index].title = e.currentTarget.value;
-                            }))} 
+                    {
+                        content.elementTitle.use && 
+                        <div className="df-margin-big feature-title" style={{width:'100%'}}>            
+                            <TextareaAutosize 
+                                className="text-input"  
+                                style={{
+                                    width:'100%',
+                                    resize:'none',
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
+                                    fontFamily:`${state.setting.smallFont}`,
+                                    color:`${content.elementTitle.color}`,
+                                    fontSize:`${content.elementTitle.size/20}em`,
+                                }}
+                                value={item.title} 
+                                onChange={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elements[index].title = e.currentTarget.value;
+                                }))} 
+                                spellCheck="false"
                             />
-                    </div>
+                        </div>
+                    }
                     {
                         content.rating.use && 
                         <div className="df-margin">
@@ -63,7 +67,7 @@ function ReviewSection({content, setting}) {
                     {
                         content.elementText.use && 
                         <div className="df-margin-big feature-desc" style={{width:'100%'}}>
-                            <TextareaAutosize 
+                            <TextareaAutosize
                                 className="text-input" 
                                 style={{
                                     width:'100%',
@@ -71,11 +75,13 @@ function ReviewSection({content, setting}) {
                                     textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                     fontFamily:`${state.setting.smallFont}`,
                                     color:`${content.elementText.color}`,
+                                    fontSize:`${content.elementText.size/20}em`,
                                 }}
                                 value={item.desc} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elements[index].desc = e.currentTarget.value;
                                 }))}  
+                                spellCheck="false"
                                 />
                         </div>
                     }
