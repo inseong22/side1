@@ -16,14 +16,8 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-    PopoverHeader,
     PopoverBody,
-    PopoverFooter,
     PopoverArrow,
-    PopoverCloseButton,
-    PopoverAnchor,
-    ButtonGroup,
-    Portal,
   } from '@chakra-ui/react'
 
 const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone, loading, foot, editing, editingId, setLoading, setting, navi, setNavi, saveLocalStorage}) => {
@@ -62,9 +56,6 @@ const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone,
     }
 
 const saveImages = async () => {
-    console.log(state.contents[0].image.attachment.length)
-    console.log(state.contents[1].image.attachment.length)
-    console.log(state.contents[2].image.attachment.length)
 
     if(navi.logo.use && navi.logo.image.use && checkUnSaved(navi.logo.image.attachment)){
         // 사진을 먼저 업로드하고 그 URL을 받아서 데이터로 넣어줘야한다.
@@ -108,6 +99,16 @@ const saveImages = async () => {
 
             // 이미지 업로드
             if(cont.contents.type === 'image') {
+                contCopy[index].video.attachment = ''
+                contCopy[index].slide_img.attachment1 = ''
+                contCopy[index].slide_img.attachment2 = ''
+                contCopy[index].slide_img.attachment3 = ''
+                contCopy[index].mockup.attachment = ''
+                contCopy[index].mockup.attachment2 = ''
+            }
+            // 이미지 업로드
+            if(cont.contents.type === 'video') {
+                contCopy[index].image.attachment = ''
                 contCopy[index].slide_img.attachment1 = ''
                 contCopy[index].slide_img.attachment2 = ''
                 contCopy[index].slide_img.attachment3 = ''
@@ -116,12 +117,14 @@ const saveImages = async () => {
             }
 
             if(cont.contents.type === 'slide') {
+                contCopy[index].video.attachment = ''
                 contCopy[index].image.attachment = ''
                 contCopy[index].mockup.attachment = ''
                 contCopy[index].mockup.attachment2 = ''
             }
 
             if(cont.contents.type === 'mockup') {
+                contCopy[index].video.attachment = ''
                 contCopy[index].image.attachment = ''
                 contCopy[index].slide_img.attachment1 = ''
                 contCopy[index].slide_img.attachment2 = ''
@@ -181,6 +184,14 @@ const saveImages = async () => {
                 const attachmentURL = await response.ref.getDownloadURL();
 
                 contCopy[index].slide_img.attachment3 = attachmentURL;
+            }
+            // 슬라이드 업로드
+            if(cont.contents.type === 'video' && cont.video.type === 'base' && checkUnSaved(cont.video.attachment)){
+                const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
+                const response = await attachmentRef.putString(cont.video.attachment, "data_url");
+                const attachmentURL = await response.ref.getDownloadURL();
+
+                contCopy[index].video.attachment = attachmentURL;
             }
 
         }

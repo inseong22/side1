@@ -18,6 +18,7 @@ function TextAuto({small, value, onChange, color, align, size}) {
                     color:`${color}`, 
                     textAlign:`${align}`,
                     resize:'none',
+                    fontSize: `${size}em`,
                     fontFamily:`${state.setting.smallFont}`
                 }}
                 spellCheck="false"
@@ -31,7 +32,7 @@ function TextAuto({small, value, onChange, color, align, size}) {
                     color:`${color}`, 
                     textAlign:`${align}`,
                     resize:'none',
-                    fontSize: `${size}px`,
+                    fontSize: `${size}em`,
                     fontFamily:`${state.setting.font}`
                 }}
                 spellCheck="false"

@@ -56,7 +56,7 @@ const style = {
   pb: 3,
 };
 
-function AddingSection({open, setOpen}) {
+function AddingSection({open, setOpen, isScroll}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const addSection = (typeName) => {
@@ -67,8 +67,8 @@ function AddingSection({open, setOpen}) {
             ...state.contents.slice(0, state.contents.length),
             body,
         ])
+        setOpen(false)
         action.setSecNum(state.contents.length)
-        action.setCategory(0);
     }
 
     return (
@@ -92,7 +92,9 @@ function AddingSection({open, setOpen}) {
                     <div className="section-modal__container">
                         {base.map((item,index) => {
                             return(
-                                <div className="section-modal__button" key={index} onClick={() => addSection(item.sectionTypeName)}>
+                                <div className="section-modal__button" key={index} onClick={() => 
+                                {addSection(item.sectionTypeName); isScroll(true);
+                                }}>
                                     <img src={IMGS[index]} width={90} />
                                     {item.name}
                                 </div>

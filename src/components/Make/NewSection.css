@@ -7,6 +7,10 @@
     z-index:1;
 }
 
+.for-section-hover:hover{
+    background-color: #6C63FF;
+}
+
 .section-selection-container{
     position: absolute;
     z-index: 10;
@@ -70,14 +74,6 @@
     flex-direction:column;
     position:relative;
     overflow:visible;
-}
-
-.cta-button-made{
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    cursor:pointer;
-    width: auto;
 }
 
 .button-made{

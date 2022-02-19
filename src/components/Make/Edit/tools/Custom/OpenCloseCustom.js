@@ -66,14 +66,6 @@ export const AccordionCustom = (props) => {
   );
 }
 
-const CustomSwitch = ({use, onChange}) => {
-  return(
-    <div className={use ? 'custom-switch' : 'custom-switch unclicked'} onClick={onChange} style={{marginLeft: '13px'}}>
-      <div className="custom-switch-thumb" style={{left : `${use ? '32px' : '2px'}`}}></div>
-    </div>
-  )
-}
-
 const OpenCloseCustom = (props) => {
   /**
    * title, tooltip, preseen 설정 가능
@@ -83,7 +75,7 @@ const OpenCloseCustom = (props) => {
   return (
     props.use ? ( 
     <div className="one-element">
-      <div className="accordion">
+      <div className="accordion" style={{padding:`${open ? '10px 15px 20px 15px' : '10px 15px'}`}}>
         <div className="accordion__header" onClick={() => setOpen(!open)}>
           <div className="edit-element">
             <ChakraProvider>
@@ -97,12 +89,6 @@ const OpenCloseCustom = (props) => {
                   {props.subtext}
                 </div> 
               }
-              {
-                props.tooltip && 
-                  <Tooltip hasArrow arrowSize={10} label={props.tooltip} placement='top' fontSize='13'>
-                    <InformationCircle size="16" style={{color:'#C4CACF', zIndex:'20', marginLeft:'6px'}}/>
-                  </Tooltip>
-              }
             </div>
             </ChakraProvider>
             <div className="centera" style={{justifyContent: 'end'}}>
@@ -115,6 +101,12 @@ const OpenCloseCustom = (props) => {
             </div> }
         </div>
         <div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`}}>
+          {
+            props.tooltip && 
+              <div style={{fontSize:'12px', width:'100%', textAlign:'left', paddingLeft:'10px'}}>
+                {props.tooltip}
+              </div>
+          }
           {props.children}
         </div>
       </div>

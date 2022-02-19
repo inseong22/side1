@@ -1,22 +1,19 @@
 import React, {useState, useEffect, useContext} from 'react'
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MyContext } from '../../../pages/Make/MakePageV2'
+import EditNaviSection from './NavFooterSetting/EditNaviSection'
 import EditDetailSection from './EditTemplates/EditDetailSection'
 import EditCtaSection from './EditTemplates/EditCtaSection'
 import EditHeroSection from './EditTemplates/EditHeroSection'
 import EditReviewSection from './EditTemplates/EditReviewSection'
 import EditFeaturesSection from './EditTemplates/EditFeaturesSection'
-import EditAppDownloadSection from './EditTemplates/EditAppDownloadSection'
-import EditApplySection from './EditTemplates/EditApplySection'
 import EditQnaSection from './EditTemplates/EditQnaSection'
 import EditGallerySection from './EditTemplates/EditGallerySection'
 import EditTextSection from './EditTemplates/EditTextSection'
 import EditMockupSection from './EditTemplates/EditMockupSection'
 import EditVideoSection from './EditTemplates/EditVideoSection'
 import EditTopBar from './tools/func/FuncTopBar'
-
+import {ArrowIosBack} from '@styled-icons/evaicons-solid'
 import EditSetting from './NavFooterSetting/EditSetting'
-import EditNaviSection from './NavFooterSetting/EditNaviSection'
 import EditFooterSection from './NavFooterSetting/EditFooterSection'
 import EditContents from './NavFooterSetting/EditContents'
 import BackButton from '../../../tools/img/backButton.png'
@@ -38,7 +35,7 @@ export const MakeContext = React.createContext({
     actionC : {setUsedColors : () => {}}
 });
 
-function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting}) {
+function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting, isScroll}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [usedColors, setUsedColors] = useState([
         "#ffffff",
@@ -139,9 +136,9 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                     <div className="back__container">
                         <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
                             <span className="back-button">
-                                <img src={BackButton} />
+                                <ArrowIosBack size="20" />
                             </span>
-                            <span className="back-text">
+                            <span className="content__name">
                                 내비게이션 바
                             </span>
                         </div>
@@ -157,7 +154,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                     <div className="back__container">
                         <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
                             <span className="back-button">
-                            <img src={BackButton} />
+                                <ArrowIosBack size="20" />
                             </span>
                             <span className="back-text">
                                 푸터 바
@@ -177,7 +174,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             )
         }else if(state.secNum === CONTENTSSECNUM ){
             return(
-                <EditContents navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot}/>
+                <EditContents navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot} isScroll={isScroll}/>
             )
         }else{
             return (
@@ -187,7 +184,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                     <div className="back__container">
                         <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
                             <span className="back-button">
-                            <img src={BackButton} />
+                                <ArrowIosBack size="20" />
                             </span>
                             <span className="back-text">
                                 {content.name}

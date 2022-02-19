@@ -86,12 +86,21 @@ function Layout({content, version, foot, setFoot}) {
                             }))} />
                             <RadioCustom text="정렬" options={alignOptions} value={content.mobile.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].mobile.align = e;
+                                draft[state.secNum].title.align = e;
+                                draft[state.secNum].desc.align = e;
                             }))} />
                         </>
                         :
+                        <>
                         <RadioCustom layout='on' version='cta' options={layout4Options} value={content.layout} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].layout = e;
                         }))} />
+                        <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].align = e;
+                            draft[state.secNum].title.align = e;
+                            draft[state.secNum].desc.align = e;
+                        }))} />
+                        </>
                     }
                     </>
                 )

@@ -4,14 +4,13 @@ import ColorCustom from '../tools/Custom/ColorCustom'
 import SingleColorCustom from '../tools/Custom/SingleColorCustom'
 import InputCustom from '../tools/Custom/InputCustom'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import SelectCustom from '../tools/Custom/SelectCustom'
 import './EditSetting.css'
 import '../EditTemplates/Edit.css'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import produce from 'immer';
 import AnimationCustom from '../tools/Custom/AnimationCustom'
-import AddContentImg from '../tools/func/FuncContentImg'
+import SliderCustom from '../tools/Custom/SliderCustom'
 import AddFaviconImg from '../tools/func/FuncFaviconImg'
 import {Check} from '@styled-icons/bootstrap'
 import {ChevronRight} from '@styled-icons/boxicons-regular'
@@ -26,10 +25,7 @@ import {
     PopoverFooter,
     PopoverArrow,
     PopoverCloseButton,
-    PopoverAnchor,
     ButtonGroup,
-    Portal,
-    Button
   } from '@chakra-ui/react'
 
 const fontOptions = [
@@ -56,7 +52,7 @@ const shapeOptions = [
 const sizeOptions = [
     { label: 'Small', value: 50 },
     { label: 'Medium', value: 75 },
-    { label: 'Large', value: 100 },
+    { label: 'Large', value: 98 },
 ]
 
 function EdtiSetting({setting, setSetting, category}) {
@@ -115,7 +111,7 @@ function EdtiSetting({setting, setSetting, category}) {
                     onClose={close}
                 >
                 <PopoverTrigger>
-                    <div className="font-button" style={{fontFamily: `${setting.font}`}} onClick={() => {open(); setIsSmallFontOpen(false)}}>노코드 랜딩페이지 제작 툴, Surfee <ChevronRight size="20"/></div>
+                    <div className="font-button" style={{fontFamily: `${setting.font}`}} onClick={() => {open(); setIsSmallFontOpen(false)}}>노코드 랜딩페이지 제작 툴, Surfee <ChevronRight size="20" color=""/></div>
                 </PopoverTrigger>
                 <PopoverContent>
                     <PopoverArrow />
@@ -271,25 +267,25 @@ function EdtiSetting({setting, setSetting, category}) {
                                     }))} />
                                     <div className="edit-element">
                                         {/* 폰트 색상 연결 안해놓음 디자인만! */}
-                                        <SingleColorCustom text="폰트 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
-                                            draft.fta.backgroundColor = e;
+                                        <SingleColorCustom text="폰트 색상" value={setting.fta.color} func={(e) => setSetting(produce(setting, draft => {
+                                            draft.fta.color = e;
                                         }))} />
                                         <div className="edit-element-bar"/>
                                         <SingleColorCustom text="배경 색상" value={setting.fta.backgroundColor} func={(e) => setSetting(produce(setting, draft => {
                                             draft.fta.backgroundColor = e;
                                         }))} />
                                     </div>
-                                    <OnOffCustom text="테두리" value={setting.ghost.border} func={(e) => setSetting(produce(setting, draft => {
-                                        draft.ghost.border = !setting.ghost.border
+                                    <OnOffCustom text="테두리" value={setting.fta.border} func={(e) => setSetting(produce(setting, draft => {
+                                        draft.fta.border = !setting.fta.border
                                     }))} />
                                     {
-                                        setting.ghost.border && 
-                                        <ColorCustom text="테두리 색상" value={setting.ghost.borderColor} func={(e) => setSetting(produce(setting, draft => {
-                                            draft.ghost.borderColor = e;
+                                        setting.fta.border && 
+                                        <ColorCustom text="테두리 색상" value={setting.fta.borderColor} func={(e) => setSetting(produce(setting, draft => {
+                                            draft.fta.borderColor = e;
                                         }))} />
                                     }
-                                    <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
-                                        draft.ghost.shadow = !setting.ghost.shadow
+                                    <OnOffCustom text="그림자" value={setting.fta.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                        draft.fta.shadow = !setting.fta.shadow
                                     }))} />
                                     <InputCustom text="링크 연결" value={setting.fta.link} placeholder="링크를 입력하세요" func={(e) => setSetting(produce(setting, draft => {
                                         draft.fta.link = e
@@ -306,8 +302,8 @@ function EdtiSetting({setting, setSetting, category}) {
                 return(
                     <>
                     <div>
-                        <OpenCloseCustom title="메인 색상" use={true}>
-                            <SingleColorCustom text="색상" value={setting.color} func={(e) => setSetting(produce(setting, draft => {
+                        <OpenCloseCustom title="메인 색상" use={true} tootip="메인 색상으로 설정한 색상은 다른 요소의 색상을 설정할 때 쉽게 적용할 수 있습니다.">
+                            <SingleColorCustom value={setting.color} func={(e) => setSetting(produce(setting, draft => {
                                 draft.color = e;
                             }))} />
                         </OpenCloseCustom>
@@ -352,6 +348,9 @@ function EdtiSetting({setting, setSetting, category}) {
                             <OnOffCustom text="그림자" value={setting.cta.shadow} func={(e) => setSetting(produce(setting, draft => {
                                 draft.cta.shadow = !setting.cta.shadow
                             }))} />
+                            <SliderCustom top="여백" value={setting.cta.padding} max={24} func={e => setSetting(produce(setting, draft => {
+                                draft.cta.padding = e
+                            }))}/>
                         </OpenCloseCustom>
                         <OpenCloseCustom title="고스트 버튼" use={true} preseen={
                             <div className="edit-element">
@@ -362,7 +361,7 @@ function EdtiSetting({setting, setSetting, category}) {
                                 </div>
                             </div>
                         }>
-                            <RadioCustom text="모양" options={shapeOptions} value={setting.ghost.borderRadius} func={(e) => setSetting(produce(setting, draft => {
+                            <RadioCustom button text="모양" options={shapeOptions} value={setting.ghost.borderRadius} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.borderRadius = e
                             }))} />
                             <div className="edit-element">
@@ -376,9 +375,6 @@ function EdtiSetting({setting, setSetting, category}) {
                                 draft.ghost.color = e;
                             }))} />
                             </div>
-                            <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
-                                draft.ghost.shadow = !setting.ghost.shadow
-                            }))} />
                             <OnOffCustom text="테두리" value={setting.ghost.border} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.border = !setting.ghost.border
                             }))} />
@@ -388,6 +384,12 @@ function EdtiSetting({setting, setSetting, category}) {
                                     draft.ghost.borderColor = e;
                                 }))} />
                             }
+                            <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
+                                draft.ghost.shadow = !setting.ghost.shadow
+                            }))} />
+                            <SliderCustom top="여백" value={setting.ghost.padding} max={24} func={e => setSetting(produce(setting, draft => {
+                                draft['ghost'].padding = e
+                            }))}/>
                         </OpenCloseCustom>
                     </div>
                     <OpenCloseCustom title="애니메이션" use={true}>

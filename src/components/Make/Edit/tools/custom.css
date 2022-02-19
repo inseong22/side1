@@ -22,7 +22,6 @@
     color:white;
     border-radius: 30px;
     font-size: var(--button-font-size);
-    font-weight: 700;
     margin:8px;
     flex-direction: column;
     border-color:white;
@@ -39,7 +38,22 @@
     justify-content: center;
     color:white;
     border-radius: 10px;
-    font-size: 14px;
+    margin:8px;
+    flex-direction: column;
+    border-color:white;
+}
+
+.radio-element-f{
+    cursor: pointer;
+    width:67.26px;
+    height:67.26px;
+    background:var(--main-gradient);
+    box-shadow: var(--main-shadow-01);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    border-radius: 10px;
     margin:8px;
     flex-direction: column;
     border-color:white;
@@ -225,37 +239,13 @@
 .upload-div{
     margin-left: 10px;
 }
-.upload-video-div{
-    padding: 30px 1px 30px 0px; 
-    margin: auto;
-}
-.upload-click{
-    cursor: pointer;
-    background: linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
-    /* 메인 섀도우 01 */
-    box-shadow: 4px 4px 15px #D0CDFF;
-    border-radius: 32px;
-    width: 190px;
-    height: 40px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: var(--button-font-size);
-    font-weight: 700;
-    line-height: 16px;
-    text-align: center;
-    margin-top: 10px;
-    color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content:center;
-}
 .upload-img-click{
     cursor: pointer;
     background: linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
     /* 메인 섀도우 01 */
     box-shadow: 4px 4px 15px #D0CDFF;
     border-radius: 32px;
-    width: 190px;
+    width: 180px;
     height: 40px;
     font-style: normal;
     font-weight: normal;

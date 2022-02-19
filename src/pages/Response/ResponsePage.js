@@ -20,7 +20,7 @@ function ResponsePage({userObj, history}) {
     const [loading, setLoading] = useState(false);
     const [update, setUpdate] = useState(false);
     const [responses, setResponses] = useState([[]]);
-    const [datas, setDatas] = useState();
+    const [datas, setDatas] = useState([[]]);
     const [mylandings, setMylandings] = useState([]);
     const [published, setPublished] = useState([]);
     const [part, setPart] = useState(1);
@@ -44,6 +44,7 @@ function ResponsePage({userObj, history}) {
         let thisuserData = thisuserDatas.docs.map(doc => {
             return({...doc.data(), id:doc.id})
         });
+
         setMylandings(thisuserData);
 
         getThisPublished();
@@ -52,11 +53,11 @@ function ResponsePage({userObj, history}) {
         
         thisuserData.map(item => {
             let tempd = []
-            getResponses(item.setting.urlId).then(i => {
+            getResponses(item.id).then(i => {
                 tempd = i;
                 tempApplyDatas.push(tempd);
             })
-            getDatas(item.setting.urlId).then(i => {
+            getDatas(item.id).then(i => {
                 tempd = i;
                 tempDatas.push(tempd);
             })
@@ -78,11 +79,11 @@ function ResponsePage({userObj, history}) {
         setPublished(publishedData);
     }
 
-    const getResponses = async (urlId) => {
+    const getResponses = async (pageId) => {
         const reDatas = await dbService
             .collection("datas") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
             .orderBy("created", "desc")
-            .where("urlId", "==", urlId)
+            .where("pageId", "==", pageId)
             .get();
 
         let reData = reDatas.docs.map(doc => {
@@ -93,10 +94,10 @@ function ResponsePage({userObj, history}) {
         return reData;
     }
 
-    const getDatas = async (urlId) => {
+    const getDatas = async (pageId) => {
         const reDatas = await dbService
             .collection("gadata") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
-            .where("path", "==", '/' + urlId)
+            .where("path", "==", '/' + pageId)
             .get();
 
         let result = reDatas.docs.map(doc => {
@@ -123,7 +124,10 @@ function ResponsePage({userObj, history}) {
 
     const returnMylandingsTable = mylandings.map((item, index) => {
         return(
-            <MadeLandingCard history={history} item={item} key={item.id} index={index} published={checkPublished(item.urlId)} setNowChecking={setNowChecking} num={mylandings.length} setUpdate={setUpdate} update={update}/>
+            <MadeLandingCard 
+                history={history} item={item} key={item.id} index={index} 
+                published={checkPublished(item.urlId)} setNowChecking={setNowChecking} 
+                nowChecking={nowChecking} num={mylandings.length} setUpdate={setUpdate} update={update}/>
         )
     })
 
@@ -175,7 +179,7 @@ function ResponsePage({userObj, history}) {
                         {
                             mylandings.length === 0 ?
                             <div>
-                                1분만에 새로운 랜딩페이지를 만들고 유저의 반응을 테스트 해 보세요!
+                                10분 만에 새로운 랜딩페이지를 만들고 간편하게 유저의 반응을 확인해 보세요!
                             </div>
                             :
                             <div>

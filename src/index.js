@@ -6,11 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "devices.css";
+import {ScrollToTop} from './App'
 
 AOS.init(); 
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* <ScrollToTop /> */}
     <App />
   </React.StrictMode>,
   document.getElementById('root')

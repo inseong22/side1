@@ -32,7 +32,7 @@ export function EditRadio({options, value, onChange}) {
         <div className="radio-container">
             {options.map((item, index) => {
                 return(
-                    <div className={value === item.value ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(item.value)} key={index}>
+                    <div className={value === item.value ? 'radio-element' : 'radio-element r-unclicked radio-hover'} onClick={() => onChange(item.value)} key={index}>
                         {item.label}
                     </div>
                 )
@@ -48,21 +48,21 @@ export function EditRadioLayout({content, options, value, onChange, version}){
         case 'main':
             return(
                 <div className="radio-container">
-                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, contAlign) => onChange(e=1, align='start', contAlign='space-between')}>
+                    <div className={value === 1 ? 'radio-element-f' : 'radio-element-f r-unclicked radio-hover'} onClick={(e, align, contAlign) => onChange(e=1, align='start', contAlign='space-between')}>
                         {value === 1 ? (
                             <img src={Blay1W} />
                         ):(
                             <img src={Blay1G} />
                         )}
                     </div>
-                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align,contAlign) => onChange(e=2, align='start', contAlign='space-between')}>
+                    <div className={value === 2 ? 'radio-element-f' : 'radio-element-f r-unclicked radio-hover'} onClick={(e, align,contAlign) => onChange(e=2, align='start', contAlign='space-between')}>
                         {value === 2 ? (
                             <img src={Blay2W} />
                         ):(
                             <img src={Blay2G} />
                         )}
                     </div>
-                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, contAlign) => {
+                    <div className={value === 3 ? 'radio-element-f' : 'radio-element-f r-unclicked radio-hover'} onClick={(e, align, contAlign) => {
                         onChange(e=3, align='center', contAlign='center') 
                     }}>
                     {value === 3 ? (
@@ -71,7 +71,7 @@ export function EditRadioLayout({content, options, value, onChange, version}){
                             <img src={Blay3G} />
                         )}
                     </div>
-                    <div className={value === 4 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, contAlign) => onChange(e=4, align='center', contAlign='center')}>
+                    <div className={value === 4 ? 'radio-element-f' : 'radio-element-f r-unclicked radio-hover'} onClick={(e, align, contAlign) => onChange(e=4, align='center', contAlign='center')}>
                     {value === 4 ? (
                             <img src={Blay4W} />
                         ):(
@@ -83,21 +83,21 @@ export function EditRadioLayout({content, options, value, onChange, version}){
         case 'cta': 
             return(
                 <div className="radio-container">
-                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(1)}>
+                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(1)}>
                         {value === 1 ? (
                             <img src={Clay31} />
                         ):(
                             <img src={Clay32} />
                         )}
                     </div>
-                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(2)}>
+                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(2)}>
                         {value === 2 ? (
                             <img src={Clay21} />
                         ):(
                             <img src={Clay22} />
                         )}
                     </div>
-                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(3)}>
+                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(3)}>
                     {value === 3 ? (
                             <img src={Clay11} />
                         ):(
@@ -109,14 +109,14 @@ export function EditRadioLayout({content, options, value, onChange, version}){
         case 'two': 
             return(
                 <div className="radio-container">
-                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(3)}>
+                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(3)}>
                     {value === 3 ? (
                             <img src={Blay3W} />
                         ):(
                             <img src={Blay3G} />
                         )}
                     </div>
-                    <div className={value === 4 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(4)}>
+                    <div className={value === 4 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(4)}>
                     {value === 4 ? (
                             <img src={Blay4W} />
                         ):(
@@ -128,21 +128,21 @@ export function EditRadioLayout({content, options, value, onChange, version}){
         case 'text':
             return (
                 <div className="radio-container">
-                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, top, bottom) => onChange(e=1, align='center', top=15, bottom=15)}>
+                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, top, bottom) => onChange(e=1, align='center', top=15, bottom=15)}>
                         {value === 1 ? (
                             <img src={Tlay1W} />
                         ):(
                             <img src={Tlay1G} />
                         )}
                     </div>
-                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, top, bottom) => onChange(e=2, align='start', top=25, bottom=5)}>
+                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, top, bottom) => onChange(e=2, align='start', top=25, bottom=5)}>
                         {value === 2 ? (
                             <img className='text-layout2' src={Tlay23W} />
                         ):(
                             <img className='text-layout2' src={Tlay23G} />
                         )}
                     </div>
-                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={(e, align, top, bottom) => onChange(e=3, align='start', top=15, bottom=15)}>
+                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, top, bottom) => onChange(e=3, align='start', top=15, bottom=15)}>
                     {value === 3 ? (
                             <img className='text-layout3' src={Tlay23W} />
                         ):(
@@ -154,21 +154,21 @@ export function EditRadioLayout({content, options, value, onChange, version}){
         case 'footer':
             return (
                 <div className="radio-container">
-                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(1)}>
+                    <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(1)}>
                         {value === 1 ? (
                             <img src={Flay12} />
                         ):(
                             <img src={Flay11} />
                         )}
                     </div>
-                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(2)}>
+                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(2)}>
                         {value === 2 ? (
                             <img src={Flay22} />
                         ):(
                             <img src={Flay21} />
                         )}
                     </div>
-                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(3)}>
+                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(3)}>
                     {value === 3 ? (
                             <img src={Flay32} />
                         ):(
@@ -186,7 +186,7 @@ export function EditRadioButtom({options, value, onChange}) {
 
     return (
         <div className="radio-container">
-            <div className={value === 0 ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(0)}>
+            <div className={value === 0 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(0)}>
                 <div className="radio-shape box">
 
                 </div>
@@ -194,7 +194,7 @@ export function EditRadioButtom({options, value, onChange}) {
                     사각형
                 </div>
             </div>
-            <div className={value === ROUNDBORDER ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(ROUNDBORDER)}>
+            <div className={value === ROUNDBORDER ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(ROUNDBORDER)}>
                 <div className="radio-shape round">
 
                 </div>
@@ -202,7 +202,7 @@ export function EditRadioButtom({options, value, onChange}) {
                     라운드
                 </div>
             </div>
-            <div className={value === CIRCLEBORDER ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(CIRCLEBORDER)}>
+            <div className={value === CIRCLEBORDER ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => onChange(CIRCLEBORDER)}>
                 <div className="radio-shape circle">
 
                 </div>

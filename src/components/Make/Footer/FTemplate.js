@@ -112,7 +112,6 @@ function FTemplate({foot, setFoot, history }) {
                             style={{
                                 fontFamily:`${state.setting.smallFont}`, 
                                 color: `${foot.text.color}`,
-                                fontSize: `${foot.text.size}px`,
                                 textAlign:`${foot.text.align}`,
                                 resize: 'none',
                                 backgroundColor: `${foot.backgroundColor}`
@@ -143,7 +142,8 @@ function FTemplate({foot, setFoot, history }) {
                     <div 
                         className='copyright-box'
                         style={{
-                            fontFamily:`${state.setting.font}`
+                            fontFamily:`${state.setting.font}`,
+                            color:`${foot.text.color}`,
                         }}>
                         Copyright 2022 {foot.copyright.text}
                     </div>

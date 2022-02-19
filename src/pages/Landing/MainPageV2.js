@@ -129,7 +129,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
 
     return (
         <>
-        <NavBarV2 history={history} isLoggedIn={isLoggedIn} />
+        <NavBarV2 history={history} isLoggedIn={isLoggedIn} buttonOpen />
         <div className="main-page-container">
             <div className="main-page-section-topbottom" style={{backgroundColor:'white'}}>
                 <div className="main-section-left-topbottom" style={{color:'black'}}>

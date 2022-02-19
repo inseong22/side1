@@ -2,12 +2,9 @@ import React, {useContext, useState} from 'react';
 import { MyContext } from '../../../../pages/Make/MakePageV2';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import produce from 'immer';
-import ConfirmCustom from '../../../../tools/ConfirmCustom';
 import AddingSection from '../../Modal/AddingSection';
 import {CustomSwitch2} from '../tools/Custom/OnOffCustom'
 import './EditContents.css';
-import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
-import {DragIndicator} from '@styled-icons/material-outlined'
 // import PlusIcon from '../../../../tools/img/plusButton.png';
 
 const BCOLOR = 'rgba(230,230,230,0)'
@@ -26,7 +23,7 @@ const getItemStyle = (isDragging, draggableStyle, backColor) => {
     };
 };
 
-function EditContents({navi, setNavi, foot, setFoot}) {
+function EditContents({navi, setNavi, foot, setFoot, isScroll}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [deleteopen, setDeleteOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
@@ -98,7 +95,7 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                     </div>   
                 </div>
                 <div className="comment">
-                드래그 앤 드랍으로 순서를 바꿀 수 있습니다
+                드래그 앤 드랍으로 순서를 변경할 수 있습니다
                 </div>
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
@@ -253,7 +250,7 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                     </div>   
                 </div>
             </div>
-            <AddingSection open={addOpen} setOpen={setAddOpen} />
+            <AddingSection open={addOpen} setOpen={setAddOpen} isScroll={isScroll}/>
         </div>
     )
 }

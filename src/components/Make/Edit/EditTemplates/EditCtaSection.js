@@ -76,7 +76,7 @@ function EditCtaSection({content, category, type}) {
                         <Layout content={content} version="cta"/>
                         {
                             !(type === 'appDownload') &&
-                            <OpenCloseCustom title="버튼">
+                            <OpenCloseCustom title="버튼" use={content.button.use}>
                                 <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
                                 <AddCtaButton content={content} num={5}/>
                                 <AddGhostButton content={content} num={5}/>
