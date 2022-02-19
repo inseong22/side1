@@ -100,7 +100,7 @@ function EditDesign({content}) {
                 <RadioCustom text="정렬" options={alignOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].title.align = e;
                 }))} />
-                <TextSizeCustom text="크기" value={content.title.size} func={e => action.setContents(produce(state.contents, draft => {
+                <TextSizeCustom text="크기" title value={content.title.size} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].title.size = e;
                 }))} />
             </OpenCloseCustom>

@@ -1,9 +1,8 @@
 
 .fta__container{
     position:fixed;
-    bottom:50px;
+    bottom:30px;
     z-index:1003;
-    width:100%;
     display: flex;
     justify-content :center;
     align-items :center;
@@ -13,8 +12,8 @@
     display: flex;
     align-items : center;
     justify-content :center;
-    font-size:var(--feature-title-size);
-    padding:5px;
+    font-size:var(--button-font-size);
+    padding:8px;
 }
 
 .font-done-button{

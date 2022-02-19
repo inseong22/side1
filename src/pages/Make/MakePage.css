@@ -179,7 +179,7 @@
     background: #F2F6FA;
     /* 기본 섀도우 01 */
 
-    box-shadow: 2px 4px 20px #E8F0F9;
+    /* box-shadow: 2px 4px 20px #E8F0F9; */
     border-radius: 20px 20px 0px 0px;
     display: flex;
     flex-direction: row;

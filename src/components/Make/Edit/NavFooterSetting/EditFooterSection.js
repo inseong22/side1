@@ -105,9 +105,6 @@ function EditFooterSection({foot, setFoot, category}) {
                         <RadioCustom text="정렬" options={alignOptions} value={foot.text.align} func={e => setFoot(produce(foot, draft => {
                             draft.text.align = e;
                         }))} />
-                        <TextSizeCustom text="크기" options={sizeOptions} value={foot.text.size} func={e => setFoot(produce(foot, draft => {
-                            draft.text.size = e;
-                        }))} />
                     </OpenCloseCustom>
                     <OpenCloseCustom title="소셜 아이콘" use={foot.icon.use}>
                         <ColorCustom text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {

@@ -34,7 +34,7 @@ function AddGhostButton({content, num}) {
             case 'link':
                 return(
                     <>
-                    <InputCustom placeholder="연결하고 싶은 URL을 선택해 주세요" value={content.button.ghostLink} func = {(e) => action.setContents(produce(state.contents, draft => {
+                    <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요" value={content.button.ghostLink} func = {(e) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.ghostLink = e
                     }))} />
                     <SliderCustom top="고스트 여백" value={content.button.ghostPadding} max={18} func={e => action.setContents(produce(state.contents, draft => {
@@ -71,9 +71,6 @@ function AddGhostButton({content, num}) {
                     </> }
                     <div className="mid-command-light"> 최대 {num}개의 신청 박스만 생성 가능합니다. 
                     </div>
-                    <SliderCustom top="고스트 여백" value={content.button.ghostPadding} max={18} func={e => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].button.ghostPadding = e
-                    }))}/>
                     </>
                 )
             default:

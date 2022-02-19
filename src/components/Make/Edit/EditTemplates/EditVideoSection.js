@@ -74,7 +74,7 @@ function EditVideoSection({content, category}) {
                     <AddYoutubeLink content={content} value={content.video.link} />
                     <CustomSwitch text="자동 재생" value={content.video.auto} 
                         onChange={ () => action.setContents(produce(state.contents, draft => {
-                            if (content.video.link.includes('autoplay=1'))
+                            if (content.video.link.includes('autoplay=0'))
                                 {draft[state.secNum].video.link = content.video.link.replace('autoplay=1', 'autoplay=0');
                                 draft[state.secNum].video.auto = false;}
                             else
@@ -82,7 +82,10 @@ function EditVideoSection({content, category}) {
                                 draft[state.secNum].video.auto = true;}
                         }))}/>
                     <div className="mid-command">
-                        유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다.
+                        {
+                            content.video.auto ? <> 유저가 페이지에 들어오면 동영상이 음소거 상태로 자동 재생됩니다. </>
+                            : <> 유저가 페이지에 들어온 후 동영상을 클릭하면 재생됩니다. </>
+                        }
                     </div>
                     <SliderCustom top="크기" text="동영상" value={content.image.size} func={setImgSize} max="100"/>
                     </>
@@ -129,9 +132,8 @@ function EditVideoSection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <OpenCloseCustom title="동영상" use={content.video.use}>
-                        <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
-                        <div style={{marginBottom: '25px'}}/>
-                        {videoType()}
+                            <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
+                            {videoType()}
                         </OpenCloseCustom>
                         <OpenCloseCustom title='설명' use={content.explanation.use}>
                         <ColorCustom text="색상" value={content.explanation.color} func={e => action.setContents(produce(state.contents, draft => {

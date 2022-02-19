@@ -49,7 +49,7 @@ function ReviewSection({content, setting}) {
                         <div className="df-margin">
                             <div style={{
                                 width:'100%', 
-                                textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`
+                                textAlign:`${state.isPhone ? content.mobile.align : content.align}`
                             }}>
                             <Rating
                                 value={item.rating} 
@@ -72,7 +72,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.align}`,
                                     fontFamily:`${state.setting.smallFont}`,
                                     color:`${content.elementText.color}`,
                                     fontSize:`${content.elementText.size/20}em`,
@@ -93,7 +93,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.align}`,
                                     color:`${content.writer.color}`,
                                     fontFamily:`${state.setting.smallFont}`,
                                 }}

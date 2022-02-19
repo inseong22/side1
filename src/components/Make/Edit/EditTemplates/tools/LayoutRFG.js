@@ -14,6 +14,11 @@ const layoutOptions = [
     { label: '4', value: 4},
     { label: '5', value: 5},
 ]
+const layoutOptions2 = [
+    { label: '2', value: 2},
+    { label: '3', value: 3},
+    { label: '4', value: 4},
+]
 const mobileLayoutOptions = [
     { label: '1', value: 1},
     { label: '2', value: 2},
@@ -38,7 +43,7 @@ function LayoutRFG({content}) {
                 </>
                 :
                 <>
-                <RadioCustom text="단 개수" options={layoutOptions} value={content.numOfElements} func={e => action.setContents(produce(state.contents, draft => {
+                <RadioCustom text="단 개수" options={content.sectionTypeName === 'GallerySection' ? layoutOptions2 : layoutOptions} value={content.numOfElements} func={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].layout = e;
                         draft[state.secNum].numOfElements = e;
                     }))} />

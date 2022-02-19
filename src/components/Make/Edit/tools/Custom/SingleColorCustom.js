@@ -31,7 +31,7 @@ export function EditColor({onChange, value}) {
 
     return (
         <ChakraProvider>
-        <div className="center-row" style={{justifyContent: "start"}}>
+        <div className="center-row" style={{justifyContent: "center"}}>
             <Popover
                     placement='right'
                     closeOnBlur={false}

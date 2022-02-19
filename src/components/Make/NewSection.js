@@ -105,7 +105,7 @@ function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCat
     return(
         <div>
         <div style={{fontSize:`${isPhone ? '22px' : '28px'}`}} className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
-            {!full && <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? '#6C63FF' : 'rgba(0,0,0,0)'}`}}>
+            {!full && <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0)'}`}}>
 
             </div>}
             <div className="section__container" 

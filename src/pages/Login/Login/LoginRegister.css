@@ -45,21 +45,23 @@
 }
 
 .login-label{
+    display: flex;
+    flex-direction:row;
+    align-items :center;
     margin-top:5%;
 }
 
-.login-input{
+.login-input{ 
     margin-top:1%;
     width:95%;
     padding:4% 2%;
-    background-color:rgba(235, 235, 235, 0.3);
-    border:1px solid rgba(190, 190, 190, 0.8);
+    background-color:var(--main-light-gray-02);
+    border:1px solid var(--main-light-gray);
     border-radius:3px;   
 }
 
 .login-form-button{
     width:100%;
-    background-color:#6a63f7;
     border:none;
     margin-top:5%;
     border-radius:3px;
@@ -67,7 +69,6 @@
     color:white;
     cursor:pointer;
     font-size:1em;
-    box-shadow:1px 1px 3px rgba(0,0,0,0.2);
 }
 
 .google-login-button{
