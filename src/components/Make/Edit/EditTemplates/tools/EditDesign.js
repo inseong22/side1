@@ -13,7 +13,7 @@ import {Phone} from '@styled-icons/bootstrap'
 import {Desktop} from '@styled-icons/fa-solid'
 
 const alignOptions = [
-    { label: '왼쪽', value: 'start' },
+    { label: '왼쪽', value: 'justify' },
     { label: '중앙', value: 'center' },
 ]
 
@@ -143,15 +143,15 @@ function EditDesign({content}) {
                     <div className="edit-element__one" style={{flexDirection: 'column'}}>
                         <div className="edit-element__left">반응형</div> 
                         <div className="radio-container" style={{justifyContent:'center'}}>
-                            <div className={content.responsive.pc ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => action.setContents(produce(state.contents, draft => {
+                            <div className={content.responsive.pc ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].responsive.pc = !content.responsive.pc
                             }))}>
                                 <Desktop size="30"/>
-                                <div className="radio-shape-text">
+                                <div className="radio-shape-text ">
                                     PC
                                 </div>
                             </div>
-                            <div className={content.responsive.mobile ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => action.setContents(produce(state.contents, draft => {
+                            <div className={content.responsive.mobile ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={() => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].responsive.mobile = !content.responsive.mobile
                             }))}>
                                 <Phone size="30"/>

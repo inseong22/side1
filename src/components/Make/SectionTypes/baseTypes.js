@@ -9,14 +9,14 @@ const commons = {
     title:{
         use:true,
         text: '노코드 랜딩페이지 제작 툴',
-        align: 'start',
+        align: 'justify',
         size: 40,
         color: '#000000'
     },
     desc:{
         use:true,
         text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해 보세요!',
-        align: 'start',
+        align: 'justify',
         size: 16,
         color: '#000000'
     },
@@ -100,7 +100,7 @@ const button = {
         use : true,
         ctaText:'CTA 버튼',
         ghostText:'고스트 버튼',
-        align:'start',
+        align:'justify',
         ctaUse:true,
         ctaOption: 'link',
         ghostOption: 'link',
@@ -117,14 +117,14 @@ const button = {
         use: false,
         apple: '',
         google: '',
-        align:''
+        align:'justify'
     },
     ctaApplyInputs: [],
     ghostApplyInputs: [],
     caution:{
         use:true,
         color: '#000000',
-        align: '',
+        align: 'justify',
         size: 10,
         text:'조심하세요',
     }
@@ -176,7 +176,7 @@ export const base = [
         element:element,
         name:'특징',
         sectionTypeName:'FeaturesSection',
-        align:'start',
+        align:'justify',
         numOfElements:3,
         elementText:{
             use:true,
@@ -224,7 +224,7 @@ export const base = [
         element:element,
         name:'리뷰/추천',
         sectionTypeName:'ReviewSection',
-        align:'start',
+        align:'justify',
         numOfElements:3,
         ratingColor:'red',
         rating:{
@@ -325,7 +325,7 @@ export const base = [
         element:element,
         numOfElements: 3,
         name:'갤러리',
-        align:'start',
+        align:'justify',
         sectionTypeName:'GallerySection',
         galleryImg:{
             use:true,
@@ -341,7 +341,7 @@ export const base = [
         text:{
             use:true,
             color: '#000000',
-            align: ''
+            align: 'justify'
         },
         elementText:{
             color:'#000000'
@@ -461,14 +461,14 @@ export const defaults = {
             use:true,
             text:'',
             color:'#000000',
-            align: 'start',
+            align: 'justify',
             size: 15,
         },
         icon:{
             use:true,
             style:'circle',
             color:'#ffffff',
-            align:'start',
+            align:'justify',
             facebook: '',
             instagram: '',
             notion: '',
