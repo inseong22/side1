@@ -28,7 +28,7 @@ function RadioCustom({options, value, onChange}) {
         <>
             {options.map((item, index) => {
                 return(
-                    <div className={value === item.value ? 'radio-element' : 'radio-element r-unclicked'} onClick={() => onChange(item.value)} key={index}>
+                    <div className={value === item.value ? 'radio-element' : 'radio-element r-unclicked radio-hover'} onClick={() => onChange(item.value)} key={index}>
                         {item.label}
                     </div>
                 )

@@ -31,7 +31,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.align}`,
                                     fontFamily:`${state.setting.smallFont}`,
                                     color:`${content.elementTitle.color}`,
                                     fontSize:`${content.elementTitle.size/20}em`,

@@ -81,6 +81,14 @@ function EditReviewSection({content, category}) {
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
                         <EditImageIcon content={content} />
+                        <OpenCloseCustom title="리뷰 제목" use={content.elementTitle.use}>
+                            <ColorCustom text="색상" value={content.elementTitle.color} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementTitle.color = e;
+                            }))} />
+                            <TextSizeCustom text="크기" desc value={content.elementTitle.size} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementTitle.size = e;
+                            }))} />
+                        </OpenCloseCustom>
                         <OpenCloseCustom title="별점" use={content.rating.use}>
                             <ColorCustom text="색상" value={content.rating.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].rating.color = e;

@@ -7,7 +7,7 @@ import TextSizeCustom from '../../tools/func/TextSizeCustom'
 import RadioCustom from '../../tools/Custom/RadioCustom'
 
 const alignOptions = [
-    { label: '왼쪽', value: 'start' },
+    { label: '왼쪽', value: 'justify' },
     { label: '중앙', value: 'center' },
 ]
 
@@ -30,8 +30,8 @@ function EditNotice({content}) {
             <RadioCustom text="정렬" options={alignOptions} value={content.caution.align} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.align = e;
             }))} />
-            <TextSizeCustom text="크기" value={content.caution.size} func={e => action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].caution.size = e;
+            <TextSizeCustom text="크기" desc value={content.caution.size} func={e => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].caution.size = e;
             }))} />
             </>
         </OpenCloseCustom>
