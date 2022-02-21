@@ -14,7 +14,7 @@ function FuncContentImg({text, value, func, removeFunc, subtext}) {
             onClick={inputClick}
             onChange={e => func(e)}
             id='attach'
-            style={{backgroundImage: `url(${value === '' ? ourA : value}`}}
+            style={{backgroundImage: `url(${value === '' && (text === '목업' || text === '로고')  ? '' : value!='' ? value : ourA}`}}
             >
             {/* <div 
                 className="img-remove"

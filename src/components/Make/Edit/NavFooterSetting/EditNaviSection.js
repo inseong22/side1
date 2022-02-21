@@ -113,7 +113,7 @@ function EditNaviSection({navi, setNavi, category}) {
                             </>
                         }
                     </OpenCloseCustom>
-                    <OpenCloseCustom title="버튼 사용" use={navi.button.use}>
+                    <OpenCloseCustom title="버튼" use={navi.button.use}>
                         <RadioCustom options={buttonAlignOptions} value={navi.button.align} func={(e) => setNavi(produce(navi, draft => {
                             draft.button.align = e;
                         }))} text="정렬" />

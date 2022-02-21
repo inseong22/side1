@@ -8,19 +8,19 @@ import {
 } from '@chakra-ui/react'
 
 const titleSizeOptions = [
-    { label: 'Small', value: 40 },
-    { label: 'Medium', value: 52 },
-    { label: 'Large', value: 64 },
+    { label: 'Small', value: 36 },
+    { label: 'Medium', value: 42 },
+    { label: 'Large', value: 54 },
 ]
 const textSizeOptions = [
-    { label: 'Small', value: 24 },
-    { label: 'Medium', value: 32 },
+    { label: 'Small', value: 28 },
+    { label: 'Medium', value: 36 },
     { label: 'Large', value: 42 },
 ]
 const subTextSizeOptions = [
-    { label: 'Small', value: 16 },
-    { label: 'Medium', value: 18 },
-    { label: 'Large', value: 20 },
+    { label: 'Small', value: 18 },
+    { label: 'Medium', value: 24 },
+    { label: 'Large', value: 30 },
 ]
 
 function RadioCustom({options, value, onChange}) {

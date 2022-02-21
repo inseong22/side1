@@ -111,7 +111,9 @@ function ReviewSection({content, setting}) {
 
     return (
         <>
-            <motion.div className="template" data-aos={setting.animation} aos-duration="2000">
+            <motion.div className="template"data-aos-easing="ease-in-back"
+     data-aos-delay="100"
+     data-aos-offset="0" data-aos={setting.animation} aos-duration="2000">
                 
                 <TitleDesc content={content} />
 

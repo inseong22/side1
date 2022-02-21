@@ -11,6 +11,10 @@ function ImageOrSlide({content}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const imgRef=useRef(null)
     const [imageShow, setImageShow] = useState(null);
+    const photoInput = useRef();
+    const inputClick = () => {
+        photoInput.current.click();
+    };
 
     const imageWidth = (desktop) => {
         if(desktop){
@@ -25,6 +29,46 @@ function ImageOrSlide({content}){
             return state.isPhone ? 50 - ((content.image.size/2.7 + 50)/1.22)/2 : 50 - (content.image.size/1.22)/2
         }else{
             return state.isPhone ? 50 - (content.image.size/2.7 + 50)/2 : 50 - content.image.size/2
+        }
+    }
+
+    // 화면에서 이미지 업로드
+    const upload_img = (e) => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].image.attachment = result;            
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
+        }
+    }
+
+    // 화면에서 목업 업로드
+    const upload_mockup = (e) => {
+        const {target:{files},} = e;
+        const oneFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+            if(oneFile.size > 3000000){
+                alert("파일의 크기가 3MB를 초과합니다.")
+                return;
+            }
+            const {currentTarget:{result}} = finishedEvent;
+            action.setContents(produce(state.contents, draft=>{
+                draft[state.secNum].mockup.attachment = result;           
+            }))
+        }
+        if(oneFile){
+            reader.readAsDataURL(oneFile);
         }
     }
 
@@ -59,38 +103,62 @@ function ImageOrSlide({content}){
             // 이미지
             if( content.contents.type === 'image' )
                 return (
-                    // <div style={{width:'100%'}}>
-                    <img 
-                        src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
-                        className="image" 
-                        style={{
-                            borderRadius:`${content.image.border}px`,
-                            width:`${imageWidth()}%`, 
-                            boxShadow: `${content.image.shadowValue}`
-                        }}
-                        />
-                    // </div>
+                    <div id="attach" onChange = {e => upload_img(e)} onClick={inputClick}>
+                         <input
+                        ref={photoInput}
+                        style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                        type="file"
+                        accept="image/*"
+                        id="file"
+                        onChange = {e => upload_img(e)}
+                    />
+                        <img 
+                            src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
+                            className="image" 
+                            style={{
+                                borderRadius:`${content.image.border}px`,
+                                width:`${imageWidth()}%`, 
+                                boxShadow: `${content.image.shadowValue}`
+                            }}
+                            />
+                    </div>
                 )
             // 목업 - 모바일
             if(content.mockup.type === 'mobile' && content.contents.type === 'mockup' )
                 return( 
-                <div className="mock-container">
-                    <img className="mobile-ex" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
+                <div className="mock-container" id="attach" onChange = {e => upload_mockup(e)} onClick={inputClick}>
+                    <input
+                        ref={photoInput}
+                        style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                        type="file"
+                        accept="image/*"
+                        id="file"
+                        onChange = {e => upload_mockup(e)}
+                    />
+                   <img className="mobile-ex  uphover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
                     { content.mockup.attachment === '' ?
                     <></>:
-                    <img className="upload-mobile" src={content.mockup.attachment} style={{ 
+                    <img className="upload-mobile  uphover" src={content.mockup.attachment} style={{ 
                         width:`${imageWidth()}%`, 
                         left:`${imageLeft()}%`}} />
-                    }
-                </div>)
+                    }         
+               </div>)
             // 목업 - 데스크탑
             if(content.mockup.type === 'desktop' && content.contents.type === 'mockup' )
                 return(
-                    <div className="mock-container">
-                        <img className="mobile-ex" src={Desktop} alt="목업틀" style={{width: `${imageWidth()}%`}} />
+                    <div className="mock-container" id="attach" onChange = {e => upload_mockup(e)} onClick={inputClick}>
+                        <input
+                        ref={photoInput}
+                        style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                        type="file"
+                        accept="image/*"
+                        id="file"
+                        onChange = {e => upload_mockup(e)}
+                    />
+                        <img className="mobile-ex uphover" src={Desktop} alt="목업틀" style={{width: `${imageWidth()}%`}} />
                         { content.mockup.attachment === '' ? 
                         <></> :
-                        <img  className="upload-desk" src={`${content.mockup.attachment}`} style={{ 
+                        <img  className="upload-desk uphover" src={`${content.mockup.attachment}`} style={{ 
                             width:`${imageWidth(true)}%`, 
                             left:`${imageLeft(true)}%`}} />
                         }

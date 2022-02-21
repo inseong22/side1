@@ -15,7 +15,6 @@ const featureOptions = [
     { label: '아이콘', value: 'icon' },
     { label: '이미지', value: 'image'},
 ]
-
 const shapeOptions = [
     { label: '사각형', value: 0 },
     { label: '라운드', value: 5 },
@@ -26,6 +25,11 @@ const imageSizeOptions = [
     { label: 'Medium', value: 75 },
     { label: 'Large', value: 100 },
 ]
+const alignOptions = [
+    { label: '왼쪽', value: 'start'},
+    { label: '중앙', value: 'center'}
+]
+
 
 export const EditImageIcon = ({content}) => {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -110,6 +114,9 @@ function EditFeaturesSection({content, category}) {
                         <OpenCloseCustom title="설명글" use={content.elementText.use}>
                             <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.color = e;
+                            }))} />
+                            <RadioCustom text="정렬" options={alignOptions} value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.align = e;
                             }))} />
                             <OnOffCustom text="특징 제목" value={content.elementText.titleUse} func={(e) => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.titleUse = !content.elementText.titleUse;

@@ -47,8 +47,7 @@ function LayoutRFG({content}) {
                         draft[state.secNum].layout = e;
                         draft[state.secNum].numOfElements = e;
                     }))} />
-                <RadioCustom text="정렬" options={alignOptions} value={content.align} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].align = e
+                <RadioCustom text="정렬" options={alignOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].title.align = e;
                     draft[state.secNum].desc.align = e;
                 }))} />

@@ -9,15 +9,15 @@ const commons = {
     title:{
         use:true,
         text: '노코드 랜딩페이지 제작 툴',
-        align: 'justify',
-        size: 40,
+        align: 'start',
+        size: 36,
         color: '#000000'
     },
     desc:{
         use:true,
         text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해 보세요!',
-        align: 'justify',
-        size: 16,
+        align: 'start',
+        size: 18,
         color: '#000000'
     },
     contents:{
@@ -37,6 +37,7 @@ const commons = {
         use:false,
         backgroundColor:'#6CCAD0',
         borderRadius:5,
+        height: 1,
     },
     responsive:{
         mobile:true,
@@ -100,7 +101,7 @@ const button = {
         use : true,
         ctaText:'CTA 버튼',
         ghostText:'고스트 버튼',
-        align:'justify',
+        align:'start',
         ctaUse:true,
         ctaOption: 'link',
         ghostOption: 'link',
@@ -114,18 +115,18 @@ const button = {
         ghostPadding: 10,
     },
     appButton:{
-        use: false,
+        use: true,
         apple: '',
         google: '',
-        align:'justify'
+        align:'start'
     },
     ctaApplyInputs: [],
     ghostApplyInputs: [],
     caution:{
         use:true,
         color: '#000000',
-        align: 'justify',
-        size: 10,
+        align: 'start',
+        size: 0.8,
         text:'조심하세요',
     }
 }
@@ -163,11 +164,6 @@ export const base = [
     {
         ...commons,
         ...button,
-        button:{
-            ...button.button,
-            ctaUse:false,
-            ghostUse:false,
-        },
         name:'앱 다운로드',
         sectionTypeName:'AppDownloadSection', 
     },
@@ -181,10 +177,11 @@ export const base = [
         elementText:{
             use:true,
             titleUse:true,
-            titleSize: 24,
+            titleSize: 28,
             descUse:true,
-            descSize: 16,
+            descSize: 18,
             color:'#000000',
+            align: 'start'
         },
         elements:[
             {
@@ -227,6 +224,7 @@ export const base = [
         align:'justify',
         numOfElements:3,
         ratingColor:'red',
+        text: true,
         rating:{
             use:true,
             color: '#ffd23a',
@@ -239,12 +237,12 @@ export const base = [
         elementTitle:{
             use:true,
             color: '#000000',
-            size: 24,
+            size: 18,
         },
         elementText:{
             use:true,
             color: '#000000',
-            size: 16,
+            size: 18,
         },
         elements:[
             {
@@ -316,7 +314,49 @@ export const base = [
         ],
     },
     {
-        ...commons,
+        layout: 1,
+        backgroundColor:'#ffffff',
+        backgroundType:'color',
+        backgroundImage:{
+            attachment:'',
+            overlay:false,
+        },
+        title:{
+            use:true,
+            text: '노코드 랜딩페이지 제작 툴',
+            align: 'center',
+            size: 36,
+            color: '#000000'
+        },
+        desc:{
+            use:true,
+            text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해 보세요!',
+            align: 'center',
+            size: 18,
+            color: '#000000'
+        },
+        padding:{
+            top:15,
+            bottom:15,
+        },
+        animation:{
+            use:true,
+            type:'none',
+        },
+        box:{
+            use:false,
+            backgroundColor:'#6CCAD0',
+            borderRadius:5,
+        },
+        responsive:{
+            mobile:true,
+            pc:true,
+        },
+        mobile:{
+            align:'center',
+            layout:3,
+            contentSize:50,
+        },
         name:'글',
         sectionTypeName:'TextSection',
     },
@@ -416,7 +456,7 @@ export const defaults = {
             text:{
                 use:true,
                 text:'',
-                fontSize:16,
+                fontSize:18,
                 color:'#000000'
             },
         },
@@ -462,7 +502,7 @@ export const defaults = {
             text:'',
             color:'#000000',
             align: 'justify',
-            size: 15,
+            size: 18,
         },
         icon:{
             use:true,

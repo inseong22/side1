@@ -354,13 +354,11 @@ const afterSaveImage = async () => {
                                 </div>
                             </span>
                             <span className={full ? "device-button clicked" : "device-button" } onClick={e => {
-                                if(state.isPhone){
-                                    return
-                                }else{
+                                setIsPhone(false);
                                 setFull(true); 
                                 handleClick()
                                 }   
-                            }}>
+                            }>
                                 <div className="left">
                                     전체화면
                                 </div>
