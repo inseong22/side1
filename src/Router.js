@@ -10,6 +10,7 @@ import ResponsePage from './pages/Response/ResponsePage';
 import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/unused/SubmitPage';
 import CustomerPage from './pages/Customer/CustomerPage'
+import ScrollToTop from './tools/ScrollToTop'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
@@ -30,36 +31,37 @@ const AppRouter = ({userObj, isLoggedIn}) => {
     }else{
         return(
             <Router history={history}>
-                <>
+                <ScrollToTop>
                 <div className="Container" style={{ minHeight: 'calc(100vh - 80px)', zIndex:-1 }}>
-                <Switch>
-                    <Route exact path="/">
-                        <MainPage history={history}/>
-                    </Route>
-                    <Route exact path="/v2" onUpdate={() => window.scrollTo(0, 0)}>
-                        <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
-                    </Route>
-                    <Route path="/response" onUpdate={() => window.scrollTo(0, 0)}>
-                        <ResponsePage history={history} userObj={userObj}/> 
-                    </Route>
-                    <Route path="/submit">
-                        <SubmitPage history={history}/>
-                    </Route>
-                    <Route path="/make" onUpdate={() => window.scrollTo(0, 0)}>
-                        <MakePageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
-                    </Route>
-                    <Route path="/login">
-                        <LoginPage history={history} isLoggedIn={isLoggedIn}/>
-                    </Route>
-                    <Route path="/customer" onUpdate={() => window.scrollTo(0, 0)}>
-                        <CustomerPage history={history} isLoggedIn={isLoggedIn}/>
-                    </Route>
-                    <Route path="/register">
-                        <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
-                    </Route>
-                </Switch>
+                    <Switch>
+                        <Route exact path="/">
+                            <MainPage history={history}/>
+                        </Route>
+                        <Route exact path="/v2" onUpdate={() => window.scrollTo(0, 0)}>
+                            <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
+                        </Route>
+                        <Route path="/response" onUpdate={() => window.scrollTo(0, 0)}>
+                            <ResponsePage history={history} userObj={userObj}/> 
+                        </Route>
+                        <Route path="/submit">
+                            <SubmitPage history={history}/>
+                        </Route>
+                        <Route path="/make" onUpdate={() => window.scrollTo(0, 0)}>
+                            <MakePageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
+                        </Route>
+                        <Route path="/login">
+                            <LoginPage history={history} isLoggedIn={isLoggedIn}/>
+                        </Route>
+                        <Route path="/customer" onUpdate={() => window.scrollTo(0, 0)}>
+                            <CustomerPage history={history} isLoggedIn={isLoggedIn}/>
+                        </Route>
+                        <Route path="/register">
+                            <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
+                        </Route>
+                        <Route exact path="/:id" component={ UserLandingPage } />
+                    </Switch>
                 </div>
-                </> 
+                </ScrollToTop> 
             </Router>
         )
     }

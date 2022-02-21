@@ -7,9 +7,9 @@ function ChromeTapBar({content}) {
                 borderRadius: '10px 10px 10px 10px'
             }}>
             <div className="left">
-                <div className="make-tab-circle" style={{marginLeft:'15px'}}></div>
+                <div className="make-tab-circle" style={{marginLeft:'15px', backgroundColor:'red'}}></div>
                 <div className="make-tab-circle"></div>
-                <div className="make-tab-circle"></div>
+                <div className="make-tab-circle" style={{backgroundColor:'green'}}></div>
                 <div className="make-tab-one-tab">
                     {
                         content.setting.faviconAttachment === '' ? 

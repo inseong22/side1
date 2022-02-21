@@ -82,15 +82,16 @@ const OpenCloseCustom = (props) => {
             <ChakraProvider>
             <div className="accordion__title">
               <div className="title_text" style={{color:`${props.color}`, width:'100%'}}>
-                <span className="qna__word">Q.</span>
+                <div className="qna__word">Q.</div>
                 <div style={{width:'100%'}}>
                   <TextAuto 
+                    desc
                     value={props.title} 
                     onChange={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
                     }))}
                     color={props.color} align="start" />
-                  </div>
+                </div>
               </div> 
             </div>
             </ChakraProvider>

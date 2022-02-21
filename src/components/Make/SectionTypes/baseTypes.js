@@ -242,7 +242,7 @@ export const base = [
         elementText:{
             use:true,
             color: '#000000',
-            size: 18,
+            size: 16,
         },
         elements:[
             {

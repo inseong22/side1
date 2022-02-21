@@ -28,6 +28,7 @@ function AddAppButton({content}) {
                     <div className="edit-element__left">Google Play Store</div> 
                     <InputCustom placeholder="링크를 입력해 주세요." value={content.appButton.google} func = {(e) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].appButton.google = e
+                        console.log(e)
                     }))} />
                 </div>
             </div>
