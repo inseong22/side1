@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useContext, useEffect, useState, useRef} from 'react'
 import { motion } from 'framer-motion';
 import TitleDesc from './components/TitleDesc'
 import TextAuto from './components/TextAuto'
 import Element from './components/Element'
+import produce from 'immer'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
-import { isMobile } from 'react-device-detect'
+import {isMobile} from 'react-device-detect'
 
 function FeaturesSection({content, setting}) {
 
@@ -16,7 +17,7 @@ function FeaturesSection({content, setting}) {
                 boxShadow : '', 
                 margin : `${ isMobile ? '5px 5px' : '0px 15px' }`,
                 height : `${isMobile ? '' : '100%'}`,
-                width : `${isMobile ? content.mobile.layout === 1 ? '100%' : '46%' : '100%'}`
+                width : `${isMobile ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`
                 }}>
                 {
                     content.element.use && 
@@ -25,34 +26,37 @@ function FeaturesSection({content, setting}) {
                 {
                     content.elementText.use && 
                     <>
-                    <div className="df-margin-big" style={{width:'100%'}}>
-                        <TextareaAutosize className="text-no-input" 
-                            value={item.title} 
-                            style={{
-                                fontFamily:`${setting.smallFont}`, 
-                                color : `${content.elementText.color}`,
-                                textAlign : `${isMobile ? content.mobile.align : content.align}`,
-                                fontSize:`${content.elementText.titleSize/20}em`,
-                                resize:'none'
-                            }}
-                        />
-                    </div>
-                    <div className="df-margin">
-                        <TextareaAutosize 
-                            className="text-no-input"  
-                            value={item.desc} 
-                            color = {content.elementText.color} 
-                            style={{
-                                fontFamily:`${setting.smallFont}`, 
-                                color:`${content.desc.color}`, 
-                                fontSize:`${content.elementText.descSize/20}em`, 
-                                // boxSizing:`border-box`, 
-                                textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
-                                resize:'none'
-                            }}
-                            spellCheck="false"
-                        />
-                    </div>
+                    {
+                        content.elementText.titleUse && 
+                            <div className="df-margin-big feature-title" style={{width:'100%'}}>
+                                <TextAuto className="text-input" 
+                                    value={item.title} 
+                                    color = {content.elementText.color} 
+                                    align = {isMobile ? content.mobile.align : content.align}
+                                    size={content.elementText.titleSize/20} 
+                                />
+                            </div>
+                    }
+                    {
+                        content.elementText.descUse && 
+                            <div className="df-margin feature-desc">
+                                <TextareaAutosize 
+                                    className="text-input"  
+                                    value={item.desc} 
+                                    color = {content.elementText.color} 
+                                    // align = {isMobile ? content.mobile.align : content.align}
+                                    style={{
+                                        fontFamily:`${setting.smallFont}`, 
+                                        color:`${content.desc.color}`, 
+                                        fontSize:`${content.elementText.descSize/20}em`, 
+                                        // boxSizing:`border-box`, 
+                                        textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
+                                        resize:'none'
+                                    }}
+                                    spellCheck="false"
+                                />
+                            </div>
+                    }
                     </>
                 }
             </div>
@@ -69,7 +73,7 @@ function FeaturesSection({content, setting}) {
                 data-aos-offset="0" data-aos={content.animation.type} aos-duration="2000" >
                 <TitleDesc setting={setting} content={content} />
 
-                <div className="features__container" style={{flexWrap : `${isMobile ? 'wrap' : 'no-wrap'}`, fontSize:`${isMobile ? '22px' : '28px'}`}}>
+                <div className="features__container" style={{flexWrap : `${isMobile ? 'wrap' : ''}`}}>
                     {returnFeatureCards}
                 </div>
 

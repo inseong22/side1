@@ -128,12 +128,12 @@ function FTemplate({foot, setFoot, history }) {
                         </div>
                     }
                     {foot.icon.use && foot.layout === 2 && 
-                        <div className="icon-box" style={{flexDirection: 'row', justifyContent: 'start'}}>
+                        <div className="icon-box" style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}>
                         {returnIcons()}
                         </div>
                     }
                     {foot.icon.use && foot.layout === 3 && 
-                        <div className="icon-box" style={{flexDirection: 'row', justifyContent: 'start'}}>
+                        <div className="icon-box" style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}>
                         {returnIcons()}
                         </div>
                     }
@@ -142,7 +142,7 @@ function FTemplate({foot, setFoot, history }) {
                     <div 
                         className='copyright-box'
                         style={{
-                            fontFamily:`${state.setting.font}`,
+                            fontFamily:`${state.setting.smallFont}`,
                             color:`${foot.text.color}`,
                         }}>
                         Copyright 2022 {foot.copyright.text}

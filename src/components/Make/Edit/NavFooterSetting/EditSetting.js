@@ -129,7 +129,7 @@ function EdtiSetting({setting, setSetting, category}) {
                                     <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
                                         draft.font = item.value
                                     }))}} style={{fontFamily: `${item.value}`}}>
-                                        <div className="left">
+                                        <div className="left" style={{width:'70%'}}>
                                             {item.label}
                                         </div>
                                         {
@@ -190,7 +190,7 @@ function EdtiSetting({setting, setSetting, category}) {
                                             <div className={item.value === setting.smallFont ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
                                                 draft.smallFont = item.value
                                             }))}} style={{fontFamily: `${item.value}`}}>
-                                                <div className="left">
+                                                <div className="left" style={{width:'70%'}}>
                                                     {item.label}
                                                 </div>
                                                 {

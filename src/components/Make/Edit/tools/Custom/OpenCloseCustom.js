@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Tooltip, ChakraProvider } from '@chakra-ui/react'
 import { InformationCircle } from '@styled-icons/ionicons-outline';
 import './OpenCloseCustom.css'
+import './SelectCustom.css'
 // import Accordion from '@mui/material/Accordion';
 
 const Accordion = styled((props) => (

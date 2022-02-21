@@ -49,6 +49,7 @@ function ReturnButton({content, onlyapp}){
             </div>
         )
     }
+<<<<<<< HEAD
 
     return (
         <>
@@ -108,6 +109,49 @@ function ReturnButton({content, onlyapp}){
                         }
                     </div>
         )}
+=======
+    {/* <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}> */}
+    return(
+        <>
+            {
+                content.button.use && 
+                <div className="button__container" style={{
+                    justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`,
+                    flexDirection:`${ 
+                        content.button.ctaUse && content.button.ctaOption === 'apply' && 
+                        content.button.ghostUse && content.button.ghostOption === 'apply' ? 'column' : 'row'
+                        }`
+                    }}>
+                    <>
+                    {
+                        content.button.ctaUse && 
+                            ( content.button.ctaOption === 'link' ? CustomButton('cta') : returnInputs('cta') )
+                    }
+                    </>
+                    <>
+                    {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
+                    {
+                        content.button.ghostUse && 
+                            ( content.button.ghostOption === 'link' ? CustomButton('ghost') : returnInputs('ghost') )
+                    }
+                    </>
+                </div>
+            }
+            {
+                content.appButton.use && 
+                <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.appButton.align}`}}>
+                    {
+                        content.appButton.google.length > 0 && 
+                            <img src={playstorebutton} className="store-button" style={{height:'51px'}} />
+                    }
+                    {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
+                    {
+                        content.appButton.apple.length > 0 && 
+                            <img src={appstorebutton} className="store-button" />
+                    }
+                </div>
+            }
+>>>>>>> 1b756eb41 (Response Tutorail)
         </>
     )
 }

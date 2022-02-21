@@ -1,10 +1,10 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import Rating from '@mui/material/Rating';
 import { motion } from 'framer-motion';
 import TitleDesc from './components/TitleDesc'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Element from './components/Element'
-import { isMobile } from 'react-device-detect'
+import {isMobile} from 'react-device-detect'
 
 function ReviewSection({content, setting}) {
 
@@ -28,7 +28,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
+                                    textAlign:`${isMobile ? content.mobile.align : content.align}`,
                                     fontFamily:`${setting.smallFont}`,
                                     color:`${content.elementTitle.color}`,
                                     fontSize:`${content.elementTitle.size/20}em`,

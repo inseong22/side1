@@ -1,9 +1,8 @@
 import React, {useContext} from 'react'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
-import AutosizeInput from 'react-input-autosize';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
-import TextAuto from '../SectionTypes/components/TextAuto'
+import AutosizeInput from 'react-input-autosize';
 
 function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -16,7 +15,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                     <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
                 }
                 {navi.logo.text.use && 
-                    <TextareaAutosize
+                    <AutosizeInput
                         className="text-input-flex ti"
                         value={navi.title}
                         onChange={(e) => {
@@ -24,14 +23,13 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                                 draft.title = e.currentTarget.value;
                             }))
                         }}
-                        style={{
+                        inputStyle={{
                             zIndex: 5,
                             fontSize:`${navi.logo.text.fontSize}px`, 
                             color:`${navi.logo.text.color}`, 
                             fontFamily:`${state.setting.font}`,
                             resize:'none',
-                            padding: '5px',
-                            paddingLeft: '0px',
+                            padding: '1px',
                             marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`
                         }}
                     />

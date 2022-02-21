@@ -8,6 +8,7 @@ import UserFoot from '../../components/UserLandingPage/UserFoot'
 import ErrorPage from './NavAndFooter/ErrorPage'
 import { isMobile } from 'react-device-detect'
 import UserSection from '../../components/UserLandingPage/UserSection'
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 export const UserContext = React.createContext({
     state : {},
@@ -72,6 +73,17 @@ const UserLandingPage = (props) => {
         setLoading(true);
     }
 
+    const moveToPage = async (button) => {
+        // 파이어베이스에 기록
+        await dbService.collection('datas').add({
+            pageId:pageId,
+            type:'click',
+            from:'플로팅 버튼',
+            button:button,
+            created:Date.now(),
+        })
+    }
+    
     return (
         <UserContext.Provider value={contextValue}>
         {!loading ? 
@@ -86,6 +98,38 @@ const UserLandingPage = (props) => {
                 <UserContents contents={item.contents} setting={item.setting} />
             </div>
             <UserFoot foot={item.foot} setting={item.setting}/>
+
+            <>
+            {  ( item.setting.fta.use ) &&
+            <div className="fta__container" style={{width:`${isMobile ? '26vw' : '100vw'}`}}>
+                <div className="fta-button" 
+                    style={{
+                        backgroundColor:`${setting.fta.backgroundColor}`, 
+                        width:`${isMobile ? setting.fta.size/2 : setting.fta.size}%`, 
+                        borderRadius:`${setting.fta.shape}px`, 
+                        border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
+                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
+                    }}
+                    onClick={() => {
+                        moveToPage('플로팅 버튼')
+                        window.open(
+                            setting.fta.link,
+                            '_blank' // <- This is what makes it open in a new window.
+                        );
+                    }}
+                    >
+                    <TextareaAutosize className='text-no-input'  value={setting.fta.text}
+                        style={{
+                            textAlign: 'center', 
+                            color:`${setting.fta.color}`,
+                            fontFamily: `${setting.font}`,
+                            resize:'none',
+                            cursor:'pointer',
+                        }} />
+                </div>
+            </div>
+            }
+            </>
         </div> 
         }
         </UserContext.Provider>
