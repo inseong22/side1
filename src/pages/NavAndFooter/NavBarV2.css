@@ -109,8 +109,9 @@
   }
 
 .footer-text-click{
-  color:rgb(131, 131, 131);
-    text-decoration: none;
+    color:rgb(131, 131, 131);
+    text-decoration: none;  
+    font-size:14px;
 }
 
 .footer-text-click:hover{

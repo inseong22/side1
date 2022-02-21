@@ -19,47 +19,30 @@ const alignOptions = [
     {label:'중앙', value: 'center'}
 ]
 
+const elementss = ['title', 'desc', 'button', 'appButton', 'caution']
+const elementDoc = {
+    title:'제목',
+    desc:'본문',
+    button:'버튼',
+    appButton:'앱 다운로드',
+    caution:'안내사항',
+}
+
 function EditCtaSection({content, category, type}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const elements = [
-        {
-            title:'제목',
-            use:content.title.use,
+    const elementsAll = elementss.map(doc => {
+        return({
+            title:elementDoc[doc],
+            use:content[doc].use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].title.use = !content.title.use;
+                draft[state.secNum][doc].use = !content[doc].use;
             }))
-        },
-        {
-            title:'본문',
-            use:content.desc.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].desc.use = !content.desc.use;
-            }))
-        },
-        {
-            title:'버튼',
-            use:content.button.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].button.use = !content.button.use;
-            }))
-        },
-        {
-            title:'앱 다운로드',
-            use:content.appButton.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].appButton.use = !content.appButton.use;
-            }))
-        },
-        {
-            title:'안내사항',
-            use:content.caution.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].caution.use = !content.caution.use;
-            }))
-        },
-    ]
-    
+        })
+    })
+
+    const elements = elementsAll.filter(doc => (type !== 'apply' && doc.title !== '버튼') || (type !== 'appDownload' && doc.title !== '앱 다운로드'))
+
     const changeAlignOption = (e) => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.align = e

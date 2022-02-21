@@ -10,6 +10,8 @@ import { motion } from "framer-motion"
 import Icons from '../../components/Make/tools/Icons'
 import AskLoginModal from './tools/AskLoginModal'
 import NavBarV2 from '../NavAndFooter/NavBarV2'
+import LoginModal from '../../components/Login/LoginModal'
+import RegisterModal from '../../components/Login/RegisterModal'
 
 import s1 from '../../tools/img/surfee1.png';
 
@@ -59,6 +61,8 @@ const ourInfos = [
 function MainPageV2({history, isLoggedIn, userObj}) {
     const [email,setEmail] = useState("");
     const [askOpen,setAskOpen] = useState(false);
+    const [registerOpen,setRegisterOpen] = useState(false);
+    const [loginOpen,setLoginOpen] = useState(false);
     const targets = useRef(null)
     
     const scrollDown = () => {
@@ -81,6 +85,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     const checkLoggedIn = () => {
         if(isLoggedIn === false){
             alert("로그인하셔야 이용가능한 페이지입니다.");
+            setRegisterOpen(true);
         }else{
             history.push('/#/response');
             history.go();
@@ -256,6 +261,8 @@ function MainPageV2({history, isLoggedIn, userObj}) {
         </div>
         <Footer />
         <AskLoginModal open={askOpen} setOpen={setAskOpen} SomeoneClickMoveToMake={SomeoneClickMoveToMake}/>
+        <RegisterModal open={registerOpen} setOpen={setRegisterOpen} />
+        <RegisterModal open={loginOpen} setOpen={setLoginOpen} />
         </>
     )
 }

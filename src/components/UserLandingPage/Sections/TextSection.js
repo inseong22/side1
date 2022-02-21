@@ -1,9 +1,10 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { motion } from 'framer-motion';
-import {produce} from 'immer'
 import TitleDesc from './components/TitleDesc'
 
 function TextSection({content, setting}) {
+
+
     return (
         <motion.div className="centera"
         data-aos-easing="ease-in-back"

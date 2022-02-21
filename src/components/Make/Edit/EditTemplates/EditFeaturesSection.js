@@ -21,7 +21,7 @@ const shapeOptions = [
     { label: '원형', value: 500 },
 ]
 const imageSizeOptions = [
-    { label: 'Small', value: 50 },
+    { label: 'Small', value: 60 },
     { label: 'Medium', value: 75 },
     { label: 'Large', value: 100 },
 ]
@@ -35,7 +35,7 @@ export const EditImageIcon = ({content}) => {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return(
-        <OpenCloseCustom title="요소" use={content.element.use}>
+        <OpenCloseCustom title="요소" use={content.element.use} tooltip="화면 위에서 아이콘 및 이미지를 업로드 할 수 있습니다.">
             <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].element.type = e;
             }))} />

@@ -7223,7 +7223,7 @@
   "integrity" "sha1-lpGEQOMEGnpBT4xS48V06zw+HgU="
   "version" "1.3.0"
 
-"fast-deep-equal@^3.1.1":
+"fast-deep-equal@^3.1.1", "fast-deep-equal@3.1.3":
   "integrity" "sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q=="
   "version" "3.1.3"
 
@@ -12737,6 +12737,15 @@
     "redux" "^4.0.4"
     "use-memo-one" "^1.1.1"
 
+"react-channel-plugin@^2.1.3":
+  "integrity" "sha512-EsE3xPuTfvlwJ61mK281FBon3hbw1eU16H62mxJhtMFbtPjyrYbE/on6LnWNxjDtHfHoVso1xgQpEJ8ejeMeZg=="
+  "resolved" "https://registry.npmjs.org/react-channel-plugin/-/react-channel-plugin-2.1.3.tgz"
+  "version" "2.1.3"
+  dependencies:
+    "fast-deep-equal" "3.1.3"
+    "react" "^16.8.0"
+    "tslib" "^2.2.0"
+
 "react-chartjs-2@2.9.0":
   "integrity" "sha512-IYwqUUnQRAJ9SNA978vxulHJTcUFTJk2LDVfbAyk0TnJFZZG7+6U/2flsE4MCw6WCbBjTTypy8T82Ch7XrPtRw=="
   "version" "2.9.0"
@@ -13178,6 +13187,15 @@
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
+
+"react@^16.8.0":
+  "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
+  "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
+  "version" "16.14.0"
+  dependencies:
+    "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.2"
 
 "reactcss@^1.2.0":
   "integrity" "sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A=="

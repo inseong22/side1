@@ -103,7 +103,7 @@ const OpenCloseCustom = (props) => {
         <div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`}}>
           {
             props.tooltip && 
-              <div style={{fontSize:'12px', width:'100%', textAlign:'left', paddingLeft:'10px'}}>
+              <div style={{fontSize:'13px', width:'100%', textAlign:'left', paddingLeft:'10px'}}>
                 {props.tooltip}
               </div>
           }

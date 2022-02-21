@@ -224,11 +224,8 @@ function EditContents({navi, setNavi, foot, setFoot, isScroll}) {
                     </Droppable>
                 </DragDropContext>
                 <div className="center-row">
-                    <div className="content__button" onClick={() => {
-                        setAddOpen(true);
-                        // action.setAddingSectionAt(state.contents.length - 1);
-                    }}
-                    style={{margin:'15px', borderRadius:'3px'}} >
+                    <div className="section-add__button" onClick={() => { setAddOpen(true); }}
+                        style={{margin:'15px', borderRadius:'3px'}} >
                         + 섹션 추가하기
                     </div>
                 </div>

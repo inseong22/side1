@@ -206,7 +206,7 @@ const MakePageV2 = ({history, userObj}) => {
                                 <div className="make-tab-circle"></div>
                                 <div className="make-tab-one-tab">
                                     <img src={setting.faviconAttachment} className='make-tab-favicon'/>
-                                    {navi.title}
+                                    {setting.title}
                                 </div>
                             </div>
                             <div className="right" style={{paddingRight:'23px'}}>
@@ -233,7 +233,6 @@ const MakePageV2 = ({history, userObj}) => {
                                 <MakeFooterV2 full={full} history={history} foot={foot} setFoot={setFoot} /> 
                                 }                             
                             </div>
-
                             <>
                             {  ( setting.fta.use ) &&
                             <div className="fta__container" style={{width:`${full ? '100vw' : isPhone ? '26vw' : '70vw'}`}}>
