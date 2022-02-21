@@ -37,9 +37,9 @@ function AddGhostButton({content, num}) {
                     <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요" value={content.button.ghostLink} func = {(e) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.ghostLink = e
                     }))} />
-                    <SliderCustom top="고스트 여백" value={content.button.ghostPadding} max={18} func={e => action.setContents(produce(state.contents, draft => {
+                    {/* <SliderCustom top="고스트 여백" value={content.button.ghostPadding} max={18} func={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].button.ghostPadding = e
-                    }))}/>
+                    }))}/> */}
                     </>
                 )
             case 'apply':

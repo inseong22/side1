@@ -9,6 +9,8 @@ import AutosizeInput from 'react-input-autosize';
 import ImageOrSlide from './components/ImageOrSlide'
 import ReturnButton from './components/ReturnButton'
 import AnimationDiv from './components/AnimationDiv'
+import appstorebutton from '../../../tools/img/appstorebutton.png'
+import playstorebutton from '../../../tools/img/playstorebutton.png'
 
 import './DetailSection.css'
 import './Default.css'
@@ -27,7 +29,9 @@ function HeroSection({content, setting}) {
     }
 
     return (
-        <motion.div  data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
+        <motion.div data-aos-easing="ease-in-back"
+        data-aos-delay="100"
+        data-aos-offset="0" data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout}>
                 <div className="text__container" style={{marginTop:`${ !state.isPhone && content.layout === 4 ? '20px'  : state.isPhone && content.mobile.layout === 4 ? '10px' : '0px'}` }}>
                     <TitleDesc content={content} />

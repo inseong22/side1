@@ -1,10 +1,21 @@
 .cta-button-made{
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    cursor:pointer;
-    margin:4px;
-    font-size: var(--button-font-size);
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  cursor:pointer;
+  margin:4px;
+  padding:12px 10px;
+  font-size: var(--button-font-size);
+}
+
+.cta-button-edit{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  cursor:pointer;
+  margin:4px;
+  padding:0px;
+  font-size: var(--button-font-size);
 }
 
 .button__container{

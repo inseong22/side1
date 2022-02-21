@@ -1,7 +1,10 @@
-import React, {useContext, useEffect, useState, useRef} from 'react'
-import TextareaAutosize from '@mui/material/TextareaAutosize';
+import React, {useContext} from 'react'
+import { UserContext } from '../../../../pages/UserLanding/UserLandingPage'
+import { isMobile } from 'react-device-detect'
+import TextareaAutosize from 'react-textarea-autosize';
 
-function TitleDesc({content, setting}) {
+function TitleDesc({content}) {
+    const {state, action} = useContext(UserContext)
 
     return (
         <div className="title-desc__container">
@@ -10,14 +13,16 @@ function TitleDesc({content, setting}) {
                 <div style={{width:'100%'}}>
                     <TextareaAutosize 
                         className="text-no-input" 
+                        value={content.title.text} 
                         style={{
-                            fontFamily:`${setting.font}`, 
+                            fontFamily:`${state.setting.font}`, 
                             color:`${content.title.color}`, 
                             fontSize:`${content.title.size/20}em`, 
-                            textAlign:`${content.title.align}`,
+                            textAlign:`${isMobile ? content.mobile.align : content.title.align}`,
+                            resize:'none'
                         }}
-                        value = {content.title.text}
-                        />
+                        spellCheck="false"
+                    />
                 </div>
             }
             {
@@ -25,15 +30,17 @@ function TitleDesc({content, setting}) {
                 <div style={{width:'100%', marginTop:'10px'}}>
                     <TextareaAutosize 
                         className="text-no-input" 
+                        value={content.desc.text} 
                         style={{
-                            fontFamily:`${setting.smallFont}`, 
+                            fontFamily:`${state.setting.smallFont}`, 
                             color:`${content.desc.color}`, 
                             fontSize:`${content.desc.size/20}em`, 
                             // boxSizing:`border-box`, 
-                            textAlign:`${content.desc.align}`,
+                            textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
+                            resize:'none'
                         }}
-                        value = {content.desc.text}
-                        />
+                        spellCheck="false"
+                    />
                 </div>
             }
         </div>

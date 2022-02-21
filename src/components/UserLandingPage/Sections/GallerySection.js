@@ -3,42 +3,74 @@ import { motion } from 'framer-motion';
 import TitleDesc from './components/TitleDesc'
 import TextAuto from './components/TextAuto'
 import {Upload} from '@styled-icons/bootstrap';
-import Element from './components/Element'
+import { isMobile } from 'react-device-detect'
 
-function GallerySection({content, setting}) {
-    const heightRef = useRef(null)
+function GallerySection({content,setting}) {
 
     const returnElementsCards = content.elements.map((item, index) => {
-        // '1px 1px 3px rgba(0,0,0,0.2)'
-        return(
-        <div key={index} className="feature__card" style={{alignItems: 'center', boxShadow:`${content.card.shadow ? '2px 2px 4px rgba(0,0,0,0.4)' : ''}`, margin:`${ index === 0 ? '0px 15px 0px 0px' : index === content.elements.length - 1 ? '0px 0px 0px 15px' : '0px 15px' }`, backgroundColor: `${content.card.color}`, padding:'8px 5px'}}>
-                <div style={{width:`${content.element.size}px`, position:'relative', cursor:'pointer'}}>
-                    { item.attachment ? 
-                        <img src={item.attachment} style={{width:`${content.element.size}px`, borderRadius:`${content.element.borderRadius}px`}}/> 
-                        :
-                        <div className="feature-upload-button" style={{borderRadius:`${content.element.borderRadius}px`, backgroundColor:`${content.element.backgroundColor}`}}>
-                            <Upload size="25" />
-                        </div>
-                    }
-                </div> 
-                {
-                    content.text.use && 
-                    <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                            <TextAuto small className="text-input" value={item.text} color = {content.text.color} align = {content.text.align}
-                            />
-                    </div>
-                }
-            </div>
-        )
+       if(index < content.numOfElements){
+           return(
+               <>
+               {content.card.use && 
+               <div key={index} className="feature__card" 
+                    style={{
+                    alignItems: 'center',
+                    margin : `${ isMobile ? '5px 5px' : '0px 15px' }`,
+                    height : `${isMobile ? '' : '100%'}`,
+                    width : `${isMobile ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`,
+                    boxShadow:`${content.card.shadow ? '2px 2px 4px rgba(0,0,0,0.4)' : ''}`, 
+                    backgroundColor: `${content.card.color}`, 
+                    borderRadius:`${content.card.borderRadius}px`}}>
+
+                       {content.element.use && 
+                       <div style={{width:'100%', position:'relative', cursor:'pointer'}}>
+                           { item.attachment ? 
+                            <img 
+                                src={item.attachment} 
+                                style={{
+                                    width:'100%',
+                                    objectFit:'cover',
+                                    height:`${isMobile ? content.element.size/1.5 : content.element.size}px`, 
+                                    borderRadius:`${content.card.borderRadius}px ${content.card.borderRadius}px 0px 0px`
+                                }}/> 
+                               :
+                            <div className="feature-upload-button uphover" 
+                                style={{ 
+                                    height:`${content.element.size}px`, 
+                                    backgroundColor:`${content.element.backgroundColor}`, 
+                                    borderRadius:`${content.card.borderRadius}px ${content.card.borderRadius}px 0px 0px`
+                                }}>
+                                <Upload size="25" />
+                            </div>
+                           }
+                       </div> 
+                       }
+                       {
+                           content.text.use && 
+                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', padding:'8px 5px'}}>
+                                   <TextAuto small className="text-input" 
+                                        value={item.text} 
+                                        color = {content.text.color} 
+                                        align = {isMobile ? content.mobile.align : content.align}
+                                   />
+                           </div>
+                       }
+                   </div>
+               }
+               </>
+           )
+       }
     })
 
     return (
-        <motion.div className="template"
+        <motion.div className="template"data-aos-easing="ease-in-back"
+        data-aos-delay="100"
+        data-aos-offset="0"
             data-aos={content.animation.type} aos-duration="2000">
 
-            <TitleDesc setting={setting} content={content}/>
+            <TitleDesc content={content} />
 
-            <div className="features__container" ref={heightRef} >
+            <div className="features__container" style={{flexWrap : `${isMobile ? 'wrap' : ''}`}}>
                 {returnElementsCards}
             </div>
 

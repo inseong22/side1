@@ -1,0 +1,1 @@
+export const CHANNEL_ID_PLUGIN_KEY = "e6b830bc-7731-43fa-8eea-1245d3d4fc3e";

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import UserSection from './Sections/UserSection'
+import UserSection from './UserSection'
 import { isMobile } from 'react-device-detect'
 
 function UserContents({contents, setting}) {
@@ -8,15 +8,11 @@ function UserContents({contents, setting}) {
             <>
             {
                 item.responsive.mobile && isMobile && 
-                    <div style={{width:'100%'}}>
-                        <UserSection content={item} setting={setting}/>
-                    </div>
+                    <UserSection content={item} setting={setting}/>
             }
             {
                 item.responsive.pc && !isMobile && 
-                    <div style={{width:'100%'}}>
-                        <UserSection content={item} setting={setting}/>
-                    </div>
+                    <UserSection content={item} setting={setting}/>
             }
             </>
         )

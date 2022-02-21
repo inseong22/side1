@@ -38,7 +38,7 @@ function Element({content, item, index, gallery}) {
     <ChakraProvider>
     {
         content.element.use && 
-        <div className="centeras" style={{justifyContent: `${content.align}`}}>
+        <div className="centeras" style={{justifyContent: `${content.elementText.align}`}}>
             <div style={{width:`${content.element.size}px`, height:`${content.element.size}px`, position:'relative', cursor:'pointer'}}>
             {
             content.element.type === 'image' ? 

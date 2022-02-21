@@ -8,6 +8,7 @@ import {Fullscreen} from '@styled-icons/bootstrap'
 import LoginModal from '../../../components/Login/LoginModal'
 import { dbService } from '../../../tools/fbase';
 import { stService } from '../../../tools/fbase';
+import MakeTutorialModal from '../../../tools/MakeTutorialModal';
 import { v4 as uuidv4 } from 'uuid';
 import lodash from 'lodash'
 import produce from 'immer'
@@ -24,6 +25,7 @@ const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone,
     const [loginModal, setLoginModal] = useState(false)
     const {state, action} = useContext(MyContext)
     const [deviceOpen, setDeviceOpen] = useState(false);
+    const [tutorialOpen, setTutorialOpen] = useState(false);
   
     const handleClick = () => {
         setDeviceOpen(!deviceOpen);
@@ -306,13 +308,10 @@ const afterSaveImage = async () => {
     }
 }
 
-    
     const onSubmit = async () => {
         // 배포하기 클릭
         // 관리페이지에서 수정하기를 누른 거라면
-        
         saveLocalStorage()
-
         if(userObj === null){
             alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
             setLoginModal(true);
@@ -354,13 +353,11 @@ const afterSaveImage = async () => {
                                 </div>
                             </span>
                             <span className={full ? "device-button clicked" : "device-button" } onClick={e => {
-                                if(state.isPhone){
-                                    return
-                                }else{
+                                setIsPhone(false);
                                 setFull(true); 
                                 handleClick()
                                 }   
-                            }}>
+                            }>
                                 <div className="left">
                                     전체화면
                                 </div>
@@ -398,6 +395,11 @@ const afterSaveImage = async () => {
                     }} >
                         페이지 구성
                     </span>
+                    <span className="make-nav-button" onClick={e => {
+                        setTutorialOpen(true);
+                    }} style={{boxShadow:'none', width:'90px'}}>
+                        사용 방법
+                    </span>
                 </div>
                 <div className="make-page-nav-half">
                     <div className="centera">
@@ -408,12 +410,13 @@ const afterSaveImage = async () => {
                 </div>
                 <div className="make-page-nav-half" style={{justifyContent: 'end', marginRight:'1%'}}>
                     {deviceSelect()}
-                    <Button onClick={() => saveTo()} className="default-button-02">
+                    <Button onClick={() => onSubmit()} className="default-button-02">
                         저장하기
                     </Button>
                 </div>
             </div>
             <LoginModal open={loginModal} setOpen={setLoginModal} />
+            <MakeTutorialModal open={tutorialOpen} setOpen={setTutorialOpen} />
         </ChakraProvider>
     )
 }

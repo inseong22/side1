@@ -9,7 +9,7 @@ import AnimationDiv from './components/AnimationDiv'
 import TextAuto from './components/TextAuto'
 import produce from 'immer'
 
-function CtaSection({content, setting}) {
+function CtaSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnLayout = {
@@ -31,7 +31,13 @@ function CtaSection({content, setting}) {
                     <ReturnButton content={content} />
                     {content.caution.use && 
                         <div className="df-margin-big feature-desc" style={{width:'100%'}}>
-                            <TextAuto className="text-input" small value={content.caution.text} color = {content.caution.color} align = {state.isPhone ? content.mobile.align : content.caution.align}
+                            <TextAuto 
+                                className="text-input" 
+                                small 
+                                size = {content.caution.size}
+                                value={content.caution.text} 
+                                color = {content.caution.color} 
+                                align = {state.isPhone ? content.mobile.align : content.caution.align}
                                 onChange={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].caution.text = e.currentTarget.value;
                                 }))}  

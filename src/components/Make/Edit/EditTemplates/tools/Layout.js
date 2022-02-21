@@ -88,6 +88,7 @@ function Layout({content, version, foot, setFoot}) {
                                 draft[state.secNum].mobile.align = e;
                                 draft[state.secNum].title.align = e;
                                 draft[state.secNum].desc.align = e;
+                                draft[state.secNum].caution.align = e;
                             }))} />
                         </>
                         :
@@ -99,6 +100,9 @@ function Layout({content, version, foot, setFoot}) {
                             draft[state.secNum].align = e;
                             draft[state.secNum].title.align = e;
                             draft[state.secNum].desc.align = e;
+                            draft[state.secNum].button.align = e;
+                            draft[state.secNum].appButton.align = e;
+                            draft[state.secNum].caution.align = e;
                         }))} />
                         </>
                     }

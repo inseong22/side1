@@ -37,7 +37,9 @@
     height: 100%;
 }
 .section__container-inner{
-    font-size:0.6em;
+    /* 이거 아주 중요합니다,, */
+    font-size:0.6em; 
+    /* 이거 아주 중요합니다,, */
     width:100%;
     z-index: 4;
 }

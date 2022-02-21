@@ -19,30 +19,40 @@ const alignOptions = [
     {label:'중앙', value: 'center'}
 ]
 
-const elementss = ['title', 'desc', 'button', 'appButton', 'caution']
-const elementDoc = {
-    title:'제목',
-    desc:'본문',
-    button:'버튼',
-    appButton:'앱 다운로드',
-    caution:'안내사항',
-}
-
-function EditCtaSection({content, category, type}) {
+function EditApplySection({content, category, type}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const elementsAll = elementss.map(doc => {
-        return({
-            title:elementDoc[doc],
-            use:content[doc].use,
+    const elements = [
+        {
+            title:'제목',
+            use:content.title.use,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum][doc].use = !content[doc].use;
+                draft[state.secNum].title.use = !content.title.use;
             }))
-        })
-    })
-
-    const elements = elementsAll.filter(doc => (type !== 'apply' && doc.title !== '버튼') || (type !== 'appDownload' && doc.title !== '앱 다운로드'))
-
+        },
+        {
+            title:'본문',
+            use:content.desc.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].desc.use = !content.desc.use;
+            }))
+        },
+        {
+            title:'신청 버튼',
+            use:content.button.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].button.use = !content.button.use;
+            }))
+        },
+        {
+            title:'안내사항',
+            use:content.caution.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].caution.use = !content.caution.use;
+            }))
+        },
+    ]
+    
     const changeAlignOption = (e) => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.align = e
@@ -59,7 +69,7 @@ function EditCtaSection({content, category, type}) {
                         <Layout content={content} version="cta"/>
                         {
                             !(type === 'appDownload') &&
-                            <OpenCloseCustom title="버튼" use={content.button.use}>
+                            <OpenCloseCustom title="신청 버튼" use={content.button.use}>
                                 <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
                                 <AddCtaButton content={content} num={5}/>
                                 <AddGhostButton content={content} num={5}/>
@@ -88,4 +98,4 @@ function EditCtaSection({content, category, type}) {
     )
 }
 
-export default EditCtaSection
+export default EditApplySection

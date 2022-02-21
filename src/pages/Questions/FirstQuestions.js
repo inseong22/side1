@@ -234,6 +234,8 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
             setSetting(produce(setting, draft => {
                 draft.font = font;
                 draft.color = color;
+                // draft.cta.backgroundColor = color;
+                // draft.ghost.backgroundColor = color;
             }))
             setCnum(cnum + 1);
         }

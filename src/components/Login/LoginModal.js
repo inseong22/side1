@@ -42,6 +42,19 @@ const style = {
   pb: 3,
 };
 
+export const Infos = () => {
+    return(
+        <div style={{padding:'2% 0%', justifyContent:'flex-start', display:'flex', width:'100%'}}>
+            <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" target="_blank" className="footer-text-click">
+                개인정보 처리방침
+            </a>
+            <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" target="_blank" className="footer-text-click" style={{marginLeft:'2%'}}>
+                이용약관
+            </a>
+        </div>
+    )
+}
+
 function LoginModal({open, setOpen}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -118,6 +131,13 @@ function LoginModal({open, setOpen}) {
                             <Close size="30" />
                         </div>
                     </div>
+                    <button className="google-login-button opacity-hover" name="googleLogin" onClick={e => socialLogin(e)} style={{marginTop:'2%'}}>
+                        <img src={googlelogo} width={20}/>
+                        <span style={{marginLeft:'5%'}}>구글아이디로 이용하기</span>
+                    </button>
+                    <div style={{fontSize:'12px', color:'rgba(150,150,150,1)', marginTop:'8px'}}>
+                        위 버튼을 클릭하면 <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" target="_blank">약관</a>에 동의한 것으로 간주하고<br/> 자동으로 회원가입/로그인이 진행됩니다.
+                    </div>
                     <form onSubmit={e => submit(e)}>
                         <div className="login-label">
                             이메일
@@ -142,18 +162,7 @@ function LoginModal({open, setOpen}) {
                         />
                         <Input className="login-form-button our-hover" type="submit" value="로그인" />
                     </form>
-                    <button className="google-login-button opacity-hover" name="googleLogin" onClick={e => socialLogin(e)} style={{marginTop:'2%'}}>
-                        <img src={googlelogo} width={20}/>
-                        <span style={{marginLeft:'5%'}}>구글 로그인</span>
-                    </button>
-                    <div style={{padding:'2% 0%', justifyContent:'flex-start', display:'flex', width:'100%'}}>
-                        <a href="https://surfee.co.kr/#/customer" className="footer-text-click">
-                            개인정보 처리방침
-                        </a>
-                        <a href="https://surfee.co.kr/#/customer" className="footer-text-click" style={{marginLeft:'2%'}}>
-                            이용약관
-                        </a>
-                    </div>
+                    <Infos />
                 </div>
             </Box>
         </StyledModal>

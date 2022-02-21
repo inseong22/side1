@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-
+import { motion } from 'framer-motion';
 import TitleDesc from './components/TitleDesc'
 import ImageOrSlide from './components/ImageOrSlide'
 import TextAuto from './components/TextAuto'
@@ -14,10 +14,10 @@ function VideoSection({content, setting}) {
     }
     
     return (
-        <div style={{ width:'100%', height:'100%' }}>
+        <motion.div data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout}>
                 <div className="text__container">
-                    <TitleDesc setting={setting} content={content} />
+                    <TitleDesc content={content} />
                 </div>
                 <div className="image__container">
                     <ImageOrSlide content={content} />
@@ -33,7 +33,7 @@ function VideoSection({content, setting}) {
                 </div>
                 }
             </AnimationDiv>
-        </div>
+        </motion.div>
     )
 }
 
