@@ -6,7 +6,7 @@ import playstorebutton from '../../../../tools/img/playstorebutton.png'
 import produce from 'immer';
 import './ReturnButton.css'
 
-function ReturnButton({content}){
+function ReturnButton({content, onlyapp}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const CustomButton = (type) => { return (
@@ -21,10 +21,12 @@ function ReturnButton({content}){
         <AutosizeInput className="text-input-flex ti" value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } onChange={(e) => action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button[type === "cta" ? 'ctaText' : 'ghostText'] = e.currentTarget.value;
         }))} inputStyle={{
+            textAlign: 'center',
+            width: '100%',
             fontFamily:`${state.setting.smallFont}`,
             borderRadius:`${state.setting[type].borderRadius}px`,  
             backgroundColor:`${state.setting[type].backgroundColor}`, 
-            padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
+            // padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
             }}/>
     
     </div>)}
@@ -47,53 +49,67 @@ function ReturnButton({content}){
             </div>
         )
     }
-if(content.button.use){
-    // ctaOption === 'link' => 버튼 클릭 시 링크 이동
-    // ctaOption === 'apply' => 신청
 
-    {/* <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}> */}
-    return(
-        <div style={{width:'100%'}}>
-            <div className="button__container" style={{
-                justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`,
-                flexDirection:`${ 
-                    content.button.ctaUse && content.button.ctaOption === 'apply' && 
-                    content.button.ghostUse && content.button.ghostOption === 'apply' ? 'column' : 'row'
-                    }`
-                }}>
-                <>
+    return (
+        <>
+    {onlyapp ? 
+        (content.appButton.use && 
+               <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.appButton.align}`}}>
                 {
-                    content.button.ctaUse && 
-                        ( content.button.ctaOption === 'link' ? CustomButton('cta') : returnInputs('cta') )
+                    content.appButton.google.length > 0 && 
+                        <img src={playstorebutton} className="store-button" />
                 }
-                </>
-                <>
                 {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
                 {
-                    content.button.ghostUse && 
-                        ( content.button.ghostOption === 'link' ? CustomButton('ghost') : returnInputs('ghost') )
+                    content.appButton.apple.length > 0 && 
+                        <img src={appstorebutton} className="store-button" />
                 }
-                </>
-            </div>
-            {
-                content.appButton.use && 
-                <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
-                    {
-                        content.appButton.google.length > 0 && 
-                            <img src={playstorebutton} className="store-button" style={{height:'51px'}} />
-                    }
-                    {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
-                    {
-                        content.appButton.apple.length > 0 && 
-                            <img src={appstorebutton} className="store-button" />
-                    }
-                </div>
-            }
-        </div>
+            </div>) 
+        : (content.button.use && 
+                    <div style={{width:'100%'}}>
+                        <div className="button__container" style={{
+                            justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`,
+                            flexDirection:`${ 
+                                (content.button.ctaUse && content.button.ctaOption === 'apply' && 
+                                content.button.ghostUse && content.button.ghostOption === 'apply') || 
+                                (content.button.ctaUse && content.button.ctaOption === 'apply' && 
+                                content.button.ghostUse && content.button.ghostOption === 'link') ||
+                                (content.button.ctaUse && content.button.ctaOption === 'link' &&
+                                content.button.ghostUse && content.button.ghostOption === 'apply') ? 'column' : 'row' 
+                                }`
+                            }}>
+                            <>
+                            {
+                                content.button.ctaUse && 
+                                    ( content.button.ctaOption === 'link' ? CustomButton('cta') : returnInputs('cta') )
+                            }
+                            </>
+                            <>
+                            {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
+                            {
+                                content.button.ghostUse && 
+                                    ( content.button.ghostOption === 'link' ? CustomButton('ghost') : returnInputs('ghost') )
+                            }
+                            </>
+                        </div>
+                        {
+                            content.appButton.use && 
+                            <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.appButton.align}`}}>
+                                {
+                                    content.appButton.google.length > 0 && 
+                                        <img src={playstorebutton} className="store-button" />
+                                }
+                                {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
+                                {
+                                    content.appButton.apple.length > 0 && 
+                                        <img src={appstorebutton} className="store-button" />
+                                }
+                            </div>
+                        }
+                    </div>
+        )}
+        </>
     )
-}else{
-    return(<></>)
-}
 }
 
 

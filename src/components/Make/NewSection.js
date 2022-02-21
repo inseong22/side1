@@ -59,12 +59,12 @@ function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCat
 
             case 'ApplySection' :
                 return(
-                    <CtaSection content={content} type="apply" setting={setting}/>
+                    <ApplySection content={content} type="apply" setting={setting}/>
                 )
 
             case 'AppDownloadSection' :
                 return(
-                    <CtaSection content={content} type="appDownload" setting={setting}/>
+                    <AppDownloadSection content={content} type="appDownload" setting={setting}/>
                 )
 
             case 'QnaSection' :
@@ -122,8 +122,8 @@ function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCat
                 }
                 {
                     content.box.use && 
-                    <div className="section__box" style={{padding:`0px ${full ? 'calc(11vw)' : '0px'}`}}>
-                        <div style={{backgroundColor:`${content.box.backgroundColor}`, borderRadius:`${content.box.borderRadius}px`, width:'100%', height:'100%'}}>
+                    <div className="section__box" style={{padding:`${content.box.height}vh ${full ? 'calc(11vw)' : '0vh'}`}}>
+                        <div style={{backgroundColor:`${content.box.backgroundColor}`, borderRadius:`${content.box.borderRadius}px`, width:'100%', height: '100%'}}>
                         </div>
                     </div>
                 }

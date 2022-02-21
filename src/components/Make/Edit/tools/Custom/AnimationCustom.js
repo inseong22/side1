@@ -7,7 +7,7 @@ import FadeG from '../../../../../tools/img/animationIcon/fadeInG.png'
 function EditAnimation({options, value, onChange}) {
     const NONE = 'none'
     const FADEUP = 'fade-up'
-    const ZOOMIN = 'zoom-in'
+    const FADEIN = 'fade-in'
 
     return (
         <div>
@@ -39,8 +39,8 @@ function EditAnimation({options, value, onChange}) {
                     )}
                 </div>
 
-                <div className={value === ZOOMIN ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(ZOOMIN)}>
-                    {value === ZOOMIN ? (
+                <div className={value === FADEIN ? 'radio-element-b' : 'radio-element-b r-unclicked'} onClick={() => onChange(FADEIN)}>
+                    {value === FADEIN ? (
                     <>
                         <img src={FadeW} />
                         <div className="radio-shape-text">

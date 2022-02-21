@@ -262,6 +262,17 @@
   font-weight: 700;
 }
 
+/* .button-centera{
+  display:flex;
+  justify-content: center;
+  align-items: start;
+  height:100%;
+  width:100%;
+  box-sizing:border-box;
+  font-size: var(--func-subtitle);
+  font-weight: 700;
+} */
+
 .input-centera{
   display:flex;
   justify-content: center;

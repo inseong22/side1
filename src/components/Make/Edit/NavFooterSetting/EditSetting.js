@@ -67,7 +67,7 @@ function EdtiSetting({setting, setSetting, category}) {
     const animationOptions = [
         {label:'없음', value: 'none'},
         {label:'떠오르기', value: 'fade-up'},
-        {label:'zoom-in', value: 'zoom-in'}
+        {label:'fade-zoom-in', value: 'fade-zoom-in'}
     ]
 
     const changeAnimationOption = e => {

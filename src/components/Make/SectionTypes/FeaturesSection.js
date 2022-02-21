@@ -15,7 +15,7 @@ function FeaturesSection({content, setting}) {
         if (index < content.numOfElements){
         return(
             <div key={index} className="feature__card" style={{
-                alignItems: `${state.isPhone ? content.mobile.align : content.align}`,
+                alignItems: `${state.isPhone ? content.mobile.align : content.elementText.align}`,
                 boxShadow : '', 
                 margin : `${ state.isPhone ? '5px 5px' : '0px 15px' }`,
                 height : `${state.isPhone ? '' : '100%'}`,
@@ -34,7 +34,7 @@ function FeaturesSection({content, setting}) {
                                 <TextAuto className="text-input" 
                                     value={item.title} 
                                     color = {content.elementText.color} 
-                                    align = {state.isPhone ? content.mobile.align : content.align}
+                                    align = {state.isPhone ? content.mobile.align : content.elementText.align}
                                     onChange={e => action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].elements[index].title = e.currentTarget.value;
                                     }))} 
@@ -58,7 +58,7 @@ function FeaturesSection({content, setting}) {
                                         color:`${content.desc.color}`, 
                                         fontSize:`${content.elementText.descSize/20}em`, 
                                         // boxSizing:`border-box`, 
-                                        textAlign:`${state.isPhone ? content.mobile.align : content.desc.align}`,
+                                        textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                         resize:'none'
                                     }}
                                     spellCheck="false"
@@ -75,7 +75,9 @@ function FeaturesSection({content, setting}) {
 
     return (
         <>
-            <motion.div className="template" data-aos={setting.animation} aos-duration="2000" >
+            <motion.div className="template" data-aos={setting.animation}data-aos-easing="ease-in-back"
+     data-aos-delay="100"
+     data-aos-offset="0" aos-duration="2000" >
                 <TitleDesc content={content} />
 
                 <div className="features__container" style={{flexWrap : `${state.isPhone ? 'wrap' : ''}`}}>

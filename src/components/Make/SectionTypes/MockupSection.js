@@ -17,7 +17,9 @@ function MockupSection({content, setting}) {
         // paddingRight:`${content.layout === 1 ? '0px' : content.layout === 2 ? '30px' : '30px'}`,
     }   
     return (
-        <motion.div data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
+        <motion.div data-aos-easing="ease-in-back"
+        data-aos-delay="100"
+        data-aos-offset="0" data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout}>
                 <div className="text__container">
                     <TitleDesc content={content} />
