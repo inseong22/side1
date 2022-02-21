@@ -4,6 +4,7 @@ import TitleDesc from './components/TitleDesc'
 import QnaOpenClose from './components/QnaOpenClose'
 import TextAuto from './components/TextAuto'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import { isMobile } from 'react-device-detect'
 
 function QnaSection({content, setting}) {
 
@@ -12,9 +13,9 @@ function QnaSection({content, setting}) {
             <QnaOpenClose key={index} title={item.question} open={content.qna.shape === 'open'} color={content.qna.question} content={content} type={content.layout} index={index}>
                 <div className="edit-element">
                     <div style={{display:'flex', alignItems: 'start', height:'100%'}}>
-                        <span className="qna__word">A. <></></span>
+                        <span className="qna__word" style={{fontFamily:`${setting.smallFont}`}}>A. <></></span>
                     </div>
-                    <TextAuto 
+                    <TextAuto
                         small
                         value={item.answer} 
                         color={content.qna.answer} align="start" />
@@ -29,7 +30,10 @@ function QnaSection({content, setting}) {
         data-aos-delay="100"
         data-aos-offset="0" data-aos={content.animation.type} aos-duration="2000">
 
-            <TitleDesc setting={setting} content={content} />
+            {/* 큐앤에이 카드의 그림자때문에 텍스트와 정렬이 맞지 않아서 */}
+            <div style={{width : `${isMobile ? '100%' : '95%'}` }}>  
+                <TitleDesc content={content} />
+            </div>
 
             <div className="features__container" style={{flexDirection: 'column', marginTop:'20px'}}>
                 {returnQnaCards}

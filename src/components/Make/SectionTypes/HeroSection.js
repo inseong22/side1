@@ -9,6 +9,8 @@ import AutosizeInput from 'react-input-autosize';
 import ImageOrSlide from './components/ImageOrSlide'
 import ReturnButton from './components/ReturnButton'
 import AnimationDiv from './components/AnimationDiv'
+import appstorebutton from '../../../tools/img/appstorebutton.png'
+import playstorebutton from '../../../tools/img/playstorebutton.png'
 
 import './DetailSection.css'
 import './Default.css'

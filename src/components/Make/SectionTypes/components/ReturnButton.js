@@ -10,7 +10,7 @@ function ReturnButton({content, onlyapp}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const CustomButton = (type) => { return (
-    <div className="cta-button-made" style={{
+    <div className="cta-button-edit" style={{
         borderRadius:`${state.setting[type].borderRadius}px`,
         backgroundColor:`${state.setting[type].backgroundColor}`,
         color:`${state.setting[type].color}`,
@@ -65,7 +65,9 @@ function ReturnButton({content, onlyapp}){
                         <img src={appstorebutton} className="store-button" />
                 }
             </div>) 
-        : (content.button.use && 
+        : 
+        <>
+        {content.button.use && 
                     <div style={{width:'100%'}}>
                         <div className="button__container" style={{
                             justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`,
@@ -92,22 +94,23 @@ function ReturnButton({content, onlyapp}){
                             }
                             </>
                         </div>
-                        {
-                            content.appButton.use && 
-                            <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.appButton.align}`}}>
-                                {
-                                    content.appButton.google.length > 0 && 
-                                        <img src={playstorebutton} className="store-button" />
-                                }
-                                {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
-                                {
-                                    content.appButton.apple.length > 0 && 
-                                        <img src={appstorebutton} className="store-button" />
-                                }
-                            </div>
-                        }
                     </div>
-        )}
+        }
+        {
+            content.appButton.use && 
+            <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.appButton.align}`}}>
+                {
+                    content.appButton.google.length > 0 && 
+                        <img src={playstorebutton} className="store-button" style={{height:`${state.isPhone ? '31px' : '51px'}`}} />
+                }
+                {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
+                {
+                    content.appButton.apple.length > 0 && 
+                        <img src={appstorebutton} className="store-button" style={{height:`${state.isPhone ? '30px' : '50px'}`}} />
+                }
+            </div>
+        }
+        </>}
         </>
     )
 }

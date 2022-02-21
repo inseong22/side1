@@ -129,7 +129,7 @@ function EdtiSetting({setting, setSetting, category}) {
                                     <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
                                         draft.font = item.value
                                     }))}} style={{fontFamily: `${item.value}`}}>
-                                        <div className="left">
+                                        <div className="left" style={{width:'70%'}}>
                                             {item.label}
                                         </div>
                                         {
@@ -190,7 +190,7 @@ function EdtiSetting({setting, setSetting, category}) {
                                             <div className={item.value === setting.smallFont ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
                                                 draft.smallFont = item.value
                                             }))}} style={{fontFamily: `${item.value}`}}>
-                                                <div className="left">
+                                                <div className="left" style={{width:'70%'}}>
                                                     {item.label}
                                                 </div>
                                                 {
@@ -302,7 +302,7 @@ function EdtiSetting({setting, setSetting, category}) {
                 return(
                     <>
                     <div>
-                        <OpenCloseCustom title="메인 색상" use={true} tootip="메인 색상으로 설정한 색상은 다른 요소의 색상을 설정할 때 쉽게 적용할 수 있습니다.">
+                        <OpenCloseCustom title="메인 색상" use={true} tooltip="메인 색상으로 설정한 색상은 다른 요소의 색상을 설정할 때 쉽게 적용할 수 있습니다.">
                             <SingleColorCustom value={setting.color} func={(e) => setSetting(produce(setting, draft => {
                                 draft.color = e;
                             }))} />

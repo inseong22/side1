@@ -365,7 +365,13 @@
   font-size:var(--button-font-size);
   padding:var(--made-button-padding);
 }
-
+.text-input-button{
+  border:none;
+  background-color:rgba(0,0,0,0);
+  font-size:var(--button-font-size);
+  padding:var(--made-button-padding);
+  cursor:pointer;
+}
 .pointer{
   cursor: pointer;
 }
@@ -379,8 +385,6 @@
   display:flex;
   flex-direction:column;
 }
-
-
 
 @font-face {
   font-family: 'ImcreSoojin';
@@ -409,11 +413,6 @@
 }
 
 @media screen and (max-width:800px){
-  .footer{
-    padding-left: 15vw;
-    font-size:10px;
-    height:150px;
-  }
   .mobile-hide{
     display: flex;
     justify-content: center;

@@ -85,8 +85,8 @@ function AddingSection({open, setOpen, isScroll}) {
                         <div className="centera" style={{width:"95%"}}>
                             원하는 섹션을 추가하세요
                         </div>
-                        <div style={{width:"5%", cursor:"pointer"}} onClick={() => setOpen(false)}>
-                            <Close size="30" />
+                        <div className="modal-close-button" onClick={() => setOpen(false)}>
+                            <Close size="25" />
                         </div>
                     </div>
                     <div className="section-modal__container">

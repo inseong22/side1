@@ -58,7 +58,7 @@ function EditReviewSection({content, category}) {
             }))
         },
         {
-            title:'이름/닉네임',
+            title:'이름/정보',
             use:content.writer.use,
             func:() => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].writer.use = !content.writer.use;
@@ -101,7 +101,7 @@ function EditReviewSection({content, category}) {
                                 draft[state.secNum].elementText.size = e;
                             }))} />
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="이름 / 닉네임" use={content.writer.use}>
+                        <OpenCloseCustom title="이름 / 정보" use={content.writer.use}>
                             <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].writer.color = e;
                             }))} />

@@ -37,6 +37,21 @@
     cursor: pointer;
 }
 
+.section-add__button{
+    padding:8px 14px;
+    font-size:0.9em;
+    background-color:#A89AFF;
+    border-radius: 20px;
+    color:white;
+    margin:2%;
+    cursor: pointer;
+    border:none;
+}
+
+.section-add__button:hover{
+    background-color:#8b79ff;
+}
+
 .content__button{
     padding:6px 12px;
     font-size:0.8em;

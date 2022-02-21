@@ -19,6 +19,7 @@
 }
 
 .modal-top__title{
+    position: relative;
     display: flex;
     align-items:center;
     justify-content:center;
@@ -34,4 +35,15 @@
     align-items: center;
     box-sizing: border-box;
     flex-wrap: wrap;
+}
+
+.modal-close-button{
+  position:absolute;
+  top:5px;
+  right:5px;
+  cursor: pointer;
+  color:rgba(100,100,100,1);
+}
+.modal-close-button:hover{
+    color:black;
 }

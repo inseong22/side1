@@ -10,7 +10,6 @@ import './ImageOrSlide.css'
 function ImageOrSlide({content}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const imgRef=useRef(null)
-    const [imageShow, setImageShow] = useState(null);
     const photoInput = useRef();
     const inputClick = () => {
         photoInput.current.click();

@@ -9,7 +9,7 @@ import AnimationDiv from './components/AnimationDiv'
 import TextAuto from './components/TextAuto'
 import produce from 'immer'
 
-function CtaSection({content, setting}) {
+function CtaSection({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnLayout = {

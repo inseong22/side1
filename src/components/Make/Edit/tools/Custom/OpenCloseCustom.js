@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Tooltip, ChakraProvider } from '@chakra-ui/react'
 import { InformationCircle } from '@styled-icons/ionicons-outline';
 import './OpenCloseCustom.css'
+import './SelectCustom.css'
 // import Accordion from '@mui/material/Accordion';
 
 const Accordion = styled((props) => (
@@ -103,7 +104,7 @@ const OpenCloseCustom = (props) => {
         <div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`}}>
           {
             props.tooltip && 
-              <div style={{fontSize:'12px', width:'100%', textAlign:'left', paddingLeft:'10px'}}>
+              <div style={{fontSize:'13px', width:'100%', textAlign:'left', paddingLeft:'10px'}}>
                 {props.tooltip}
               </div>
           }

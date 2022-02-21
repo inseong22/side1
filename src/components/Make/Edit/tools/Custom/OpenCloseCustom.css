@@ -8,7 +8,8 @@
 
 .title_text{
     display: flex;
-    align-items : center;
+    align-items : end;
+    justify-content: start;
     font-weight: 700;
 }
 
