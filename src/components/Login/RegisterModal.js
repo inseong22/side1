@@ -65,6 +65,7 @@ function RegisterModal({open, setOpen, history}) {
 
         const data = await authService.signInWithPopup(provider);
         await checkRegister(data.user.multiFactor.user.email);
+        setOpen(false)
     }
 
     const submit = async (e) => {

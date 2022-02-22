@@ -85,6 +85,7 @@ function LoginModal({open, setOpen}) {
         } catch (err){
             console.log(err)
         }
+        setOpen(false)
     }
 
     const checkRegister = async (email) => {
