@@ -3,8 +3,7 @@ import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Close } from '@styled-icons/evaicons-solid';
 import './FeedbackModal.css';
-import {base} from '../components/Make/SectionTypes/baseTypes'
-import lodash from 'lodash'
+import {dbService} from './fbase'
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -38,11 +37,12 @@ const style = {
     pb: 3,
   };
 
-function FeedbackModal({open, setOpen, setFeedback, deploy}) {
+function FeedbackModal({open, setOpen, deploy}) {
     const [quest, goQuest] = useState(false);
     const [page, setPage] = useState(1);
     const [complete, setComplete] = useState(false);
     const [clicked, setClicked] = useState(false);
+    const [inputText, setInputText] = useState('');
 
     const [path, setPath] = useState('');
     const [difficul, setDifficul] = useState('');
@@ -52,6 +52,21 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
     const [func, setFunc] = useState('');
     const [comment, setComment] = useState('');
     const [recom, setRecom] = useState('');
+
+    const saveFeedback = async () => {
+        // 파이어베이스에 피드백기록
+        await dbService.collection('feedback').add({
+            funnel: path,
+            difficulty: difficul,
+            inconvenience: inconv,
+            satisfaction: satisfy,
+            working_time: time,
+            function: func,
+            comment: comment,
+            recommendation: recom
+        })
+        localStorage.setItem('feedback',true);
+    }
 
     const toPrev = () => {
         if(page>1)
@@ -65,8 +80,11 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
            {
                setPage(page+1);
                setClicked(false);
+               setInputText('');
            }
-        else return
+        else {
+            alert('답변해주세요!')
+        }
     }
 
     const toComplete = () => {
@@ -75,49 +93,19 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
             setComplete(true)
             goQuest(false)
             setClicked(false)
-            
+            saveFeedback()
         }
-        else return
+        else {
+            alert('답변해주세요!')
+        }
     }
 
-    const pathList = [
-        {label: '카카오톡 오픈채팅방', value: 'Kakao'},
-        {label: '디스콰이엇', value: 'Disquiet'},
-        {label: '지인 추천', value: 'Recommend'},
-        {label: '기타', value: 'etc'},
-    ]
-
-    const diffList = [
-        {label: '1', value: '1'},{label: '2', value: '2'},{label: '3', value: '3'},{label: '4', value: '4'},{label: '5', value: '5'},
-    ]
-
-    const recommendList = [
-        {label: '1', value: '1'}, {label: '2', value: '2'}, {label: '3', value: '3'}, {label: '4', value: '4'}, {label: '5', value: '5'}, {label: '6', value: '6'}, {label: '7', value: '7'},  {label: '8', value: '8'}, {label: '9', value: '9'}, {label: '10', value: '10'},
-    ]
-
-    const inconvList = [
-        {label: '낮은 자유도', value: '낮은 자유도'},
-        {label: '섹션 유형의 부족', value:'섹션 유형의 부족'},
-        {label: '기능의 오류', value:'기능의 오류'},
-        {label: '결과물이 만족스럽지 않음', value:'결과물이 만족스럽지 않음'},
-        {label: '기타', value:'기타'},    
-    ]
-
-    const satisfyList = [
-        {label:'사용이 쉬움', value:'사용이 쉬움'},
-        {label:'섹션 유형이 다양함', value:'섹션 유형이 다양함'},
-        {label:'결과물이 유용함', value:'결과물이 유용함'},
-        {label:'결과물의 디자인', value:'결과물의 디자인'},
-        {label:'기타', value:'기타'},
-    ]
-
-    const timeList = [
-        {label:'5분 미만', value:'사용이 쉬움'},
-        {label:'5분 이상 30분 미만', value:'5분 이상 30분 미만'},
-        {label:'30분 이상 1시간 미만 ', value:'30분 이상 1시간 미만 '},
-        {label:'1시간 이상 3시간 미만', value:'1시간 이상 3시간 미만'},
-        {label:'3시간 이상', value:'3시간 이상'},
-    ]
+    const setClear = () => {
+        setOpen(false);
+        setClicked(false);
+        goQuest(false);
+        setPage(1);
+    }
 
     const returnQuestions = () => {
         switch(page){
@@ -127,14 +115,20 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
                     어떤 경로를 통해 Surfee를 알게 되셨나요?
                 </div>
                 <div className="column-ans">
-                    {pathList.map(item => (
-                        <div className="round-ans-button" onClick={() => {setPath(item.value); setClicked(true);}}>
-                        {item.label}
+                    <div className="round-ans-button" style={{background: `${path === 'kakao' ? `var(--main-color)`: 'white'}`, color: `${path === 'kakao' ? 'white': `var(--main-color)`}`}} onClick={() => {setPath('kakao'); setClicked(true);}}>
+                        카카오톡 오픈채팅방
                     </div>
-                    ))}
+                    <div className="round-ans-button" style={{background: `${path === 'disquiet' ? `var(--main-color)`: 'white'}`, color: `${path === 'disquiet' ? 'white': `var(--main-color)`}`}} onClick={() => {setPath('disquiet'); setClicked(true);}}>
+                        디스콰이엇
+                    </div>
+                    <div className="round-ans-button" style={{background: `${path === '지인 추천' ? `var(--main-color)`: 'white'}`, color: `${path === '지인 추천' ? 'white': `var(--main-color)`}`}} onClick={() => {setPath('지인 추천'); setClicked(true);}}>
+                        지인 추천
+                    </div>
+                    <div className="round-ans-button" style={{background: `${path === '기타' ? `var(--main-color)`: 'white'}`, color: `${path === '기타' ? 'white': `var(--main-color)`}`}} onClick={() => {setPath('기타'); setClicked(true);}}>
+                        기타
+                    </div>
                 </div>
-                <div className="prev-next-fbuttons">
-                    <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
+                <div className="prev-next-fbuttons" style={{justifyContent:'end'}}>
                     <div className="prev-next-fbutton" onClick={toNext}>다음</div>
                 </div>
                 </>
@@ -146,9 +140,11 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
                 </div>
                 <div className="row-ans">
                     <div className="circle-text">어려움</div>
-                    {diffList.map(item => (
-                        <div className="circle-ans-button" onClick={() => {setDifficul(item.value); setClicked(true);}}>{item.label}</div>
-                    ))}
+                        <div className="circle-ans-button" style={{background: `${difficul === '1' ? `var(--main-color)`: 'white'}`, color: `${difficul === '1' ? 'white': `var(--main-color)`}`}} onClick={() => {setDifficul('1'); setClicked(true);}}>1</div>
+                        <div className="circle-ans-button" style={{background: `${difficul === '2' ? `var(--main-color)`: 'white'}`, color: `${difficul === '2' ? 'white': `var(--main-color)`}`}} onClick={() => {setDifficul('2'); setClicked(true);}}>2</div>
+                        <div className="circle-ans-button" style={{background: `${difficul === '3' ? `var(--main-color)`: 'white'}`, color: `${difficul === '3' ? 'white': `var(--main-color)`}`}} onClick={() => {setDifficul('3'); setClicked(true);}}>3</div>
+                        <div className="circle-ans-button" style={{background: `${difficul === '4' ? `var(--main-color)`: 'white'}`, color: `${difficul === '4' ? 'white': `var(--main-color)`}`}} onClick={() => {setDifficul('4'); setClicked(true);}}>4</div>
+                        <div className="circle-ans-button" style={{background: `${difficul === '5' ? `var(--main-color)`: 'white'}`, color: `${difficul === '5' ? 'white': `var(--main-color)`}`}} onClick={() => {setDifficul('5'); setClicked(true);}}>5</div> 
                     <div className="circle-text">쉬움</div>
                 </div>
                 <div className="prev-next-fbuttons">
@@ -163,11 +159,21 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
                 Surfee를 사용하면서 가장 불편했던 점이 무엇인가요?
                 </div>
                 <div className="column-ans">
-                    {inconvList.map(item=>(
-                        <div className="round-ans-button" onClick={() => {setInconv(item.value); setClicked(true);}}>
-                        {item.label}
+                        <div className="round-ans-button" style={{background: `${inconv === '낮은 자유도' ? `var(--main-color)`: 'white'}`, color: `${inconv === '낮은 자유도' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('낮은 자유도'); setClicked(true);}}>
+                            낮은 자유도
                         </div>
-                    ))}
+                        <div className="round-ans-button" style={{background: `${inconv === '섹션 유형의 부족' ? `var(--main-color)`: 'white'}`, color: `${inconv === '섹션 유형의 부족' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('섹션 유형의 부족'); setClicked(true);}}>
+                            섹션 유형의 부족
+                        </div>
+                        <div className="round-ans-button" style={{background: `${inconv === '기능의 오류' ? `var(--main-color)`: 'white'}`, color: `${inconv === '기능의 오류' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('기능의 오류'); setClicked(true);}}>
+                        기능의 오류
+                        </div>
+                        <div className="round-ans-button" style={{background: `${inconv === '결과물이 만족스럽지 않음' ? `var(--main-color)`: 'white'}`, color: `${inconv === '결과물이 만족스럽지 않음' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('결과물이 만족스럽지 않음'); setClicked(true);}}>
+                        결과물이 만족스럽지 않음
+                        </div>
+                        <div className="round-ans-button" style={{background: `${inconv === '기타' ? `var(--main-color)`: 'white'}`, color: `${inconv === '기타' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('기타'); setClicked(true);}}>
+                        기타
+                        </div>
                 </div>
                 <div className="prev-next-fbuttons">
                     <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
@@ -181,11 +187,21 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
                 Surfee를 사용하면서 가장 만족했던 점이 무엇인가요?
                 </div>
                 <div className="column-ans">
-                    {satisfyList.map(item => (
-                        <div className="round-ans-button" onClick={() => {setSatisfy(item.value); setClicked(true);}}>
-                        {item.label}
-                        </div>
-                    ))}
+                    <button className="round-ans-button" style={{background: `${satisfy === '사용이 쉬움' ? `var(--main-color)`: 'white'}`, color: `${satisfy === '사용이 쉬움' ? 'white': `var(--main-color)`}`}} onClick={() => {setSatisfy('사용이 쉬움'); setClicked(true);}}>
+                        사용이 쉬움
+                    </button>
+                    <button className="round-ans-button" style={{background: `${satisfy === '섹션 유형이 다양함' ? `var(--main-color)`: 'white'}`, color: `${satisfy === '섹션 유형이 다양함' ? 'white': `var(--main-color)`}`}} onClick={() => {setSatisfy('섹션 유형이 다양함'); setClicked(true);}}>
+                    섹션 유형이 다양함
+                    </button>
+                    <button className="round-ans-button" style={{background: `${satisfy === '결과물이 유용함' ? `var(--main-color)`: 'white'}`, color: `${satisfy === '결과물이 유용함' ? 'white': `var(--main-color)`}`}} onClick={() => {setSatisfy('결과물이 유용함'); setClicked(true);}}>
+                    결과물이 유용함
+                    </button>
+                    <button className="round-ans-button" style={{background: `${satisfy === '결과물의 디자인' ? `var(--main-color)`: 'white'}`, color: `${satisfy === '결과물의 디자인' ? 'white': `var(--main-color)`}`}} onClick={() => {setSatisfy('결과물의 디자인'); setClicked(true);}}>
+                    결과물의 디자인
+                    </button>
+                    <button className="round-ans-button" style={{background: `${satisfy === '기타' ? `var(--main-color)`: 'white'}`, color: `${satisfy === '기타' ? 'white': `var(--main-color)`}`}} onClick={() => {setSatisfy('기타'); setClicked(true);}}>
+                    기타
+                    </button>
                 </div>
                 <div className="prev-next-fbuttons">
                     <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
@@ -199,11 +215,21 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
                 제작하는 데 얼마의 시간이 소요되었나요?
                 </div>
                 <div className="column-ans">
-                    {timeList.map(item => (
-                        <div className="round-ans-button" onClick={() => {setTime(item.value); setClicked(true);}}>
-                        {item.label}
-                        </div>
-                    ))}
+                    <div className="round-ans-button" style={{background: `${time === '5분 미만' ? `var(--main-color)`: 'white'}`, color: `${time === '5분 미만' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('5분 미만'); setClicked(true);}}>
+                        5분 미만
+                    </div>
+                    <div className="round-ans-button" style={{background: `${time === '5분 이상 30분 미만' ? `var(--main-color)`: 'white'}`, color: `${time === '5분 이상 30분 미만' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('5분 이상 30분 미만'); setClicked(true);}}>
+                    5분 이상 30분 미만
+                    </div>
+                    <div className="round-ans-button" style={{background: `${time === '30분 이상 1시간 미만' ? `var(--main-color)`: 'white'}`, color: `${time === '30분 이상 1시간 미만' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('30분 이상 1시간 미만'); setClicked(true);}}>
+                    30분 이상 1시간 미만
+                    </div>
+                    <div className="round-ans-button" style={{background: `${time === '1시간 이상 3시간 미만' ? `var(--main-color)`: 'white'}`, color: `${time === '1시간 이상 3시간 미만' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('1시간 이상 3시간 미만'); setClicked(true);}}>
+                    1시간 이상 3시간 미만
+                    </div>
+                    <div className="round-ans-button" style={{background: `${time === '3시간 이상' ? `var(--main-color)`: 'white'}`, color: `${time === '3시간 이상' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('3시간 이상'); setClicked(true);}}>
+                    3시간 이상
+                    </div>
                 </div>
                 <div className="prev-next-fbuttons">
                     <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
@@ -216,8 +242,8 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
                 <div className="big-title question">
                 추가되면 좋겠다고 생각하는 기능을 자유롭게 남겨주세요!
                 </div>
-                <div className="text-input">
-                <input className="text-input inputbox" onChange={(e)=>{setFunc(e.target.value); setClicked(true);}}/>
+                <div className="text-modal-input">
+                <input className="text-modal-input inputbox" value={inputText} onChange={(e)=>{setInputText(e.target.value); setFunc(e.target.value); setClicked(true);}}/>
                 </div>
                 <div className="prev-next-fbuttons">
                     <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
@@ -230,8 +256,8 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
                 <div className="big-title question">
                 Surfee를 위해, 여러분의 소중한 의견을 자유롭게 남겨주세요!
                 </div>
-                <div className="text-input">
-                <input className="text-input inputbox" onChange={(e)=>{setComment(e.target.value); setClicked(true);}}/>
+                <div className="text-modal-input">
+                <input className="text-modal-input inputbox" value={inputText} onChange={(e)=>{setInputText(e.target.value); setComment(e.target.value); setClicked(true);}}/>
                 </div>
                 <div className="prev-next-fbuttons">
                     <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
@@ -244,11 +270,19 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
                 <div className="big-title question">
                 마지막으로, Surfee를 주위 친구, 동료, 지인에게 추천할 의향이 얼마나 있나요?
                 </div>
-                <div className="row-ans" style={{width: '700px'}}>
+                <div className="row-ans" style={{width: '750px'}}>
                     <div className="circle-text">전혀없음</div>
-                    {recommendList.map(item => (
-                        <div className="circle-ans-button" onClick={()=>{setRecom(item.value); setClicked(true);}}>{item.label}</div>
-                    ))}
+                        <div className="circle-ans-button" style={{background: `${recom === '0' ? `var(--main-color)`: 'white'}`, color: `${recom === '0' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('0'); setClicked(true);}}>0</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '1' ? `var(--main-color)`: 'white'}`, color: `${recom === '1' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('1'); setClicked(true);}}>1</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '2' ? `var(--main-color)`: 'white'}`, color: `${recom === '2' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('2'); setClicked(true);}}>2</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '3' ? `var(--main-color)`: 'white'}`, color: `${recom === '3' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('3'); setClicked(true);}}>3</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '4' ? `var(--main-color)`: 'white'}`, color: `${recom === '4' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('4'); setClicked(true);}}>4</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '5' ? `var(--main-color)`: 'white'}`, color: `${recom === '5' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('5'); setClicked(true);}}>5</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '6' ? `var(--main-color)`: 'white'}`, color: `${recom === '6' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('6'); setClicked(true);}}>6</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '7' ? `var(--main-color)`: 'white'}`, color: `${recom === '7' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('7'); setClicked(true);}}>7</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '8' ? `var(--main-color)`: 'white'}`, color: `${recom === '8' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('8'); setClicked(true);}}>8</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '9' ? `var(--main-color)`: 'white'}`, color: `${recom === '9' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('9'); setClicked(true);}}>9</div>
+                        <div className="circle-ans-button" style={{background: `${recom === '10' ? `var(--main-color)`: 'white'}`, color: `${recom === '10' ? 'white': `var(--main-color)`}`}} onClick={()=>{setRecom('10'); setClicked(true);}}>10</div>
                     <div className="circle-text">완전있음</div>
                 </div>
                 <div className="prev-next-fbuttons">
@@ -271,7 +305,7 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
             >
                 <Box sx={style}>
                     <div className="modal-top__title">
-                        <div className="modal-close-button" onClick={() => setOpen(false)}>
+                        <div className="modal-close-button" onClick={() => {setClear()}}>
                             <Close size="30" />
                         </div>
                         <div className="big-title">Surfee 제작 과정 피드백</div>
@@ -291,7 +325,9 @@ function FeedbackModal({open, setOpen, setFeedback, deploy}) {
                                     작성해 주신 피드백을 바탕으로 <br />
                                     더 발전하는 Surfee가 되겠습니다 :)
                                 </div>
-                                <div className="feed-button" style={{width: '167px'}} onClick={()=>{deploy(true)}}>
+                                <div className="feed-button" style={{width: '167px'}} 
+                                onClick={()=>{deploy(true)}}
+                                >
                                     배포하기
                                 </div>
                                 </>

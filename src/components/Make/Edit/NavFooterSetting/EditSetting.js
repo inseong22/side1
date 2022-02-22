@@ -50,9 +50,9 @@ const shapeOptions = [
 ]
 
 const sizeOptions = [
-    { label: 'Small', value: 50 },
-    { label: 'Medium', value: 75 },
-    { label: 'Large', value: 98 },
+    { label: '작게', value: 50 },
+    { label: '보통', value: 75 },
+    { label: '크게', value: 98 },
 ]
 
 function EdtiSetting({setting, setSetting, category}) {
@@ -348,9 +348,9 @@ function EdtiSetting({setting, setSetting, category}) {
                             <OnOffCustom text="그림자" value={setting.cta.shadow} func={(e) => setSetting(produce(setting, draft => {
                                 draft.cta.shadow = !setting.cta.shadow
                             }))} />
-                            <SliderCustom top="여백" value={setting.cta.padding} max={24} func={e => setSetting(produce(setting, draft => {
+                            {/* <SliderCustom top="여백" value={setting.cta.padding} max={24} func={e => setSetting(produce(setting, draft => {
                                 draft.cta.padding = e
-                            }))}/>
+                            }))}/> */}
                         </OpenCloseCustom>
                         <OpenCloseCustom title="고스트 버튼" use={true} preseen={
                             <div className="edit-element">
@@ -387,9 +387,9 @@ function EdtiSetting({setting, setSetting, category}) {
                             <OnOffCustom text="그림자" value={setting.ghost.shadow} func={(e) => setSetting(produce(setting, draft => {
                                 draft.ghost.shadow = !setting.ghost.shadow
                             }))} />
-                            <SliderCustom top="여백" value={setting.ghost.padding} max={24} func={e => setSetting(produce(setting, draft => {
+                            {/* <SliderCustom top="여백" value={setting.ghost.padding} max={24} func={e => setSetting(produce(setting, draft => {
                                 draft['ghost'].padding = e
-                            }))}/>
+                            }))}/> */}
                         </OpenCloseCustom>
                     </div>
                     <OpenCloseCustom title="애니메이션" use={true}>

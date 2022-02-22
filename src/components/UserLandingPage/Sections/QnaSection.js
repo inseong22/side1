@@ -27,8 +27,8 @@ function QnaSection({content, setting}) {
     return (
         <motion.div className="template"
         data-aos-easing="ease-in-back"
-        data-aos-delay="100"
-        data-aos-offset="0" data-aos={content.animation.type} aos-duration="2000">
+        data-aos-delay="200"
+        data-aos-offset="0" data-aos={content.animation.type} aos-duration="4000">
 
             {/* 큐앤에이 카드의 그림자때문에 텍스트와 정렬이 맞지 않아서 */}
             <div style={{width : `${isMobile ? '100%' : '95%'}` }}>  

@@ -19,7 +19,10 @@ function CtaSection({content, setting}) {
     
     return (
         <>
-            <motion.div style={{display:'flex', width:'100%', height:'100%', ...returnLayout}} data-aos={content.animation.type} aos-duration="2000" >
+            <motion.div style={{display:'flex', width:'100%', height:'100%', ...returnLayout}} 
+            data-aos-easing="ease-in-back"
+            data-aos-delay="200"
+            data-aos-offset="0" data-aos={setting.animation} aos-duration="4000" >
                 <div className="text__container">
                     <TitleDesc content={content} />
                 </div>

@@ -21,9 +21,9 @@ const shapeOptions = [
     { label: '원형', value: 500 },
 ]
 const imageSizeOptions = [
-    { label: 'Small', value: 60 },
-    { label: 'Medium', value: 75 },
-    { label: 'Large', value: 100 },
+    { label: '작게', value: 60 },
+    { label: '보통', value: 75 },
+    { label: '크게', value: 100 },
 ]
 const alignOptions = [
     { label: '왼쪽', value: 'start'},

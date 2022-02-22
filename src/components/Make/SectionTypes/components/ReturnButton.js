@@ -22,6 +22,7 @@ function ReturnButton({content, onlyapp}){
             draft[state.secNum].button[type === "cta" ? 'ctaText' : 'ghostText'] = e.currentTarget.value;
         }))} inputStyle={{
             textAlign: 'center',
+            fontSize: `${content.button.textSize}px`,
             fontFamily:`${state.setting.smallFont}`,
             borderRadius:`${state.setting[type].borderRadius}px`,  
             backgroundColor:`${state.setting[type].backgroundColor}`, 

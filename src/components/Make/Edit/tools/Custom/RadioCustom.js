@@ -138,14 +138,7 @@ export function EditRadioLayout({content, options, value, onChange, version}){
                             <img src={Tlay1G} />
                         )}
                     </div>
-                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, top, bottom) => {onChange(e=2, align='start', top=25, bottom=5); console.log(top)}}>
-                        {value === 2 ? (
-                            <img className='text-layout2' src={Tlay23W} />
-                        ):(
-                            <img className='text-layout2' src={Tlay23G} />
-                        )}
-                    </div>
-                    <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, top, bottom) => onChange(e=3, align='start', top=15, bottom=15)}>
+                    <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, top, bottom) => onChange(e=2, align='start', top=15, bottom=15)}>
                     {value === 3 ? (
                             <img className='text-layout3' src={Tlay23W} />
                         ):(

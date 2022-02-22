@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const AnimationDiv = ({content, children, returnLayout}) => {
+const AnimationDiv = ({content, children, returnLayout, setting}) => {
     if(!content.animation.use)
     return(
     <>
@@ -18,8 +18,10 @@ const AnimationDiv = ({content, children, returnLayout}) => {
             <motion.div
                 style={{display:'flex', ...returnLayout}} 
                 data-aos-easing="ease-in-back"
-     data-aos-delay="100"
-     data-aos-offset="0" data-aos={content.animation.type} aos-duration="2000" >
+                data-aos-delay="200"
+                data-aos-offset="0"
+                data-aos={setting.animation} 
+                aos-duration="4000" >
                 {children}
             </motion.div>
             </>
