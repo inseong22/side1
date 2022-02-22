@@ -19,6 +19,7 @@ function QnaSection({content, setting}) {
                     </div>
                     <TextAuto
                         small
+                        placeholder="여기를 클릭하여 자주 묻는 질문의 답변을 적어보세요."
                         value={item.answer} 
                         onChange={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].qnas[index].answer = e.currentTarget.value;
@@ -37,7 +38,7 @@ function QnaSection({content, setting}) {
 
             {/* 큐앤에이 카드의 그림자때문에 텍스트와 정렬이 맞지 않아서 */}
             <div style={{width : `${state.isPhone ? '100%' : '95%'}` }}>  
-                <TitleDesc content={content} />
+                <TitleDesc content={content} titlePlaceholder="자주 묻는 질문을 적어보세요." descPlaceholder="여기를 클릭하여 자주 묻는 질문과 그 답변을 적어보세요." />
             </div>
 
             <div className="features__container" style={{flexDirection: 'column', marginTop:'20px'}}>

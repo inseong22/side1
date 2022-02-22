@@ -24,7 +24,7 @@ function AppDownloadSection({content}) {
             <div style={{ width:'100%', height:'100%'}}>
                 <AnimationDiv content={content} returnLayout={returnLayout}>
                     <div className="text__container">
-                        <TitleDesc content={content} />
+                        <TitleDesc content={content} titlePlaceholder="잠재 유저의 앱 다운로드를 유도할 말을 적어보세요." descPlaceholder="여기를 클릭하여 잠재 유저의 앱 다운로드를 유도할 수 있는 문구를 적어보세요." />
                     </div>
                         <div style={{display:'flex', flexDirection:'column', width:'100%', justifyContent:'center', height:'100%'}}>
                             {content.appButton.use && 

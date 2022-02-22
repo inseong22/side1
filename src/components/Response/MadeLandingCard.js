@@ -97,7 +97,7 @@ function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking
                         width: '8px',
                         height: '8px',
                         borderRadius:'10px',
-                        marginRight:'5px',
+                        marginRight:'3px',
                         background: '#11E533'}}></div>
                     {returnDate(published.created)} 마지막 배포
                     </div>
@@ -107,7 +107,7 @@ function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking
                         width: '8px',
                         height: '8px',
                         borderRadius:'10px',
-                        marginRight:'5px',
+                        marginRight:'3px',
                         background: '#C4C4C4'}}></div>배포 전
                     </div>
                     }

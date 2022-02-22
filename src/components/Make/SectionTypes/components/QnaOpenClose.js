@@ -90,7 +90,9 @@ const OpenCloseCustom = (props) => {
                     onChange={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
                     }))}
-                    color={props.color} align="start" />
+                    color={props.color} align="start"
+                    placeholder="여기를 클릭하여 자주 묻는 질문을 적어보세요."
+                    />
                 </div>
               </div> 
             </div>

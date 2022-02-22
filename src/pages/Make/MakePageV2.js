@@ -23,6 +23,7 @@ import {ChakraProvider} from '@chakra-ui/react'
 import {Prompt} from 'react-router-dom';
 import produce from 'immer'
 import TextareaAutosize from '../../components/Make/SectionTypes/components/TextAuto'
+import ChannelTalk from '../../tools/ChannelTalk'
 
 export const MyContext = React.createContext({
     state : {},
@@ -35,6 +36,10 @@ export const MyContext = React.createContext({
 // })
 
 const MakePageV2 = ({history, userObj}) => {
+    ChannelTalk.boot({
+        "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"
+    });
+
     const scrollRef = useRef();
     const [scroll, setScroll] = useState(false);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
@@ -77,10 +82,10 @@ const MakePageV2 = ({history, userObj}) => {
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/making/${userObj.email}`);
         function repeat(){
-            localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting]));
+            saveLocalStorage()
         }
         // 30초에 한번 씩 자동 저장
-        let id = setInterval(repeat, 30000);
+        let id = setInterval(repeat, 10000);
         return () => clearInterval(id);
     })
 
@@ -126,8 +131,14 @@ const MakePageV2 = ({history, userObj}) => {
         action : {setSecNum, setContents, setIsPhone, setCategory, setSetting},
     }
 
-    const saveLocalStorage = () => {
-        localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting, editing]));
+    const saveLocalStorage = async () => {
+        if(JSON.stringify([contents, navi, foot, setting, editing]).length > 48000){
+            // 임시 방편으로 큰 데이터는 건너뛰도록 조치.
+            return
+        }else{
+            localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting, editing]));
+            console.log("자동저장 실행");
+        }
     }
 
     const loadLocalStorage = () => {

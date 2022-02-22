@@ -25,7 +25,7 @@ function CtaSection({content}) {
         <>
             <motion.div style={{display:'flex', width:'100%', height:'100%', ...returnLayout}} data-aos={content.animation.type} aos-duration="2000" >
                 <div className="text__container">
-                    <TitleDesc content={content} />
+                    <TitleDesc content={content} titlePlaceholder="잠재 유저의 행동을 유도할 말을 적어보세요." descPlaceholder="여기를 클릭하여 잠재 유저의 행동을 유도할 수 있는 문구를 적어보세요." />
                 </div>
                 <div style={{display:'flex', flexDirection:'column', width:'100%', justifyContent:'center', height:'100%'}}>
                     <ReturnButton content={content} />
@@ -41,6 +41,7 @@ function CtaSection({content}) {
                                 onChange={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].caution.text = e.currentTarget.value;
                                 }))}  
+                                placeholder="유의사항이나 부가 설명을 적어보세요."
                             />
                         </div>
                     }

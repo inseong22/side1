@@ -34,7 +34,7 @@ function HeroSection({content, setting}) {
         data-aos-offset="0" data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout}>
                 <div className="text__container" style={{marginTop:`${ !state.isPhone && content.layout === 4 ? '20px'  : state.isPhone && content.mobile.layout === 4 ? '10px' : '0px'}` }}>
-                    <TitleDesc content={content} />
+                    <TitleDesc content={content} titlePlaceholder="서비스 한 줄 소개를 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 상품에 대한 핵심 설명을 적어보세요." />
                     <ReturnButton content={content} />
                 </div>
                 <div className="image__container">
