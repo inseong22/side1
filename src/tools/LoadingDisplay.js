@@ -8,8 +8,8 @@ function LoadingDisplay() {
                 autoplay
                 loop
                 mode="normal"
-                src="https://assets7.lottiefiles.com/packages/lf20_8y9IYf.json"
-                style={{width:'320px'}}
+                src="https://assets2.lottiefiles.com/packages/lf20_tiuij39a.json"
+                style={{width:'200px'}}
             >
             </lottie-player>
         </div>

@@ -3,7 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import produce from 'immer';
 
-function TextAuto({small, value, onChange, color, align, size}) {
+function TextAuto({small, value, onChange, color, align, size, placeholder}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     
     return (
@@ -14,6 +14,7 @@ function TextAuto({small, value, onChange, color, align, size}) {
                 className="text-input feature-desc" 
                 value={value} 
                 onChange={e => onChange(e)}
+                placeholder={placeholder}
                 style={{
                     color:`${color}`, 
                     textAlign:`${align}`,
@@ -27,6 +28,7 @@ function TextAuto({small, value, onChange, color, align, size}) {
             <TextareaAutosize 
                 className="text-input feature-title" 
                 value={value} 
+                placeholder={placeholder}
                 onChange={e => onChange(e)}
                 style={{ 
                     color:`${color}`, 

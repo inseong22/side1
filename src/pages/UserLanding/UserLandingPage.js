@@ -34,7 +34,6 @@ const UserLandingPage = (props) => {
 
     useEffect(() => {
         loadData()
-        console.log("채널톡", channeltalk);
         ReactGa.initialize('UA-213792742-1');
         // to report page view
         if(item !== undefined && item !== null){

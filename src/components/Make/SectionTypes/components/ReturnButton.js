@@ -22,11 +22,10 @@ function ReturnButton({content, onlyapp}){
             draft[state.secNum].button[type === "cta" ? 'ctaText' : 'ghostText'] = e.currentTarget.value;
         }))} inputStyle={{
             textAlign: 'center',
-            width: '100%',
             fontFamily:`${state.setting.smallFont}`,
             borderRadius:`${state.setting[type].borderRadius}px`,  
             backgroundColor:`${state.setting[type].backgroundColor}`, 
-            // padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
+            padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
             }}/>
     
     </div>)}

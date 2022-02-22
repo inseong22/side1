@@ -22,7 +22,7 @@ function VideoSection({content, setting}) {
         data-aos-offset="0" data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout}>
                 <div className="text__container">
-                    <TitleDesc content={content} />
+                    <TitleDesc content={content} titlePlaceholder="제목을 적어보세요." descPlaceholder="여기를 클릭하여 내용을 적어보세요." />
                 </div>
                 <div className="image__container">
                     <ImageOrSlide content={content} />
@@ -31,6 +31,7 @@ function VideoSection({content, setting}) {
                 content.explanation.use &&
                 <div style={{width:'100%'}}>
                     <TextAuto small  className="text-input" 
+                        placeholder="여기를 클릭하여 동영상에 대한 추가 설명을 적어보세요."
                         value={content.explanation.text} 
                         onChange={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].explanation.text = e.currentTarget.value;

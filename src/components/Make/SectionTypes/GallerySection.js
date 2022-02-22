@@ -17,7 +17,9 @@ function GallerySection({content,setting}) {
                <div key={index} className="feature__card" 
                     style={{
                     alignItems: 'center',
-                    margin : `${ state.isPhone ? '5px 5px' : '0px 15px' }`,
+                    margin : `${ state.isPhone ? '5px 5px' : '0px 10px' }`,
+                    marginLeft: `${index === 0 ? '0px' : '15px'}`,
+                    marginRight: `${index === content.numOfElements - 1 ? '0px' : '15px'}`,
                     height : `${state.isPhone ? '' : '100%'}`,
                     width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`,
                     boxShadow:`${content.card.shadow ? '2px 2px 4px rgba(0,0,0,0.4)' : ''}`, 
@@ -73,15 +75,17 @@ function GallerySection({content,setting}) {
                        }
                        {
                            content.text.use && 
-                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', padding:'8px 5px'}}>
-                                   <TextAuto small className="text-input" 
-                                        value={item.text} 
-                                        color = {content.text.color} 
-                                        align = {state.isPhone ? content.mobile.align : content.align}
-                                        onChange={e => action.setContents(produce(state.contents, draft => {
-                                            draft[state.secNum].elements[index].text = e.currentTarget.value;
-                                        }))}  
-                                   />
+                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:'12px'}}>
+                                <TextAuto small className="text-input" 
+                                    placeholder="여기를 클릭하여 이미지에 대한 설명을 적어보세요."
+                                    value={item.text} 
+                                    size={0.9}
+                                    color = {content.text.color} 
+                                    align = {state.isPhone ? content.mobile.align : content.align}
+                                    onChange={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].elements[index].text = e.currentTarget.value;
+                                    }))}  
+                                />
                            </div>
                        }
                    </div>
@@ -97,7 +101,7 @@ function GallerySection({content,setting}) {
         data-aos-delay="100"
         data-aos-offset="0" data-aos={setting.animation} aos-duration="2000">
 
-            <TitleDesc content={content} />
+            <TitleDesc content={content} titlePlaceholder="제목을 적어보세요." descPlaceholder="여기를 클릭하여 내용을 적어보세요." />
 
             <div className="features__container" style={{flexWrap : `${state.isPhone ? 'wrap' : ''}`}}>
                 {returnElementsCards}

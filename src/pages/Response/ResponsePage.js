@@ -13,6 +13,7 @@ import {Link } from 'react-router-dom'
 import gadata from '../../tools/datacodes/gadata.json'
 import { Tooltip, ChakraProvider } from '@chakra-ui/react'
 import { InformationCircle } from '@styled-icons/ionicons-outline';
+import ChannelTalk from '../../tools/ChannelTalk'
 
 const NOTCLICKED = 10000
 
@@ -27,7 +28,9 @@ function ResponsePage({userObj, history}) {
     const [nowChecking, setNowChecking] = useState(NOTCLICKED);
     
     useEffect(() => {
-        
+        ChannelTalk.boot({
+            "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"
+        });
         // to report page view
         // ReactGa.initialize('UA-213792742-1');
         // ReactGa.pageview(`/response/${userObj.email}`);
