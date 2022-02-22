@@ -14,9 +14,9 @@ const buttonOptions = [
 ]
 
 const buttonTextOptions = [
-    { label: 'Small', value: 10 },
-    { label: 'Medium', value: 12 },
-    { label: 'Large', value: 14 }
+    { label: '작게', value: 10 },
+    { label: '보통', value: 12 },
+    { label: '크게', value: 14 }
 ]
 
 function AddCtaButton({content, num}) {

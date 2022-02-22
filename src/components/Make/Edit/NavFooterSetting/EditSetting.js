@@ -50,9 +50,9 @@ const shapeOptions = [
 ]
 
 const sizeOptions = [
-    { label: 'Small', value: 50 },
-    { label: 'Medium', value: 75 },
-    { label: 'Large', value: 98 },
+    { label: '작게', value: 50 },
+    { label: '보통', value: 75 },
+    { label: '크게', value: 98 },
 ]
 
 function EdtiSetting({setting, setSetting, category}) {

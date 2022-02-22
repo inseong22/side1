@@ -13,9 +13,9 @@ import TextSizeCustom from '../tools/func/TextSizeCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 
 const ratingSizeOptions = [
-    { label: 'Small', value: 20 },
-    { label: 'Medium', value: 25 },
-    { label: 'Large', value: 30 },
+    { label: '작게', value: 20 },
+    { label: '보통', value: 25 },
+    { label: '크게', value: 30 },
 ]
 const alignOptions = [
     { label: '왼쪽', value: 'start'},
