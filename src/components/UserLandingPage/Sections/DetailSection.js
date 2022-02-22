@@ -18,8 +18,8 @@ function DetailSection({content, setting}) {
     }
     
     return (
-        <motion.div data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
-            <AnimationDiv content={content} returnLayout={returnLayout}>
+        <motion.div style={{ width:'100%', height:'100%'}}>
+            <AnimationDiv setting={setting} content={content} returnLayout={returnLayout}>
                 <div className="text__container" style={{marginTop:`${ !isMobile && content.layout === 4 ? '20px' : isMobile && content.mobile.layout === 4 ? '10px' : '0px'}` }}>
                     <TitleDesc content={content} />
                 </div>

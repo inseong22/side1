@@ -9,7 +9,7 @@ import AnimationDiv from './components/AnimationDiv'
 import TextAuto from './components/TextAuto'
 import produce from 'immer'
 
-function CtaSection({content}) {
+function CtaSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnLayout = {
@@ -23,7 +23,8 @@ function CtaSection({content}) {
     
     return (
         <>
-            <motion.div style={{display:'flex', width:'100%', height:'100%', ...returnLayout}} data-aos={content.animation.type} aos-duration="2000" >
+            <motion.div style={{display:'flex', width:'100%', height:'100%', ...returnLayout}} data-aos={setting.animation} data-aos-easing="ease-in-back"
+            data-aos-delay="200" data-aos-offset="0" aos-duration="4000" >
                 <div className="text__container">
                     <TitleDesc content={content} titlePlaceholder="잠재 유저의 행동을 유도할 말을 적어보세요." descPlaceholder="여기를 클릭하여 잠재 유저의 행동을 유도할 수 있는 문구를 적어보세요." />
                 </div>
@@ -34,7 +35,7 @@ function CtaSection({content}) {
                             <TextAuto 
                                 className="text-input" 
                                 small 
-                                size = {content.caution.size}
+                                size = {content.caution.size*0.0625}
                                 value={content.caution.text} 
                                 color = {content.caution.color} 
                                 align = {state.isPhone ? content.mobile.align : content.caution.align}

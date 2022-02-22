@@ -19,7 +19,10 @@ function MakeNavigationV2({full, navi, setNavi, history}) {
                     paddingLeft: `${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '12px' : '30px'}`}`,
                     borderBottom:`${navi.bottomBorder.use ? `1px solid ${navi.bottomBorder.color}` : ''}`, 
                     backgroundColor:`${navi.backgroundColor}`, 
-                    height:`${navi.height}px`}} 
+                    height:`${navi.height}px`,
+                    // display: `${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? 'block' : 'flex'}`
+                }} 
+                    
                 onClick={() => action.setSecNum(50)}>
                 <NaviConatainer navi={navi} setNavi={setNavi} />
             </div>

@@ -460,6 +460,16 @@ export const base = [
             layout:3,
             contentSize:50,
         },
+        box:{
+            use:false,
+            backgroundColor:'#6CCAD0',
+            borderRadius:5,
+            height: 1,
+        },
+        backgroundImage:{
+            attachment:'',
+            overlay:false,
+        },
         name:'글',
         sectionTypeName:'TextSection',
     },

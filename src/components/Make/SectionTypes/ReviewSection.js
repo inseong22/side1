@@ -122,8 +122,8 @@ function ReviewSection({content, setting}) {
     return (
         <>
             <motion.div className="template"data-aos-easing="ease-in-back"
-                data-aos-delay="100"
-                data-aos-offset="0" data-aos={setting.animation} aos-duration="2000">
+                data-aos-delay="200"
+                data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
                 
                 <TitleDesc content={content} titlePlaceholder="서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." />
 

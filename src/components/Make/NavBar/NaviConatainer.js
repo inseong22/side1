@@ -10,20 +10,19 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
     return (
         <>
         {navi.logo.use &&  
-            <div className="make-nav-logoc" style={{height:`${navi.height}px`, justifyContent:`${navi.logo.align}`}}>
+            <div className="make-nav-logoc" style={{height:`${navi.height}px`, 
+            justifyContent:`${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? 'right' : navi.logo.align}`,
+            width: `${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? '115%' : '100%'}`}}>
                 {navi.logo.image.use &&  
                     <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
                 }
                 {navi.logo.text.use && 
-                    <TextareaAutosize
-                        className="text-input-flex ti"
+                    <AutosizeInput
+                        name="form-field-name"
                         value={navi.title}
-                        onChange={(e) => {
-                            setNavi(produce(navi, draft => {
-                                draft.title = e.currentTarget.value;
-                            }))
-                        }}
-                        style={{
+                        placeholder="서비스명을 입력하세요"
+                        inputStyle={{ 
+                            fontSize: `${navi.logo.text.fontSize/20}em`,
                             display: 'flex',
                             zIndex: 5,
                             fontSize:`${navi.logo.text.fontSize/20}em`, 
@@ -32,8 +31,12 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                             resize:'none',
                             padding: '1px',
                             marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`,
-                            width:'300px',
                         }}
+                        onChange={(e) => {
+                         setNavi(produce(navi, draft => {
+                            draft.title = e.currentTarget.value;
+                        }))
+                       }}
                     />
                 }
             </div>
