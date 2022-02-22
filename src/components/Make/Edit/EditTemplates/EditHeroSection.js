@@ -14,6 +14,7 @@ import Contents from './tools/Contents'
 import AddGhostButton from './tools/AddGhostButton'
 import AddCtaButton from './tools/AddCtaButton'
 import AddAppButton from './tools/AddAppButton'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
 
 const alignOptions = [
     {label:'왼쪽', value: '0'},
@@ -172,7 +173,12 @@ function EditHeroSection({content, category}) {
                     <Layout content={content} version='main'/>
                     <Contents content={content} />
                     <OpenCloseCustom title="버튼" use={content.button.use}>
-                        <RadioCustom content={content} options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
+                        <div className="box-gray__container">
+                            <RadioCustom content={content} options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
+                            <TextSizeCustom text="글자 크기" button value={content.button.textSize} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].button.textSize = e;
+                            }))} />
+                        </div>
                         <AddCtaButton content={content} num={1} />
                         <AddGhostButton content={content} num={1} />
                     </OpenCloseCustom>

@@ -30,6 +30,12 @@ const buttonAlignOptions = [
     { label: '오른쪽', value: 'end' },
 ]
 
+const buttonTextOptions = [
+    { label: 'Small', value: 10 },
+    { label: 'Medium', value: 12 },
+    { label: 'Large', value: 14 }
+]
+
 function EditNaviSection({navi, setNavi, category}) {
     const [logo, setLogo] = useState("logo")
     const [buttonUse, setButtonUse] = useState(true)
@@ -114,10 +120,16 @@ function EditNaviSection({navi, setNavi, category}) {
                         }
                     </OpenCloseCustom>
                     <OpenCloseCustom title="버튼" use={navi.button.use}>
+                        <div className="box-gray__container">
                         <RadioCustom options={buttonAlignOptions} value={navi.button.align} func={(e) => setNavi(produce(navi, draft => {
                             draft.button.align = e;
                         }))} text="정렬" />
-                        
+                        <TextSizeCustom text="글자 크기" options={buttonTextOptions} value={navi.button.cta.textsize} func={e => setNavi(produce(navi, draft => {
+                                    draft.button.cta.textsize = e;
+                                    draft.button.ghost.textsize = e;
+                        }))} />
+                        </div>
+                        <div className="box-gray__container">
                         <OnOffCustom text="CTA 버튼" value={navi.button.cta.use} func={() => setNavi(produce(navi, draft => {
                             draft.button.cta.use = !navi.button.cta.use
                         }))} />
@@ -132,11 +144,11 @@ function EditNaviSection({navi, setNavi, category}) {
                                 }))}/>
                             </>
                         }
-                        <div></div>
+                        </div>
+                        <div className="box-gray__container">
                         <OnOffCustom text="고스트 버튼" value={navi.button.ghost.use} func={() => setNavi(produce(navi, draft => {
                             draft.button.ghost.use = !navi.button.ghost.use
                         }))} />
-
                         {
                             navi.button.ghost.use && 
                             <>
@@ -148,6 +160,7 @@ function EditNaviSection({navi, setNavi, category}) {
                                 }))}/>
                             </>
                         }
+                        </div>
                     </OpenCloseCustom>
                     
                     <BoxCustom>

@@ -108,6 +108,7 @@ const button = {
     button:{
         use : true,
         ctaText:'CTA 버튼',
+        textSize: 12,
         ghostText:'고스트 버튼',
         align:'start',
         ctaUse:true,
@@ -613,12 +614,14 @@ export const defaults = {
                 text:'CTA버튼',
                 link:'',
                 padding: 10,
+                textsize: 12,
             },
             ghost:{
                 use:false,
                 text:'고스트 버튼',
                 link:'',
                 padding: 10,
+                textsize: 10,
             },
         },
         appButton:{
