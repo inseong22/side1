@@ -224,7 +224,7 @@ export const base = [
         align:'justify',
         numOfElements:3,
         ratingColor:'red',
-        text: true,
+        reviewText: true,
         rating:{
             use:true,
             color: '#ffd23a',
@@ -242,7 +242,7 @@ export const base = [
         elementText:{
             use:true,
             color: '#000000',
-            size: 16,
+            size: 18,
         },
         elements:[
             {

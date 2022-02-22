@@ -117,6 +117,7 @@ function EditFeaturesSection({content, category}) {
                             }))} />
                             <RadioCustom text="정렬" options={alignOptions} value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.align = e;
+                                draft[state.secNum].align = e;
                             }))} />
                             <OnOffCustom text="특징 제목" value={content.elementText.titleUse} func={(e) => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.titleUse = !content.elementText.titleUse;

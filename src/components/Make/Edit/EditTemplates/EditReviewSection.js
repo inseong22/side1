@@ -17,6 +17,10 @@ const ratingSizeOptions = [
     { label: 'Medium', value: 25 },
     { label: 'Large', value: 30 },
 ]
+const alignOptions = [
+    { label: '왼쪽', value: 'start'},
+    { label: '중앙', value: 'center'}
+]
 
 function EditReviewSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -44,24 +48,10 @@ function EditReviewSection({content, category}) {
             }))
         },
         {
-            title:'별점',
-            use:content.rating.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].rating.use = !content.rating.use;
-            }))
-        },
-        {
             title:'리뷰 내용',
-            use:content.elementText.use,
+            use:content.reviewText,
             func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].elementText.use = !content.elementText.use;
-            }))
-        },
-        {
-            title:'이름/정보',
-            use:content.writer.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].writer.use = !content.writer.use;
+                draft[state.secNum].reviewText = !content.reviewText;
             }))
         },
     ]
@@ -75,36 +65,52 @@ function EditReviewSection({content, category}) {
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
                         <EditImageIcon content={content} />
-                        <OpenCloseCustom title="별점" use={content.rating.use}>
-                            <ColorCustom text="색상" value={content.rating.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].rating.color = e;
-                            }))} />
-                            <RadioCustom text="크기" value={content.rating.size} options={ratingSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].rating.size = e;
-                            }))} />
-                        </OpenCloseCustom>
-                        <OpenCloseCustom title="리뷰 내용" use={content.elementText.use}>
-                            <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elementText.color = e;
-                                draft[state.secNum].elementTitle.color = e;
-                            }))} />
-                            <OnOffCustom text="리뷰 제목" value={content.elementTitle.use} func={(e) => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elementTitle.use = !content.elementTitle.use;
-                            }))} />
-                            <TextSizeCustom text="제목 크기" desc value={content.elementTitle.size} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elementTitle.size = e;
-                            }))} />
-                            <OnOffCustom text="리뷰 내용" value={content.elementText.use} func={(e) => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elementText.use = !content.elementText.use;
-                            }))} />
-                            <TextSizeCustom text="내용 크기" desc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elementText.size = e;
-                            }))} />
-                        </OpenCloseCustom>
-                        <OpenCloseCustom title="이름 / 정보" use={content.writer.use}>
-                            <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].writer.color = e;
-                            }))} />
+                        <OpenCloseCustom title="리뷰 내용" use={content.reviewText}>
+                            <div className="box-gray__container">
+                                <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.color = e;
+                                    draft[state.secNum].elementTitle.color = e;
+                                }))} />
+                                <RadioCustom text="정렬" options={alignOptions} value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.align = e;
+                                    draft[state.secNum].align = e;
+                                }))} />
+                            </div>
+                            <div className="box-gray__container">
+                                <OnOffCustom text="제목" value={content.elementTitle.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementTitle.use = !content.elementTitle.use;
+                                }))} />
+                                <TextSizeCustom text="제목 크기" desc value={content.elementTitle.size} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementTitle.size = e;
+                                }))} />
+                            </div>
+                            <div className="box-gray__container">
+                                <OnOffCustom text="내용" value={content.elementText.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.use = !content.elementText.use;
+                                }))} />
+                                <TextSizeCustom text="내용 크기" desc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.size = e;
+                                }))} />
+                            </div>
+                            <div className="box-gray__container">
+                                <OnOffCustom text="별점" value={content.rating.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].rating.use = !content.rating.use;
+                                }))} />
+                                <ColorCustom text="색상" value={content.rating.color} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].rating.color = e;
+                                }))} />
+                                <RadioCustom text="크기" value={content.rating.size} options={ratingSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].rating.size = e;
+                                }))} />
+                            </div>
+                            <>
+                                <OnOffCustom text="이름 / 정보" value={content.rating.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].rating.use = !content.rating.use;
+                                }))} />
+                                <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].writer.color = e;
+                                }))} />
+                            </>
                         </OpenCloseCustom>
                         {/* <div>
                             {returnRepeatComponents}
