@@ -40,7 +40,6 @@ const MakePageV2 = ({history, userObj}) => {
         "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"
     });
 
-    const scrollRef = useRef();
     const [scroll, setScroll] = useState(false);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
     const [secNum, setSecNum] = useState(52); // 현재 수정중인 페이지를 의미.
@@ -161,13 +160,13 @@ const MakePageV2 = ({history, userObj}) => {
             </div>
         )
     })
-    const isScroll = useCallback((scroll)=>{
-        setScroll(scroll);
-        if(scroll){
-            // 스크롤 내리기
-            scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-        }
-    },[scroll])
+    // const isScroll = useCallback((scroll)=>{
+    //     setScroll(scroll);
+    //     if(scroll){
+    //         // 스크롤 내리기
+    //         scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    //     }
+    // },[scroll])
 
     return (<>
     { isMobile ? 
@@ -201,7 +200,7 @@ const MakePageV2 = ({history, userObj}) => {
                         <div className="make-page-make-space">
                             <OverflowScrolling className='overflow-scrolling'>
                                 {/* 제작페이지 메인 */}
-                               <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} isScroll={isScroll} />
+                               <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
                             </OverflowScrolling>
                         </div>
                         <div className="fake-make">
@@ -231,7 +230,7 @@ const MakePageV2 = ({history, userObj}) => {
                                 </div>
                             </div>
                         </div>}
-                            <div ref={scrollRef} className="make-main-page-container" style={{borderRadius:`${isPhone ? '7px' : '0px'}`,fontSize:`${isPhone ? '22px' : '28px'}` }}>  
+                            <div className="make-main-page-container" style={{borderRadius:`${isPhone ? '7px' : '0px'}`,fontSize:`${isPhone ? '22px' : '28px'}` }}>  
                                 {/* 네비게이션 */}
                                 {navi.use && <MakeNavigationV2 full={full} navi={navi} setNavi={setNavi} history={history} /> }
                                 

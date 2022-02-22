@@ -93,7 +93,7 @@ function EditDesign({content}) {
                     backgroundColorOrImage() 
                 }
             </OpenCloseCustom>
-            <OpenCloseCustom title="제목" use={true}>
+            <OpenCloseCustom title="제목" use={content.title.use}>
                 <ColorCustom text="색상" value={content.title.color} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].title.color = e;
                 }))} />
@@ -104,7 +104,7 @@ function EditDesign({content}) {
                     draft[state.secNum].title.size = e;
                 }))} />
             </OpenCloseCustom>
-            <OpenCloseCustom title="본문" use={true}>
+            <OpenCloseCustom title="본문" use={content.desc.use}>
                 <ColorCustom text="색상" value={content.desc.color} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].desc.color = e;
                 }))} />

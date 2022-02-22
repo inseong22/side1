@@ -170,6 +170,7 @@ export const base = [
     {
         ...commons,
         ...contents,
+        layout: 2,
         name:'디테일',
         sectionTypeName:'DetailSection',
         title:{
@@ -197,42 +198,67 @@ export const base = [
         title:{
             ...commons.title,
             text:'잠재 유저의 행동을 유도해 보세요!',
-            size:32
+            size:32,
+            align:'center'
         },
         desc:{
             ...commons.desc,
+            align:'center',
             text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 잠재유저의 행동을 유도할 수 있는 문구를 적어보세요.'
         },
+        button:{
+            ...button.button,
+            align:'center',
+        },
+        caution:{
+            ...button.caution,
+            align:'center',
+        },
+        appButton:{
+            ...button.appButton,
+            align:'center'
+        }
     },
     {
         ...commons,
         ...button,
         name:'신청',
-        align:'start',
+        align:'center',
         sectionTypeName:'ApplySection',
         title:{
             ...commons.title,
             text:'잠재 유저의 신청을 유도해 보세요!',
-            size:32
+            size:32,
+            align:'center'
         },
         desc:{
             ...commons.desc,
+            align:'center',
             text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 잠재유저의 신청을 유도할 수 있는 문구를 적어보세요.'
+        },
+        button:{
+            ...button.button,
+            align:'center',
+        },
+        caution:{
+            ...button.caution,
+            align:'center',
         },
     },
     {
         ...commons,
         ...button,
         name:'앱 다운로드',
-        align:'start',
         sectionTypeName:'AppDownloadSection', 
         title:{
             ...commons.title,
             text:'잠재 유저의 앱 다운로드를 유도해 보세요!',
-            size:32
+            size:32,
+            align: 'center'
         },
         desc:{
             ...commons.desc,
+            align: 'center',
             text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 잠재유저의 앱 다운로드를 유도할 수 있는 문구를 적어보세요.'
         },
         appButton:{
@@ -241,6 +267,10 @@ export const base = [
             google: 'https://play.google.com/store/',
             align:'center'
         },
+        caution:{
+            ...button.caution,
+            align:'center'
+        }
     },
     {
         ...commons,
