@@ -13,9 +13,9 @@ function AppDownloadSection({content}) {
     const returnLayout = {
         flexDirection:`${
             state.isPhone ? 
-                content.mobile.layout === 3 ? 'column' : 'column-reverse'
+                content.mobile.layout === 1 ? 'column' : 'column-reverse'
             :
-                content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : 'column'
+                content.layout === 2 ? 'row' : content.layout === 3 ? 'row-reverse' : 'column'
         }`
     }
     
@@ -36,7 +36,7 @@ function AppDownloadSection({content}) {
                                         value={content.caution.text} 
                                         color = {content.caution.color} 
                                         align = {content.caution.align}
-                                        size = {content.caution.size}
+                                        size = {content.caution.size*0.0625}
                                         onChange={e => action.setContents(produce(state.contents, draft => {
                                             draft[state.secNum].caution.text = e.currentTarget.value;
                                         }))}  

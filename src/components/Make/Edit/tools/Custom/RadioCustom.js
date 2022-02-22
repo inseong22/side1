@@ -86,9 +86,9 @@ export function EditRadioLayout({content, options, value, onChange, version}){
                     <div className={value === 1 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, contAlign) => {
                         onChange(e=1, align='center', contAlign='center')}} >
                         {value === 1 ? (
-                            <img src={Clay31} />
+                            <img src={Clay11} />
                         ):(
-                            <img src={Clay32} />
+                            <img src={Clay12} />
                         )}
                     </div>
                     <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, contAlign) => {
@@ -102,9 +102,9 @@ export function EditRadioLayout({content, options, value, onChange, version}){
                     <div className={value === 3 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, contAlign) => {
                         onChange(e=3, align='center', contAlign='center')}}>
                     {value === 3 ? (
-                            <img src={Clay11} />
+                            <img src={Clay31} />
                         ):(
-                            <img src={Clay12} />
+                            <img src={Clay32} />
                         )}
                     </div>
                 </div>

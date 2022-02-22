@@ -11,6 +11,7 @@ import MakeNavigationV2 from '../../components/Make/NavBar/MakeNavigationV2'
 import MakeFooterV2 from '../../components/Make/Footer/MakeFooterV2'
 import FirstQuestions from '../Questions/FirstQuestions'
 import LoadingModal from '../../components/Make/Modal/LoadingModal'
+import FeedbackModal from '../../tools/FeedbackModal';
 import OverflowScrolling from 'react-overflow-scrolling';
 import { useLocation, useParams } from 'react-router';
 import { base } from '../../components/Make/SectionTypes/baseTypes'
@@ -72,6 +73,9 @@ const MakePageV2 = ({history, userObj}) => {
     // 푸터
     const [openConfirm, setOpenConfirm] = useState(false);
 
+    // 피드백
+    const [feedback, setFeedback] = useState(lodash.cloneDeep(defaults.feedback));
+
     // 반복 실행되는 useEffect
     useEffect(() => {
         // to report page view
@@ -98,6 +102,7 @@ const MakePageV2 = ({history, userObj}) => {
                 const item = location.state.item;
                 setContents(item.contents);
                 setNavi(item.navi);
+                setFeedback(item.feedback);
                 setFoot(item.foot);
                 setSetting(item.setting);
                 setOpen(false);
@@ -276,6 +281,7 @@ const MakePageV2 = ({history, userObj}) => {
             <div>
                 <FirstQuestions foot={foot} setFoot={setFoot} type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
                 <LoadingModal loading={loading} />
+                <FeedbackModal setFeedback={setFeedback} />
             </div>
             <ConfirmCustom open={openConfirm} setOpen={setOpenConfirm} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />
         </MyContext.Provider>

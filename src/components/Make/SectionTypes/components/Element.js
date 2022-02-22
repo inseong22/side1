@@ -76,6 +76,7 @@ function Element({content, item, index, gallery}) {
             /> </div> : 
             <>
             <Popover
+                style={{zIndex: 6, position: 'relative'}}
                 placement='top'
                 closeOnBlur={false}
                 isOpen={open[index]}

@@ -133,8 +133,8 @@ const button = {
     caution:{
         use:true,
         color: '#000000',
-        align: 'center',
-        size: 0.8,
+        align: 'start',
+        size: 14,
         text:'이 곳에서 유의사항이나 부가설명을 적을 수 있어요.',
     }
 }
@@ -190,6 +190,7 @@ export const base = [
         ...commons,
         ...contents,
         ...button,
+        align:'start',
         name:'CTA',
         sectionTypeName:'CtaSection',
         title:{
@@ -206,6 +207,7 @@ export const base = [
         ...commons,
         ...button,
         name:'신청',
+        align:'start',
         sectionTypeName:'ApplySection',
         title:{
             ...commons.title,
@@ -221,6 +223,7 @@ export const base = [
         ...commons,
         ...button,
         name:'앱 다운로드',
+        align:'start',
         sectionTypeName:'AppDownloadSection', 
         title:{
             ...commons.title,
@@ -265,9 +268,9 @@ export const base = [
         elementText:{
             use:true,
             titleUse:true,
-            titleSize: 28,
+            titleSize: 20,
             descUse:true,
-            descSize: 18,
+            descSize: 16,
             color:'#000000',
             align: 'center'
         },
@@ -332,7 +335,7 @@ export const base = [
         align:'center',
         numOfElements:3,
         ratingColor:'red',
-        text: true,
+        reviewText: true,
         rating:{
             use:true,
             color: '#ffd23a',
@@ -345,7 +348,7 @@ export const base = [
         elementTitle:{
             use:true,
             color: '#000000',
-            size: 18,
+            size: 20,
         },
         elementText:{
             use:true,
@@ -692,5 +695,15 @@ export const defaults = {
             padding:10,
         },
         animation:'none'
+    },
+    feedback:{
+        path: '',
+        difficulty: '',
+        inconvenience: '',
+        satisfy: '',
+        time: '',
+        function: '',
+        comment: '',
+        recommend: '',
     }
 }
