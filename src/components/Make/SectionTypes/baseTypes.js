@@ -569,5 +569,15 @@ export const defaults = {
             padding:10,
         },
         animation:'none'
+    },
+    feedback:{
+        path: '',
+        difficulty: '',
+        inconvenience: '',
+        satisfy: '',
+        time: '',
+        function: '',
+        comment: '',
+        recommend: '',
     }
 }
