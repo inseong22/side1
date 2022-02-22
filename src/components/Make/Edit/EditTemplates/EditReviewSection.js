@@ -41,7 +41,7 @@ function EditReviewSection({content, category}) {
             }))
         },
         {
-            title:'요소',
+            title:'아이콘/이미지',
             use:content.element.use,
             func:() => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].element.use = !content.element.use;
@@ -80,7 +80,7 @@ function EditReviewSection({content, category}) {
                                 <OnOffCustom text="제목" value={content.elementTitle.use} func={(e) => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementTitle.use = !content.elementTitle.use;
                                 }))} />
-                                <TextSizeCustom text="제목 크기" desc value={content.elementTitle.size} func={e => action.setContents(produce(state.contents, draft => {
+                                <TextSizeCustom text="제목 크기" elementTitle value={content.elementTitle.size} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementTitle.size = e;
                                 }))} />
                             </div>
@@ -88,7 +88,7 @@ function EditReviewSection({content, category}) {
                                 <OnOffCustom text="내용" value={content.elementText.use} func={(e) => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.use = !content.elementText.use;
                                 }))} />
-                                <TextSizeCustom text="내용 크기" desc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
+                                <TextSizeCustom text="내용 크기" elementDesc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.size = e;
                                 }))} />
                             </div>

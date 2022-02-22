@@ -68,6 +68,7 @@
     align-items : center;
     border:none;
     box-shadow: var(--main-button-shadow);
+    cursor: pointer;
 }
 .prev-next-button:hover{
     background-color: var(--main-hover-color);

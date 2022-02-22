@@ -126,7 +126,7 @@ const button = {
         use:true,
         color: '#000000',
         align: 'start',
-        size: 0.8,
+        size: 14,
         text:'조심하세요',
     }
 }
@@ -152,6 +152,7 @@ export const base = [
         ...commons,
         ...contents,
         ...button,
+        align:'start',
         name:'CTA',
         sectionTypeName:'CtaSection',
     },
@@ -159,12 +160,14 @@ export const base = [
         ...commons,
         ...button,
         name:'신청',
+        align:'start',
         sectionTypeName:'ApplySection',
     },
     {
         ...commons,
         ...button,
         name:'앱 다운로드',
+        align:'start',
         sectionTypeName:'AppDownloadSection', 
     },
     {
@@ -177,9 +180,9 @@ export const base = [
         elementText:{
             use:true,
             titleUse:true,
-            titleSize: 28,
+            titleSize: 20,
             descUse:true,
-            descSize: 18,
+            descSize: 16,
             color:'#000000',
             align: 'start'
         },
@@ -237,12 +240,12 @@ export const base = [
         elementTitle:{
             use:true,
             color: '#000000',
-            size: 18,
+            size: 20,
         },
         elementText:{
             use:true,
             color: '#000000',
-            size: 18,
+            size: 16,
         },
         elements:[
             {
