@@ -27,6 +27,9 @@
     font-weight: 600;
     height:10%;
 }
+.modal-text-title{
+    margin-top: 5px;
+}
 
 .section-modal__container{
     display: flex;
@@ -42,8 +45,60 @@
   top:5px;
   right:5px;
   cursor: pointer;
-  color:rgba(100,100,100,1);
+  color:rgb(31, 29, 29);
 }
 .modal-close-button:hover{
     color:black;
+}
+.prev-next-buttons{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: var(--func-subtitle);
+}
+.prev-next-button{
+    width: 200px;
+    height: 30px;
+    background-color: var(--main-gray);
+    text-align: center;
+    font-weight: 700;
+    height:35px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    border:none;
+    box-shadow: var(--main-button-shadow);
+    cursor: pointer;
+}
+.prev-next-button:hover{
+    background-color: var(--main-hover-color);
+}
+
+.tutorial-box{
+    height: 360px;
+    font-size: var(--func-subtitle);
+    font-weight: 500;
+}
+.sub-text{
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    font-weight: 600;
+}
+.card-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+.card{
+    margin-top: 20px;
+}
+.card-img{
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    box-shadow: var(--main-shadow-02);
+}
+.card-text{
+    text-align: center;
+    margin-top: 14px;
 }

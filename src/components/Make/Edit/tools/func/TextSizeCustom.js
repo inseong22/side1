@@ -22,6 +22,16 @@ const subTextSizeOptions = [
     { label: 'Medium', value: 24 },
     { label: 'Large', value: 30 },
 ]
+const elementTitleOptions = [
+    { label: 'Small', value: 18 },
+    { label: 'Medium', value: 20 },
+    { label: 'Large', value: 24 },
+]
+const elementDescOptions = [
+    { label: 'Small', value: 14 },
+    { label: 'Medium', value: 16 },
+    { label: 'Large', value: 18 },
+]
 
 function RadioCustom({options, value, onChange}) {
     return (
@@ -57,7 +67,7 @@ export function NumberInputCustom({value, func}) {
     )
 }
 
-function TextSizeCustom({text, value, func, desc, title, options}) {
+function TextSizeCustom({text, value, func, desc, title, options, elementTitle, elementDesc}) {
     return (
         <div className="edit-element">
             <div className="edit-element__one" style={{flexDirection: 'column'}}>
@@ -79,6 +89,20 @@ function TextSizeCustom({text, value, func, desc, title, options}) {
                         title ?
                         <RadioCustom 
                             options={titleSizeOptions}
+                            onChange={e => func(e)}
+                            value={value}
+                        />
+                        :
+                        elementTitle ?
+                        <RadioCustom 
+                            options={elementTitleOptions}
+                            onChange={e => func(e)}
+                            value={value}
+                        />
+                        :
+                        elementDesc ?
+                        <RadioCustom 
+                            options={elementDescOptions}
                             onChange={e => func(e)}
                             value={value}
                         />

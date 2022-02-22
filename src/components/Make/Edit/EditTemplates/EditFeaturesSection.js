@@ -35,7 +35,7 @@ export const EditImageIcon = ({content}) => {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return(
-        <OpenCloseCustom title="요소" use={content.element.use} tooltip="화면 위에서 아이콘 및 이미지를 업로드 할 수 있습니다.">
+        <OpenCloseCustom title="아이콘/이미지" use={content.element.use} tooltip="화면 위에서 아이콘 및 이미지를 업로드 할 수 있습니다.">
             <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].element.type = e;
             }))} />
@@ -87,7 +87,7 @@ function EditFeaturesSection({content, category}) {
             }))
         },
         {
-            title:'요소',
+            title:'아이콘/이미지',
             use:content.element.use,
             func:() => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].element.use = !content.element.use;
@@ -117,17 +117,18 @@ function EditFeaturesSection({content, category}) {
                             }))} />
                             <RadioCustom text="정렬" options={alignOptions} value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.align = e;
+                                draft[state.secNum].align = e;
                             }))} />
                             <OnOffCustom text="특징 제목" value={content.elementText.titleUse} func={(e) => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.titleUse = !content.elementText.titleUse;
                             }))} />
-                            <TextSizeCustom text="제목 크기" value={content.elementText.titleSize} func={e => action.setContents(produce(state.contents, draft => {
+                            <TextSizeCustom text="제목 크기" elementTitle value={content.elementText.titleSize} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.titleSize = e;
                             }))} />
                             <OnOffCustom text="특징 본문" value={content.elementText.descUse} func={(e) => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.descUse = !content.elementText.descUse;
                             }))} />
-                            <TextSizeCustom text="본문 크기" desc value={content.elementText.descSize} func={e => action.setContents(produce(state.contents, draft => {
+                            <TextSizeCustom text="본문 크기" elementDesc value={content.elementText.descSize} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.descSize = e;
                             }))} />
                         </OpenCloseCustom>

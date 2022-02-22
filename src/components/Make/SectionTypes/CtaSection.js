@@ -15,9 +15,9 @@ function CtaSection({content}) {
     const returnLayout = {
         flexDirection:`${
             state.isPhone ? 
-                content.mobile.layout === 3 ? 'column' : 'column-reverse'
+                content.mobile.layout === 1 ? 'column' : 'column-reverse'
             :
-                content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : 'column'
+                content.layout === 2 ? 'row' : content.layout === 3 ? 'row-reverse' : 'column'
         }`
     }
     

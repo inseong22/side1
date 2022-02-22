@@ -11,7 +11,7 @@ function ElementsTable({elements, content}) {
         <div className="one-element">
             <div className="edit-element__box">
                 <div className="edit-element__title">
-                    요소
+                    아이콘/이미지
                 </div>
                 <div>
                     {elements.map((item,index) => {
