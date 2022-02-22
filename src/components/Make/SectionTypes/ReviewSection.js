@@ -19,6 +19,8 @@ function ReviewSection({content, setting}) {
                         alignItems: `${state.isPhone ? content.mobile.align : content.align}`,
                         boxShadow : '', 
                         margin : `${ state.isPhone ? '5px 5px' : '0px 15px' }`,
+                        marginLeft: `${index === 0 ? '0px' : '15px'}`,
+                        marginRight: `${index === content.numOfElements - 1 ? '0px' : '15px'}`,
                         height : `${state.isPhone ? '' : '100%'}`,
                         width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`
                     }}>
@@ -27,6 +29,7 @@ function ReviewSection({content, setting}) {
                         content.elementTitle.use && 
                         <div className="df-margin-big feature-title" style={{width:'100%'}}>            
                             <TextareaAutosize 
+                                placeholder="리뷰/추천사의 핵심을 적어보세요."
                                 className="text-input"  
                                 style={{
                                     width:'100%',
@@ -68,6 +71,7 @@ function ReviewSection({content, setting}) {
                         content.elementText.use && 
                         <div className="df-margin-big feature-desc" style={{width:'100%'}}>
                             <TextareaAutosize
+                                placeholder="여기를 클릭하여 서비스 및 제품에 대한 리뷰, 추천사를 적어보세요."
                                 className="text-input" 
                                 style={{
                                     width:'100%',
@@ -89,6 +93,7 @@ function ReviewSection({content, setting}) {
                         content.writer.use && 
                         <div className="df-margin-big feature-writer" style={{width:'100%'}}>
                             <TextareaAutosize 
+                                placeholder="회사이름, 직함이름"
                                 className="text-input" 
                                 style={{
                                     width:'100%',
@@ -112,10 +117,10 @@ function ReviewSection({content, setting}) {
     return (
         <>
             <motion.div className="template"data-aos-easing="ease-in-back"
-     data-aos-delay="100"
-     data-aos-offset="0" data-aos={setting.animation} aos-duration="2000">
+                data-aos-delay="100"
+                data-aos-offset="0" data-aos={setting.animation} aos-duration="2000">
                 
-                <TitleDesc content={content} />
+                <TitleDesc content={content} titlePlaceholder="서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." />
 
                 <div className="features__container" style={{flexWrap : `${state.isPhone ? 'wrap' : ''}`}}> 
                     {returnReviewCards}
