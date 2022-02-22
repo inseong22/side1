@@ -23,7 +23,7 @@ const getItemStyle = (isDragging, draggableStyle, backColor) => {
     };
 };
 
-function EditContents({navi, setNavi, foot, setFoot, isScroll}) {
+function EditContents({navi, setNavi, foot, setFoot}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [deleteopen, setDeleteOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
@@ -95,7 +95,7 @@ function EditContents({navi, setNavi, foot, setFoot, isScroll}) {
                     </div>   
                 </div>
                 <div className="comment">
-                드래그 앤 드랍으로 순서를 변경할 수 있습니다
+                <span style={{fontWeight:'900'}}>드래그 앤 드랍</span>으로 순서를 변경할 수 있습니다
                 </div>
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
@@ -247,7 +247,7 @@ function EditContents({navi, setNavi, foot, setFoot, isScroll}) {
                     </div>   
                 </div>
             </div>
-            <AddingSection open={addOpen} setOpen={setAddOpen} isScroll={isScroll}/>
+            <AddingSection open={addOpen} setOpen={setAddOpen}/>
         </div>
     )
 }
