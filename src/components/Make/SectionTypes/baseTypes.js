@@ -1,3 +1,11 @@
+import heroanimation from '../../../tools/img/heroanimation.gif'
+import person1 from '../../../tools/img/person1.png'
+import person2 from '../../../tools/img/person2.png'
+import person3 from '../../../tools/img/person3.png'
+import gal1 from '../../../tools/img/gal1.png'
+import gal2 from '../../../tools/img/gal2.png'
+import gal3 from '../../../tools/img/gal3.png'
+
 const commons = {
     layout: 1,
     backgroundColor:'#ffffff',
@@ -125,9 +133,9 @@ const button = {
     caution:{
         use:true,
         color: '#000000',
-        align: 'start',
+        align: 'center',
         size: 0.8,
-        text:'조심하세요',
+        text:'이 곳에서 유의사항이나 부가설명을 적을 수 있어요.',
     }
 }
 
@@ -139,14 +147,44 @@ export const base = [
         ...button,
         name:'메인',
         sectionTypeName:'HeroSection',
-        layout:1,
+        title:{
+            ...commons.title,
+            text:'당신의 서비스를 Surfee로 소개해 보세요.',
+            size:30
+        },
+        desc:{
+            ...commons.desc,
+            text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 서비스 및 상품에 대한 핵심설명을 적어보세요.'
+        },
+        button:{
+            ...button.button,
+            ctaText:'버튼 클릭을 유도할 문구를 적어보세요.'
+        },
+        image:{
+            ...contents.image,
+            attachment:heroanimation,
+            size:100,
+        }
     },
     {
         ...commons,
         ...contents,
         name:'디테일',
         sectionTypeName:'DetailSection',
-        layout:1,
+        title:{
+            ...commons.title,
+            text:'핵심 특징에 대해서\n한 줄 설명을 적어보세요',
+            size:36
+        },
+        desc:{
+            ...commons.desc,
+            text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 서비스 및 상품에 대한 핵심설명을 적어보세요.'
+        },
+        image:{
+            ...contents.image,
+            attachment:heroanimation,
+            size:67,
+        }
     },
     {
         ...commons,
@@ -154,26 +192,76 @@ export const base = [
         ...button,
         name:'CTA',
         sectionTypeName:'CtaSection',
+        title:{
+            ...commons.title,
+            text:'잠재 유저의 행동을 유도해 보세요!',
+            size:32
+        },
+        desc:{
+            ...commons.desc,
+            text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 잠재유저의 행동을 유도할 수 있는 문구를 적어보세요.'
+        },
     },
     {
         ...commons,
         ...button,
         name:'신청',
         sectionTypeName:'ApplySection',
+        title:{
+            ...commons.title,
+            text:'잠재 유저의 신청을 유도해 보세요!',
+            size:32
+        },
+        desc:{
+            ...commons.desc,
+            text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 잠재유저의 신청을 유도할 수 있는 문구를 적어보세요.'
+        },
     },
     {
         ...commons,
         ...button,
         name:'앱 다운로드',
         sectionTypeName:'AppDownloadSection', 
+        title:{
+            ...commons.title,
+            text:'잠재 유저의 앱 다운로드를 유도해 보세요!',
+            size:32
+        },
+        desc:{
+            ...commons.desc,
+            text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 잠재유저의 앱 다운로드를 유도할 수 있는 문구를 적어보세요.'
+        },
+        appButton:{
+            use: true,
+            apple: 'https://www.apple.com/kr/app-store/',
+            google: 'https://play.google.com/store/',
+            align:'center'
+        },
     },
     {
         ...commons,
-        element:element,
+        element:{
+            use:true,
+            type:'image', // image or icon
+            backgroundColor:'#6CCAD0',
+            // borderRaidus:5,'    iconBorder:5,
+            imageBorder:500,
+            size:50,
+            color:'#ffffff',
+        },
         name:'특징',
         sectionTypeName:'FeaturesSection',
         align:'justify',
         numOfElements:3,
+        title:{
+            ...commons.title,
+            text:'특징을 간단하게 나타내 보세요!',
+            size:32
+        },
+        desc:{
+            ...commons.desc,
+            text:'여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요.'
+        },
         elementText:{
             use:true,
             titleUse:true,
@@ -181,38 +269,38 @@ export const base = [
             descUse:true,
             descSize: 18,
             color:'#000000',
-            align: 'start'
+            align: 'center'
         },
         elements:[
             {
                 icon:'',
                 attachment:'',
-                title:'Respect privacy',
-                desc:'Set up cookie banners that help you respect your visitor\'s privacy. \n This is especially important for Europe.',
+                title:'특징 1',
+                desc:'여기를 클릭하여 서비스 및 제품의 특징 1을 설명해 주세요.',
             },
             {
                 icon:'',
                 attachment:'',
-                title:'Translate your website',
-                desc:'Easily manage your website in multiple languages. \n With this feature you can \n offer your site to everyone.',
+                title:'특징 2',
+                desc:'여기를 클릭하여 서비스 및 제품의 특징 2를 설명해 주세요.',
             },
             {
                 icon:'',
                 attachment:'',
-                title:'Protect your content',
-                desc:'Secure your entire website or \n single pages with passwords to protect it from unwanted eyes.',
+                title:'특징 3',
+                desc:'여기를 클릭하여 서비스 및 제품의 특징 3을 설명해 주세요.',
             },
             {
                 icon:'',
                 attachment:'',
-                title:'Protect your content',
-                desc:'Secure your entire website or \n single pages with passwords to protect it from unwanted eyes.',
+                title:'특징 4',
+                desc:'여기를 클릭하여 서비스 및 제품의 특징 4를 설명해 주세요.',
             },
             {
                 icon:'',
                 attachment:'',
-                title:'Protect your content',
-                desc:'Secure your entire website or \n single pages with passwords to protect it from unwanted eyes.',
+                title:'특징 5',
+                desc:'여기를 클릭하여 서비스 및 제품의 특징 5를 설명해 주세요.',
             },
         ],
     },
@@ -221,7 +309,27 @@ export const base = [
         element:element,
         name:'리뷰/추천',
         sectionTypeName:'ReviewSection',
-        align:'justify',
+        element:{
+            use:true,
+            type:'image', // image or icon
+            backgroundColor:'#6CCAD0',
+            // borderRaidus:5,'    iconBorder:5,
+            imageBorder:500,
+            size:50,
+            color:'#ffffff',
+        },
+        title:{
+            ...commons.title,
+            text:'서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요.',
+            size:32,
+            align:'center'
+        },
+        desc:{
+            ...commons.desc,
+            text:'여기를 클릭하여 서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요.',
+            align:'center'
+        },
+        align:'center',
         numOfElements:3,
         ratingColor:'red',
         text: true,
@@ -241,49 +349,53 @@ export const base = [
         },
         elementText:{
             use:true,
-            color: '#000000',
-            size: 16,
+            titleUse:true,
+            titleSize: 28,
+            descUse:true,
+            descSize: 18,
+            color:'#000000',
+            align: 'center'
         },
         elements:[
             {
                 icon:'',
-                attachment:'',
-                title:'1의 타이틀',
-                desc:'전에 어떤 분이 저희 웹사이트 디자이너 고용해서 만들었냐고 물어보시더라구요.(웃음) 우리가 필요한 기능들을 커스터마이징 할 수 있는 아임웹 디자인 모드가 정말 좋았어요. 해외 브랜드 사이트 같은 느낌도 많이 들고요.',
+                attachment:person1,
+                title:'"리뷰 / 추천사의 핵심을 적어보세요."',
+                desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:4.8,
-                writer:'NOT OURS, 신하나 마케터 인터뷰',
+                writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
                 icon:'',
-                attachment:'',
-                title:'2의 타이틀',
-                desc:'기술과 전자제품을 개발하는 회사답게 신뢰감가고 정돈된 모습을 보여주고자 했어요. 배경과 폰트 등 톤앤매너를 디테일한 부분까지 클릭 한번으로 원하는 디자인을 구현할 수 있어 좋았던 것 같아요.',
+                attachment:person2,
+                title:'"리뷰 / 추천사의 핵심을 적어보세요."',
+                desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:5,
-                writer:'duit, 아혜진 브랜드 매니저 인터뷰',
+                writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
                 icon:'',
-                attachment:'',
-                title:'3의 타이틀',
-                desc:'실제로 주변에 아임웹을 많이 소개했는데요. 요즘에는 누구나 개인 홈페이지를 만들고 싶어하는 것 같아요. 블로그나 텀블러 등의 소셜 프로그램은 완벽한 웹사이트가 될 순 없고 결국 차별화된 나만의 웹사이트를 원하게 되죠.',
+                attachment:person3,
+                title:'"리뷰 / 추천사의 핵심을 적어보세요."',
+                desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:4.6,
-                writer:'Achim, 윤진 대표 인터뷰',
+                writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
                 icon:'',
-                attachment:'',
-                title:'4의 타이틀',
-                desc:'실제로 주변에 아임웹을 많이 소개했는데요. 요즘에는 누구나 개인 홈페이지를 만들고 싶어하는 것 같아요. 블로그나 텀블러 등의 소셜 프로그램은 완벽한 웹사이트가 될 순 없고 결국 차별화된 나만의 웹사이트를 원하게 되죠.',
+                attachment:person3,
+                title:'"리뷰 / 추천사의 핵심을 적어보세요."',
+                desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:4.6,
-                writer:'Achim, 윤진 대표 인터뷰',
+                writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
                 icon:'',
-                attachment:'',
-                title:'5의 타이틀',
-                desc:'실제로 주변에 아임웹을 많이 소개했는데요. 요즘에는 누구나 개인 홈페이지를 만들고 싶어하는 것 같아요. 블로그나 텀블러 등의 소셜 프로그램은 완벽한 웹사이트가 될 순 없고 결국 차별화된 나만의 웹사이트를 원하게 되죠.',
+                attachment:person3,
+                title:'"리뷰 / 추천사의 핵심을 적어보세요."',
+                desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:4.6,
-                writer:'Achim, 윤진 대표 인터뷰',
+                writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
         ],
     },
@@ -291,6 +403,15 @@ export const base = [
         ...commons,
         name:'자주 묻는 질문',
         sectionTypeName:'QnaSection',
+        title:{
+            ...commons.title,
+            text:'자주 묻는 질문을 적어보세요',
+            size:32
+        },
+        desc:{
+            ...commons.desc,
+            text:'여기를 클릭하여 자주 묻는 질문과 그 답변을 적어보세요.'
+        },
         layout: 'card',
         qna:{
             use:true,
@@ -300,53 +421,32 @@ export const base = [
         },
         qnas:[
             {
-                question:'1의 타이틀',
-                answer:'리뷰를 쓰는 창입니다.리뷰를 쓰는 창입니다.리뷰를 쓰는 창입니다.리뷰를 쓰는 창입니다.',
+                question:'여기를 클릭하여 자주 묻는 질문을 적어보세요.',
+                answer:'여기를 클릭하여 자주 묻는 질문의 답변을 적어보세요.',
             },
             {
-                question:'2의 타이틀',
-                answer:'2의 부가설명',
+                question:'여기를 클릭하여 자주 묻는 질문을 적어보세요.',
+                answer:'여기를 클릭하여 자주 묻는 질문의 답변을 적어보세요.',
             },
             {
-                question:'3의 타이틀',
-                answer:'3의 부가설명',
+                question:'여기를 클릭하여 자주 묻는 질문을 적어보세요.',
+                answer:'여기를 클릭하여 자주 묻는 질문의 답변을 적어보세요.',
             },
         ],
     },
     {
-        layout: 1,
-        backgroundColor:'#ffffff',
-        backgroundType:'color',
-        backgroundImage:{
-            attachment:'',
-            overlay:false,
-        },
         title:{
-            use:true,
-            text: '노코드 랜딩페이지 제작 툴',
-            align: 'center',
-            size: 36,
-            color: '#000000'
+            ...commons.title,
+            text:'글만 쓰고 싶을 때 \'글\' 섹션을 이용해 보세요.',
+            size:32
         },
         desc:{
-            use:true,
-            text: 'Surfee에 오신 것을 환영합니다. 자유롭게 사용해 보세요!',
-            align: 'center',
-            size: 18,
-            color: '#000000'
+            ...commons.desc,
+            text:'여기를 클릭하여 글을 적어보세요.'
         },
         padding:{
             top:15,
             bottom:15,
-        },
-        animation:{
-            use:true,
-            type:'none',
-        },
-        box:{
-            use:false,
-            backgroundColor:'#6CCAD0',
-            borderRadius:5,
         },
         responsive:{
             mobile:true,
@@ -367,14 +467,22 @@ export const base = [
         name:'갤러리',
         align:'justify',
         sectionTypeName:'GallerySection',
-        galleryImg:{
-            use:true,
-            border:0,
-            size:30,
+        title:{
+            ...commons.title,
+            text:'이미지를 강조하고 싶을 때 \'갤러리\'섹션을 이용해 보세요.',
+            size:32
+        },
+        desc:{
+            ...commons.desc,
+            text:'여기를 클릭하여 이미지에 대해 적어보세요.'
+        },
+        element:{
+            ...element,
+            size:300,
         },
         card:{
             use:true,
-            color:'#ffffff',
+            color:'#C4C4C4',
             shadow:false,
             borderRadius:0,
         },
@@ -388,20 +496,20 @@ export const base = [
         },
         elements:[
             {
-                attachment:'',
-                text:'1의 타이틀',
+                attachment:gal1,
+                text:'여기를 클릭하여 이미지에 대한 설명을 적어보세요.',
             },
             {
-                attachment:'',
-                text:'2의 타이틀',
+                attachment:gal2,
+                text:'여기를 클릭하여 이미지에 대한 설명을 적어보세요.',
             },
             {
-                attachment:'',
-                text:'3의 타이틀',
+                attachment:gal3,
+                text:'여기를 클릭하여 이미지에 대한 설명을 적어보세요.',
             },
             {
-                attachment:'',
-                text:'4의 타이틀',
+                attachment:gal3,
+                text:'여기를 클릭하여 이미지에 대한 설명을 적어보세요.',
             },
         ]
     },
@@ -417,13 +525,22 @@ export const base = [
             ...contents.video,
             type:'base',
         },
+        title:{
+            ...commons.title,
+            text:'동영상을 강조하고 싶을 때 \'동영상\'섹션을 이용해 보세요.',
+            size:32
+        },
+        desc:{
+            ...commons.desc,
+            text:'좌측 메뉴에서 동영상을 삽입하고, 여기를 클릭하여 동영상에 대해 적어보세요.'
+        },
         name:'동영상',
         sectionTypeName:'VideoSection',
         explanation:{
             use:true,
             color: '#000000',
-            align: '',
-            text:'비디오에 대한 추가 설명을 작성해 보세요.'
+            align: 'center',
+            text:'여기를 클릭하여 동영상에 대한 추가 설명을 적어 보세요.'
         },
     },
     {
@@ -431,6 +548,15 @@ export const base = [
         ...contents,
         name:'목업',
         sectionTypeName:'MockupSection',
+        title:{
+            ...commons.title,
+            text:'실제 서비스나 프로토타입이 있다면 \'목업\'섹션을 이용해보세요.',
+            size:32
+        },
+        desc:{
+            ...commons.desc,
+            text:'좌측 메뉴에서 목업을 고르고, 여기를 클릭하여 서비스에 대해 적어보세요.'
+        },
     },
 ]
 

@@ -18,6 +18,8 @@ function FeaturesSection({content, setting}) {
                 alignItems: `${state.isPhone ? content.mobile.align : content.elementText.align}`,
                 boxShadow : '', 
                 margin : `${ state.isPhone ? '5px 5px' : '0px 15px' }`,
+                marginLeft: `${index === 0 ? '0px' : '15px'}`,
+                marginRight: `${index === content.numOfElements - 1 ? '0px' : '15px'}`,
                 height : `${state.isPhone ? '' : '100%'}`,
                 width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`
                 }}>
@@ -39,6 +41,7 @@ function FeaturesSection({content, setting}) {
                                         draft[state.secNum].elements[index].title = e.currentTarget.value;
                                     }))} 
                                     size={content.elementText.titleSize/20} 
+                                    placeholder="특징"
                                 />
                             </div>
                     }
@@ -61,6 +64,7 @@ function FeaturesSection({content, setting}) {
                                         textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                         resize:'none'
                                     }}
+                                    placeholder="여기를 클릭하여 서비스 및 제품의 특징을 적어보세요."
                                     spellCheck="false"
                                 />
                             </div>
@@ -76,9 +80,9 @@ function FeaturesSection({content, setting}) {
     return (
         <>
             <motion.div className="template" data-aos={setting.animation}data-aos-easing="ease-in-back"
-     data-aos-delay="100"
-     data-aos-offset="0" aos-duration="2000" >
-                <TitleDesc content={content} />
+                data-aos-delay="100"
+                data-aos-offset="0" aos-duration="2000" >
+                    <TitleDesc content={content} titlePlaceholder="특징들의 제목을 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요." />
 
                 <div className="features__container" style={{flexWrap : `${state.isPhone ? 'wrap' : ''}`}}>
                     {returnFeatureCards}

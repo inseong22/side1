@@ -12,6 +12,7 @@ import AskLoginModal from './tools/AskLoginModal'
 import NavBarV2 from '../NavAndFooter/NavBarV2'
 import LoginModal from '../../components/Login/LoginModal'
 import RegisterModal from '../../components/Login/RegisterModal'
+import ChannelTalk from '../../tools/ChannelTalk'
 
 import s1 from '../../tools/img/surfee1.png';
 
@@ -65,6 +66,10 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     const [loginOpen,setLoginOpen] = useState(false);
     const targets = useRef(null)
     
+    ChannelTalk.boot({
+        "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"
+    });
+
     const scrollDown = () => {
         targets.current.scrollIntoView({behavior: 'smooth'})
     }

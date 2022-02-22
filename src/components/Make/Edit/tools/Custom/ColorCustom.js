@@ -31,6 +31,24 @@ export function EditColor({onChange, value}) {
         setOpen(false);
     };
 
+    const closeSave = () => {
+        handleClose();
+        if(stateC.usedColors.includes(value)){
+            return
+        }else{
+            if(stateC.usedColors.length > 5){
+                actionC.setUsedColors(produce(stateC.usedColors, draft => {
+                    draft.shift()
+                    draft.push(value)
+                }))
+            }else{
+                actionC.setUsedColors(produce(stateC.usedColors, draft => {
+                    draft.push(value)
+                }))
+            }
+        }
+    }
+
     return (
         <ChakraProvider>
         <div className="center-row" style={{justifyContent: "start"}}>
@@ -47,21 +65,7 @@ export function EditColor({onChange, value}) {
                     closeOnBlur={false}
                     isOpen={open}
                     onClose={() => {
-                        handleClose();
-                        if(stateC.usedColors.includes(value)){
-                            return
-                        }else{
-                            if(stateC.usedColors.length > 5){
-                                actionC.setUsedColors(produce(stateC.usedColors, draft => {
-                                    draft.shift()
-                                    draft.push(value)
-                                }))
-                            }else{
-                                actionC.setUsedColors(produce(stateC.usedColors, draft => {
-                                    draft.push(value)
-                                }))
-                            }
-                        }
+                        closeSave()
                     }}>
                 <PopoverTrigger>
                     <div className="color-button" style={{backgroundColor:`${value}`, color:`${value === '#ffffff' ? '#555C67' : 'white'}`}} onClick={handleClick}>    
@@ -71,7 +75,7 @@ export function EditColor({onChange, value}) {
                 <PopoverContent style={{zIndex: 100}}>
                     <PopoverArrow />
                     <PopoverHeader>
-                        <div className="color-close" onClick={handleClick}>
+                        <div className="color-close" onClick={ () => closeSave() }>
                                 x
                         </div>
                     </PopoverHeader>

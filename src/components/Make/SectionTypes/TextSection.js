@@ -17,7 +17,7 @@ function TextSection({content, setting}) {
                 marginTop:`${ !state.isPhone && content.layout === 2 ? `15vh`  : state.isPhone && content.mobile.layout === 2 ? '8px' : '2px'}`,
                 marginBottom:`${ !state.isPhone && content.layout === 2 ? `1vh`  : state.isPhone && content.mobile.layout === 2 ? '0px' : '2px'}`,
              }}>
-                <TitleDesc content={content} />
+            <TitleDesc content={content} titlePlaceholder="제목을 적어보세요." descPlaceholder="여기를 클릭하여 내용을 적어보세요." />
             </div>
         </motion.div>
     )

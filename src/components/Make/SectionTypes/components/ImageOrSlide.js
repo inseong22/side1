@@ -102,15 +102,14 @@ function ImageOrSlide({content}){
             // 이미지
             if( content.contents.type === 'image' )
                 return (
-                    <div id="attach" onChange = {e => upload_img(e)} onClick={inputClick}>
+                    <div id="attach" onChange = {e => upload_img(e)} onClick={inputClick} className="centera">
                          <input
-                        ref={photoInput}
-                        style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
-                        type="file"
-                        accept="image/*"
-                        id="file"
-                        onChange = {e => upload_img(e)}
-                    />
+                            ref={photoInput}
+                            style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                            type="file"
+                            accept="image/*"
+                            id="file"
+                            onChange = {e => upload_img(e)} />
                         <img 
                             src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
                             className="image" 
@@ -118,8 +117,7 @@ function ImageOrSlide({content}){
                                 borderRadius:`${content.image.border}px`,
                                 width:`${imageWidth()}%`, 
                                 boxShadow: `${content.image.shadowValue}`
-                            }}
-                            />
+                            }} />
                     </div>
                 )
             // 목업 - 모바일
