@@ -12,9 +12,9 @@ const alignOptions = [
 ]
 
 const sizeOptions = [
-    { label: 'Small', value: 14 },
-    { label: 'Medium', value: 16 },
-    { label: 'Large', value: 18 },
+    { label: '작게', value: 14 },
+    { label: '보통', value: 16 },
+    { label: '크게', value: 18 },
 ]
 
 function EditNotice({content}) {

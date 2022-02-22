@@ -21,9 +21,9 @@ const alignOptions = [
 ]
 
 const sizeOptions = [
-    { label: 'Small', value: 10 },
-    { label: 'Medium', value: 15 },
-    { label: 'Large', value: 20 },   
+    { label: '작게', value: 10 },
+    { label: '보통', value: 15 },
+    { label: '크게', value: 20 },   
 ]
 const layoutOptions = [
     { label: '1', value: 1 },

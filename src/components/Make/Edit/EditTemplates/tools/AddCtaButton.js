@@ -6,10 +6,17 @@ import RadioCustom from '../../tools/Custom/RadioCustom'
 import InputCustom from '../../tools/Custom/InputCustom'
 import ApplyInputCustom from '../../tools/Custom/ApplyInputCustom'
 import SliderCustom from '../../tools/Custom/SliderCustom'
+import TextSizeCustom from '../../tools/func/TextSizeCustom'
 
 const buttonOptions = [
     {label: '링크 연결', value: 'link'},
     {label: '신청', value: 'apply'},
+]
+
+const buttonTextOptions = [
+    { label: '작게', value: 10 },
+    { label: '보통', value: 12 },
+    { label: '크게', value: 14 }
 ]
 
 function AddCtaButton({content, num}) {

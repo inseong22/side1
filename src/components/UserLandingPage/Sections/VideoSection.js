@@ -14,8 +14,8 @@ function VideoSection({content, setting}) {
     }
     
     return (
-        <motion.div data-aos={setting.animation} aos-duration="2000" style={{ width:'100%', height:'100%'}}>
-            <AnimationDiv content={content} returnLayout={returnLayout}>
+        <motion.div style={{ width:'100%', height:'100%'}}>
+            <AnimationDiv content={content} returnLayout={returnLayout} setting={setting}>
                 <div className="text__container">
                     <TitleDesc content={content} />
                 </div>

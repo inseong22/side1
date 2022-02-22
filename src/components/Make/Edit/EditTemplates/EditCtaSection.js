@@ -9,6 +9,7 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import InputCustom from '../tools/Custom/InputCustom'
 import EditNotice from './tools/EditNotice'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
 
 import AddCtaButton from './tools/AddCtaButton'
 import AddGhostButton from './tools/AddGhostButton'
@@ -60,7 +61,12 @@ function EditCtaSection({content, category, type}) {
                         {
                             !(type === 'appDownload') &&
                             <OpenCloseCustom title="버튼" use={content.button.use}>
-                                <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
+                                <div className="box-gray__container">
+                                    <RadioCustom options={alignOptions} value={content.button.align} func={e => changeAlignOption(e)} />
+                                    <TextSizeCustom text="글자 크기" button value={content.button.textSize} func={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].button.textSize = e;
+                                    }))} />
+                                </div>
                                 <AddCtaButton content={content} num={5}/>
                                 <AddGhostButton content={content} num={5}/>
                             </OpenCloseCustom>

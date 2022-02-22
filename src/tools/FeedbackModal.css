@@ -127,10 +127,11 @@
     background: var(--main-gradient);
     color: white;
 }
+
 .prev-next-fbuttons{
     display: flex;
     justify-content: space-between;
-    width: 240px;
+    width: 245px;
     align-items: center;
     margin: 0 auto;
 }
@@ -155,7 +156,7 @@
 .prev-next-fbutton:hover{
     background: var(--main-gradient);
 }
-.text-input {
+.text-modal-input {
     box-shadow: var(--main-shadow-01);
     background: #FFFFFF;
     width: 513px;

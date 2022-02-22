@@ -105,7 +105,17 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
                         item:content,
                     }}} 
                     className="default-button-01 opacity-hover" style={{marginLeft:'15px'}}>편집하기</Link>
-                <div className="default-button-02" style={{marginLeft:'15px'}} onClick={() => setFeedbackOpen(true)}>배포하기</div>
+                <div className="default-button-02" style={{marginLeft:'15px'}} 
+                onClick={() => {
+                    if(localStorage.getItem('feedback'))
+                    {
+                        doPublish();
+                    }
+                    else{
+                        setFeedbackOpen(true)
+                    }
+                }}
+                    >배포하기</div>
             </div>
         </span>
     </div>
