@@ -40,6 +40,9 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                         <Route exact path="/" onUpdate={() => window.scrollTo(0, 0)}>
                             <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
                         </Route>
+                        <Route path="/register">
+                            <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
+                        </Route>
                         <Route path="/response" onUpdate={() => window.scrollTo(0, 0)}>
                             <ResponsePage history={history} userObj={userObj}/> 
                         </Route>
@@ -54,9 +57,6 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                         </Route>
                         <Route path="/customer" onUpdate={() => window.scrollTo(0, 0)}>
                             <CustomerPage history={history} isLoggedIn={isLoggedIn}/>
-                        </Route>
-                        <Route path="/register">
-                            <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
                         </Route>
                         <Route exact path="/:id" component={ UserLandingPage } />
                     </Switch>

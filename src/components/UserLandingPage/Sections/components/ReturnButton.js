@@ -101,14 +101,18 @@ function ReturnButton({content}){
                 }}>
                 <>
                 {
-                    content.button.ctaUse && 
-                        ( content.button.ctaOption === 'link' ? CustomButton('cta') : returnInputs('cta') )
+                    content.button.ctaUse && content.button.ghostOption !== 'apply' && content.button.ghostUse &&
+                    <>
+                        { content.button.ctaOption === 'link' ? CustomButton('cta') : returnInputs('cta') }
+                    </>
                 }
                 </>
                 <>
                 {
-                    content.button.ghostUse && 
-                        ( content.button.ghostOption === 'link' ? CustomButton('ghost') : returnInputs('ghost') )
+                    content.button.ghostUse && content.button.ctaOption !== 'apply' && content.button.ctaUse &&
+                    <>
+                        { content.button.ghostOption === 'link' ? CustomButton('ghost') : returnInputs('ghost') }
+                    </>
                 }
                 </>
             </div>

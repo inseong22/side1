@@ -9,6 +9,7 @@ import ColorCustom from '../tools/Custom/ColorCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
 import LayoutRFG from './tools/LayoutRFG'
+import SliderCustom from '../tools/Custom/SliderCustom'
 
 const layoutOptions = [
     { label: '1', value: 1},
@@ -82,9 +83,10 @@ function EditGallerySection({content, category}) {
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
                         <OpenCloseCustom title="이미지" use={content.element.use}>
-                            <TextSizeCustom text="크기" value={content.element.size} options={imageSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].element.size = e;
-                            }))} />
+                            <SliderCustom top="크기" value={content.element.size} func={e =>
+                                action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].element.size = e
+                                }))} max="500"/>
                         </OpenCloseCustom>
                         <OpenCloseCustom title='카드' use={content.card.use}>
                             <RadioCustom text="프레임" value={content.card.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {

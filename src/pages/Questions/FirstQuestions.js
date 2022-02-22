@@ -175,7 +175,7 @@ const colorList = [
     },
 ]
 
-function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting}) {
+function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
     // 모달
     const [cnum, setCnum] = useState(1);
     const [title, setTitle] = useState("");
@@ -500,9 +500,9 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
             BackdropComponent={Backdrop}
         >
             <Box sx={style}>
-                <Link to="/" className="arrow-back">
+                <div onClick={() => history.go(-1)} className="arrow-back">
                     ←
-                </Link> 
+                </div> 
                 <div className="progress-bar__container">
                     {progressList.map((item, index) => {
                         let backColor = 'rgba(100,100,100,0.2)'

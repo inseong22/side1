@@ -57,11 +57,11 @@ function EditDesign({content}) {
         switch(content.backgroundType){
             case 'color':
                 return(
-                        <>
-                            <ColorCustom text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].backgroundColor = e
-                            }))} />
-                        </>
+                    <>
+                        <ColorCustom text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].backgroundColor = e
+                        }))} />
+                    </>
                 )           
             case 'image':
                 return(

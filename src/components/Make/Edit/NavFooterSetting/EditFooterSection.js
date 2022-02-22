@@ -136,7 +136,7 @@ function EditFooterSection({foot, setFoot, category}) {
                         <div className="center-column">
                             <div className="edit-element center-row" style={{fontSize:'13px', justifyContent:'start'}}>
                                 <div>
-                                    2022 Copyright ©
+                                    Copyright 2022
                                 </div>
                                 <div style={{width:'180px'}}>
                                     <InputCustom value={foot.copyright.text} placeholder="surfee" func={(e) => setFoot(produce(foot, draft => {

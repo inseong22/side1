@@ -39,7 +39,7 @@ const style = {
 };
 const Desc = styled('div')`
     margin-top:12px;
-    font-size:16px;
+    font-size:14px;
     text-align:center;
 `;
 

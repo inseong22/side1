@@ -7,14 +7,16 @@ import {Copy} from '@styled-icons/boxicons-regular'
 
 function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking, history, addNew, num, update, setUpdate}) {
     const [deleteopen, setDeleteOpen] = useState(false)
-
+    
     const deletePage = async () => {
 
-        var saved_delete = await dbService.collection('saved-page').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-              doc.ref.delete();
-            });
-          });;
+        // var saved_delete = await dbService.collection('saved-page').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
+        //     querySnapshot.forEach(function(doc) {
+        //       doc.ref.delete();
+        //     });
+        //   });;
+        
+        await dbService.doc(`saved-page/${item.id}`).delete();
 
         var published_delete = await dbService.collection('published-page').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {

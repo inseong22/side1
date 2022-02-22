@@ -14,8 +14,10 @@ import SliderCustom from '../tools/Custom/SliderCustom'
 import AddFaviconImg from '../tools/func/FuncFaviconImg'
 import {Check} from '@styled-icons/bootstrap'
 import {ChevronRight} from '@styled-icons/boxicons-regular'
+import {ChevronDown} from '@styled-icons/bootstrap'
 import OverflowScrolling from 'react-overflow-scrolling';
 import {
+    Button,
     ChakraProvider,
     Popover,
     PopoverTrigger,
@@ -25,20 +27,42 @@ import {
     PopoverFooter,
     PopoverArrow,
     PopoverCloseButton,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuItemOption,
+    MenuGroup,
+    MenuOptionGroup,
+    MenuDivider,
     ButtonGroup,
   } from '@chakra-ui/react'
 
 const fontOptions = [
     { label: '노토산스', value: 'Noto Sans KR' },
-    { label: '프리텐다드', value: 'Pretendard-Regular' },
+    { label: '프리텐다드', value: 'Pretendard-Bold' },
     { label: '나눔스퀘어 라운드', value: 'NanumSquareRound' },
     { label: '바른 공군', value: 'ROKAFSansBold' },
-    { label: '지마켓 산스', value: 'GmarketSansMedium' },
+    { label: '지마켓 산스', value: 'GmarketSansBold' },
+    { label: '고운 돋움', value: 'GowunDodum-Regular' },
+    { label: '에스코어 드림', value: 'S-CoreDream-7ExtraBold' },
+    { label: '함박눈체', value : 'SF_HambakSnow'},
+    { label: '카페24 서라운드', value: 'Cafe24Ssurround'},
+    { label: '레페리포인트-Black', value:'LeferiPoint-BlackA'},
+    { label: '고운바탕', value : 'GowunBatang-Bold'},
+    { label: '여기어때 잘난체', value: 'yg-jalnan'},
+]
+const smallFontOptions = [
+    { label: '노토산스', value: 'Noto Sans KR' },
+    { label: '프리텐다드', value: 'Pretendard-Regular' },
+    { label: '나눔스퀘어 라운드', value: 'NanumSquareRound' },
+    { label: '바른 공군', value: 'ROKAFSansMedium' },
+    { label: '지마켓 산스', value: 'GmarketSansLight' },
     { label: '고운 돋움', value: 'GowunDodum-Regular' },
     { label: '에스코어 드림', value: 'S-CoreDream-4Regular' },
     { label: '함박눈체', value : 'SF_HambakSnow'},
     { label: '카페24 서라운드', value: 'Cafe24Ssurround'},
-    { label: '레페리포인트-Black', value:'LeferiPoint-BlackA'},
+    { label: '레페리포인트-Black', value:'LeferiPoint-WhiteA'},
     { label: '고운바탕', value : 'GowunBatang-Regular'},
     { label: '여기어때 잘난체', value: 'yg-jalnan'},
 ]
@@ -104,56 +128,36 @@ function EdtiSetting({setting, setSetting, category}) {
         <div className="edit-element" style={{flexDirection:'row'}}>
             <div className="left" style={{width:'20%'}}>제목</div>
             <div className="right" style={{width:'80%'}}>
-                <Popover
-                    placement='right'
-                    closeOnBlur={false}
-                    isOpen={isFontOpen}
-                    onClose={close}
-                >
-                <PopoverTrigger>
-                    <div className="font-button" style={{fontFamily: `${setting.font}`}} onClick={() => {open(); setIsSmallFontOpen(false)}}>노코드 랜딩페이지 제작 툴, Surfee <ChevronRight size="20" color=""/></div>
-                </PopoverTrigger>
-                <PopoverContent>
-                    <PopoverArrow />
+            <Menu>
+                <MenuButton className="font-button opacity-hover" style={{fontFamily:`${setting.font}`, width:'250px'}}>
+                    {fontOptions.filter(doc => doc.value === setting.font)[0].label}
+                    <ChevronDown size="15" style={{position:'absolute', right:'12px'}}/>
+                </MenuButton>
+                <MenuList>
 
-                    <PopoverHeader>폰트를 선택하세요.</PopoverHeader>
-                    
-                    <PopoverCloseButton />
-                    
-                    <PopoverBody>
-                        <div style={{height:'250px'}}>
-                        <OverflowScrolling className='overflow-scrolling2'>
-                            <div className="font-select__container">
-                            {fontOptions.map((item, index) => {
-                                return(
-                                    <div className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
-                                        draft.font = item.value
-                                    }))}} style={{fontFamily: `${item.value}`}}>
-                                        <div className="left" style={{width:'70%'}}>
-                                            {item.label}
-                                        </div>
-                                        {
-                                            item.value === setting.font && 
-                                            <div className="right">
-                                                <Check size="20"/>
-                                            </div>
-                                        }
+                <div style={{height:'250px'}}>
+                    <OverflowScrolling className='overflow-scrolling2'>
+                    {fontOptions.map((item, index) => {
+                        return(
+                            <MenuItem className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                draft.font = item.value
+                            }))}} style={{fontFamily: `${item.value}`, width:'250px'}}>
+                                <div className="left" style={{width:'70%'}}>
+                                    {item.label}
+                                </div>
+                                {
+                                    item.value === setting.font && 
+                                    <div className="right">
+                                        <Check size="20"/>
                                     </div>
-                                )
-                            })}
-                            </div>
-                        </OverflowScrolling>
-                        </div>
-                    </PopoverBody>
-                    
-                    <PopoverFooter d='flex' justifyContent='flex-end'>
-                        <ButtonGroup size='sm'>
-                            <div className="font-done-button" onClick={() => close()}>Apply</div>
-                        </ButtonGroup>
-                    </PopoverFooter>
-
-                </PopoverContent>
-                </Popover>
+                                }
+                            </MenuItem>
+                        )
+                    })}
+                    </OverflowScrolling>
+                </div>
+                </MenuList>
+            </Menu>
             </div>
         </div>
         )
@@ -164,57 +168,36 @@ function EdtiSetting({setting, setSetting, category}) {
         <div className="edit-element" style={{flexDirection:'row'}}>
             <div className="left" style={{width:'20%'}}>본문</div>
             <div className="right" style={{width:'80%'}}>
-                <Popover
-                    placement='right'
-                    closeOnBlur={false}
-                    isOpen={isSmallFontOpen}
-                    onClose={() => setIsSmallFontOpen(false)}
-                >
-                <PopoverTrigger>
-                    <div className="font-button" style={{fontFamily: `${setting.smallFont}`}} onClick={() => {setIsSmallFontOpen(!isSmallFontOpen); close()}}>노코드 랜딩페이지 제작 툴, Surfee <ChevronRight size="20"/></div>
-                </PopoverTrigger>
-                <PopoverContent>
-                    <PopoverArrow />
+            <Menu>
+                <MenuButton className="font-button opacity-hover" style={{fontFamily:`${setting.font}`, width:'250px'}}>
+                    {smallFontOptions.filter(doc => doc.value === setting.font)[0].label}
+                    <ChevronDown size="15" style={{position:'absolute', right:'12px'}}/>
+                </MenuButton>
+                <MenuList>
 
-                    <PopoverHeader>폰트를 선택하세요.</PopoverHeader>
-                    
-                    <PopoverCloseButton />
-                    
-                    <PopoverBody>
-
-                        <div style={{height:'250px'}}>
-                            <OverflowScrolling className='overflow-scrolling2'>
-                                <div className="font-select__container">
-                                    {fontOptions.map((item, index) => {
-                                        return(
-                                            <div className={item.value === setting.smallFont ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
-                                                draft.smallFont = item.value
-                                            }))}} style={{fontFamily: `${item.value}`}}>
-                                                <div className="left" style={{width:'70%'}}>
-                                                    {item.label}
-                                                </div>
-                                                {
-                                                    item.value === setting.smallFont && 
-                                                    <div className="right">
-                                                        <Check size="20"/>
-                                                    </div>
-                                                }
-                                            </div>
-                                        )
-                                    })}
+                <div style={{height:'250px'}}>
+                    <OverflowScrolling className='overflow-scrolling2'>
+                    {smallFontOptions.map((item, index) => {
+                        return(
+                            <MenuItem className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                draft.font = item.value
+                            }))}} style={{fontFamily: `${item.value}`, width:'250px'}}>
+                                <div className="left" style={{width:'70%'}}>
+                                    {item.label}
                                 </div>
-                            </OverflowScrolling>
-                        </div>
-                    </PopoverBody>
-                    
-                    <PopoverFooter d='flex' justifyContent='flex-end'>
-                        <ButtonGroup size='sm'>
-                            <div className="font-done-button" onClick={() => setIsSmallFontOpen(false)}>Apply</div>
-                        </ButtonGroup>
-                    </PopoverFooter>
-
-                </PopoverContent>
-                </Popover>
+                                {
+                                    item.value === setting.font && 
+                                    <div className="right">
+                                        <Check size="20"/>
+                                    </div>
+                                }
+                            </MenuItem>
+                        )
+                    })}
+                    </OverflowScrolling>
+                </div>
+                </MenuList>
+            </Menu>
             </div>
         </div>
         )
@@ -355,7 +338,7 @@ function EdtiSetting({setting, setSetting, category}) {
                         <OpenCloseCustom title="고스트 버튼" use={true} preseen={
                             <div className="edit-element">
                                 <div className="centera" style={{padding:'5px 10px'}}>
-                                    <div className="custom-button" style={{ color:`${setting.ghost.color}`, border:`${setting.ghost.border ? `1px solid ${setting.borderColor}` : 'none'}`, boxShadow:`${setting.ghost.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'}`, borderRadius:`${setting.ghost.borderRadius}px`, backgroundColor:`${setting.ghost.backgroundColor}`}}>
+                                    <div className="custom-button" style={{ color:`${setting.ghost.color}`, border:`${setting.ghost.border ? `1px solid ${setting.ghost.borderColor}` : 'none'}`, boxShadow:`${setting.ghost.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : 'none'}`, borderRadius:`${setting.ghost.borderRadius}px`, backgroundColor:`${setting.ghost.backgroundColor}`}}>
                                         디자인 미리보기
                                     </div>
                                 </div>

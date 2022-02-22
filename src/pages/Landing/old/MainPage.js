@@ -101,23 +101,6 @@ function MainPage({history}) {
                     </div>  
                 </div>
             </div>
-            {/* <div className="main-page-section" style={{backgroundColor:"white"}}>
-                <div className="main-section-left">
-                    <div className="middle-section">
-                        <span className="one-section-big">
-                            제작부터 데이터 분석까지<br/>9,990원의<br/>합리적인 가격으로
-                        </span>
-                        <span className="one-section-small">
-                            9,900원에 일주일 무료<br/>
-                            이후 하루마다 단돈 500원이 추가되는<br/>
-                            합리적인 가격으로 만나 보세요.
-                        </span>
-                    </div>
-                </div>
-                <div className="main-section-right">                   
-                    <img src={section3}  className="section-one-image"/>
-                </div>
-            </div> */}
             <div ref={targets} className="main-page-section-last" style={{backgroundColor:'#6B63F7'}}>
                 <span className="last-one-component" style={{width:'50%'}}>
                     <div className="main-section-last-title">
@@ -131,26 +114,7 @@ function MainPage({history}) {
                         {/* <br/> <p style={{color:'rgb(30,30,30)', fontFamily:'OTWelcomeBA'}}>기간 : 21.11.20 ~ 21.12.20</p> */}
                     </div>
                 </span>
-                {/* <span className="last-one-component">
-                    <div className="main-section-last-title">
-                        지금 당장 필요하지 않다면<br/>쿠폰 받아가세요!
-                    </div>
-                    <Link to="coupon" onClick={AddLog} className="apply-button" style={{backgroundColor:'rgba(0,0,0,0)', color:'white'}}>
-                        할인쿠폰 받으러 가기</Link>
-                    
-                    <div className="main-section-last-desc">
-                        이벤트 기간 : 2021.00.00 ~ 2021.00.00 <br/>
-                        사용 가능 기간 : ~ 2022.02.28
-                    </div>
-                </span> */}
             </div>
-            {/* <div className="main-page-section-last" style={{backgroundColor:'white', color:'black'}}>
-                <span className="last-one-component" style={{width:'100%'}}>
-                    <div>
-                        여기에 뭐 설명같은거
-                    </div>
-                </span>
-            </div> */}
         </div>
             <Footer />
            </>

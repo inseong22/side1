@@ -110,6 +110,7 @@ const MakePageV2 = ({history, userObj}) => {
                 
                 setLoading(false);
                 saveLocalStorage();
+                console.log("아이디", item.id)
             }
         }else{
             // 로컬스토리지에 저장되어인게 있다면
@@ -131,11 +132,11 @@ const MakePageV2 = ({history, userObj}) => {
     }
 
     const saveLocalStorage = async () => {
-        if(JSON.stringify([contents, navi, foot, setting, editing]).length > 48000){
+        if(JSON.stringify([contents, navi, foot, setting, editing, editingId]).length > 48000){
             // 임시 방편으로 큰 데이터는 건너뛰도록 조치.
             return
         }else{
-            localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting, editing]));
+            localStorage.setItem('temp', JSON.stringify([contents, navi, foot, setting, editing, editingId]));
             console.log("자동저장 실행");
         }
     }
@@ -280,7 +281,7 @@ const MakePageV2 = ({history, userObj}) => {
             
             {/* 모달 모아두기 */}
             <div>
-                <FirstQuestions foot={foot} setFoot={setFoot} type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
+                <FirstQuestions history={history} foot={foot} setFoot={setFoot} type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
                 <LoadingModal loading={loading} />
             </div>
             <ConfirmCustom open={openConfirm} setOpen={setOpenConfirm} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />

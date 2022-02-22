@@ -21,7 +21,7 @@ function GallerySection({content,setting}) {
                     marginLeft: `${index === 0 ? '0px' : '15px'}`,
                     marginRight: `${index === content.numOfElements - 1 ? '0px' : '15px'}`,
                     height : `${state.isPhone ? '' : '100%'}`,
-                    width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`,
+                    width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '46%'}`,
                     boxShadow:`${content.card.shadow ? '2px 2px 4px rgba(0,0,0,0.4)' : ''}`, 
                     backgroundColor: `${content.card.color}`, 
                     borderRadius:`${content.card.borderRadius}px`}}>

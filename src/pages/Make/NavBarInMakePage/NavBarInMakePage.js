@@ -60,13 +60,9 @@ const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone,
         // 로딩 시작
         setLoading(true);
 
-        await saveImages()
-        await afterSaveImage()
-        setTimeout(() => {
-            setLoading(false);
-            history.push('/#/response');
-            history.go();
-        },3000)
+        const returned = await saveImages();
+        saveLocalStorage();
+        await afterSaveImage(returned);
     }
 
 const saveImages = async () => {
@@ -93,7 +89,6 @@ const saveImages = async () => {
     }
 
     let contCopy = lodash.cloneDeep(state.contents)
-    let deleteList = []
 
     for ( const [index, cont] of state.contents.entries() ){
         console.log(index, typeof index, cont )
@@ -105,6 +100,7 @@ const saveImages = async () => {
             const attachmentURL = await response.ref.getDownloadURL();
 
             contCopy[index].backgroundImage.attachment = attachmentURL;
+            console.log("바꾼거 크기는?", attachmentURL.length)
         }else if(cont.backgroundType === "color"){
             contCopy[index].backgroundImage.attachment = '';
         }
@@ -229,29 +225,28 @@ const saveImages = async () => {
         }
         // 다른 이미지는 더 없는거겠지?
     }
-
-    action.setContents(lodash.cloneDeep(contCopy))
+    return lodash.cloneDeep(contCopy);
 }
 
-const afterSaveImage = async () => {
+const afterSaveImage = async (returned) => {
     if(editing){
 
         let savedPage
     
-        const savedPages = await dbService
-            .collection(`saved-page`)
-            .doc(editingId)
-            .get()
-            .then(snapshot => savedPage = {...snapshot.data(), id:snapshot.id})
+        // const savedPages = await dbService
+        //     .collection(`saved-page`)
+        //     .doc(editingId)
+        //     .get()
+        //     .then(snapshot => savedPage = {...snapshot.data(), id:snapshot.id})
         
-        if( !savedPage ){
-            alert("잘못된 접근입니다.")
-            setLoading(false);
-            return
-        }
+        // if( !savedPage ){
+        //     alert("잘못된 접근입니다.")
+        //     setLoading(false);
+        //     return
+        // }
 
         const body = {
-            contents:state.contents,
+            contents:returned,
             navi:navi,
             foot:foot,
             setting:setting,
@@ -290,7 +285,7 @@ const afterSaveImage = async () => {
             setLoading(false);
         }else{
             const body = {
-                contents:state.contents,
+                contents:returned,
                 navi:navi,
                 foot:foot,
                 setting:setting,

@@ -485,6 +485,7 @@ export const base = [
         ],
     },
     {
+        ...commons,
         title:{
             ...commons.title,
             text:'글만 쓰고 싶을 때 \'글\' 섹션을 이용해 보세요.',
