@@ -2,9 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import EditNaviSection from './NavFooterSetting/EditNaviSection'
 import EditDetailSection from './EditTemplates/EditDetailSection'
-import EditApplySection from './EditTemplates/EditApplySection'
 import EditCtaSection from './EditTemplates/EditCtaSection'
-import EditAppdownSection from './EditTemplates/EditAppdownSection'
 import EditHeroSection from './EditTemplates/EditHeroSection'
 import EditReviewSection from './EditTemplates/EditReviewSection'
 import EditFeaturesSection from './EditTemplates/EditFeaturesSection'
@@ -85,13 +83,13 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
 
             case 'ApplySection':
                 return(
-                    <EditApplySection content={content} category={state.category} type="apply"/>
+                    <EditCtaSection content={content} category={state.category} type="apply"/>
 
                 )
             
             case 'AppDownloadSection':
                 return(
-                    <EditAppdownSection content={content} category={state.category} type="appDownload"/>
+                    <EditCtaSection content={content} category={state.category} type="appDownload"/>
 
                 )
     

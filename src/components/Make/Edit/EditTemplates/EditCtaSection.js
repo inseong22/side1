@@ -43,7 +43,7 @@ function EditCtaSection({content, category, type}) {
     })
 
     const elements = elementsAll.filter(doc => (type !== 'apply' && doc.title !== '버튼') || (type !== 'appDownload' && doc.title !== '앱 다운로드'))
-
+    
     const changeAlignOption = (e) => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.align = e
