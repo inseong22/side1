@@ -288,7 +288,7 @@ export const base = [
         element:{
             use:true,
             type:'image', // image or icon
-            backgroundColor:'#6CCAD0',
+            backgroundColor:'#e6e6e6',
             // borderRaidus:5,'    iconBorder:5,
             imageBorder:5,
             iconBorder:5,
