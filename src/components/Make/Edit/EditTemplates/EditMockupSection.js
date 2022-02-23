@@ -108,8 +108,8 @@ function EditMockupSection({content, category}) {
             case 'mobile2':
                 return(
                     <>
-                    <FuncContentImg text='모바일1' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment1} func={uploadMockup}/>
-                    <FuncContentImg text='모바일2' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment2} func={uploadMockup2}/>
+                    <FuncContentImg text='목업1' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment} func={uploadMockup}/>
+                    <FuncContentImg text='목업2' subtext="최대 3MB 업로드 가능" value={content.mockup.attachment2} func={uploadMockup2}/>
                     <SliderCustom top="크기" text="목업" value={content.image.size} func={e =>
                         action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].image.size = e
