@@ -40,7 +40,6 @@ const MakePageV2 = ({history, userObj}) => {
         "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"
     });
 
-    const [scroll, setScroll] = useState(false);
     // 데이터 베이스에 저장하지 않고 제작을 위해서만 사용되는 것들.
     const [secNum, setSecNum] = useState(52); // 현재 수정중인 페이지를 의미.
     const [loading, setLoading] = useState(false);
@@ -227,7 +226,7 @@ const MakePageV2 = ({history, userObj}) => {
                             </div>
                             <div className="right" style={{paddingRight:'23px'}}>
                                 <div className="make-tab-url">
-                                    https://{setting.urlId}.surfee.co.kr
+                                    https://surfee.co.kr/#/{setting.urlId}
                                 </div>
                             </div>
                         </div>}
@@ -256,7 +255,7 @@ const MakePageV2 = ({history, userObj}) => {
                                     style={{
                                         fontFamily: `${setting.font}`,
                                         backgroundColor:`${setting.fta.backgroundColor}`, 
-                                        width:`${isPhone ? setting.fta.size/2 : setting.fta.size}%`, 
+                                        width:`${isPhone ? setting.fta.size : setting.fta.size}%`, 
                                         borderRadius:`${setting.fta.shape}px`, 
                                         border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
                                         boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
@@ -269,8 +268,7 @@ const MakePageV2 = ({history, userObj}) => {
                                         }))}
                                         color={setting.fta.color} align="center" />
                                 </div>
-                            </div>
-                            }
+                            </div> }
                             </>
                             {/* {full && <div className="cancel-full-screen" onClick={() => setFull(false)}>
                                 전체화면<br/>취소
@@ -281,7 +279,7 @@ const MakePageV2 = ({history, userObj}) => {
             
             {/* 모달 모아두기 */}
             <div>
-                <FirstQuestions history={history} foot={foot} setFoot={setFoot} type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting}/>
+                <FirstQuestions setContents={setContents} history={history} foot={foot} setFoot={setFoot} type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting} setIsPhone={setIsPhone}/>
                 <LoadingModal loading={loading} />
             </div>
             <ConfirmCustom open={openConfirm} setOpen={setOpenConfirm} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />

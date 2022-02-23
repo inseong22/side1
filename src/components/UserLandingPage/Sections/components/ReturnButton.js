@@ -35,46 +35,50 @@ function ReturnButton({content}){
         setValues(['','','','',''])
     }
 
-    const CustomButton = (type) => { return (
-        <div className="cta-button-made" style={{
-            borderRadius:`${state.setting[type].borderRadius}px`,
-            backgroundColor:`${state.setting[type].backgroundColor}`,
-            boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
-            border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
-        }} onClick={() => {
-            if(content.button[type === "cta" ? 'ctaOption' : 'ghostOption'] === 'link'){
-                moveToPage(type)
-                window.open(
-                    content.button[[type === "cta" ? 'ctaLink' : 'ghostLinkg']],
-                    '_blank' // <- This is what makes it open in a new window.
-                );
-            }else{
-                apply()
-            }
-        }}>
-            <div className="text-input-button" style={{
-                fontFamily:`${state.setting.smallFont}`,
-                borderRadius:`${state.setting[type].borderRadius}px`,   
-                padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
-                color:`${state.setting[type].color}`,
-                border:'none',
-                }}>
-                {content.button[type === "cta" ? 'ctaText' : 'ghostText']}
-            </div>
-        </div>)}
+const CustomButton = (type) => { return (
+    <div className="cta-button-edit" style={{
+        borderRadius:`${state.setting[type].borderRadius}px`,
+        backgroundColor:`${state.setting[type].backgroundColor}`,
+        color:`${state.setting[type].color}`,
+        boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
+        border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
+    }} onClick={() => {
+        if(content.button[type === "cta" ? 'ctaOption' : 'ghostOption'] === 'link'){
+            moveToPage(type)
+            window.open(
+                content.button[[type === "cta" ? 'ctaLink' : 'ghostLinkg']],
+                '_blank' // <- This is what makes it open in a new window.
+            );
+        }else{
+            apply()
+        }
+    }}>
 
+        <AutosizeInput className="text-input-flex" value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } 
+            inputStyle={{
+                cursor:'pointer',
+                border:'none',
+                textAlign: 'center',
+                fontSize: `${content.button.textSize}px`,
+                fontFamily:`${state.setting.smallFont}`,
+                borderRadius:`${state.setting[type].borderRadius}px`,  
+                backgroundColor:`${state.setting[type].backgroundColor}`, 
+                padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
+                }}
+                disabled/>
+    
+    </div>)}
+    
     const returnInputs = (type) => {
         return(
             <div className="centera" style={{flexDirection:`${isMobile || content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ? 'column' : 'row'}`, justifyContent:`${isMobile ? content.mobile.align : content.button.align}`}}>
                 {content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].map((item, index) => {
                     return <input className="input-placeholder" placeholder={item} key={index} 
-                                style={{
-                                    margin:'4px',
-                                    padding: `${state.setting[type].padding * 0.3 + 11.2}px 10px`, }}
-                                    onChange={e => setValues(produce(values, draft => {
-                                        draft[index] = e.currentTarget.value
-                                    }))} />
-                            })}
+                        style={{ margin:'4px', padding: `${state.setting[type].padding * 0.3 + 7.2}px 10px`, }}
+                        onChange={e => setValues(produce(values, draft => {
+                            draft[index] = e.currentTarget.value
+                        }))} />
+                })}
                 {
                     type === 'cta' && <>{CustomButton('cta')}</>
                 }
@@ -85,67 +89,69 @@ function ReturnButton({content}){
         )
     }
 
-    if(content.button.use){
-        // ctaOption === 'link' => 버튼 클릭 시 링크 이동
-        // ctaOption === 'apply' => 신청
-
-        {/* <CustomCtaButton className="action-button" onClick={() => {window.open(`${content.button.ctaLink}`)}}> */}
-        return(
-        <div style={{width:'100%'}}>
-            <div className="button__container" style={{
-                justifyContent:`${isMobile ? content.mobile.align : content.button.align}`,
-                flexDirection:`${ 
-                    content.button.ctaUse && content.button.ctaOption === 'apply' && 
-                    content.button.ghostUse && content.button.ghostOption === 'apply' ? 'column' : 'row'
-                    }`
-                }}>
-                <>
-                {
-                    content.button.ctaUse && content.button.ghostOption !== 'apply' && content.button.ghostUse &&
+    return (
+        <>
+        {content.button.use && 
+            <div style={{width:'100%'}}>
+                <div className="button__container" style={{
+                    justifyContent:`${isMobile ? content.mobile.align : content.button.align}`,
+                    flexDirection:`${ 
+                        (content.button.ctaUse && content.button.ctaOption === 'apply' && 
+                        content.button.ghostUse && content.button.ghostOption === 'apply') || 
+                        (content.button.ctaUse && content.button.ctaOption === 'apply' && 
+                        content.button.ghostUse && content.button.ghostOption === 'link') ||
+                        (content.button.ctaUse && content.button.ctaOption === 'link' &&
+                        content.button.ghostUse && content.button.ghostOption === 'apply') ? 'column' : 'row' 
+                        }`
+                    }}>
                     <>
-                        { content.button.ctaOption === 'link' ? CustomButton('cta') : returnInputs('cta') }
+                    {
+                        content.button.ctaUse && 
+                        <>
+                            { content.button.ctaOption === 'link' ? CustomButton('cta') : returnInputs('cta') }
+                        </>
+                    }
                     </>
-                }
-                </>
-                <>
-                {
-                    content.button.ghostUse && content.button.ctaOption !== 'apply' && content.button.ctaUse &&
                     <>
-                        { content.button.ghostOption === 'link' ? CustomButton('ghost') : returnInputs('ghost') }
+                    {
+                        content.button.ghostUse &&
+                        <>
+                            { content.button.ghostOption === 'link' ? CustomButton('ghost') : returnInputs('ghost') }
+                        </>
+                    }
                     </>
-                }
-                </>
+                </div>
             </div>
+        }
+        {
+            content.appButton.use && 
+            <div className="button__container" style={{justifyContent:`${isMobile ? content.mobile.align : content.appButton.align}`}}>
                 {
-                    content.appButton.use && 
-                    <div className="button__container" style={{justifyContent:`${content.button.align}`}}>
-                        {
-                            content.appButton.google.length > 0 && 
-                                <img src={playstorebutton} className="store-button" onClick={e => {
-                                    window.open(
-                                        content.appButton.google,
-                                        '_blank' // <- This is what makes it open in a new window.
-                                      )
-                                      moveToPage('google')
-                                    }}/>
-                        }
-                        {
-                            content.appButton.apple.length > 0 && 
-                                <img src={appstorebutton} className="store-button" onClick={e => {
-                                    window.open(
-                                        content.appButton.apple,
-                                        '_blank' // <- This is what makes it open in a new window.
-                                      )
-                                      moveToPage('app')
-                                    }}/>
-                        }
-                    </div>
+                    content.appButton.google.length > 0 && 
+                        <img src={playstorebutton} className="store-button" style={{height:`${isMobile ? '41px' : '51px'}`}} onClick={e => {
+                            window.open(
+                                content.appButton.google,
+                                '_blank' // <- This is what makes it open in a new window.
+                              )
+                              moveToPage('google')
+                            }}/>
+                }
+                {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
+                {
+                    content.appButton.apple.length > 0 && 
+                        <img src={appstorebutton} className="store-button" style={{height:`${isMobile ? '40px' : '50px'}`}} onClick={e => {
+                            window.open(
+                                content.appButton.apple,
+                                '_blank' // <- This is what makes it open in a new window.
+                              )
+                              moveToPage('apple')
+                            }}/>
                 }
             </div>
-        )
-    }else{
-        return(<></>)
-    }
+        }
+        </>
+    )
 }
+
 
 export default ReturnButton

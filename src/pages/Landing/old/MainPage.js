@@ -39,6 +39,15 @@ function MainPage({history}) {
             await dbService.collection('gadata').add(gadata[i])
             //Do something
         }
+        
+            const ee = await dbService.collection('saved-page').where("urlId", '==', '0').get()
+
+            let eee = ee.docs.map(doc => {
+                return({...doc.data(), id:doc.id})
+            });
+
+            console.log(eee[0])
+
         targets.current.scrollIntoView({behavior: 'smooth'})
     }
 

@@ -19,14 +19,6 @@ import OverflowScrolling from 'react-overflow-scrolling';
 import {
     Button,
     ChakraProvider,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    PopoverHeader,
-    PopoverBody,
-    PopoverFooter,
-    PopoverArrow,
-    PopoverCloseButton,
     Menu,
     MenuButton,
     MenuList,
@@ -81,10 +73,6 @@ const sizeOptions = [
 
 function EdtiSetting({setting, setSetting, category}) {
     const [isFontOpen, setIsFontOpen] = useState(false)
-    const [isSmallFontOpen, setIsSmallFontOpen] = useState(false)
-    const open = () => setIsFontOpen(!isFontOpen)
-    const close = () => setIsFontOpen(false)
-
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     // 애니메이션 관련 
@@ -169,8 +157,8 @@ function EdtiSetting({setting, setSetting, category}) {
             <div className="left" style={{width:'20%'}}>본문</div>
             <div className="right" style={{width:'80%'}}>
             <Menu>
-                <MenuButton className="font-button opacity-hover" style={{fontFamily:`${setting.font}`, width:'250px'}}>
-                    {smallFontOptions.filter(doc => doc.value === setting.font)[0].label}
+                <MenuButton className="font-button opacity-hover" style={{fontFamily:`${setting.smallFont}`, width:'250px'}}>
+                    {smallFontOptions.filter(doc => doc.value === setting.smallFont)[0].label}
                     <ChevronDown size="15" style={{position:'absolute', right:'12px'}}/>
                 </MenuButton>
                 <MenuList>
@@ -179,14 +167,14 @@ function EdtiSetting({setting, setSetting, category}) {
                     <OverflowScrolling className='overflow-scrolling2'>
                     {smallFontOptions.map((item, index) => {
                         return(
-                            <MenuItem className={item.value === setting.font ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
-                                draft.font = item.value
+                            <MenuItem className={item.value === setting.smallFont ? 'select-hover clicked' : 'select-hover'} onClick={(e) => {setSetting(produce(setting, draft => {
+                                draft.smallFont = item.value
                             }))}} style={{fontFamily: `${item.value}`, width:'250px'}}>
                                 <div className="left" style={{width:'70%'}}>
                                     {item.label}
                                 </div>
                                 {
-                                    item.value === setting.font && 
+                                    item.value === setting.smallFont && 
                                     <div className="right">
                                         <Check size="20"/>
                                     </div>
@@ -221,13 +209,13 @@ function EdtiSetting({setting, setSetting, category}) {
                         <OpenCloseCustom title="URL" use={true}>
                             <div style={{flexDirection:'column'}}>
                                 <div style={{display:'flex'}}>
+                                    <div style={{color:'#202936', marginTop: '30px', marginRight: '30px'}}>
+                                        https://surfee.co.kr/#/
+                                    </div>
                                     <div>
                                         <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) => setSetting(produce(setting, draft => {
                                             draft.urlId = e;
                                         }))}/>
-                                    </div>
-                                    <div style={{color:'#202936', marginTop: '30px', marginRight: '30px'}}>
-                                        .surfee.co.kr
                                     </div>
                                 </div>
                             </div>

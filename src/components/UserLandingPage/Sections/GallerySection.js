@@ -4,6 +4,7 @@ import TitleDesc from './components/TitleDesc'
 import TextAuto from './components/TextAuto'
 import {Upload} from '@styled-icons/bootstrap';
 import { isMobile } from 'react-device-detect'
+import FeatureCard from './components/FeatureCard'
 
 function GallerySection({content,setting}) {
 
@@ -12,16 +13,7 @@ function GallerySection({content,setting}) {
            return(
                <>
                {content.card.use && 
-               <div key={index} className="feature__card" 
-                    style={{
-                    alignItems: 'center',
-                    margin : `${ isMobile ? '5px 5px' : '0px 15px' }`,
-                    height : `${isMobile ? '' : '100%'}`,
-                    width : `${isMobile ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`,
-                    boxShadow:`${content.card.shadow ? '2px 2px 4px rgba(0,0,0,0.4)' : ''}`, 
-                    backgroundColor: `${content.card.color}`, 
-                    borderRadius:`${content.card.borderRadius}px`}}>
-
+               <FeatureCard section="feature" content={content} index={index}>
                        {content.element.use && 
                        <div style={{width:'100%', position:'relative', cursor:'pointer'}}>
                            { item.attachment ? 
@@ -47,15 +39,18 @@ function GallerySection({content,setting}) {
                        }
                        {
                            content.text.use && 
-                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', padding:'8px 5px'}}>
-                                   <TextAuto small className="text-input" 
-                                        value={item.text} 
-                                        color = {content.text.color} 
-                                        align = {isMobile ? content.mobile.align : content.align}
-                                   />
+                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:`${isMobile ? 5 : 12}px`}}>
+                                <TextAuto small className="text-no-input" 
+                                    placeholder="여기를 클릭하여 이미지에 대한 설명을 적어보세요."
+                                    value={item.text} 
+                                    size={0.9}
+                                    color = {content.text.color} 
+                                    align = {isMobile ? content.mobile.align : content.align}
+                                    disabled
+                                />
                            </div>
                        }
-                   </div>
+                   </FeatureCard>
                }
                </>
            )

@@ -34,7 +34,7 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                 <ScrollToTop>
                 <div className="Container" style={{ minHeight: 'calc(100vh - 80px)', zIndex:-1 }}>
                     <Switch>
-                        <Route exact path="/v2">
+                        <Route exact path="/oldoldoldold">
                             <MainPage history={history}/>
                         </Route>
                         <Route exact path="/" onUpdate={() => window.scrollTo(0, 0)}>

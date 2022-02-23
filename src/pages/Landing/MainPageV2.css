@@ -4,7 +4,7 @@
 }
 
 .bt2{
-    background-color:white;
+    background-color:rgba(255, 255, 255, 0);
     color:var(--main-color);
 }
 
@@ -28,28 +28,32 @@
 
 .one-section-big{
     text-align: left;
-    font-size:1.35em;
+    font-size:1.7em;
     font-family:Pretendard-ExtraBold;
     line-height: 1.4em;
     box-sizing: border-box;
+    z-index:1;
+    background-color:rgba(0,0,0,0);
 }
 
 .one-section-small{
     text-align:left;
-    font-size:0.6em;
+    font-size:0.8em;
     margin-top:40px;
     font-weight: 400;
-    line-height: 1.8rem;
-    font-family: Noto Sans KR;
+    line-height: 2rem;
+    font-family:Pretendard-Regular;
     box-sizing: border-box;
+    z-index:1;
+    background-color:rgba(0,0,0,0);
 }
 
 .main__button{
     cursor: pointer;
     background-color:#6a63f7;
-    border-radius:30px;
+    border-radius:8px;
     color:white;
-    padding:14px 30px;
+    padding:18px 40px;
     display: flex;
     align-items:center;
     justify-content : center;
@@ -61,10 +65,10 @@
 
 .main__button2{
     cursor: pointer;
-    background-color:white;
-    border-radius:30px;
-    color:#6a63f7;
-    padding:14px 30px;
+    background-color:rgba(8, 8, 8, 0.685);
+    border-radius:6px;
+    color:white;
+    padding:18px 40px;
     display: flex;
     align-items:center;
     justify-content : center;
@@ -72,6 +76,11 @@
     border:none;
     margin-top:50px;
     text-decoration: none;
+    font-weight:700;
+}
+
+.main__button2:hover{
+    background-color:rgba(8, 8, 8, 0.959);
 }
 
 .main-page-section1{
@@ -139,6 +148,7 @@
     justify-content:center;
     align-items:start;
     margin:40px 0px;
+    z-index:1;
 }
 
 .main__feature{

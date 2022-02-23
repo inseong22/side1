@@ -40,6 +40,7 @@ const style = {
   p: 2,
   px: 4,
   pb: 3,
+  fontSize:'12px',
 };
 
 export const Infos = () => {
@@ -137,7 +138,7 @@ function LoginModal({open, setOpen}) {
                         <span style={{marginLeft:'5%'}}>구글아이디로 이용하기</span>
                     </button>
                     <div style={{fontSize:'12px', color:'rgba(150,150,150,1)', marginTop:'8px'}}>
-                        위 버튼을 클릭하면 <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" target="_blank">약관</a>에 동의한 것으로 간주하고<br/> 자동으로 회원가입/로그인이 진행됩니다.
+                        위 버튼을 클릭하면 <a style={{color:'black'}} href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" target="_blank">약관</a>에 동의한 것으로 간주하고<br/> 자동으로 회원가입/로그인이 진행됩니다.
                     </div>
                     <form onSubmit={e => submit(e)}>
                         <div className="login-label">

@@ -4,6 +4,8 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Close } from '@styled-icons/evaicons-solid';
 import rt1 from './img/tutorial/rt1.png'
 import rt2 from './img/tutorial/rt2.png'
+import rt3 from './img/tutorial/rt3.png'
+import rt4 from './img/tutorial/rt4.png'
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -87,7 +89,7 @@ function MakeTutorialModal({open, setOpen}) {
 
             case 3: return ( 
                 <ModalBody>
-                    <img src={rt1} style={{width:'70%', border:'1px solid var(--main-light-gray-02', boxShadow:'2px 4px 20px #E8F0F9'}}/>
+                    <img src={rt3} style={{width:'70%', border:'1px solid var(--main-light-gray-02', boxShadow:'2px 4px 20px #E8F0F9'}}/>
                     <Desc>
                         페이지와 관련된 데이터들은 <br/>
                         구글 애널리틱스의 업데이트 주기에 맞춰 30분 마다 갱신됩니다.<br/>
@@ -97,7 +99,7 @@ function MakeTutorialModal({open, setOpen}) {
 
             case 4: return ( 
                 <ModalBody>
-                    <img src={rt1} style={{width:'70%', border:'1px solid var(--main-light-gray-02', boxShadow:'2px 4px 20px #E8F0F9'}}/>
+                    <img src={rt4} style={{width:'70%', border:'1px solid var(--main-light-gray-02', boxShadow:'2px 4px 20px #E8F0F9'}}/>
                     <Desc>
                         한 계정당 최대 3개의 페이지를 제작할 수 있습니다. <br/>
                         같은 서비스라도 각기 다른 내용으로 여러개의 페이지를 만들고,<br/>

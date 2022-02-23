@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import { UserContext } from '../../../../pages/UserLanding/UserLandingPage'
 import TextareaAutosize from 'react-textarea-autosize';
 
-function TextAuto({small, value, color, setting, align, size}) {
+function TextAuto({small, value, color, setting, align, size, disabled}) {
     const {state, action} = useContext(UserContext)
     
         return (
@@ -17,9 +17,10 @@ function TextAuto({small, value, color, setting, align, size}) {
                         textAlign:`${align}`,
                         resize:'none',
                         fontSize: `${size}em`,
-                        fontFamily:`${state.setting.smallFont}`
+                        fontFamily:`${state.setting.smallFont}`,
                     }}
                     spellCheck="false"
+                    disabled={disabled}
                 />
                 : 
                 <TextareaAutosize 
@@ -30,9 +31,10 @@ function TextAuto({small, value, color, setting, align, size}) {
                         textAlign:`${align}`,
                         resize:'none',
                         fontSize: `${size}em`,
-                        fontFamily:`${state.setting.font}`
+                        fontFamily:`${state.setting.font}`,
                     }}
                     spellCheck="false"
+                    disabled={disabled}
                 />
             }
             </>

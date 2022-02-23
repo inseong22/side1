@@ -11,6 +11,7 @@ import RegisterModal from '../../components/Login/RegisterModal'
 import ChannelTalk from '../../tools/ChannelTalk'
 import { styled, Box } from '@mui/system';
 import {isMobile} from 'react-device-detect'
+import "@lottiefiles/lottie-player";
 
 import {DeveloperBoardOff, Animation, DesignServices} from '@styled-icons/material';
 import {DataPie, MobileOptimized} from '@styled-icons/fluentui-system-regular'
@@ -148,17 +149,17 @@ function MainPageV2({history, isLoggedIn, userObj}) {
         return(<>
             {
                 isLoggedIn ? 
-                <Link to='/response' className="main__button2">
-                    지금 바로 제작하기
+                <Link to='/response' className="main__button2 uphover">
+                    무료로 제작하기
                 </Link>:
                 <>
                 {
                     top === 'top' ?
-                    <button className="main__button" onClick={() => setAskOpen(true)}>
-                        지금 바로 제작하기
+                    <button className="main__button uphover" onClick={() => setAskOpen(true)}>
+                        무료로 제작하기
                     </button>:
-                    <button className="main__button2" onClick={() => setAskOpen(true)}>
-                        지금 바로 제작하기
+                    <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
+                        무료로 제작하기
                     </button>
                 }
                 </>
@@ -170,10 +171,10 @@ function MainPageV2({history, isLoggedIn, userObj}) {
         <>
         <NavBarV2 history={history} isLoggedIn={isLoggedIn} buttonOpen />
         <div className="main-page-container">
-            <div className="main-page-section1" style={{marginTop:'20px', flexDirection:'column', background:"linear-gradient(0deg, #6C63FF 0%, #ffffff 100%)"}}>
+            <div className="main-page-section1" style={{paddingTop:'30px', marginTop:'50px', flexDirection:'column', background:"linear-gradient(0deg, #6C63FF 0%, #ffffff 100%)"}}>
                 <div className="main-section-left-topbottom" style={{color:'black', marginTop:'50px'}}>
                     <span className="one-section-big osb2" style={{textAlign: 'center'}}>
-                        '랜딩페이지'를 쉽고 간단하게
+                        '랜딩페이지'를 3분만에 <br/>쉽고 간단하게 제작해보세요
                     </span>
                     <span className="one-section-small" style={{textAlign: 'center'}}>
                         Surfee와 함께 '타이핑'과 '이미지'로만 <br/>
@@ -186,7 +187,19 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     고객 검증을 위한 '랜딩페이지'제작은<br/>
                     이제 선택이 아닌 필수입니다.
                 </span>
-                <img src={main1} className="section-one-image-main-topbottom mt30" />
+            </div>
+            <div className="main-page-section1" style={{position:'relative'}}>
+                <lottie-player
+                    autoplay
+                    loop
+                    mode="normal"
+                    src="https://assets6.lottiefiles.com/packages/lf20_46tauco6.json"
+                    style={{width:'100%', height:'100%', position:'absolute', zIndex:'0'}}
+                >
+                </lottie-player>
+                <div className="one-section-big" style={{color:'var(--main-color)'}}>
+                    Surfee?
+                </div>
             </div>
             <div className="main-page-section1 bg1">
                 <div className="main-section-right">              
@@ -236,7 +249,15 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     </span>
                 </div>
             </div>
-            <div className="main-page-section1" style={{flexDirection: "column"}}>
+            <div className="main-page-section1" style={{flexDirection: "column", position:'relative'}}>
+                <lottie-player
+                    autoplay
+                    loop
+                    mode="normal"
+                    src="https://assets9.lottiefiles.com/packages/lf20_tkvgymkx.json"
+                    style={{transform:'rotate(90deg)', position:'absolute', zIndex:'0', width:'100%', height:'200%'}}
+                >
+                </lottie-player>
                 <span className="one-section-big bt2" style={{textAlign:'center'}}>
                     랜딩페이지를 가장 효율적으로<br/> 제작해보세요
                 </span>

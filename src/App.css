@@ -341,6 +341,14 @@
   overflow:hidden;
   word-wrap:break-word;
 }
+.text-no-input:hover{
+  border:1px solid rgba(200,200,200,0);
+}
+.text-no-input:focus{
+  border:1px solid rgba(200,200,200,0);
+  outline:none;
+}
+
 
 .text-input:hover{
   border:1px solid rgba(200,200,200,0.7);
@@ -369,7 +377,7 @@
 .text-input-button{
   border:none;
   background-color:rgba(0,0,0,0);
-  font-size:var(--button-font-size);
+  font-size:13px;
   padding:var(--made-button-padding);
   cursor:pointer;
 }

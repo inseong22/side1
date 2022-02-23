@@ -120,12 +120,12 @@ const secondQuestion = [
     {
         typequestion: "✍️ 사전신청",
         question : "사전신청을 많이 받고 싶어요",
-        type:'pre',
+        type:'apply',
     },
     {
         typequestion: "💰 판매",
         question : "서비스/제품을 많이 팔고 싶어요",
-        type:'sell',
+        type:'sale',
     },
     {
         typequestion: "📚 개인적인 목적",
@@ -175,7 +175,7 @@ const colorList = [
     },
 ]
 
-function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
+function FirstQuestions({setIsPhone, setContents, type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
     // 모달
     const [cnum, setCnum] = useState(1);
     const [title, setTitle] = useState("");
@@ -241,6 +241,7 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
         }
     }
     const nextAndSetDone = async e => {
+        console.log("나오나여? 여기는");
 
         const urlDatas = await dbService
             .collection("urlStores")
@@ -258,6 +259,23 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
             alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
             return;
         }else{
+
+            const defaults = await dbService
+                .collection("saved-page")
+                .where("urlId", "==", type)
+                .get(); // ui
+
+            const defaultTemplate = defaults.docs.map(doc => {
+                return({...doc.data(), id:doc.id})
+            });
+            
+            console.log("나오나여?", defaultTemplate[0]);
+            if(defaultTemplate){
+                setContents(defaultTemplate[0].contents);
+                setNavi(defaultTemplate[0].navi);
+                setFoot(defaultTemplate[0].foot);
+                setSetting(defaultTemplate[0].setting);
+            }
             
             const body = {
                 type: type,
@@ -376,6 +394,7 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                             <div className="template__card uphover"
                                 onClick={() => {
                                     setDevice('pc')
+                                    setIsPhone(false)
                                 }}
                                 style={{border: `${device === 'pc' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
@@ -385,6 +404,7 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                             <div className="template__card uphover"
                                 onClick={() => {
                                     setDevice('mobile')
+                                    setIsPhone(true)
                                 }}
                                 style={{border: `${device === 'mobile' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
@@ -472,7 +492,7 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                         </div>
                         <div className="modal-main-card">
                             <div className="modal-title" style={{fontSize:'25px'}}>
-                                <input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
+                                https://surfee.co.kr/#/<input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />
                             </div>
                             <div style={{color:'gray', paddingLeft:'0%',marginTop:'1%', fontSize:'14px', textAlign:'center', fontFamily:'Pretendard-Regular'}}>
                                 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.

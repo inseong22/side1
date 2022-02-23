@@ -59,9 +59,7 @@ function FuncImageCarousel({content}) {
             width:`${numReturn()}vw`, 
             height:`${imgRef.current && imgRef.current.scrollWidth * 0.56}px`,
             boxShadow: `${content.image.shadowValue}`
-        }}
-            >
-
+        }} >
             <Slider {...settings}> 
             {
                 (content.slide_img.attachment1) && <Slide im={content.slide_img.attachment1} />

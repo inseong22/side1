@@ -24,13 +24,13 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
             .get().then( querySnapshot => 
                 { 
                     if(querySnapshot.empty){
-                        console.log("새 배포")
                         let body = {
                             ...content,
                             pageId:content.id,
                             created:Date.now(),
                         }
                         dbService.collection('published-page').add(body)
+                        alert("배포 완료되었습니다.")
                     }else{
                         console.log("배포 수정")
                         let body = {

@@ -53,7 +53,7 @@ function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking
 
             setUpdate(!update)
             alert("복제되었습니다.")
-            history.go(-1)
+            history.go()
         }
     }
 
@@ -117,7 +117,7 @@ function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking
             </div>
             <div className="center-row">
                 <div className="left" style={{fontSize:'0.7em', width:'70%'}}>
-                    https://{item.setting.urlId}.surfee.co.kr 
+                    https://surfee.co.kr/#/{item.setting.urlId} 
                     {/* <Copy size={15} color="#6B63F7" onClick={(e) => {
                         alert("링크가 복사되었습니다");
                     }}

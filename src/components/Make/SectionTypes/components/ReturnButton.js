@@ -57,12 +57,12 @@ function ReturnButton({content, onlyapp}){
                <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.appButton.align}`}}>
                 {
                     content.appButton.google.length > 0 && 
-                        <img src={playstorebutton} className="store-button" />
+                        <img src={playstorebutton} className="store-button" style={{height:`${state.isPhone ? '31px' : '51px'}`}} />
                 }
                 {/* onClick={() => {window.open(`${content.button.ghostLink}`)}} */}
                 {
                     content.appButton.apple.length > 0 && 
-                        <img src={appstorebutton} className="store-button" />
+                        <img src={appstorebutton} className="store-button" style={{height:`${state.isPhone ? '30px' : '50px'}`}} />
                 }
             </div>) 
         : 

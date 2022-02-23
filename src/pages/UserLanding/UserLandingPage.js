@@ -98,36 +98,30 @@ const UserLandingPage = (props) => {
             </div>
             <UserFoot foot={item.foot} setting={item.setting}/>
 
+
             <>
-            {  ( item.setting.fta.use ) &&
-            <div className="fta__container" style={{width:`${isMobile ? '26vw' : '100vw'}`}}>
-                <div className="fta-button" 
-                    style={{
-                        backgroundColor:`${setting.fta.backgroundColor}`, 
-                        width:`${isMobile ? setting.fta.size/2 : setting.fta.size}%`, 
-                        borderRadius:`${setting.fta.shape}px`, 
-                        border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
-                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
-                    }}
-                    onClick={() => {
-                        moveToPage('플로팅 버튼')
-                        window.open(
-                            setting.fta.link,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    >
-                    <TextareaAutosize className='text-no-input'  value={setting.fta.text}
+            {  ( setting.fta.use ) &&
+                <div className="fta__container" style={{width:'100vw'}}>
+                    <div className="fta-button" 
                         style={{
-                            textAlign: 'center', 
-                            color:`${setting.fta.color}`,
                             fontFamily: `${setting.font}`,
-                            resize:'none',
-                            cursor:'pointer',
-                        }} />
-                </div>
-            </div>
-            }
+                            backgroundColor:`${setting.fta.backgroundColor}`, 
+                            width:`${setting.fta.size}%`, 
+                            borderRadius:`${setting.fta.shape}px`, 
+                            border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
+                            boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
+                        }}
+                        onClick={() => {
+                            moveToPage('플로팅 버튼')
+                            window.open(
+                                setting.fta.link,
+                                '_blank' // <- This is what makes it open in a new window.
+                            );
+                        }}>
+                        <TextareaAutosize className='text-input'  value={setting.fta.text}
+                            color={setting.fta.color} align="center" />
+                    </div>
+                </div> }
             </>
         </div> 
         }
