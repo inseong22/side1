@@ -255,8 +255,8 @@ const afterSaveImage = async () => {
         
         setTimeout(() => {
             setLoading(false);
-            history.push('/#/response');
-            history.go();
+            // history.push('/#/response');
+            // history.go();
         },200)
     }else{
         console.log( '수정 중이 아니다' );
