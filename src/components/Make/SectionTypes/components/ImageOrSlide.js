@@ -112,7 +112,7 @@ function ImageOrSlide({content}){
                             onChange = {e => upload_img(e)} />
                         <img 
                             src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
-                            className="image" 
+                            className="image uphover" 
                             style={{
                                 borderRadius:`${content.image.border}px`,
                                 width:`${imageWidth()}%`, 

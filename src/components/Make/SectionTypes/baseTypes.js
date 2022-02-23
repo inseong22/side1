@@ -1,7 +1,7 @@
 import heroanimation from '../../../tools/img/heroanimation.gif'
-import person1 from '../../../tools/img/person1.png'
-import person2 from '../../../tools/img/person2.png'
-import person3 from '../../../tools/img/person3.png'
+// import person1 from '../../../tools/img/person1.png'
+// import person2 from '../../../tools/img/person2.png'
+// import person3 from '../../../tools/img/person3.png'
 import gal1 from '../../../tools/img/gal1.png'
 import gal2 from '../../../tools/img/gal2.png'
 import gal3 from '../../../tools/img/gal3.png'
@@ -99,7 +99,7 @@ const element = {
     type:'image', // image or icon
     backgroundColor:'#6CCAD0',
     // borderRaidus:5,'    iconBorder:5,
-    imageBorder:5,
+    imageBorder:15,
     size:50,
     color:'#ffffff',
 }
@@ -151,7 +151,7 @@ export const base = [
         title:{
             ...commons.title,
             text:'당신의 서비스를 Surfee로 소개해 보세요.',
-            size:30
+            size:36
         },
         desc:{
             ...commons.desc,
@@ -160,6 +160,10 @@ export const base = [
         button:{
             ...button.button,
             ctaText:'버튼 클릭을 유도할 문구를 적어보세요.'
+        },
+        appButton:{
+            ...button.appButton,
+            use: false,
         },
         image:{
             ...contents.image,
@@ -216,7 +220,8 @@ export const base = [
         },
         appButton:{
             ...button.appButton,
-            align:'center'
+            align:'center',
+            use: false
         }
     },
     {
@@ -244,21 +249,27 @@ export const base = [
             ...button.caution,
             align:'center',
         },
+        appButton:{
+            ...button.appButton,
+            use: false,
+        }
     },
     {
         ...commons,
         ...button,
         name:'앱 다운로드',
+        align: 'center',
         sectionTypeName:'AppDownloadSection', 
         title:{
             ...commons.title,
             text:'잠재 유저의 앱 다운로드를 유도해 보세요!',
-            size:32,
+            size:42,
             align: 'center'
         },
         desc:{
             ...commons.desc,
             align: 'center',
+            size:24,
             text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 잠재유저의 앱 다운로드를 유도할 수 있는 문구를 적어보세요.'
         },
         appButton:{
@@ -279,8 +290,9 @@ export const base = [
             type:'image', // image or icon
             backgroundColor:'#6CCAD0',
             // borderRaidus:5,'    iconBorder:5,
-            imageBorder:500,
-            size:50,
+            imageBorder:5,
+            iconBorder:5,
+            size:75,
             color:'#ffffff',
         },
         name:'특징',
@@ -346,10 +358,10 @@ export const base = [
         element:{
             use:true,
             type:'image', // image or icon
-            backgroundColor:'#6CCAD0',
-            // borderRaidus:5,'    iconBorder:5,
-            imageBorder:500,
-            size:50,
+            backgroundColor:'#e6e6e6',
+            imageBorder:5,
+            iconBorder:5,
+            size:75,
             color:'#ffffff',
         },
         title:{
@@ -361,7 +373,8 @@ export const base = [
         desc:{
             ...commons.desc,
             text:'여기를 클릭하여 서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요.',
-            align:'center'
+            align:'center',
+            size:16
         },
         align:'center',
         numOfElements:3,
@@ -370,7 +383,7 @@ export const base = [
         rating:{
             use:true,
             color: '#ffd23a',
-            size: 15,
+            size: 25,
         },
         writer:{
             use:true,
@@ -393,7 +406,7 @@ export const base = [
         elements:[
             {
                 icon:'',
-                attachment:person1,
+                attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:4.8,
@@ -401,7 +414,7 @@ export const base = [
             },
             {
                 icon:'',
-                attachment:person2,
+                attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:5,
@@ -409,7 +422,7 @@ export const base = [
             },
             {
                 icon:'',
-                attachment:person3,
+                attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:4.6,
@@ -417,7 +430,7 @@ export const base = [
             },
             {
                 icon:'',
-                attachment:person3,
+                attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:4.6,
@@ -425,7 +438,7 @@ export const base = [
             },
             {
                 icon:'',
-                attachment:person3,
+                attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
                 rating:4.6,
@@ -440,11 +453,12 @@ export const base = [
         title:{
             ...commons.title,
             text:'자주 묻는 질문을 적어보세요',
-            size:32
+            size:42
         },
         desc:{
             ...commons.desc,
-            text:'여기를 클릭하여 자주 묻는 질문과 그 답변을 적어보세요.'
+            text:'여기를 클릭하여 자주 묻는 질문과 그 답변을 적어보세요.',
+            size:24
         },
         layout: 'card',
         qna:{
@@ -472,11 +486,13 @@ export const base = [
         title:{
             ...commons.title,
             text:'글만 쓰고 싶을 때 \'글\' 섹션을 이용해 보세요.',
-            size:32
+            size:32,
+            align:'center',
         },
         desc:{
             ...commons.desc,
-            text:'여기를 클릭하여 글을 적어보세요.'
+            text:'여기를 클릭하여 글을 적어보세요.',
+            align:'center',
         },
         padding:{
             top:15,
@@ -709,7 +725,7 @@ export const defaults = {
         fta:{
             borderRadius:5,
             use:false,
-            backgroundColor:'#6CCAD0',
+            backgroundColor:'#6c63ff',
             color:'#ffffff',
             border:false,
             borderColor:'#000000',

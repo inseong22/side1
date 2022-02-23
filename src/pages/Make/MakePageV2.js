@@ -260,7 +260,9 @@ const MakePageV2 = ({history, userObj}) => {
                                         border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
                                         boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
                                     }}>
-                                    <TextareaAutosize className='text-input'  value={setting.fta.text} 
+                                    <TextareaAutosize className='text-input'  
+                                        placeholder="플로팅 버튼입니다!"
+                                        value={setting.fta.text} 
                                         onChange={e => setSetting(produce(setting, draft => {
                                             draft.fta.text = e.target.value;
                                         }))}
