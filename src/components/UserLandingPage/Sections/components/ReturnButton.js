@@ -39,7 +39,6 @@ const CustomButton = (type) => { return (
     <div className="cta-button-edit" style={{
         borderRadius:`${state.setting[type].borderRadius}px`,
         backgroundColor:`${state.setting[type].backgroundColor}`,
-        color:`${state.setting[type].color}`,
         boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
         border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
     }} onClick={() => {
@@ -56,6 +55,7 @@ const CustomButton = (type) => { return (
 
         <AutosizeInput className="text-input-flex" value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } 
             inputStyle={{
+                color:`${state.setting[type].color}`,
                 cursor:'pointer',
                 border:'none',
                 textAlign: 'center',

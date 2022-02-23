@@ -13,7 +13,7 @@ function GallerySection({content,setting}) {
            return(
                <>
                {content.card.use && 
-               <FeatureCard section="feature" content={content} index={index}>
+               <FeatureCard section="gallery" content={content} index={index}>
                        {content.element.use && 
                        <div style={{width:'100%', position:'relative', cursor:'pointer'}}>
                            { item.attachment ? 
@@ -39,8 +39,17 @@ function GallerySection({content,setting}) {
                        }
                        {
                            content.text.use && 
-                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:`${isMobile ? 5 : 12}px`}}>
-                                <TextAuto small className="text-no-input" 
+                           <div className="df-margin-big feature-title" style={{
+                               width:'100%', 
+                               height:'100%', 
+                               alignItems:'start', 
+                               display: 'flex', 
+                               margin:'0px', 
+                               padding:`${isMobile ? '5px' : '8px'}`}}>
+
+                                <TextAuto 
+                                    small
+                                    className="text-no-input" 
                                     placeholder="여기를 클릭하여 이미지에 대한 설명을 적어보세요."
                                     value={item.text} 
                                     size={0.9}

@@ -31,6 +31,7 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
                         }
                         dbService.collection('published-page').add(body)
                         alert("배포 완료되었습니다.")
+                        history.go();
                     }else{
                         console.log("배포 수정")
                         let body = {
