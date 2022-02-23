@@ -13,7 +13,7 @@ import {Phone} from '@styled-icons/bootstrap'
 import {Desktop} from '@styled-icons/fa-solid'
 
 const alignOptions = [
-    { label: '왼쪽', value: 'justify' },
+    { label: '왼쪽', value: 'start' },
     { label: '중앙', value: 'center' },
 ]
 

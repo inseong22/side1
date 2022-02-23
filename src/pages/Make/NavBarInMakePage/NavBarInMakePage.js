@@ -49,12 +49,24 @@ const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone,
     }
 
 
+    const saveToOnly = async () => {
+        // 로딩 시작
+        setLoading(true);
+
+        await saveImages()
+        await afterSaveImage()
+    }
     const saveTo = async () => {
         // 로딩 시작
         setLoading(true);
 
         await saveImages()
         await afterSaveImage()
+        setTimeout(() => {
+            setLoading(false);
+            history.push('/#/response');
+            history.go();
+        },3000)
     }
 
 const saveImages = async () => {
@@ -301,14 +313,28 @@ const afterSaveImage = async () => {
             
             setTimeout(() => {
                 setLoading(false);
-                history.push('/#/response');
-                history.go();
+                // history.push('/#/response');
+                // history.go();
             },200)
         }
     }
 }
 
     const onSubmit = async () => {
+        // 배포하기 클릭
+        // 관리페이지에서 수정하기를 누른 거라면
+        saveLocalStorage()
+        if(userObj === null){
+            alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
+            setLoginModal(true);
+        }else{
+            // 새로 업로드 해야한다.
+            // 파이어 베이스에 저장한다.
+            saveToOnly();
+            // setCheckModalOpen(true);
+        }
+    }
+    const goSetup = async () => {
         // 배포하기 클릭
         // 관리페이지에서 수정하기를 누른 거라면
         saveLocalStorage()
@@ -412,6 +438,9 @@ const afterSaveImage = async () => {
                     {deviceSelect()}
                     <Button onClick={() => onSubmit()} className="default-button-02">
                         저장하기
+                    </Button>
+                    <Button onClick={() => goSetup()} className="default-button-02">
+                        관리페이지
                     </Button>
                 </div>
             </div>
