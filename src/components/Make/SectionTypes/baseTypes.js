@@ -302,11 +302,13 @@ export const base = [
         title:{
             ...commons.title,
             text:'특징을 간단하게 나타내 보세요!',
+            align:'center',
             size:32
         },
         desc:{
             ...commons.desc,
-            text:'여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요.'
+            text:'여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요.',
+            align:'center',
         },
         elementText:{
             use:true,

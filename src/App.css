@@ -235,6 +235,7 @@
   cursor: pointer;
   font-family: Noto Sans KR;
   font-weight: normal;
+  margin-left:0.3vw;
 }
 
 .center-row{
