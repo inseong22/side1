@@ -22,7 +22,7 @@ function VideoSection({content, setting}) {
                 <div className="text__container">
                     <TitleDesc content={content} titlePlaceholder="제목을 적어보세요." descPlaceholder="여기를 클릭하여 내용을 적어보세요." />
                 </div>
-                <div className="image__container">
+                <div className="image__container" style={{marginTop:'12px'}}>
                     <ImageOrSlide content={content} />
                 </div>
                 {

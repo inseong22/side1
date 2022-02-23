@@ -185,12 +185,13 @@ const MakePageV2 = ({history, userObj}) => {
             />
                <NavBarInMakePage 
                     editing={editing} editingId={editingId}
+                    setEditing={setEditing} setEditingId={setEditingId}
                     history={history} userObj={userObj}
                     full={full} setFull={setFull}
-                   isPhone={isPhone} setIsPhone={setIsPhone}
-                   loading={loading} setLoading={setLoading}
-                   navi={navi} foot={foot} setting={setting} setNavi={setNavi}
-                   saveLocalStorage={saveLocalStorage}
+                    isPhone={isPhone} setIsPhone={setIsPhone}
+                    loading={loading} setLoading={setLoading}
+                    navi={navi} foot={foot} setting={setting} setNavi={setNavi}
+                    saveLocalStorage={saveLocalStorage}
                />
             <div className="make-page-container" style={{paddingTop:`${full ? '55px' : '60px'}`}}>
                 {/* 아래는 제작하는 곳 */}

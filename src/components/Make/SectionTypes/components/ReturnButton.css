@@ -25,4 +25,6 @@
     justify-content: start;
     position:relative;
     width:100%;
+    flex-wrap: wrap;
+    box-sizing: border-box;
 }

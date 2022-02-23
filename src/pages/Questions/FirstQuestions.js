@@ -149,30 +149,17 @@ const fontList = [
     { label: '여기어때 잘난체', value: 'yg-jalnan'},
 ]
 const colorList = [
-    {
-        name:'검',
-        color:'rgba(0,0,0,1)',
-    },
-    {
-        name:'차분',
-        color:'rgba(255,255,255,1)',
-    },
-    {
-        name:'노',
-        color:'rgba(0,255,255,1)',
-    },
-    {
-        name:'빨',
-        color:'rgba(250,0,0,1)',
-    },,
-    {
-        name:'초',
-        color:'rgba(0,250,0,1)',
-    },,
-    {
-        name:'파',
-        color:'rgba(0,0,250,1)',
-    },
+    {name:'빨강', color:'#FF6464'},
+{name:'노랑',color:'#FFE162',},
+{name:'머스타드노랑',color:'#FFBD35',},
+{name:'초록',color:'#91C483',},
+{name:'하늘색',color:'#5D8BF4',},
+{name:'파란색',color:'#2D31FA',},
+{name:'연보라',color:'#BAABDA',},
+{name:'진한 보라색',color:'#3B185F',},
+{name:'검정',color:'#171717',},
+{name:'진한 회색',color:'#444444',},
+{name:'갈색',color:'#c99c75',},
 ]
 
 function FirstQuestions({setIsPhone, setContents, type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
@@ -465,8 +452,10 @@ function FirstQuestions({setIsPhone, setContents, type, foot, setFoot, setType, 
                                                 onClick={() => {
                                                     setColor(item.color);
                                                 }}
-                                                style={{border: `${bor}`, padding:'5% 3%'}}
-                                            >
+                                                style={{border: `${bor}`, padding:'5% 3%'}}>
+                                                <div>
+                                                    {item.color}
+                                                </div>
                                                 <div style={{backgroundColor:`${item.color}`, width:'50px', height:'50px', borderRadius:'10px'}}>
                                                     
                                                 </div>

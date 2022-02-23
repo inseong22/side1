@@ -21,7 +21,7 @@ import {
     PopoverArrow,
   } from '@chakra-ui/react'
 
-const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone, loading, foot, editing, editingId, setLoading, setting, navi, setNavi, saveLocalStorage}) => {
+const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone, loading, foot, editing,setEditing, setEditingId, editingId, setLoading, setting, navi, setNavi, saveLocalStorage}) => {
     const [loginModal, setLoginModal] = useState(false)
     const {state, action} = useContext(MyContext)
     const [deviceOpen, setDeviceOpen] = useState(false);
@@ -42,28 +42,10 @@ const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone,
         );
     }
 
-
-
     const checkUnSaved = (attach) => {
         return attach.length > 1000;
     }
 
-
-    const saveToOnly = async () => {
-        // 로딩 시작
-        setLoading(true);
-
-        await saveImages()
-        await afterSaveImage()
-    }
-    const saveTo = async () => {
-        // 로딩 시작
-        setLoading(true);
-
-        const returned = await saveImages();
-        saveLocalStorage();
-        await afterSaveImage(returned);
-    }
 
 const saveImages = async () => {
 
@@ -231,20 +213,6 @@ const saveImages = async () => {
 const afterSaveImage = async (returned) => {
     if(editing){
 
-        let savedPage
-    
-        // const savedPages = await dbService
-        //     .collection(`saved-page`)
-        //     .doc(editingId)
-        //     .get()
-        //     .then(snapshot => savedPage = {...snapshot.data(), id:snapshot.id})
-        
-        // if( !savedPage ){
-        //     alert("잘못된 접근입니다.")
-        //     setLoading(false);
-        //     return
-        // }
-
         const body = {
             contents:returned,
             navi:navi,
@@ -260,11 +228,6 @@ const afterSaveImage = async (returned) => {
         // 자동저장 하던 걸 지운다.
         window.localStorage.removeItem("temp");
         
-        setTimeout(() => {
-            setLoading(false);
-            // history.push('/#/response');
-            // history.go();
-        },200)
     }else{
         console.log( '수정 중이 아니다' );
 
@@ -294,23 +257,18 @@ const afterSaveImage = async (returned) => {
                 // makingTypeByUser:makingTypeByUser,
                 urlId:setting.urlId,
             }
-            // const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
 
-            // const response = await attachmentRef.putString(attachment, "data_url");
-            // const attachmentURL = await response.ref.getDownloadURL();
+            const awssss = await dbService.collection("saved-page").add(body);
+            
+            setEditing(true);
+            setEditingId(awssss.id);
 
-            await dbService.collection("saved-page").add(body);
-
-            await dbService.collection("urlStores").add({urlId:body.urlId});
+            await dbService.collection("urlStores").add({
+                urlId:body.urlId
+            });
 
             // 자동저장 하던 걸 지운다.
             window.localStorage.removeItem("temp");
-            
-            setTimeout(() => {
-                setLoading(false);
-                // history.push('/#/response');
-                // history.go();
-            },200)
         }
     }
 }
@@ -323,10 +281,11 @@ const afterSaveImage = async (returned) => {
             alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
             setLoginModal(true);
         }else{
-            // 새로 업로드 해야한다.
-            // 파이어 베이스에 저장한다.
-            saveToOnly();
-            // setCheckModalOpen(true);
+            setLoading(true);        
+            saveLocalStorage();
+            const returned = await saveImages();
+            await afterSaveImage(returned);
+            setLoading(false);
         }
     }
     const goSetup = async () => {
@@ -337,10 +296,15 @@ const afterSaveImage = async (returned) => {
             alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
             setLoginModal(true);
         }else{
-            // 새로 업로드 해야한다.
-            // 파이어 베이스에 저장한다.
-            saveTo();
-            // setCheckModalOpen(true);
+            setLoading(true);        
+            const returned = await saveImages();
+            saveLocalStorage();
+            await afterSaveImage(returned);
+            setTimeout(() => {
+                setLoading(false);
+                history.push('/#/response');
+                history.go();
+            },200)
         }
     }
 

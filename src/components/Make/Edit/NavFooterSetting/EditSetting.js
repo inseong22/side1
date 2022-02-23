@@ -209,7 +209,7 @@ function EdtiSetting({setting, setSetting, category}) {
                         <OpenCloseCustom title="URL" use={true}>
                             <div style={{flexDirection:'column'}}>
                                 <div style={{display:'flex'}}>
-                                    <div style={{color:'#202936', marginTop: '30px', marginRight: '30px'}}>
+                                    <div style={{color:'#202936', marginTop: '20px'}}>
                                         https://surfee.co.kr/#/
                                     </div>
                                     <div>
