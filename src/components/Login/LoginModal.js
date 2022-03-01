@@ -101,9 +101,6 @@ function LoginModal({open, setOpen}) {
 
         setOpen(!open);
         
-        console.log("일단 로그인 성공", email, usersExist)
-
-
         // if(usersExist.length === 0){
         //     // 구글 아이디로 로그인했는데 회원가입에 정보가 없을 때
         //     console.log("회원가입 정보를 받습니다.");

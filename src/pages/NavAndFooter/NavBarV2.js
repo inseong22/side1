@@ -22,7 +22,7 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width:'100%'}}>
             <div className="nav-bar-container-v2">
                 <div className="nav-bar-left-v2">
-                    <Link to="/v2" className="nav-bar-title-v2" style={{cursor:'pointer', color:'#6a63f7'}}>
+                    <Link to="/" className="nav-bar-title-v2" style={{cursor:'pointer', color:'#6a63f7'}}>
                         Surfee
                     </Link>
                     {/* <Link to="/info" className="nav-left-text" style={{marginLeft:'4vw'}}>

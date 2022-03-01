@@ -73,7 +73,6 @@ function Contents({content}) {
 
     // 슬라이드 - 이미지
     const onChangeSlideImage= (num, e) => {
-        console.log(num, "번째 슬라이드 추가하기")
         let numName = ''
         if(num === 1){
             numName = 'attachment1'
@@ -100,7 +99,6 @@ function Contents({content}) {
         }
     }
     const RemoveSlide = (num) => {
-        console.log(num, "번째 슬라이드 지우기")
         let numName = ''
         if(num === 1){
             numName = 'attachment1'

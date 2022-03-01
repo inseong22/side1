@@ -44,25 +44,18 @@ const UserLandingPage = (props) => {
 
     const loadData = async () => {
         let userOrder = []
-        if(props.match.params.id !== ''){
-            userOrder = await dbService
-                .collection("published-page")
-                .where("urlId", "==", props.match.params.id)
-                .get(); // uid를 creatorId로 줬었으니까.
-        }else{
-            userOrder = await dbService
-                .collection("published-page")
-                .where("urlId", "==", window.location.host.split(".")[0])
-                .get(); // uid를 creatorId로 줬었으니까.
-        }
-
+        userOrder = await dbService
+            .collection("published-page")
+            .where("urlId", "==", props.match.params.id)
+            .get(); // uid를 creatorId로 줬었으니까.
+        
         let orderData = userOrder.docs.map(doc => {
             return({...doc.data(), id:doc.id})
         });
-
+        
         if(orderData.length === 0){
-            setLoading(true);
-            setError(true);
+            props.history.push('/');
+            props.history.go();
         }
 
         favicon.href = orderData[0].setting.faviconAttachment;   
@@ -104,7 +97,7 @@ const UserLandingPage = (props) => {
                 <div className="fta__container" style={{width:'100vw'}}>
                     <div className="fta-button" 
                         style={{
-                            fontFamily: `${setting.font}`,
+                            fontFamily: `${setting.smallFont}`,
                             backgroundColor:`${setting.fta.backgroundColor}`, 
                             width:`${setting.fta.size}%`, 
                             borderRadius:`${setting.fta.shape}px`, 

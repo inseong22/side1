@@ -67,7 +67,6 @@ function EditHeroSection({content, category}) {
             use:content.button.use,
             func:() => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].button.use = !content.button.use;
-                console.log(content.button.use)
             }))
         },
         {

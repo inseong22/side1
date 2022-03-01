@@ -73,7 +73,6 @@ const saveImages = async () => {
     let contCopy = lodash.cloneDeep(state.contents)
 
     for ( const [index, cont] of state.contents.entries() ){
-        console.log(index, typeof index, cont )
 
         // 배경 이미지 업로드 배경은 다 있지?
         if(cont.backgroundType === "image" && checkUnSaved(cont.backgroundImage.attachment)){
@@ -82,7 +81,6 @@ const saveImages = async () => {
             const attachmentURL = await response.ref.getDownloadURL();
 
             contCopy[index].backgroundImage.attachment = attachmentURL;
-            console.log("바꾼거 크기는?", attachmentURL.length)
         }else if(cont.backgroundType === "color"){
             contCopy[index].backgroundImage.attachment = '';
         }
@@ -134,7 +132,6 @@ const saveImages = async () => {
 
             // 목업 업로드
             if(cont.contents.type === 'mockup' && checkUnSaved(cont.mockup.attachment)){
-                console.log("목업 한장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.mockup.attachment, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -142,7 +139,6 @@ const saveImages = async () => {
                 contCopy[index].mockup.attachment = attachmentURL;
             }
             if(cont.contents.type === 'mockup' && checkUnSaved(cont.mockup.attachment2)){
-                console.log("목업 두장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.mockup.attachment2, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -152,7 +148,6 @@ const saveImages = async () => {
 
             // 슬라이드 업로드
             if(cont.contents.type === 'slide' && checkUnSaved(cont.slide_img.attachment1)){
-                console.log("슬라이드 한장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.slide_img.attachment1, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -161,7 +156,6 @@ const saveImages = async () => {
             }
             // 슬라이드 업로드
             if(cont.contents.type === 'slide' && checkUnSaved(cont.slide_img.attachment2)){
-                console.log("슬라이드 두장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.slide_img.attachment2, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -170,7 +164,6 @@ const saveImages = async () => {
             }
             // 슬라이드 업로드
             if(cont.contents.type === 'slide' && checkUnSaved(cont.slide_img.attachment3)){
-                console.log("슬라이드 세장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.slide_img.attachment3, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -285,27 +278,40 @@ const afterSaveImage = async (returned) => {
             saveLocalStorage();
             const returned = await saveImages();
             await afterSaveImage(returned);
+            alert("저장되었습니다!");
             setLoading(false);
         }
     }
     const goSetup = async () => {
         // 배포하기 클릭
         // 관리페이지에서 수정하기를 누른 거라면
-        saveLocalStorage()
-        if(userObj === null){
-            alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
-            setLoginModal(true);
-        }else{
-            setLoading(true);        
-            const returned = await saveImages();
-            saveLocalStorage();
-            await afterSaveImage(returned);
-            setTimeout(() => {
-                setLoading(false);
+        const check = window.confirm("관리페이지로 돌아가시겠습니까? 저장하기 버튼을 클릭하지 않으셨다면 저장이 되지 않았을 수 있습니다.")
+        if(check === true){
+            if(userObj === null){
+                alert("로그인을 하셔야 관리 페이지로 접속하실 수 있습니다.");
+                setLoginModal(true);
+            }else{
                 history.push('/#/response');
                 history.go();
-            },200)
+            }
+        }else{
+            return
         }
+        // saveLocalStorage()
+        // if(userObj === null){
+        //     alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
+        //     setLoginModal(true);
+        // }else{
+        //     setLoading(true);        
+        //     const returned = await saveImages();
+        //     saveLocalStorage();
+        //     await afterSaveImage(returned);
+        //     setTimeout(() => {
+        //         setLoading(false);
+        //         history.push('/#/response');
+        //         history.go();
+        //     },200)
+        // }
     }
 
     const deviceSelect = () => {
@@ -398,7 +404,7 @@ const afterSaveImage = async (returned) => {
                     <Button onClick={() => onSubmit()} className="default-button-02">
                         저장하기
                     </Button>
-                    <Button onClick={() => goSetup()} className="default-button-02">
+                    <Button onClick={() => goSetup()} className="default-button-01 opacity-hover" style={{border:`1px solid var(--main-color-soft)`, color:'#6c63ff', margin:'0px 5px'}}>
                         관리페이지
                     </Button>
                 </div>

@@ -40,7 +40,6 @@ function EditMockupSection({content, category}) {
     const mockOption = e => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].mockup.type = e;
-            console.log(content.mockup.type)
         }))
     }
 

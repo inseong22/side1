@@ -43,7 +43,7 @@ const commons = {
     },
     box:{
         use:false,
-        backgroundColor:'#6CCAD0',
+        backgroundColor:'#6C63ff1d',
         borderRadius:5,
         height: 1,
     },
@@ -735,11 +735,11 @@ export const defaults = {
         faviconAttachment: "",
         font: "yg-jalnan",
         fta:{
-            backgroundColor: "#6CCAD0",
+            backgroundColor: "#6c63ff1d",
             border: false,
             borderColor: "#000000",
             borderRadius: 5,
-            color: "#ffffff",
+            color: "#000000",
             link: "",
             shadow: false,
             shape: 0,

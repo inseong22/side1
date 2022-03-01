@@ -155,7 +155,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                 <>
                 {
                     top === 'top' ?
-                    <button className="main__button uphover" onClick={() => setAskOpen(true)}>
+                    <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
                         무료로 제작하기
                     </button>:
                     <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
@@ -167,6 +167,10 @@ function MainPageV2({history, isLoggedIn, userObj}) {
         </>)
     }
 
+    console.log("로그 테스트")
+    console.log("로그 테스트")
+    console.log("로그 테스트")
+
     return (
         <>
         <NavBarV2 history={history} isLoggedIn={isLoggedIn} buttonOpen />
@@ -174,7 +178,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             <div className="main-page-section1" style={{paddingTop:'30px', marginTop:'50px', flexDirection:'column', background:"linear-gradient(0deg, #6C63FF 0%, #ffffff 100%)"}}>
                 <div className="main-section-left-topbottom" style={{color:'black', marginTop:'50px'}}>
                     <span className="one-section-big osb2" style={{textAlign: 'center'}}>
-                        '랜딩페이지'를 3분만에 <br/>쉽고 간단하게 제작해보세요
+                        '랜딩페이지'를 3분만에 <br/>쉽고 간단하게 제작해 보세요
                     </span>
                     <span className="one-section-small" style={{textAlign: 'center'}}>
                         Surfee와 함께 '타이핑'과 '이미지'로만 <br/>
@@ -207,7 +211,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                 </div>
                 <div className="main-section-left">
                     <span className="one-section-big" style={{marginTop:`${isMobile ? '30px' : '0px'}`}}>
-                        코딩도 디자인도 필요없는<br/>
+                        코딩도 디자인도 필요 없는<br/>
                         One-stop 랜딩페이지 제작
                     </span>
                     <span className="one-section-small">
@@ -259,7 +263,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                 >
                 </lottie-player>
                 <span className="one-section-big bt2" style={{textAlign:'center'}}>
-                    랜딩페이지를 가장 효율적으로<br/> 제작해보세요
+                    랜딩페이지를 가장 효율적으로<br/> 제작해 보세요
                 </span>
                 <span className="one-section-small">
                     Surfee가 제공하는 기능!
@@ -270,7 +274,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             </div>
             <div className="main-page-section1 bg1" style={{flexDirection: "column", padding:'50px 0px'}}>
                 <span className="one-section-big osb2" style={{textAlign:'center'}}>
-                    Surfee와 함께<br/>랜딩페이지를 제작해보세요.
+                    Surfee와 함께<br/>랜딩페이지를 제작해 보세요.
                 </span>
                 {moveButton()}
             </div>

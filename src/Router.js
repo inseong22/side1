@@ -58,7 +58,7 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                         <Route path="/customer" onUpdate={() => window.scrollTo(0, 0)}>
                             <CustomerPage history={history} isLoggedIn={isLoggedIn}/>
                         </Route>
-                        <Route exact path="/:id" component={ UserLandingPage } />
+                        <Route exact path="/:id" component={ UserLandingPage } history={history}/>
                     </Switch>
                 </div>
                 </ScrollToTop> 

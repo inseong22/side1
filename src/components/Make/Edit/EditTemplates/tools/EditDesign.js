@@ -135,9 +135,6 @@ function EditDesign({content}) {
                         <RadioCustom text="테두리" options={shapeOptions} value={content.box.borderRadius} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].box.borderRadius = e;
                         }))} />
-                        <SliderCustom top="크기" value={content.box.height} max={15} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].box.height = e;
-                        }))}/>
                     </>
                 }
             </OpenCloseCustom>

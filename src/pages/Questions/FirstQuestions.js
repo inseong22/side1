@@ -162,7 +162,7 @@ const colorList = [
 {name:'갈색',color:'#c99c75',},
 ]
 
-function FirstQuestions({setIsPhone, setContents, type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
+function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
     // 모달
     const [cnum, setCnum] = useState(1);
     const [title, setTitle] = useState("");
@@ -228,7 +228,6 @@ function FirstQuestions({setIsPhone, setContents, type, foot, setFoot, setType, 
         }
     }
     const nextAndSetDone = async e => {
-        console.log("나오나여? 여기는");
 
         const urlDatas = await dbService
             .collection("urlStores")
@@ -256,7 +255,6 @@ function FirstQuestions({setIsPhone, setContents, type, foot, setFoot, setType, 
                 return({...doc.data(), id:doc.id})
             });
             
-            console.log("나오나여?", defaultTemplate[0]);
             if(defaultTemplate){
                 setContents(defaultTemplate[0].contents);
                 setNavi(defaultTemplate[0].navi);
@@ -279,13 +277,20 @@ function FirstQuestions({setIsPhone, setContents, type, foot, setFoot, setType, 
 
             setSetting(produce(setting, draft => {
                 draft.title = title;
+                draft.cta.backgroundColor = color;
             }))
 
             setFoot(produce(foot, draft => {
                 draft.copyright.text = title;
             }))
 
-            handleClose();
+            if(JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']).length > 48000){
+                // 임시 방편으로 큰 데이터는 건너뛰도록 조치.
+                handleClose()
+            }else{
+                localStorage.setItem('temp', JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']));
+                handleClose()
+            }
         }
     }
 
@@ -317,13 +322,13 @@ function FirstQuestions({setIsPhone, setContents, type, foot, setFoot, setType, 
                             당신의 서비스 / 제품 명을 알려주세요.
                         </div>
                         <div className="modal-main-card">
-                        {/* <form onSubmit={() => setCnum(cnum + 1)} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}> */}
-                        <Input 
-                            className="input-holder input-focus" 
-                            placeholder="서비스/제품 명이 로고 자리에 들어갑니다." 
-                            value={title} 
-                            onChange={e => setTitle(e.currentTarget.value)} />
-                        {/* </form> */}
+                        <form onSubmit={() => setCnum(cnum + 1)} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
+                            <Input 
+                                className="input-holder input-focus" 
+                                placeholder="서비스/제품 명이 로고 자리에 들어갑니다." 
+                                value={title} 
+                                onChange={e => setTitle(e.currentTarget.value)} />
+                        </form>
                         <div className="modal-mini-text">
                             수정 가능하니 편하게 정해주세요 :)
                         </div>
@@ -437,7 +442,7 @@ function FirstQuestions({setIsPhone, setContents, type, foot, setFoot, setType, 
                                     })}
                                 </OverflowScrolling>
                             </div>
-                            <div className="modal-column">
+                            <div className="modal-column" style={{marginLeft:'2vw'}}>
                                 <div>
                                     색상을 선택해 주세요.
                                 </div>

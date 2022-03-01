@@ -20,7 +20,6 @@ function MainPage({history}) {
     },[])
 
     const sendData = async () => {
-        console.log(dbService);
         if(email.length < 4){
             alert("올바른 이메일 양식을 입력해 주세요!");
             return;
@@ -35,6 +34,12 @@ function MainPage({history}) {
     }
 
     const scrollDown = async () => {
+        await dbService.collection('gadata').get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              doc.ref.delete();
+            });
+          });
+
         for (var i = 0; i < gadata.length; i++) {
             await dbService.collection('gadata').add(gadata[i])
             //Do something
@@ -45,8 +50,6 @@ function MainPage({history}) {
             let eee = ee.docs.map(doc => {
                 return({...doc.data(), id:doc.id})
             });
-
-            console.log(eee[0])
 
         targets.current.scrollIntoView({behavior: 'smooth'})
     }

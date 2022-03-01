@@ -6,7 +6,6 @@ function Template4({content}) {
     */
 
     const uploadVideo = () => {
-        console.log(content)
     }
 
     return (
