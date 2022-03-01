@@ -166,11 +166,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             }
         </>)
     }
-
-    console.log("로그 테스트")
-    console.log("로그 테스트")
-    console.log("로그 테스트")
-
+    
     return (
         <>
         <NavBarV2 history={history} isLoggedIn={isLoggedIn} buttonOpen />

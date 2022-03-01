@@ -52,7 +52,7 @@ function ReviewSection({content, setting}) {
                                 onChange={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elements[index].rating = e.currentTarget.value;
                                 }))}  
-                                precision={0.1}
+                                precision={0.5}
                                 style={{ fontSize: `${content.rating.size}px`, color:`${content.rating.color}` }}
                                 // size={content.rating.size}
                                 // color={content.rating.color}

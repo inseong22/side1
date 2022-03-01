@@ -44,7 +44,7 @@ function ReviewSection({content, setting}) {
                             }}>
                             <Rating
                                 value={item.rating} 
-                                precision={0.1}
+                                precision={0.5}
                                 style={{ fontSize: `${content.rating.size}px`, color:`${content.rating.color}` }}
                                 // size={content.rating.size}
                                 // color={content.rating.color}

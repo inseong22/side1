@@ -20,7 +20,7 @@ import produce from 'immer'
 
 import styled from "styled-components";
 
-function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCategory, full}) {
+function NewSection({elementRef, setting, content, index, secNum, setSecNum, isPhone, setCategory, full}) {
     const [isHover, setIsHover] = useState('none');
 
     const setThisSection = () => {
@@ -103,13 +103,11 @@ function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCat
     
 
     return(
-        <div>
-        <div className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
+        <div ref={elementRef} className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{border:`${secNum === index ? '1px solid #918bff' : `1px solid ${content.backgroundColor}`}`}}>
             {!full && <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0)'}`}}>
-
             </div>}
             <div className="section__container" 
-                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat'}} 
+                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat', backgroundColor:'white'}} 
                     onClick={() => setThisSection()}>
                 {
                     content.backgroundType === 'color' ?
@@ -137,7 +135,6 @@ function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCat
                     {returnType()}
                 </div>
             </div>
-        </div>
         </div>
     )
 }

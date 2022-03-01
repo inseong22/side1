@@ -6,6 +6,7 @@ import MainPage from './pages/Landing/old/MainPage';
 import UserLandingPage from './pages/UserLanding/UserLandingPage';
 import MainPageV2 from './pages/Landing/MainPageV2';
 import MakePageV2 from './pages/Make/MakePageV2';
+import AdminPage from './pages/AdminPage/AdminPage';
 import ResponsePage from './pages/Response/ResponsePage';
 import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/unused/SubmitPage';
@@ -34,8 +35,8 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                 <ScrollToTop>
                 <div className="Container" style={{ minHeight: 'calc(100vh - 80px)', zIndex:-1 }}>
                     <Switch>
-                        <Route exact path="/oldoldoldold">
-                            <MainPage history={history}/>
+                        <Route exact path="/surfeeadminpage">
+                            <AdminPage history={history}/>
                         </Route>
                         <Route exact path="/" onUpdate={() => window.scrollTo(0, 0)}>
                             <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>

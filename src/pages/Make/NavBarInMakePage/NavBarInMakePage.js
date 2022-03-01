@@ -9,6 +9,7 @@ import LoginModal from '../../../components/Login/LoginModal'
 import { dbService } from '../../../tools/fbase';
 import { stService } from '../../../tools/fbase';
 import MakeTutorialModal from '../../../tools/MakeTutorialModal';
+import SaveAlert from '../../../tools/SaveAlert';
 import { v4 as uuidv4 } from 'uuid';
 import lodash from 'lodash'
 import produce from 'immer'
@@ -20,12 +21,15 @@ import {
     PopoverBody,
     PopoverArrow,
   } from '@chakra-ui/react'
+import {QuestionCircle} from '@styled-icons/bootstrap'
+
 
 const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone, loading, foot, editing,setEditing, setEditingId, editingId, setLoading, setting, navi, setNavi, saveLocalStorage}) => {
     const [loginModal, setLoginModal] = useState(false)
     const {state, action} = useContext(MyContext)
     const [deviceOpen, setDeviceOpen] = useState(false);
     const [tutorialOpen, setTutorialOpen] = useState(false);
+    const [saveOpen, setSaveOpen] = useState(false);
   
     const handleClick = () => {
         setDeviceOpen(!deviceOpen);
@@ -278,7 +282,10 @@ const afterSaveImage = async (returned) => {
             saveLocalStorage();
             const returned = await saveImages();
             await afterSaveImage(returned);
-            alert("저장되었습니다!");
+            setSaveOpen(true);
+            setTimeout(() => {
+                setSaveOpen(false);
+            },2100)
             setLoading(false);
         }
     }
@@ -386,10 +393,8 @@ const afterSaveImage = async (returned) => {
                     }} >
                         페이지 구성
                     </span>
-                    <span className="make-nav-button" onClick={e => {
-                        setTutorialOpen(true);
-                    }} style={{boxShadow:'none', width:'90px'}}>
-                        사용 방법
+                    <span className="make-nav-button" onClick={e => setTutorialOpen(true)} style={{boxShadow:'none', width:'110px'}}>
+                        사용 방법 <QuestionCircle size="13" color="rgba(0,0,0,0.5)" style={{marginLeft:'4px'}} />
                     </span>
                 </div>
                 <div className="make-page-nav-half">
@@ -411,6 +416,7 @@ const afterSaveImage = async (returned) => {
             </div>
             <LoginModal open={loginModal} setOpen={setLoginModal} />
             <MakeTutorialModal open={tutorialOpen} setOpen={setTutorialOpen} />
+            <SaveAlert open={saveOpen} />
         </ChakraProvider>
     )
 }
