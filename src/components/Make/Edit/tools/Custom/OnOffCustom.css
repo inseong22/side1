@@ -1,0 +1,27 @@
+.custom-switch{
+    width: 53px;
+    height:25px;
+    background:var(--main-gradient);
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    color: white;
+}
+.custom-switch:hover{
+    color: white;
+}
+
+.custom-switch-thumb{
+    background-color:white;
+    width:20px;
+    height: 20px;
+    box-shadow: var(--main-shadow-02);
+    border-radius: 100px;
+    left:2px;
+    top:2.5px;
+    position: absolute;
+}
+
+.unclicked{
+    background:#F2F6FA;
+}

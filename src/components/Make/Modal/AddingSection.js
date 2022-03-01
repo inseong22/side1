@@ -4,7 +4,25 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import {base} from '../SectionTypes/baseTypes'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import { Close } from '@styled-icons/evaicons-solid';
+import {dbService} from '../../../tools/fbase'
 import './AddingSection.css'
+
+import hero from '../../../tools/img/addSection/01hero.png'
+import detail from '../../../tools/img/addSection/02detail.png'
+import cta from '../../../tools/img/addSection/03cta.png'
+import apply from '../../../tools/img/addSection/04apply.png'
+import appDownload from '../../../tools/img/addSection/05appDownload.png'
+import feature from '../../../tools/img/addSection/06feature.png'
+import review from '../../../tools/img/addSection/07review.png'
+import qna from '../../../tools/img/addSection/08qna.png'
+import text from '../../../tools/img/addSection/09text.png'
+import gallery from '../../../tools/img/addSection/10gallery.png'
+import video from '../../../tools/img/addSection/11video.png'
+import mockup from '../../../tools/img/addSection/12mockup.png'
+
+const IMGS = [
+    hero, detail, cta, apply, appDownload, feature, review, qna, text, gallery, video, mockup
+]
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -30,7 +48,7 @@ const Backdrop = styled('div')`
 `;
 
 const style = {
-  width: 700,
+  width: 800,
   height: 500,
   bgcolor: 'rgba(255,255,255,1)',
   borderRadius:2,
@@ -42,16 +60,23 @@ const style = {
 function AddingSection({open, setOpen}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const addSection = (typeName) => {
+    const addSection = async (typeName) => {
         // 아래는 state.contents에 섹션 하나를 추가하는 것.
-        let body = JSON.parse(JSON.stringify(base.filter((item, index) => item.sectionTypeName === typeName)[0]))
+        
+        const ee = await dbService.collection('saved-page').where("urlId", '==', '0').get()
+
+        let eee = ee.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+
+        let body = JSON.parse(JSON.stringify(eee[0].contents.filter(doc => doc.sectionTypeName === typeName)[0]))
 
         action.setContents([
             ...state.contents.slice(0, state.contents.length),
             body,
         ])
-        action.setSecNum(state.contents.length)
-        action.setCategory(0);
+        setOpen(false)
+        // action.setSecNum(state.contents.length)
     }
 
     return (
@@ -66,17 +91,21 @@ function AddingSection({open, setOpen}) {
                 <Box sx={style}>
                     <div className="modal-top__title">
                         <div className="centera" style={{width:"95%"}}>
-                            섹션 추가
+                            원하는 섹션을 추가하세요
                         </div>
-                        <div style={{width:"5%", cursor:"pointer"}} onClick={() => setOpen(false)}>
-                            <Close size="30" />
+                        <div className="modal-close-button" onClick={() => setOpen(false)}>
+                            <Close size="25" />
                         </div>
                     </div>
                     <div className="section-modal__container">
                         {base.map((item,index) => {
                             return(
-                                <div className="section-modal__button" key={index} onClick={() => addSection(item.sectionTypeName)}>
-                                    {item.sectionTypeName}
+                                <div className="section-modal__button" key={index} onClick={() => 
+                                {addSection(item.sectionTypeName); 
+                                    // isScroll(true);
+                                }}>
+                                    <img src={IMGS[index]} width={90} />
+                                    {item.name}
                                 </div>
                             )
                         })} 

@@ -3,11 +3,12 @@ import { authService } from '../../../tools/fbase'
 import { firebaseInstance } from '../../../tools/fbase'
 import { dbService } from '../../../tools/fbase'
 import { Input } from 'antd';
-import googlelogo from '../googlelogo.png'
+import googlelogo from '../../../tools/img/googlelogo.png'
 import s1 from '../../../tools/img/surfee1.png';
 import {Link} from 'react-router-dom';
+import NavBarV2 from '../../NavAndFooter/NavBarV2'
 
-function RegisterPage({history}) {
+function RegisterPage({history, isLoggedIn}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [done, setDone] = useState(false);
@@ -22,14 +23,12 @@ function RegisterPage({history}) {
         if (name === "googleLogin"){
             provider = new firebaseInstance.auth.GoogleAuthProvider();
         }else{
-            console.log("이건 뜨면 안되는 메세지.");
         }
 
         const data = await authService.signInWithPopup(provider);
         await checkRegister(data.user.multiFactor.user.email);
         setDone(true);
 
-        console.log(data.user.multiFactor.user, "로그인");
     }
 
     const submit = async (e) => {
@@ -39,14 +38,13 @@ function RegisterPage({history}) {
             data = await authService.createUserWithEmailAndPassword(
                 id, password
             )
-            console.log(data)
         } catch (err){
             if(err.code === "auth/email-already-in-use"){
-                alert("이미 존재하는 아이디입니다. 로그인 해주세요.");
+                alert("이미 존재하는 아이디입니다. 로그인 해 주세요.");
                 history.push('/#/login');
                 history.go();
             }else if(err.code === "auth/invalid-email"){
-                alert("이메일 양식에 맞게 작성해주세요.");
+                alert("이메일 양식에 맞게 작성해 주세요.");
             }else{
                 alert("옳바르지 않은 회원가입 시도입니다.");
             }
@@ -68,7 +66,6 @@ function RegisterPage({history}) {
 
         if(usersExist.length === 0){
             // 구글 아이디로 로그인했는데 회원가입에 정보가 없을 때
-            console.log("회원가입 정보를 받습니다.");
         }
     }
 
@@ -84,6 +81,7 @@ function RegisterPage({history}) {
 
     return (
         <>
+        <NavBarV2 history={history} isLoggedIn={isLoggedIn}/>
         {done ? 
         <div className="login-container">
             <div className="login__inner">
@@ -93,14 +91,14 @@ function RegisterPage({history}) {
                 <form className="form-container" onSubmit={e => submitInfo(e)}>
                     <input 
                         type="text" 
-                        placeholder="이름을 입력해주세요." 
+                        placeholder="이름을 입력해 주세요." 
                         required
                         value={name}   
                         onChange={e => setName(e.currentTarget.value)}
                     />
                     <input  
                         type="text" 
-                        placeholder="직업을 입력해주세요." 
+                        placeholder="직업을 입력해 주세요." 
                         required
                         value={job} 
                         onChange={e => setJob(e.currentTarget.value)}
@@ -127,7 +125,7 @@ function RegisterPage({history}) {
                         <Input 
                             type="text" 
                             className="login-input"
-                            placeholder="아이디를 입력해주세요." 
+                            placeholder="아이디를 입력해 주세요." 
                             required
                             value={id}   
                             onChange={e => setId(e.currentTarget.value)}
@@ -138,7 +136,7 @@ function RegisterPage({history}) {
                         <Input  
                             type="password" 
                             className="login-input"
-                            placeholder="비밀번호를 입력해주세요." 
+                            placeholder="비밀번호를 입력해 주세요." 
                             required
                             value={password} 
                             onChange={e => setPassword(e.currentTarget.value)}

@@ -1,15 +1,14 @@
 .confirm-button{
-    width:80px;
+    width:75px;
     margin:1%;
     background-color:white;
-    padding:10px;
+    padding:8px 12px;
     font-size:1em;
     display: flex;
     justify-content:center;
     align-items:center;
     cursor:pointer;
     border:none;
-    font-family: Pretendard-Regular;
     border-radius: 5px;
 }
 
@@ -18,14 +17,14 @@
 }
 
 .confirm-message{
-    font-family: Pretendard-Regular;
-    font-size:1.2em;
+    font-size:1em;
+    font-weight: normal;
 }
 
 .confirm-button__container{
     height:20%;
     padding-top:1%;
     justify-content:end;
-    border-top:1px solid rgba(0,0,0,0.1);
+    /* border-top:1px solid rgba(0,0,0,0.1); */
 }
 

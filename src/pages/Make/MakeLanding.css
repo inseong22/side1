@@ -189,30 +189,39 @@
     display: flex;
     padding-bottom:10%;
     left:0%;
-    width:30vw;
+    width:28vw;
     top:7vh;
     height:93vh;
     z-index:1;
 }
 
 .make-page-make-space{
-    font-family: Noto Sans KR;
     font-weight:500;
-    background-color:rgb(255, 255, 255);
     flex-direction: column;
     display: flex;
-    padding-bottom:10%;
     position:fixed;
     left:0%;
-    width:30vw;
-    top:7vh;
-    height:93vh;
-    z-index: 2;
+    width:28vw;
+    top:0vh;
+    padding-top:8vh;
+    height:100vh;
+    z-index: 5;
 }
 
 .overflow-scrolling {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    height: 100%;
+    box-shadow: var(--default-shadow-01);
+    background-color:rgb(255, 255, 255);
+    border-radius: 20px 20px 0px 0px;
+    padding-bottom:30px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.overflow-scrolling::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 
 .title-desc-text{

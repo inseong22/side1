@@ -23,11 +23,34 @@
 
         gtag('config', 'G-X3P8WL2EDT');
       </script>
-
-    <title id="urltitle">Sufree | Landing Page Saas</title>
+      <script src="http://code.jquery.com/jquery.min.js"></script>
+      <script type="text/javascript">
+          var logger = function() {
+              var oldConsoleLog = null;
+              var pub = {};
+              pub.enableLogger = function enableLogger() {
+                  if (oldConsoleLog == null)
+                      return;
+                  window['console']['log'] = oldConsoleLog;
+              };
+              pub.disableLogger = function disableLogger() {
+                  oldConsoleLog = console.log;
+                  window['console']['log'] = function() {};
+              };
+              return pub;
+          }();
+       
+          $(document).ready(
+              function() {
+                  logger.disableLogger();
+                  console.log('콘솔 로그가 다시 찍힌다.');
+              }
+          );
+      </script>
+    <title id="urltitle">Surfee | Landing Page Saas</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>원하는 디자인의 랜딩페이지를 1분만에 쉽고 빠르게 제작해 보세요.</noscript>
     <div id="root"></div>
   </body>
 </html>

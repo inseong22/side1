@@ -1,8 +1,8 @@
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');} 
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');} 
-@font-face {font-family: 'Noto Sans KRRE';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');} 
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');} 
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');} 
-@font-face {font-family: 'Noto Sans KRBO';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');} 
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');} 
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
 
 @font-face {
@@ -11,7 +11,6 @@
      font-weight: normal;
      font-style: normal;
 }
-
 
 @font-face {
      font-family: 'S-CoreDream-4Regular';
@@ -59,13 +58,76 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'SF_HambakSnow';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Cafe24Ssurround';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'LeferiPoint-BlackA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GowunBatang-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NanumSquareRound';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
   --make-border: rgb(192, 192, 192);
   --main-color: #6B63F7;
+  --main-color-soft:#A89AFF;
+  --main-font-color: #202936;
   --main-hover-color: #b3b0f5;
-}
 
+  --default-shadow-01: 2px 4px 20px #E8F0F9;
+  --non-hover-button-shadow: 2px 4px 20px #E5E5E5;
+  --br-01: 25px;
+  --br-02:32px;
+  --main-gradient:linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
+  --main-shadow-01:4px 4px 15px #D0CDFF;
+  --main-shadow-02:2px 2px 8px rgba(0,0,0,0.25);
+  --main-button-shadow:2px 2px 6px #b1b1b1;
+
+  --main-gray:#C4CACF;
+  --main-light-gray:#e1e5e9;
+  --main-dark-gray: #555C67;
+  --main-black-01:#202936;
+  --main-light-gray-02:#F2F6FA;
+
+  --section-top: 22px;
+  --section-main: 20px;
+  --func-title: 15px;
+  --func-subtitle: 14px;
+  --func-subtitle-mini: 12px;
+  --small-text: 12px;
+
+  --button-font-size : 0.9em;
+  --input-font-size: 13px;
+  --made-button-padding: 8px 8.5px;
+
+  --feature-title-size:1.1em;
+  --feature-desc-size:0.95em;
+  --feature-writer-size:0.85em;
+  --big-margin:12px;
+  --mid-margin:8px;
+}
 
 .App {
   text-align: center;
@@ -91,8 +153,83 @@
 .insta:hover{
   color:rgb(50,50,50);
 }
+
+.uphover{
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.uphover:hover{
+  transform: translate(0px, -4px);
+  box-shadow:0px 3px 8px rgba(50,50,50,0.2);
+}
+
+.hover-shadow{
+  cursor:pointer;
+  box-shadow: var(--default-shadow-01);
+}
+
+.hover-shadow:hover{
+  box-shadow: 2px 4px 20px #d7dbdf;
+}
+
+.opacity-hover{
+  background-color: rgba(255,255,255);
+}
+.opacity-hover:hover{
+  background-color: rgba(245,245,245);
+}
+
+.radio-hover{
+  background-color: rgba(255,255,255);
+}
+.radio-hover:hover{
+  background-color: rgba(240,240,240);
+}
+
+.our-hover{
+  background-color:#6a63f7;
+}
+.our-hover:hover{
+  background-color:#544cee;
+}
+
 .mobile-hide{
   display: none;
+}
+.default-button-01{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  box-shadow: 4px 4px 15px #E8F0F9;
+  border-radius: var(--br-02);
+  color:black;
+  font-family: Noto Sans KR;
+  font-weight: normal;
+  font-size: 15px;
+  border:none;
+  padding:0px 1.5vw;
+  height:38px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.default-button-02{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background:var(--main-gradient);
+  box-shadow: var(--non-hover-button-shadow);
+  border-radius: var(--br-02);
+  color:white;
+  font-size: 15px;
+  border:none;
+  padding:0px 1.5vw;
+  height:38px;
+  cursor: pointer;
+  font-family: Noto Sans KR;
+  font-weight: normal;
+  margin-left:0.3vw;
 }
 
 .center-row{
@@ -122,6 +259,36 @@
   height:100%;
   width:100%;
   box-sizing:border-box;
+  font-size: var(--func-subtitle);
+  font-weight: 700;
+}
+
+/* .button-centera{
+  display:flex;
+  justify-content: center;
+  align-items: start;
+  height:100%;
+  width:100%;
+  box-sizing:border-box;
+  font-size: var(--func-subtitle);
+  font-weight: 700;
+} */
+
+.input-centera{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  width:100%;
+  box-sizing:border-box;
+}
+
+.comment{
+  margin-top: 20px;
+  margin-bottom:-20px;
+  font-size: var(--func-subtitle);
+  color: var(--main-black-01);
+  font-weight: 500;
 }
 
 .left{
@@ -130,6 +297,16 @@
   align-items: center;
   width:50%;
   padding-left:5px;
+}
+
+.left-top{
+  display:flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  padding-left: 22px;
+  padding-top: 20px;
+  margin-bottom: 20px;
 }
 
 .right{
@@ -150,11 +327,72 @@
 }
 
 .text-input{
+  border:1px solid rgba(200,200,200,0);
+  background-color:rgba(0,0,0,0);
   width:100%;
-  border:1px solid rgba(200,200,200,0.4);
+  overflow:hidden;
+  word-wrap:break-word;
 }
+
+.text-no-input{
+  border:1px solid rgba(200,200,200,0);
+  background-color:rgba(0,0,0,0);
+  width:100%;
+  overflow:hidden;
+  word-wrap:break-word;
+}
+.text-no-input:hover{
+  border:1px solid rgba(200,200,200,0);
+}
+.text-no-input:focus{
+  border:1px solid rgba(200,200,200,0);
+  outline:none;
+}
+
+
 .text-input:hover{
   border:1px solid rgba(200,200,200,0.7);
+}
+
+.text-input:focus {
+  outline:1px solid #383838;
+}
+
+.ti:hover{
+  border:1px solid rgba(200,200,200,0.7);
+  z-index: 10;
+}
+
+.ti:focus {
+  outline:1px solid #6e5c5c;
+  z-index: 10;
+}
+
+.text-input-flex{
+  border:1px solid rgba(200,200,200,0);
+  background-color:rgba(0,0,0,0);
+  font-size:var(--button-font-size);
+  padding:var(--made-button-padding);
+}
+.text-input-button{
+  border:none;
+  background-color:rgba(0,0,0,0);
+  font-size:13px;
+  padding:var(--made-button-padding);
+  cursor:pointer;
+}
+.pointer{
+  cursor: pointer;
+}
+
+.row{
+  display: flex;
+  flex-direction:row;
+}
+
+.column{
+  display:flex;
+  flex-direction:column;
 }
 
 @font-face {
@@ -184,11 +422,6 @@
 }
 
 @media screen and (max-width:800px){
-  .footer{
-    padding-left: 15vw;
-    font-size:10px;
-    height:150px;
-  }
   .mobile-hide{
     display: flex;
     justify-content: center;

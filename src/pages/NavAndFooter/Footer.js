@@ -3,33 +3,35 @@ import {Link} from 'react-router-dom'
 
 function Footer() {
     return (
-        <footer className="footer">
+        <div className="footer">
             <div className="footer-more">
               <div className="footer-item">
-                <a href="https://6cetqycakbc.typeform.com/to/oRcv6Qdu" className="insta" style={{fontSize:'25px'}}>Surfee</a>
-                <a href="https://6cetqycakbc.typeform.com/to/oRcv6Qdu" className="insta" style={{marginLeft:'3%', color:'black'}}>🙋🏻‍♂️ 문의하기 클릭</a>
+                <a href="https://6cetqycakbc.typeform.com/to/oRcv6Qdu" className="insta" style={{fontSize:'21px'}}>Surfee</a>
+                <a href="https://6cetqycakbc.typeform.com/to/oRcv6Qdu" className="insta" style={{marginLeft:'3%'}}>Contact Us</a>
               </div>
-              <div className="footer-item" style={{flexDirection:'column', alignItems:'start'}}>
-                <span>
+              <div className="footer-item">
                 Phone : 010-4690-5086
-                </span>
-                <span>
-                E-mail : surfee.business@gmail.com 
-                </span>
               </div>
-              <div className="footer-item" style={{color:"black"}}>
-                {new Date().getFullYear()} Copyright © Surfee, All rights reserved
+              <div className="footer-item">
+                E-mail : surfee.business@gmail.com 
+              </div>
+              <div className="footer-item">
+                {new Date().getFullYear()} Copyright Surfee, All rights reserved
               </div>
             </div>
             <div className="footer-more">
-                <Link to="/customer" className="footer-text-click">
+              <div className="footer-item">
+                <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" className="footer-text-click">
                   이용약관
-                </Link>
-                <Link to="/customer" className="footer-text-click">
+                </a>
+              </div>
+              <div className="footer-item">
+                <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" className="footer-text-click">
                   개인정보 처리방침
-                </Link>
+                </a>
+              </div>
             </div>
-        </footer>
+        </div>
     )
 }
 

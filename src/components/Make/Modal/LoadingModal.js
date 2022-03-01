@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
+import "@lottiefiles/lottie-player";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -26,18 +27,16 @@ const Backdrop = styled('div')`
 `;
 
 const style = {
-  width: 500,
-  bgcolor: 'rgba(255,255,255,0.2)',
-  border: '2px solid #000',
+  width: 300,
+  width: 300,
+  bgcolor: 'rgba(255,255,255,0)',
+  border: '0px solid #000',
   p: 2,
   px: 4,
   pb: 3,
 };
 
 function LoadingModal({loading, setLoading}) {
-    const [cnum, setCnum] = useState(1);
-    const handleOpen = () => setLoading(true);
-    const handleClose = () => setLoading(false);
 
     return (
         <div>
@@ -47,9 +46,16 @@ function LoadingModal({loading, setLoading}) {
                 open={loading}
                 BackdropComponent={Backdrop}
             >
-                <Box sx={style}>
-                    <span>로딩중</span>
-                </Box>
+              <Box sx={style}>
+                <lottie-player
+                    autoplay
+                    loop
+                    mode="normal"
+                    src="https://assets2.lottiefiles.com/packages/lf20_tiuij39a.json"
+                    style={{width:'200px'}}
+                >
+                </lottie-player>
+              </Box>
             </StyledModal>
         </div>
     )

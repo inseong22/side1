@@ -1,0 +1,40 @@
+
+.number-input{
+    margin-left:50px;
+    background-color:white;
+    border-radius: 5px;
+    padding:8px 12px;
+    margin-left:30px;
+    border:none;
+    width:50px;
+    font-size:var(--small-text);
+    font-weight: 600;
+    border:1px solid var(--main-light-gray);
+}
+
+.slider__container{
+    background-color:var(--main-light-gray-02);
+    border-radius: 5px;
+}
+
+.slider-small-command{
+    display: flex;
+    justify-content:start;
+    align-items:center;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 10px;
+    text-align: left;
+    margin: 0 auto;
+    padding:8px 5px;
+}
+
+.slider-medium-command{
+    display: flex;
+    justify-content:start;
+    align-items:center;
+    font-size: var(--func-subtitle);
+    font-weight: 700;
+    padding:8px 5px 2px 5px;
+    width:340px;
+}

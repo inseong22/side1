@@ -1,0 +1,135 @@
+/* 
+.nav-button:hover{
+    font-weight: 600;
+}
+
+.nav-on-v2{
+    display: flex;
+    align-items :center;
+    width:100%;
+    cursor:pointer;
+    justify-content : center;
+    margin-right:5vw;
+}
+
+.nav-bar-container{
+    position: fixed;
+    top: 0;
+    z-index:3;
+    height:60px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items : center;
+    flex-direction: row;
+}
+
+.nav-bar-container-top22{
+    position: fixed;
+    top: 0;
+    z-index:3;
+    height:63px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items : center;
+    flex-direction:row;
+    box-sizing: border-box;
+    padding:1% 3% 1% 7%;
+    background-color: #01415D;
+}
+
+.nav-bar-title22{
+    margin-top:4px;
+    font-size:29px;
+    font-weight: 700;
+    text-align:start;
+    text-decoration: none;
+    color:var(--main-color1);
+    display: flex;
+    justify-content: start;
+    align-items : center;
+    width:100%;
+    font-family: SCDBold;
+}
+
+.nav-on{
+    display: flex;
+    justify-content :end;
+    align-items : center;
+    width:100%;
+}
+
+.footer{
+  background-color:rgb(37, 37, 37);
+  display: flex;
+  justify-content : center;
+  align-items : center;
+  color:rgb(131, 131, 131);
+  font-weight:400;
+  flex-direction: row;
+  width:100%;
+  padding:20px 10px;
+  box-sizing: border-box;
+}
+
+.footer-item{
+    margin-top:7px;
+    width:100%;
+    display: flex;
+    justify-content : start;
+    align-items : center;
+    box-sizing: border-box;
+    flex-direction:column;
+}
+
+
+.footer-more{
+    width:100%;
+    padding-left:20%;
+    height:60%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content :end;
+    box-sizing: border-box;
+  }
+
+.footer-text-click{
+  color:rgb(131, 131, 131);
+    text-decoration: none;
+}
+
+.footer-text-click:hover{
+    color:black;
+}
+
+.apply-button22{
+    border:none;
+    cursor: pointer;
+    background-color:white;
+    border-radius:50px;
+    color:black;
+    width:120px;
+    height:35px;
+    display: flex;
+    align-items:center;
+    justify-content : center;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+@media screen and (max-width:800px){
+    .nav-button{
+        font-size: 15px;
+    }
+    .nav-bar-title{
+        font-size:24px;
+    }
+    .footer-item{
+      justify-content : center;
+    }
+    .footer-more{
+        padding-left:5%;
+    }
+} */

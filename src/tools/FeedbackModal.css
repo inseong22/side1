@@ -1,0 +1,174 @@
+.big-title{
+    color: var(--main-color);
+    font-weight: 700;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 43px;
+    font-family: 'Noto Sans KR';
+    letter-spacing: -0.1em;
+}
+.sub{
+    color: black;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 38px;
+}
+.question{
+    color: black;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 34px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+.small-text{
+    font-weight: 700;
+    font-size: 15px;
+    margin-top: 20px;
+    color: black;
+    letter-spacing: 0em;
+}
+.feed-button{
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+    font-size: 18px;
+    background: var(--main-gradient);
+    width: 281.8px;
+    height: 44px;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: var(--main-shadow-01);
+    color: #FFFFFF;
+    margin: 0 auto;
+    margin-top: 50px;
+    line-height: 44px;
+    cursor: pointer;
+}
+.questnum{
+    width: 514px;
+    height: 50px;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 23px;
+    line-height: 72px;
+    text-align: center;
+    color: #000000;
+    margin: 0 auto;
+}
+.column-ans{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Noto Sans KR';
+    letter-spacing: -0.05em;
+    font-weight: 600;
+    font-size: 15px;
+    height: auto;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.row-ans{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Noto Sans KR';
+    letter-spacing: -0.05em;
+    font-weight: 600;
+    font-size: 15px;
+    height: 60px;
+    line-height: 60px;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    width: 450px;
+}
+.subtext{
+    color: var(--main-color);
+}
+.circle-text{
+    width: 65px;
+    text-align: center;
+    color: var(--main-color);
+    height: 57px;
+    line-height: 57px;
+}
+.circle-ans-button{
+    background: #FFFFFF;
+    box-shadow: 6px 6px 24px rgba(0, 0, 0, 0.15), inset 3px 2px 4px rgba(108, 99, 255, 0.1), inset -6px -4px 8px rgba(108, 99, 255, 0.25);
+    border-radius: 50%;
+    width: 57px;
+    height: 57px;
+    text-align: center;
+    line-height: 57px;
+    color: var(--main-color);
+    cursor: pointer;
+}
+.circle-ans-button:hover{
+    background: var(--main-gradient);
+    color: white;
+}
+.round-ans-button{
+    background: #FFFFFF;
+    box-shadow: 6px 6px 24px rgba(0, 0, 0, 0.15), inset 3px 2px 4px rgba(108, 99, 255, 0.1), inset -6px -4px 8px rgba(108, 99, 255, 0.25);
+    border-radius: 250px;
+    width: 238px;
+    height: 57px;
+    line-height: 57px;
+    text-align: center;
+    color: var(--main-color);
+    cursor: pointer;
+    margin-bottom: 5px;
+    font-family: 'Noto Sans KR';
+}
+.round-ans-button:hover{
+    background: var(--main-gradient);
+    color: white;
+}
+
+.prev-next-fbuttons{
+    display: flex;
+    justify-content: space-between;
+    width: 245px;
+    align-items: center;
+    margin: 0 auto;
+}
+.prev-next-fbutton{
+    font-family: 'Noto Sans KR';
+    width: 116.31px;
+    height: 44px;
+    background-color: var(--main-gray);
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 44px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    border:none;
+    box-shadow: var(--main-button-shadow);
+    cursor: pointer;
+}
+.prev-next-fbutton:hover{
+    background: var(--main-gradient);
+}
+.text-modal-input {
+    box-shadow: var(--main-shadow-01);
+    background: #FFFFFF;
+    width: 513px;
+    height: 57px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    border-radius: 10px;
+    align-items: center;
+}
+.inputbox{
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}

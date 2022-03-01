@@ -1,85 +1,92 @@
 import React, {useState, useEffect} from 'react';
 import './ResponsePage.css';
 import {dbService} from '../../tools/fbase';
-import {authService} from '../../tools/fbase';
 import ReactGa from 'react-ga'
-import NavBarV2 from '../NavAndFooter/NavBarV2'
 import Footer from '../NavAndFooter/Footer'
-import { Table, Tag, Space } from 'antd';
 import MadeLandingCard from '../../components/Response/MadeLandingCard'
-import gadata from '../../components/Response/data/gadata.json';
+import ResponseNavBar from '../../components/Response/ResponseNavBar'
+import ChromeTapBar from '../../components/Response/ChromeTapBar'
+import ResultTable from '../../components/Response/ResultTable'
+import ResultTopTitle from '../../components/Response/ResultTopTitle'
+import LoadingDisplay from '../../tools/LoadingDisplay'
+import {Link } from 'react-router-dom'
+import gadata from '../../tools/datacodes/gadata.json'
+import { Tooltip, ChakraProvider } from '@chakra-ui/react'
+import { InformationCircle } from '@styled-icons/ionicons-outline';
+import ChannelTalk from '../../tools/ChannelTalk'
 
-const columns = [
-    {
-      title: '이메일',
-      dataIndex: 'email',
-      key: 'email',
-      render: text => <a>{text}</a>,
-    },
-    {
-      title: '신청한 날짜',
-      dataIndex: 'date',
-      key: 'date',
-      render: date => <span>2021년 {date.getMonth()+1}월 {date.getDate()}일 {date.getHours()}시에 신청 </span>
-    },
-    {
-      title: '유입 URL',
-      dataIndex: 'urlId',
-      key: 'urlId',
-      render: text => <span>{text}</span>
-    },
-  ];
-  
+const NOTCLICKED = 10000
+
 function ResponsePage({userObj, history}) {
-    const [id, setId] = useState("");
-    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [update, setUpdate] = useState(false);
     const [responses, setResponses] = useState([[]]);
+    const [datas, setDatas] = useState([[]]);
     const [mylandings, setMylandings] = useState([]);
+    const [published, setPublished] = useState([]);
     const [part, setPart] = useState(1);
-    const [myDatas, setMyDatas] = useState({
-        all_sessions:0,
-        all_pageViews:0
-    });
-    const [nowChecking, setNowChecking] = useState(10000);
+    const [nowChecking, setNowChecking] = useState(NOTCLICKED);
     
     useEffect(() => {
+        ChannelTalk.boot({
+            "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"
+        });
         // to report page view
-        ReactGa.initialize('UA-213792742-1');
-        ReactGa.pageview(`/seeResponse/${userObj.email}`);
+        // ReactGa.initialize('UA-213792742-1');
+        // ReactGa.pageview(`/response/${userObj.email}`);
         getThisUserDatas();
-    },[loading])
+    },[loading, update])
 
     const getThisUserDatas = async () => {
+        // setLoading(false);
         const thisuserDatas = await dbService
-            .collection('made-page')
+            .collection('saved-page')
             .where("makerEmail", "==", userObj.email)
             .get();
         
         let thisuserData = thisuserDatas.docs.map(doc => {
             return({...doc.data(), id:doc.id})
         });
+
         setMylandings(thisuserData);
-        
+
+        getThisPublished();
+        let tempApplyDatas = []
         let tempDatas = []
         
         thisuserData.map(item => {
             let tempd = []
-            getDatas(item.setting.urlId).then(i => {
+            getResponses(item.id).then(i => {
+                tempd = i;
+                tempApplyDatas.push(tempd);
+            })
+            getDatas(item.id).then(i => {
                 tempd = i;
                 tempDatas.push(tempd);
             })
         })
-        setResponses(tempDatas);
+        setResponses(tempApplyDatas);
+        setDatas(tempDatas);
 
         setLoading(true);
-}
+    }
 
-    const getDatas = async (urlId) => {
+    const getThisPublished = async () => {
+        const publishedDatas = await dbService
+            .collection('published-page')
+            .where("makerEmail", "==", userObj.email)
+            .get();
+        let publishedData = publishedDatas.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+        setPublished(publishedData);
+    }
+
+    const getResponses = async (pageId) => {
         const reDatas = await dbService
-            .collection("apply-datas") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
+            .collection("datas") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
             .orderBy("created", "desc")
-            // .where("urlId", "==", urlId)
+            .where("pageId", "==", pageId)
             .get();
 
         let reData = reDatas.docs.map(doc => {
@@ -87,90 +94,113 @@ function ResponsePage({userObj, history}) {
             return({...doc.data(), id:doc.id, date:day})
         });
 
-        console.log(reData);
-
         return reData;
     }
 
-    const getMyData = (path) => {
-        let all_data = gadata.reports[0].data.rows;
-        
-        const myData = all_data.filter(item => item.dimensions[2] === `${path}`);
-        let all_sessions = 0;
-        let all_pageViews = 0;
-        myData.map((item, index) => {
-            console.log("여기서", item.dimensions);
-            console.log("세션 수 : ", item.metrics[0].values[0]);
-            console.log("페이지 뷰 수 : ", item.metrics[0].values[1]);
-            console.log("세션 머무르는 : ", item.metrics[0].values[2]);
-            all_sessions += parseInt(item.metrics[0].values[0]);
-            all_pageViews += parseInt(item.metrics[0].values[1]);
+    const getDatas = async (pageId) => {
+        const reDatas = await dbService
+            .collection("gadata") // apply-datas는 유저가 만든 랜딩페이지에 들어와서 목표 액션을 한 데이터.
+            .where("path", "==", '/' + pageId)
+            .get();
+
+        let result = reDatas.docs.map(doc => {
+            let day = new Date(doc.data().created)
+            return({...doc.data(), id:doc.id, date:day})
+        });
+
+        return result[0];
+    }
+
+    const checkPublished = (urlId) => {
+        let found = false
+        published.map((item,index) => {
+            if(item.urlId === urlId){
+                found = item
+            }
         })
-        console.log("총 세션 수 : ", all_sessions );
-        console.log("총 페이지 뷰 수 : ", all_pageViews );
-        const body = {
-            all_sessions,
-            all_pageViews,
+        if(found){
+            return found
+        }else{
+            return false
         }
-        setMyDatas(body);
     }
 
     const returnMylandingsTable = mylandings.map((item, index) => {
         return(
-            <MadeLandingCard history={history} item={item} key={item.id} index={index} setNowChecking={setNowChecking} />
+            <MadeLandingCard 
+                history={history} item={item} key={item.id} index={index} 
+                published={checkPublished(item.urlId)} setNowChecking={setNowChecking} 
+                nowChecking={nowChecking} num={mylandings.length} setUpdate={setUpdate} update={update}/>
         )
     })
+
         if(loading === true){
             return (
-                <div style={{backgroundColor:'white', display:'flex', justifyContent:'center',alignItems:'center', width:'100%', flexDirection:'column'}}>
+                <ChakraProvider>
+                <div className="response__container">
+                <ResponseNavBar />
                 <div className="get-all-container">
                     <div className="get-up-container">
                         <div className="get-up-title">
-                            김호진 님의 대시보드
+                            {userObj.displayName} 님의 랜딩페이지를 관리해 보세요 :)
+                            {
+                                mylandings.length > 2 &&
+                               <span className="response-subtext">현재 버전에서 랜딩페이지는 최대 3개까지 만들 수 있습니다. 새로운 페이지를 만들고 싶다면 기존의 페이지를 삭제해 주세요.</span>
+                        }
                         </div>
                         <div className="get__mylandings-cantainer">
                             {returnMylandingsTable}
-                        </div>
-                        <div className="get-buttons-container">
-                            <button className="get-part-button" style={{backgroundColor:`${part === 1 ? "#6a63f76e" : "white"}`}} onClick={e => setPart(1)}>응답</button>
-                            <button className="get-part-button" style={{backgroundColor:`${part === 2 ? "#6a63f76e" : "white"}`}} onClick={e => setPart(2)}>데이터</button>
+                            {
+                                mylandings.length < 3 &&
+                                <MadeLandingCard addNew />
+                            }
                         </div>
                     </div>
-                    <div className="get-down-container">
+                    {
+                    nowChecking !== NOTCLICKED ? 
+                    <div className="response-down__container">
+                        <ChromeTapBar content={mylandings[nowChecking]}/>
                         { part === 1 ? 
-                        // 응답 파트
-                        <div className="response-container">
-                            <div className="response-table">
-                                <div className="response-table-top">
-                                    <span className="response-table-title"> {nowChecking === 10000 ? "응답을 볼 페이지를 클릭하세요." : <div>총 목표액션 전환 수 : {responses[nowChecking].length} 명</div>} </span>
-                                </div>
-                                {responses.length === 0 ? <></> : <Table columns={columns} dataSource={responses[nowChecking]} className="response-table-datas"/>}
-                            </div>
+                        <div className="response-display__container">
+                            <ResultTopTitle content={mylandings[nowChecking]} myResponses={responses[nowChecking]} checkPublished={checkPublished} datas={datas[nowChecking]} history={history}/>
+                            <ResultTable responses={responses} nowChecking={nowChecking} />
                         </div>
                         :
                         <>
                         {/* 데이터 파트 */}
-                        <div style={{height:'100vh'}}>
-                            <button onClick={() => getMyData()}>데이터 불러오기</button>
+                        {/* <div style={{height:'100vh'}}>
                             <div>
                                 <span className="data-one-mini-card">총 페이지 뷰 수 {myDatas.all_pageViews}</span>
                                 <span className="data-one-mini-card">총 세션 수 {myDatas.all_sessions}</span>
                             </div>
-                        </div>
+                        </div> */}
                         </>
                         }
                     </div>
+                    :
+                    <div style={{marginTop:'15px'}}>
+                        {
+                            mylandings.length === 0 ?
+                            <div>
+                                10분 만에 새로운 랜딩페이지를 만들고 간편하게 유저의 반응을 확인해 보세요!
+                            </div>
+                            :
+                            <div>
+                                확인할 페이지를 클릭하세요
+                            </div>
+                        }
+                    </div>
+                    }
                 </div>
-                <Footer />
+                <div style={{fontSize:'15px', width:'100%', marginTop:'40vh'}}>
+                    <Footer />
                 </div>
+                </div>
+                </ChakraProvider>
             )
         }else{
             return(
-                <>
-                <div>
-                    유저 정보를 불러오는 중입니다..
-                </div>
-                </>
+                <LoadingDisplay />
             )
         }
 }

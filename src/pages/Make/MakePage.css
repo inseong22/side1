@@ -6,15 +6,11 @@
     height: 100%;
     width:100%;
     overflow:hidden;
-    background-color:white;
-    padding-top:60px;
     position:relative;
+    background-color:#edf0f3;
 }
-
-.make-page-example{
-    width:70%;
-    height:100%;
-    background-color:pink;
+.section-animation{
+    width: 100%;
 }
 
 .colorSelection{
@@ -134,15 +130,15 @@
 }
 
 .make-left-landing{
+    height: auto;
     display:flex;
-    width:100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding:3% 0%;
-    z-index: 1;
+    padding:5px 0px 0px 0px;
+    z-index: 4;
     -webkit-overflow-scrolling: touch;
-    background-color:rgba(200,200,200,0.3);
+    border-radius: 0px 0px 20px 20px;
 }
 
 .make-main-page-container{
@@ -154,15 +150,16 @@
     background-color:white;
     z-index: 10;
     overflow:visible;
+    border-radius: 0px 0px 20px 20px;
   }
 
 .scroll-container{
-    border-radius:10px;
     overflow: auto;
-    z-index:10;
-    /* box-shadow: 3px 3px 8px rgba(0,0,0,0.4); */
-    overflow:visible;
+    z-index:4;
+    border-radius: 20px;
+    overflow: visible;
 }
+
 .make-left-bottom-container{
     justify-content: center;
     align-items: center;
@@ -175,4 +172,79 @@
     width:80%;
     justify-content: start;
     align-items: center;
+}
+
+.make-tab-preseen{
+    /* Surfee WG */
+    background: #F2F6FA;
+    /* 기본 섀도우 01 */
+
+    /* box-shadow: 2px 4px 20px #E8F0F9; */
+    border-radius: 20px 20px 0px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items :center;
+    justify-content:start;
+    height:40px;
+    position: relative;
+    cursor: pointer;
+}
+
+.make-tab-circle{
+    width:9px;
+    height:9px;
+    margin-left:6px;
+    border-radius: 20px;
+    background-color:white;
+}
+
+.make-tab-one-tab{
+    display: flex;
+    flex-direction: row;
+    align-items :center;
+    justify-content:center;
+    background-color:#ffffff;
+    opacity: 0.8;
+    padding:8px 13px;
+    border-radius: 8px 8px 0px 0px;
+    position:absolute;
+    bottom:0px;
+    left:80px;
+    color:#555C67;
+    font-size: 12px;
+}
+
+.make-tab-url{
+    padding:5px 25px 5px 15px;
+    background-color:#ffffff;
+    color:#555C67;
+    border-radius: 15px;
+    opacity: 0.8;
+    font-size:12px;
+}
+
+.make-tab-favicon{
+    width:20px;
+    height:20px;
+    border-radius: 20px;
+    margin-right:8px;
+}
+
+.cancel-full-screen{
+    width:80px;
+    height:80px;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    position: fixed;
+    bottom:30px;
+    right:30px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid var(--main-color);
+    z-index:1020;
+    color:var(--main-color);
+    font-size:15px;
+    border-radius:50%;
+    text-align: center;
 }

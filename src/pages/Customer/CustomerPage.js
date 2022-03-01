@@ -4,15 +4,13 @@ import Term from '../../components/Customer/Term'
 import PersonalInformation from '../../components/Customer/PersonalInformation'
 import Footer from '../NavAndFooter/Footer'
 import ReactGa from 'react-ga'
-import { useRecoilState } from 'recoil'
-import {userState} from '../../Router'
+import NavBarV2 from '../NavAndFooter/NavBarV2'
 
 import './CustomerPage.css'
 
-function CustomerPage() {
+function CustomerPage({history, isLoggedIn}) {
     const [cnum, setCnum] = useState(1);
     const [cnums, setCnums] = useState([1,2,3]);
-    const [userData, setUserData] = useRecoilState(userState);
     
     useEffect(()=>{
 
@@ -67,6 +65,7 @@ function CustomerPage() {
 
     return (
         <>
+        <NavBarV2 history={history} isLoggedIn={isLoggedIn} />
         <div className="questionspage-container">
             <div className="q-inner">
                 <div className="q-info-top">

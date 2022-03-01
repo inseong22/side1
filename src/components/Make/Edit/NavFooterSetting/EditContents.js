@@ -2,11 +2,12 @@ import React, {useContext, useState} from 'react';
 import { MyContext } from '../../../../pages/Make/MakePageV2';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import produce from 'immer';
-import ConfirmCustom from '../../../../tools/ConfirmCustom';
 import AddingSection from '../../Modal/AddingSection';
+import {CustomSwitch2} from '../tools/Custom/OnOffCustom'
 import './EditContents.css';
+// import PlusIcon from '../../../../tools/img/plusButton.png';
 
-const BCOLOR = 'rgba(230,230,230,0.8)'
+const BCOLOR = 'rgba(230,230,230,0)'
 
 const getItemStyle = (isDragging, draggableStyle, backColor) => {
     return {
@@ -15,7 +16,7 @@ const getItemStyle = (isDragging, draggableStyle, backColor) => {
 
         // change background color if dragging
         background: isDragging ? "white" : BCOLOR,
-        boxShadow: isDragging ? "2px 2px 3px rgba(0,0,0,0.2)" : 'none',
+        boxShadow: isDragging ? "2px 4px 20px #E8F0F9" : 'none',
 
         // styles we need to apply on draggables
         ...draggableStyle
@@ -48,7 +49,6 @@ function EditContents({navi, setNavi, foot, setFoot}) {
     }
 
     const deleteSection = (index) => {
-        console.log("index", index);
         if(index === 0){
             action.setContents([
                 ...state.contents.slice(1,state.contents.length)
@@ -75,20 +75,18 @@ function EditContents({navi, setNavi, foot, setFoot}) {
 
     return (
         <div>
-            <div className="edit-element">
-                컨텐츠 수정
-            </div>
-            <div>
+            <div className="back__container" />
+            <div style={{width:'100%', display: 'flex', justifyContent:'center', alignItems: 'center', flexDirection:'column'}}>
                 <div className="one-contents-draggable" style={{backgroundColor:`${BCOLOR}`}}>
-                    <div className="center-row hoverback one-contents__inner">
+                    <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
                         <div className="left">
                             <div className="content__name">
-                                네비 바
+                                내비게이션 바
                             </div>
-                            <div>
-                                <input type="checkbox" checked={navi.use} value={navi.use} onChange={e => setNavi(produce(navi, draft => {
+                            <div style={{paddingLeft:'7%'}}>
+                                <CustomSwitch2 value={navi.use} onChange={e => setNavi(produce(navi, draft => {
                                     draft.use = !navi.use
-                                })) } />
+                                })) }/>
                             </div>
                         </div>
                         <div className="right">
@@ -96,89 +94,151 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                         </div>
                     </div>   
                 </div>
-                <hr className="hr" />
+                <div className="comment">
+                <span style={{fontWeight:'900'}}>드래그 앤 드랍</span>으로 순서를 변경할 수 있습니다
+                </div>
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
                         {(provided) => 
                             (
-                            <div className="sectionsss"
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}>
+                                <>
+                            <div {...provided.droppableProps} ref={provided.innerRef} style={{width:'100%', display: 'flex', justifyContent:'center', alignItems: 'center', flexDirection:'column'}}>
                                 {state.contents.map((item, index) => {
                                     return(
                                         <Draggable draggableId={String(index)} key={index} index={index} style={{width:'100%'}}>
                                             {(provided, snapshot) => {
-                                                return(
-                                                    <>
-                                                        <div
-                                                            className="one-contents-draggable"
-                                                            ref={provided.innerRef}
-                                                            {...provided.dragHandleProps}
-                                                            {...provided.draggableProps}
+                                                if(index === 0){
+                                                        return(
+                                                            <>
+                                                            <div style={{marginTop: '30px'}}></div>
+                                                            {/* <img className="fixed-icon" src={PlusIcon} alt="아이콘"/> */}
+                                                                <div
+                                                                    className="one-contents-draggable"
+                                                                    ref={provided.innerRef}
+                                                                    {...provided.dragHandleProps}
+                                                                    {...provided.draggableProps}
 
-                                                            style={getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style,
-                                                            )}>
-                                                                <div className="center-row hoverback one-contents__inner">
-                                                                    <div className="left">
-                                                                        <div className="content__name">
-                                                                            {item.sectionTypeName}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="right">
-                                                                        {optionButton(index)}
-                                                                        <div className="content__button delete"
-                                                                            onClick={() => {
-                                                                                const yes = window.confirm("정말 삭제하시겠습니까?");
-                                                                                if(yes){
-                                                                                    deleteSection(index);
-                                                                                }
-                                                                            } }>
-                                                                            삭제
-                                                                        </div>
-                                                                        <div className="content__button"
-                                                                            onClick={() => pasteThisSection(state.contents[index], index) }>
-                                                                            복제
-                                                                        </div>
-                                                                    </div>
-                                                                </div>   
-                                                        </div>
-                                                        {/* <div className="centera small-button__container">
-                                                            <span className="centera make-section-button__small">
-                                                                +
-                                                            </span>
-                                                        </div> */}
-                                                    </>
-                                                )}}
-                                        </Draggable>
-                                    )
-                                })}
+                                                                    style={getItemStyle(
+                                                                    snapshot.isDragging,
+                                                                    provided.draggableProps.style,
+                                                                    )}>
+                                                                        <div className="center-column hoverback one-contents__inner">
+                                                                            {/* <div className="centera" style={{width:'5%'}}>
+                                                                                <DragIndicator size="30" />
+                                                                            </div> */}
+                                                                                <div className="center-row">
+                                                                                    <div className="left">
+                                                                                        <div className="content__name">
+                                                                                            {item.name}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="right">
+                                                                                        {optionButton(index)}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="center-row">
+                                                                                    <div className="left" style={{width:'85%', textAlign:'left', color:'#555C67', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                                                                                        {item.title.text}
+                                                                                    </div>
+                                                                                    <div className="right">
+                                                                                        <div className="content__button cb-delete"
+                                                                                            onClick={() => {
+                                                                                                const yes = window.confirm("정말 삭제하시겠습니까?");
+                                                                                                if(yes){
+                                                                                                    deleteSection(index);
+                                                                                                }
+                                                                                            } }>
+                                                                                            삭제
+                                                                                        </div>
+                                                                                        <div className="content__button cb-duplicate"
+                                                                                            onClick={() => pasteThisSection(state.contents[index], index) }>
+                                                                                            복제
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                        </div>   
+                                                                </div>
+                                                                {/* <div className="centera small-button__container">
+                                                                    <span className="centera make-section-button__small">
+                                                                        +
+                                                                    </span>
+                                                                </div> */}
+                                                            </>
+                                                        )}
+                                                        else{
+                                                            return(
+                                                            <>
+                                                            <div
+                                                                    className="one-contents-draggable"
+                                                                    ref={provided.innerRef}
+                                                                    {...provided.dragHandleProps}
+                                                                    {...provided.draggableProps}
+
+                                                                    style={getItemStyle(
+                                                                    snapshot.isDragging,
+                                                                    provided.draggableProps.style,
+                                                                    )}>
+                                                                        <div className="center-column hoverback one-contents__inner">
+                                                                            <div className="center-row">
+                                                                                <div className="left">
+                                                                                    <div className="content__name">
+                                                                                        {item.name}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="right">
+                                                                                    {optionButton(index)}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="center-row">
+                                                                                <div className="left" style={{width:'85%', textAlign:'left', color:'#555C67', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                                                                                    {item.title.text}
+                                                                                </div>
+                                                                                <div className="right">
+                                                                                    <div className="content__button cb-delete"
+                                                                                        onClick={() => {
+                                                                                            const yes = window.confirm("정말 삭제하시겠습니까?");
+                                                                                            if(yes){
+                                                                                                deleteSection(index);
+                                                                                            }
+                                                                                        } }>
+                                                                                        삭제
+                                                                                    </div>
+                                                                                    <div className="content__button cb-duplicate"
+                                                                                        onClick={() => pasteThisSection(state.contents[index], index) }>
+                                                                                        복제
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>   
+                                                                </div>
+                                                            </>
+                                                        ) }}}
+                                                </Draggable>
+                                            )
+                                        })}
                                 {provided.placeholder}
                             </div>
+                            </>
                             )
                         }
                     </Droppable>
                 </DragDropContext>
                 <div className="center-row">
-                    <div className="make-section-button" onClick={() => {
-                        setAddOpen(true);
-                        // action.setAddingSectionAt(state.contents.length - 1);
-                    }}>
+                    <div className="section-add__button" onClick={() => { setAddOpen(true); }}
+                        style={{margin:'15px', borderRadius:'3px'}} >
                         + 섹션 추가하기
                     </div>
                 </div>
-                <hr className="hr" />
-                <div className="one-contents-draggable" style={{backgroundColor:`${BCOLOR}`}}>
-                    <div className="center-row hoverback one-contents__inner">
+                <div className="one-contents-draggable">
+                    <div className="center-row hoverback one-contents__inner" style={{padding:'20px 10px'}}>
                         <div className="left">
                             <div className="content__name">
                                 푸터 바
                             </div>
-                            <div>
-                                <input type="checkbox" checked={foot.use} value={foot.use} onChange={e => setFoot(produce(foot, draft => {
+                            <div style={{paddingLeft:'7%'}}>
+                                <CustomSwitch2 value={foot.use} onChange={e => setFoot(produce(foot, draft => {
                                     draft.use = !foot.use
-                                })) } />
+                                })) }/>
                             </div>
                         </div>
                         <div className="right">
@@ -186,18 +246,8 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                         </div>
                     </div>   
                 </div>
-
-                {/* <span className="make-section-button" style={{display:`${isHover}`}} onClick={() => {
-                    if(state.addingSectionAt === index){
-                        action.setAddingSectionAt(1000);
-                    }else{
-                        action.setAddingSectionAt(index)
-                    }
-                }}>
-                {parseInt(state.addingSectionAt) === parseInt(index) ? <>- 섹션 제거하기</> : <>+ 섹션 추가하기</>}
-                </span> */}
             </div>
-            <AddingSection open={addOpen} setOpen={setAddOpen} />
+            <AddingSection open={addOpen} setOpen={setAddOpen}/>
         </div>
     )
 }

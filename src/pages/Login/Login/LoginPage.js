@@ -4,12 +4,13 @@ import { authService } from '../../../tools/fbase'
 import { firebaseInstance } from '../../../tools/fbase'
 import { dbService } from '../../../tools/fbase'
 import { Input } from 'antd';
-import googlelogo from '../googlelogo.png'
+import googlelogo from '../../../tools/img/googlelogo.png'
 import s1 from '../../../tools/img/surfee1.png';
 import Footer from '../../NavAndFooter/Footer';
 import {Link} from 'react-router-dom';
+import NavBarV2 from '../../NavAndFooter/NavBarV2'
 
-function LoginPage({history}) {
+function LoginPage({history, isLoggedIn}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [done, setDone] = useState(false);
@@ -42,7 +43,6 @@ function LoginPage({history}) {
         } catch (err){
             console.log(err)
         }
-        console.log(data)
     }
 
     const checkRegister = async (email) => {
@@ -55,15 +55,10 @@ function LoginPage({history}) {
             return({...doc.data(), id: doc.id})
         })
 
-        console.log("일단 로그인 성공", email, usersExist)
-
-
         if(usersExist.length === 0){
             // 구글 아이디로 로그인했는데 회원가입에 정보가 없을 때
-            console.log("회원가입 정보를 받습니다.");
             setDone(true);
         }else{
-            console.log("로그인 완료");
             localStorage.setItem("name", usersExist[0].name);
             localStorage.setItem("job", usersExist[0].job);
 
@@ -81,6 +76,7 @@ function LoginPage({history}) {
         </div>
         :
         <div>
+        <NavBarV2 history={history} isLoggedIn={isLoggedIn}/>
         <div className="login-container">
             <div className="login-container__container">
                 <div className="login__inner">
@@ -95,9 +91,8 @@ function LoginPage({history}) {
                             Email
                         </span>
                         <Input 
-                            type="text" 
-                            className="login-input"
-                            placeholder="아이디를 입력해주세요." 
+                            className="login-input input-focus"
+                            placeholder="아이디를 입력해 주세요." 
                             required
                             value={id}   
                             onChange={e => setId(e.currentTarget.value)}
@@ -107,8 +102,8 @@ function LoginPage({history}) {
                         </span>
                         <Input  
                             type="password" 
-                            className="login-input"
-                            placeholder="비밀번호를 입력해주세요." 
+                            className="login-input input-focus"
+                            placeholder="비밀번호를 입력해 주세요." 
                             required
                             value={password} 
                             onChange={e => setPassword(e.currentTarget.value)}

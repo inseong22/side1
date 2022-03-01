@@ -6,11 +6,11 @@
   align-items : center;
   flex-direction: row;
   position:relative;
+  border-radius: 0px 0px 20px 20px;
 }
 
 .make-footer__container{
   width:100%;
-  padding:4% 0%;
   z-index:13;
   display: flex;
   justify-content: center;
@@ -31,11 +31,26 @@
   display: flex;
   flex-direction: column;
   justify-content :end;
-  padding:0% 3%;
 }
 
 .footer-icon{
   width:27px;
   margin:3px;
   cursor:pointer;
+}
+
+.copyright-box{
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.footer-text-input{
+  width: 100%;
+}
+
+.icon-box{
+  display:flex;
+  height:100%;
+  width:50%;
+  box-sizing:border-box;
 }

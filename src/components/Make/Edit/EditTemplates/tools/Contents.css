@@ -1,0 +1,28 @@
+.mockup-select{
+    margin: 0 auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.select_list{
+    width: 329px;
+    height: 48px;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 13px;
+    padding: 15px 18px 15px 18px;
+    font-size: 14px;
+}
+.func-title{
+    font-size: var(--func-subtitle);
+    font-weight: 700;
+}
+
+.box-gray__container{
+    width:100%;
+    border-bottom:1px solid var(--main-light-gray);
+    border-radius: 5px;
+    padding-bottom:10px;
+    box-sizing: border-box;
+    margin-bottom:12px;
+}

@@ -1,0 +1,32 @@
+.edit__top-bar{
+    padding:5px 15px 0px 15px;
+    width:100%;
+    box-sizing:border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content :start;
+    align-items :center;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.edit-radios{
+    display: flex;
+    padding:3px;
+    margin-left:3px;
+    margin-right: 10px;
+    cursor:pointer;
+    font-size: var(--section-top);
+    color:var(--main-gray);
+    font-weight: 700;
+}
+
+.edit-radios:hover{
+    color:var(--main-black-01);
+}
+
+.er-clicked{
+    color:var(--main-black-01);
+    margin-top: 3px;
+    border-bottom:3px solid var(--main-black-01);
+}

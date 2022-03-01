@@ -1,21 +1,22 @@
 import React, {useState, useEffect, useContext} from 'react'
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MyContext } from '../../../pages/Make/MakePageV2'
+import EditNaviSection from './NavFooterSetting/EditNaviSection'
 import EditDetailSection from './EditTemplates/EditDetailSection'
 import EditCtaSection from './EditTemplates/EditCtaSection'
 import EditHeroSection from './EditTemplates/EditHeroSection'
 import EditReviewSection from './EditTemplates/EditReviewSection'
 import EditFeaturesSection from './EditTemplates/EditFeaturesSection'
-import EditMapSection from './EditTemplates/EditMapSection'
-import EditPriceSection from './EditTemplates/EditPriceSection'
-import EditTopBar from './tools/EditTopBar'
-import AddingSection from './AddingSection'
-
+import EditQnaSection from './EditTemplates/EditQnaSection'
+import EditGallerySection from './EditTemplates/EditGallerySection'
+import EditTextSection from './EditTemplates/EditTextSection'
+import EditMockupSection from './EditTemplates/EditMockupSection'
+import EditVideoSection from './EditTemplates/EditVideoSection'
+import EditTopBar from './tools/func/FuncTopBar'
+import {ArrowIosBack} from '@styled-icons/evaicons-solid'
 import EditSetting from './NavFooterSetting/EditSetting'
-import EditNaviSection from './NavFooterSetting/EditNaviSection'
 import EditFooterSection from './NavFooterSetting/EditFooterSection'
 import EditContents from './NavFooterSetting/EditContents'
-
+import BackButton from '../../../tools/img/backButton.png'
 import './NewSectionMake.css'
 
 const NAVSECNUM = 50;
@@ -23,8 +24,31 @@ const FOOTSECNUM = 51;
 const SETTINGSECNUM = 52;
 const CONTENTSSECNUM = 53;
 
+export const MakeContext = React.createContext({
+    stateC : {usedColors : [
+        "#ffffff",
+        "#00ff00",
+        "#ff0000",
+        "#0000ff",
+        "#000000",
+    ]},
+    actionC : {setUsedColors : () => {}}
+});
+
 function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+    const [usedColors, setUsedColors] = useState([
+        "#ffffff",
+        "#00ff00",
+        "#ff0000",
+        "#0000ff",
+        "#000000",
+    ]);
+
+    const contextValue = {
+        stateC: {usedColors},
+        actionC : {setUsedColors},
+    }
 
     const sectionMakeTable = () => {
 
@@ -40,6 +64,11 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                     <EditHeroSection content={content} category={state.category}/>
                 )
 
+            case 'CtaSection':
+                return (
+                    <EditCtaSection content={content} category={state.category} type="cta"/>
+                )
+
             // 리뷰들인 경우 편집화면
             case 'ReviewSection':
                 return(
@@ -52,21 +81,43 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
 
                 )
 
-            case 'MapSection':
+            case 'ApplySection':
                 return(
-                    <EditMapSection content={content} category={state.category}/>
+                    <EditCtaSection content={content} category={state.category} type="apply"/>
+
+                )
+            
+            case 'AppDownloadSection':
+                return(
+                    <EditCtaSection content={content} category={state.category} type="appDownload"/>
+
+                )
+    
+            case 'QnaSection':
+                return(
+                    <EditQnaSection content={content} category={state.category}/>
                 )
 
-            case 'CtaSection':
+            case 'GallerySection':
                 return(
-                    <EditCtaSection content={content} category={state.category}/>
+                    <EditGallerySection content={content} category={state.category}/>
                 )
 
-            case 'PriceSection':
+            case 'TextSection':
                 return(
-                    <EditPriceSection content={content} category={state.category}/>
+                    <EditTextSection content={content} category={state.category}/>
                 )
 
+            case 'MockupSection':
+                return(
+                    <EditMockupSection content={content} category={state.category}/>
+                )
+
+            case 'VideoSection':
+                return(
+                    <EditVideoSection content={content} category={state.category}/>
+                )
+    
             default:
                 return(
                     <div>
@@ -83,15 +134,16 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             return(
                 <>
                     <div className="back__container">
-                            <div className="left">
-                                <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                    ⬅
-                                </span>
-                                <span className="back-text">
-                                    {navi.sectionTypeName}
-                                </span>
-                            </div>
+                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                            <span className="back-button">
+                                <ArrowIosBack size="20" />
+                            </span>
+                            <span className="content__name">
+                                내비게이션 바
+                            </span>
+                        </div>
                     </div>
+                    <EditTopBar category={state.category} setCategory={action.setCategory} />
                     <EditNaviSection navi={navi} setNavi={setNavi} category={state.category}/>
                 </>
             )
@@ -100,21 +152,25 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             return(
                 <>
                     <div className="back__container">
-                            <div className="left">
-                                <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                    ⬅
-                                </span>
-                                <span className="back-text">
-                                    {foot.sectionTypeName}
-                                </span>
-                            </div>
+                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                            <span className="back-button">
+                                <ArrowIosBack size="20" />
+                            </span>
+                            <span className="back-text">
+                                푸터 바
+                            </span>
+                        </div>
                     </div>
+                    <EditTopBar category={state.category} setCategory={action.setCategory} />
                     <EditFooterSection foot={foot} setFoot={setFoot} category={state.category}/>
                 </>
             )
         }else if(state.secNum === SETTINGSECNUM ){
             return(
-                <EditSetting setting={setting} setSetting={setSetting} category={state.category}/>
+                <>
+                    <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    <EditSetting setting={setting} setSetting={setSetting} category={state.category}/>
+                </>
             )
         }else if(state.secNum === CONTENTSSECNUM ){
             return(
@@ -126,14 +182,14 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                 {content && 
                 <>
                     <div className="back__container">
-                            <div className="left">
-                                <span className="back-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                    ⬅
-                                </span>
-                                <span className="back-text">
-                                    {content.sectionTypeName}
-                                </span>
-                            </div>
+                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                            <span className="back-button">
+                                <ArrowIosBack size="20" />
+                            </span>
+                            <span className="back-text">
+                                {content.name}
+                            </span>
+                        </div>
                     </div>
                     <EditTopBar category={state.category} setCategory={action.setCategory} />
                     {sectionMakeTable()}
@@ -144,9 +200,9 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
     }
 
     return (
-        <>
+        <MakeContext.Provider value={contextValue}>
             {returnMake()}
-        </>
+        </MakeContext.Provider>
     )
 }
 

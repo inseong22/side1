@@ -1,147 +1,198 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import EditAnimation from '../tools/EditAnimation'
-import { detailSectionTemplateList } from './InnerTemplates'
-import TemplateChoose from '../tools/TemplateChoose'
-import {EditRadioContainer} from '../tools/RadioCustom'
+import EditDesign from './tools/EditDesign'
+import RadioCustom from '../tools/Custom/RadioCustom'
+import ElementsTable from './tools/ElementsTable'
 import produce from 'immer';
-import {EditColorContainer} from '../tools/ColorCustom'
-import CheckBoxContainer from '../tools/CheckBoxContainer'
-import ImageAddEdit from '../tools/ImageAddEdit'
+import {CustomSwitch} from '../tools/Custom/OnOffCustom'
+import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
+import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
+import InputCustom from '../tools/Custom/InputCustom'
+import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
+import Layout from './tools/Layout'
+import Contents from './tools/Contents'
+import AddGhostButton from './tools/AddGhostButton'
+import AddCtaButton from './tools/AddCtaButton'
+import AddAppButton from './tools/AddAppButton'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
 
-const paddingOptions = [
-    { label: '없음', value: 0 },
-    { label: '좁게', value: 5 },
-    { label: '보통', value: 10 },
-    { label: '넓게', value: 20 },
-]
-const imageBorderOptions = [
-    { label: '원형', value: 50 },
-    { label: '라운드', value: 7 },
-    { label: '사각형', value: 0 },
-]
-
-const imageSizeOptions = [
-    { label: '작게', value: 250 },
-    { label: '보통', value: 400 },
-    { label: '크게', value: 500 },
+const alignOptions = [
+    {label:'왼쪽', value: '0'},
+    {label:'중앙', value: '0 auto'}
 ]
 
-const imageOptions = [
-    { label:'동영상', value:'video'},
-    { label:'사진', value:'image'},
-    { label:'목업', value:'mockup'},
-    { label:'슬라이드', value:'slide'},
+const buttonAlignOptions = [
+    {label:'왼쪽', value: 'start'},
+    {label:'중앙', value: 'center'}
+]
+
+const buttonOptions = [
+    {label: '링크 연결', value: 'link'},
+    {label: '신청', value: 'apply'},
+]
+
+const layoutOptions = [
+    {label: '1', value: 1},
+    {label: '2', value: 2},
+    {label: '3', value: 3},
 ]
 
 function EditHeroSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
-    const [selectOpen, setSelectOpen] = useState(false)
 
-    const changeImageOption = e => {
+    const elements = [
+        {
+            title: '제목',
+            use:content.title.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].title.use = !content.title.use;
+            }))
+        },
+        {
+            title: '본문',
+            use:content.desc.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].desc.use = !content.desc.use;
+            }))
+        },
+        {
+            title: '콘텐츠',
+            use:content.contents.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].contents.use = !content.contents.use;
+            }))
+        },
+        {
+            title: '버튼',
+            use:content.button.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].button.use = !content.button.use;
+            }))
+        },
+        {
+            title: '앱 다운로드',
+            use:content.appButton.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].appButton.use = !content.appButton.use;
+            }))
+        },
+    ]
+
+    const changeAlignOption = e => {
         action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].image.type = e;
-        }));
+            if (draft[state.secNum].button.align == '0')
+                draft[state.secNum].button.align = '0 auto'
+            else
+                draft[state.secNum].button.align = '0'
+        }))
     }
 
-    // 템플릿 2 이미지의 경우에는
-    const onChangeBackgroundImage = e => {
-        let newContents = JSON.parse(JSON.stringify(state.contents))
-        const {target:{files},} = e;
-        const oneFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-            const {currentTarget:{result}} = finishedEvent;
-            // newContents = state.contents.map((item, index) => index === state.secNum ? {...item, image: {...item.image, attachment : result}} : item)
-            newContents[state.secNum].backgroundImage.attachment = result;
-        }
-        reader.readAsDataURL(oneFile);
-        action.setContents(newContents);
+    const changeButtonAlignOption = e => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].button.align = e
+        }))
     }
 
-    const returnImageOrVideoAdd = () => {
-        switch(content.image.type){
-            case 'image':
+
+    // 버튼 관련
+    const ctaOpen = () => {
+        action.setContents(produce(state.contents, draft => {
+            draft[state.secNum].button.ctaUse = !content.button.ctaUse}))     
+    }
+
+    const changeCtaOption = () => {
+        action.setContents(produce(state.contents, draft => {
+            if (draft[state.secNum].button.ctaOption == 'link')
+                draft[state.secNum].button.ctaOption = 'apply'
+            else
+                draft[state.secNum].button.ctaOption = 'link'
+        }))
+    }
+
+
+    const returnCtaOptions = () => {
+        switch(content.button.ctaOption){
+            case 'link':
                 return(
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">사진 삽입</div>
-                            <div className="edit-element__right">
-                            </div>
-                        </div>
-                    </div>
+                    <>
+                    <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요" value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button.ctaLink = e
+                    }))} />
+                    <div className="mid-command">입력 후 엔터를 누르세요.</div>
+                    </>
                 )
-            
-            case 'video':
+            case 'apply':
                 return(
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">동영상 사용</div>
-                            <div className="edit-element__right">
-                            </div>
-                        </div>
+                    <>
+                    {
+                        content.ctaApplyInputs.length >= 1 ?  
+                        <ApplyInputCustom disabled /> 
+                        :
+                        <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].ctaApplyInputs.push(e)
+                        }))} /> 
+                    }
+                    
+                    { content.ctaApplyInputs.length > 0 && 
+                    <>
+                        { content.ctaApplyInputs.map((item, index) => {
+                                return(
+                                    <div key={index}>
+                                        <ApplyInputCustom made value={item} func={e => action.setContents(produce(state.contents, draft => {
+                                            if(index === 0 ){
+                                                draft[state.secNum].ctaApplyInputs.shift()
+                                            }else{
+                                                draft[state.secNum].ctaApplyInputs.splice(index, index)
+                                            }
+                                        }))} />
+                                    </div>
+                                )
+                            })
+                        } 
+                    </> }
+                    <div className="mid-command-light"> 최대 5개의 신청 박스만 생성 가능합니다. 
                     </div>
-
+                    </>
                 )
             default:
                 return(
-                    <div>아니</div>
+                    <> </>
                 )
         }
     }
 
+    
     const returnTable = () => {
         switch(category){
             case 0:
                 // case 0은 디자인 수정
                 return(
                     <>
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            히어로 섹션 수정
+                    <ElementsTable elements={elements} />
+                    <Layout content={content} version='main'/>
+                    <Contents content={content} />
+                    <OpenCloseCustom title="버튼" use={content.button.use}>
+                        <div className="box-gray__container">
+                            <RadioCustom content={content} options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
+                            <TextSizeCustom text="글자 크기" button value={content.button.textSize} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].button.textSize = e;
+                            }))} />
                         </div>
-                    </div>
-                    <EditColorContainer text={"배경 색상"} value={content.backgroundColor} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].backgroundColor = e
-                        }))} />
-                    <div className="edit-element">
-                        <div className="edit-element__one">
-                            <div className="edit-element__left">배경 색상 투명도</div>
-                            <div className="edit-element__right">
-                                <input onChange={(e) => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].backgroundOpacity = e.currentTarget.value
-                                }))} value={content.backgroundOpacity} type="number" />
-                            </div>
+                        <AddCtaButton content={content} num={1} />
+                        <AddGhostButton content={content} num={1} />
+                    </OpenCloseCustom>
+                    <AddAppButton content={content} />
+                    {/* <div className="left">
+                        <div className="content__name">
+                                    애니메이션
                         </div>
-                    </div>
-                    <CheckBoxContainer text="배경에 이미지 삽입" value={content.backgroundImage.use} func={ () => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].backgroundImage.use = !content.backgroundImage.use;
-                    }))} />
-                    {
-                        content.backgroundImage.use && 
-                            <ImageAddEdit text="배경에 이미지 삽입" value={content.backgroundImage.attachment} func={e => onChangeBackgroundImage(e)} />
-                    }
-                    <EditRadioContainer text="위아래 여백" options={paddingOptions} value={content.paddingSize} func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].paddingSize = e;
-                        }))} />
-                    <EditRadioContainer text="사진 테두리" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {
-                                        draft[state.secNum].image.border = e;
-                                    }))} />
-                    <EditRadioContainer text="사진 크기" options={imageSizeOptions} value={content.image.size} func={e =>  action.setContents(produce(state.contents, draft => {
-                                        draft[state.secNum].image.size = e;
-                                    }))} />
-                    <EditRadioContainer text="사진 사용" options={imageOptions} value={content.image.type} func={e => changeImageOption(e)} />
-                    
-                    {
-                        returnImageOrVideoAdd()
-                    }
-                    
-                    <CheckBoxContainer text="버튼 1 사용" value={content.button.first} func={ () => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].button.first = !content.button.first;
-                    }))} />
-                    <CheckBoxContainer text="버튼 2 사용" value={content.button.second} func={ () => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].button.second = !content.button.second;
-                    }))} />
+                        <div style={{paddingLeft:'7%'}}>
+                            <CustomSwitch value={content.animation.use} 
+                                onChange={ e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].animation.use = !content.animation.use
+                                }))}/>
+                        </div>
+                    </div> */}
                     </>
                 )
 
@@ -149,7 +200,7 @@ function EditHeroSection({content, category}) {
                 // case 1은 템플릿 변경
                 return(
                     <>
-                        <TemplateChoose content={content} title="디테일" list={detailSectionTemplateList} />
+                        <EditDesign content={content} />
                     </>
                 )
 

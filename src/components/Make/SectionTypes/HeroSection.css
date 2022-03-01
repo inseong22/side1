@@ -1,0 +1,70 @@
+
+
+.slider-carousel{
+    width:100%,
+}
+
+.video{
+    z-index: 1;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.mobbesk-container{
+    position: relative;
+    float: left;
+}
+.text__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:100%;
+}
+
+.image__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.video__container{ 
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.full-button-container{
+    width: 100%;
+}
+
+.store-button{
+    height:50px;
+    cursor:pointer;
+    margin:2px;
+}
+
+.video-area {
+    /* z-index: 1; */
+    margin: 0 auto;
+    /* position: relative; absolute는 부모가 relative일 때 부모를 따라간다. */
+  }
+  
+.input-placeholder{
+    background-color:white;
+    border : 1px solid var(--main-light-gray);
+    width:250px;
+    border-radius: 3px;
+    margin-right:8px;
+    padding:12px 10px;
+    font-size:var(--button-font-size);
+}
+
+.device-galaxy-s8{
+    width:200px;
+    height:200px;
+    background-color:red;
+}

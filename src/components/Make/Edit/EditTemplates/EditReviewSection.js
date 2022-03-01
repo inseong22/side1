@@ -1,58 +1,60 @@
 import React, {useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import { reviewSectionTemplateList } from './InnerTemplates'
-import TemplateChoose from '../tools/TemplateChoose'
 import produce from 'immer';
+import EditDesign from './tools/EditDesign'
+import ElementsTable from './tools/ElementsTable'
+import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
+import RadioCustom from '../tools/Custom/RadioCustom'
+import ColorCustom from '../tools/Custom/ColorCustom'
+import LayoutRFG from './tools/LayoutRFG'
+import SingleColorCustom from '../tools/Custom/SingleColorCustom'
+import {EditImageIcon} from './EditFeaturesSection'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
+import OnOffCustom from '../tools/Custom/OnOffCustom'
+
+const ratingSizeOptions = [
+    { label: '작게', value: 20 },
+    { label: '보통', value: 25 },
+    { label: '크게', value: 30 },
+]
+const alignOptions = [
+    { label: '왼쪽', value: 'start'},
+    { label: '중앙', value: 'center'}
+]
 
 function EditReviewSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const returnRepeatComponents = content.reviews.map((item, index) => {
-            return(
-                <div className="edit-repeat-component">
-                    <div className="edit-element__one" style={{flexDirection:'column'}}>
-                        <div className="center-row">
-                            <div>
-                                뭐 아무거나
-                            </div>
-                            <div className="content-delete" onClick={() => deleteComponent(index)}>
-                                x
-                            </div>
-                        </div>
-                        <div>
-                            {item.title}
-                        </div>
-                        <div>
-                            {item.desc}
-                        </div>
-                        <div>
-                            {item.writer}
-                        </div>
-                    </div>
-                </div>
-            )
-        })
-
-    const deleteComponent = (index) => {
-            action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].reviews.splice(index, 1);
-            }
-        ))
-    }
-
-    const addComponent = () => {
-            action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].reviews.push(
-                    {
-                        title:'2의 타이틀',
-                        desc:'2의 부가설명',
-                        rating:5,
-                        writer:'백인성',
-                    }
-                )
-            }
-        ))
-    }
+    const elements = [
+        {
+            title:'제목',
+            use:content.title.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].title.use = !content.title.use;
+            }))
+        },
+        {
+            title:'본문',
+            use:content.desc.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].desc.use = !content.desc.use;
+            }))
+        },
+        {
+            title:'아이콘/이미지',
+            use:content.element.use,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].element.use = !content.element.use;
+            }))
+        },
+        {
+            title:'리뷰 내용',
+            use:content.reviewText,
+            func:() => action.setContents(produce(state.contents, draft => {
+                draft[state.secNum].reviewText = !content.reviewText;
+            }))
+        },
+    ]
 
     const returnTable = () => {
         switch(category){
@@ -60,19 +62,64 @@ function EditReviewSection({content, category}) {
                 // case 0은 디자인 수정
                 return(
                     <>
-                        <div className="edit-element">
-                            <div className="edit-element__one">
-                                리뷰 섹션 수정
+                        <ElementsTable elements={elements} />
+                        <LayoutRFG content={content} />
+                        <EditImageIcon content={content} />
+                        <OpenCloseCustom title="리뷰 내용" use={content.reviewText}>
+                            <div className="box-gray__container">
+                                <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.color = e;
+                                    draft[state.secNum].elementTitle.color = e;
+                                }))} />
+                                <RadioCustom text="정렬" options={alignOptions} value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.align = e;
+                                    draft[state.secNum].align = e;
+                                }))} />
                             </div>
-                        </div>
-                        <div>
+                            <div className="box-gray__container">
+                                <OnOffCustom text="제목" value={content.elementTitle.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementTitle.use = !content.elementTitle.use;
+                                }))} />
+                                <TextSizeCustom text="제목 크기" elementTitle value={content.elementTitle.size} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementTitle.size = e;
+                                }))} />
+                            </div>
+                            <div className="box-gray__container">
+                                <OnOffCustom text="내용" value={content.elementText.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.use = !content.elementText.use;
+                                }))} />
+                                <TextSizeCustom text="내용 크기" elementDesc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.size = e;
+                                }))} />
+                            </div>
+                            <div className="box-gray__container">
+                                <OnOffCustom text="별점" value={content.rating.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].rating.use = !content.rating.use;
+                                }))} />
+                                <ColorCustom text="색상" value={content.rating.color} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].rating.color = e;
+                                }))} />
+                                <RadioCustom text="크기" value={content.rating.size} options={ratingSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].rating.size = e;
+                                }))} />
+                            </div>
+                            <>
+                                <OnOffCustom text="이름 / 정보" value={content.rating.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].rating.use = !content.rating.use;
+                                }))} />
+                                <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].writer.color = e;
+                                }))} />
+                            </>
+                        </OpenCloseCustom>
+                        {/* <div>
                             {returnRepeatComponents}
                             <div>
                                 <span className="add-feature-button" onClick={() => addComponent()}>
                                     Add Feature
                                 </span>
                             </div>
-                        </div>
+                        </div> */}
                     </>
                 )
 
@@ -80,7 +127,7 @@ function EditReviewSection({content, category}) {
                 // case 1은 템플릿 변경
                 return(
                     <>
-                        <TemplateChoose content={content} title="디테일" list={reviewSectionTemplateList} />
+                        <EditDesign content={content} />
                     </>
                 )
 
