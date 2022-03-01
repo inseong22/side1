@@ -48,7 +48,6 @@ function SliderCustom({top, text, func, value, max}) {
                   setRange(e.currentTarget.value);
                   if(range <= max){
                     func(e.currentTarget.value);
-                    console.log(range)
                   }
                   else{
                     func(max)

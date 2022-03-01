@@ -3,7 +3,7 @@ import { UserContext } from '../../../../pages/UserLanding/UserLandingPage'
 import { isMobile } from 'react-device-detect'
 import TextareaAutosize from 'react-textarea-autosize';
 
-function TitleDesc({content}) {
+function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
     const {state, action} = useContext(UserContext)
 
     return (
@@ -12,6 +12,8 @@ function TitleDesc({content}) {
                 content.title.use &&
                 <div style={{width:'100%'}}>
                     <TextareaAutosize 
+                        disabled
+                        placeholder={titlePlaceholder}
                         className="text-no-input" 
                         value={content.title.text} 
                         style={{
@@ -21,7 +23,7 @@ function TitleDesc({content}) {
                             textAlign:`${isMobile ? content.mobile.align : content.title.align}`,
                             resize:'none'
                         }}
-                        spellCheck="false"
+                        spellcheck="false"
                     />
                 </div>
             }
@@ -29,6 +31,8 @@ function TitleDesc({content}) {
                 content.desc.use &&
                 <div style={{width:'100%', marginTop:'10px'}}>
                     <TextareaAutosize 
+                        disabled
+                        placeholder={descPlaceholder}
                         className="text-no-input" 
                         value={content.desc.text} 
                         style={{
@@ -39,7 +43,7 @@ function TitleDesc({content}) {
                             textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
                             resize:'none'
                         }}
-                        spellCheck="false"
+                        spellcheck="false"
                     />
                 </div>
             }

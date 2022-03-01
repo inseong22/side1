@@ -15,7 +15,7 @@ function CtaSection({content, setting}) {
     const returnLayout = {
         flexDirection:`${
             state.isPhone ? 
-                content.mobile.layout === 1 ? 'column' : 'column-reverse'
+                content.mobile.layout === 3 ? 'column' : 'column-reverse'
             :
                 content.layout === 2 ? 'row' : content.layout === 3 ? 'row-reverse' : 'column'
         }`
@@ -35,7 +35,7 @@ function CtaSection({content, setting}) {
                             <TextAuto 
                                 className="text-input" 
                                 small 
-                                size = {content.caution.size*0.0625}
+                                size = {content.caution.size/20}
                                 value={content.caution.text} 
                                 color = {content.caution.color} 
                                 align = {state.isPhone ? content.mobile.align : content.caution.align}

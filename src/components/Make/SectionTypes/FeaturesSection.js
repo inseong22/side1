@@ -7,6 +7,7 @@ import Element from './components/Element'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import FeatureCard from './components/FeatureCard'
 
 function FeaturesSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -14,15 +15,7 @@ function FeaturesSection({content, setting}) {
     const returnFeatureCards = content.elements.map((item, index) => {
         if (index < content.numOfElements){
         return(
-            <div key={index} className="feature__card" style={{
-                alignItems: `${state.isPhone ? content.mobile.align : content.elementText.align}`,
-                boxShadow : '', 
-                margin : `${ state.isPhone ? '5px 5px' : '0px 15px' }`,
-                marginLeft: `${index === 0 ? '0px' : '15px'}`,
-                marginRight: `${index === content.numOfElements - 1 ? '0px' : '15px'}`,
-                height : `${state.isPhone ? '' : '100%'}`,
-                width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`
-                }}>
+            <FeatureCard section="feature" content={content} index={index}>
                 {
                     content.element.use && 
                     <Element content={content} item={item} index={index} key={index}/>
@@ -71,7 +64,7 @@ function FeaturesSection({content, setting}) {
                     }
                     </>
                 }
-            </div>
+            </FeatureCard>
         )}
         else{
         }

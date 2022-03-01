@@ -21,7 +21,7 @@ import {
     PopoverArrow,
   } from '@chakra-ui/react'
 
-const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone, loading, foot, editing, editingId, setLoading, setting, navi, setNavi, saveLocalStorage}) => {
+const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone, loading, foot, editing,setEditing, setEditingId, editingId, setLoading, setting, navi, setNavi, saveLocalStorage}) => {
     const [loginModal, setLoginModal] = useState(false)
     const {state, action} = useContext(MyContext)
     const [deviceOpen, setDeviceOpen] = useState(false);
@@ -42,32 +42,10 @@ const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone,
         );
     }
 
-
-
     const checkUnSaved = (attach) => {
         return attach.length > 1000;
     }
 
-
-    const saveToOnly = async () => {
-        // 로딩 시작
-        setLoading(true);
-
-        await saveImages()
-        await afterSaveImage()
-    }
-    const saveTo = async () => {
-        // 로딩 시작
-        setLoading(true);
-
-        await saveImages()
-        await afterSaveImage()
-        setTimeout(() => {
-            setLoading(false);
-            history.push('/#/response');
-            history.go();
-        },3000)
-    }
 
 const saveImages = async () => {
 
@@ -93,10 +71,8 @@ const saveImages = async () => {
     }
 
     let contCopy = lodash.cloneDeep(state.contents)
-    let deleteList = []
 
     for ( const [index, cont] of state.contents.entries() ){
-        console.log(index, typeof index, cont )
 
         // 배경 이미지 업로드 배경은 다 있지?
         if(cont.backgroundType === "image" && checkUnSaved(cont.backgroundImage.attachment)){
@@ -156,7 +132,6 @@ const saveImages = async () => {
 
             // 목업 업로드
             if(cont.contents.type === 'mockup' && checkUnSaved(cont.mockup.attachment)){
-                console.log("목업 한장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.mockup.attachment, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -164,7 +139,6 @@ const saveImages = async () => {
                 contCopy[index].mockup.attachment = attachmentURL;
             }
             if(cont.contents.type === 'mockup' && checkUnSaved(cont.mockup.attachment2)){
-                console.log("목업 두장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.mockup.attachment2, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -174,7 +148,6 @@ const saveImages = async () => {
 
             // 슬라이드 업로드
             if(cont.contents.type === 'slide' && checkUnSaved(cont.slide_img.attachment1)){
-                console.log("슬라이드 한장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.slide_img.attachment1, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -183,7 +156,6 @@ const saveImages = async () => {
             }
             // 슬라이드 업로드
             if(cont.contents.type === 'slide' && checkUnSaved(cont.slide_img.attachment2)){
-                console.log("슬라이드 두장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.slide_img.attachment2, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -192,7 +164,6 @@ const saveImages = async () => {
             }
             // 슬라이드 업로드
             if(cont.contents.type === 'slide' && checkUnSaved(cont.slide_img.attachment3)){
-                console.log("슬라이드 세장 업로드")
                 const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
                 const response = await attachmentRef.putString(cont.slide_img.attachment3, "data_url");
                 const attachmentURL = await response.ref.getDownloadURL();
@@ -229,29 +200,14 @@ const saveImages = async () => {
         }
         // 다른 이미지는 더 없는거겠지?
     }
-
-    action.setContents(lodash.cloneDeep(contCopy))
+    return lodash.cloneDeep(contCopy);
 }
 
-const afterSaveImage = async () => {
+const afterSaveImage = async (returned) => {
     if(editing){
 
-        let savedPage
-    
-        const savedPages = await dbService
-            .collection(`saved-page`)
-            .doc(editingId)
-            .get()
-            .then(snapshot => savedPage = {...snapshot.data(), id:snapshot.id})
-        
-        if( !savedPage ){
-            alert("잘못된 접근입니다.")
-            setLoading(false);
-            return
-        }
-
         const body = {
-            contents:state.contents,
+            contents:returned,
             navi:navi,
             foot:foot,
             setting:setting,
@@ -265,11 +221,6 @@ const afterSaveImage = async () => {
         // 자동저장 하던 걸 지운다.
         window.localStorage.removeItem("temp");
         
-        setTimeout(() => {
-            setLoading(false);
-            // history.push('/#/response');
-            // history.go();
-        },200)
     }else{
         console.log( '수정 중이 아니다' );
 
@@ -290,7 +241,7 @@ const afterSaveImage = async () => {
             setLoading(false);
         }else{
             const body = {
-                contents:state.contents,
+                contents:returned,
                 navi:navi,
                 foot:foot,
                 setting:setting,
@@ -299,23 +250,18 @@ const afterSaveImage = async () => {
                 // makingTypeByUser:makingTypeByUser,
                 urlId:setting.urlId,
             }
-            // const attachmentRef = stService.ref().child(`${userObj.uid}/${uuidv4()}`)
 
-            // const response = await attachmentRef.putString(attachment, "data_url");
-            // const attachmentURL = await response.ref.getDownloadURL();
+            const awssss = await dbService.collection("saved-page").add(body);
+            
+            setEditing(true);
+            setEditingId(awssss.id);
 
-            await dbService.collection("saved-page").add(body);
-
-            await dbService.collection("urlStores").add({urlId:body.urlId});
+            await dbService.collection("urlStores").add({
+                urlId:body.urlId
+            });
 
             // 자동저장 하던 걸 지운다.
             window.localStorage.removeItem("temp");
-            
-            setTimeout(() => {
-                setLoading(false);
-                // history.push('/#/response');
-                // history.go();
-            },200)
         }
     }
 }
@@ -328,25 +274,44 @@ const afterSaveImage = async () => {
             alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
             setLoginModal(true);
         }else{
-            // 새로 업로드 해야한다.
-            // 파이어 베이스에 저장한다.
-            saveToOnly();
-            // setCheckModalOpen(true);
+            setLoading(true);        
+            saveLocalStorage();
+            const returned = await saveImages();
+            await afterSaveImage(returned);
+            alert("저장되었습니다!");
+            setLoading(false);
         }
     }
     const goSetup = async () => {
         // 배포하기 클릭
         // 관리페이지에서 수정하기를 누른 거라면
-        saveLocalStorage()
-        if(userObj === null){
-            alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
-            setLoginModal(true);
+        const check = window.confirm("관리페이지로 돌아가시겠습니까? 저장하기 버튼을 클릭하지 않으셨다면 저장이 되지 않았을 수 있습니다.")
+        if(check === true){
+            if(userObj === null){
+                alert("로그인을 하셔야 관리 페이지로 접속하실 수 있습니다.");
+                setLoginModal(true);
+            }else{
+                history.push('/#/response');
+                history.go();
+            }
         }else{
-            // 새로 업로드 해야한다.
-            // 파이어 베이스에 저장한다.
-            saveTo();
-            // setCheckModalOpen(true);
+            return
         }
+        // saveLocalStorage()
+        // if(userObj === null){
+        //     alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
+        //     setLoginModal(true);
+        // }else{
+        //     setLoading(true);        
+        //     const returned = await saveImages();
+        //     saveLocalStorage();
+        //     await afterSaveImage(returned);
+        //     setTimeout(() => {
+        //         setLoading(false);
+        //         history.push('/#/response');
+        //         history.go();
+        //     },200)
+        // }
     }
 
     const deviceSelect = () => {
@@ -439,7 +404,7 @@ const afterSaveImage = async () => {
                     <Button onClick={() => onSubmit()} className="default-button-02">
                         저장하기
                     </Button>
-                    <Button onClick={() => goSetup()} className="default-button-02">
+                    <Button onClick={() => goSetup()} className="default-button-01 opacity-hover" style={{border:`1px solid var(--main-color-soft)`, color:'#6c63ff', margin:'0px 5px'}}>
                         관리페이지
                     </Button>
                 </div>

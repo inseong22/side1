@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import TitleDesc from './components/TitleDesc'
 import TextAuto from './components/TextAuto'
 import Element from './components/Element'
-import produce from 'immer'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import FeatureCard from './components/FeatureCard'
 import {isMobile} from 'react-device-detect'
 
 function FeaturesSection({content, setting}) {
@@ -12,13 +12,7 @@ function FeaturesSection({content, setting}) {
     const returnFeatureCards = content.elements.map((item, index) => {
         if (index < content.numOfElements){
         return(
-            <div key={index} className="feature__card" style={{
-                alignItems: `${isMobile ? content.mobile.align : content.align}`,
-                boxShadow : '', 
-                margin : `${ isMobile ? '5px 5px' : '0px 15px' }`,
-                height : `${isMobile ? '' : '100%'}`,
-                width : `${isMobile ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`
-                }}>
+            <FeatureCard section="feature" content={content} index={index}>
                 {
                     content.element.use && 
                     <Element content={content} item={item} index={index} key={index}/>
@@ -29,11 +23,13 @@ function FeaturesSection({content, setting}) {
                     {
                         content.elementText.titleUse && 
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                                <TextAuto className="text-input" 
+                                <TextAuto className="text-no-input" 
                                     value={item.title} 
                                     color = {content.elementText.color} 
-                                    align = {isMobile ? content.mobile.align : content.align}
+                                    align = {isMobile ? content.mobile.align : content.elementText.align}
                                     size={content.elementText.titleSize/20} 
+                                    placeholder="특징"
+                                    disabled
                                 />
                             </div>
                     }
@@ -41,7 +37,7 @@ function FeaturesSection({content, setting}) {
                         content.elementText.descUse && 
                             <div className="df-margin feature-desc">
                                 <TextareaAutosize 
-                                    className="text-input"  
+                                    className="text-no-input"  
                                     value={item.desc} 
                                     color = {content.elementText.color} 
                                     // align = {isMobile ? content.mobile.align : content.align}
@@ -50,16 +46,18 @@ function FeaturesSection({content, setting}) {
                                         color:`${content.desc.color}`, 
                                         fontSize:`${content.elementText.descSize/20}em`, 
                                         // boxSizing:`border-box`, 
-                                        textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
+                                        textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
                                         resize:'none'
                                     }}
+                                    placeholder="여기를 클릭하여 서비스 및 제품의 특징을 적어보세요."
+                                    disabled
                                     spellCheck="false"
                                 />
                             </div>
                     }
                     </>
                 }
-            </div>
+            </FeatureCard>
         )}
         else{
         }
@@ -67,11 +65,10 @@ function FeaturesSection({content, setting}) {
 
     return (
         <>
-            <motion.div className="template"
-                data-aos-easing="ease-in-back"
+            <motion.div className="template" data-aos={setting.animation} data-aos-easing="ease-in-back"
                 data-aos-delay="200"
-                data-aos-offset="0" data-aos={content.animation.type} aos-duration="4000" >
-                <TitleDesc setting={setting} content={content} />
+                data-aos-offset="0" aos-duration="4000" >
+                    <TitleDesc content={content} titlePlaceholder="특징들의 제목을 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요." />
 
                 <div className="features__container" style={{flexWrap : `${isMobile ? 'wrap' : ''}`}}>
                     {returnFeatureCards}

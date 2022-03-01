@@ -83,12 +83,6 @@
   font-style: normal;
 }
 @font-face {
-  font-family: 'yg-jalnan';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
   font-family: 'NanumSquareRound';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
   font-weight: normal;
@@ -347,6 +341,14 @@
   overflow:hidden;
   word-wrap:break-word;
 }
+.text-no-input:hover{
+  border:1px solid rgba(200,200,200,0);
+}
+.text-no-input:focus{
+  border:1px solid rgba(200,200,200,0);
+  outline:none;
+}
+
 
 .text-input:hover{
   border:1px solid rgba(200,200,200,0.7);
@@ -375,7 +377,7 @@
 .text-input-button{
   border:none;
   background-color:rgba(0,0,0,0);
-  font-size:var(--button-font-size);
+  font-size:13px;
   padding:var(--made-button-padding);
   cursor:pointer;
 }
