@@ -107,7 +107,7 @@ function FTemplate({foot, setFoot, history }) {
                     {foot.text.use && 
                         <TextareaAutosize
                             // defaultValue={new Array(15).join('Line.')}
-                            className="footer-text-input"
+                            className="text-input"
                             value={foot.text.text}
                             style={{
                                 fontFamily:`${state.setting.smallFont}`, 
