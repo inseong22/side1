@@ -43,7 +43,6 @@ function LoginPage({history, isLoggedIn}) {
         } catch (err){
             console.log(err)
         }
-        console.log(data)
     }
 
     const checkRegister = async (email) => {
@@ -56,15 +55,10 @@ function LoginPage({history, isLoggedIn}) {
             return({...doc.data(), id: doc.id})
         })
 
-        console.log("일단 로그인 성공", email, usersExist)
-
-
         if(usersExist.length === 0){
             // 구글 아이디로 로그인했는데 회원가입에 정보가 없을 때
-            console.log("회원가입 정보를 받습니다.");
             setDone(true);
         }else{
-            console.log("로그인 완료");
             localStorage.setItem("name", usersExist[0].name);
             localStorage.setItem("job", usersExist[0].job);
 

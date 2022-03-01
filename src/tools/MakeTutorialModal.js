@@ -42,6 +42,11 @@ const style = {
   px: 4,
   pb: 3,
 };
+const Desc = styled('div')`
+    margin-top:12px;
+    font-size:14px;
+    text-align:center;
+`;
 
 function MakeTutorialModal({open, setOpen}) {
     const [page, setPage] = useState(1)
@@ -69,11 +74,11 @@ function MakeTutorialModal({open, setOpen}) {
                     <div className="card-container">
                         <div className="card">
                             <img className="card-img" src={Info1} alt="1" />
-                            <div className="card-text">1. 하나의 페이지는 여러 개의 섹션으로 구성되며,</div>
+                            <Desc>하나의 페이지는 여러 개의 섹션으로 구성되며,</Desc>
                         </div>
                         <div className="card">
                             <img className="card-img" src={Info2} alt="2" />
-                            <div className="card-text">페이지 구성에서 섹션을 생성하고 삭제할 수 있습니다.</div>
+                            <Desc>페이지 구성에서 섹션을 생성하고 삭제할 수 있습니다.</Desc>
                         </div>
                     </div>
                 </div>)
@@ -83,11 +88,11 @@ function MakeTutorialModal({open, setOpen}) {
                     <div className="card-container">
                         <div className="card">
                             <img className="card-img" src={Info3} alt="3" />
-                            <div className="card-text">2. 페이지 수정을 위해서 디자인은 왼쪽의 제작화면에서,</div>
+                            <Desc>페이지 수정을 위해서 디자인은 왼쪽의 제작화면에서,</Desc>
                         </div>
                         <div className="card">
                             <img className="card-img" src={Info4} alt="4" />
-                            <div className="card-text">글과 아이콘 등은 오른쪽의 화면에서 수정할 수 있습니다.</div>
+                            <Desc>글과 아이콘 등은 오른쪽의 화면에서 수정할 수 있습니다.</Desc>
                         </div>
                     </div>
                 </div>)
@@ -97,11 +102,11 @@ function MakeTutorialModal({open, setOpen}) {
                     <div className="card-container">
                         <div className="card">
                             <img className="card-img" src={Info5} alt="5" />
-                            <div className="card-text">3. 기본 설정에서 사이트 제작에 필수적인 정보와</div>
+                            <Desc>기본 설정에서 사이트 제작에 필수적인 정보와</Desc>
                         </div>
                         <div className="card">
                             <img className="card-img" src={Info6} alt="6" />
-                            <div className="card-text">폰트 및 버튼 디자인을 수정할 수 있습니다.</div>
+                            <Desc>폰트 및 버튼 디자인을 수정할 수 있습니다.</Desc>
                         </div>
                     </div>
                 </div>)
@@ -110,7 +115,7 @@ function MakeTutorialModal({open, setOpen}) {
                     <div className="card-container">
                         <div className="card">
                             <img className="card-img" src={Info7} alt="7" />
-                            <div className="card-text">4. 제작 완료 시 오른쪽 위의 저장하기를 눌러 페이지를 저장하면 제작이 완료됩니다.</div>
+                            <Desc>제작 완료 시 오른쪽 위의 저장하기를 눌러 페이지를 저장하면 제작이 완료됩니다.</Desc>
                         </div>
                     </div>
                 <div className="sub-text">
@@ -151,8 +156,18 @@ function MakeTutorialModal({open, setOpen}) {
                         {returnTutorials()}
                     </div>
                     <div className="prev-next-buttons">
-                        <div className="prev-next-button" onClick={toPrev}>이전</div>
-                        <div className="prev-next-button" onClick={toNext}>다음</div>
+                        {
+                            page === 4 ? 
+                            <>
+                                <div className="modal-move-button-back uphover" onClick={e => setPage(page - 1)} style={{visibility:`${page === 1 ? 'hidden' : 'visible'}`}}>이전</div>
+                                <div className="modal-move-button uphover" onClick={() => {setOpen(false); setPage(1)}}>제작하러 가기</div>
+                            </>
+                            :
+                            <>
+                                <div className="modal-move-button-back uphover" onClick={e => setPage(page - 1)} style={{visibility:`${page === 1 ? 'hidden' : 'visible'}`}}>이전</div>
+                                <div className="modal-move-button uphover" onClick={e => setPage(page + 1)}>다음</div>  
+                            </>
+                        }
                     </div>
                 </Box>
             </StyledModal>

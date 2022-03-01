@@ -22,7 +22,7 @@ function HeroSection({content, setting}) {
     const returnLayout = {
         flexDirection:`${
             state.isPhone ? 
-            content.mobile.layout === 1 ? 'row' : content.mobile.layout === 2 ? 'row-reverse' : content.mobile.layout === 3 ? 'column' : 'column-reverse'
+            content.mobile.layout === 3 ? 'column' : 'column-reverse'
             :
             content.layout === 1 ? 'row' : content.layout === 2 ? 'row-reverse' : content.layout === 3 ? 'column' : 'column-reverse'
         }`,

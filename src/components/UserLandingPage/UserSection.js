@@ -99,7 +99,7 @@ function UserSection({content, setting}) {
             }
             {
                 content.box.use && 
-                <div className="section__box" style={{padding:`0px 11vw`}}>
+                <div className="section__box" style={{padding:`1vh 11vw`}}>
                     <div style={{backgroundColor:`${content.box.backgroundColor}`, borderRadius:`${content.box.borderRadius}px`, width:'100%', height:'100%'}}>
                     </div>
                 </div>

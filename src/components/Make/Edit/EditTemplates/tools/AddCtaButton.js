@@ -23,16 +23,20 @@ function AddCtaButton({content, num}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const ctaOpen = () => {
+        if(!(content.button.ghostUse && content.button.ghostOption === 'apply')){
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.ctaUse = !content.button.ctaUse}))
+        }
     }
 
-    const changeCtaOption = () => {
+    const changeCtaOption = (e) => {
         action.setContents(produce(state.contents, draft => {
-            if (draft[state.secNum].button.ctaOption === 'link')
+            if (draft[state.secNum].button.ctaOption === 'link'){
                 draft[state.secNum].button.ctaOption = 'apply'
-            else
+                draft[state.secNum].button.ghostUse = false
+            }else{
                 draft[state.secNum].button.ctaOption = 'link'
+            }
         }))
     }
 

@@ -18,14 +18,14 @@ const textSizeOptions = [
     { label: '크게', value: 42 },
 ]
 const subTextSizeOptions = [
-    { label: '작게', value: 18 },
-    { label: '보통', value: 24 },
-    { label: '크게', value: 30 },
+    { label: '작게', value: 16 },
+    { label: '보통', value: 18 },
+    { label: '크게', value: 20 },
 ]
 const elementTitleOptions = [
     { label: '작게', value: 18 },
     { label: '보통', value: 20 },
-    { label: '크게', value: 24 },
+    { label: '크게', value: 22 },
 ]
 const elementDescOptions = [
     { label: '작게', value: 14 },

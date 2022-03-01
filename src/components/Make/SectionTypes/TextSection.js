@@ -9,15 +9,11 @@ function TextSection({content, setting}) {
 
     return (
         <motion.div style={{ width:'100%', height:'100%'}}
-        data-aos-easing="ease-in-back"
-        data-aos-delay="200"
-        data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
-            <div className="text__container" 
-            style={{
-                marginTop:`${ !state.isPhone ? `15vh`  : state.isPhone  ? '8px' : '2px'}`,
-                marginBottom:`${ !state.isPhone ? `15vh`  : state.isPhone ? '0px' : '2px'}`,
-             }}>
-            <TitleDesc content={content} titlePlaceholder="제목을 적어보세요." descPlaceholder="여기를 클릭하여 내용을 적어보세요." />
+            data-aos-easing="ease-in-back"
+            data-aos-delay="200"
+            data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
+            <div className="text__container">
+                <TitleDesc content={content} titlePlaceholder="제목을 적어보세요." descPlaceholder="여기를 클릭하여 내용을 적어보세요." />
             </div>
         </motion.div>
     )

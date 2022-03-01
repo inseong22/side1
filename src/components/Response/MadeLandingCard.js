@@ -3,18 +3,21 @@ import { Link } from 'react-router-dom'
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import {dbService, stService} from '../../tools/fbase'
 import './MadeLandingCard.css'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {Copy} from '@styled-icons/boxicons-regular'
 
 function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking, history, addNew, num, update, setUpdate}) {
     const [deleteopen, setDeleteOpen] = useState(false)
-
+    
     const deletePage = async () => {
 
-        var saved_delete = await dbService.collection('saved-page').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-              doc.ref.delete();
-            });
-          });;
+        // var saved_delete = await dbService.collection('saved-page').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
+        //     querySnapshot.forEach(function(doc) {
+        //       doc.ref.delete();
+        //     });
+        //   });;
+        
+        await dbService.doc(`saved-page/${item.id}`).delete();
 
         var published_delete = await dbService.collection('published-page').where('urlId','==', item.urlId).get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
@@ -51,7 +54,7 @@ function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking
 
             setUpdate(!update)
             alert("복제되었습니다.")
-            history.go(-1)
+            history.go()
         }
     }
 
@@ -115,12 +118,12 @@ function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking
             </div>
             <div className="center-row">
                 <div className="left" style={{fontSize:'0.7em', width:'70%'}}>
-                    https://{item.setting.urlId}.surfee.co.kr 
-                    {/* <Copy size={15} color="#6B63F7" onClick={(e) => {
-                        alert("링크가 복사되었습니다");
-                    }}
-                    style={{marginLeft:'5px'}}
-                    /> */}
+                    https://surfee.co.kr/#/{item.setting.urlId} 
+                    <CopyToClipboard  text={"https://surfee.co.kr/#/"+`${item.setting.urlId}`} onCopy={(e) => {alert("링크가 복사되었습니다");}}>
+                        <Copy size={15} color="#6B63F7"              
+                        style={{marginLeft:'5px'}}
+                        />
+                    </CopyToClipboard>
                 </div>
                 <div className="right" style={{fontSize:'15px', width:'30%'}}>
                     <button className="content__button cb-delete" onClick={() => {setDeleteOpen(true)}}>삭제</button>

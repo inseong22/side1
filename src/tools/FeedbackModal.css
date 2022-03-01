@@ -1,7 +1,7 @@
 .big-title{
     color: var(--main-color);
     font-weight: 700;
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
     margin-top: 43px;
     font-family: 'Noto Sans KR';
@@ -11,15 +11,15 @@
     color: black;
     font-weight: 500;
     font-size: 25px;
-    line-height: 34px;
+    line-height: 38px;
 }
 .question{
     color: black;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 22px;
     line-height: 34px;
     margin-top: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .small-text{
     font-weight: 700;
@@ -46,16 +46,15 @@
 }
 .questnum{
     width: 514px;
-    height: 72px;
+    height: 50px;
     font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 23px;
     line-height: 72px;
     text-align: center;
     color: #000000;
     margin: 0 auto;
-    margin-top: 6px;
 }
 .column-ans{
     display: flex;
@@ -67,7 +66,7 @@
     font-size: 15px;
     height: auto;
     align-items: center;
-    margin-top: 25px;
+    margin-top: 15px;
     margin-bottom: 15px;
 }
 .row-ans{
@@ -122,6 +121,7 @@
     color: var(--main-color);
     cursor: pointer;
     margin-bottom: 5px;
+    font-family: 'Noto Sans KR';
 }
 .round-ans-button:hover{
     background: var(--main-gradient);

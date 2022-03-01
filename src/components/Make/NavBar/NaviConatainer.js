@@ -23,15 +23,17 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                         value={navi.title}
                         placeholder="서비스명을 입력하세요"
                         inputStyle={{ 
+                            textAlign:`${navi.logo.align === 'center' && navi.button.use ? 'right' : navi.logo.align === 'center' ? 'center' : 'left'}`,
                             fontSize: `${navi.logo.text.fontSize/20}em`,
                             display: 'flex',
                             zIndex: 5,
-                            fontSize:`${navi.logo.text.fontSize/20}em`, 
                             color:`${navi.logo.text.color}`, 
                             fontFamily:`${state.setting.font}`,
                             resize:'none',
-                            padding: '1px',
-                            marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`,
+                            padding: '0px',
+                            marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,
+                            marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
+                            backgroundColor: 'transparent',
                         }}
                         onChange={(e) => {
                          setNavi(produce(navi, draft => {
@@ -51,18 +53,16 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                     color:`${state.setting.cta.color}`,
                     boxShadow:`${state.setting.cta.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
                     border:`${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'}`,
-                    padding: `${navi.button.cta.padding}px ${navi.button.cta.padding}px`,
                     display: 'block'
                 }} onClick={() => {}}>
                     <AutosizeInput 
-                    className="text-input-flex ti" 
+                    className="text-input-button ti" 
                     value={navi.button.cta.text } 
                     onChange={(e) => setNavi(produce(navi, draft => {
                         draft.button.cta.text = e.currentTarget.value;
                     }))} 
                     inputStyle={{
-                        textAlign: 'center',
-                        fontSize:`${navi.button.cta.textsize/20}em`, 
+                        textAlign: 'center', 
                         fontFamily:`${state.setting.smallFont}`, 
                         borderRadius:`${state.setting.cta.borderRadius}px`,  
                         backgroundColor:`${state.setting.cta.backgroundColor}`, 
@@ -78,16 +78,14 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                     color:`${state.setting.ghost.color}`,
                     boxShadow:`${state.setting.ghost.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
                     border:`${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'}`,
-                    padding: `${navi.button.ghost.padding}px ${navi.button.ghost.padding}px`,
                     display: 'block'
                 }} onClick={() => {}}>
-                    <AutosizeInput className="text-input-flex ti"  value={navi.button.ghost.text } 
+                    <AutosizeInput className="text-input-button ti"  value={navi.button.ghost.text } 
                     onChange={(e) => setNavi(produce(navi, draft => {
                         draft.button.ghost.text = e.currentTarget.value;
                     }))} 
                     inputStyle={{
                         textAlign: 'center',
-                        fontSize:`${navi.button.ghost.textsize/20}em`,
                         fontFamily:`${state.setting.smallFont}`, 
                         borderRadius:`${state.setting.ghost.borderRadius}px`,  
                         backgroundColor:`${state.setting.ghost.backgroundColor}`,

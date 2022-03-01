@@ -120,12 +120,12 @@ const secondQuestion = [
     {
         typequestion: "✍️ 사전신청",
         question : "사전신청을 많이 받고 싶어요",
-        type:'pre',
+        type:'apply',
     },
     {
         typequestion: "💰 판매",
         question : "서비스/제품을 많이 팔고 싶어요",
-        type:'sell',
+        type:'sale',
     },
     {
         typequestion: "📚 개인적인 목적",
@@ -149,33 +149,20 @@ const fontList = [
     { label: '여기어때 잘난체', value: 'yg-jalnan'},
 ]
 const colorList = [
-    {
-        name:'검',
-        color:'rgba(0,0,0,1)',
-    },
-    {
-        name:'차분',
-        color:'rgba(255,255,255,1)',
-    },
-    {
-        name:'노',
-        color:'rgba(0,255,255,1)',
-    },
-    {
-        name:'빨',
-        color:'rgba(250,0,0,1)',
-    },,
-    {
-        name:'초',
-        color:'rgba(0,250,0,1)',
-    },,
-    {
-        name:'파',
-        color:'rgba(0,0,250,1)',
-    },
+    {name:'빨강', color:'#FF6464'},
+{name:'노랑',color:'#FFE162',},
+{name:'머스타드노랑',color:'#FFBD35',},
+{name:'초록',color:'#91C483',},
+{name:'하늘색',color:'#5D8BF4',},
+{name:'파란색',color:'#2D31FA',},
+{name:'연보라',color:'#BAABDA',},
+{name:'진한 보라색',color:'#3B185F',},
+{name:'검정',color:'#171717',},
+{name:'진한 회색',color:'#444444',},
+{name:'갈색',color:'#c99c75',},
 ]
 
-function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting}) {
+function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
     // 모달
     const [cnum, setCnum] = useState(1);
     const [title, setTitle] = useState("");
@@ -258,6 +245,22 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
             alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
             return;
         }else{
+
+            const defaults = await dbService
+                .collection("saved-page")
+                .where("urlId", "==", type)
+                .get(); // ui
+
+            const defaultTemplate = defaults.docs.map(doc => {
+                return({...doc.data(), id:doc.id})
+            });
+            
+            if(defaultTemplate){
+                setContents(defaultTemplate[0].contents);
+                setNavi(defaultTemplate[0].navi);
+                setFoot(defaultTemplate[0].foot);
+                setSetting(defaultTemplate[0].setting);
+            }
             
             const body = {
                 type: type,
@@ -274,13 +277,20 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
 
             setSetting(produce(setting, draft => {
                 draft.title = title;
+                draft.cta.backgroundColor = color;
             }))
 
             setFoot(produce(foot, draft => {
                 draft.copyright.text = title;
             }))
 
-            handleClose();
+            if(JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']).length > 48000){
+                // 임시 방편으로 큰 데이터는 건너뛰도록 조치.
+                handleClose()
+            }else{
+                localStorage.setItem('temp', JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']));
+                handleClose()
+            }
         }
     }
 
@@ -312,13 +322,13 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                             당신의 서비스 / 제품 명을 알려주세요.
                         </div>
                         <div className="modal-main-card">
-                        {/* <form onSubmit={() => setCnum(cnum + 1)} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}> */}
-                        <Input 
-                            className="input-holder input-focus" 
-                            placeholder="서비스/제품 명이 로고 자리에 들어갑니다." 
-                            value={title} 
-                            onChange={e => setTitle(e.currentTarget.value)} />
-                        {/* </form> */}
+                        <form onSubmit={() => setCnum(cnum + 1)} style={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
+                            <Input 
+                                className="input-holder input-focus" 
+                                placeholder="서비스/제품 명이 로고 자리에 들어갑니다." 
+                                value={title} 
+                                onChange={e => setTitle(e.currentTarget.value)} />
+                        </form>
                         <div className="modal-mini-text">
                             수정 가능하니 편하게 정해주세요 :)
                         </div>
@@ -337,7 +347,7 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                     <ModalBox 
                         title={<><span style={{color:'#6C63FF'}}>{title}</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀</>}>
                         <>
-                            <div className="modal-row">
+                            <div className="modal-row1">
                             {
                                 secondQuestion.map((item, index) => {
                                     let color = 'none';
@@ -376,6 +386,7 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                             <div className="template__card uphover"
                                 onClick={() => {
                                     setDevice('pc')
+                                    setIsPhone(false)
                                 }}
                                 style={{border: `${device === 'pc' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
@@ -385,6 +396,7 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                             <div className="template__card uphover"
                                 onClick={() => {
                                     setDevice('mobile')
+                                    setIsPhone(true)
                                 }}
                                 style={{border: `${device === 'mobile' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
@@ -403,16 +415,16 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                 return(
                     <ModalBox title={<>
                         좋아요! 디자인은 어떻게 할까요? 🤔</>}>
-                            <div className="modal-row" style={{flexWrap:'nowrap'}}>
+                            <div className="modal-row">
                             <div className="modal-column">
                                 <div>
                                     폰트를 선택해 주세요.
                                 </div>
-                                <OverflowScrolling className="font-selections__container">
+                                <div className="font-selections__container">
                                     {fontList.map((item, index) => {
                                         return(
-                                            <div className="template__card uphover" key={index}
-                                                onClick={() => {
+                                            <button className="template__card uphover" key={index}
+                                                onClick={(e) => {
                                                     setFont(item.value);
                                                 }}
                                                 style={{border: `${font === item.value ? '1px solid #A89AFF' : 'none'}`, 
@@ -425,12 +437,12 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                                                 <div style={{marginTop:'2%'}}>
                                                     노코드 랜딩페이지 제작 툴, Surfee
                                                 </div>
-                                            </div>
+                                            </button>
                                         )
                                     })}
-                                </OverflowScrolling>
+                                </div>
                             </div>
-                            <div className="modal-column">
+                            <div className="modal-column" style={{marginLeft:'2vw'}}>
                                 <div>
                                     색상을 선택해 주세요.
                                 </div>
@@ -445,8 +457,10 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                                                 onClick={() => {
                                                     setColor(item.color);
                                                 }}
-                                                style={{border: `${bor}`, padding:'5% 3%'}}
-                                            >
+                                                style={{border: `${bor}`, padding:'5% 3%'}}>
+                                                <div>
+                                                    {item.color}
+                                                </div>
                                                 <div style={{backgroundColor:`${item.color}`, width:'50px', height:'50px', borderRadius:'10px'}}>
                                                     
                                                 </div>
@@ -472,7 +486,7 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
                         </div>
                         <div className="modal-main-card">
                             <div className="modal-title" style={{fontSize:'25px'}}>
-                                <input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />.surfee.co.kr
+                                https://surfee.co.kr/#/<input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />
                             </div>
                             <div style={{color:'gray', paddingLeft:'0%',marginTop:'1%', fontSize:'14px', textAlign:'center', fontFamily:'Pretendard-Regular'}}>
                                 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.
@@ -500,9 +514,9 @@ function FirstQuestions({type, foot, setFoot, setType, open, setOpen, navi, setN
             BackdropComponent={Backdrop}
         >
             <Box sx={style}>
-                <Link to="/" className="arrow-back">
+                <div onClick={() => history.go(-1)} className="arrow-back">
                     ←
-                </Link> 
+                </div> 
                 <div className="progress-bar__container">
                     {progressList.map((item, index) => {
                         let backColor = 'rgba(100,100,100,0.2)'

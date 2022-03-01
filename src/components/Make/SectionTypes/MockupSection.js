@@ -24,7 +24,7 @@ function MockupSection({content, setting}) {
                 </div>
                 {
                     content.mockup.use && 
-                    <div className="image__container">
+                    <div className="image__container" style={{marginTop:'12px'}}>
                         <ImageOrSlide content={content} />
                     </div>
                 }

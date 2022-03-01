@@ -1,5 +1,7 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import { styled } from '@mui/material/styles';
+import { MyContext } from '../../../../pages/Make/MakePageV2'
+import produce from 'immer'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -63,34 +65,39 @@ export const AccordionCustom = (props) => {
 }
 
 const OpenCloseCustom = (props) => {
-  /**
+  /*
    * title, tooltip, preseen 설정 가능
-   */
-  const isopen = props.content.qna.shape
-  const [open, setOpen] = useState(props.open)
+  */
+   const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+  const open = props.content.qna.shape
+  const [isopen, setOpen] = useState(props.open)
 
   return (
     <div className="one-element" >
       <div className={props.type === 'card' ? 'accordion__card' : 'accordion__plain'}>
-        <div className="accordion__header-qna" onClick={() => setOpen(!open)}>
+        <div className="accordion__header-qna" onClick={() => {setOpen(!isopen)}}>
           <div className="edit-element">
             <div className="accordion__title">
               <div className="title_text" style={{color:`${props.color}`, width:'100%'}}>
-                <span className="qna__word">Q.</span>
+                <div className="qna__word" style={{fontFamily:`${props.setting.smallFont}`}}>Q.</div>
                 <div style={{width:'100%'}}>
                   <TextAuto 
+                    disabled
+                    small
                     value={props.title} 
-                    color={props.color} align="start" />
-                  </div>
+                    color={props.color} align="start"
+                    placeholder="여기를 클릭하여 자주 묻는 질문을 적어보세요."
+                    />
+                </div>
               </div> 
             </div>
             <div className="centera" style={{justifyContent: 'end', width:'20%'}}>
-              { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
+              { isopen ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
             </div>
           </div>
         </div>
         {isopen === 'open' ? 
-          (<div className="accordion__body" style={{display:`${!open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>
+          (<div className="accordion__body" style={{display:'flex', flexDirection:'row', justifyContent:'start'}}>
           {props.children}
           </div>):
           (<div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>

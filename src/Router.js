@@ -34,11 +34,14 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                 <ScrollToTop>
                 <div className="Container" style={{ minHeight: 'calc(100vh - 80px)', zIndex:-1 }}>
                     <Switch>
-                        <Route exact path="/v2">
+                        <Route exact path="/oldoldoldold">
                             <MainPage history={history}/>
                         </Route>
                         <Route exact path="/" onUpdate={() => window.scrollTo(0, 0)}>
                             <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
+                        </Route>
+                        <Route path="/register">
+                            <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
                         </Route>
                         <Route path="/response" onUpdate={() => window.scrollTo(0, 0)}>
                             <ResponsePage history={history} userObj={userObj}/> 
@@ -55,10 +58,7 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                         <Route path="/customer" onUpdate={() => window.scrollTo(0, 0)}>
                             <CustomerPage history={history} isLoggedIn={isLoggedIn}/>
                         </Route>
-                        <Route path="/register">
-                            <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
-                        </Route>
-                        <Route exact path="/:id" component={ UserLandingPage } />
+                        <Route exact path="/:id" component={ UserLandingPage } history={history}/>
                     </Switch>
                 </div>
                 </ScrollToTop> 
