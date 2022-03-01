@@ -104,8 +104,8 @@ function EditReviewSection({content, category}) {
                                 }))} />
                             </div>
                             <>
-                                <OnOffCustom text="이름 / 정보" value={content.rating.use} func={(e) => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].rating.use = !content.rating.use;
+                                <OnOffCustom text="이름 / 정보" value={content.writer.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].writer.use = !content.writer.use;
                                 }))} />
                                 <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].writer.color = e;

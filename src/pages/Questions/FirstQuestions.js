@@ -347,7 +347,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                     <ModalBox 
                         title={<><span style={{color:'#6C63FF'}}>{title}</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀</>}>
                         <>
-                            <div className="modal-row">
+                            <div className="modal-row1">
                             {
                                 secondQuestion.map((item, index) => {
                                     let color = 'none';
@@ -415,16 +415,16 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                 return(
                     <ModalBox title={<>
                         좋아요! 디자인은 어떻게 할까요? 🤔</>}>
-                            <div className="modal-row" style={{flexWrap:'nowrap'}}>
+                            <div className="modal-row">
                             <div className="modal-column">
                                 <div>
                                     폰트를 선택해 주세요.
                                 </div>
-                                <OverflowScrolling className="font-selections__container">
+                                <div className="font-selections__container">
                                     {fontList.map((item, index) => {
                                         return(
-                                            <div className="template__card uphover" key={index}
-                                                onClick={() => {
+                                            <button className="template__card uphover" key={index}
+                                                onClick={(e) => {
                                                     setFont(item.value);
                                                 }}
                                                 style={{border: `${font === item.value ? '1px solid #A89AFF' : 'none'}`, 
@@ -437,10 +437,10 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                                                 <div style={{marginTop:'2%'}}>
                                                     노코드 랜딩페이지 제작 툴, Surfee
                                                 </div>
-                                            </div>
+                                            </button>
                                         )
                                     })}
-                                </OverflowScrolling>
+                                </div>
                             </div>
                             <div className="modal-column" style={{marginLeft:'2vw'}}>
                                 <div>

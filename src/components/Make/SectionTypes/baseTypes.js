@@ -498,12 +498,12 @@ export const base = [
             ...commons.title,
             text:'글만 쓰고 싶을 때 \'글\' 섹션을 이용해 보세요.',
             size:32,
-            align:'center',
+            align:'start',
         },
         desc:{
             ...commons.desc,
             text:'여기를 클릭하여 글을 적어보세요.',
-            align:'center',
+            align:'start',
         },
         padding:{
             top:15,

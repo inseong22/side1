@@ -18,20 +18,22 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                     <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
                 }
                 {navi.logo.text.use && 
-                    <TextareaAutosize
+                    <AutosizeInput
                         name="form-field-name"
                         value={navi.title}
                         placeholder="서비스명을 입력하세요"
-                        style={{ 
-                            textAlign:`${navi.logo.align === 'center' ? 'center' : 'left'}`,
+                        inputStyle={{ 
+                            textAlign:`${navi.logo.align === 'center' && navi.button.use ? 'right' : navi.logo.align === 'center' ? 'center' : 'left'}`,
                             fontSize: `${navi.logo.text.fontSize/20}em`,
                             display: 'flex',
                             zIndex: 5,
                             color:`${navi.logo.text.color}`, 
                             fontFamily:`${state.setting.font}`,
                             resize:'none',
-                            padding: '1px',
-                            marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`,
+                            padding: '0px',
+                            marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,
+                            marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
+                            backgroundColor: 'transparent',
                         }}
                         onChange={(e) => {
                          setNavi(produce(navi, draft => {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import {dbService, stService} from '../../tools/fbase'
 import './MadeLandingCard.css'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {Copy} from '@styled-icons/boxicons-regular'
 
 function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking, history, addNew, num, update, setUpdate}) {
@@ -118,11 +119,11 @@ function MadeLandingCard({item,published, id, index, setNowChecking, nowChecking
             <div className="center-row">
                 <div className="left" style={{fontSize:'0.7em', width:'70%'}}>
                     https://surfee.co.kr/#/{item.setting.urlId} 
-                    {/* <Copy size={15} color="#6B63F7" onClick={(e) => {
-                        alert("링크가 복사되었습니다");
-                    }}
-                    style={{marginLeft:'5px'}}
-                    /> */}
+                    <CopyToClipboard  text={"https://surfee.co.kr/#/"+`${item.setting.urlId}`} onCopy={(e) => {alert("링크가 복사되었습니다");}}>
+                        <Copy size={15} color="#6B63F7"              
+                        style={{marginLeft:'5px'}}
+                        />
+                    </CopyToClipboard>
                 </div>
                 <div className="right" style={{fontSize:'15px', width:'30%'}}>
                     <button className="content__button cb-delete" onClick={() => {setDeleteOpen(true)}}>삭제</button>
