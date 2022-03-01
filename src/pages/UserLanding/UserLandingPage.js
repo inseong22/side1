@@ -9,6 +9,7 @@ import ErrorPage from './NavAndFooter/ErrorPage'
 import { isMobile } from 'react-device-detect'
 import UserSection from '../../components/UserLandingPage/UserSection'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import ChannelTalk from '../../tools/ChannelTalk'
 
 export const UserContext = React.createContext({
     state : {},
@@ -30,7 +31,9 @@ const UserLandingPage = (props) => {
     const favicon = document.getElementById("favicon");
 
     const urltitle = document.getElementById("urltitle");
-    const channeltalk = document.getElementsByTagName("script");
+
+
+    ChannelTalk.shutdown();
 
     useEffect(() => {
         loadData()

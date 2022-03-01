@@ -35,7 +35,7 @@
 .make-nav-button{
     background-color:rgba(0,0,0,0);
     color:var(--main-grey);
-    border-radius: 5px;
+    border-radius: 25px;
     display: flex;
     align-items:center;
     justify-content:center;

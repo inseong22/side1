@@ -1,4 +1,4 @@
-import React, {useMemo, useEffect, useState, useRef, createContext, useContext, useCallback} from 'react'
+import React, {useEffect, useState, useRef, createRef, useMemo} from 'react'
 import './MakePage.css'
 import './MakeLanding.css'
 // Recoil , Immer JS 적용
@@ -73,6 +73,16 @@ const MakePageV2 = ({history, userObj}) => {
 
     // 피드백
     const [feedback, setFeedback] = useState(lodash.cloneDeep(defaults.feedback));
+    const elementsRef = useRef([0,1,2,3,4,5,6,8,9,7,10,11,12,13,14,15].map(() => createRef()));
+
+    // const [bgc, setBgc] = useState('red');
+
+    // useMemo(() => {
+    //     setBgc('#c2bfff')
+    //     setTimeout(() => {
+    //         setBgc('white')
+    //     }, 150)
+    // }, [secNum])
 
     // 반복 실행되는 useEffect
     useEffect(() => {
@@ -195,9 +205,15 @@ const MakePageV2 = ({history, userObj}) => {
                     !full && 
                     <div style={{display:'flex', justifyContent:'center', alignItems: 'center', width:'28vw'}}>
                         <div className="make-page-make-space">
-                            <OverflowScrolling className='overflow-scrolling'>
+                            <OverflowScrolling className='overflow-scrolling' style={{
+                                // backgroundColor:`${bgc}`, 
+                                // mozTransition: `all 0.3s ease-in`,
+                                // webkitTransition: `all ${bgc === 'white' ? 0.7 : 0}s ease-in`,
+                                // oTransition: `all 0.3s ease-in`,
+                                // transition: `all 0.3s ease-in`,
+                                }}>
                                 {/* 제작페이지 메인 */}
-                               <NewSectionMake content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
+                               <NewSectionMake elementsRef={elementsRef} content={contents[secNum]} foot={foot} setFoot={setFoot} navi={navi} setNavi={setNavi} setting={setting} setSetting={setSetting} />
                             </OverflowScrolling>
                         </div>
                         <div className="fake-make">
@@ -236,7 +252,7 @@ const MakePageV2 = ({history, userObj}) => {
                                 {contents.map((item, index) => {
                                     return(
                                         <div style={{width:'100%'}}>
-                                            <NewSection setCategory={setCategory} content={item} key={index} index={index} secNum={secNum} isPhone={isPhone} setSecNum={setSecNum} contents={contents} setContents={setContents} full={full} setting={setting}/>
+                                            <NewSection elementRef={elementsRef.current[index]} setCategory={setCategory} content={item} key={index} index={index} secNum={secNum} isPhone={isPhone} setSecNum={setSecNum} contents={contents} setContents={setContents} full={full} setting={setting}/>
                                         </div>
                                     )
                                 })}

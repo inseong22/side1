@@ -5,6 +5,7 @@ import produce from 'immer';
 import AddingSection from '../../Modal/AddingSection';
 import {CustomSwitch2} from '../tools/Custom/OnOffCustom'
 import './EditContents.css';
+import {DragHandle} from '@styled-icons/material-rounded'
 // import PlusIcon from '../../../../tools/img/plusButton.png';
 
 const BCOLOR = 'rgba(230,230,230,0)'
@@ -23,7 +24,7 @@ const getItemStyle = (isDragging, draggableStyle, backColor) => {
     };
 };
 
-function EditContents({navi, setNavi, foot, setFoot}) {
+function EditContents({navi, setNavi, foot, setFoot, elementsRef}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [deleteopen, setDeleteOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
@@ -117,15 +118,12 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                                                                     ref={provided.innerRef}
                                                                     {...provided.dragHandleProps}
                                                                     {...provided.draggableProps}
-
+                                                                    onClick={() => {window.scrollTo({top:(elementsRef.current[index].current.offsetTop - window.innerHeight/5), left:0, behavior:'smooth'})}}
                                                                     style={getItemStyle(
                                                                     snapshot.isDragging,
                                                                     provided.draggableProps.style,
                                                                     )}>
                                                                         <div className="center-column hoverback one-contents__inner">
-                                                                            {/* <div className="centera" style={{width:'5%'}}>
-                                                                                <DragIndicator size="30" />
-                                                                            </div> */}
                                                                                 <div className="center-row">
                                                                                     <div className="left">
                                                                                         <div className="content__name">
@@ -173,7 +171,7 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                                                                     ref={provided.innerRef}
                                                                     {...provided.dragHandleProps}
                                                                     {...provided.draggableProps}
-
+                                                                    onClick={() => {window.scrollTo({top:(elementsRef.current[index] && elementsRef.current[index].current.offsetTop - window.innerHeight/5), left:0, behavior:'smooth'})}}
                                                                     style={getItemStyle(
                                                                     snapshot.isDragging,
                                                                     provided.draggableProps.style,
@@ -247,7 +245,7 @@ function EditContents({navi, setNavi, foot, setFoot}) {
                     </div>   
                 </div>
             </div>
-            <AddingSection open={addOpen} setOpen={setAddOpen}/>
+            <AddingSection open={addOpen} setOpen={setAddOpen} foot={foot}/>
         </div>
     )
 }
