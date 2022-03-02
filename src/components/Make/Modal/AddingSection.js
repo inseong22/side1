@@ -57,7 +57,7 @@ const style = {
   pb: 3,
 };
 
-function AddingSection({open, setOpen, foot}) {
+function AddingSection({setting, open, setOpen, foot}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const addSection = async (typeName) => {
@@ -69,12 +69,17 @@ function AddingSection({open, setOpen, foot}) {
             return({...doc.data(), id:doc.id})
         });
 
-        let body = JSON.parse(JSON.stringify(eee[0].contents.filter(doc => doc.sectionTypeName === typeName)[0]))
+        let tempBody = eee[0].contents.filter(doc => doc.sectionTypeName === typeName)[0]
+
+        tempBody['animation'] = setting.animation
+
+        let body = JSON.parse(JSON.stringify(tempBody))
 
         action.setContents([
             ...state.contents.slice(0, state.contents.length),
             body,
         ])
+        console.log(tempBody)
         window.scrollTo({top:(document.body.scrollHeight - 150), left:0, behavior:'smooth'})
         setOpen(false)
         action.setSecNum(state.contents.length)

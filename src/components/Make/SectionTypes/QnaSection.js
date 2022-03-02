@@ -34,7 +34,7 @@ function QnaSection({content, setting}) {
         <motion.div className="template"
         data-aos-easing="ease-in-back"
         data-aos-delay="200"
-        data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
+        data-aos-offset="0" data-aos={content.animation} aos-duration="4000">
 
             {/* 큐앤에이 카드의 그림자때문에 텍스트와 정렬이 맞지 않아서 */}
             <div style={{width : `${state.isPhone ? '100%' : '95%'}` }}>  

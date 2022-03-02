@@ -89,8 +89,7 @@ function GallerySection({content,setting}) {
         <motion.div className="template"
         data-aos-easing="ease-in-back"
         data-aos-delay="200"
-        data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
-
+        data-aos-offset="0" data-aos={content.animation} aos-duration="4000">
             <TitleDesc content={content} titlePlaceholder="제목을 적어보세요." descPlaceholder="여기를 클릭하여 내용을 적어보세요." />
 
             <div className="features__container" style={{flexWrap : `${state.isPhone ? 'wrap' : ''}`}}>

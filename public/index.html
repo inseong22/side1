@@ -47,12 +47,12 @@
               return pub;
           }();
        
-         $(document).ready(
+         {% comment %} $(document).ready(
               function() {
                   logger.disableLogger();
                   console.log('콘솔 로그가 다시 찍힌다.');
               }
-          );
+          ); {% endcomment %}
       </script>
     <title id="urltitle">Surfee | Landing Page Saas</title>
   </head>

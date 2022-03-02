@@ -72,7 +72,7 @@ function FeaturesSection({content, setting}) {
 
     return (
         <>
-            <motion.div className="template" data-aos={setting.animation} data-aos-easing="ease-in-back"
+            <motion.div className="template" data-aos={content.animation} data-aos-easing="ease-in-back"
                 data-aos-delay="200"
                 data-aos-offset="0" aos-duration="4000" >
                     <TitleDesc content={content} titlePlaceholder="특징들의 제목을 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요." />

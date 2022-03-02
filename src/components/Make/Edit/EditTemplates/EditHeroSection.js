@@ -182,17 +182,6 @@ function EditHeroSection({content, category}) {
                         <AddGhostButton content={content} num={1} />
                     </OpenCloseCustom>
                     <AddAppButton content={content} />
-                    {/* <div className="left">
-                        <div className="content__name">
-                                    애니메이션
-                        </div>
-                        <div style={{paddingLeft:'7%'}}>
-                            <CustomSwitch value={content.animation.use} 
-                                onChange={ e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].animation.use = !content.animation.use
-                                }))}/>
-                        </div>
-                    </div> */}
                     </>
                 )
 

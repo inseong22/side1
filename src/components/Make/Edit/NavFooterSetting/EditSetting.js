@@ -16,6 +16,7 @@ import {Check} from '@styled-icons/bootstrap'
 import {ChevronRight} from '@styled-icons/boxicons-regular'
 import {ChevronDown} from '@styled-icons/bootstrap'
 import OverflowScrolling from 'react-overflow-scrolling';
+import {base} from '../../SectionTypes/baseTypes'
 import {
     Button,
     ChakraProvider,
@@ -71,7 +72,7 @@ const sizeOptions = [
     { label: '크게', value: 98 },
 ]
 
-function EdtiSetting({setting, setSetting, category}) {
+function EdtiSetting({setting, setSetting, category, setContents}) {
     const [isFontOpen, setIsFontOpen] = useState(false)
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
@@ -83,10 +84,10 @@ function EdtiSetting({setting, setSetting, category}) {
     ]
 
     const changeAnimationOption = e => {
-        // action.setContents(produce(state.contents, draft => {
-        //     draft[state.secNum].animation.type = e;
-        // }))
-        setSetting({...setting, animation : e})
+        setSetting({...setting, animation : e});
+        action.setContents(produce(state.contents, draft => {
+            draft.map(item => item.animation = e)
+        }))
     }
 
     // 이미지 업로드

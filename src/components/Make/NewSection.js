@@ -20,7 +20,7 @@ import produce from 'immer'
 
 import styled from "styled-components";
 
-function NewSection({elementRef, setting, content, index, secNum, setSecNum, isPhone, setCategory, full}) {
+function NewSection({elementRef, setting, content, index, secNum, setSecNum, isPhone, setCategory, setContents, full}) {
     const [isHover, setIsHover] = useState('none');
 
     const setThisSection = () => {
