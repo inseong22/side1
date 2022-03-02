@@ -79,7 +79,6 @@ function AddingSection({setting, open, setOpen, foot}) {
             ...state.contents.slice(0, state.contents.length),
             body,
         ])
-        console.log(tempBody)
         window.scrollTo({top:(document.body.scrollHeight - 150), left:0, behavior:'smooth'})
         setOpen(false)
         action.setSecNum(state.contents.length)
