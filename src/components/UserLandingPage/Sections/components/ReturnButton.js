@@ -73,11 +73,19 @@ const CustomButton = (type) => { return (
         return(
             <div className="centera" style={{flexDirection:`${isMobile || content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ? 'column' : 'row'}`, justifyContent:`${isMobile ? content.mobile.align : content.button.align}`}}>
                 {content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].map((item, index) => {
-                    return <input className="input-placeholder" placeholder={item} key={index} 
-                        style={{ margin:'4px', padding: `${state.setting[type].padding * 0.3 + 7.2}px 10px`, }}
-                        onChange={e => setValues(produce(values, draft => {
-                            draft[index] = e.currentTarget.value
-                        }))} />
+                    return (
+                        <input 
+                            className="input-placeholder" 
+                            placeholder={item} 
+                            style={{ 
+                                margin:'4px', 
+                                padding: `${state.setting[type].padding * 0.3 + 7.2}px 10px`,
+                            }}
+                            onChange={e => setValues(produce(values, draft => {
+                                draft[index] = e.currentTarget.value
+                            }))} 
+                            key={index} />
+                    )
                 })}
                 {
                     type === 'cta' && <>{CustomButton('cta')}</>

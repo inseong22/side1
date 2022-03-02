@@ -268,7 +268,7 @@ const MakePageV2 = ({history, userObj}) => {
                                     style={{
                                         fontFamily: `${setting.smallFont}`,
                                         backgroundColor:`${setting.fta.backgroundColor}`, 
-                                        width:`${isPhone ? setting.fta.size : setting.fta.size}%`, 
+                                        width:`${setting.fta.size}%`, 
                                         borderRadius:`${setting.fta.shape}px`, 
                                         border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
                                         boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`

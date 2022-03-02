@@ -10,7 +10,7 @@ function FuncTopBar({category, setCategory}) {
     return (
         <>
         <div className="edit__top-bar">
-            <div className="edit__top-bar fixed">
+            <div className="edit__top-bar">
                 <div className={category === 1 ? 'edit-radios' : 'edit-radios er-clicked'} onClick={() => setCategory(0)}>
                     기본
                 </div>

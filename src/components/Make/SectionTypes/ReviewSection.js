@@ -42,11 +42,7 @@ function ReviewSection({content, setting}) {
                     }
                     {
                         content.rating.use && 
-                        <div className="df-margin">
-                            <div style={{
-                                width:'100%', 
-                                textAlign:`${state.isPhone ? content.mobile.align : content.align}`
-                            }}>
+                        <div className="df-margin-small" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.align}`}}>
                             <Rating
                                 value={item.rating} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {
@@ -57,12 +53,11 @@ function ReviewSection({content, setting}) {
                                 // size={content.rating.size}
                                 // color={content.rating.color}
                             />
-                            </div>
                         </div>
                     }
                     {
                         content.elementText.use && 
-                        <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                        <div className="df-margin feature-desc" style={{width:'100%'}}>
                             <TextareaAutosize
                                 className="text-input" 
                                 style={{
