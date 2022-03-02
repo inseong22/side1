@@ -24,7 +24,7 @@ const getItemStyle = (isDragging, draggableStyle, backColor) => {
     };
 };
 
-function EditContents({navi, setNavi, foot, setFoot, elementsRef}) {
+function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [deleteopen, setDeleteOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
@@ -245,7 +245,7 @@ function EditContents({navi, setNavi, foot, setFoot, elementsRef}) {
                     </div>   
                 </div>
             </div>
-            <AddingSection open={addOpen} setOpen={setAddOpen} foot={foot}/>
+            <AddingSection setting={setting} open={addOpen} setOpen={setAddOpen} foot={foot}/>
         </div>
     )
 }

@@ -37,10 +37,7 @@ const commons = {
         top:15,
         bottom:15,
     },
-    animation:{
-        use:true,
-        type:'none',
-    },
+    animation: 'none',
     box:{
         use:false,
         backgroundColor:'#6C63ff1d',

@@ -35,7 +35,7 @@ export const MakeContext = React.createContext({
     actionC : {setUsedColors : () => {}}
 });
 
-function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting, elementsRef}) {
+function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting, elementsRef, setContents}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [usedColors, setUsedColors] = useState([
         "#ffffff",
@@ -134,7 +134,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             return(
                 <>
                     <div className="back__container">
-                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer', justifyContent: 'none'}}>
                             <span className="back-button">
                                 <ArrowIosBack size="20" />
                             </span>
@@ -169,12 +169,12 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             return(
                 <>
                     <EditTopBar category={state.category} setCategory={action.setCategory} />
-                    <EditSetting setting={setting} setSetting={setSetting} category={state.category}/>
+                    <EditSetting setting={setting} setSetting={setSetting} category={state.category} setContents={setContents} content={content}/>
                 </>
             )
         }else if(state.secNum === CONTENTSSECNUM ){
             return(
-                <EditContents navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot} elementsRef={elementsRef}/>
+                <EditContents setting={setting} navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot} elementsRef={elementsRef}/>
             )
         }else{
             return (
