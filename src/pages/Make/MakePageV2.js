@@ -266,7 +266,7 @@ const MakePageV2 = ({history, userObj}) => {
                             <div className="fta__container" style={{width:`${full ? '100vw' : isPhone ? '26vw' : '70vw'}`}}>
                                 <div className="fta-button" 
                                     style={{
-                                        fontFamily: `${setting.smallFont}`,
+                                        fontFamily: `${setting.font}`,
                                         backgroundColor:`${setting.fta.backgroundColor}`, 
                                         width:`${setting.fta.size}%`, 
                                         borderRadius:`${setting.fta.shape}px`, 

@@ -98,7 +98,7 @@ function UserFoot({foot, setting}) {
             padding:`${
                 isMobile ? foot.paddingTop/2.5 : foot.paddingTop}vh 
                 ${isMobile ? '15px' : 'calc(14vw + 30px)'}
-                ${isMobile ? foot.paddingTop/2.5 : foot.paddingBottom}vh 
+                ${isMobile ? foot.paddingBottom/2.5 : foot.paddingBottom}vh 
                 ${isMobile ? '15px' : 'calc(14vw + 30px)'}`
             }}>
                     <div className="footer-section" style={{fontSize:'0.5em'}}>

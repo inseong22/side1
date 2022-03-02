@@ -177,8 +177,9 @@
 .opacity-hover{
   background-color: rgba(255,255,255);
 }
+
 .opacity-hover:hover{
-  background-color: rgba(245,245,245);
+  background-color: var(--main-light-gray);
 }
 
 .radio-hover{
@@ -342,14 +343,20 @@
   overflow:hidden;
   word-wrap:break-word;
 }
+
 .text-no-input:hover{
   border:1px solid rgba(200,200,200,0);
 }
+
 .text-no-input:focus{
   border:1px solid rgba(200,200,200,0);
   outline:none;
 }
 
+.text-no-input:disabled{
+  opacity: 1;
+  -webkit-text-fill-color:inherit;
+}
 
 .text-input:hover{
   border:1px solid rgba(200,200,200,0.7);
@@ -375,6 +382,7 @@
   font-size:var(--button-font-size);
   padding:var(--made-button-padding);
 }
+
 .text-input-button{
   border:none;
   background-color:rgba(0,0,0,0);
@@ -382,6 +390,7 @@
   padding:var(--made-button-padding);
   cursor:pointer;
 }
+
 .pointer{
   cursor: pointer;
 }

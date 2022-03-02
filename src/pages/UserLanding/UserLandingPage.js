@@ -118,7 +118,7 @@ const UserLandingPage = (props) => {
                         value={setting.fta.text} 
                         disabled
                         style={{
-                            fontFamily: `${setting.smallFont}`,
+                            fontFamily: `${setting.font}`,
                             resize: 'none',
                             color:`${setting.fta.color}`,
                             textAlign:'center',

@@ -99,7 +99,8 @@ const CustomButton = (type) => { return (
 
     return (
         <>
-        {content.button.use && 
+        {
+        content.sectionTypeName !== 'AppDownloadSection' && content.button.use && 
             <div style={{width:'100%'}}>
                 <div className="button__container" style={{
                     justifyContent:`${isMobile ? content.mobile.align : content.button.align}`,
@@ -110,7 +111,7 @@ const CustomButton = (type) => { return (
                         content.button.ghostUse && content.button.ghostOption === 'link') ||
                         (content.button.ctaUse && content.button.ctaOption === 'link' &&
                         content.button.ghostUse && content.button.ghostOption === 'apply') ? 'column' : 'row' 
-                        }`
+                        }` 
                     }}>
                     <>
                     {
@@ -132,7 +133,7 @@ const CustomButton = (type) => { return (
             </div>
         }
         {
-            content.appButton.use && 
+            content.sectionTypeName !== 'ApplySection' && content.appButton.use && 
             <div className="button__container" style={{justifyContent:`${isMobile ? content.mobile.align : content.appButton.align}`}}>
                 {
                     content.appButton.google.length > 0 && 
