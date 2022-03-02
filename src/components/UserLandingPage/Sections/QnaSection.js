@@ -10,12 +10,13 @@ function QnaSection({content, setting}) {
 
     const returnQnaCards = content.qnas.map((item, index) => {
         return(
-            <QnaOpenClose key={index} title={item.question} open={content.qna.shape === 'open'} color={content.qna.question} content={content} type={content.layout} index={index}>
+            <QnaOpenClose setting={setting} key={index} title={item.question} open={content.qna.shape === 'open'} color={content.qna.question} content={content} type={content.layout} index={index}>
                 <div className="edit-element">
                     <div style={{display:'flex', alignItems: 'start', height:'100%'}}>
                         <span className="qna__word" style={{fontFamily:`${setting.smallFont}`}}>A. <></></span>
                     </div>
                     <TextAuto
+                        disabled
                         small
                         value={item.answer} 
                         color={content.qna.answer} align="start" />

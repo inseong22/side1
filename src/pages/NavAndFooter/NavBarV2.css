@@ -1,3 +1,19 @@
+
+.nav-bar-container-v2{
+    position: fixed;
+    top: 0;
+    z-index:3;
+    height:60px;
+    margin-bottom:60px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items : center;
+    color:rgb(106, 99, 247);
+    background-color:rgba(255, 255, 255, 0.719);
+    font-weight: 500;
+}
+
 .nav-button-round-v2{
     border-radius:20px;
     width:130px;
@@ -32,7 +48,12 @@
     padding:5px 8px;
     border-radius: 5px;
     text-decoration: none;
+    background-color:rgba(255, 255, 255, 0.719);
 }
+
+.nav-left-text:hover{
+    background-color: rgba(245,245,245);
+  }
 
 .nav-on-v2{
     display: flex;
@@ -41,21 +62,6 @@
     cursor:pointer;
     justify-content : center;
     margin-right:5vw;
-}
-
-.nav-bar-container-v2{
-    position: fixed;
-    top: 0;
-    z-index:3;
-    height:60px;
-    margin-bottom:60px;
-    width: 100%;
-    display: flex;
-    justify-content: start;
-    align-items : center;
-    color:rgb(106, 99, 247);
-    background-color:white;
-    font-weight: 500;
 }
 
 .nav-bar-left-v2{
@@ -67,10 +73,12 @@
 }
 .nav-bar-title-v2{
     font-size:36px;
-    font-weight: 700;
     text-align:start;
     padding-left:20%;
     text-decoration: none;
+    font-family: Noto Sans KR;
+    letter-spacing: -0.02em;
+    font-weight: 800;
 }
 .footer{
     background-color: rgb(245, 245, 245);
@@ -121,19 +129,21 @@
 @media screen and (max-width:800px){
     .nav-bar-title-v2{
         font-size:25px;
-        font-weight: 700;
         text-align:start;
-        padding-left:1%;
     }
 
     .nav-bar-left-v2{
-        width:70%;
+        display: flex;
+        justify-content: start;
+        align-items : center;
+    
+        width:50%;
         font-size:14px;
     }
 
     .nav-on-v2{
-        width:30%;
-        margin-right:5vw;
+        width:50%;
+        margin-right:0vw;
     }
     
     .nav-button-round-v2{

@@ -2,6 +2,7 @@ import React from 'react'
 import AutosizeInput from 'react-input-autosize';
 import {dbService} from '../../tools/fbase'
 import { isMobile } from 'react-device-detect'
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 function UserNavBar({setting, navi}) {
 
@@ -13,6 +14,7 @@ function UserNavBar({setting, navi}) {
                 color:`${setting[type].color}`,
                 boxShadow:`${setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
                 border:`${setting[type].border ? `1px solid ${setting[type].borderColor}` : 'none'}`,
+                display: 'block'
             }} 
             onClick={() => {
                 moveToPage(type)
@@ -23,15 +25,17 @@ function UserNavBar({setting, navi}) {
                 // window.location.href = navi.button.cta.link
             }}>
     
-            <div className="text-input-flex"
+            <AutosizeInput className="text-input-flex"
+                value={ navi.button[type].text } 
                 style={{
                     fontFamily:`${setting.smallFont}`,
                     borderRadius:`${setting[type].borderRadius}px`,  
                     backgroundColor:`${setting[type].backgroundColor}`, 
-                    padding: `${setting[type].padding * 0.3}px ${setting[type].padding}px`, 
-                }}>
-                { navi.button[type].text } 
-            </div>
+                    textAlign: 'center', 
+                    padding: `${navi.button[type].padding*0.3}px ${navi.button[type].padding}px` 
+                }}
+                disabled
+                />
         </div>
     )}
 
@@ -58,23 +62,33 @@ function UserNavBar({setting, navi}) {
             >
                 
             <>
-                <div className="make-nav-logoc" style={{height:`${navi.height}px`, justifyContent:`${navi.logo.align}`}}>
-                    {navi.logo.image.use && 
-                        <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
-                    }
-                    {navi.logo.text.use && 
-                        <div
-                            className="text-input-flex"
-                            style={{
-                                zIndex: 5,
-                                fontSize:`${navi.logo.text.fontSize}px`, 
-                                color:`${navi.logo.text.color}`, 
-                                fontFamily:`${setting.font}`,
-                                padding: '5px',
-                                paddingLeft: '0px',
-                                marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`
-                            }}>{navi.title}</div>
-                    }
+                <div className="make-nav-logoc" style={{height:`${navi.height}px`, 
+                    justifyContent:`${navi.logo.align === 'center' && navi.button.use && !isMobile ? 'right' : navi.logo.align}`,
+                    width: `${navi.logo.align === 'center' && navi.button.use && !isMobile ? '115%' : '100%'}`}}>
+                        {navi.logo.image.use &&  
+                            <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
+                        }
+                        {navi.logo.text.use && 
+                            <TextareaAutosize
+                                disabled
+                                name="text-no-input"
+                                value={navi.title}
+                                placeholder="서비스명을 입력하세요"
+                                style={{ 
+                                    border:'none',
+                                    backgroundColor:'rgba(0,0,0,0)',
+                                    textAlign:`${navi.logo.align === 'center' ? 'center' : 'left'}`,
+                                    fontSize: `${navi.logo.text.fontSize/20}em`,
+                                    display: 'flex',
+                                    zIndex: 5,
+                                    color:`${navi.logo.text.color}`, 
+                                    fontFamily:`${setting.font}`,
+                                    resize:'none',
+                                    padding: '1px',
+                                    marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`,
+                                }}
+                            />
+                        }
                 </div>
                 <div className="make-nav-buttonc" style={{justifyContent:`${navi.button.align}`}}>
                     { navi.button.cta.use && 

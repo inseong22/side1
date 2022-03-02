@@ -22,36 +22,33 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width:'100%'}}>
             <div className="nav-bar-container-v2">
                 <div className="nav-bar-left-v2">
-                    <Link to="/v2" className="nav-bar-title-v2" style={{cursor:'pointer', color:'#6a63f7'}}>
+                    <Link to="/" className="nav-bar-title-v2" style={{cursor:'pointer', color:'#6a63f7'}}>
                         Surfee
                     </Link>
                     {/* <Link to="/info" className="nav-left-text" style={{marginLeft:'4vw'}}>
                         제품소개
                     </Link> */}
-                    <Link to="/customer" className="nav-left-text opacity-hover">
-                        문의하기
-                    </Link>
+                </div>
+                <div className="nav-on-v2">
                     {isLoggedIn ? 
                     <>
-                    <span className="nav-left-text opacity-hover" onClick={() => onLogout()}>
+                    <span className="nav-left-text" onClick={() => onLogout()}>
                         로그아웃
                     </span>
                     </> : 
                     <>
-                        <div className="nav-left-text opacity-hover" onClick={() => setLoginOpen(!loginOpen)}>
+                        <div className="nav-left-text" onClick={() => setLoginOpen(!loginOpen)}>
                             로그인
                         </div>
-                        <div className="nav-left-text opacity-hover" onClick={() => setRegisterOpen(!registerOpen)}>
+                        <div className="nav-left-text" onClick={() => setRegisterOpen(!registerOpen)}>
                             회원가입
                         </div>
                     </>
                     }
-                </div>
-                <div className="nav-on-v2">
-                    {
+                    {/* {
                     buttonOpen &&  
                         <button className="nav-button-square" onClick={() => window.scrollTo(0,document.body.scrollHeight)}>무료로 체험하기</button>
-                    }
+                    } */}
                 </div>
             </div>
             <div style={{borderBottom: '2px solid black', width:`${(scrollPosition/window.innerHeight)*63}%`, position:'fixed', top:'58px', zIndex:'12'}}></div>

@@ -21,14 +21,14 @@ function Footer() {
             </div>
             <div className="footer-more">
               <div className="footer-item">
-                <Link to="/customer" className="footer-text-click">
+                <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" className="footer-text-click">
                   이용약관
-                </Link>
+                </a>
               </div>
               <div className="footer-item">
-                <Link to="/customer" className="footer-text-click">
+                <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" className="footer-text-click">
                   개인정보 처리방침
-                </Link>
+                </a>
               </div>
             </div>
         </div>

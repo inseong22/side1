@@ -45,9 +45,12 @@ function FeedbackModal({open, setOpen, deploy}) {
     const [inputText, setInputText] = useState('');
 
     const [path, setPath] = useState('');
+    const [pathEtc, setPathEtc] = useState('');
     const [difficul, setDifficul] = useState('');
     const [inconv, setInconv] = useState('');
+    const [inconvEtc, setInconvEtc] = useState('');
     const [satisfy, setSatisfy] = useState('');
+    const [satisfyEtc, setSatisfyEtc] = useState('');
     const [time, setTime] = useState('');
     const [func, setFunc] = useState('');
     const [comment, setComment] = useState('');
@@ -57,9 +60,12 @@ function FeedbackModal({open, setOpen, deploy}) {
         // 파이어베이스에 피드백기록
         await dbService.collection('feedback').add({
             funnel: path,
+            funnelEtc: pathEtc,
             difficulty: difficul,
             inconvenience: inconv,
+            inconvenienceEtc: inconvEtc,
             satisfaction: satisfy,
+            satisfactionEtc: satisfyEtc,
             working_time: time,
             function: func,
             comment: comment,
@@ -124,12 +130,18 @@ function FeedbackModal({open, setOpen, deploy}) {
                     <div className="round-ans-button" style={{background: `${path === '지인 추천' ? `var(--main-color)`: 'white'}`, color: `${path === '지인 추천' ? 'white': `var(--main-color)`}`}} onClick={() => {setPath('지인 추천'); setClicked(true);}}>
                         지인 추천
                     </div>
-                    <div className="round-ans-button" style={{background: `${path === '기타' ? `var(--main-color)`: 'white'}`, color: `${path === '기타' ? 'white': `var(--main-color)`}`}} onClick={() => {setPath('기타'); setClicked(true);}}>
-                        기타
+                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection:'column'}}>
+                        <div className="round-ans-button" style={{background: `${path === '기타' ? `var(--main-color)`: 'white'}`, color: `${path === '기타' ? 'white': `var(--main-color)`}`}} onClick={() => {setPath('기타'); setClicked(true);}}>
+                            기타
+                        </div>
+                        {
+                            path === '기타' && 
+                            <input className="text-modal-input inputbox" value={pathEtc} onChange={e => setPathEtc(e.currentTarget.value)} style={{width:'300px'}}/>
+                        }
                     </div>
                 </div>
                 <div className="prev-next-fbuttons" style={{justifyContent:'end'}}>
-                    <div className="prev-next-fbutton" onClick={toNext}>다음</div>
+                    <div className="prev-next-fbutton" style={{width:'100%'}} onClick={toNext}>다음</div>
                 </div>
                 </>
             )
@@ -159,21 +171,27 @@ function FeedbackModal({open, setOpen, deploy}) {
                 Surfee를 사용하면서 가장 불편했던 점이 무엇인가요?
                 </div>
                 <div className="column-ans">
-                        <div className="round-ans-button" style={{background: `${inconv === '낮은 자유도' ? `var(--main-color)`: 'white'}`, color: `${inconv === '낮은 자유도' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('낮은 자유도'); setClicked(true);}}>
-                            낮은 자유도
-                        </div>
-                        <div className="round-ans-button" style={{background: `${inconv === '섹션 유형의 부족' ? `var(--main-color)`: 'white'}`, color: `${inconv === '섹션 유형의 부족' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('섹션 유형의 부족'); setClicked(true);}}>
-                            섹션 유형의 부족
-                        </div>
-                        <div className="round-ans-button" style={{background: `${inconv === '기능의 오류' ? `var(--main-color)`: 'white'}`, color: `${inconv === '기능의 오류' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('기능의 오류'); setClicked(true);}}>
+                    <div className="round-ans-button" style={{background: `${inconv === '낮은 자유도' ? `var(--main-color)`: 'white'}`, color: `${inconv === '낮은 자유도' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('낮은 자유도'); setClicked(true);}}>
+                        낮은 자유도
+                    </div>
+                    <div className="round-ans-button" style={{background: `${inconv === '섹션 유형의 부족' ? `var(--main-color)`: 'white'}`, color: `${inconv === '섹션 유형의 부족' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('섹션 유형의 부족'); setClicked(true);}}>
+                        섹션 유형의 부족
+                    </div>
+                    <div className="round-ans-button" style={{background: `${inconv === '기능의 오류' ? `var(--main-color)`: 'white'}`, color: `${inconv === '기능의 오류' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('기능의 오류'); setClicked(true);}}>
                         기능의 오류
-                        </div>
-                        <div className="round-ans-button" style={{background: `${inconv === '결과물이 만족스럽지 않음' ? `var(--main-color)`: 'white'}`, color: `${inconv === '결과물이 만족스럽지 않음' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('결과물이 만족스럽지 않음'); setClicked(true);}}>
+                    </div>
+                    <div className="round-ans-button" style={{background: `${inconv === '결과물이 만족스럽지 않음' ? `var(--main-color)`: 'white'}`, color: `${inconv === '결과물이 만족스럽지 않음' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('결과물이 만족스럽지 않음'); setClicked(true);}}>
                         결과물이 만족스럽지 않음
-                        </div>
+                    </div>
+                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection:'column'}}>
                         <div className="round-ans-button" style={{background: `${inconv === '기타' ? `var(--main-color)`: 'white'}`, color: `${inconv === '기타' ? 'white': `var(--main-color)`}`}} onClick={() => {setInconv('기타'); setClicked(true);}}>
-                        기타
+                            기타
                         </div>
+                        {
+                            inconv === '기타' && 
+                            <input className="text-modal-input inputbox" value={inconvEtc} onChange={e => setInconvEtc(e.currentTarget.value)} style={{width:'300px'}}/>
+                        }
+                    </div>
                 </div>
                 <div className="prev-next-fbuttons">
                     <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
@@ -199,9 +217,15 @@ function FeedbackModal({open, setOpen, deploy}) {
                     <button className="round-ans-button" style={{background: `${satisfy === '결과물의 디자인' ? `var(--main-color)`: 'white'}`, color: `${satisfy === '결과물의 디자인' ? 'white': `var(--main-color)`}`}} onClick={() => {setSatisfy('결과물의 디자인'); setClicked(true);}}>
                     결과물의 디자인
                     </button>
-                    <button className="round-ans-button" style={{background: `${satisfy === '기타' ? `var(--main-color)`: 'white'}`, color: `${satisfy === '기타' ? 'white': `var(--main-color)`}`}} onClick={() => {setSatisfy('기타'); setClicked(true);}}>
-                    기타
-                    </button>
+                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection:'column'}}>
+                        <button className="round-ans-button" style={{background: `${satisfy === '기타' ? `var(--main-color)`: 'white'}`, color: `${satisfy === '기타' ? 'white': `var(--main-color)`}`}} onClick={() => {setSatisfy('기타'); setClicked(true);}}>
+                        기타
+                        </button>
+                        {
+                            satisfy === '기타' && 
+                            <input className="text-modal-input inputbox" value={satisfyEtc} onChange={e => setSatisfyEtc(e.currentTarget.value)} style={{width:'300px'}}/>
+                        }
+                    </div>
                 </div>
                 <div className="prev-next-fbuttons">
                     <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
@@ -304,11 +328,11 @@ function FeedbackModal({open, setOpen, deploy}) {
                 BackdropComponent={Backdrop}
             >
                 <Box sx={style}>
-                    <div className="modal-top__title">
+                    <div className="modal-top__title" style={{marginTop:'-10px', flexDirection:'row'}}>
+                        <div className="big-title" style={{marginTop:'5px'}}>Surfee 제작 과정 피드백</div>
                         <div className="modal-close-button" onClick={() => {setClear()}}>
                             <Close size="30" />
                         </div>
-                        <div className="big-title">Surfee 제작 과정 피드백</div>
                     </div>
                     { quest ? (
                         <>
@@ -341,7 +365,8 @@ function FeedbackModal({open, setOpen, deploy}) {
                                     제작 과정에서 느낀 점에 대한 피드백을 부탁드립니다 :)
                                 </div>
                                 <div className="big-title small-text">
-                                    질문은 총 <span style={{color:`var(--main-color)`}}>8</span>개이며, 예상 소요시간은 <span style={{color:`var(--main-color)`}}>1</span>분입니다.
+                                    질문은 총 <span style={{color:`var(--main-color)`}}>8</span>개이며, 예상 소요시간은 <span style={{color:`var(--main-color)`}}>1</span>분입니다.<br/>
+                                    최초 배포 시 한번만 응답하시면 됩니다. 이후에는 나타나지 않습니다.
                                 </div>
                                 <div className="feed-button" onClick={()=>{goQuest(true)}}>
                                     피드백 하고 배포 완료하기

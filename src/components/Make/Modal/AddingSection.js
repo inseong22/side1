@@ -4,6 +4,7 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import {base} from '../SectionTypes/baseTypes'
 import { MyContext } from '../../../pages/Make/MakePageV2'
 import { Close } from '@styled-icons/evaicons-solid';
+import {dbService} from '../../../tools/fbase'
 import './AddingSection.css'
 
 import hero from '../../../tools/img/addSection/01hero.png'
@@ -56,19 +57,27 @@ const style = {
   pb: 3,
 };
 
-function AddingSection({open, setOpen}) {
+function AddingSection({open, setOpen, foot}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
-    const addSection = (typeName) => {
+    const addSection = async (typeName) => {
         // 아래는 state.contents에 섹션 하나를 추가하는 것.
-        let body = JSON.parse(JSON.stringify(base.filter((item, index) => item.sectionTypeName === typeName)[0]))
+        
+        const ee = await dbService.collection('saved-page').where("urlId", '==', '0').get()
+
+        let eee = ee.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+
+        let body = JSON.parse(JSON.stringify(eee[0].contents.filter(doc => doc.sectionTypeName === typeName)[0]))
 
         action.setContents([
             ...state.contents.slice(0, state.contents.length),
             body,
         ])
+        window.scrollTo({top:(document.body.scrollHeight - 150), left:0, behavior:'smooth'})
         setOpen(false)
-        // action.setSecNum(state.contents.length)
+        action.setSecNum(state.contents.length)
     }
 
     return (

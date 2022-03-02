@@ -16,14 +16,18 @@ function AddGhostButton({content, num}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const ghostOpen = () => {
+        if(!(content.button.ctaUse && content.button.ctaOption === 'apply')){
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.ghostUse = !content.button.ghostUse}))
+        }
     }
 
     const changeGhostOption = () => {
         action.setContents(produce(state.contents, draft => {
-            if (draft[state.secNum].button.ghostOption == 'link')
+            if (draft[state.secNum].button.ghostOption == 'link'){
                 draft[state.secNum].button.ghostOption = 'apply'
+                draft[state.secNum].button.ctaUse = false
+            }
             else
                 draft[state.secNum].button.ghostOption = 'link'
         }))

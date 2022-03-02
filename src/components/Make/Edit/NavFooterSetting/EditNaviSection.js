@@ -30,17 +30,7 @@ const buttonAlignOptions = [
     { label: '오른쪽', value: 'end' },
 ]
 
-const buttonTextOptions = [
-    { label: '작게', value: 10 },
-    { label: '보통', value: 12 },
-    { label: '크게', value: 14 }
-]
-
 function EditNaviSection({navi, setNavi, category}) {
-    const [logo, setLogo] = useState("logo")
-    const [buttonUse, setButtonUse] = useState(true)
-    const [buttonFunc, setButtonFunc] = useState("link")
-    const [buttonTemplate, setButtonTemplate] = useState(1)
 
     const elements = [
         {
@@ -121,15 +111,6 @@ function EditNaviSection({navi, setNavi, category}) {
                     </OpenCloseCustom>
                     <OpenCloseCustom title="버튼" use={navi.button.use}>
                         <div className="box-gray__container">
-                        <RadioCustom options={buttonAlignOptions} value={navi.button.align} func={(e) => setNavi(produce(navi, draft => {
-                            draft.button.align = e;
-                        }))} text="정렬" />
-                        <TextSizeCustom text="글자 크기" options={buttonTextOptions} value={navi.button.cta.textsize} func={e => setNavi(produce(navi, draft => {
-                                    draft.button.cta.textsize = e;
-                                    draft.button.ghost.textsize = e;
-                        }))} />
-                        </div>
-                        <div className="box-gray__container">
                         <OnOffCustom text="CTA 버튼" value={navi.button.cta.use} func={() => setNavi(produce(navi, draft => {
                             draft.button.cta.use = !navi.button.cta.use
                         }))} />
@@ -182,7 +163,7 @@ function EditNaviSection({navi, setNavi, category}) {
                     <ColorCustom func={(e) => setNavi({...navi, backgroundColor:e})} value={navi.backgroundColor} text="색상" />
                 </OpenCloseCustom>
                 <OpenCloseCustom title="구분선" use={true}>
-                    <CheckBoxContainer text="구분선" value={navi.bottomBorder.use} func={e => setNavi(produce(navi, draft => {
+                    <OnOffCustom text="구분선" value={navi.bottomBorder.use} func={e => setNavi(produce(navi, draft => {
                         draft.bottomBorder.use = !navi.bottomBorder.use;
                     }))}/>
                     {

@@ -71,7 +71,8 @@ const OpenCloseCustom = (props) => {
    * title, tooltip, preseen 설정 가능
    */
   const isopen = props.content.qna.shape
-  const [open, setOpen] = useState(props.open)
+
+  const [open, setOpen] = useState(false)
   const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
   return (
@@ -82,10 +83,10 @@ const OpenCloseCustom = (props) => {
             <ChakraProvider>
             <div className="accordion__title">
               <div className="title_text" style={{color:`${props.color}`, width:'100%'}}>
-                <div className="qna__word">Q.</div>
+                <div className="qna__word" style={{fontFamily:`${state.setting.smallFont}`}}>Q.</div>
                 <div style={{width:'100%'}}>
                   <TextAuto 
-                    desc
+                    small
                     value={props.title} 
                     onChange={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
@@ -103,7 +104,7 @@ const OpenCloseCustom = (props) => {
           </div>
         </div>
         {isopen === 'open' ? 
-          (<div className="accordion__body" style={{display:`${!open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>
+          (<div className="accordion__body" style={{display:'flex', flexDirection:'row', justifyContent:'start'}}>
           {props.children}
           </div>):
           (<div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>

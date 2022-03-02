@@ -13,7 +13,7 @@ function AppDownloadSection({content, setting}) {
     const returnLayout = {
         flexDirection:`${
             state.isPhone ? 
-                content.mobile.layout === 1 ? 'column' : 'column-reverse'
+                content.mobile.layout === 3 ? 'column' : 'column-reverse'
             :
                 content.layout === 2 ? 'row' : content.layout === 3 ? 'row-reverse' : 'column'
         }`
@@ -26,24 +26,25 @@ function AppDownloadSection({content, setting}) {
                     <div className="text__container">
                         <TitleDesc content={content} titlePlaceholder="잠재 유저의 앱 다운로드를 유도할 말을 적어보세요." descPlaceholder="여기를 클릭하여 잠재 유저의 앱 다운로드를 유도할 수 있는 문구를 적어보세요." />
                     </div>
-                        <div style={{display:'flex', flexDirection:'column', width:'100%', justifyContent:'center', height:'100%'}}>
-                            {content.appButton.use && 
-                                <ReturnButton onlyapp={true} content={content} />
-                            }
-                            {content.caution.use && 
-                                <div className="df-margin-big feature-desc" style={{width:'100%'}}>
-                                    <TextAuto className="text-input"  
-                                        value={content.caution.text} 
-                                        color = {content.caution.color} 
-                                        align = {content.caution.align}
-                                        size = {content.caution.size*0.0625}
-                                        onChange={e => action.setContents(produce(state.contents, draft => {
-                                            draft[state.secNum].caution.text = e.currentTarget.value;
-                                        }))}  
-                                    />
-                                </div>
-                            }     
-                        </div>
+                    <div style={{display:'flex', flexDirection:'column', width:'100%', justifyContent:'center', height:'100%'}}>
+                        {content.appButton.use && 
+                            <ReturnButton onlyapp={true} content={content} />
+                        }
+                        {content.caution.use && 
+                            <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                                <TextAuto className="text-input"  
+                                    small
+                                    value={content.caution.text} 
+                                    color = {content.caution.color} 
+                                    align = {content.caution.align}
+                                    size = {content.caution.size/20}
+                                    onChange={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].caution.text = e.currentTarget.value;
+                                    }))}  
+                                />
+                            </div>
+                        }     
+                    </div>
                 </AnimationDiv>
             </div>
         </>

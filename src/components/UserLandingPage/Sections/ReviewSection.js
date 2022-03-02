@@ -1,30 +1,26 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Rating from '@mui/material/Rating';
 import { motion } from 'framer-motion';
 import TitleDesc from './components/TitleDesc'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Element from './components/Element'
-import {isMobile} from 'react-device-detect'
+import FeatureCard from './components/FeatureCard'
+import isMobile from 'react-device-detect'
 
 function ReviewSection({content, setting}) {
 
     const returnReviewCards = content.elements.map((item, index) => {
         if(index < content.numOfElements){
+            if(content.reviewText) {
             return(
-                <div key={index} className="feature__card" 
-                    style={{
-                        alignItems: `${isMobile ? content.mobile.align : content.align}`,
-                        boxShadow : '', 
-                        margin : `${ isMobile ? '5px 5px' : '0px 15px' }`,
-                        height : `${isMobile ? '' : '100%'}`,
-                        width : `${isMobile ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`
-                    }}>
+                <FeatureCard section="feature" content={content} index={index}>
                     <Element content={content} item={item} index={index} key={index}/>
                     {
                         content.elementTitle.use && 
                         <div className="df-margin-big feature-title" style={{width:'100%'}}>            
                             <TextareaAutosize 
-                                className="text-input"  
+                                placeholder="리뷰/추천사의 핵심을 적어보세요."
+                                className="text-no-input"  
                                 style={{
                                     width:'100%',
                                     resize:'none',
@@ -35,7 +31,8 @@ function ReviewSection({content, setting}) {
                                 }}
                                 value={item.title} 
                                 spellCheck="false"
-                            />
+                                disabled
+                                />
                         </div>
                     }
                     {
@@ -47,11 +44,12 @@ function ReviewSection({content, setting}) {
                             }}>
                             <Rating
                                 value={item.rating} 
-                                precision={0.1}
+                                precision={0.5}
                                 style={{ fontSize: `${content.rating.size}px`, color:`${content.rating.color}` }}
                                 // size={content.rating.size}
                                 // color={content.rating.color}
-                            />
+                                readOnly
+                                />
                             </div>
                         </div>
                     }
@@ -59,7 +57,7 @@ function ReviewSection({content, setting}) {
                         content.elementText.use && 
                         <div className="df-margin-big feature-desc" style={{width:'100%'}}>
                             <TextareaAutosize
-                                className="text-input" 
+                                className="text-no-input" 
                                 style={{
                                     width:'100%',
                                     resize:'none',
@@ -69,6 +67,7 @@ function ReviewSection({content, setting}) {
                                     fontSize:`${content.elementText.size/20}em`,
                                 }}
                                 value={item.desc} 
+                                disabled
                                 spellCheck="false"
                                 />
                         </div>
@@ -77,7 +76,8 @@ function ReviewSection({content, setting}) {
                         content.writer.use && 
                         <div className="df-margin-big feature-writer" style={{width:'100%'}}>
                             <TextareaAutosize 
-                                className="text-input" 
+                                className="text-no-input" 
+                                placeholder="회사이름, 직함이름"
                                 style={{
                                     width:'100%',
                                     resize:'none',
@@ -86,21 +86,27 @@ function ReviewSection({content, setting}) {
                                     fontFamily:`${setting.smallFont}`,
                                 }}
                                 value={item.writer} 
+                                disabled
                                 />
                         </div>
                     }
-                </div>
+                </FeatureCard>
             )
+        }
+    else {
+        return(<>
+        </>)
+    }
         }
     })
 
     return (
         <>
             <motion.div className="template"data-aos-easing="ease-in-back"
-     data-aos-delay="200"
-     data-aos-offset="0" data-aos={content.animation.type} aos-duration="4000">
+                data-aos-delay="200"
+                data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
                 
-                <TitleDesc content={content} />
+                <TitleDesc content={content} titlePlaceholder="서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." />
 
                 <div className="features__container" style={{flexWrap : `${isMobile ? 'wrap' : ''}`}}> 
                     {returnReviewCards}

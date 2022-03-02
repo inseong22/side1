@@ -6,6 +6,7 @@ import MainPage from './pages/Landing/old/MainPage';
 import UserLandingPage from './pages/UserLanding/UserLandingPage';
 import MainPageV2 from './pages/Landing/MainPageV2';
 import MakePageV2 from './pages/Make/MakePageV2';
+import AdminPage from './pages/AdminPage/AdminPage';
 import ResponsePage from './pages/Response/ResponsePage';
 import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/unused/SubmitPage';
@@ -34,11 +35,14 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                 <ScrollToTop>
                 <div className="Container" style={{ minHeight: 'calc(100vh - 80px)', zIndex:-1 }}>
                     <Switch>
-                        <Route exact path="/v2">
-                            <MainPage history={history}/>
+                        <Route exact path="/surfeeadminpage">
+                            <AdminPage history={history}/>
                         </Route>
                         <Route exact path="/" onUpdate={() => window.scrollTo(0, 0)}>
                             <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
+                        </Route>
+                        <Route path="/register">
+                            <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
                         </Route>
                         <Route path="/response" onUpdate={() => window.scrollTo(0, 0)}>
                             <ResponsePage history={history} userObj={userObj}/> 
@@ -55,10 +59,7 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                         <Route path="/customer" onUpdate={() => window.scrollTo(0, 0)}>
                             <CustomerPage history={history} isLoggedIn={isLoggedIn}/>
                         </Route>
-                        <Route path="/register">
-                            <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
-                        </Route>
-                        <Route exact path="/:id" component={ UserLandingPage } />
+                        <Route exact path="/:id" component={ UserLandingPage } history={history}/>
                     </Switch>
                 </div>
                 </ScrollToTop> 

@@ -3,6 +3,9 @@ import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Close } from '@styled-icons/evaicons-solid';
 import {Link} from 'react-router-dom'
+import d1 from '../../../tools/img/main/3d1.png'
+import d2 from '../../../tools/img/main/3d2.png'
+import d3 from '../../../tools/img/main/3d3.png'
 import './AskLoginModal.css'
 
 const StyledModal = styled(ModalUnstyled)`
@@ -30,15 +33,15 @@ const Backdrop = styled('div')`
 
 const style = {
   width: 400,
-  height: 300,
+  height: 400,
   bgcolor: 'rgba(255,255,255,1)',
-  borderRadius:'20px',
+  borderRadius:'10px',
   p: 2,
   px: 4,
   pb: 3,
 };
 
-function AskLoginModal({open, setOpen, SomeoneClickMoveToMake}) {
+function AskLoginModal({open, setOpen, SomeoneClickMoveToMake, setRegisterOpen}) {
     return (
         <div>
             <StyledModal
@@ -48,35 +51,39 @@ function AskLoginModal({open, setOpen, SomeoneClickMoveToMake}) {
                 onClose={() => setOpen(!open)}
                 BackdropComponent={Backdrop}>
                 <Box sx={style}>
+                <div className="ask-modal__inner">
                     <div className="modal-top__title">
-                        <div className="centera" style={{width:"95%"}}>
-                            
+                        <div className="login-title" style={{width:"95%"}}>
+                            로그인
                         </div>
                         <div style={{width:"5%", cursor:"pointer"}} onClick={() => setOpen(false)}>
-                            <Close size="30" color="#C4CACF"/>
+                            <Close size="30" />
                         </div>
                     </div>
-                    <div className="centeras">
-                        <div className="section-login-modal__container">
-                            <div className="modal-body">
-                                로그인 하시면 만들던 페이지를 나중에 <br/>이어서 만들 수 있습니다.<br/><br/>
-                                로그인 하시겠습니까?
-                            </div>
-                            <div className="center-column" style={{height:'30%'}}>
-                                <Link to='/login' className="ask-modal-button">
-                                    네 ( 로그인/회원가입 하러 가기 ) 
-                                </Link>
-                                <Link to={{
-                                    pathname:`/make`,
-                                    state:{
-                                        newMake:true,
-                                    }}}  
-                                    className="ask-modal-button button-second" onClick={() => SomeoneClickMoveToMake()}>
-                                    오늘은 구경만 할게요 ( 비회원으로 이용하기 )
-                                </Link>
+                    <div className="modal-body">
+                        로그인 하시면 만들던 페이지를 나중에 <br/>이어서 만들 수 있습니다.<br/><br/>
+                        로그인 하시겠습니까?
+                    </div>
+                    <div className="center-row" style={{height:'30%', marginTop:'40px'}}>
+                        <div className="ask-modal-button uphover" onClick={() => {setRegisterOpen(true); setOpen(false)}}>
+                            <img src={d1} width={140} /> 
+                            <div>
+                                네 <br/>( 로그인/회원가입 하러 가기 ) 
                             </div>
                         </div>
+                        <Link to={{
+                            pathname:`/make`,
+                            state:{
+                                newMake:true,
+                            }}}  
+                            className="ask-modal-button button-second uphover" onClick={() => SomeoneClickMoveToMake()}>
+                            <img src={d2} width={140} /> 
+                            <div>
+                                오늘은 구경만 할게요 <br/>( 비회원으로 이용하기 )
+                            </div>
+                        </Link>
                     </div>
+                </div>
                 </Box>
             </StyledModal>
         </div>

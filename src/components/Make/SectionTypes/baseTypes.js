@@ -1,7 +1,7 @@
 import heroanimation from '../../../tools/img/heroanimation.gif'
-// import person1 from '../../../tools/img/person1.png'
-// import person2 from '../../../tools/img/person2.png'
-// import person3 from '../../../tools/img/person3.png'
+import person1 from '../../../tools/img/person1.png'
+import person2 from '../../../tools/img/person2.png'
+import person3 from '../../../tools/img/person3.png'
 import gal1 from '../../../tools/img/gal1.png'
 import gal2 from '../../../tools/img/gal2.png'
 import gal3 from '../../../tools/img/gal3.png'
@@ -43,7 +43,7 @@ const commons = {
     },
     box:{
         use:false,
-        backgroundColor:'#6CCAD0',
+        backgroundColor:'#6C63ff1d',
         borderRadius:5,
         height: 1,
     },
@@ -53,7 +53,7 @@ const commons = {
     },
     mobile:{
         align:'center',
-        layout:3,
+        layout:1,
         contentSize:50,
     }
 }
@@ -245,6 +245,10 @@ export const base = [
             ...button.button,
             align:'center',
         },
+        appButton:{
+            ...button.appButton,
+            use:false,
+        },
         caution:{
             ...button.caution,
             align:'center',
@@ -271,6 +275,10 @@ export const base = [
             align: 'center',
             size:24,
             text:'Surfee에 오신 것을 환영합니다. 자유롭게 사용해보세요! \n여기를 클릭하여 잠재유저의 앱 다운로드를 유도할 수 있는 문구를 적어보세요.'
+        },
+        button:{
+            ...button.button,
+            use:false,
         },
         appButton:{
             use: true,
@@ -411,7 +419,7 @@ export const base = [
                 attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
-                rating:4.8,
+                rating:4.5,
                 writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
@@ -427,7 +435,7 @@ export const base = [
                 attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
-                rating:4.6,
+                rating:4.5,
                 writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
@@ -435,7 +443,7 @@ export const base = [
                 attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
-                rating:4.6,
+                rating:5,
                 writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
@@ -443,7 +451,7 @@ export const base = [
                 attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
-                rating:4.6,
+                rating:5,
                 writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
         ],
@@ -485,16 +493,17 @@ export const base = [
         ],
     },
     {
+        ...commons,
         title:{
             ...commons.title,
             text:'글만 쓰고 싶을 때 \'글\' 섹션을 이용해 보세요.',
             size:32,
-            align:'center',
+            align:'start',
         },
         desc:{
             ...commons.desc,
             text:'여기를 클릭하여 글을 적어보세요.',
-            align:'center',
+            align:'start',
         },
         padding:{
             top:15,
@@ -623,139 +632,133 @@ export const base = [
 ]
 
 export const defaults = {
+
     navi:{
-        responsive:{
-            mobile:true,
-            pc:true,
+        appButton:{
+            link: "",
+            use: true,
         },
-        sectionTypeName:'상단 바',
-        sectionTemplateNumber:1,
-        height:80,
-        use:true,
-        title:'',
-        logo:{
-            use:true,
-            align:'start',
-            image:{
-                use:false,
-                attachment:'',
-                width:60,
-            },
-            text:{
-                use:true,
-                text:'',
-                fontSize:18,
-                color:'#000000'
-            },
-        },
-        fixed:false,
-        backgroundColor:'#ffffff', 
+        backgroundColor: "#ffffff",
         bottomBorder:{
-            use:false,
-            color:'#F0F0F0',
+            color: "#F0F0F0",
+            use: false,
         },
         button:{
-            use:false,
-            align:'end',
+            align: "end",
             cta:{
-                use:false,
-                text:'CTA버튼',
-                link:'',
+                link: "",
                 padding: 10,
-                textsize: 12,
+                text: "CTA버튼",
+                use: false,
             },
             ghost:{
-                use:false,
-                text:'고스트 버튼',
-                link:'',
+                link: "",
                 padding: 10,
-                textsize: 10,
+                text: "고스트 버튼",
+                use: false,
             },
+            use: false,
         },
-        appButton:{
-            use:true,
-            link:'',
-        }
+        fixed: false,
+        height: 80,
+        logo:{
+            align: "start",
+            image:{
+                attachment: "",
+                use: false,
+                width: 60,
+            },
+            text:{
+                color: "#000000",
+                fontSize: 18,
+                text: "",
+                use: true,
+            },
+            use: true,
+        },
+        responsive:{
+            mobile: true,
+            pc: true,
+        },
+        sectionTemplateNumber: 1,
+        sectionTypeName: "상단 바",
+        title: "서비스 / 제품 명",
+        use: true,
     },
     foot:{
-        sectionTypeName:'푸터 바',
-        sectionTemplateNmber:1,
-        use:true,
-        layout:1,
-        backgroundColor:'#ffffff', 
-        text:"copyright 2022",
-        padding:10,
-        paddingTop:10,
-        paddingBottom:10,
-        text:{
-            use:true,
-            text:'',
-            color:'#000000',
-            align: 'justify',
-            size: 18,
+        backgroundColor: "#f9f9f9",
+        copyright:{
+            color: "#ffffff",
+            text: "앱 다운로드",
+            use: true,
         },
         icon:{
-            use:true,
-            style:'circle',
-            color:'#ffffff',
-            align:'justify',
-            facebook: '',
-            instagram: '',
-            notion: '',
-            kakaotalk: '',
-            twitter: '',
-            youtube: '',
-            linkedIn: '',
-            
+            align: "justify",
+            color: "#6c63ff",
+            facebook: "페이스북 연결",
+            instagram: "인스타그램",
+            kakaotalk: "",
+            linkedIn: "",
+            notion: "",
+            style: "circle",
+            twitter: "",
+            use: true,
+            youtube: "",
         },
-        copyright:{
-            use:true,
-            text:'',
-            color:'#ffffff',
+        layout: 3,
+        padding: 10,
+        paddingBottom: 8,
+        paddingTop: "5",
+        sectionTemplateNmber: 1,
+        sectionTypeName: "푸터 바",
+        text:{
+            align: "start",
+            color: "#000000",
+            size: 18,
+            text: "",
+            use: true,
         },
-        second:{
-            text:'<p>두번 째 단입니다.</p>'
-        }
+        use: true
     },
-    setting:{
-        urlId:'',
-        title:'',
-        faviconAttachment:'',
-        font:'Noto Sans KR',
-        smallFont:'Noto Sans KR',
-        color:'#63B3F7',
-        fta:{
-            borderRadius:5,
-            use:false,
-            backgroundColor:'#6c63ff',
-            color:'#ffffff',
-            border:false,
-            borderColor:'#000000',
-            text:'',
-            link:'',
-            shadow:false,
-            size:50,
-            shape:0,
-        },
+    setting : {
+        animation: "none",
+        color: "#6c63ff",
         cta:{
-            borderRadius:5,
-            backgroundColor:'#ffffff',
-            color:'#000000',
-            shadow:true,
-            borderColor:'#000000',
-            border:false,
-            padding:10,
+            backgroundColor: "#6c63ff",
+            border: false,
+            borderColor: "#000000",
+            borderRadius: 5,
+            color: "#ffffff",
+            padding: 10,
+            shadow: true,
+        },
+        faviconAttachment: "",
+        font: "yg-jalnan",
+        fta:{
+            backgroundColor: "#6c63ff1d",
+            border: false,
+            borderColor: "#000000",
+            borderRadius: 5,
+            color: "#000000",
+            link: "",
+            shadow: false,
+            shape: 0,
+            size: 50,
+            text: "",
+            use: false,
         },
         ghost:{
-            borderRadius:5,
-            backgroundColor:'#ffffff',
-            color:'#000000',
-            shadow:true,
-            borderColor:'#000000',
-            border:false,
-            padding:10,
+            backgroundColor: "#ffffff",
+            border: true,
+            borderColor: "#6c63ff",
+            borderRadius: 5,
+            color: "#6c63ff",
+            padding: 10,
+            shadow: false,
         },
-        animation:'none'
+        smallFont: "Pretendard-Regular",
+        title: "기본템플릿",
+        urlId: '',
     },
     feedback:{
         path: '',

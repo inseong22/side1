@@ -161,6 +161,46 @@ function ImageOrSlide({content}){
                         }
                     </div>
                 )
+            // 목업 - 모바일 2개
+        if(content.mockup.type === 'mobile2' && content.contents.type === 'mockup')
+            return( 
+                <>
+                <div className="mock-container" id="attach" onChange = {e => upload_mockup(e)} onClick={inputClick}>
+                    <input
+                        ref={photoInput}
+                        style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                        type="file"
+                        accept="image/*"
+                        id="file"
+                        onChange = {e => upload_mockup(e)}
+                    />
+                <img className="mobile-ex  uphover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
+                    { content.mockup.attachment === '' ?
+                    <></>:
+                    <img className="upload-mobile  uphover" src={content.mockup.attachment} style={{ 
+                        width:`${imageWidth()}%`, 
+                        left:`${imageLeft()}%`}} />
+                    }         
+            </div>
+            <div className="mock-container" id="attach" onChange = {e => upload_mockup(e)} onClick={inputClick}>
+                    <input
+                        ref={photoInput}
+                        style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                        type="file"
+                        accept="image/*"
+                        id="file"
+                        onChange = {e => upload_mockup(e)}
+                    />
+                <img className="mobile-ex  uphover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
+                    { content.mockup.attachment2 === '' ?
+                    <></>:
+                    <img className="upload-mobile  uphover" src={content.mockup.attachment2} style={{ 
+                        width:`${imageWidth()}%`, 
+                        left:`${imageLeft()}%`}} />
+                    }         
+            </div>
+            </>
+            )
         }
         else{
             return(<>

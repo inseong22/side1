@@ -32,7 +32,7 @@
     justify-content : center;
     width:100%;
 }
-
+/* 
 .make-nav-button{
     height:35px;
     border-radius: 25px;
@@ -40,7 +40,7 @@
     justify-content: center;
     align-items : center;
     border:none;
-}
+} */
 
 .make-nav-logoc{
     display: flex;

@@ -47,7 +47,7 @@
     color:#6A6A6A;
 }
 
-.modal-row{
+.modal-row1{
     width:80%;
     display:flex;
     flex-direction: row;
@@ -56,8 +56,15 @@
     flex-wrap: wrap;
 }
 
+.modal-row{
+    width:100%;
+    display:flex;
+    align-items :center;
+    justify-content:center;
+}
+
 .modal-column{
-    width:420px;
+    width: 100%;
     display:flex;
     flex-direction: column;
     align-items :center;
@@ -65,6 +72,7 @@
     flex-wrap: wrap;
     margin:7px;
 }
+
 
 .modal-main-card{
     width:100%;
@@ -161,7 +169,8 @@
     height:55vh;
     border: 1px solid #c7c7c7;
     padding-top:10px;
-    overflow: auto;
+    overflow: hidden;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; /* IE and Edge */
 }

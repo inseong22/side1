@@ -10,7 +10,6 @@ import FeedbackModal from '../../tools/FeedbackModal'
 function ResultTopTitle({content, myResponses, checkPublished, history, datas}) {
     const [feedbackOpen, setFeedbackOpen] = useState(false);
 
-    console.log(datas)
     const numOfPerson = (type) => {
         let numClick = 0
         myResponses.forEach(doc => doc.type === type ? numClick += 1 : numClick)
@@ -21,18 +20,18 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
         await dbService
             .collection('published-page')
             .where('pageId', "==", content.id)
-            .get().then( querySnapshot => 
+            .get().then( async querySnapshot => 
                 { 
                     if(querySnapshot.empty){
-                        console.log("새 배포")
                         let body = {
                             ...content,
                             pageId:content.id,
                             created:Date.now(),
                         }
-                        dbService.collection('published-page').add(body)
+                        await dbService.collection('published-page').add(body)
+                        alert("첫 배포가 완료되었습니다.")
+                        history.go();
                     }else{
-                        console.log("배포 수정")
                         let body = {
                             ...content,
                             created:Date.now(),

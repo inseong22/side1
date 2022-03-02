@@ -65,6 +65,7 @@ function RegisterModal({open, setOpen, history}) {
 
         const data = await authService.signInWithPopup(provider);
         await checkRegister(data.user.multiFactor.user.email);
+        setOpen(false)
     }
 
     const submit = async (e) => {
@@ -74,7 +75,6 @@ function RegisterModal({open, setOpen, history}) {
             data = await authService.createUserWithEmailAndPassword(
                 id, password
             )
-            console.log(data)
         } catch (err){
             if(err.code === "auth/email-already-in-use"){
                 alert("이미 존재하는 아이디입니다. 로그인 해 주세요.");

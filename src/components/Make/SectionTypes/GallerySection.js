@@ -5,6 +5,7 @@ import {produce} from 'immer'
 import TitleDesc from './components/TitleDesc'
 import TextAuto from './components/TextAuto'
 import {Upload} from '@styled-icons/bootstrap';
+import FeatureCard from './components/FeatureCard'
 
 function GallerySection({content,setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -14,18 +15,7 @@ function GallerySection({content,setting}) {
            return(
                <>
                {content.card.use && 
-               <div key={index} className="feature__card" 
-                    style={{
-                    alignItems: 'center',
-                    margin : `${ state.isPhone ? '5px 5px' : '0px 10px' }`,
-                    marginLeft: `${index === 0 ? '0px' : '15px'}`,
-                    marginRight: `${index === content.numOfElements - 1 ? '0px' : '15px'}`,
-                    height : `${state.isPhone ? '' : '100%'}`,
-                    width : `${state.isPhone ? content.mobile.layout === 1 ? '100%' : '46%' : '300px'}`,
-                    boxShadow:`${content.card.shadow ? '2px 2px 4px rgba(0,0,0,0.4)' : ''}`, 
-                    backgroundColor: `${content.card.color}`, 
-                    borderRadius:`${content.card.borderRadius}px`}}>
-
+               <FeatureCard section="gallery" content={content} index={index}>
                        {content.element.use && 
                        <div style={{width:'100%', position:'relative', cursor:'pointer'}}>
                            { item.attachment ? 
@@ -40,7 +30,7 @@ function GallerySection({content,setting}) {
                                :
                             <div className="feature-upload-button uphover" 
                                 style={{ 
-                                    height:`${content.element.size}px`, 
+                                    height:`${state.isPhone ? content.element.size/1.5 : content.element.size}px`, 
                                     backgroundColor:`${content.element.backgroundColor}`, 
                                     borderRadius:`${content.card.borderRadius}px ${content.card.borderRadius}px 0px 0px`
                                 }}>
@@ -75,7 +65,7 @@ function GallerySection({content,setting}) {
                        }
                        {
                            content.text.use && 
-                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:'12px'}}>
+                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:`${state.isPhone ? 5 : 8}px`}}>
                                 <TextAuto small className="text-input" 
                                     placeholder="여기를 클릭하여 이미지에 대한 설명을 적어보세요."
                                     value={item.text} 
@@ -88,7 +78,7 @@ function GallerySection({content,setting}) {
                                 />
                            </div>
                        }
-                   </div>
+                   </FeatureCard>
                }
                </>
            )

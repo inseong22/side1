@@ -10,7 +10,6 @@ function FuncYoutubeLink({content}) {
     const onChangeLink = e => {
         e.preventDefault()
         setText(e.target.value)
-        console.log(text)
         // action.setContents(produce(state.contents, draft => {
         //     draft[state.secNum].video.link = e.target.value
         // }))

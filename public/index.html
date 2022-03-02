@@ -13,6 +13,13 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!-- 웹 앱 매니페스트를 읽어 들이기 -->
     <link rel="manifest" href="manifest.json">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-M52FRTH');</script>
+      <!-- End Google Tag Manager -->
     
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3P8WL2EDT"></script>
@@ -23,52 +30,37 @@
 
         gtag('config', 'G-X3P8WL2EDT');
       </script>
-      <!-- Channel Plugin Scripts -->
-      <!-- <script>
-        (function() {
-          var w = window;
-          if (w.ChannelIO) {
-            return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-          }
-          var ch = function() {
-            ch.c(arguments);
-          };
-          ch.q = [];
-          ch.c = function(args) {
-            ch.q.push(args);
-          };
-          w.ChannelIO = ch;
-          function l() {
-            if (w.ChannelIOInitialized) {
-              return;
-            }
-            w.ChannelIOInitialized = true;
-            var s = document.createElement('script');
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-            s.charset = 'UTF-8';
-            var x = document.getElementsByTagName('script')[0];
-            x.parentNode.insertBefore(s, x);
-          }
-          if (document.readyState === 'complete') {
-            l();
-          } else if (window.attachEvent) {
-            window.attachEvent('onload', l);
-          } else {
-            window.addEventListener('DOMContentLoaded', l, false);
-            window.addEventListener('load', l, false);
-          }
-        })(); -->
-        <!-- // ChannelIO('boot', {
-        //   "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e"
-        // }); -->
-      <!-- </script> -->
-      <!-- End Channel Plugin -->
-
+      <script src="http://code.jquery.com/jquery.min.js"></script>
+      <script type="text/javascript">
+          var logger = function() {
+              var oldConsoleLog = null;
+              var pub = {};
+              pub.enableLogger = function enableLogger() {
+                  if (oldConsoleLog == null)
+                      return;
+                  window['console']['log'] = oldConsoleLog;
+              };
+              pub.disableLogger = function disableLogger() {
+                  oldConsoleLog = console.log;
+                  window['console']['log'] = function() {};
+              };
+              return pub;
+          }();
+       
+         $(document).ready(
+              function() {
+                  logger.disableLogger();
+                  console.log('콘솔 로그가 다시 찍힌다.');
+              }
+          );
+      </script>
     <title id="urltitle">Surfee | Landing Page Saas</title>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M52FRTH"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
     <noscript>원하는 디자인의 랜딩페이지를 1분만에 쉽고 빠르게 제작해 보세요.</noscript>
     <div id="root"></div>
   </body>

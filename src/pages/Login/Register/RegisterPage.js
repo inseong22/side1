@@ -23,14 +23,12 @@ function RegisterPage({history, isLoggedIn}) {
         if (name === "googleLogin"){
             provider = new firebaseInstance.auth.GoogleAuthProvider();
         }else{
-            console.log("이건 뜨면 안되는 메세지.");
         }
 
         const data = await authService.signInWithPopup(provider);
         await checkRegister(data.user.multiFactor.user.email);
         setDone(true);
 
-        console.log(data.user.multiFactor.user, "로그인");
     }
 
     const submit = async (e) => {
@@ -40,7 +38,6 @@ function RegisterPage({history, isLoggedIn}) {
             data = await authService.createUserWithEmailAndPassword(
                 id, password
             )
-            console.log(data)
         } catch (err){
             if(err.code === "auth/email-already-in-use"){
                 alert("이미 존재하는 아이디입니다. 로그인 해 주세요.");
@@ -69,7 +66,6 @@ function RegisterPage({history, isLoggedIn}) {
 
         if(usersExist.length === 0){
             // 구글 아이디로 로그인했는데 회원가입에 정보가 없을 때
-            console.log("회원가입 정보를 받습니다.");
         }
     }
 

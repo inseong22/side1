@@ -76,6 +76,7 @@
     flex-direction:column;
     position:relative;
     overflow:visible;
+    box-sizing: content-box;
 }
 
 .button-made{

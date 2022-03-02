@@ -38,11 +38,16 @@
 }
 
 .back__container{
+    scroll-behavior: smooth;
     height:40px;
     padding:15px 15px 5px 15px;
     display: flex;
     justify-content:start;
     align-items:center;
+}
+
+.white-box{
+    background-color: white;
 }
 
 /* <<<<<<< HEAD */
@@ -61,12 +66,18 @@
     justify-content: center;
     align-items: center;
     padding:6px 11px 6px 8px;
-    border-radius: 3px;
+    border-radius: 20px;
     font-weight: bold;
+    position: fixed;
+    z-index: 1001;
+    background-color: white;
+    width: 26.5vw;
+    height: 50px;
     /* box-shadow: var(--default-shadow-01); */
 }
 .back__container-button:hover{
-    background-color:var(--main-light-gray);
+    /* background-color:var(--main-light-gray); */
+    color: var(--main-dark-gray);
 }
 .back-button{
     display:flex;
@@ -78,8 +89,9 @@
 .back-text{
     width: 100%;
     height: auto;
-    padding-top: 1px;
+    /* padding-top: 1px; */
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 700;
+    font-family: Noto Sans KR;
 }
 
