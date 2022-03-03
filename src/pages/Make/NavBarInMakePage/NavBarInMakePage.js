@@ -9,7 +9,7 @@ import LoginModal from '../../../components/Login/LoginModal'
 import { dbService } from '../../../tools/fbase';
 import { stService } from '../../../tools/fbase';
 import MakeTutorialModal from '../../../tools/MakeTutorialModal';
-import SaveAlert from '../../../tools/SaveAlert';
+import MiniModal from '../../../tools/MiniModal';
 import { v4 as uuidv4 } from 'uuid';
 import lodash from 'lodash'
 import produce from 'immer'
@@ -224,6 +224,7 @@ const afterSaveImage = async (returned) => {
         await dbService.doc(`saved-page/${editingId}`).update(body);
         // 자동저장 하던 걸 지운다.
         window.localStorage.removeItem("temp");
+        setSaveOpen(true);
         
     }else{
         console.log( '수정 중이 아니다' );
@@ -266,6 +267,7 @@ const afterSaveImage = async (returned) => {
 
             // 자동저장 하던 걸 지운다.
             window.localStorage.removeItem("temp");
+            setSaveOpen(true);
         }
     }
 }
@@ -282,10 +284,6 @@ const afterSaveImage = async (returned) => {
             saveLocalStorage();
             const returned = await saveImages();
             await afterSaveImage(returned);
-            setSaveOpen(true);
-            setTimeout(() => {
-                setSaveOpen(false);
-            },2100)
             setLoading(false);
         }
     }
@@ -416,7 +414,7 @@ const afterSaveImage = async (returned) => {
             </div>
             <LoginModal open={loginModal} setOpen={setLoginModal} />
             <MakeTutorialModal open={tutorialOpen} setOpen={setTutorialOpen} />
-            <SaveAlert open={saveOpen} />
+            <MiniModal open={saveOpen} setOpen={setSaveOpen} />
         </ChakraProvider>
     )
 }

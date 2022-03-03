@@ -9,10 +9,9 @@ import ChromeTapBar from '../../components/Response/ChromeTapBar'
 import ResultTable from '../../components/Response/ResultTable'
 import ResultTopTitle from '../../components/Response/ResultTopTitle'
 import LoadingDisplay from '../../tools/LoadingDisplay'
-import {Link } from 'react-router-dom'
 import gadata from '../../tools/datacodes/gadata.json'
 import { Tooltip, ChakraProvider } from '@chakra-ui/react'
-import { InformationCircle } from '@styled-icons/ionicons-outline';
+import MiniModal from '../../tools/MiniModal'
 import ChannelTalk from '../../tools/ChannelTalk'
 
 const NOTCLICKED = 10000
@@ -26,6 +25,7 @@ function ResponsePage({userObj, history}) {
     const [published, setPublished] = useState([]);
     const [part, setPart] = useState(1);
     const [nowChecking, setNowChecking] = useState(NOTCLICKED);
+    const [copyOpen, setCopyOpen] = useState(false)
     
     useEffect(() => {
         ChannelTalk.boot({
@@ -129,7 +129,7 @@ function ResponsePage({userObj, history}) {
         return(
             <MadeLandingCard 
                 history={history} item={item} key={item.id} index={index} 
-                published={checkPublished(item.urlId)} setNowChecking={setNowChecking} 
+                published={checkPublished(item.urlId)} setNowChecking={setNowChecking} setCopyOpen={() => {setCopyOpen(true)}}
                 nowChecking={nowChecking} num={mylandings.length} setUpdate={setUpdate} update={update}/>
         )
     })
@@ -196,6 +196,7 @@ function ResponsePage({userObj, history}) {
                     <Footer />
                 </div>
                 </div>
+                <MiniModal open={copyOpen} setOpen={setCopyOpen} copy />
                 </ChakraProvider>
             )
         }else{

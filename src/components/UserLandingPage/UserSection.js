@@ -108,7 +108,7 @@ function UserSection({content, setting}) {
                 style={{padding:`${
                     isMobile ? content.padding.top/2.5 : content.padding.top}vh 
                     ${isMobile? '15px' : 'calc(14vw + 30px)'}
-                    ${isMobile ? content.padding.top/2.5 : content.padding.bottom}vh 
+                    ${isMobile ? content.padding.bottom/2.5 : content.padding.bottom}vh 
                     ${isMobile ? '15px' : 'calc(14vw + 30px)'}`}} >
                 {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                 {returnType()}

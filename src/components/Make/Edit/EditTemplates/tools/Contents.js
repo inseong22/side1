@@ -9,7 +9,6 @@ import AddContentVideo from '../../tools/func/FuncContentVideo'
 import AddYoutubeLink from '../../tools/func/FuncYoutubeLink'
 import SliderCustom from '../../tools/Custom/SliderCustom'
 import {CustomSwitch} from '../../tools/Custom/OnOffCustom'
-// import ImageModal from '../../../../../tools/ImageModal'
 import { Select } from '@chakra-ui/react'
 import './Contents.css'
 import FuncContentImg from '../../tools/func/FuncContentImg'
@@ -270,7 +269,6 @@ function Contents({content}) {
             case 'image':
                 return(
                     <div style={{width:'100%'}}>
-                        {/* <ImageModal open={true} setOpen={() => {}} /> */}
                         <AddContentImg text="이미지" subtext="최대 3MB 업로드 가능" value={content.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         <SliderCustom top="크기" text="이미지를" value={content.image.size} func={setImgSize} max="100"/>
                         <RadioCustom text="프레임" options={imageBorderOptions} value={content.image.border} func={e =>  action.setContents(produce(state.contents, draft => {

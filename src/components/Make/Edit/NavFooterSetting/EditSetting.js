@@ -45,6 +45,7 @@ const fontOptions = [
     { label: '고운바탕', value : 'GowunBatang-Bold'},
     { label: '여기어때 잘난체', value: 'yg-jalnan'},
 ]
+
 const smallFontOptions = [
     { label: '노토산스', value: 'Noto Sans KR' },
     { label: '프리텐다드', value: 'Pretendard-Regular' },

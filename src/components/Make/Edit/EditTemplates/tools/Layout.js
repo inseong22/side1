@@ -123,10 +123,8 @@ function Layout({content, version, foot, setFoot}) {
                 return(
                     <RadioCustom layout='on' version='text' options={layout3Options} value={content.layout} func={(e,align,top,bottom) => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].layout = e;
-                        draft[state.secNum].title.align=align;
-                        draft[state.secNum].desc.align=align;
-                        draft[state.secNum].padding.top= top;
-                        draft[state.secNum].padding.bottom= bottom;
+                        draft[state.secNum].title.align = align;
+                        draft[state.secNum].desc.align = align;
                     }))} />
                 )
             case 'footer':

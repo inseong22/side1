@@ -24,6 +24,8 @@ const FOOTSECNUM = 51;
 const SETTINGSECNUM = 52;
 const CONTENTSSECNUM = 53;
 
+const MARGINTOP = '100px'
+
 export const MakeContext = React.createContext({
     stateC : {usedColors : [
         "#ffffff",
@@ -133,17 +135,20 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
         if(state.secNum === NAVSECNUM){
             return(
                 <>
-                    <div className="back__container">
-                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer', justifyContent: 'none'}}>
-                            <span className="back-button">
-                                <ArrowIosBack size="20" />
-                            </span>
-                            <span className="content__name">
-                                내비게이션 바
-                            </span>
+                    <div className="top-bar__fixed">
+                        <div className="back__container">
+                            <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                <span className="back-button">
+                                    <ArrowIosBack size="20" />
+                                </span>
+                                <span className="content__name">
+                                    내비게이션 바
+                                </span>
+                            </div>
                         </div>
+                        <EditTopBar category={state.category} setCategory={action.setCategory} />
                     </div>
-                    <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    <div style={{marginTop:`${MARGINTOP}`}}></div>
                     <EditNaviSection navi={navi} setNavi={setNavi} category={state.category}/>
                 </>
             )
@@ -151,24 +156,30 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
         }else if(state.secNum === FOOTSECNUM ){
             return(
                 <>
-                    <div className="back__container">
-                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                            <span className="back-button">
-                                <ArrowIosBack size="20" />
-                            </span>
-                            <span className="back-text">
-                                푸터 바
-                            </span>
+                    <div className="top-bar__fixed">
+                        <div className="back__container">
+                            <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                <span className="back-button">
+                                    <ArrowIosBack size="20" />
+                                </span>
+                                <span className="back-text">
+                                    푸터 바
+                                </span>
+                            </div>
                         </div>
+                        <EditTopBar category={state.category} setCategory={action.setCategory} />
                     </div>
-                    <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    <div style={{marginTop:`${MARGINTOP}`}}></div>
                     <EditFooterSection foot={foot} setFoot={setFoot} category={state.category}/>
                 </>
             )
         }else if(state.secNum === SETTINGSECNUM ){
             return(
                 <>
-                    <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    <div className="top-bar__fixed">
+                        <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    </div>
+                    <div style={{marginTop:`60px`}}></div>
                     <EditSetting setting={setting} setSetting={setSetting} category={state.category} setContents={setContents} content={content}/>
                 </>
             )
@@ -181,17 +192,20 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                 <>
                 {content && 
                 <>
-                    <div className="back__container">
-                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                            <span className="back-button">
-                                <ArrowIosBack size="20" />
-                            </span>
-                            <span className="back-text">
-                                {content.name}
-                            </span>
+                    <div className="top-bar__fixed">
+                        <div className="back__container">
+                            <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                <span className="back-button">
+                                    <ArrowIosBack size="20" />
+                                </span>
+                                <span className="back-text">
+                                    {content.name}
+                                </span>
+                            </div>
                         </div>
+                        <EditTopBar category={state.category} setCategory={action.setCategory} />
                     </div>
-                    <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    <div style={{marginTop:`${MARGINTOP}`}}></div>
                     {sectionMakeTable()}
                 </> }
                 </>
@@ -200,7 +214,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
     }
 
     return (
-        <MakeContext.Provider value={contextValue}>
+        <MakeContext.Provider value={contextValue} style={{position:'relative'}}>
             {returnMake()}
         </MakeContext.Provider>
     )
