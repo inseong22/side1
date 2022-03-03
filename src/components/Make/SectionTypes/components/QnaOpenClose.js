@@ -82,7 +82,7 @@ const OpenCloseCustom = (props) => {
           <div className="edit-element">
             <ChakraProvider>
             <div className="accordion__title">
-              <div className="title_text" style={{color:`${props.color}`, width:'100%'}}>
+              <div className="title_text" style={{color:`${props.color}`, width:'100%', alignItems: 'start'}}>
                 <div className="qna__word" style={{fontFamily:`${state.setting.smallFont}`}}>Q.</div>
                 <div style={{width:'100%'}}>
                   <TextAuto 

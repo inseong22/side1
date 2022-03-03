@@ -34,6 +34,8 @@ function VideoSection({content, setting}) {
                         value={content.explanation.text} 
                         color={content.explanation.color}
                         align={content.explanation.align}
+                        size={content.explanation.size/20}
+                        
                     />
                 </div>
                 }

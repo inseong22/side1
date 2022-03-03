@@ -38,6 +38,7 @@ function VideoSection({content, setting}) {
                         onChange={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].explanation.text = e.currentTarget.value;
                         }))}
+                        size={content.explanation.size/20}
                         color={content.explanation.color}
                         align={content.explanation.align}
                     />

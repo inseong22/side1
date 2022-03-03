@@ -170,6 +170,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     const [font, setFont] = useState('');
     const [color, setColor] = useState('');
     const [tmodalOpen, setTmodalOpen] = useState(false);
+    const [alarm, setAlarm] = useState(false);
 
     useEffect(() => {
         console.log("리렌더링")
@@ -186,10 +187,12 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
 
     const onUrlChange = e => {
         if (isNotNumber(e.nativeEvent.data)){ 
+            setAlarm(false)
             setSetting(produce(setting, draft => {
                 draft.urlId = e.currentTarget.value
             }))
         }else{
+            setAlarm(true)
             e.preventDefault(); 
             return null; 
         }
@@ -488,6 +491,11 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                             <div className="modal-title" style={{fontSize:'25px'}}>
                                 https://surfee.co.kr/#/<input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />
                             </div>
+                            {alarm ? (
+                                <div className="text-alarm">
+                                    ⚠ 영문 소문자와 숫자만 사용가능합니다.
+                                </div>
+                            ):(<div className="text-alarm"> </div>)}
                             <div style={{color:'gray', paddingLeft:'0%',marginTop:'1%', fontSize:'14px', textAlign:'center', fontFamily:'Pretendard-Regular'}}>
                                 개인 도메인 연결은 다음 버전에 업데이트할 예정입니다.
                                 수정 가능하니 편하게 설정해 주세요 :)

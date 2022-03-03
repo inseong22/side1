@@ -21,7 +21,8 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                             color:`${content.title.color}`, 
                             fontSize:`${content.title.size/20}em`, 
                             textAlign:`${isMobile ? content.mobile.align : content.title.align}`,
-                            resize:'none'
+                            resize:'none',
+                            WebkitTextFillColor: `${content.title.color}`
                         }}
                         spellcheck="false"
                     />
@@ -42,6 +43,7 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                             // boxSizing:`border-box`, 
                             textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
                             resize:'none',
+                            WebkitTextFillColor: `${content.desc.color}`
                         }}
                         spellcheck="false"
                     />
