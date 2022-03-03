@@ -41,7 +41,7 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                             fontSize:`${content.desc.size/20}em`, 
                             // boxSizing:`border-box`, 
                             textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
-                            resize:'none'
+                            resize:'none',
                         }}
                         spellcheck="false"
                     />

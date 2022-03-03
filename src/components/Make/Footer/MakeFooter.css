@@ -51,6 +51,7 @@
 .icon-box{
   display:flex;
   height:100%;
-  width:50%;
-  box-sizing:border-box;
+  width:100%;
+  /* box-sizing:border-box; */
+  flex-wrap:wrap;
 }

@@ -5,6 +5,7 @@ import produce from 'immer';
 import ColorCustom from '../../tools/Custom/ColorCustom'
 import TextSizeCustom from '../../tools/func/TextSizeCustom'
 import OpenCloseCustom from '../../tools/Custom/OpenCloseCustom'
+import AnimationCustom from '../../tools/Custom/AnimationCustom'
 import BoxCustom from '../../tools/Custom/BoxCustom'
 import SliderCustom from '../../tools/Custom/SliderCustom'
 import OnOffCustom from '../../tools/Custom/OnOffCustom'
@@ -50,6 +51,12 @@ function EditDesign({content}) {
     const RemoveImage = () => {
         action.setContents(produce(state.contents, draft=>{
             draft[state.secNum].backgroundImage.attachment = '';
+        }))
+    }
+    // 애니메이션 함수
+    const changeAnimationOption = e => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].animation = e;
         }))
     }
 
@@ -137,6 +144,12 @@ function EditDesign({content}) {
                         }))} />
                     </>
                 }
+            </OpenCloseCustom>
+            <OpenCloseCustom title="애니메이션" use={true}>
+                <AnimationCustom 
+                    text="애니메이션" 
+                    value={content.animation} 
+                    func={ e => changeAnimationOption(e)} />
             </OpenCloseCustom>
             <BoxCustom title="반응형">
                 <div className="edit-element">

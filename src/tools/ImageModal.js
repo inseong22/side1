@@ -48,11 +48,13 @@ function ImageModal({open, setOpen}) {
         >
             <Box sx={style}>
             <OverflowScrolling className='overflow-scrolling'>
+                <div className="center-row" style={{flexWrap:'wrap'}}>
                 {iconscouts.response.items.data.map((item) => {
                     return(
-                        <img src={item.urls.svg} />
+                        <img src={item.urls.svg} width={120} />
                     )
                 })}
+                </div>
             </OverflowScrolling>
             </Box>
         </StyledModal>

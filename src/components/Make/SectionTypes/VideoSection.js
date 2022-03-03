@@ -17,7 +17,11 @@ function VideoSection({content, setting}) {
     }
     
     return (
-        <motion.div style={{ width:'100%', height:'100%'}}>
+        <motion.div 
+        data-aos-easing="ease-in-back"
+        data-aos-delay="200"
+        data-aos-offset="0" data-aos={content.animation} aos-duration="4000"
+        style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout} setting={setting}>
                 <div className="text__container">
                     <TitleDesc content={content} titlePlaceholder="제목을 적어보세요." descPlaceholder="여기를 클릭하여 내용을 적어보세요." />

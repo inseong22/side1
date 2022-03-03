@@ -42,11 +42,7 @@ function ReviewSection({content, setting}) {
                     }
                     {
                         content.rating.use && 
-                        <div className="df-margin">
-                            <div style={{
-                                width:'100%', 
-                                textAlign:`${state.isPhone ? content.mobile.align : content.align}`
-                            }}>
+                        <div className="df-margin-small" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.align}`}}>
                             <Rating
                                 value={item.rating} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {
@@ -57,12 +53,11 @@ function ReviewSection({content, setting}) {
                                 // size={content.rating.size}
                                 // color={content.rating.color}
                             />
-                            </div>
                         </div>
                     }
                     {
                         content.elementText.use && 
-                        <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                        <div className="df-margin feature-desc" style={{width:'100%'}}>
                             <TextareaAutosize
                                 className="text-input" 
                                 style={{
@@ -115,7 +110,7 @@ function ReviewSection({content, setting}) {
         <>
             <motion.div className="template"data-aos-easing="ease-in-back"
                 data-aos-delay="200"
-                data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
+                data-aos-offset="0" data-aos={content.animation} aos-duration="4000">
                 
                 <TitleDesc content={content} titlePlaceholder="서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." />
 

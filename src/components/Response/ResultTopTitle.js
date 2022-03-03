@@ -79,8 +79,8 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
                                 <div className="row">
                                     <ResultData data={datas.pageViews + "개"} name="페이지 뷰" />
                                     <ResultData data={datas.users + "명"} name="유입 수" />
-                                    <ResultData data={numOfPerson('apply') / parseInt(datas.users)} name="신청 전환율" type="%"/>
-                                    <ResultData data={numOfPerson('click') / parseInt(datas.users)} name="클릭 전환율" type="%"/>
+                                    <ResultData data={numOfPerson('apply')*100 / parseInt(datas.users)} name="신청 전환율" type="%"/>
+                                    <ResultData data={numOfPerson('click')*100 / parseInt(datas.users)} name="클릭 전환율" type="%"/>
                                 </div>
                                 :
                                 <div className="row">

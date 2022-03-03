@@ -16,3 +16,8 @@
     width:100%;
     box-sizing: border-box;
 }
+.df-margin-small{
+    display:flex;
+    margin-top:-2px;
+    width:100%;
+}
