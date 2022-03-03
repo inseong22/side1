@@ -17,14 +17,16 @@ function QnaSection({content, setting}) {
                     <div style={{display:'flex', alignItems: 'start', height:'100%'}}>
                         <span className="qna__word" style={{fontFamily:`${state.setting.smallFont}`, color: `${content.qna.answer}`}}>A. <></></span>
                     </div>
-                    <TextAuto
-                        small
-                        placeholder="여기를 클릭하여 자주 묻는 질문의 답변을 적어보세요."
-                        value={item.answer} 
-                        onChange={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].qnas[index].answer = e.currentTarget.value;
-                        }))}
-                        color={content.qna.answer} align="start" />
+                    <div style={{marginTop:'4px', width:'100%'}}>
+                        <TextAuto
+                            small
+                            placeholder="여기를 클릭하여 자주 묻는 질문의 답변을 적어보세요."
+                            value={item.answer} 
+                            onChange={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].qnas[index].answer = e.currentTarget.value;
+                            }))}
+                            color={content.qna.answer} align="start" />
+                    </div>
                 </div>
             </QnaOpenClose>
         )

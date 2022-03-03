@@ -15,11 +15,13 @@ function QnaSection({content, setting}) {
                     <div style={{display:'flex', alignItems: 'start', height:'100%'}}>
                         <span className="qna__word" style={{fontFamily:`${setting.smallFont}`}}>A. <></></span>
                     </div>
-                    <TextAuto
-                        disabled
-                        small
-                        value={item.answer} 
-                        color={content.qna.answer} align="start" />
+                    <div style={{marginTop:'4px', width:'100%'}}>
+                        <TextAuto
+                            disabled
+                            small
+                            value={item.answer} 
+                            color={content.qna.answer} align="start" />
+                    </div>
                 </div>
             </QnaOpenClose>
         )

@@ -9,7 +9,7 @@ import AskLoginModal from './tools/AskLoginModal'
 import NavBarV2 from '../NavAndFooter/NavBarV2'
 import RegisterModal from '../../components/Login/RegisterModal'
 import ChannelTalk from '../../tools/ChannelTalk'
-import { styled, Box } from '@mui/system';
+import {detect} from 'detect-browser'
 import {isMobile} from 'react-device-detect'
 import "@lottiefiles/lottie-player";
 
@@ -75,6 +75,12 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     const [registerOpen,setRegisterOpen] = useState(false);
     const [loginOpen,setLoginOpen] = useState(false);
     const targets = useRef(null)
+
+    useEffect(() => {
+        if(detect.name !== 'chrome' || isMobile){
+            alert("본 서비스는 PC 환경과 Chrome 환경에 최적화되어있습니다.")
+        }
+    },[])
     
     ChannelTalk.boot({
         "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"

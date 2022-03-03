@@ -27,7 +27,7 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
             return({...doc.data(), id:doc.id})
         });
         
-        if(urlData.length > 0){
+        if(urlData.length > 0 && urlData[0].pageId !== content.id ){
             alert("url을 변경한 후 배포해주시기 바랍니다.");
             return;
         }
