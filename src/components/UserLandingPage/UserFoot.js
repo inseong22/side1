@@ -122,12 +122,12 @@ function UserFoot({foot, setting}) {
                             </div>
                         }
                         {foot.icon.use && foot.layout === 2 && 
-                            <div className="icon-box" style={{flexDirection: 'row', justifyContent: 'start'}}>
+                            <div className="icon-box" style={{display: 'inline', flexDirection: 'row', justifyContent: 'start'}}>
                             {returnIcons()}
                             </div>
                         }
                         {foot.icon.use && foot.layout === 3 && 
-                            <div className="icon-box" style={{flexDirection: 'row', justifyContent: 'start'}}>
+                            <div className="icon-box" style={{display: 'inline', flexDirection: 'row', justifyContent: 'start'}}>
                             {returnIcons()}
                             </div>
                         }

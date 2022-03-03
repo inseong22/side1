@@ -58,12 +58,14 @@ const CustomButton = (type) => { return (
                 color:`${state.setting[type].color}`,
                 cursor:'pointer',
                 border:'none',
+                WebkitTextFillColor: `${state.setting[type].color}`,
                 textAlign: 'center',
                 fontSize: `${content.button.textSize}px`,
                 fontFamily:`${state.setting.smallFont}`,
                 borderRadius:`${state.setting[type].borderRadius}px`,  
                 backgroundColor:`${state.setting[type].backgroundColor}`, 
                 padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
+                WebkitTextFillColor: `${state.setting[type].color}`,
                 }}
                 disabled/>
     

@@ -732,7 +732,7 @@ export const defaults = {
         faviconAttachment: "",
         font: "yg-jalnan",
         fta:{
-            backgroundColor: "#6c63ff1d",
+            backgroundColor: "#6c63ff",
             border: false,
             borderColor: "#000000",
             borderRadius: 5,

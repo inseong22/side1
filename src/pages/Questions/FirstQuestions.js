@@ -170,6 +170,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     const [font, setFont] = useState('');
     const [color, setColor] = useState('');
     const [tmodalOpen, setTmodalOpen] = useState(false);
+    const [alarm, setAlarm] = useState(false);
 
     useEffect(() => {
         console.log("리렌더링")

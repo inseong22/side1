@@ -343,7 +343,10 @@
   overflow:hidden;
   word-wrap:break-word;
 }
-
+input:disabled{
+  background-color:transparent; 
+  border-style: none;
+}
 .text-no-input:hover{
   border:1px solid rgba(200,200,200,0);
 }
@@ -351,11 +354,6 @@
 .text-no-input:focus{
   border:1px solid rgba(200,200,200,0);
   outline:none;
-}
-
-.text-no-input:disabled{
-  opacity: 1;
-  -webkit-text-fill-color:inherit;
 }
 
 .text-input:hover{
@@ -377,8 +375,10 @@
 }
 
 .text-input-flex{
-  border:1px solid rgba(200,200,200,0);
-  background-color:rgba(0,0,0,0);
+  /* border:1px solid rgba(200,200,200,0);
+  background-color:rgba(0,0,0,0); */
+  background-color: transparent; 
+  border: none;
   font-size:var(--button-font-size);
   padding:var(--made-button-padding);
 }

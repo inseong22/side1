@@ -123,7 +123,8 @@ const UserLandingPage = (props) => {
                             color:`${setting.fta.color}`,
                             textAlign:'center',
                             border:'none',
-                            cursor:'pointer'
+                            cursor:'pointer',
+                            WebkitTextFillColor: `${setting.fta.color}`,
                         }} />
                 </div>
             </div> }
