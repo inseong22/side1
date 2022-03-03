@@ -65,13 +65,6 @@ function EditGallerySection({content, category}) {
                 draft[state.secNum].card.use = !content.card.use;
             }))
         },
-        {
-            title:'설명',
-            use:content.text.use,
-            func:() => action.setContents(produce(state.contents, draft => {
-                draft[state.secNum].text.use = !content.text.use;
-            }))
-        },
     ]
 
     const returnTable = () => {
@@ -92,15 +85,13 @@ function EditGallerySection({content, category}) {
                             <RadioCustom text="프레임" value={content.card.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].card.borderRadius = e;
                                 }))} />
-                            <ColorCustom text="색상" value={content.card.color} func={e => action.setContents(produce(state.contents, draft => {
+                            <ColorCustom text="카드 색상" value={content.card.color} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].card.color = e;
                             }))} />
                             <OnOffCustom text="그림자 적용" value={content.card.shadow} func={(e) => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].card.shadow = !content.card.shadow
                             }))} />
-                        </OpenCloseCustom>
-                        <OpenCloseCustom title='설명' use={content.text.use}>
-                            <ColorCustom text="색상" value={content.text.color} func={e => action.setContents(produce(state.contents, draft => {
+                            <ColorCustom text="설명 글 색상" value={content.text.color} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].text.color = e;
                                 }))} />
                         </OpenCloseCustom>

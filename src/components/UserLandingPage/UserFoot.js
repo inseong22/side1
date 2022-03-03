@@ -104,7 +104,10 @@ function UserFoot({foot, setting}) {
                     <div className="footer-section" style={{fontSize:'0.5em'}}>
                     <div style={{display:'flex', ...returnLayout}} >
                         {foot.text.use && 
-                            <TextareaAutosize className="footer-text-input"
+                            <TextareaAutosize 
+                                disabled 
+                                className="text-no-input"
+                                spellcheck="false"   
                                 value = {foot.text.text}
                                 style={{
                                     fontFamily:`${setting.smallFont}`, 
@@ -113,6 +116,7 @@ function UserFoot({foot, setting}) {
                                     backgroundColor: `${foot.backgroundColor}`,
                                     resize:'none',
                                     border:'none',
+                                    WebkitTextFillColor: `${foot.text.color}`
                                 }}>
                             </TextareaAutosize>
                         }
