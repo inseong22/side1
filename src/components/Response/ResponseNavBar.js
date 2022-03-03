@@ -12,7 +12,7 @@ function ResponseNavBar() {
                 <div>관리 페이지</div>
                 <span className="make-nav-button" onClick={e => {
                     setTutorialOpen(true);
-                }} style={{boxShadow:'none', width:'90px', marginLeft:'30px'}}>
+                }} style={{boxShadow:'none', width:'90px', marginLeft:'30px', color:'black'}}>
                     사용 방법
                 </span>
             </div>

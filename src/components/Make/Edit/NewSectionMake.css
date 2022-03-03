@@ -39,7 +39,7 @@
 
 .back__container{
     scroll-behavior: smooth;
-    padding:5px 15px 0px 15px;
+    padding:10px 15px 5px 15px;
     display: flex;
     justify-content:start;
     align-items:center;

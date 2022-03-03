@@ -3,6 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import EditDesign from './tools/EditDesign'
 import produce from 'immer';
 import ElementsTable from './tools/ElementsTable'
+import EditTitleDesc from './tools/EditTitleDesc'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
@@ -75,6 +76,7 @@ function EditGallerySection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
+                        <EditTitleDesc content={content} />
                         <OpenCloseCustom title="이미지" use={content.element.use}>
                             <SliderCustom top="크기" value={content.element.size} func={e =>
                                 action.setContents(produce(state.contents, draft => {

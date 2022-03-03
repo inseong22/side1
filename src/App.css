@@ -154,6 +154,12 @@
 .insta:hover{
   color:rgb(50,50,50);
 }
+.border-hover{
+  cursor: pointer;
+}
+.border-hover:hover{
+  border:1px solid rgba(200,200,200,0.7);
+}
 
 .uphover{
   cursor: pointer;

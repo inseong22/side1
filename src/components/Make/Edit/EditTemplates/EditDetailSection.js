@@ -1,9 +1,9 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import { detailSectionTemplateList } from './InnerTemplates'
 import EditDesign from './tools/EditDesign'
 import './EditeTemplates.css'
 import ElementsTable from './tools/ElementsTable'
+import EditTitleDesc from './tools/EditTitleDesc'
 import produce from 'immer';
 import './EditContent.css'
 
@@ -50,6 +50,7 @@ function EditDetailSection({content, category}) {
                     <div className="section-make__inner-container">
                         <ElementsTable elements={elements} />
                         <Layout content={content} version='detail' />
+                        <EditTitleDesc content={content} />
                         <Contents content={content}/>
                     </div>
                 )

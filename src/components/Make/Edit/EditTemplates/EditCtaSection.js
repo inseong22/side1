@@ -3,11 +3,10 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import ElementsTable from './tools/ElementsTable'
 import EditDesign from './tools/EditDesign'
 import produce from 'immer'
-import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
+import EditTitleDesc from './tools/EditTitleDesc'
 import AddAppButton from './tools/AddAppButton'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
-import InputCustom from '../tools/Custom/InputCustom'
 import EditNotice from './tools/EditNotice'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
 
@@ -58,6 +57,7 @@ function EditCtaSection({content, category, type}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <Layout content={content} version="cta"/>
+                        <EditTitleDesc content={content} />
                         {
                             !(type === 'appDownload') &&
                             <OpenCloseCustom title="버튼" use={content.button.use}>

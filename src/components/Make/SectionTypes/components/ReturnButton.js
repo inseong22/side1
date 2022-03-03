@@ -35,7 +35,7 @@ function ReturnButton({content, onlyapp}){
         return(
             <div className="centera" style={{flexDirection:`${state.isPhone || content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ? 'column' : 'row'}`, justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
                 {content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].map((item, index) => {
-                    return <input className="input-placeholder" placeholder={item} key={index} 
+                    return <input readOnly className="input-placeholder" placeholder={item} key={index} 
                         style={{
                             margin:'4px',
                             padding: `${state.setting[type].padding * 0.3 + 7.2}px 10px`, }}/>

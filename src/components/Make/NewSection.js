@@ -103,7 +103,12 @@ function NewSection({elementRef, setting, content, index, secNum, setSecNum, isP
     
 
     return(
-        <div ref={elementRef} className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{border:`${secNum === index ? '1px solid #918bff' : `1px solid ${content.backgroundColor}`}`}}>
+        <div ref={elementRef} className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{
+                borderTop:`${secNum === index ? '1.5px solid #918bff' : 'none'}`,
+                borderBottom:`${secNum === index ? '1.5px solid #918bff' : 'none'}`,
+                borderLeft:`${secNum === index ? '1.5px solid #918bff' : '1.5px solid #edf0f3'}`,
+                borderRight:`${secNum === index ? '1.5px solid #918bff' : '1.5px solid #edf0f3'}`,
+            }}>
             {!full && <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0)'}`}}>
             </div>}
             <div className="section__container" 

@@ -4,6 +4,7 @@ import surfeelogo from '../../tools/img/surfeelogo.png'
 function ChromeTapBar({content}) {
     return (
         <div className="make-tab-preseen" style={{
+                cursor:'default',
                 borderRadius: '10px 10px 10px 10px'
             }}>
             <div className="left">
