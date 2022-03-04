@@ -73,6 +73,11 @@ function AddingSection({setting, open, setOpen, foot}) {
 
         tempBody['animation'] = setting.animation
 
+        if(tempBody['sectionTypeName'] === 'CtaSection' || tempBody['sectionTypeName'] === 'ApplySection' || tempBody['sectionTypeName'] === 'AppDownloadSection')
+            {
+                tempBody['backgroundColor'] = setting.color
+            }
+
         let body = JSON.parse(JSON.stringify(tempBody))
 
         action.setContents([

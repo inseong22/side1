@@ -77,11 +77,23 @@ function EditGallerySection({content, category}) {
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
                         <EditTitleDesc content={content} />
-                        <OpenCloseCustom title="이미지" use={content.element.use}>
-                            <SliderCustom top="크기" value={content.element.size} func={e =>
-                                action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].element.size = e
-                                }))} max="500"/>
+                        <OpenCloseCustom title="이미지" use={content.element.use} subtext={state.isPhone ? '모바일' : 'PC'}>
+                            {
+                                state.isPhone ? 
+                                <>
+                                    <SliderCustom top="크기" value={content.mobile.cardSize} func={e =>
+                                        action.setContents(produce(state.contents, draft => {
+                                            draft[state.secNum].mobile.cardSize = e
+                                    }))} max="400"/>
+                                </>
+                                :
+                                <>
+                                    <SliderCustom top="크기" value={content.element.size} func={e =>
+                                        action.setContents(produce(state.contents, draft => {
+                                            draft[state.secNum].element.size = e
+                                    }))} max="500"/>
+                                </>
+                            }
                         </OpenCloseCustom>
                         <OpenCloseCustom title='카드' use={content.card.use}>
                             <RadioCustom text="프레임" value={content.card.borderRadius} options={shapeOptions} func={e => action.setContents(produce(state.contents, draft => {

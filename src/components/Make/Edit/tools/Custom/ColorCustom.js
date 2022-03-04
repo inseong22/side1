@@ -21,10 +21,12 @@ export function EditColor({onChange, value}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const {stateC, actionC} = useContext(MakeContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [color, setColor] = useColor("hex", value);
+    const [newColor, setNewColor] = useState(false);
     const [open, setOpen] = useState(null);
 
     const handleClick = () => {
         setOpen(!open);
+        setNewColor(true);
     };
   
     const handleClose = () => {
@@ -52,11 +54,20 @@ export function EditColor({onChange, value}) {
     return (
         <ChakraProvider>
         <div className="center-row" style={{justifyContent: "start"}}>
-            <div className="color-button" style={{backgroundColor : `${state.setting.color}`, color:`${state.setting.color === '#ffffff' ? '#555C67' : 'white'}`}} onClick={() => onChange(`${state.setting.color}`)}>
+            <div className="color-button" 
+                style={{
+                    backgroundColor : `${state.setting.color}`, 
+                    color:`${state.setting.color === '#ffffff' ? '#555C67' : 'white'}`,
+                    border: `${newColor ? ('3px solid #ffffff'): ('3px solid #6B63F7')}`,
+                }} 
+                onClick={() => {
+                    setNewColor(false)
+                    onChange(`${state.setting.color}`)
+                    }}>
                 {/* <div style={{color:'rgba(255,255,255,0.8)'}}>
                     main
                 </div> */}
-                <div>
+                <div>메인 색상
                     {state.setting.color}
                 </div>
             </div>
@@ -68,7 +79,13 @@ export function EditColor({onChange, value}) {
                         closeSave()
                     }}>
                 <PopoverTrigger>
-                    <div className="color-button" style={{backgroundColor:`${value}`, color:`${value === '#ffffff' ? '#555C67' : 'white'}`}} onClick={handleClick}>    
+                    <div className="color-button" 
+                    style={{
+                        backgroundColor:`${value}`, 
+                        color:`${value === '#ffffff' ? '#555C67' : 'white'}`,
+                        border: `${!newColor ? ('3px solid #ffffff'): ('3px solid #6B63F7')}`,
+                    }} onClick={handleClick}>    
+                        새로운 색상
                         {value}
                     </div>
                 </PopoverTrigger>

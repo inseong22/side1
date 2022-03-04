@@ -66,6 +66,7 @@ const CustomButton = (type) => { return (
                 backgroundColor:`${state.setting[type].backgroundColor}`, 
                 padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
                 WebkitTextFillColor: `${state.setting[type].color}`,
+                WebkitOpacity: 1,
                 }}
                 disabled/>
     

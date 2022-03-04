@@ -24,7 +24,7 @@ const elementDoc = {
     title:'제목',
     desc:'본문',
     button:'버튼',
-    appButton:'앱 다운로드',
+    appButton:'앱 다운로드 버튼',
     caution:'안내사항',
 }
 

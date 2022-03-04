@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { styled, Box } from '@mui/system';
+import { MyContext } from '../Make/MakePageV2'
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import '../../components/Make/Modal/Modal.css';
 import './FirstQuestions.css'
@@ -172,6 +173,8 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     const [tmodalOpen, setTmodalOpen] = useState(false);
     const [alarm, setAlarm] = useState(false);
 
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+
     useEffect(() => {
         console.log("리렌더링")
     }, [])
@@ -281,10 +284,25 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
             setSetting(produce(setting, draft => {
                 draft.title = title;
                 draft.cta.backgroundColor = color;
+                draft.ghost.borderColor = color;
+                draft.ghost.color = color;
+            }))
+
+           setContents(produce(state.contents, draft => {
+                draft.map(item => {
+                    if(item.sectionTypeName === 'CtaSection' || item.sectionTypeName === 'ApplySection' || item.sectionTypeName === 'AppDownloadSection')
+                    {
+                        item.backgroundColor = color;
+                    }
+                    else{
+                        return 
+                    }
+                })
             }))
 
             setFoot(produce(foot, draft => {
                 draft.copyright.text = title;
+                draft.icon.color = color;
             }))
 
             if(JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']).length > 48000){

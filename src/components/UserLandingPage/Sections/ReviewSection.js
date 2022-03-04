@@ -29,6 +29,7 @@ function ReviewSection({content, setting}) {
                                     color:`${content.elementTitle.color}`,
                                     fontSize:`${content.elementTitle.size/20}em`,
                                     WebkitTextFillColor: `${content.elementTitle.color}`,
+                                    WebkitOpacity: 1,
                                 }}
                                 value={item.title} 
                                 spellCheck="false"
@@ -67,6 +68,7 @@ function ReviewSection({content, setting}) {
                                     color:`${content.elementText.color}`,
                                     fontSize:`${content.elementText.size/20}em`,
                                     WebkitTextFillColor: `${content.elementText.color}`,
+                                    WebkitOpacity: 1,
                                 }}
                                 value={item.desc} 
                                 disabled
@@ -87,6 +89,7 @@ function ReviewSection({content, setting}) {
                                     color:`${content.writer.color}`,
                                     fontFamily:`${setting.smallFont}`,
                                     WebkitTextFillColor: `${content.writer.color}`,
+                                    WebkitOpacity: 1,
                                 }}
                                 value={item.writer} 
                                 disabled

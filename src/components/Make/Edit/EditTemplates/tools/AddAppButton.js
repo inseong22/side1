@@ -14,7 +14,7 @@ function AddAppButton({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return (
-        <OpenCloseCustom title="앱 다운로드" use={content.appButton.use}>
+        <OpenCloseCustom title="앱 다운로드 버튼" use={content.appButton.use}>
             <div className="edit-element">
                 <RadioCustom content={content} 
                     options={buttonAlignOptions} 

@@ -49,6 +49,7 @@ function FeaturesSection({content, setting}) {
                                         textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
                                         resize:'none',
                                         WebkitTextFillColor: `${content.desc.color}`,
+                                        WebkitOpacity: 1,
                                     }}
                                     placeholder="여기를 클릭하여 서비스 및 제품의 특징을 적어보세요."
                                     disabled

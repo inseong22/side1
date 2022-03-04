@@ -11,7 +11,7 @@ function ElementsTable({elements, content}) {
         <div className="one-element">
             <div className="edit-element__box">
                 <div className="edit-element__title">
-                    요소
+                    요소 ON/OFF
                 </div>
                 <div>
                     {elements.map((item,index) => {
