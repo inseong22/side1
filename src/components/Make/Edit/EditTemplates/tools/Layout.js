@@ -125,6 +125,7 @@ function Layout({content, version, foot, setFoot}) {
                         draft[state.secNum].layout = e;
                         draft[state.secNum].title.align = align;
                         draft[state.secNum].desc.align = align;
+                        draft[state.secNum].mobile.align = align;
                     }))} />
                 )
             case 'footer':

@@ -22,7 +22,7 @@ function GallerySection({content,setting}) {
                                 style={{
                                     width:'100%',
                                     objectFit:'cover',
-                                    height:`${isMobile ? content.element.size/1.5 : content.element.size}px`, 
+                                    height:`${isMobile ? content.mobile.cardSize : content.element.size}px`, 
                                     borderRadius:`${content.card.borderRadius}px ${content.card.borderRadius}px 0px 0px`
                                 }}/> 
                                :
