@@ -62,9 +62,7 @@ function UserNavBar({setting, navi}) {
                 backgroundColor:`${navi.backgroundColor}`, 
                 height:`${navi.height}px`, 
                 position:`${navi.fixed ? 'relative' : 'fixed'}`
-            }}
-            >
-                
+            }} >
             <>
                 <div className="make-nav-logoc" style={{height:`${navi.height}px`, 
                     justifyContent:`${navi.logo.align === 'center' && navi.button.use && !isMobile ? 'right' : navi.logo.align}`,

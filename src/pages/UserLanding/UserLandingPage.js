@@ -89,7 +89,7 @@ const UserLandingPage = (props) => {
         :
         <div style={{fontSize:`${isMobile ? '22px' : '28px'}`}}>
             <UserNavBar navi={item.navi} setting={item.setting} />
-            <div style={{paddingTop:`${item.navi.fixed ? `${item.navi.height}px` : '0px'}`}}>
+            <div style={{paddingTop:`${item.navi.fixed ? '0px': `${item.navi.height}px`}`}}>
                 <UserContents contents={item.contents} setting={item.setting} />
             </div>
             <UserFoot foot={item.foot} setting={item.setting}/>

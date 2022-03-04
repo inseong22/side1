@@ -90,7 +90,7 @@ const OpenCloseCustom = (props) => {
                 </div>
               </div> 
             </div>
-            <div className="centera" style={{justifyContent: 'end', width:'20%'}}>
+            <div className="centera" style={{justifyContent: 'flex-end', width:'20%'}}>
               { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
             </div>
           </div>

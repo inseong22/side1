@@ -77,7 +77,8 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     const targets = useRef(null)
 
     useEffect(() => {
-        if(detect.name !== 'chrome' || isMobile){
+        const browser = detect();
+        if(browser.name !== 'chrome' || isMobile){
             alert("본 서비스는 PC 환경과 Chrome 환경에 최적화되어있습니다.")
         }
     },[])

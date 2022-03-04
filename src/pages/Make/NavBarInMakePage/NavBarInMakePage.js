@@ -404,7 +404,7 @@ const afterSaveImage = async (returned) => {
                         </Button>
                     </div>
                 </div>
-                <div className="make-page-nav-half" style={{justifyContent: 'end', marginRight:'1%'}}>
+                <div className="make-page-nav-half" style={{justifyContent: 'flex-end', marginRight:'1%'}}>
                     {deviceSelect()}
                     <Button onClick={() => onSubmit()} className="default-button-02">
                         저장하기
