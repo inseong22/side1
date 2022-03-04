@@ -19,6 +19,7 @@ function TextAuto({small, value, color, setting, align, size, disabled}) {
                         fontSize: `${size}em`,
                         fontFamily:`${state.setting.smallFont}`,
                         WebkitTextFillColor: `${color}`,
+                        WebkitOpacity: 1,
                     }}
                     spellCheck="false"
                     disabled={disabled}
@@ -34,6 +35,7 @@ function TextAuto({small, value, color, setting, align, size, disabled}) {
                         fontSize: `${size}em`,
                         fontFamily:`${state.setting.font}`,
                         WebkitTextFillColor: `${color}`,
+                        WebkitOpacity: 1,
                     }}
                     spellCheck="false"
                     disabled={disabled}

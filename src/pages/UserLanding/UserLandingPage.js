@@ -125,6 +125,7 @@ const UserLandingPage = (props) => {
                             border:'none',
                             cursor:'pointer',
                             WebkitTextFillColor: `${setting.fta.color}`,
+                            WebkitOpacity: 1,
                         }} />
                 </div>
             </div> }

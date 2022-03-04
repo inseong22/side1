@@ -22,7 +22,8 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                             fontSize:`${content.title.size/22}em`, 
                             textAlign:`${isMobile ? content.mobile.align : content.title.align}`,
                             resize:'none',
-                            WebkitTextFillColor: `${content.title.color}`
+                            WebkitTextFillColor: `${content.title.color}`,
+                            WebkitOpacity: 1,
                         }}
                         spellcheck="false"
                     />
@@ -43,7 +44,8 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                             // boxSizing:`border-box`, 
                             textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
                             resize:'none',
-                            WebkitTextFillColor: `${content.desc.color}`
+                            WebkitTextFillColor: `${content.desc.color}`,
+                            WebkitOpacity: 1,
                         }}
                         spellcheck="false"
                     />

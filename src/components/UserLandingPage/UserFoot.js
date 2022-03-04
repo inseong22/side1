@@ -116,7 +116,8 @@ function UserFoot({foot, setting}) {
                                     backgroundColor: `${foot.backgroundColor}`,
                                     resize:'none',
                                     border:'none',
-                                    WebkitTextFillColor: `${foot.text.color}`
+                                    WebkitTextFillColor: `${foot.text.color}`,
+                                    WebkitOpacity: 1,
                                 }}>
                             </TextareaAutosize>
                         }
