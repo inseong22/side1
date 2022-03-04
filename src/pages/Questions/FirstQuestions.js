@@ -160,7 +160,8 @@ const colorList = [
 {name:'진한 보라색',color:'#3B185F',},
 {name:'검정',color:'#171717',},
 {name:'진한 회색',color:'#444444',},
-{name:'갈색',color:'#c99c75',},
+{name:'갈색',color:'#C99C75',},
+{name:'상아색',color:'#EEE6C4',},
 ]
 
 function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
@@ -411,7 +412,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                                 }}
                                 style={{border: `${device === 'pc' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
-                                    🖥 PC<br/><br/> PC 화면을 중심으로 편집하고<br/> 모바일 화면은 간단한 수정만 가능해요.
+                                    🖥 PC<br/><br/> PC 화면을 중심으로 편집 가능해요.
                                 </div>
                             </div>
                             <div className="template__card uphover"
@@ -421,7 +422,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                                 }}
                                 style={{border: `${device === 'mobile' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
-                                    📱모바일<br/><br/> 모바일 화면을 중심으로 편집하고<br/> PC 화면은 간단한 수정만 가능해요.
+                                    📱모바일<br/><br/> 모바일 화면을 중심으로 편집 가능해요.
                                 </div>
                             </div>
                         </div>
@@ -434,11 +435,11 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
 
             case 4:
                 return(
-                    <ModalBox title={<>
-                        좋아요! 디자인은 어떻게 할까요? 🤔</>}>
-                            <div className="modal-row">
+                    <OverflowScrolling className="scroll">
+                    <ModalBox title={<> 좋아요! 디자인은 어떻게 할까요? 🤔</>}>
+                        <div className="modal-column">
                             <div className="modal-column">
-                                <div>
+                                <div className="modal-fc-select-title">
                                     폰트를 선택해 주세요.
                                 </div>
                                 <div className="font-selections__container">
@@ -450,7 +451,9 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                                                 }}
                                                 style={{border: `${font === item.value ? '1px solid #A89AFF' : 'none'}`, 
                                                 fontFamily:`${item.value}`, 
-                                                padding:'5% 3%'}}
+                                                padding:'20px 3px',
+                                                width:'20vw',
+                                            }}
                                             >
                                                 <div>
                                                     {item.label}
@@ -464,10 +467,10 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                                 </div>
                             </div>
                             <div className="modal-column" style={{marginLeft:'2vw'}}>
-                                <div>
+                                <div className="modal-fc-select-title">
                                     색상을 선택해 주세요.
                                 </div>
-                                <OverflowScrolling className="font-selections__container">
+                                <div className="font-selections__container">
                                     {colorList.map((item, index) => {
                                         let bor = 'none';
                                         if(item.color === color){
@@ -478,7 +481,8 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                                                 onClick={() => {
                                                     setColor(item.color);
                                                 }}
-                                                style={{border: `${bor}`, padding:'5% 3%'}}>
+                                                style={{border: `${bor}`, padding:'15px 3px',
+                                                width:'20vw'}}>
                                                 <div>
                                                     {item.color}
                                                 </div>
@@ -488,14 +492,15 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                                             </div>
                                         )
                                     })}
-                                </OverflowScrolling>
+                                </div>
                             </div>
-                            </div>
+                        </div>
                         <div className="modal-button-container">
                             <div className="modal-move-button-back" onClick={e => setCnum(cnum - 1)}>이전</div>
                             <div className="modal-move-button" onClick={() => nextAndSetFont()}>다음</div>
                         </div>
                     </ModalBox>
+                    </OverflowScrolling>
                 )
                 break;
 
