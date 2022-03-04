@@ -219,3 +219,10 @@
     flex-direction: column;
     padding-top:0vh;
 }
+
+.text-alarm{
+    font-size: var(--small-text);
+    font-family: 'Pretendard-Regular';
+    color: #ff6464;
+    font-weight: 600;
+}

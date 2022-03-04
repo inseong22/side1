@@ -68,19 +68,18 @@ const OpenCloseCustom = (props) => {
   /*
    * title, tooltip, preseen 설정 가능
   */
-   const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
-  const open = props.content.qna.shape
-  const [isopen, setOpen] = useState(props.open)
+  const isopen = props.content.qna.shape
+  const [open, setOpen] = useState(false)
 
   return (
     <div className="one-element" >
       <div className={props.type === 'card' ? 'accordion__card' : 'accordion__plain'}>
-        <div className="accordion__header-qna" onClick={() => {setOpen(!isopen)}}>
+        <div className="accordion__header-qna" onClick={() => {setOpen(!open)}}>
           <div className="edit-element">
             <div className="accordion__title">
-              <div className="title_text" style={{color:`${props.color}`, width:'100%'}}>
+              <div className="title_text" style={{color:`${props.color}`, width:'100%', alignItems: 'start'}}>
                 <div className="qna__word" style={{fontFamily:`${props.setting.smallFont}`}}>Q.</div>
-                <div style={{width:'100%'}}>
+                <div style={{width:'100%', marginTop:'3px'}}>
                   <TextAuto 
                     disabled
                     small
@@ -91,8 +90,8 @@ const OpenCloseCustom = (props) => {
                 </div>
               </div> 
             </div>
-            <div className="centera" style={{justifyContent: 'end', width:'20%'}}>
-              { isopen ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
+            <div className="centera" style={{justifyContent: 'flex-end', width:'20%'}}>
+              { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
             </div>
           </div>
         </div>

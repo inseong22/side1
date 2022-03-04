@@ -10,6 +10,8 @@ import AddYoutubeLink from '../tools/func/FuncYoutubeLink'
 import SliderCustom from '../tools/Custom/SliderCustom'
 import {CustomSwitch} from '../tools/Custom/OnOffCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
+import EditTitleDesc from './tools/EditTitleDesc'
 
 const videoOptions = [
     { label: '업로드', value: 'base'},
@@ -131,6 +133,7 @@ function EditVideoSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
+                        <EditTitleDesc content={content} />
                         <OpenCloseCustom title="동영상" use={content.video.use}>
                             <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
                             {videoType()}
@@ -141,6 +144,9 @@ function EditVideoSection({content, category}) {
                         }))} />
                         <RadioCustom text="정렬" options={alignOptions} value={content.explanation.align} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].explanation.align = e;
+                        }))} />
+                        <TextSizeCustom text="크기" desc value={content.explanation.size} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].explanation.size = e;
                         }))} />
                         </OpenCloseCustom>
                     </div>

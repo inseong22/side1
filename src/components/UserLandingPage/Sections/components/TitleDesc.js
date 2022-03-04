@@ -19,9 +19,10 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                         style={{
                             fontFamily:`${state.setting.font}`, 
                             color:`${content.title.color}`, 
-                            fontSize:`${content.title.size/20}em`, 
+                            fontSize:`${content.title.size/22}em`, 
                             textAlign:`${isMobile ? content.mobile.align : content.title.align}`,
-                            resize:'none'
+                            resize:'none',
+                            WebkitTextFillColor: `${content.title.color}`
                         }}
                         spellcheck="false"
                     />
@@ -38,10 +39,11 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                         style={{
                             fontFamily:`${state.setting.smallFont}`, 
                             color:`${content.desc.color}`, 
-                            fontSize:`${content.desc.size/20}em`, 
+                            fontSize:`${content.desc.size/19}em`, 
                             // boxSizing:`border-box`, 
                             textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
                             resize:'none',
+                            WebkitTextFillColor: `${content.desc.color}`
                         }}
                         spellcheck="false"
                     />

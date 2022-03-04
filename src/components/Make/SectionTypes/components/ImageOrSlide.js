@@ -112,7 +112,7 @@ function ImageOrSlide({content}){
                             onChange = {e => upload_img(e)} />
                         <img 
                             src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
-                            className="image uphover" 
+                            className="image border-hover" 
                             style={{
                                 borderRadius:`${content.image.border}px`,
                                 width:`${imageWidth()}%`, 
@@ -132,10 +132,10 @@ function ImageOrSlide({content}){
                         id="file"
                         onChange = {e => upload_mockup(e)}
                     />
-                   <img className="mobile-ex  uphover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
+                   <img className="mobile-ex  border-hover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
                     { content.mockup.attachment === '' ?
                     <></>:
-                    <img className="upload-mobile  uphover" src={content.mockup.attachment} style={{ 
+                    <img className="upload-mobile  border-hover" src={content.mockup.attachment} style={{ 
                         width:`${imageWidth()}%`, 
                         left:`${imageLeft()}%`}} />
                     }         
@@ -152,10 +152,10 @@ function ImageOrSlide({content}){
                         id="file"
                         onChange = {e => upload_mockup(e)}
                     />
-                        <img className="mobile-ex uphover" src={Desktop} alt="목업틀" style={{width: `${imageWidth()}%`}} />
+                        <img className="mobile-ex border-hover" src={Desktop} alt="목업틀" style={{width: `${imageWidth()}%`}} />
                         { content.mockup.attachment === '' ? 
                         <></> :
-                        <img  className="upload-desk uphover" src={`${content.mockup.attachment}`} style={{ 
+                        <img  className="upload-desk border-hover" src={`${content.mockup.attachment}`} style={{ 
                             width:`${imageWidth(true)}%`, 
                             left:`${imageLeft(true)}%`}} />
                         }
@@ -174,10 +174,10 @@ function ImageOrSlide({content}){
                         id="file"
                         onChange = {e => upload_mockup(e)}
                     />
-                <img className="mobile-ex  uphover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
+                <img className="mobile-ex  border-hover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
                     { content.mockup.attachment === '' ?
                     <></>:
-                    <img className="upload-mobile  uphover" src={content.mockup.attachment} style={{ 
+                    <img className="upload-mobile  border-hover" src={content.mockup.attachment} style={{ 
                         width:`${imageWidth()}%`, 
                         left:`${imageLeft()}%`}} />
                     }         
@@ -191,10 +191,10 @@ function ImageOrSlide({content}){
                         id="file"
                         onChange = {e => upload_mockup(e)}
                     />
-                <img className="mobile-ex  uphover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
+                <img className="mobile-ex  border-hover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
                     { content.mockup.attachment2 === '' ?
                     <></>:
-                    <img className="upload-mobile  uphover" src={content.mockup.attachment2} style={{ 
+                    <img className="upload-mobile  border-hover" src={content.mockup.attachment2} style={{ 
                         width:`${imageWidth()}%`, 
                         left:`${imageLeft()}%`}} />
                     }         

@@ -11,6 +11,8 @@ import { stService } from '../../../tools/fbase';
 import MakeTutorialModal from '../../../tools/MakeTutorialModal';
 import MiniModal from '../../../tools/MiniModal';
 import { v4 as uuidv4 } from 'uuid';
+import {Settings} from '@styled-icons/ionicons-sharp'
+import {DocumentOnePage} from '@styled-icons/fluentui-system-filled'
 import lodash from 'lodash'
 import produce from 'immer'
 import {
@@ -290,7 +292,7 @@ const afterSaveImage = async (returned) => {
     const goSetup = async () => {
         // 배포하기 클릭
         // 관리페이지에서 수정하기를 누른 거라면
-        const check = window.confirm("관리페이지로 돌아가시겠습니까? 저장하기 버튼을 클릭하지 않으셨다면 저장이 되지 않았을 수 있습니다.")
+        const check = window.confirm("관리페이지로 돌아가시겠습니까?\n저장하기 버튼을 클릭하지 않으셨다면 저장이 되지 않았을 수 있습니다.")
         if(check === true){
             if(userObj === null){
                 alert("로그인을 하셔야 관리 페이지로 접속하실 수 있습니다.");
@@ -384,12 +386,12 @@ const afterSaveImage = async (returned) => {
                     <span className={state.secNum === 52 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(52); 
                     }} >
-                        기본 설정
+                        기본 설정 <Settings size="16" style={{ marginLeft:'5px'}} />
                     </span>
                     <span className={state.secNum === 53 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(53);
                     }} >
-                        페이지 구성
+                        페이지 구성 <DocumentOnePage size="16" style={{ marginLeft:'5px'}} />
                     </span>
                     <span className="make-nav-button" onClick={e => setTutorialOpen(true)} style={{boxShadow:'none', width:'110px'}}>
                         사용 방법 <QuestionCircle size="13" color="rgba(0,0,0,0.5)" style={{marginLeft:'4px'}} />
@@ -402,7 +404,7 @@ const afterSaveImage = async (returned) => {
                         </Button>
                     </div>
                 </div>
-                <div className="make-page-nav-half" style={{justifyContent: 'end', marginRight:'1%'}}>
+                <div className="make-page-nav-half" style={{justifyContent: 'flex-end', marginRight:'1%'}}>
                     {deviceSelect()}
                     <Button onClick={() => onSubmit()} className="default-button-02">
                         저장하기

@@ -62,7 +62,7 @@
     display:flex;
     align-items : center;
     flex-direction: row;
-    justify-content:end;
+    justify-content:flex-end;
     width:100%;
     box-sizing: border-box;
 }

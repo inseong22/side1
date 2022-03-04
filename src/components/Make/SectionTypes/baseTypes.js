@@ -606,6 +606,7 @@ export const base = [
         sectionTypeName:'VideoSection',
         explanation:{
             use:true,
+            size: 18,
             color: '#000000',
             align: 'center',
             text:'여기를 클릭하여 동영상에 대한 추가 설명을 적어 보세요.'
@@ -732,7 +733,7 @@ export const defaults = {
         faviconAttachment: "",
         font: "yg-jalnan",
         fta:{
-            backgroundColor: "#6c63ff1d",
+            backgroundColor: "#6c63ff",
             border: false,
             borderColor: "#000000",
             borderRadius: 5,

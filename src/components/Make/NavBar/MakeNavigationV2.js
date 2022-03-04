@@ -12,7 +12,12 @@ function MakeNavigationV2({full, navi, setNavi, history}) {
 
     return (
         <>
-        <div className="make-navigation" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
+        <div className="make-navigation" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{
+                borderTop:`${state.secNum === 50 ? '1.5px solid #918bff' : 'none'}`,
+                borderBottom:`${state.secNum === 50 ? '1.5px solid #918bff' : 'none'}`,
+                borderLeft:`${state.secNum === 50 ? '1.5px solid #918bff' : '1.5px solid #edf0f3'}`,
+                borderRight:`${state.secNum === 50 ? '1.5px solid #918bff' : '1.5px solid #edf0f3'}`,
+            }}>
             <div className="make-nav-container" 
                 style={{
                     paddingRight: `${full ? 'calc(14vw + 30px)' : `${state.isPhone ? '12px' : '30px'}`}`,

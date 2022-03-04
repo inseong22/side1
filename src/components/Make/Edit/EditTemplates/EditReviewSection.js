@@ -10,6 +10,7 @@ import LayoutRFG from './tools/LayoutRFG'
 import SingleColorCustom from '../tools/Custom/SingleColorCustom'
 import {EditImageIcon} from './EditFeaturesSection'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
+import EditTitleDesc from './tools/EditTitleDesc'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 
 const ratingSizeOptions = [
@@ -64,6 +65,7 @@ function EditReviewSection({content, category}) {
                     <>
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
+                        <EditTitleDesc content={content} />
                         <EditImageIcon content={content} />
                         <OpenCloseCustom title="리뷰 내용" use={content.reviewText}>
                             <div className="box-gray__container">

@@ -43,7 +43,7 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                         style={{
                             fontFamily:`${state.setting.smallFont}`, 
                             color:`${content.desc.color}`, 
-                            fontSize:`${content.desc.size/20}em`, 
+                            fontSize:`${content.desc.size/19}em`, 
                             // boxSizing:`border-box`, 
                             textAlign:`${state.isPhone ? content.mobile.align : content.desc.align}`,
                             resize:'none'

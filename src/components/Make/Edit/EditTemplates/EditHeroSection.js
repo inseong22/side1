@@ -12,6 +12,7 @@ import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
 import Layout from './tools/Layout'
 import Contents from './tools/Contents'
 import AddGhostButton from './tools/AddGhostButton'
+import EditTitleDesc from './tools/EditTitleDesc'
 import AddCtaButton from './tools/AddCtaButton'
 import AddAppButton from './tools/AddAppButton'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
@@ -170,6 +171,7 @@ function EditHeroSection({content, category}) {
                     <>
                     <ElementsTable elements={elements} />
                     <Layout content={content} version='main'/>
+                    <EditTitleDesc content={content} />
                     <Contents content={content} />
                     <OpenCloseCustom title="버튼" use={content.button.use}>
                         <div className="box-gray__container">

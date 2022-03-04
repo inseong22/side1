@@ -26,74 +26,25 @@ function FTemplate({foot, setFoot, history }) {
         return(
             <>
         {foot.icon.facebook !== '' && 
-                    <Facebook color={foot.icon.color} className="footer-icon" 
-                        onClick={()=>{
-                            window.open(
-                                foot.icon.facebook,
-                                '_blank' // <- This is what makes it open in a new window.
-                            );
-                        }}
-                    />
+                    <Facebook color={foot.icon.color} className="footer-icon" />
         }
         {foot.icon.instagram !== '' && 
-                    <Instagram color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.instagram,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
+                    <Instagram color={foot.icon.color} className="footer-icon" />
         }
         {foot.icon.twitter !== '' && 
-                    <Twitter color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.twitter,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
+                    <Twitter color={foot.icon.color} className="footer-icon" />
         }
          {foot.icon.kakaotalk !== '' && 
-                    <KakaoTalk color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.kakaotalk,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
+                    <KakaoTalk color={foot.icon.color} className="footer-icon" />
         }
          {foot.icon.youtube !== '' && 
-                    <Youtube color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.youtube,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
+                    <Youtube color={foot.icon.color} className="footer-icon" />
         }
         {foot.icon.notion !== '' && 
-                    <Notion color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.notion,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
+                    <Notion color={foot.icon.color} className="footer-icon" />
         }
         {foot.icon.linkedIn !== '' && 
-                    <Linkedin color={foot.icon.color} className="footer-icon" 
-                    onClick={()=>{
-                        window.open(
-                            foot.icon.linkedIn,
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
-                    }}
-                    />
+                    <Linkedin color={foot.icon.color} className="footer-icon" />
         }
             </>
         )

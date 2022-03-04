@@ -3,6 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import ElementsTable from './tools/ElementsTable'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import produce from 'immer';
+import EditTitleDesc from './tools/EditTitleDesc'
 import SingleColorCustom from '../tools/Custom/SingleColorCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
@@ -110,6 +111,7 @@ function EditFeaturesSection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <LayoutRFG content={content} />
+                        <EditTitleDesc content={content} />
                         <EditImageIcon content={content} />
                         <OpenCloseCustom title="설명글" use={content.elementText.use}>
                             <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {

@@ -7,14 +7,15 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 function UserNavBar({setting, navi}) {
 
     const CustomButton = (type) => { return (
-        <div className="cta-button-made" 
+        <div className="cta-button-edit" 
             style={{
                 borderRadius:`${setting[type].borderRadius}px`,
                 backgroundColor:`${setting[type].backgroundColor}`,
                 color:`${setting[type].color}`,
                 boxShadow:`${setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
                 border:`${setting[type].border ? `1px solid ${setting[type].borderColor}` : 'none'}`,
-                display: 'block'
+                display: 'block',
+                cursor: 'pointer'
             }} 
             onClick={() => {
                 moveToPage(type)
@@ -25,14 +26,16 @@ function UserNavBar({setting, navi}) {
                 // window.location.href = navi.button.cta.link
             }}>
     
-            <AutosizeInput className="text-input-flex"
+            <AutosizeInput className="text-input-button"
                 value={ navi.button[type].text } 
                 style={{
                     fontFamily:`${setting.smallFont}`,
                     borderRadius:`${setting[type].borderRadius}px`,  
                     backgroundColor:`${setting[type].backgroundColor}`, 
                     textAlign: 'center', 
-                    padding: `${navi.button[type].padding*0.3}px ${navi.button[type].padding}px` 
+                    padding: `${navi.button[type].padding*0.3}px ${navi.button[type].padding}px`,
+                    cursor: 'pointer',
+                    WebkitTextFillColor: `${setting[type].color}`
                 }}
                 disabled
                 />
@@ -57,10 +60,9 @@ function UserNavBar({setting, navi}) {
                 paddingLeft: `${isMobile ? '12px' : 'calc(14vw + 30px)'}`,
                 borderBottom:`${navi.bottomBorder.use ? `1px solid ${navi.bottomBorder.color}` : ''}`, 
                 backgroundColor:`${navi.backgroundColor}`, 
-                height:`${navi.height}px`, position:`${navi.fixed ? 'fixed' : 'relative'}`
-            }}
-            >
-                
+                height:`${navi.height}px`, 
+                position:`${navi.fixed ? 'relative' : 'fixed'}`
+            }} >
             <>
                 <div className="make-nav-logoc" style={{height:`${navi.height}px`, 
                     justifyContent:`${navi.logo.align === 'center' && navi.button.use && !isMobile ? 'right' : navi.logo.align}`,
@@ -85,6 +87,7 @@ function UserNavBar({setting, navi}) {
                                     fontFamily:`${setting.font}`,
                                     resize:'none',
                                     padding: '1px',
+                                    WebkitTextFillColor: `${navi.logo.text.color}`,
                                     marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`,
                                 }}
                             />

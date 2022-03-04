@@ -18,7 +18,7 @@ function Element({content, item}) {
             <div style={{width:`${content.element.size}px`, height:`${content.element.size}px`, position:'relative', cursor:'pointer'}}>
             {
             content.element.type === 'image' ? 
-            <div className="feature-upload-button">
+            <div className="feature-upload-button" style={{cursor:'default'}}>
             { item.attachment ? 
                 <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.imageBorder}px`, objectFit:'cover'}}/> 
                 :
@@ -28,7 +28,7 @@ function Element({content, item}) {
             }
             </div> 
             : 
-            <div className="feature-upload-button" style={{borderRadius:`${content.element.iconBorder}px`, backgroundColor:`${content.element.backgroundColor}`}}>
+            <div className="feature-upload-button" style={{cursor:'default', borderRadius:`${content.element.iconBorder}px`, backgroundColor:`${content.element.backgroundColor}`}}>
                 {item.icon ? 
                     <>{returnIcon(item.icon)}</> 
                     :
