@@ -121,12 +121,24 @@ function Layout({content, version, foot, setFoot}) {
                 )
             case 'text': 
                 return(
-                    <RadioCustom layout='on' version='text' options={layout3Options} value={content.layout} func={(e,align,top,bottom) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].layout = e;
-                        draft[state.secNum].title.align = align;
-                        draft[state.secNum].desc.align = align;
-                        draft[state.secNum].mobile.align = align;
-                    }))} />
+                    <>
+                    { state.isPhone ? 
+                        <>
+                            <RadioCustom layout='on' version='text' options={layout3Options} value={content.mobile.layout} func={(e,align,top,bottom) => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].mobile.layout = e;
+                                draft[state.secNum].mobile.align = align;
+                            }))} />
+                        </> 
+                        :
+                        <>
+                            <RadioCustom layout='on' version='text' options={layout3Options} value={content.layout} func={(e,align,top,bottom) => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].layout = e;
+                                draft[state.secNum].title.align = align;
+                                draft[state.secNum].desc.align = align;
+                            }))} />
+                        </>
+                    }
+                    </>
                 )
             case 'footer':
                 return(
