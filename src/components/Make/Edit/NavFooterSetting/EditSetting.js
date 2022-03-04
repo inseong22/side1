@@ -10,25 +10,17 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import produce from 'immer';
 import AnimationCustom from '../tools/Custom/AnimationCustom'
-import SliderCustom from '../tools/Custom/SliderCustom'
 import AddFaviconImg from '../tools/func/FuncFaviconImg'
 import {Check} from '@styled-icons/bootstrap'
-import {ChevronRight} from '@styled-icons/boxicons-regular'
 import {ChevronDown} from '@styled-icons/bootstrap'
 import OverflowScrolling from 'react-overflow-scrolling';
 import {base} from '../../SectionTypes/baseTypes'
 import {
-    Button,
     ChakraProvider,
     Menu,
     MenuButton,
     MenuList,
     MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
-    ButtonGroup,
   } from '@chakra-ui/react'
 
 const fontOptions = [

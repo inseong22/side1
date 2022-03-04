@@ -5,6 +5,7 @@ import {dbService, stService} from '../../tools/fbase'
 import './MadeLandingCard.css'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {Copy} from '@styled-icons/boxicons-regular'
+import lodash from 'lodash'
 
 function MadeLandingCard({item,published, setCopyOpen, id, index, setNowChecking, nowChecking, history, addNew, num, update, setUpdate}) {
     const [deleteopen, setDeleteOpen] = useState(false)
@@ -48,7 +49,11 @@ function MadeLandingCard({item,published, setCopyOpen, id, index, setNowChecking
         if(num > 2){
             alert("최대 3개의 페이지만 만들 수 있습니다.")
         }else{
-            await dbService.collection("saved-page").add(item);
+            let temp = lodash.cloneDeep(item);
+            temp.urlId = item.urlId + 'copied'
+            temp.setting.urlId = item.setting.urlId + 'copied'
+            temp.created = Date.now();
+            await dbService.collection("saved-page").add(temp);
 
             // await dbService.collection("urlStores").add({urlId:item.setting.urlId});
 
@@ -116,11 +121,11 @@ function MadeLandingCard({item,published, setCopyOpen, id, index, setNowChecking
                     }
                 </div>
             </div>
-            <div className="center-row">
-                <div className="left" style={{fontSize:'0.7em', width:'70%'}}>
+            <div className="center-row" style={{justifyContent: "start"}}>
+                <div className="left" style={{fontSize:'0.7em', width:'70%', wordWrap:'break-word', wordBreak:'break-all'}}>
                     https://surfee.co.kr/#/{item.setting.urlId} 
                     <CopyToClipboard  text={"https://surfee.co.kr/#/"+`${item.setting.urlId}`} onCopy={setCopyOpen}>
-                        <Copy size={15} color="#6B63F7"              
+                        <Copy size={17} color="#6B63F7"              
                         style={{marginLeft:'5px'}}
                         />
                     </CopyToClipboard>

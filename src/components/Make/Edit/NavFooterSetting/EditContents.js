@@ -96,7 +96,7 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                     </div>   
                 </div>
                 <div className="comment">
-                <span style={{fontWeight:'900'}}>드래그 앤 드랍</span>으로 순서를 변경할 수 있습니다
+                <span style={{fontWeight:'900', fontSize:'1.15em'}}>드래그 앤 드랍</span>으로 순서를 변경할 수 있습니다
                 </div>
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">

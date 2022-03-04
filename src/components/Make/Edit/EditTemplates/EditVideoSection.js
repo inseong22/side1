@@ -11,6 +11,7 @@ import SliderCustom from '../tools/Custom/SliderCustom'
 import {CustomSwitch} from '../tools/Custom/OnOffCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import TextSizeCustom from '../tools/func/TextSizeCustom'
+import EditTitleDesc from './tools/EditTitleDesc'
 
 const videoOptions = [
     { label: '업로드', value: 'base'},
@@ -132,6 +133,7 @@ function EditVideoSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
+                        <EditTitleDesc content={content} />
                         <OpenCloseCustom title="동영상" use={content.video.use}>
                             <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
                             {videoType()}

@@ -9,7 +9,12 @@ function MakeFooterV2({full, history, foot, setFoot}) {
     const [isHover, setIsHover] = useState('none');
 
     return (
-        <div className="make-footer" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{width:`${full ? '100%' : '100%'}`}}>
+        <div className="make-footer" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{
+            borderTop:`${state.secNum === 51 ? '1.5px solid #918bff' : 'none'}`,
+            borderBottom:`${state.secNum === 51 ? '1.5px solid #918bff' : 'none'}`,
+            borderLeft:`${state.secNum === 51 ? '1.5px solid #918bff' : '1.5px solid #edf0f3'}`,
+            borderRight:`${state.secNum === 51 ? '1.5px solid #918bff' : '1.5px solid #edf0f3'}`,
+        }}>
             <footer className="make-footer__container" 
             style={{backgroundColor:`${foot.backgroundColor}`, 
             padding:`${

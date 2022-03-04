@@ -15,7 +15,7 @@ function GallerySection({content,setting}) {
                {content.card.use && 
                <FeatureCard section="gallery" content={content} index={index}>
                        {content.element.use && 
-                       <div style={{width:'100%', position:'relative', cursor:'pointer'}}>
+                       <div style={{width:'100%', position:'relative', cursor:'default'}}>
                            { item.attachment ? 
                             <img 
                                 src={item.attachment} 

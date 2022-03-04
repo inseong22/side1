@@ -60,10 +60,9 @@ function UserNavBar({setting, navi}) {
                 paddingLeft: `${isMobile ? '12px' : 'calc(14vw + 30px)'}`,
                 borderBottom:`${navi.bottomBorder.use ? `1px solid ${navi.bottomBorder.color}` : ''}`, 
                 backgroundColor:`${navi.backgroundColor}`, 
-                height:`${navi.height}px`, position:`${navi.fixed ? 'fixed' : 'relative'}`
-            }}
-            >
-                
+                height:`${navi.height}px`, 
+                position:`${navi.fixed ? 'relative' : 'fixed'}`
+            }} >
             <>
                 <div className="make-nav-logoc" style={{height:`${navi.height}px`, 
                     justifyContent:`${navi.logo.align === 'center' && navi.button.use && !isMobile ? 'right' : navi.logo.align}`,

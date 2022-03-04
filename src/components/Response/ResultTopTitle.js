@@ -17,6 +17,21 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
     }
 
     const doPublish = async () => {
+        
+        const urlDatas = await dbService
+            .collection("published-page")
+            .where("urlId", "==", content.urlId)
+            .get(); // uid를 creatorId로 줬었으니까.
+        
+        let urlData = urlDatas.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+        
+        if(urlData.length > 0 && urlData[0].pageId !== content.id ){
+            alert("url을 변경한 후 배포해주시기 바랍니다.");
+            return;
+        }
+
         await dbService
             .collection('published-page')
             .where('pageId', "==", content.id)
@@ -79,8 +94,8 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
                                 <div className="row">
                                     <ResultData data={datas.pageViews + "개"} name="페이지 뷰" />
                                     <ResultData data={datas.users + "명"} name="유입 수" />
-                                    <ResultData data={numOfPerson('apply')*100 / parseInt(datas.users)} name="신청 전환율" type="%"/>
-                                    <ResultData data={numOfPerson('click')*100 / parseInt(datas.users)} name="클릭 전환율" type="%"/>
+                                    <ResultData data={Math.round(numOfPerson('apply')*1000 / parseInt(datas.users)) / 10} name="신청 전환율" type="%"/>
+                                    <ResultData data={Math.round(numOfPerson('click')*1000 / parseInt(datas.users)) / 10} name="클릭 전환율" type="%"/>
                                 </div>
                                 :
                                 <div className="row">

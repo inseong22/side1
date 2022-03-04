@@ -79,7 +79,7 @@ const OpenCloseCustom = (props) => {
             <div className="accordion__title">
               <div className="title_text" style={{color:`${props.color}`, width:'100%', alignItems: 'start'}}>
                 <div className="qna__word" style={{fontFamily:`${props.setting.smallFont}`}}>Q.</div>
-                <div style={{width:'100%'}}>
+                <div style={{width:'100%', marginTop:'3px'}}>
                   <TextAuto 
                     disabled
                     small
@@ -90,7 +90,7 @@ const OpenCloseCustom = (props) => {
                 </div>
               </div> 
             </div>
-            <div className="centera" style={{justifyContent: 'end', width:'20%'}}>
+            <div className="centera" style={{justifyContent: 'flex-end', width:'20%'}}>
               { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
             </div>
           </div>

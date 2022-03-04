@@ -17,7 +17,7 @@ function EditInput({value, func, placeholder, noKorean}) {
 
 export function InputCustom({value, func, placeholder, text, noKorean}) {
     const isNotNumber = (v) => {
-        const regExp = /[a-zA-Z0-9]/g; 
+        const regExp = /[a-z0-9]/g; 
         return regExp.test(v);
     }
 

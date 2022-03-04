@@ -20,6 +20,7 @@ function GallerySection({content,setting}) {
                        <div style={{width:'100%', position:'relative', cursor:'pointer'}}>
                            { item.attachment ? 
                             <img 
+                                className="uphover" 
                                 src={item.attachment} 
                                 style={{
                                     width:'100%',

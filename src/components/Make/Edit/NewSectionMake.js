@@ -17,6 +17,7 @@ import EditSetting from './NavFooterSetting/EditSetting'
 import EditFooterSection from './NavFooterSetting/EditFooterSection'
 import EditContents from './NavFooterSetting/EditContents'
 import BackButton from '../../../tools/img/backButton.png'
+import {Trash} from '@styled-icons/boxicons-solid'
 import './NewSectionMake.css'
 
 const NAVSECNUM = 50;
@@ -50,6 +51,23 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
     const contextValue = {
         stateC: {usedColors},
         actionC : {setUsedColors},
+    }
+
+    const deleteSection = (index) => {
+        if(index === 0){
+            action.setContents([
+                ...state.contents.slice(1,state.contents.length)
+            ])
+        }if(index === state.contents.length){
+            action.setContents([
+                ...state.contents.slice(0,index-1),
+            ])
+        }else{
+            action.setContents([
+                ...state.contents.slice(0,index),
+                ...state.contents.slice(index+1, state.contents.length)
+            ])
+        }
     }
 
     const sectionMakeTable = () => {
@@ -194,12 +212,25 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                 <>
                     <div className="top-bar__fixed">
                         <div className="back__container">
-                            <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                                <span className="back-button">
-                                    <ArrowIosBack size="20" />
-                                </span>
-                                <span className="back-text">
-                                    {content.name}
+                            <div className="centera" style={{width:'50%', justifyContent:'start'}}>
+                                <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                    <span className="back-button">
+                                        <ArrowIosBack size="20" />
+                                    </span>
+                                    <span className="back-text">
+                                        {content.name}
+                                    </span>
+                                </div>
+                            </div>
+                            <div style={{width:'50%',display:'flex', justifyContent:'end', paddingRight:'10px'}}>
+                                <span className="back__container-button" style={{padding:'6px', cursor:'pointer'}} 
+                                    onClick={() => {
+                                        const yes = window.confirm("정말 삭제하시겠습니까?");
+                                        if(yes){
+                                            deleteSection(state.secNum);
+                                        }
+                                    } }>
+                                    <Trash size="20" style={{color:'rgba(105,105,105,1)'}} />
                                 </span>
                             </div>
                         </div>

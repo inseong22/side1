@@ -147,11 +147,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color:white;
+    background-color:#edf0f3;
     z-index: 10;
     overflow:visible;
     border-radius: 0px 0px 20px 20px;
-  }
+    transition-property: none;
+    padding-bottom:20px;
+}
 
 .scroll-container{
     overflow: auto;

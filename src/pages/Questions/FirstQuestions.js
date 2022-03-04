@@ -233,7 +233,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     const nextAndSetDone = async e => {
 
         const urlDatas = await dbService
-            .collection("urlStores")
+            .collection("saved-page")
             .where("urlId", "==", setting.urlId)
             .get(); // uid를 creatorId로 줬었으니까.
         
@@ -311,7 +311,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     }
 
     const isNotNumber = (v) => {
-        const regExp = /[a-zA-Z0-9]/g; 
+        const regExp = /[a-z0-9]/g; 
         return regExp.test(v);
     }
 

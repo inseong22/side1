@@ -172,6 +172,26 @@
     /* box-sizing: border-box; */
 }
 
+.rud-hover:hover{
+    background-color:var(--main-light-gray);
+    border-radius: 3px;
+}
+
+.menu-item{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    text-align:center;
+    width:100%;
+    font-size:0.7em;
+    padding:40px 30px;
+    color:var(--main-dark-gray);
+    border-bottom: none;
+}
+.menu-item:hover{
+    background-color:var(--main-color-soft);
+}
+
 .response__user-datas-top{
     display: flex;
     flex-direction: row;

@@ -5,6 +5,7 @@ import ElementsTable from './tools/ElementsTable'
 import produce from 'immer'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
+import EditTitleDesc from './tools/EditTitleDesc'
 import ColorCustom from '../tools/Custom/ColorCustom'
 
 const layoutOptions = [
@@ -58,6 +59,7 @@ function EditQnaSection({content, category}) {
                         <OpenCloseCustom title="레이아웃" use={true} subtext={state.isPhone ? '모바일' : 'PC'}>
                             <RadioCustom options={layoutOptions} value={content.layout} func={e => changeLayoutOption(e)} />
                         </OpenCloseCustom>
+                        <EditTitleDesc content={content} />
                         <OpenCloseCustom title="QnA" use={content.qna.use}>
                             <RadioCustom text="기본 모양" options={shapeOptions} value={content.qna.shape} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.shape = e;
