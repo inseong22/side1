@@ -40,7 +40,7 @@
     width:28vw;
     background:white;
     z-index:2;
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 0px 20px 0px 0px;
     position:fixed;
     border-bottom:1px solid rgb(233, 233, 233);
 }
