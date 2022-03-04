@@ -20,7 +20,8 @@ function ReturnButton({content, onlyapp}){
 
         <AutosizeInput className="text-input-flex ti" value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } onChange={(e) => action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button[type === "cta" ? 'ctaText' : 'ghostText'] = e.currentTarget.value;
-        }))} inputStyle={{
+        }))} 
+        inputStyle={{
             textAlign: 'center',
             fontSize: `${content.button.textSize}px`,
             fontFamily:`${state.setting.smallFont}`,

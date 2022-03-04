@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './SliderCustom.css'
 import {
   Slider,
@@ -18,6 +18,10 @@ import { RamenDiningOutlined } from '@mui/icons-material';
 
 function SliderCustom({top, text, func, value, max}) {
     const [range, setRange] = useState(value);
+
+    useEffect(() => {
+      setRange(value)
+    }, [value])
 
     return (
       <div className="edit-element slider__container">

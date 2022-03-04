@@ -71,7 +71,7 @@ function EditHeroSection({content, category}) {
             }))
         },
         {
-            title: '앱 다운로드',
+            title: '앱 다운로드 버튼',
             use:content.appButton.use,
             func:() => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].appButton.use = !content.appButton.use;

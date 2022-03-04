@@ -87,14 +87,6 @@ function EditReviewSection({content, category}) {
                                 }))} />
                             </div>
                             <div className="box-gray__container">
-                                <OnOffCustom text="내용" value={content.elementText.use} func={(e) => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].elementText.use = !content.elementText.use;
-                                }))} />
-                                <TextSizeCustom text="내용 크기" elementDesc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].elementText.size = e;
-                                }))} />
-                            </div>
-                            <div className="box-gray__container">
                                 <OnOffCustom text="별점" value={content.rating.use} func={(e) => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].rating.use = !content.rating.use;
                                 }))} />
@@ -103,6 +95,14 @@ function EditReviewSection({content, category}) {
                                 }))} />
                                 <RadioCustom text="크기" value={content.rating.size} options={ratingSizeOptions} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].rating.size = e;
+                                }))} />
+                            </div>
+                            <div className="box-gray__container">
+                                <OnOffCustom text="내용" value={content.elementText.use} func={(e) => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.use = !content.elementText.use;
+                                }))} />
+                                <TextSizeCustom text="내용 크기" elementDesc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.size = e;
                                 }))} />
                             </div>
                             <>

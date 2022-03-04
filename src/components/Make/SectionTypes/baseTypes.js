@@ -52,6 +52,7 @@ const commons = {
         align:'center',
         layout:1,
         contentSize:50,
+        cardSize: 100,
     }
 }
 

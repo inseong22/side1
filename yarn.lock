@@ -8212,6 +8212,19 @@
   "integrity" "sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ=="
   "version" "1.1.0"
 
+"hex-to-hsl@^1.0.2":
+  "integrity" "sha1-1cWezgAXhEToIcj8WKQwr8CYMcI="
+  "resolved" "https://registry.npmjs.org/hex-to-hsl/-/hex-to-hsl-1.0.2.tgz"
+  "version" "1.0.2"
+  dependencies:
+    "hex-to-rgb" "^1.0.1"
+    "rgb-to-hsl" "0.0.2"
+
+"hex-to-rgb@^1.0.1":
+  "integrity" "sha1-EAud8SazLydirfhIa+aMZe+O0qQ="
+  "resolved" "https://registry.npmjs.org/hex-to-rgb/-/hex-to-rgb-1.0.1.tgz"
+  "version" "1.0.1"
+
 "hey-listen@^1.0.8":
   "integrity" "sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q=="
   "version" "1.0.8"
@@ -13779,6 +13792,11 @@
 "rgb-regex@^1.0.1":
   "integrity" "sha1-wODWiC3w4jviVKR16O3UGRX+rrE="
   "version" "1.0.1"
+
+"rgb-to-hsl@0.0.2":
+  "integrity" "sha1-Nvn8KGN2uQrMRX5pkAW0y0LTUOw="
+  "resolved" "https://registry.npmjs.org/rgb-to-hsl/-/rgb-to-hsl-0.0.2.tgz"
+  "version" "0.0.2"
 
 "rgba-regex@^1.0.0":
   "integrity" "sha1-QzdOLiyglosO8VI0YLfXMP8i7rM="

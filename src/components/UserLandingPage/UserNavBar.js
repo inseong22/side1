@@ -35,7 +35,8 @@ function UserNavBar({setting, navi}) {
                     textAlign: 'center', 
                     padding: `${navi.button[type].padding*0.3}px ${navi.button[type].padding}px`,
                     cursor: 'pointer',
-                    WebkitTextFillColor: `${setting[type].color}`
+                    WebkitTextFillColor: `${setting[type].color}`,
+                    WebkitOpacity: 1,
                 }}
                 disabled
                 />
@@ -88,6 +89,7 @@ function UserNavBar({setting, navi}) {
                                     resize:'none',
                                     padding: '1px',
                                     WebkitTextFillColor: `${navi.logo.text.color}`,
+                                    WebkitOpacity: 1,
                                     marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`,
                                 }}
                             />

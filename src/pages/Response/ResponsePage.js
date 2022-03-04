@@ -142,7 +142,11 @@ function ResponsePage({userObj, history}) {
                 <div className="get-all-container">
                     <div className="get-up-container">
                         <div className="get-up-title">
-                            {userObj.displayName} 님의 랜딩페이지를 관리해 보세요 :)
+                            {
+                                userObj.displayName ? <>{userObj.displayName} 님의 랜딩페이지를 관리해 보세요 :)</>
+                                : <>제작한 랜딩페이지를 관리해 보세요 :)</>
+                            }
+                            
                             {
                                 mylandings.length > 2 &&
                                <span className="response-subtext">현재 버전에서 랜딩페이지는 최대 3개까지 만들 수 있습니다. 새로운 페이지를 만들고 싶다면 기존의 페이지를 삭제해 주세요.</span>
