@@ -82,6 +82,11 @@ function LoginModal({open, setOpen}) {
             data = await authService.signInWithEmailAndPassword(
                 id, password
             )
+            if(!data.user.multiFactor.user.emailVerified){
+                alert("이메일 인증이 완료되지 않았습니다!");
+                authService.signOut();
+                return;
+            }
             checkRegister(data.user.multiFactor.user.email)
         } catch (err){
             console.log(err)

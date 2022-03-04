@@ -6,6 +6,7 @@
     align-items:center;
     width:100%;
     flex-direction:column;
+    font-family: Noto Sans KR;
 }
 
 .get-all-container{
@@ -145,6 +146,7 @@
     align-items : center;
     justify-content: start;
     flex-direction:row;
+    flex-wrap:wrap;
 }
 
 .response-down__container{

@@ -71,11 +71,15 @@ function RegisterModal({open, setOpen, history}) {
     const submit = async (e) => {
         var data = '';
         e.preventDefault();
-        try{
-            data = await authService.createUserWithEmailAndPassword(
-                id, password
-            )
-        } catch (err){
+        await authService.createUserWithEmailAndPassword(id , password)
+        .then(async (userCredential)=>{
+            // send verification mail.
+            await userCredential.user.sendEmailVerification();
+            authService.signOut();
+            alert("계정 인증용 이메일을 발송했습니다.");
+            return userCredential;
+        })
+        .catch( err => {
             if(err.code === "auth/email-already-in-use"){
                 alert("이미 존재하는 아이디입니다. 로그인 해 주세요.");
                 setOpen(false)
@@ -86,7 +90,7 @@ function RegisterModal({open, setOpen, history}) {
                 alert("옳바르지 않은 회원가입 시도입니다.");
             }
             return;
-        }
+        });
         setOpen(false)
         history.push('/');
         history.go();
@@ -128,7 +132,7 @@ function RegisterModal({open, setOpen, history}) {
                     </div>
                     <button className="google-login-button opacity-hover" name="googleLogin" onClick={e => socialLogin(e)} style={{marginTop:'2%'}}>
                         <img src={googlelogo} width={20}/>
-                        <span style={{marginLeft:'5%'}}>구글아이디로 이용하기</span>
+                        <span style={{marginLeft:'5%'}}>구글아이디로 3초만에 가입하기</span>
                     </button>
                     <div style={{fontSize:'12px', color:'rgba(150,150,150,1)', marginTop:'8px'}}>
                         위 버튼을 클릭하면 <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" target="_blank">약관</a>에 동의한 것으로 간주하고<br/> 자동으로 회원가입/로그인이 진행됩니다.
@@ -146,6 +150,11 @@ function RegisterModal({open, setOpen, history}) {
                         />
                         <div className="login-label">
                             비밀번호
+                            { password.length < 6 && password.length > 0 &&
+                                <div className="text-alarm" style={{marginLeft:'5px'}}>
+                                    비밀번호는 6글자 이상으로 설정하셔야 합니다.
+                                </div>
+                            }
                         </div>
                         <Input  
                             type="password" 
