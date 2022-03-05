@@ -114,7 +114,6 @@ const UserLandingPage = (props) => {
                     }}>
                     <TextareaAutosize 
                         className='text-no-input'  
-                        placeholder="플로팅 버튼입니다!"
                         value={setting.fta.text} 
                         disabled
                         style={{

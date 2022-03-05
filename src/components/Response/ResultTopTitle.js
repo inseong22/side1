@@ -44,7 +44,7 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
                             created:Date.now(),
                         }
                         await dbService.collection('published-page').add(body)
-                        alert("첫 배포가 완료되었습니다.")
+                        alert("첫 배포가 완료되었습니다! 페이지 수정을 원하시면 ‘편집하기'를 눌러 편집 후 ‘저장하기'를 누르고, 관리 페이지에서 ‘배포하기'를 다시 눌러주세요. 저장만 한 경우 수정사항이 반영되지 않습니다.")
                         history.go();
                     }else{
                         let body = {

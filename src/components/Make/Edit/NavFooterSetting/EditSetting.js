@@ -66,7 +66,7 @@ const sizeOptions = [
 ]
 
 function EdtiSetting({setting, setSetting, category, setContents}) {
-    const [isFontOpen, setIsFontOpen] = useState(false)
+    const [alarm, setAlarm] = useState(false);
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     // 애니메이션 관련 
@@ -185,6 +185,11 @@ function EdtiSetting({setting, setSetting, category, setContents}) {
         )
     }
 
+    const isNotNumber = (v) => {
+        const regExp = /[a-z0-9]/g; 
+        return regExp.test(v);
+    }
+    
     const returnTable = () => {
         switch(category){
             case 0:
@@ -207,13 +212,23 @@ function EdtiSetting({setting, setSetting, category, setContents}) {
                                         https://surfee.co.kr/#/
                                     </div>
                                     <div>
-                                        <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) => setSetting(produce(setting, draft => {
-                                            draft.urlId = e;
-                                        }))}/>
+                                        <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) =>  {
+                                                console.log("요")
+                                            if (isNotNumber(e.nativeEvent.data)){ 
+                                                setAlarm(false)
+                                                setSetting(produce(setting, draft => {
+                                                    draft.urlId = e.currentTarget.value
+                                                }))
+                                            }else{
+                                                console.log("안돼요")
+                                                setAlarm(true)
+                                                e.preventDefault(); 
+                                                return null; 
+                                            }}}/>
                                     </div>
                                 </div>
                             </div>
-                                <div style={{width:'90%', justifyContent:'center', fontSize:'12px', marginBottom:'16px'}}>
+                                <div style={{width:'90%', justifyContent:'center', fontSize:'12px', marginBottom:'16px', color:`${alarm ? 'red' : 'black'}`}}>
                                     * 영문 소문자와 숫자만 입력 가능합니다.
                                 </div>
                         </OpenCloseCustom>
