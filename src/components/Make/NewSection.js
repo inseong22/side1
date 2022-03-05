@@ -131,11 +131,13 @@ function NewSection({elementRef, setting, content, index, secNum, setSecNum, isP
                     </div>
                 }
                 <div className="section__container-inner"
-                    style={{padding:`${
-                        isPhone ? content.padding.top/2.5 : content.padding.top}vh 
+                    style={{padding:
+                        `
+                        ${isPhone ? content.padding.top/2.5 : content.padding.top}vh 
                         ${full ? 'calc(14vw + 30px)' : `${isPhone ? '15px' : '30px'}`} 
-                        ${isPhone ? content.padding.top/2.5 : content.padding.bottom}vh 
-                        ${full ? 'calc(14vw + 30px)' : `${isPhone ? '15px' : '30px'}`} `}} >
+                        ${isPhone ? content.padding.bottom/2.5 : content.padding.bottom}vh 
+                        ${full ? 'calc(14vw + 30px)' : `${isPhone ? '15px' : '30px'}`}
+                        `}} >
                     {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                     {returnType()}
                 </div>

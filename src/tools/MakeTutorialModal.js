@@ -9,6 +9,7 @@ import Info4 from '../tools/info/editTutorial/4.png'
 import Info5 from '../tools/info/editTutorial/5.png'
 import Info6 from '../tools/info/editTutorial/6.png'
 import Info7 from '../tools/info/editTutorial/7.png'
+import bgcolor from '../tools/info/sky.svg'
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -31,20 +32,27 @@ const Backdrop = styled('div')`
   left: 0;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-tap-highlight-color: transparent;
+
 `;
 
 const style = {
-  width: 700,
-  height: 500,
-  bgcolor: 'rgba(255,255,255,1)',
-  borderRadius:2,
-  p: 2,
-  px: 4,
-  pb: 3,
+    width: 700,
+    height: 500,
+    bgcolor: 'rgba(255,255,255,1)',
+    borderRadius:2,
+    p: 2,
+    px: 4,
+    pb: 3,
+    backgroundImage:`url(${bgcolor})`,
+    objectFit:'cover',
+    backgroundSize:'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
 };
+
 const Desc = styled('div')`
     margin-top:12px;
-    font-size:14px;
+    font-size:16px;
     text-align:center;
 `;
 
@@ -88,11 +96,11 @@ function MakeTutorialModal({open, setOpen}) {
                     <div className="card-container">
                         <div className="card">
                             <img className="card-img" src={Info3} alt="3" />
-                            <Desc>페이지 수정을 위해서 디자인은 왼쪽의 제작화면에서,</Desc>
+                            <Desc>페이지 수정을 위해서 디자인은<br/>왼쪽의 제작화면에서,</Desc>
                         </div>
                         <div className="card">
                             <img className="card-img" src={Info4} alt="4" />
-                            <Desc>글과 아이콘 등은 오른쪽의 화면에서 수정할 수 있습니다.</Desc>
+                            <Desc>글과 아이콘 등은<br/>오른쪽의 화면에서 수정할 수 있습니다.</Desc>
                         </div>
                     </div>
                 </div>)
@@ -115,7 +123,7 @@ function MakeTutorialModal({open, setOpen}) {
                     <div className="card-container">
                         <div className="card">
                             <img className="card-img" src={Info7} alt="7" />
-                            <Desc>제작 완료 시 오른쪽 위의 저장하기를 눌러 페이지를 저장하면 제작이 완료됩니다.</Desc>
+                            <Desc>제작 완료 시 오른쪽 위의 저장하기를 눌러 페이지를 저장하고<br/>관리페이지에서 배포할 수 있습니다.</Desc>
                         </div>
                     </div>
                 <div className="sub-text">

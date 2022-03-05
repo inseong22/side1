@@ -4,13 +4,14 @@ import './MainPageV2.css'
 import {Link} from 'react-router-dom';
 import { dbService } from '../../tools/fbase'
 import Footer from '../NavAndFooter/Footer'
+import NavBarV2 from '../NavAndFooter/NavBarV2'
 import { motion } from "framer-motion"
 import AskLoginModal from './tools/AskLoginModal'
-import NavBarV2 from '../NavAndFooter/NavBarV2'
 import RegisterModal from '../../components/Login/RegisterModal'
 import ChannelTalk from '../../tools/ChannelTalk'
 import {detect} from 'detect-browser'
 import {isMobile} from 'react-device-detect'
+import {LandingPageExamples} from '../ExamplePage/ExamplePage'
 import "@lottiefiles/lottie-player";
 
 import {DeveloperBoardOff, Animation, DesignServices} from '@styled-icons/material';
@@ -255,6 +256,18 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                         개발자에게 요청할 필요없이 직접 확인해 보세요.
                     </span>
                 </div>
+            </div>
+            <div className="main-page-section1" style={{paddingTop:'30px', flexDirection:'column'}}>
+                <div className="main-section-left-topbottom" style={{color:'black', marginTop:'10px'}}>
+                    <span className="one-section-big osb2" style={{textAlign: 'center'}}>
+                        <span style={{color:'#6c63ff'}}>Surfee</span> 활용 예시
+                    </span>
+                    <span className="one-section-small" style={{textAlign: 'center'}}>
+                        목적에 따라 마음에 드는 디자인을<br/>
+                        선택만 하면, 랜딩페이지 완성!
+                    </span>
+                </div>
+                <LandingPageExamples />
             </div>
             <div className="main-page-section1" style={{flexDirection: "column", position:'relative'}}>
                 <lottie-player

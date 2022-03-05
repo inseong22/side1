@@ -25,9 +25,9 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
                     <Link to="/" className="nav-bar-title-v2" style={{cursor:'pointer', color:'#6a63f7'}}>
                         Surfee
                     </Link>
-                    {/* <Link to="/info" className="nav-left-text" style={{marginLeft:'4vw'}}>
-                        제품소개
-                    </Link> */}
+                    <Link to="/surfeeexamples" className="nav-left-text" style={{marginLeft:'4vw'}}>
+                        제작 예시
+                    </Link>
                 </div>
                 <div className="nav-on-v2">
                     {isLoggedIn ? 
