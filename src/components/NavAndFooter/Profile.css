@@ -1,0 +1,23 @@
+.profile__image{
+    width:33px;
+    height:33px;
+    border-radius: 50%;
+}
+
+.profile__menu-item{
+    color:black;
+    font-size:0.9em;
+    padding:11px;
+}
+
+.profile__icon{
+    width:19px;
+    margin:2px;
+    margin-right:10px;
+    font-weight: 700;
+    /* color:var(--main-color); */
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}

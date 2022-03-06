@@ -7,8 +7,6 @@ import {
     MenuItem,
   } from '@chakra-ui/react'
   import {ChevronDown} from '@styled-icons/bootstrap'
-import {InputCursorText, CheckAll} from '@styled-icons/bootstrap'
-import {CursorClick} from '@styled-icons/fluentui-system-filled'
 
 function ResultTable({responses, nowChecking, index}) {
     const [type, setType] = useState({name : '전체', value:'all'})

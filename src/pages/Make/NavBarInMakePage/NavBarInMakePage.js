@@ -24,7 +24,7 @@ import {
     PopoverArrow,
   } from '@chakra-ui/react'
 import {QuestionCircle} from '@styled-icons/bootstrap'
-
+import Profile from '../../../components/NavAndFooter/Profile'
 
 const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone, loading, foot, editing,setEditing, setEditingId, editingId, setLoading, setting, navi, setNavi, saveLocalStorage}) => {
     const [loginModal, setLoginModal] = useState(false)
@@ -382,7 +382,7 @@ const afterSaveImage = async (returned) => {
     return (
         <ChakraProvider>
             <div className="make-page-nav">
-                <div className="make-page-nav-half" style={{justifyContent: 'start', marginLeft:'1%'}}>
+                <div className="response-nav-triple-start" style={{justifyContent: 'start', marginLeft:'1%'}}>
                     <span className={state.secNum === 52 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(52); 
                     }} >
@@ -397,21 +397,22 @@ const afterSaveImage = async (returned) => {
                         사용 방법 <QuestionCircle size="13" color="rgba(0,0,0,0.5)" style={{marginLeft:'4px'}} />
                     </span>
                 </div>
-                <div className="make-page-nav-half">
+                <div className="response-nav-triple" style={{width:'35%'}}>
                     <div className="centera">
                         <Button onClick={() => moveToMain()} className="edit-nav-home-button">
                             Surfee
                         </Button>
                     </div>
                 </div>
-                <div className="make-page-nav-half" style={{justifyContent: 'flex-end', marginRight:'1%'}}>
+                <div className="response-nav-triple-end" style={{justifyContent: 'flex-end', marginRight:'1%'}}>
                     {deviceSelect()}
                     <Button onClick={() => onSubmit()} className="default-button-02">
                         저장하기
                     </Button>
-                    <Button onClick={() => goSetup()} className="default-button-01 opacity-hover" style={{border:`1px solid var(--main-color-soft)`, color:'#6c63ff', margin:'0px 5px'}}>
+                    {/* <Button onClick={() => goSetup()} className="default-button-01 opacity-hover" style={{border:`1px solid var(--main-color-soft)`, color:'#6c63ff', margin:'0px 5px'}}>
                         관리페이지
-                    </Button>
+                    </Button> */}
+                    <Profile make />
                 </div>
             </div>
             <LoginModal open={loginModal} setOpen={setLoginModal} />

@@ -49,15 +49,13 @@ function SliderCustom({top, text, func, value, max}) {
                 </Slider>
                 {/* <NumberInput className="number-input" size='md' maxW='50px' step={1} max={max ? max : 100} value={range} onChange={e => {func(e); setRange(e)}}> */}
                 <input className="number-input" type="number" value={range} min={1} max={max ? max : 100} onChange={e => {
-                  setRange(e.currentTarget.value);
-                  if(range <= max){
-                    func(e.currentTarget.value);
-                  }
-                  else{
-                    func(max)
-                  }
+                  func(e.currentTarget.value);
+                // if(range <= max){
+                //   //   // setRange(e.currentTarget.value);
+                //   } else{
+                //     func(max)
+                //   }
                   }}/>
-
             </ChakraProvider>
           </div>
             {/* {
