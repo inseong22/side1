@@ -12,13 +12,7 @@ import TextSection from './SectionTypes/TextSection'
 import MockupSection from './SectionTypes/MockupSection'
 import VideoSection from './SectionTypes/VideoSection'
 
-import {animations} from './tools/animations'
 import './NewSection.css'
-import { motion } from 'framer-motion'
-import {Delete, Options} from '@styled-icons/fluentui-system-filled'
-import produce from 'immer'
-
-import styled from "styled-components";
 
 function NewSection({elementRef, setting, content, index, secNum, setSecNum, isPhone, setCategory, setContents, full}) {
     const [isHover, setIsHover] = useState('none');

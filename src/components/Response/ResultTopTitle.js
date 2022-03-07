@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {Link } from 'react-router-dom'
 import gadata from '../../tools/datacodes/gadata.json'
-import { Tooltip, ChakraProvider } from '@chakra-ui/react'
+import { Tooltip, ChakraProvider, Button } from '@chakra-ui/react'
 import { InformationCircle } from '@styled-icons/ionicons-outline';
 import {dbService} from '../../tools/fbase';
 import './ResultTopTitle.css'
@@ -119,17 +119,18 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
                         item:content,
                     }}} 
                     className="default-button-01 opacity-hover" style={{marginLeft:'15px'}}>편집하기</Link>
-                <div className="default-button-02" style={{marginLeft:'15px'}} 
-                onClick={() => {
-                    if(localStorage.getItem('feedback'))
-                    {
-                        doPublish();
-                    }
-                    else{
-                        setFeedbackOpen(true)
-                    }
-                }}
-                    >배포하기</div>
+                <Button className="default-button-02" style={{marginLeft:'15px'}} colorScheme="6c63ff"
+                    onClick={() => {
+                        if(localStorage.getItem('feedback'))
+                        {
+                            doPublish();
+                        }
+                        else{
+                            setFeedbackOpen(true)
+                        }
+                    }}>
+                    배포하기
+                </Button>
             </div>
         </span>
     </div>

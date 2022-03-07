@@ -49,7 +49,7 @@
        
          $(document).ready(
               function() {
-                  logger.disableLogger();
+                  // logger.disableLogger();
                   console.log('콘솔 로그가 다시 찍힌다.');
               }
           );
@@ -65,17 +65,17 @@
     <div id="root"></div>
 
     <!-- Usetiful script start -->
-      <script>
-        (function (w, d, s) {
-          var a = d.getElementsByTagName('head')[0];
-          var r = d.createElement('script');
-          r.async = 1;
-          r.src = s;
-          r.setAttribute('id', 'usetifulScript');
-          r.dataset.token = "72cff1a0d5088f1865159a738121aec2";
-                  a.appendChild(r);
-        })(window, document, "https://www.usetiful.com/dist/usetiful.js");
-      </script>
+    <script>
+      (function (w, d, s) {
+        var a = d.getElementsByTagName('head')[0];
+        var r = d.createElement('script');
+        r.async = 1;
+        r.src = s;
+        r.setAttribute('id', 'usetifulScript');
+        r.dataset.token = "72cff1a0d5088f1865159a738121aec2";
+                a.appendChild(r);
+      })(window, document, "https://www.usetiful.com/dist/usetiful.js");
+    </script>
     <!-- Usetiful script end -->
 
   </body>

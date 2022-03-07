@@ -12,7 +12,7 @@ import {
 import './Profile.css'
 import profileImage from '../../tools/img/main/profile.png'
 import {BarGraph} from '@styled-icons/entypo'
-import {QuestionCircle} from '@styled-icons/bootstrap'
+import {QuestionAnswer} from '@styled-icons/material'
 import {LogOutCircle} from '@styled-icons/boxicons-regular'
 import {authService} from '../../tools/fbase'
 import {Link} from 'react-router-dom'
@@ -24,8 +24,6 @@ function Profile({make}) {
     const {state, action} = useContext(UserContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [loginModal, setLoginModal] = useState(false)
     const [confirm, setConfirm] = useState(false)
-
-    console.log(state);
 
     const onLogout = () => {
         authService.signOut();
@@ -88,11 +86,11 @@ function Profile({make}) {
                         </MenuItem>
                         <MenuItem className="profile__menu-item" onClick={() => {
                                 window.open(
-                                    'https://surfee.channel.io',
+                                    'https://tally.so/r/wMZ4Yn',
                                     '_blank'
                                 )
                             }}> 
-                            <QuestionCircle className="profile__icon"/> 문의하기
+                            <QuestionAnswer className="profile__icon"/> 문의하기
                         </MenuItem>
                         <MenuItem className="profile__menu-item"> 
                         {

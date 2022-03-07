@@ -42,7 +42,7 @@ function Element({content, item, index, gallery}) {
             <div style={{width:`${content.element.size}px`, height:`${content.element.size}px`, position:'relative', cursor:'pointer'}}>
             {
             content.element.type === 'image' ? 
-            <div className="feature-upload-button uphover">
+            <div className="feature-upload-button border-hover">
             { item.attachment ? 
                 <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.imageBorder}px`, objectFit:'cover'}}/> 
                 :
@@ -82,7 +82,7 @@ function Element({content, item, index, gallery}) {
                 isOpen={open[index]}
                 onClose={() => handleClose(index)}>
             <PopoverTrigger>
-                    <div className="feature-upload-button uphover" style={{borderRadius:`${content.element.iconBorder}px`, backgroundColor:`${content.element.backgroundColor}`}} onClick={() => handleClick(index)}>
+                    <div className="feature-upload-button border-hover" style={{borderRadius:`${content.element.iconBorder}px`, backgroundColor:`${content.element.backgroundColor}`}} onClick={() => handleClick(index)}>
                         {item.icon ? 
                             <>{returnIcon(item.icon)}</> 
                             :

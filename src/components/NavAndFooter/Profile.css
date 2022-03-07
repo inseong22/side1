@@ -15,7 +15,7 @@
     margin:2px;
     margin-right:10px;
     font-weight: 700;
-    /* color:var(--main-color); */
+    color:var(--main-dark-gray);
 }
 .flex-column{
     display: flex;

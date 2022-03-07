@@ -55,8 +55,6 @@ function ResultTable({responses, nowChecking, index}) {
         }
     }
     
-    console.log(responses[nowChecking].filter(doc => type.value === 'all' || doc.type === type.value))
-
     return (
         <ChakraProvider>
             <div className="response-table-middle">

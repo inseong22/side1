@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { Button } from 'antd';
+// import { Button } from 'antd';
 import './MakeNavBar.css';
 import { MyContext } from '../MakePageV2'
 import {Monitor} from '@styled-icons/feather'
@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {Settings} from '@styled-icons/ionicons-sharp'
 import {DocumentOnePage} from '@styled-icons/fluentui-system-filled'
 import lodash from 'lodash'
+import "@lottiefiles/lottie-player";
 import produce from 'immer'
 import {
     ChakraProvider,
@@ -22,6 +23,7 @@ import {
     PopoverContent,
     PopoverBody,
     PopoverArrow,
+    Button,
   } from '@chakra-ui/react'
 import {QuestionCircle} from '@styled-icons/bootstrap'
 import Profile from '../../../components/NavAndFooter/Profile'
@@ -32,6 +34,7 @@ const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone,
     const [deviceOpen, setDeviceOpen] = useState(false);
     const [tutorialOpen, setTutorialOpen] = useState(false);
     const [saveOpen, setSaveOpen] = useState(false);
+    const [saveLoading, setSaveLoading] = useState(false);
   
     const handleClick = () => {
         setDeviceOpen(!deviceOpen);
@@ -282,11 +285,13 @@ const afterSaveImage = async (returned) => {
             alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
             setLoginModal(true);
         }else{
-            setLoading(true);        
-            saveLocalStorage();
-            const returned = await saveImages();
-            await afterSaveImage(returned);
-            setLoading(false);
+            setSaveLoading(true);
+            setTimeout(async () => {
+                saveLocalStorage();
+                const returned = await saveImages();
+                await afterSaveImage(returned);
+                setSaveLoading(false);
+            }, 250)
         }
     }
     const goSetup = async () => {
@@ -399,19 +404,19 @@ const afterSaveImage = async (returned) => {
                 </div>
                 <div className="response-nav-triple" style={{width:'35%'}}>
                     <div className="centera">
-                        <Button onClick={() => moveToMain()} className="edit-nav-home-button">
+                        <div onClick={() => moveToMain()} className="edit-nav-home-button">
                             Surfee
-                        </Button>
+                        </div>
                     </div>
                 </div>
                 <div className="response-nav-triple-end" style={{justifyContent: 'flex-end', marginRight:'1%'}}>
                     {deviceSelect()}
-                    <Button onClick={() => onSubmit()} className="default-button-02">
+                    <Button fontSize="14px" colorScheme='#6c63ff' isLoading={saveLoading} onClick={() => onSubmit()} className="default-button-02">
                         저장하기
                     </Button>
-                    {/* <Button onClick={() => goSetup()} className="default-button-01 opacity-hover" style={{border:`1px solid var(--main-color-soft)`, color:'#6c63ff', margin:'0px 5px'}}>
+                    <Button fontSize="14px" variant='outline' colorScheme='#6c63ff' onClick={() => goSetup()} className="default-button-01 opacity-hover" style={{margin:'0px 5px'}}>
                         관리페이지
-                    </Button> */}
+                    </Button>
                     <Profile make />
                 </div>
             </div>

@@ -258,7 +258,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     </span>
                 </div>
             </div>
-            <div className="main-page-section1" style={{paddingTop:'30px', flexDirection:'column'}}>
+            <div className="main-page-section1" style={{padding:'30px 0px', flexDirection:'column'}}>
                 <div className="main-section-left-topbottom" style={{color:'black', marginTop:'10px'}}>
                     <span className="one-section-big osb2" style={{textAlign: 'center'}}>
                         <span style={{color:'#6c63ff'}}>Surfee</span> 활용 예시
