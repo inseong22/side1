@@ -87,12 +87,12 @@ const OpenCloseCustom = (props) => {
                 <div style={{width:'100%', marginTop:'3px'}}>
                   <TextAuto 
                     small
+                    size={0.9}
                     value={props.title} 
                     onChange={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
                     }))}
                     color={props.color} align="start"
-                    size={props.content.qna.questionSize/20}
                     placeholder="여기를 클릭하여 자주 묻는 질문을 적어보세요."
                     />
                 </div>

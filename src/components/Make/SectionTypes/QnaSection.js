@@ -20,6 +20,7 @@ function QnaSection({content, setting}) {
                     <div style={{marginTop:'4px', width:`${state.isPhone ? '85.6%' : '91.6%'}`}}>
                         <TextAuto
                             small
+                            size={0.9}
                             placeholder="여기를 클릭하여 자주 묻는 질문의 답변을 적어보세요."
                             value={item.answer} 
                             onChange={e => action.setContents(produce(state.contents, draft => {

@@ -232,8 +232,6 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     }
     const nextAndSetDone = async e => {
 
-        console.log("잘 불러옴 ㅏㅇ님",)
-            
         const urlDatas = await dbService
             .collection("saved-page")
             .where("urlId", "==", setting.urlId)
@@ -259,24 +257,26 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
             let defaultTemplate = defaults.docs.map(doc => {
                 return({...doc.data(), id:doc.id})
             });
+
+            let opacityColor = color + '95';
     
             defaultTemplate[0].navi.title = title;
             defaultTemplate[0].setting.title = title;
             defaultTemplate[0].setting.cta.backgroundColor = color;
+            defaultTemplate[0].setting.color = opacityColor;
             defaultTemplate[0].setting.fta.backgroundColor = color;
             defaultTemplate[0].setting.ghost.borderColor = color;
             defaultTemplate[0].setting.ghost.color = color;
             defaultTemplate[0].setting.urlId = setting.urlId;
             defaultTemplate[0].setting.font = font;
             defaultTemplate[0].foot.copyright.text = title;
-            defaultTemplate[0].foot.icon.color = color;
 
             defaultTemplate[0].contents = defaultTemplate[0].contents.map((doc, index) => {
                 if(doc.sectionTypeName === 'CtaSection' || doc.sectionTypeName === 'ApplySection' || doc.sectionTypeName === 'AppDownloadSection' ){
-                    doc.backgroundColor = color;
+                    doc.backgroundColor = opacityColor;
                 }
                 if(index === 1 && doc.sectionTypeName === 'TextSection' ){
-                    doc.backgroundColor = color;
+                    doc.backgroundColor = opacityColor;
                 }
                 return doc;
             })
@@ -517,7 +517,6 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                             <div className="modal-button-container">
                                 <div className="modal-move-button-back" onClick={e => setCnum(cnum - 1)}>이전</div>
                                 <div className="modal-move-button" onClick={() => {
-                                    console.log("콘솔 뜬다")
                                     nextAndSetDone();
                                 }}>시작하기</div>
                             </div>

@@ -213,14 +213,12 @@ function EdtiSetting({setting, setSetting, category, setContents}) {
                                     </div>
                                     <div>
                                         <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) =>  {
-                                                console.log("요")
                                             if (isNotNumber(e.nativeEvent.data)){ 
                                                 setAlarm(false)
                                                 setSetting(produce(setting, draft => {
                                                     draft.urlId = e.currentTarget.value
                                                 }))
                                             }else{
-                                                console.log("안돼요")
                                                 setAlarm(true)
                                                 e.preventDefault(); 
                                                 return null; 

@@ -5,6 +5,7 @@
     border-radius:30px;
     cursor:pointer;
     box-shadow: 5px 8px 10px rgba(50,50,50,0.3);
+    z-index:5;
 }
 
 @media screen and (max-width:800px){

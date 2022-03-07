@@ -20,7 +20,7 @@ export function InputCustom({value, func, placeholder, text, noKorean}) {
         if(noKorean){
             func(e)
         }else{
-            func(e)
+            func(e.currentTarget.value)
         }
     }
 

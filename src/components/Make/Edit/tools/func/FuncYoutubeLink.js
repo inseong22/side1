@@ -21,7 +21,8 @@ function FuncYoutubeLink({content}) {
             action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].video.link = submitLink+'?autoplay=1'+'&mute=1'
                 draft[state.secNum].image.slide = false
-                draft[state.secNum].video.use = false
+                draft[state.secNum].video.use = true
+                draft[state.secNum].video.type = 'youtube'
                 draft[state.secNum].image.slide = false
                 draft[state.secNum].image.use = false 
             }))
@@ -33,9 +34,9 @@ function FuncYoutubeLink({content}) {
         <form className="center-row">
             <div className="centera" style={{justifyContent:'start', marginTop:'12px'}}>
                     <input className="apply-input" type='text' placeholder="유튜브 링크를 입력해 주세요."
-                     onChange={e => setText(e.currentTarget.value)} 
-                     value={text}
-                     onKeyPress={e => onYoutube(e)}
+                        onChange={e => setText(e.currentTarget.value)} 
+                        value={text}
+                        onKeyPress={e => onYoutube(e)}
                     >
                     </input>
                     <input type="button" value="입력" className="content__button" style={{zIndex:4, marginLeft:'-65px'}} onClick={(e) => {

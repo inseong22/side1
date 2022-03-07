@@ -28,7 +28,7 @@ const Backdrop = styled('div')`
 `;
 
 const style = {
-  width: '30vw',
+  width: '33vw',
   height: '30vh',
   bgcolor: 'rgba(255,255,255,1)',
   border: '0px solid #000',
@@ -41,6 +41,7 @@ const style = {
   alignItems: 'center',
   borderRadius:'5px',
   position:'relative',
+  fontFamily:'Noto Sans KR'
 }
 
 

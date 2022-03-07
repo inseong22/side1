@@ -83,6 +83,7 @@ const OpenCloseCustom = (props) => {
                   <TextAuto 
                     disabled
                     small
+                    size={0.9}
                     value={props.title} 
                     color={props.color} align="start"
                     placeholder="여기를 클릭하여 자주 묻는 질문을 적어보세요."

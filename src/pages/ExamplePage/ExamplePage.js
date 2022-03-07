@@ -76,7 +76,7 @@ const ExampleCard = ({img, title, url}) => {
 
 export const LandingPageExamples = () => {
     return(
-        <div className="center-row" style={{flexWrap: 'wrap', marginTop:'15px'}}>
+        <div style={{ boxSizing:'border-box', flexWrap: 'wrap', marginTop:'15px', display:'flex', flexDirection:'row', alignItems:'center', justifyContent: 'center', width:'100%'}}>
             {exs.map((item, index) => {
                 return(
                     <ExampleCard key={index} img={item.img} title={item.title} url={item.url}/>
