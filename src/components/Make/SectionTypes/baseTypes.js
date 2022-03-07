@@ -669,7 +669,7 @@ export const defaults = {
             },
             text:{
                 color: "#000000",
-                fontSize: 18,
+                fontSize: 32,
                 text: "",
                 use: true,
             },

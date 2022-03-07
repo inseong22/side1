@@ -22,6 +22,11 @@ const subTextSizeOptions = [
     { label: '보통', value: 18 },
     { label: '크게', value: 20 },
 ]
+const logoSizeOptions = [
+    { label: '작게', value: 28 },
+    { label: '보통', value: 32 },
+    { label: '크게', value: 36 },
+]
 const elementTitleOptions = [
     { label: '작게', value: 18 },
     { label: '보통', value: 20 },
@@ -72,7 +77,7 @@ export function NumberInputCustom({value, func}) {
     )
 }
 
-function TextSizeCustom({text, value, func, desc, button, title, options, elementTitle, elementDesc}) {
+function TextSizeCustom({text, value, logo, func, desc, button, title, options, elementTitle, elementDesc}) {
     return (
         <div className="edit-element">
             <div className="edit-element__one" style={{flexDirection: 'column'}}>
@@ -96,8 +101,13 @@ function TextSizeCustom({text, value, func, desc, button, title, options, elemen
                             options={titleSizeOptions}
                             onChange={e => func(e)}
                             value={value}
-                        />
-                        :
+                        /> :
+                        logo ?
+                        <RadioCustom
+                            options={logoSizeOptions}
+                            onChange={e => func(e)}
+                            value={value}
+                        /> :
                         elementTitle ?
                         <RadioCustom 
                             options={elementTitleOptions}

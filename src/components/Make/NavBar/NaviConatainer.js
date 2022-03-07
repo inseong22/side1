@@ -24,7 +24,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                         placeholder="서비스명을 입력하세요"
                         inputStyle={{ 
                             // textAlign:`${navi.logo.align === 'center' && navi.button.use ? 'right' : navi.logo.align === 'center' ? 'center' : 'left'}`,
-                            fontSize: `${navi.logo.text.fontSize/20}em`,
+                            fontSize: `${navi.logo.text.fontSize/32}em`,
                             display: 'flex',
                             zIndex: 5,
                             color:`${navi.logo.text.color}`, 
