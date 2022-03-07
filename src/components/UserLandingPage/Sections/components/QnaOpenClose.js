@@ -85,6 +85,7 @@ const OpenCloseCustom = (props) => {
                     small
                     value={props.title} 
                     color={props.color} align="start"
+                    size={props.qna.questionSize/20}
                     placeholder="여기를 클릭하여 자주 묻는 질문을 적어보세요."
                     />
                 </div>

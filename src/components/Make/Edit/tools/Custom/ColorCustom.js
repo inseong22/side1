@@ -21,7 +21,7 @@ export function EditColor({onChange, value}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const {stateC, actionC} = useContext(MakeContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [color, setColor] = useColor("hex", value);
-    const [newColor, setNewColor] = useState(false);
+    const [newColor, setNewColor] = useState(true);
     const [open, setOpen] = useState(null);
 
     const handleClick = () => {

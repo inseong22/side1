@@ -7,6 +7,7 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import EditTitleDesc from './tools/EditTitleDesc'
 import ColorCustom from '../tools/Custom/ColorCustom'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
 
 const layoutOptions = [
     {label: '카드', value: 'card'},
@@ -67,8 +68,14 @@ function EditQnaSection({content, category}) {
                             <ColorCustom text="질문" value={content.qna.question} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.question = e;
                             }))} />
+                            <TextSizeCustom text="질문 크기" elementTitle value={content.qna.questionSize} func={e =>  action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].qna.questionSize = e;
+                            }))} />
                             <ColorCustom text="답변" value={content.qna.answer} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.answer = e;
+                            }))} />
+                            <TextSizeCustom text="답변 크기" elementTitle value={content.qna.answerSize} func={e =>  action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].qna.answerSize = e;
                             }))} />
                         </OpenCloseCustom>
 

@@ -473,7 +473,9 @@ export const base = [
             use:true,
             shape: 'close',
             question: '#000000',
+            questionSize: 18,
             answer: '#000000',
+            answerSize: 18,
         },
         qnas:[
             {
@@ -669,7 +671,7 @@ export const defaults = {
             },
             text:{
                 color: "#000000",
-                fontSize: 18,
+                fontSize: 32,
                 text: "",
                 use: true,
             },

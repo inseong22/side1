@@ -103,7 +103,7 @@ function EditNaviSection({navi, setNavi, category}) {
                                 <ColorCustom text="Text 색상" value={navi.logo.text.color} func={e =>  setNavi(produce(navi, draft => {
                                     draft.logo.text.color = e;
                                 }))} />
-                                <TextSizeCustom text="Text 크기" desc value={navi.logo.text.fontSize} func={e =>  setNavi(produce(navi, draft => {
+                                <TextSizeCustom text="Text 크기" logo value={navi.logo.text.fontSize} func={e =>  setNavi(produce(navi, draft => {
                                     draft.logo.text.fontSize = e;
                                 }))} />
                             </>
