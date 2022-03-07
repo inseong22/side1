@@ -91,6 +91,7 @@ function EditHeroSection({content, category}) {
     const changeButtonAlignOption = e => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.align = e
+            draft[state.secNum].mobile.buttonAlign = e
         }))
     }
 
@@ -175,7 +176,12 @@ function EditHeroSection({content, category}) {
                     <Contents content={content} />
                     <OpenCloseCustom title="버튼" use={content.button.use}>
                         <div className="box-gray__container">
-                            <RadioCustom content={content} options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
+                            {
+                                state.isPhone ? 
+                                <RadioCustom content={content} options={buttonAlignOptions} value={content.mobile.buttonAlign} func={e => changeButtonAlignOption(e)} />
+                                :
+                                <RadioCustom content={content} options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
+                            }
                             <TextSizeCustom text="글자 크기" button value={content.button.textSize} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].button.textSize = e;
                             }))} />

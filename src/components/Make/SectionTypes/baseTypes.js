@@ -53,6 +53,7 @@ const commons = {
         layout:1,
         contentSize:50,
         cardSize: 100,
+        buttonAlign:'center',
     }
 }
 
@@ -595,6 +596,7 @@ export const base = [
         },
         video:{
             ...contents.video,
+            use: true,
             type:'base',
         },
         title:{
