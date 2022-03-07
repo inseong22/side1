@@ -101,7 +101,7 @@ function EditReviewSection({content, category}) {
                                 <OnOffCustom text="내용" value={content.elementText.use} func={(e) => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.use = !content.elementText.use;
                                 }))} />
-                                <TextSizeCustom text="내용 크기" elementDesc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
+                                <TextSizeCustom text="크기" elementDesc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.size = e;
                                 }))} />
                             </div>
@@ -111,6 +111,9 @@ function EditReviewSection({content, category}) {
                                 }))} />
                                 <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].writer.color = e;
+                                }))} />
+                                <TextSizeCustom text="크기" elementDesc value={content.elementText.writerSize} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].elementText.writerSize = e;
                                 }))} />
                             </>
                         </OpenCloseCustom>

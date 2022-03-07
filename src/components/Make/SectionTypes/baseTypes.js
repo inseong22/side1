@@ -409,7 +409,8 @@ export const base = [
             descUse:true,
             descSize: 18,
             color:'#000000',
-            align: 'center'
+            align: 'center',
+            writerSize: 18,
         },
         elements:[
             {
