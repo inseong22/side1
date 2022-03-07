@@ -146,7 +146,7 @@
     align-items : center;
     justify-content: start;
     flex-direction:row;
-    flex-wrap:wrap;
+    /* flex-wrap:wrap; */
 }
 
 .response-down__container{

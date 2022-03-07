@@ -116,17 +116,17 @@ const secondQuestion = [
     {
         typequestion: "🍎 앱 다운로드",
         question : "많은 사람들이 우리의 앱을 다운로드 하면 좋겠어요",
-        type:'app',
+        type:'appdownload',
     },
     {
         typequestion: "✍️ 사전신청",
         question : "사전신청을 많이 받고 싶어요",
-        type:'apply',
+        type:'application',
     },
     {
         typequestion: "💰 판매",
         question : "서비스/제품을 많이 팔고 싶어요",
-        type:'sale',
+        type:'sales',
     },
     {
         typequestion: "📚 개인적인 목적",
@@ -151,17 +151,17 @@ const fontList = [
 ]
 const colorList = [
     {name:'빨강', color:'#FF6464'},
-{name:'노랑',color:'#FFE162',},
-{name:'머스타드노랑',color:'#FFBD35',},
-{name:'초록',color:'#91C483',},
-{name:'하늘색',color:'#5D8BF4',},
-{name:'파란색',color:'#2D31FA',},
-{name:'연보라',color:'#BAABDA',},
-{name:'진한 보라색',color:'#3B185F',},
-{name:'검정',color:'#171717',},
-{name:'진한 회색',color:'#444444',},
-{name:'갈색',color:'#C99C75',},
-{name:'상아색',color:'#EEE6C4',},
+    {name:'노랑',color:'#FFE162',},
+    {name:'머스타드노랑',color:'#FFBD35',},
+    {name:'초록',color:'#91C483',},
+    {name:'하늘색',color:'#5D8BF4',},
+    {name:'파란색',color:'#2D31FA',},
+    {name:'연보라',color:'#BAABDA',},
+    {name:'진한 보라색',color:'#3B185F',},
+    {name:'검정',color:'#171717',},
+    {name:'진한 회색',color:'#444444',},
+    {name:'갈색',color:'#C99C75',},
+    {name:'상아색',color:'#EEE6C4',},
 ]
 
 function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
@@ -175,10 +175,6 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     const [alarm, setAlarm] = useState(false);
 
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
-
-    useEffect(() => {
-        console.log("리렌더링")
-    }, [])
 
     const handleClose = async () => {
         // 마지막에는 입력한 정보도 저장한다. 근데 한명껄 여러번 저장해서 헷갈리지 않게..!
@@ -236,6 +232,8 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     }
     const nextAndSetDone = async e => {
 
+        console.log("잘 불러옴 ㅏㅇ님",)
+            
         const urlDatas = await dbService
             .collection("saved-page")
             .where("urlId", "==", setting.urlId)
@@ -258,10 +256,31 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                 .where("urlId", "==", type)
                 .get(); // ui
 
-            const defaultTemplate = defaults.docs.map(doc => {
+            let defaultTemplate = defaults.docs.map(doc => {
                 return({...doc.data(), id:doc.id})
             });
-            
+    
+            defaultTemplate[0].navi.title = title;
+            defaultTemplate[0].setting.title = title;
+            defaultTemplate[0].setting.cta.backgroundColor = color;
+            defaultTemplate[0].setting.fta.backgroundColor = color;
+            defaultTemplate[0].setting.ghost.borderColor = color;
+            defaultTemplate[0].setting.ghost.color = color;
+            defaultTemplate[0].setting.urlId = setting.urlId;
+            defaultTemplate[0].setting.font = font;
+            defaultTemplate[0].foot.copyright.text = title;
+            defaultTemplate[0].foot.icon.color = color;
+
+            defaultTemplate[0].contents = defaultTemplate[0].contents.map((doc, index) => {
+                if(doc.sectionTypeName === 'CtaSection' || doc.sectionTypeName === 'ApplySection' || doc.sectionTypeName === 'AppDownloadSection' ){
+                    doc.backgroundColor = color;
+                }
+                if(index === 1 && doc.sectionTypeName === 'TextSection' ){
+                    doc.backgroundColor = color;
+                }
+                return doc;
+            })
+
             if(defaultTemplate){
                 setContents(defaultTemplate[0].contents);
                 setNavi(defaultTemplate[0].navi);
@@ -277,34 +296,6 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
             }
 
             const done = await dbService.collection('after-questions').add(body);
-
-            setNavi(produce(navi, draft => {
-                draft.title = title;
-            }))
-
-            setSetting(produce(setting, draft => {
-                draft.title = title;
-                draft.cta.backgroundColor = color;
-                draft.ghost.borderColor = color;
-                draft.ghost.color = color;
-            }))
-
-           setContents(produce(state.contents, draft => {
-                draft.map(item => {
-                    if(item.sectionTypeName === 'CtaSection' || item.sectionTypeName === 'ApplySection' || item.sectionTypeName === 'AppDownloadSection')
-                    {
-                        item.backgroundColor = color;
-                    }
-                    else{
-                        return 
-                    }
-                })
-            }))
-
-            setFoot(produce(foot, draft => {
-                draft.copyright.text = title;
-                draft.icon.color = color;
-            }))
 
             if(JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']).length > 48000){
                 // 임시 방편으로 큰 데이터는 건너뛰도록 조치.
@@ -526,6 +517,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                             <div className="modal-button-container">
                                 <div className="modal-move-button-back" onClick={e => setCnum(cnum - 1)}>이전</div>
                                 <div className="modal-move-button" onClick={() => {
+                                    console.log("콘솔 뜬다")
                                     nextAndSetDone();
                                 }}>시작하기</div>
                             </div>

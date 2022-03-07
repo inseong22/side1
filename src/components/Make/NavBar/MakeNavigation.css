@@ -6,6 +6,7 @@
     align-items : center;
     flex-direction: row;
     position:relative;
+    box-sizing: content-box;
 }
 
 .make-nav-container{

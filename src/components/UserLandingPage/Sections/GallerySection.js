@@ -12,7 +12,6 @@ function GallerySection({content,setting}) {
        if(index < content.numOfElements){
            return(
                <>
-               {content.card.use && 
                <FeatureCard section="gallery" content={content} index={index}>
                        {content.element.use && 
                        <div style={{width:'100%', position:'relative', cursor:'default'}}>
@@ -38,7 +37,7 @@ function GallerySection({content,setting}) {
                        </div> 
                        }
                        {
-                           content.text.use && 
+                           content.card.use && 
                            <div className="df-margin-big feature-title" style={{
                                width:'100%', 
                                height:'100%', 
@@ -60,7 +59,6 @@ function GallerySection({content,setting}) {
                            </div>
                        }
                    </FeatureCard>
-               }
                </>
            )
        }

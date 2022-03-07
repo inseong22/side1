@@ -1,0 +1,14 @@
+.excard{
+    width:400px;
+    height:300px;
+    margin:10px;
+    border-radius:30px;
+    cursor:pointer;
+    box-shadow: 5px 8px 10px rgba(50,50,50,0.3);
+}
+
+@media screen and (max-width:800px){
+    .excard{
+        width:90%;
+    }
+}

@@ -58,7 +58,7 @@ export function EditColor({onChange, value}) {
                 style={{
                     backgroundColor : `${state.setting.color}`, 
                     color:`${state.setting.color === '#ffffff' ? '#555C67' : 'white'}`,
-                    border: `${newColor ? ('3px solid #ffffff'): ('3px solid #6B63F7')}`,
+                    border: `${newColor ? ('2px solid #ffffff'): ('2px solid #6B63F7')}`,
                 }} 
                 onClick={() => {
                     setNewColor(false)
@@ -83,7 +83,7 @@ export function EditColor({onChange, value}) {
                     style={{
                         backgroundColor:`${value}`, 
                         color:`${value === '#ffffff' ? '#555C67' : 'white'}`,
-                        border: `${!newColor ? ('3px solid #ffffff'): ('3px solid #6B63F7')}`,
+                        border: `${!newColor ? ('2px solid #ffffff'): ('2px solid #6B63F7')}`,
                     }} onClick={handleClick}>    
                         새로운 색상
                         {value}

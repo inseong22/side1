@@ -11,6 +11,7 @@ import ResponsePage from './pages/Response/ResponsePage';
 import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/unused/SubmitPage';
 import CustomerPage from './pages/Customer/CustomerPage'
+import ExamplePage from './pages/ExamplePage/ExamplePage'
 import ScrollToTop from './tools/ScrollToTop'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
@@ -58,6 +59,9 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                         </Route>
                         <Route path="/customer" onUpdate={() => window.scrollTo(0, 0)}>
                             <CustomerPage history={history} isLoggedIn={isLoggedIn}/>
+                        </Route>
+                        <Route path="/surfeeexamples" onUpdate={() => window.scrollTo(0, 0)}>
+                            <ExamplePage history={history} isLoggedIn={isLoggedIn}/>
                         </Route>
                         <Route exact path="/:id" component={ UserLandingPage } history={history}/>
                     </Switch>
