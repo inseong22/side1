@@ -123,8 +123,8 @@ function MadeLandingCard({item,published, setCopyOpen, id, index, setNowChecking
             </div>
             <div className="center-row" style={{justifyContent: "start"}}>
                 <div className="left" style={{fontSize:'0.7em', width:'70%', wordWrap:'break-word', wordBreak:'break-all'}}>
-                    https://surfee.co.kr/#/{item.setting.urlId} 
-                    <CopyToClipboard  text={"https://surfee.co.kr/#/"+`${item.setting.urlId}`} onCopy={setCopyOpen}>
+                    https://surfee.co.kr/{item.setting.urlId} 
+                    <CopyToClipboard  text={"https://surfee.co.kr/"+`${item.setting.urlId}`} onCopy={setCopyOpen}>
                         <Copy size={17} color="#6B63F7"              
                         style={{marginLeft:'5px'}}
                         />

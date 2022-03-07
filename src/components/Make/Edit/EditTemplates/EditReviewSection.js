@@ -72,6 +72,7 @@ function EditReviewSection({content, category}) {
                                 <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.color = e;
                                     draft[state.secNum].elementTitle.color = e;
+                                    draft[state.secNum].writer.color = e;
                                 }))} />
                                 <RadioCustom text="정렬" options={alignOptions} value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.align = e;
@@ -101,7 +102,7 @@ function EditReviewSection({content, category}) {
                                 <OnOffCustom text="내용" value={content.elementText.use} func={(e) => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.use = !content.elementText.use;
                                 }))} />
-                                <TextSizeCustom text="내용 크기" elementDesc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
+                                <TextSizeCustom text="크기" elementDesc value={content.elementText.size} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.size = e;
                                 }))} />
                             </div>
@@ -109,8 +110,8 @@ function EditReviewSection({content, category}) {
                                 <OnOffCustom text="이름 / 정보" value={content.writer.use} func={(e) => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].writer.use = !content.writer.use;
                                 }))} />
-                                <ColorCustom text="색상" value={content.writer.color} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].writer.color = e;
+                                <TextSizeCustom text="크기" elementDesc value={content.writer.size} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].writer.size = e;
                                 }))} />
                             </>
                         </OpenCloseCustom>

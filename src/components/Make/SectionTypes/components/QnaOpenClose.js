@@ -100,7 +100,14 @@ const OpenCloseCustom = (props) => {
             </div>
             </ChakraProvider>
             <div className="centera" style={{justifyContent: 'end', width:`${state.isPhone ? '7.5%' : '6%'}`}}>
-              { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
+              {
+                isopen !== 'open' ? 
+                <>
+                { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
+                </> : 
+                <>
+                </>
+              }
             </div>
           </div>
         </div>

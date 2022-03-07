@@ -19,7 +19,7 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                         style={{
                             fontFamily:`${state.setting.font}`, 
                             color:`${content.title.color}`, 
-                            fontSize:`${isMobile ? content.title.size/22 : content.title.size/20}em`, 
+                            fontSize:`${isMobile ? content.title.size/22 : content.title.size/19}em`, 
                             textAlign:`${isMobile ? content.mobile.align : content.title.align}`,
                             resize:'none',
                             WebkitTextFillColor: `${content.title.color}`,

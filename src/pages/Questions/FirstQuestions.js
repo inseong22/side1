@@ -503,7 +503,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                         </div>
                         <div className="modal-main-card">
                             <div className="modal-title" style={{fontSize:'25px'}}>
-                                https://surfee.co.kr/#/<input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />
+                                https://surfee.co.kr/<input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />
                             </div>
                             {alarm ? (
                                 <div className="text-alarm">

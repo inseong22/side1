@@ -14,32 +14,32 @@ const exs = [
     {
         img : ex1,
         title:"Surfee 랜딩페이지",
-        url:'https://surfee.co.kr/#/'
+        url:'https://surfee.co.kr/'
     },
     {
         img : ex2,
         title:"Template 2",
-        url:'https://surfee.co.kr/#/template1'
+        url:'https://surfee.co.kr/template1'
     },
     {
         img : ex3,
         title:"Template 3",
-        url:'https://surfee.co.kr/#/template2'
+        url:'https://surfee.co.kr/template2'
     },
     {
         img : ex4,
         title:"Template 4",
-        url:'https://surfee.co.kr/#/template3'
+        url:'https://surfee.co.kr/template3'
     },
     {
         img : ex5,
         title:"Template 5",
-        url:'https://surfee.co.kr/#/template5'
+        url:'https://surfee.co.kr/template5'
     },
     {
         img : ex6,
         title:"Template 6",
-        url:'https://surfee.co.kr/#/template4'
+        url:'https://surfee.co.kr/template4'
     },
 ]
 

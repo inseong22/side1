@@ -68,15 +68,15 @@ function EditQnaSection({content, category}) {
                             <ColorCustom text="질문" value={content.qna.question} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.question = e;
                             }))} />
-                            <TextSizeCustom text="질문 크기" elementTitle value={content.qna.questionSize} func={e =>  action.setContents(produce(state.contents, draft => {
+                            {/* <TextSizeCustom text="질문 크기" elementTitle value={content.qna.questionSize} func={e =>  action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.questionSize = e;
-                            }))} />
+                            }))} /> */}
                             <ColorCustom text="답변" value={content.qna.answer} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.answer = e;
                             }))} />
-                            <TextSizeCustom text="답변 크기" elementTitle value={content.qna.answerSize} func={e =>  action.setContents(produce(state.contents, draft => {
+                            {/* <TextSizeCustom text="답변 크기" elementTitle value={content.qna.answerSize} func={e =>  action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.answerSize = e;
-                            }))} />
+                            }))} /> */}
                         </OpenCloseCustom>
 
                     </div>

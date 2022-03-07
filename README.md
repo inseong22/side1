@@ -2,7 +2,7 @@
 
 Surfee와 함께 가장 빠르고 간단하게 랜딩페이지를 제작해 보세요.
 
-[https://surfee.co.kr/#/](https://surfee.co.kr/#/) ← 사이트로 이동 🚀
+[https://surfee.co.kr](https://surfee.co.kr) ← 사이트로 이동 🚀
 
 ( ⚠️ Chrome Web Browser 이용을 권장합니다. )
 <br /><br />
