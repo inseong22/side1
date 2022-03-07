@@ -7,6 +7,7 @@
     flex-direction: row;
     position:relative;
     box-sizing: content-box;
+    background-color: white;
 }
 
 .make-nav-container{

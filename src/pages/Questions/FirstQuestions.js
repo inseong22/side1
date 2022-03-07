@@ -263,7 +263,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
             defaultTemplate[0].navi.title = title;
             defaultTemplate[0].setting.title = title;
             defaultTemplate[0].setting.cta.backgroundColor = color;
-            defaultTemplate[0].setting.color = color;
+            defaultTemplate[0].setting.color = color + '75';
             defaultTemplate[0].setting.fta.backgroundColor = color;
             defaultTemplate[0].setting.ghost.borderColor = color;
             defaultTemplate[0].setting.ghost.color = color;
