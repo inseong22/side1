@@ -76,7 +76,7 @@ const ExampleCard = ({img, title, url}) => {
 
 export const LandingPageExamples = () => {
     return(
-        <div style={{backgroundColor:'red', boxSizing:'border-box', flexWrap: 'wrap', marginTop:'15px', display:'flex', flexDirection:'row', alignItems:'center', justifyContent: 'center', width:'100%'}}>
+        <div style={{ boxSizing:'border-box', flexWrap: 'wrap', marginTop:'15px', display:'flex', flexDirection:'row', alignItems:'center', justifyContent: 'center', width:'100%'}}>
             {exs.map((item, index) => {
                 return(
                     <ExampleCard key={index} img={item.img} title={item.title} url={item.url}/>

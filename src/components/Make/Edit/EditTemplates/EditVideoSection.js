@@ -76,7 +76,7 @@ function EditVideoSection({content, category}) {
                     <AddYoutubeLink content={content} value={content.video.link} />
                     <CustomSwitch text="자동 재생" value={content.video.auto} 
                         onChange={ () => action.setContents(produce(state.contents, draft => {
-                            if (content.video.link.includes('autoplay=0'))
+                            if (content.video.link.includes('autoplay=1'))
                                 {draft[state.secNum].video.link = content.video.link.replace('autoplay=1', 'autoplay=0');
                                 draft[state.secNum].video.auto = false;}
                             else

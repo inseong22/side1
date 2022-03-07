@@ -183,7 +183,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             <div className="main-page-section1" style={{paddingTop:'30px', marginTop:'50px', flexDirection:'column', background:"linear-gradient(0deg, #6C63FF 0%, #ffffff 100%)"}}>
                 <div className="main-section-left-topbottom" style={{color:'black', marginTop:'50px'}}>
                     <span className="one-section-big osb2" style={{textAlign: 'center'}}>
-                        '랜딩페이지'를 3분만에 <br/>쉽고 간단하게 제작해 보세요
+                        '랜딩페이지'를 3분 만에 <br/>쉽고 간단하게 제작해 보세요
                     </span>
                     <span className="one-section-small" style={{textAlign: 'center'}}>
                         Surfee와 함께 '타이핑'과 '이미지'로만 <br/>

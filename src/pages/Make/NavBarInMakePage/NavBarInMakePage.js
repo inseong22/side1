@@ -232,8 +232,6 @@ const afterSaveImage = async (returned) => {
         setSaveOpen(true);
         
     }else{
-        console.log( '수정 중이 아니다' );
-
         const savedPages = await dbService
             .collection("saved-page")
             .where("urlId", "==", setting.urlId)

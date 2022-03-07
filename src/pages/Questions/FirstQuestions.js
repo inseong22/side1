@@ -232,8 +232,6 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     }
     const nextAndSetDone = async e => {
 
-        console.log("잘 불러옴 ㅏㅇ님",)
-            
         const urlDatas = await dbService
             .collection("saved-page")
             .where("urlId", "==", setting.urlId)
@@ -519,7 +517,6 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                             <div className="modal-button-container">
                                 <div className="modal-move-button-back" onClick={e => setCnum(cnum - 1)}>이전</div>
                                 <div className="modal-move-button" onClick={() => {
-                                    console.log("콘솔 뜬다")
                                     nextAndSetDone();
                                 }}>시작하기</div>
                             </div>

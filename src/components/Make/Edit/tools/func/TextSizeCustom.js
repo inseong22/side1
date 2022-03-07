@@ -53,6 +53,9 @@ function RadioCustom({options, value, onChange}) {
                     </div>
                 )
             })}
+            <input className="text-size__input" type="number" value={value} onChange={e => onChange(e.currentTarget.value)}
+                style={{border:`${options.filter(doc => doc.value === value).length === 0 ? '1.5px solid #6C63FF' : '1.5px solid rgba(0,0,0,0)'}`}}
+            />
         </>
     )
 }
@@ -135,7 +138,6 @@ function TextSizeCustom({text, value, logo, func, desc, button, title, options, 
                             value={value}
                         />
                     }
-                    <input className="text-size__input" type="number" value={value} onChange={e => func(e.currentTarget.value)}/>
                 </div>
             </div>
         </div>
