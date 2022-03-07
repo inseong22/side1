@@ -25,6 +25,7 @@ function QnaSection({content, setting}) {
                             onChange={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qnas[index].answer = e.currentTarget.value;
                             }))}
+                            size={content.qna.answerSize/20}
                             color={content.qna.answer} align="start" />
                     </div>
                 </div>

@@ -473,7 +473,9 @@ export const base = [
             use:true,
             shape: 'close',
             question: '#000000',
+            questionSize: 18,
             answer: '#000000',
+            answerSize: 18,
         },
         qnas:[
             {
