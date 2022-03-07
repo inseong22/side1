@@ -114,21 +114,28 @@ function EditFeaturesSection({content, category}) {
                         <EditTitleDesc content={content} />
                         <EditImageIcon content={content} />
                         <OpenCloseCustom title="설명글" use={content.elementText.use}>
-                            <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].elementText.color = e;
-                            }))} />
+                            <div className="box-gray__container">
                             <RadioCustom text="정렬" options={alignOptions} value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.align = e;
                                 draft[state.secNum].align = e;
                             }))} />
+                            </div>
+                            <div className="box-gray__container">
                             <OnOffCustom text="특징 제목" value={content.elementText.titleUse} func={(e) => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.titleUse = !content.elementText.titleUse;
+                            }))} />
+                            <ColorCustom text="제목 색상" value={content.elementText.titleColor} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.titleColor = e;
                             }))} />
                             <TextSizeCustom text="제목 크기" elementTitle value={content.elementText.titleSize} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.titleSize = e;
                             }))} />
+                            </div>
                             <OnOffCustom text="특징 본문" value={content.elementText.descUse} func={(e) => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.descUse = !content.elementText.descUse;
+                            }))} />
+                            <ColorCustom text="본문 색상" value={content.elementText.descColor} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].elementText.descColor = e;
                             }))} />
                             <TextSizeCustom text="본문 크기" elementDesc value={content.elementText.descSize} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.descSize = e;

@@ -323,7 +323,8 @@ export const base = [
             titleSize: 20,
             descUse:true,
             descSize: 16,
-            color:'#000000',
+            titleColor:'#000000',
+            descColor:'#000000',
             align: 'center'
         },
         elements:[

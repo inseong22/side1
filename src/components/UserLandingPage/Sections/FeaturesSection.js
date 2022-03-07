@@ -25,7 +25,7 @@ function FeaturesSection({content, setting}) {
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
                                 <TextAuto className="text-no-input" 
                                     value={item.title} 
-                                    color = {content.elementText.color} 
+                                    color = {content.elementText.titleColor} 
                                     align = {isMobile ? content.mobile.align : content.elementText.align}
                                     size={content.elementText.titleSize/20} 
                                     placeholder="특징"
@@ -39,11 +39,11 @@ function FeaturesSection({content, setting}) {
                                 <TextareaAutosize 
                                     className="text-no-input"  
                                     value={item.desc} 
-                                    color = {content.elementText.color} 
+                                    color = {content.elementText.descColor} 
                                     // align = {isMobile ? content.mobile.align : content.align}
                                     style={{
                                         fontFamily:`${setting.smallFont}`, 
-                                        color:`${content.desc.color}`, 
+                                        color:`${content.elementText.descColor}`, 
                                         fontSize:`${content.elementText.descSize/20}em`, 
                                         // boxSizing:`border-box`, 
                                         textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,

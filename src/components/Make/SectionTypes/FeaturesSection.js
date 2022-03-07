@@ -28,7 +28,7 @@ function FeaturesSection({content, setting}) {
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
                                 <TextAuto className="text-input" 
                                     value={item.title} 
-                                    color = {content.elementText.color} 
+                                    color = {content.elementText.titleColor} 
                                     align = {state.isPhone ? content.mobile.align : content.elementText.align}
                                     onChange={e => action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].elements[index].title = e.currentTarget.value;
@@ -44,14 +44,14 @@ function FeaturesSection({content, setting}) {
                                 <TextareaAutosize 
                                     className="text-input"  
                                     value={item.desc} 
-                                    color = {content.elementText.color} 
+                                    color = {content.elementText.descCcolor} 
                                     // align = {state.isPhone ? content.mobile.align : content.align}
                                     onChange={e => action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].elements[index].desc = e.currentTarget.value;
                                     }))}  
                                     style={{
                                         fontFamily:`${state.setting.smallFont}`, 
-                                        color:`${content.desc.color}`, 
+                                        color:`${content.elementText.descColor}`, 
                                         fontSize:`${content.elementText.descSize/20}em`, 
                                         // boxSizing:`border-box`, 
                                         textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
