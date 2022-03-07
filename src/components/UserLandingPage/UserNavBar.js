@@ -81,7 +81,7 @@ function UserNavBar({setting, navi}) {
                                     border:'none',
                                     backgroundColor:'rgba(0,0,0,0)',
                                     textAlign:`${navi.logo.align === 'center' ? 'center' : 'left'}`,
-                                    fontSize: `${navi.logo.text.fontSize/20}em`,
+                                    fontSize: `${navi.logo.text.fontSize/32}em`,
                                     display: 'flex',
                                     zIndex: 5,
                                     color:`${navi.logo.text.color}`, 

@@ -19,6 +19,7 @@ function QnaSection({content, setting}) {
                         <TextAuto
                             disabled
                             small
+                            size={content.qna.answerSize/20}
                             value={item.answer} 
                             color={content.qna.answer} align="start" />
                     </div>

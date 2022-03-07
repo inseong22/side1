@@ -83,7 +83,7 @@ const OpenCloseCustom = (props) => {
             <ChakraProvider>
             <div className="accordion__title">
               <div className="title_text" style={{color:`${props.color}`, width:'100%', alignItems: 'start'}}>
-                <div className="qna__word" style={{fontFamily:`${state.setting.smallFont}`}}>Q.</div>
+                <div className="qna__word" style={{fontFamily:`${state.setting.smallFont}`, marginRight:`${state.isPhone ? '3px' : '5px'}`}}>Q.</div>
                 <div style={{width:'100%', marginTop:'3px'}}>
                   <TextAuto 
                     small
@@ -92,13 +92,14 @@ const OpenCloseCustom = (props) => {
                         draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
                     }))}
                     color={props.color} align="start"
+                    size={props.content.qna.questionSize/20}
                     placeholder="여기를 클릭하여 자주 묻는 질문을 적어보세요."
                     />
                 </div>
               </div> 
             </div>
             </ChakraProvider>
-            <div className="centera" style={{justifyContent: 'end', width:'20%'}}>
+            <div className="centera" style={{justifyContent: 'end', width:`${state.isPhone ? '7.5%' : '6%'}`}}>
               { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
             </div>
           </div>
