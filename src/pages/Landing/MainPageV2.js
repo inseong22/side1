@@ -26,6 +26,7 @@ import main3 from '../../tools/img/main/main3.gif';
 import main4 from '../../tools/img/main/main4.gif';
 import main5 from '../../tools/img/main/main5.gif';
 import main6 from '../../tools/img/main/main6.gif';
+import outdoor from '../../tools/img/main/outdoor.png';
 
 const ourInfos = [
     {
@@ -191,7 +192,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     {moveButton('top')}
                 </div>
                 <img src={main1} className="section-one-image-main-topbottom mt30" />
-                <span className="one-section-big mt30" style={{textAlign: 'center', fontSize:'1.2em'}}>
+                <span className="one-section-big mt30" style={{textAlign: 'center', fontSize:'1.2em', color:'white'}}>
                     고객 검증을 위한 '랜딩페이지'제작은<br/>
                     이제 선택이 아닌 필수입니다.
                 </span>
@@ -288,17 +289,18 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     {ourInfosTable}
                 </div>
             </div>
-            <div className="main-page-section1 bg1" style={{flexDirection: "column", padding:'50px 0px'}}>
+            <div className="main-page-section1 back-image-fit" style={{ color:'white', backgroundImage:`url(${outdoor})`, flexDirection: "column", padding:'50px 0px'}}>
                 <span className="one-section-big osb2" style={{textAlign:'center'}}>
                     Surfee와 함께<br/>랜딩페이지를 제작해 보세요.
                 </span>
+                <div className="centera" style={{backgroundColor:'#6c63ff88', position:'absolute', zIndex:'1'}}></div>
                 {moveButton()}
             </div>
         </div>
         <Footer />
         <AskLoginModal open={askOpen} setOpen={setAskOpen} SomeoneClickMoveToMake={SomeoneClickMoveToMake} registerOpen={registerOpen} setRegisterOpen={setRegisterOpen}/>
         <RegisterModal open={registerOpen} setOpen={setRegisterOpen} />
-        <RegisterModal open={loginOpen} setOpen={setLoginOpen} />
+        {/* <RegisterModal open={loginOpen} setOpen={setLoginOpen} /> */}
         </>
     )
 }

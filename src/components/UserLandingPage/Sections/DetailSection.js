@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react'
+import React from 'react'
 import TitleDesc from './components/TitleDesc'
 import ImageOrSlide from './components/ImageOrSlide'
 import AnimationDiv from './components/AnimationDiv'

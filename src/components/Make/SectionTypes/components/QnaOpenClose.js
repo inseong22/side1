@@ -87,6 +87,7 @@ const OpenCloseCustom = (props) => {
                 <div style={{width:'100%', marginTop:'3px'}}>
                   <TextAuto 
                     small
+                    size={0.9}
                     value={props.title} 
                     onChange={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
