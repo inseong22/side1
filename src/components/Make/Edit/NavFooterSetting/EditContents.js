@@ -3,6 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import produce from 'immer';
 import AddingSection from '../../Modal/AddingSection';
+import {sectionIcons} from './ContentsIcons';
 import {CustomSwitch2} from '../tools/Custom/OnOffCustom'
 import './EditContents.css';
 import {DragHandle} from '@styled-icons/material-rounded'
@@ -96,7 +97,7 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                     </div>   
                 </div>
                 <div className="comment">
-                <span style={{fontWeight:'900', fontSize:'1.15em'}}>드래그 앤 드랍</span>으로 순서를 변경할 수 있습니다
+                <span style={{fontWeight:'700', fontSize:'1em'}}>드래그 앤 드랍</span>으로 순서를 변경할 수 있습니다
                 </div>
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
@@ -124,61 +125,11 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                                                                     provided.draggableProps.style,
                                                                     )}>
                                                                         <div className="center-column hoverback one-contents__inner">
-                                                                                <div className="center-row">
-                                                                                    <div className="left">
-                                                                                        <div className="content__name">
-                                                                                            {item.name}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div className="right">
-                                                                                        {optionButton(index)}
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="center-row">
-                                                                                    <div className="left" style={{width:'85%', textAlign:'left', color:'#555C67', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                                                                                        {item.title.text}
-                                                                                    </div>
-                                                                                    <div className="right">
-                                                                                        <div className="content__button cb-delete"
-                                                                                            onClick={() => {
-                                                                                                const yes = window.confirm("정말 삭제하시겠습니까?");
-                                                                                                if(yes){
-                                                                                                    deleteSection(index);
-                                                                                                }
-                                                                                            } }>
-                                                                                            삭제
-                                                                                        </div>
-                                                                                        <div className="content__button cb-duplicate"
-                                                                                            onClick={() => pasteThisSection(state.contents[index], index) }>
-                                                                                            복제
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                        </div>   
-                                                                </div>
-                                                                {/* <div className="centera small-button__container">
-                                                                    <span className="centera make-section-button__small">
-                                                                        +
-                                                                    </span>
-                                                                </div> */}
-                                                            </>
-                                                        )}
-                                                        else{
-                                                            return(
-                                                            <>
-                                                            <div
-                                                                    className="one-contents-draggable"
-                                                                    ref={provided.innerRef}
-                                                                    {...provided.dragHandleProps}
-                                                                    {...provided.draggableProps}
-                                                                    onClick={() => {window.scrollTo({top:(elementsRef.current[index] && elementsRef.current[index].current.offsetTop - window.innerHeight/5), left:0, behavior:'smooth'})}}
-                                                                    style={getItemStyle(
-                                                                    snapshot.isDragging,
-                                                                    provided.draggableProps.style,
-                                                                    )}>
-                                                                        <div className="center-column hoverback one-contents__inner">
                                                                             <div className="center-row">
                                                                                 <div className="left">
+                                                                                    {
+                                                                                        sectionIcons.filter(doc => doc.sectionTypeName === item.sectionTypeName)[0].icon
+                                                                                    }
                                                                                     <div className="content__name">
                                                                                         {item.name}
                                                                                     </div>
@@ -208,6 +159,62 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                                                                                 </div>
                                                                             </div>
                                                                         </div>   
+                                                                </div>
+                                                                {/* <div className="centera small-button__container">
+                                                                    <span className="centera make-section-button__small">
+                                                                        +
+                                                                    </span>
+                                                                </div> */}
+                                                            </>
+                                                        )}
+                                                        else{
+                                                            return(
+                                                            <>
+                                                            <div
+                                                                className="one-contents-draggable"
+                                                                ref={provided.innerRef}
+                                                                {...provided.dragHandleProps}
+                                                                {...provided.draggableProps}
+                                                                onClick={() => {window.scrollTo({top:(elementsRef.current[index] && elementsRef.current[index].current.offsetTop - window.innerHeight/5), left:0, behavior:'smooth'})}}
+                                                                style={getItemStyle(
+                                                                snapshot.isDragging,
+                                                                provided.draggableProps.style,
+                                                                )}>
+                                                                    <div className="center-column hoverback one-contents__inner">
+                                                                        <div className="center-row">
+                                                                            <div className="left">
+                                                                                {
+                                                                                    sectionIcons.filter(doc => doc.sectionTypeName === item.sectionTypeName)[0].icon
+                                                                                }
+                                                                                <div className="content__name">
+                                                                                    {item.name}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="right">
+                                                                                {optionButton(index)}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="center-row">
+                                                                            <div className="left" style={{width:'85%', textAlign:'left', color:'#555C67', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                                                                                {item.title.text}
+                                                                            </div>
+                                                                            <div className="right">
+                                                                                <div className="content__button cb-delete"
+                                                                                    onClick={() => {
+                                                                                        const yes = window.confirm("정말 삭제하시겠습니까?");
+                                                                                        if(yes){
+                                                                                            deleteSection(index);
+                                                                                        }
+                                                                                    } }>
+                                                                                    삭제
+                                                                                </div>
+                                                                                <div className="content__button cb-duplicate"
+                                                                                    onClick={() => pasteThisSection(state.contents[index], index) }>
+                                                                                    복제
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>   
                                                                 </div>
                                                             </>
                                                         ) }}}

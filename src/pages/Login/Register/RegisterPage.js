@@ -41,7 +41,7 @@ function RegisterPage({history, isLoggedIn}) {
         } catch (err){
             if(err.code === "auth/email-already-in-use"){
                 alert("이미 존재하는 아이디입니다. 로그인 해 주세요.");
-                history.push('/#/login');
+                history.push('/login');
                 history.go();
             }else if(err.code === "auth/invalid-email"){
                 alert("이메일 양식에 맞게 작성해 주세요.");

@@ -13,13 +13,13 @@ function QnaSection({content, setting}) {
             <QnaOpenClose setting={setting} key={index} title={item.question} open={content.qna.shape === 'open'} color={content.qna.question} content={content} type={content.layout} index={index}>
                 <div className="edit-element" style={{alignItems:'start'}}>
                     <div style={{display:'flex', alignItems: 'start', height:'100%'}}>
-                        <span className="qna__word" style={{fontFamily:`${setting.smallFont}`}}>A. <></></span>
+                        <span className="qna__word" style={{fontFamily:`${setting.smallFont}`, color: `${content.qna.answer}`}}>A. <></></span>
                     </div>
                     <div style={{marginTop:'4px', width:'100%'}}>
                         <TextAuto
                             disabled
                             small
-                            size={content.qna.answerSize/20}
+                            size={0.9}
                             value={item.answer} 
                             color={content.qna.answer} align="start" />
                     </div>

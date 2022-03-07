@@ -32,7 +32,7 @@
     font-family:Pretendard-ExtraBold;
     line-height: 1.4em;
     box-sizing: border-box;
-    z-index:1;
+    z-index:2;
     background-color:rgba(0,0,0,0);
 }
 
@@ -77,6 +77,7 @@
     margin-top:50px;
     text-decoration: none;
     font-weight:700;
+    z-index:2;
 }
 
 .main__button2:hover{

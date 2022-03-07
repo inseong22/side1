@@ -139,7 +139,7 @@ export function EditRadioLayout({content, options, value, onChange, version}){
                         )}
                     </div>
                     <div className={value === 2 ? 'radio-element-b' : 'radio-element-b r-unclicked radio-hover'} onClick={(e, align, top, bottom) => onChange(e=2, align='start', top=15, bottom=15)}>
-                    {value === 3 ? (
+                    {value === 2 ? (
                             <img className='text-layout3' src={Tlay23W} />
                         ):(
                             <img className='text-layout3' src={Tlay23G} />

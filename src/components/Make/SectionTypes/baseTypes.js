@@ -53,6 +53,7 @@ const commons = {
         layout:1,
         contentSize:50,
         cardSize: 100,
+        buttonAlign:'center',
     }
 }
 
@@ -322,7 +323,8 @@ export const base = [
             titleSize: 20,
             descUse:true,
             descSize: 16,
-            color:'#000000',
+            titleColor:'#000000',
+            descColor:'#000000',
             align: 'center'
         },
         elements:[
@@ -396,6 +398,7 @@ export const base = [
         writer:{
             use:true,
             color: '#000000',
+            size: 16,
         },
         elementTitle:{
             use:true,
@@ -409,7 +412,7 @@ export const base = [
             descUse:true,
             descSize: 18,
             color:'#000000',
-            align: 'center'
+            align: 'center',
         },
         elements:[
             {
@@ -594,6 +597,7 @@ export const base = [
         },
         video:{
             ...contents.video,
+            use: true,
             type:'base',
         },
         title:{

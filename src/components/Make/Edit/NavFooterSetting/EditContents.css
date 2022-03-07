@@ -5,6 +5,7 @@
     width: 95%;
     margin-bottom: 5px;
     /* cursor:grab; */
+    font-family: Noto Sans KR;
 }
 
 .one-contents-draggable:hover{
@@ -86,7 +87,7 @@
 
 .content__name{
     font-size:16px;
-    font-weight: 900;
+    font-weight: 600;
     color:var(--main-font-color);
 }
 

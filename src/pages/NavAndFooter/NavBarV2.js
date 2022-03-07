@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {authService} from '../../tools/fbase'
 import LoginModal from '../../components/Login/LoginModal'
 import RegisterModal from '../../components/Login/RegisterModal'
+import Profile from '../../components/NavAndFooter/Profile'
 
 function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
     const [loginOpen, setLoginOpen] = useState(false)
@@ -32,9 +33,10 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
                 <div className="nav-on-v2">
                     {isLoggedIn ? 
                     <>
-                    <span className="nav-left-text" onClick={() => onLogout()}>
+                    {/* <span className="nav-left-text" onClick={() => onLogout()}>
                         로그아웃
-                    </span>
+                    </span> */}
+                    <Profile history={history} />
                     </> : 
                     <>
                         <div className="nav-left-text" onClick={() => setLoginOpen(!loginOpen)}>

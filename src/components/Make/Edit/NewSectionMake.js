@@ -16,7 +16,7 @@ import {ArrowIosBack} from '@styled-icons/evaicons-solid'
 import EditSetting from './NavFooterSetting/EditSetting'
 import EditFooterSection from './NavFooterSetting/EditFooterSection'
 import EditContents from './NavFooterSetting/EditContents'
-import BackButton from '../../../tools/img/backButton.png'
+import {sectionIcons} from './NavFooterSetting/ContentsIcons';
 import {Trash} from '@styled-icons/boxicons-solid'
 import './NewSectionMake.css'
 
@@ -217,6 +217,9 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                                     <span className="back-button">
                                         <ArrowIosBack size="20" />
                                     </span>
+                                    {
+                                        sectionIcons.filter(doc => doc.sectionTypeName === content.sectionTypeName)[0].icon
+                                    }
                                     <span className="back-text">
                                         {content.name}
                                     </span>

@@ -38,7 +38,7 @@ function GallerySection({content,setting}) {
                             </div>
                            }
                            <input
-                               className="feature-upload-file"
+                               className="feature-upload-file border-hover"
                                type="file" 
                                accept="image/*" 
                                id="file" 

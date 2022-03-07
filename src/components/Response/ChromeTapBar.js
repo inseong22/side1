@@ -23,7 +23,7 @@ function ChromeTapBar({content}) {
             </div>
             <div className="right" style={{paddingRight:'23px'}}>
                 <div className="make-tab-url">
-                    https://surfee.co.kr/#/{content.setting.urlId}
+                    https://surfee.co.kr/{content.setting.urlId}
                 </div>
             </div>
         </div>
