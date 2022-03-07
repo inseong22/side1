@@ -110,8 +110,8 @@ function EditReviewSection({content, category}) {
                                 <OnOffCustom text="이름 / 정보" value={content.writer.use} func={(e) => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].writer.use = !content.writer.use;
                                 }))} />
-                                <TextSizeCustom text="크기" elementDesc value={content.elementText.writerSize} func={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].elementText.writerSize = e;
+                                <TextSizeCustom text="크기" elementDesc value={content.writer.size} func={e => action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].writer.size = e;
                                 }))} />
                             </>
                         </OpenCloseCustom>

@@ -398,6 +398,7 @@ export const base = [
         writer:{
             use:true,
             color: '#000000',
+            size: 16,
         },
         elementTitle:{
             use:true,
@@ -412,7 +413,6 @@ export const base = [
             descSize: 18,
             color:'#000000',
             align: 'center',
-            writerSize: 18,
         },
         elements:[
             {

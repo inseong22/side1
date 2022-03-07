@@ -113,7 +113,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             alert("로그인하셔야 이용가능한 페이지입니다.");
             setRegisterOpen(true);
         }else{
-            history.push('/#/response');
+            history.push('/response');
             history.go();
             return;
         }

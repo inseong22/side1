@@ -16,7 +16,7 @@ function SubmitPage() {
                 <div className="after-page-title">
                 축하합니다!
                 랜딩페이지는<br/>
-                https://surfee.co.kr/#/입력하신 urlID<br/>
+                https://surfee.co.kr입력하신 urlID<br/>
                 에서 확인하실 수 있습니다.
                 </div>
                 <div className="after-page-desc">

@@ -90,7 +90,7 @@ function ReviewSection({content, setting}) {
                                     fontFamily:`${setting.smallFont}`,
                                     WebkitTextFillColor: `${content.writer.color}`,
                                     WebkitOpacity: 1,
-                                    fontSize:`${content.elementText.writerSize/20}em`,
+                                    fontSize:`${content.writer.size/17}em`,
                                 }}
                                 value={item.writer} 
                                 disabled

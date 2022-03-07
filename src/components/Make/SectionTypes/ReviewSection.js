@@ -88,7 +88,7 @@ function ReviewSection({content, setting}) {
                                     textAlign:`${state.isPhone ? content.mobile.align : content.align}`,
                                     color:`${content.writer.color}`,
                                     fontFamily:`${state.setting.smallFont}`,
-                                    fontSize:`${content.elementText.writerSize/20}em`,
+                                    fontSize:`${content.writer.size/17}em`,
                                 }}
                                 value={item.writer} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {

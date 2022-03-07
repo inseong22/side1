@@ -209,7 +209,7 @@ function EdtiSetting({setting, setSetting, category, setContents}) {
                             <div style={{flexDirection:'column'}}>
                                 <div style={{display:'flex'}}>
                                     <div style={{color:'#202936', marginTop: '20px'}}>
-                                        https://surfee.co.kr/#/
+                                        https://surfee.co.kr
                                     </div>
                                     <div>
                                         <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) =>  {
