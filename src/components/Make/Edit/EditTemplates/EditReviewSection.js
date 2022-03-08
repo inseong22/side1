@@ -5,6 +5,7 @@ import EditDesign from './tools/EditDesign'
 import ElementsTable from './tools/ElementsTable'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
+import AlignCustom from '../tools/Custom/AlignCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import LayoutRFG from './tools/LayoutRFG'
 import SingleColorCustom from '../tools/Custom/SingleColorCustom'
@@ -17,10 +18,6 @@ const ratingSizeOptions = [
     { label: '작게', value: 15 },
     { label: '보통', value: 19 },
     { label: '크게', value: 23 },
-]
-const alignOptions = [
-    { label: '왼쪽', value: 'start'},
-    { label: '중앙', value: 'center'}
 ]
 
 function EditReviewSection({content, category}) {
@@ -74,7 +71,7 @@ function EditReviewSection({content, category}) {
                                     draft[state.secNum].elementTitle.color = e;
                                     draft[state.secNum].writer.color = e;
                                 }))} />
-                                <RadioCustom text="정렬" options={alignOptions} value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
+                                <AlignCustom value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.align = e;
                                     draft[state.secNum].align = e;
                                 }))} />

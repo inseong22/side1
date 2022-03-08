@@ -30,7 +30,7 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
                                 Surfee
                             </Link>
                             {
-                                isMobile &&
+                                !isMobile &&
                                 <Link to="/surfeeexamples" className="nav-left-text" style={{marginLeft:'4vw'}}>
                                     제작 예시
                                 </Link>

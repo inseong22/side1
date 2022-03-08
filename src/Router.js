@@ -27,19 +27,19 @@ const AppRouter = ({userObj, isLoggedIn}) => {
         action : {},
     }
 
-    if (window.location.host.split(".")[0] !== "surfee" && window.location.host.split(".")[0] !== 'localhost:3000') {
-        return(
-            <Router history={history}>
-                <>
-                <div className="Container" style={{ minHeight: 'calc(100vh - 80px)', zIndex:-1 }}>
-                    <Switch>
-                        <Route path="/" component={UserLandingPage} />
-                    </Switch>
-                </div>
-                </> 
-            </Router>
-        )
-    }else{
+    // if (window.location.host.split(".")[0] !== "surfee" && window.location.host.split(".")[0] !== 'localhost:3000') {
+    //     return(
+    //         <Router history={history}>
+    //             <>
+    //             <div className="Container" style={{ minHeight: 'calc(100vh - 80px)', zIndex:-1 }}>
+    //                 <Switch>
+    //                     <Route path="/" component={UserLandingPage} />
+    //                 </Switch>
+    //             </div>
+    //             </> 
+    //         </Router>
+    //     )
+    // }else{
         return(
             <Router history={history}>
                 <UserContext.Provider value={contextValue}>
@@ -76,6 +76,6 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                 </UserContext.Provider>
             </Router>
         )
-    }
+    // }
 }
 export default AppRouter;

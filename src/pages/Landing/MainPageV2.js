@@ -264,8 +264,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                         <span style={{color:'#6c63ff'}}>Surfee</span> 활용 예시
                     </span>
                     <span className="one-section-small" style={{textAlign: 'center'}}>
-                        목적에 따라 마음에 드는 디자인을<br/>
-                        선택만 하면, 랜딩페이지 완성!
+                        Surfee를 사용한 페이지 디자인 예시를 참고해보세요!
                     </span>
                 </div>
                 <LandingPageExamples />

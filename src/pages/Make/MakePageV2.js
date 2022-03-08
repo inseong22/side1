@@ -283,9 +283,6 @@ const MakePageV2 = ({history, userObj, now}) => {
                                 </div>
                             </div> }
                             </>
-                            {/* {full && <div className="cancel-full-screen" onClick={() => setFull(false)}>
-                                전체화면<br/>취소
-                            </div>} */}
                         </div>
                     </div>
                 </div>

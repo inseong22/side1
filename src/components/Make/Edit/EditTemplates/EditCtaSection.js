@@ -14,11 +14,6 @@ import AddCtaButton from './tools/AddCtaButton'
 import AddGhostButton from './tools/AddGhostButton'
 import Layout from './tools/Layout'
 
-const alignOptions = [
-    {label:'왼쪽', value: 'start'},
-    {label:'중앙', value: 'center'}
-]
-
 const elementss = ['title', 'desc', 'button', 'appButton', 'caution']
 const elementDoc = {
     title:'제목',
@@ -41,7 +36,7 @@ function EditCtaSection({content, category, type}) {
         })
     })
 
-    const elements = elementsAll.filter(doc => (type !== 'apply' && doc.title !== '버튼') || (type !== 'appDownload' && doc.title !== '앱 다운로드'))
+    const elements = elementsAll.filter(doc => (type !== 'apply' && doc.title !== '버튼') || (type !== 'appDownload' && doc.title !== '앱 다운로드 버튼'))
     
     const changeAlignOption = (e) => {
         action.setContents(produce(state.contents, draft => {

@@ -8,6 +8,7 @@ import {CustomSwitch} from '../tools/Custom/OnOffCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import InputCustom from '../tools/Custom/InputCustom'
+import AlignCustom from '../tools/Custom/AlignCustom'
 import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
 import Layout from './tools/Layout'
 import Contents from './tools/Contents'
@@ -15,27 +16,10 @@ import AddGhostButton from './tools/AddGhostButton'
 import EditTitleDesc from './tools/EditTitleDesc'
 import AddCtaButton from './tools/AddCtaButton'
 import AddAppButton from './tools/AddAppButton'
-import TextSizeCustom from '../tools/func/TextSizeCustom'
-
-const alignOptions = [
-    {label:'왼쪽', value: '0'},
-    {label:'중앙', value: '0 auto'}
-]
 
 const buttonAlignOptions = [
     {label:'왼쪽', value: 'start'},
     {label:'중앙', value: 'center'}
-]
-
-const buttonOptions = [
-    {label: '링크 연결', value: 'link'},
-    {label: '신청', value: 'apply'},
-]
-
-const layoutOptions = [
-    {label: '1', value: 1},
-    {label: '2', value: 2},
-    {label: '3', value: 3},
 ]
 
 function EditHeroSection({content, category}) {
@@ -79,38 +63,12 @@ function EditHeroSection({content, category}) {
         },
     ]
 
-    const changeAlignOption = e => {
-        action.setContents(produce(state.contents, draft => {
-            if (draft[state.secNum].button.align == '0')
-                draft[state.secNum].button.align = '0 auto'
-            else
-                draft[state.secNum].button.align = '0'
-        }))
-    }
-
     const changeButtonAlignOption = e => {
         action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button.align = e
             draft[state.secNum].mobile.buttonAlign = e
         }))
     }
-
-
-    // 버튼 관련
-    const ctaOpen = () => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].button.ctaUse = !content.button.ctaUse}))     
-    }
-
-    const changeCtaOption = () => {
-        action.setContents(produce(state.contents, draft => {
-            if (draft[state.secNum].button.ctaOption == 'link')
-                draft[state.secNum].button.ctaOption = 'apply'
-            else
-                draft[state.secNum].button.ctaOption = 'link'
-        }))
-    }
-
 
     const returnCtaOptions = () => {
         switch(content.button.ctaOption){

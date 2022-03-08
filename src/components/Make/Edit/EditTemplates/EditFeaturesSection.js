@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import ElementsTable from './tools/ElementsTable'
 import RadioCustom from '../tools/Custom/RadioCustom'
+import AlignCustom from '../tools/Custom/AlignCustom'
 import produce from 'immer';
 import EditTitleDesc from './tools/EditTitleDesc'
 import SingleColorCustom from '../tools/Custom/SingleColorCustom'
@@ -26,11 +27,6 @@ const imageSizeOptions = [
     { label: '보통', value: 75 },
     { label: '크게', value: 100 },
 ]
-const alignOptions = [
-    { label: '왼쪽', value: 'start'},
-    { label: '중앙', value: 'center'}
-]
-
 
 export const EditImageIcon = ({content}) => {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -115,7 +111,7 @@ function EditFeaturesSection({content, category}) {
                         <EditImageIcon content={content} />
                         <OpenCloseCustom title="설명글" use={content.elementText.use}>
                             <div className="box-gray__container">
-                            <RadioCustom text="정렬" options={alignOptions} value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
+                            <AlignCustom value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.align = e;
                                 draft[state.secNum].align = e;
                             }))} />

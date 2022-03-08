@@ -213,7 +213,7 @@ export function EditRadioButtom({options, value, onChange}) {
 const RadioCustom = ({text, options, value, func, button, layout, version}) => {
     if (button === true){
         return(
-            <div className="edit-element">
+        <div className="edit-element">
             <div className="edit-element__one" style={{flexDirection: 'column'}}>
                 {text ? 
                     <div className="edit-element__left">{text}</div> 

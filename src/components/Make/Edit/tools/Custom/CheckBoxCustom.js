@@ -11,7 +11,7 @@ export const EditCheckbox = ({value, func}) => {
             onClick={func}
             inputProps={{ 'aria-label': 'controlled' }}
         /> */}
-        <div className={value ? 'custom-check' : 'custom-check cc-unclicked'} onClick={func}>
+        <div className={value ? 'custom-check' : 'custom-check cc-unclicked'}>
             <Check color='white' />
         </div>
         </>
@@ -20,17 +20,12 @@ export const EditCheckbox = ({value, func}) => {
 
 function CheckboxCustom({text, value, func}) {
     return(
-        <div className="edit-element">
-            <div className="edit-element__one">
-                <div className="edit-element__left">
-                    {text}
-                </div>
-                <div className="edit-element__right">
-                    <EditCheckbox
-                        value={value || false}
-                        func={func}
-                    />
-                </div>
+        <div className="element__container opacity-hover" onClick={func}>
+            <EditCheckbox 
+                value={value || false}
+                func={func}/>
+            <div className="element_list_text" style={{color:`${value ? 'black' : 'var(--main-gray)'}`}}>
+                {text}
             </div>
         </div>
     )

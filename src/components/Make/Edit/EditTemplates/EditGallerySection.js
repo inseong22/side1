@@ -23,16 +23,6 @@ const shapeOptions = [
     { label: '라운드', value: 5 },
     { label: '원형', value: 20 },
 ]
-const imageSizeOptions = [
-    { label: '작게', value: 200 },
-    { label: '보통', value: 250 },
-    { label: '크게', value: 300 },
-]
-const alignOptions = [
-    { label: '왼쪽', value: 'start' },
-    { label: '중앙', value: 'center' },
-]
-
 
 function EditGallerySection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.

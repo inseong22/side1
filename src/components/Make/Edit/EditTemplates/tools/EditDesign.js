@@ -104,7 +104,13 @@ function EditDesign({content}) {
                     draft[state.secNum].padding.bottom = e;
                 }))}/>
             </OpenCloseCustom> 
-            <OpenCloseCustom title="박스" use={true}>
+            <OpenCloseCustom title="애니메이션" use={true}>
+                <AnimationCustom 
+                    text="애니메이션" 
+                    value={content.animation} 
+                    func={ e => changeAnimationOption(e)} />
+            </OpenCloseCustom>
+            <BoxCustom title="박스" use={true}>
                 <OnOffCustom text="박스 사용" value={content.box.use} func={(e) => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].box.use = !content.box.use;
                 }))} />
@@ -118,13 +124,7 @@ function EditDesign({content}) {
                         }))} />
                     </>
                 }
-            </OpenCloseCustom>
-            <OpenCloseCustom title="애니메이션" use={true}>
-                <AnimationCustom 
-                    text="애니메이션" 
-                    value={content.animation} 
-                    func={ e => changeAnimationOption(e)} />
-            </OpenCloseCustom>
+            </BoxCustom>
             <BoxCustom title="반응형">
                 <div className="edit-element">
                     <div className="edit-element__one" style={{flexDirection: 'column'}}>
