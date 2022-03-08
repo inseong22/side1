@@ -182,9 +182,6 @@ function EditHeroSection({content, category}) {
                                 :
                                 <RadioCustom content={content} options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
                             }
-                            <TextSizeCustom text="글자 크기" button value={content.button.textSize} func={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].button.textSize = e;
-                            }))} />
                         </div>
                         <AddCtaButton content={content} num={1} />
                         <AddGhostButton content={content} num={1} />

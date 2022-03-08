@@ -40,7 +40,7 @@ function Profile({make}) {
                 alert("로그인을 하셔야 관리 페이지로 접속하실 수 있습니다.");
                 setLoginModal(true);
             }else{
-                history.push('/#/response');
+                history.push('/response');
                 history.go();
             }
         }else{

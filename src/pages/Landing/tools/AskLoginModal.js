@@ -72,7 +72,7 @@ function AskLoginModal({open, setOpen, SomeoneClickMoveToMake, setRegisterOpen})
                             </div>
                         </div>
                         <Link to={{
-                            pathname:`/make`,
+                            pathname:`/questions`,
                             state:{
                                 newMake:true,
                             }}}  

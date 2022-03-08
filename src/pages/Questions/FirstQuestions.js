@@ -10,84 +10,12 @@ import OverflowScrolling from 'react-overflow-scrolling';
 import produce from 'immer';
 import { Input } from 'antd';
 
-const StyledModal = styled(ModalUnstyled)`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
+const Div = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius:10px;
+  flex-direction:column;
 `;
-
-const Backdrop = styled('div')`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-tap-highlight-color: transparent;
-`;
-
-const style = {
-  width: '100vw',
-  height: '100vh',
-  bgcolor: 'rgba(255,255,255,1)',
-  border: '0px solid #000',
-  flexDirection:'column',
-  p: 2,
-  px: 4,
-  pb: 3,
-  display:'flex',
-  justifyContent: 'start',
-  alignItems: 'center',
-//   borderRadius:'20px',
-  position:'relative',
-}
-
-const StyledModal2 = styled(ModalUnstyled)`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius:10px;
-`;
-
-const Backdrop2 = styled('div')`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-tap-highlight-color: transparent;
-`;
-
-const style2 = {
-  width: '30vw',
-  height: '80vh',
-  bgcolor: 'rgba(255,255,255,1)',
-  border: '0px solid #000',
-  flexDirection:'column',
-  p: 2,
-  px: 4,
-  pb: 3,
-  display:'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-//   borderRadius:'20px',
-};
 
 const progressList = [
     {
@@ -164,7 +92,7 @@ const colorList = [
     {name:'상아색',color:'#EEE6C4',},
 ]
 
-function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, setFoot, setType, open, setOpen, navi, setNavi, setting, setSetting, history}) {
+function FirstQuestions({history}) {
     // 모달
     const [cnum, setCnum] = useState(1);
     const [title, setTitle] = useState("");
@@ -173,24 +101,15 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     const [color, setColor] = useState('');
     const [tmodalOpen, setTmodalOpen] = useState(false);
     const [alarm, setAlarm] = useState(false);
+    const [urlId, setUrlId] = useState('');
+    const [type, setType] = useState('');
 
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
-
-    const handleClose = async () => {
-        // 마지막에는 입력한 정보도 저장한다. 근데 한명껄 여러번 저장해서 헷갈리지 않게..!
-
-        await dbService.collection('question_answers').add({
-            createdAt: new Date(),
-        })
-        setOpen(false)
-    };
 
     const onUrlChange = e => {
         if (isNotNumber(e.nativeEvent.data)){ 
             setAlarm(false)
-            setSetting(produce(setting, draft => {
-                draft.urlId = e.currentTarget.value
-            }))
+            setUrlId(e.currentTarget.value);
         }else{
             setAlarm(true)
             e.preventDefault(); 
@@ -221,12 +140,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
             alert("위의 보기 중 한가지를 선택해주세요.");
             return
         }else{
-            setSetting(produce(setting, draft => {
-                draft.font = font;
-                draft.color = color;
-                // draft.cta.backgroundColor = color;
-                // draft.ghost.backgroundColor = color;
-            }))
+
             setCnum(cnum + 1);
         }
     }
@@ -234,76 +148,80 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
 
         const urlDatas = await dbService
             .collection("saved-page")
-            .where("urlId", "==", setting.urlId)
+            .where("urlId", "==", urlId)
             .get(); // uid를 creatorId로 줬었으니까.
         
         let urlData = urlDatas.docs.map(doc => {
             return({...doc.data(), id:doc.id})
         });
 
-        if(setting.urlId === ''){
+        if(urlId === ''){
+            e.stopPropagation()
+            e.preventDefault()
             alert("URL을 입력해 주세요. 이후 페이지에서 수정가능합니다.");
             return
         }else if(urlData.length > 0){
+            e.stopPropagation()
+            e.preventDefault()
             alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
             return;
         }else{
 
-            const defaults = await dbService
-                .collection("saved-page")
-                .where("urlId", "==", type)
-                .get(); // ui
+            // const defaults = await dbService
+            //     .collection("saved-page")
+            //     .where("urlId", "==", type)
+            //     .get(); // ui
 
-            let defaultTemplate = defaults.docs.map(doc => {
-                return({...doc.data(), id:doc.id})
-            });
+            // let defaultTemplate = defaults.docs.map(doc => {
+            //     return({...doc.data(), id:doc.id})
+            // });
 
-            let opacityColor = color + '95';
+            // let opacityColor = color + '95';
     
-            defaultTemplate[0].navi.title = title;
-            defaultTemplate[0].setting.title = title;
-            defaultTemplate[0].setting.cta.backgroundColor = color;
-            defaultTemplate[0].setting.color = opacityColor;
-            defaultTemplate[0].setting.fta.backgroundColor = color;
-            defaultTemplate[0].setting.ghost.borderColor = color;
-            defaultTemplate[0].setting.ghost.color = color;
-            defaultTemplate[0].setting.urlId = setting.urlId;
-            defaultTemplate[0].setting.font = font;
-            defaultTemplate[0].foot.copyright.text = title;
+            // defaultTemplate[0].navi.title = title;
+            // defaultTemplate[0].setting.title = title;
+            // defaultTemplate[0].setting.cta.backgroundColor = color;
+            // defaultTemplate[0].setting.color = opacityColor;
+            // defaultTemplate[0].setting.fta.backgroundColor = color;
+            // defaultTemplate[0].setting.ghost.borderColor = color;
+            // defaultTemplate[0].setting.ghost.color = color;
+            // defaultTemplate[0].setting.urlId = setting.urlId;
+            // defaultTemplate[0].setting.font = font;
+            // defaultTemplate[0].foot.copyright.text = title;
 
-            defaultTemplate[0].contents = defaultTemplate[0].contents.map((doc, index) => {
-                if(doc.sectionTypeName === 'CtaSection' || doc.sectionTypeName === 'ApplySection' || doc.sectionTypeName === 'AppDownloadSection' ){
-                    doc.backgroundColor = opacityColor;
-                }
-                if(index === 1 && doc.sectionTypeName === 'TextSection' ){
-                    doc.backgroundColor = opacityColor;
-                }
-                return doc;
-            })
+            // defaultTemplate[0].contents = defaultTemplate[0].contents.map((doc, index) => {
+            //     if(doc.sectionTypeName === 'CtaSection' || doc.sectionTypeName === 'ApplySection' || doc.sectionTypeName === 'AppDownloadSection' ){
+            //         doc.backgroundColor = opacityColor;
+            //     }
+            //     if(index === 1 && doc.sectionTypeName === 'TextSection' ){
+            //         doc.backgroundColor = opacityColor;
+            //     }
+            //     return doc;
+            // })
 
-            if(defaultTemplate){
-                setContents(defaultTemplate[0].contents);
-                setNavi(defaultTemplate[0].navi);
-                setFoot(defaultTemplate[0].foot);
-                setSetting(defaultTemplate[0].setting);
-            }
+            // if(defaultTemplate){
+            //     setContents(defaultTemplate[0].contents);
+            //     setNavi(defaultTemplate[0].navi);
+            //     setFoot(defaultTemplate[0].foot);
+            //     setSetting(defaultTemplate[0].setting);
+            // }
             
-            const body = {
-                type: type,
-                name: navi.title,
-                font: font,
-                color:color
-            }
+            // const body = {
+            //     type: type,
+            //     name: navi.title,
+            //     font: font,
+            //     color:color
+            // }
 
-            const done = await dbService.collection('after-questions').add(body);
+            // const done = await dbService.collection('after-questions').add(body);
 
-            if(JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']).length > 48000){
-                // 임시 방편으로 큰 데이터는 건너뛰도록 조치.
-                handleClose()
-            }else{
-                localStorage.setItem('temp', JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']));
-                handleClose()
-            }
+            // if(JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']).length > 48000){
+            //     // 임시 방편으로 큰 데이터는 건너뛰도록 조치.
+            //     handleClose()
+            // }else{
+            //     localStorage.setItem('temp', JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']));
+            //     handleClose()
+            // }
         }
     }
 
@@ -399,7 +317,6 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                             <div className="template__card uphover"
                                 onClick={() => {
                                     setDevice('pc')
-                                    setIsPhone(false)
                                 }}
                                 style={{border: `${device === 'pc' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
@@ -409,7 +326,6 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                             <div className="template__card uphover"
                                 onClick={() => {
                                     setDevice('mobile')
-                                    setIsPhone(true)
                                 }}
                                 style={{border: `${device === 'mobile' ? '1px solid #A89AFF' : 'none'}`, textAlign: 'center', padding:'50px 30px'}} >
                                 <div>
@@ -426,7 +342,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
 
             case 4:
                 return(
-                    <OverflowScrolling className="scroll">
+                    <OverflowScrolling className="scroll" style={{paddingBottom:'50px'}}>
                     <ModalBox title={<> 좋아요! 디자인은 어떻게 할까요? 🤔</>}>
                         <div className="modal-column">
                             <div className="modal-column">
@@ -503,7 +419,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                         </div>
                         <div className="modal-main-card">
                             <div className="modal-title" style={{fontSize:'25px'}}>
-                                https://surfee.co.kr/<input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={setting.urlId} onChange={e => onUrlChange(e)} />
+                                https://surfee.co.kr/<input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={urlId} onChange={e => onUrlChange(e)} />
                             </div>
                             {alarm ? (
                                 <div className="text-alarm">
@@ -516,9 +432,7 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
                             </div>
                             <div className="modal-button-container">
                                 <div className="modal-move-button-back" onClick={e => setCnum(cnum - 1)}>이전</div>
-                                <div className="modal-move-button" onClick={() => {
-                                    nextAndSetDone();
-                                }}>시작하기</div>
+                                <Link to='/make' className="modal-move-button" onClick={nextAndSetDone}>시작하기</Link>
                             </div>
                         </div>
                     </div>
@@ -528,62 +442,39 @@ function FirstQuestions({saveLocalStorage, setIsPhone, setContents, type, foot, 
     }
 
     return (
-        <div>
-        <StyledModal
-            aria-labelledby="unstyled-modal-title"
-            aria-describedby="unstyled-modal-description"
-            open={open}
-            BackdropComponent={Backdrop}
-        >
-            <Box sx={style}>
-                <div onClick={() => history.go(-1)} className="arrow-back">
+        <Div>
+            <div className="progress-bar__container">
+                <div onClick={() => 
+                    history.go(-1)} className="arrow-back">
                     ←
                 </div> 
-                <div className="progress-bar__container">
-                    {progressList.map((item, index) => {
-                        let backColor = 'rgba(100,100,100,0.2)'
-                        let fontColor = '#C4C4C4'
-                        let fontColor2 = 'rgba(0,0,0,0.6)'
+                {progressList.map((item, index) => {
+                    let backColor = 'rgba(100,100,100,0.2)'
+                    let fontColor = '#C4C4C4'
+                    let fontColor2 = 'rgba(0,0,0,0.6)'
 
-                        if(item.num < cnum){
-                            backColor = 'linear-gradient(180deg, #9281FF 0%, #6C63FF 100%)'
-                            fontColor = "white"
-                            fontColor2 = 'black'
-                        }else if(item.num === cnum){
-                            backColor = 'white'
-                            fontColor = "#6C63FF"
-                            fontColor2 = "#6C63FF"
-                        }
+                    if(item.num < cnum){
+                        backColor = 'linear-gradient(180deg, #9281FF 0%, #6C63FF 100%)'
+                        fontColor = "white"
+                        fontColor2 = 'black'
+                    }else if(item.num === cnum){
+                        backColor = 'white'
+                        fontColor = "#6C63FF"
+                        fontColor2 = "#6C63FF"
+                    }
 
-                        return(
-                            <span style={{display:'flex', flexDirection:'column', margin:'3%', alignItems: 'center', justifyContent: 'center'}}>
-                                <span className="list-component" style={{background:`${backColor}`, color:`${fontColor}`, border:`1px solid ${fontColor}`}}>{item.num}</span>
-                                <span style={{fontSize:'12px', color:`${fontColor2}`, marginTop:'7px'}}>{item.name}</span>
-                            </span>
-                        )
-                    })}
-                </div>
-                <div className="center-column">
-                    {content()}
-                </div>
-            </Box>
-        </StyledModal>
-
-        <StyledModal2
-            aria-labelledby="unstyled-modal-title"
-            aria-describedby="unstyled-modal-description"
-            open={tmodalOpen}
-            onClose={() => setTmodalOpen(false)}
-            BackdropComponent={Backdrop2}
-        >
-            <Box sx={style2}>
-                <>
-                템플릿
-                </>
-            </Box>
-        </StyledModal2>
-
-        </div>
+                    return(
+                        <span style={{display:'flex', flexDirection:'column', margin:'3%', alignItems: 'center', justifyContent: 'center'}}>
+                            <span className="list-component" style={{background:`${backColor}`, color:`${fontColor}`, border:`1px solid ${fontColor}`}}>{item.num}</span>
+                            <span style={{fontSize:'12px', color:`${fontColor2}`, marginTop:'7px'}}>{item.name}</span>
+                        </span>
+                    )
+                })}
+            </div>
+            <div className="center-column">
+                {content()}
+            </div>
+        </Div>
     )
 }
 

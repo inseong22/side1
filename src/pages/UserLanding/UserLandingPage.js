@@ -36,6 +36,7 @@ const UserLandingPage = (props) => {
     ChannelTalk.shutdown();
 
     useEffect(() => {
+        console.log(props)
         loadData()
         ReactGa.initialize('UA-213792742-1');
         // to report page view
