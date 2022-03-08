@@ -28,6 +28,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                             zIndex: 5,
                             color:`${navi.logo.text.color}`, 
                             fontFamily:`${state.setting.font}`,
+                            fontSize:'0.9em',
                             resize:'none',
                             padding: '0px',
                             marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,

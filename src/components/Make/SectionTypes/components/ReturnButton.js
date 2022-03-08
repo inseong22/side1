@@ -23,10 +23,11 @@ function ReturnButton({content, onlyapp}){
         }))} 
         inputStyle={{
             textAlign: 'center',
+            fontSize:'14px',
             fontFamily:`${state.setting.smallFont}`,
             borderRadius:`${state.setting[type].borderRadius}px`,  
             backgroundColor:`${state.setting[type].backgroundColor}`, 
-            padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
+            padding: `5px 5px`, 
             }}/>
     
     </div>)}

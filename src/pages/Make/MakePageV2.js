@@ -103,6 +103,7 @@ const MakePageV2 = ({history, userObj, now}) => {
         if(location.state !== undefined){
             if(location.state.now){
                 loadLocalStorage()
+                setIsPhone(location.state.isPhone)
             }else{
                 setLoading(true)
 

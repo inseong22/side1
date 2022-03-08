@@ -12,12 +12,17 @@ import produce from 'immer';
 import lodash from 'lodash'
 import { Input } from 'antd';
 import { base } from '../../components/Make/SectionTypes/baseTypes'
+import {
+    ChakraProvider,
+    Button
+  } from '@chakra-ui/react'
 
 const Div = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction:column;
+  box-sizing:border-box;
 `;
 
 const progressList = [
@@ -68,18 +73,19 @@ const secondQuestion = [
 
 const fontList = [
     { label: '노토산스', value: 'Noto Sans KR' },
-    { label: '프리텐다드', value: 'Pretendard-Regular' },
+    { label: '프리텐다드', value: 'Pretendard-Bold' },
     { label: '나눔스퀘어 라운드', value: 'NanumSquareRound' },
     { label: '바른 공군', value: 'ROKAFSansBold' },
-    { label: '지마켓 산스', value: 'GmarketSansMedium' },
+    { label: '지마켓 산스', value: 'GmarketSansBold' },
     { label: '고운 돋움', value: 'GowunDodum-Regular' },
-    { label: '에스코어 드림', value: 'S-CoreDream-4Regular' },
+    { label: '에스코어 드림', value: 'S-CoreDream-7ExtraBold' },
     { label: '함박눈체', value : 'SF_HambakSnow'},
     { label: '카페24 서라운드', value: 'Cafe24Ssurround'},
     { label: '레페리포인트-Black', value:'LeferiPoint-BlackA'},
-    { label: '고운바탕', value : 'GowunBatang-Regular'},
+    { label: '고운바탕', value : 'GowunBatang-Bold'},
     { label: '여기어때 잘난체', value: 'yg-jalnan'},
 ]
+
 const colorList = [
     {name:'빨강', color:'#FF6464'},
     {name:'노랑',color:'#FFE162',},
@@ -439,16 +445,16 @@ function FirstQuestions({history}) {
                         </div>
                         <div className="modal-main-card">
                             <div className="url-input-box">
-                                <div className="modal-title" style={{fontSize:'25px'}}>
-                                    https://surfee.co.kr/<input className="input-holder input-focus" style={{width: '18vw', marginLeft: '10px'}} placeholder="영문 소문자와 숫자만 사용 가능합니다." value={urlId} 
+                                <div className="modal-title" style={{fontSize:'23px'}}>
+                                    https://surfee.co.kr/<input className="input-holder input-focus" style={{width: '25vw', padding:'0px 15px', marginLeft: '10px'}} placeholder="영문 소문자와 숫자만 사용 가능합니다." value={urlId} 
                                     onChange={e => {
                                         setStart(false);
                                         onUrlChange(e);
                                     }} />
                                 </div>
-                                <div className="dup-button" onClick={nextAndSetDone}>
+                                <Button colorScheme='#6c63ff' className="dup-button" onClick={nextAndSetDone}>
                                     중복 확인
-                                </div>
+                                </Button>
                             </div>
                             {alarm ? (
                                 <div className="text-alarm">
@@ -466,7 +472,8 @@ function FirstQuestions({history}) {
                                     <Link to={{
                                         pathname: "/make", 
                                         state: {
-                                            now: true
+                                            now: true,
+                                            isPhone: device === 'mobile',
                                         }
                                     }} className="modal-move-button">시작하기</Link> 
                                     : 
@@ -510,9 +517,9 @@ function FirstQuestions({history}) {
                     )
                 })}
             </div>
-            <div className="center-column">
+            <ChakraProvider className="center-column">
                 {content()}
-            </div>
+            </ChakraProvider>
         </Div>
     )
 }

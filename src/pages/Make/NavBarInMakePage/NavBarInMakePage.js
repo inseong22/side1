@@ -214,23 +214,38 @@ const saveImages = async () => {
 
 const afterSaveImage = async (returned) => {
     if(editing){
-
-        const body = {
-            contents:returned,
-            navi:navi,
-            foot:foot,
-            setting:setting,
-            created:Date.now(),
-            makerEmail:userObj.email,
-            // makingTypeByUser:makingTypeByUser,
-            urlId:setting.urlId,
-        }
-
-        await dbService.doc(`saved-page/${editingId}`).update(body);
-        // 자동저장 하던 걸 지운다.
-        window.localStorage.removeItem("temp");
-        setSaveOpen(true);
+        const savedPages = await dbService
+            .collection("saved-page")
+            .where("urlId", "==", setting.urlId)
+            .get(); // uid를 creatorId로 줬었으니까.
         
+        let savedPage = savedPages.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+
+        if(setting.urlId === ''){
+            alert("url을 설정해야 합니다.");
+            setLoading(false);
+        }else if(savedPage.length > 0 && savedPage[0].id !== editingId){
+            alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
+            setLoading(false);
+        }else{
+            const body = {
+                contents:returned,
+                navi:navi,
+                foot:foot,
+                setting:setting,
+                created:Date.now(),
+                makerEmail:userObj.email,
+                // makingTypeByUser:makingTypeByUser,
+                urlId:setting.urlId,
+            }
+
+            await dbService.doc(`saved-page/${editingId}`).update(body);
+            // 자동저장 하던 걸 지운다.
+            window.localStorage.removeItem("temp");
+            setSaveOpen(true);
+        }
     }else{
         const savedPages = await dbService
             .collection("saved-page")
