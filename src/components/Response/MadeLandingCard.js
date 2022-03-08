@@ -81,7 +81,7 @@ function MadeLandingCard({item,published, setCopyOpen, id, index, setNowChecking
     if(addNew){
         return(
             <Link to={{
-                pathname:`/make`,
+                pathname:`/questions`,
                 state:{
                     newMake:true,
                 }}} 

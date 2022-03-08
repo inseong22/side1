@@ -24,7 +24,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${isMobile ? content.mobile.align : content.align}`,
+                                    textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
                                     fontFamily:`${setting.smallFont}`,
                                     color:`${content.elementTitle.color}`,
                                     fontSize:`${content.elementTitle.size/20}em`,
@@ -39,10 +39,10 @@ function ReviewSection({content, setting}) {
                     }
                     {
                         content.rating.use && 
-                        <div className="df-margin">
+                        <div className="df-margin-small">
                             <div style={{
                                 width:'100%', 
-                                textAlign:`${isMobile ? content.mobile.align : content.align}`
+                                textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`
                             }}>
                             <Rating
                                 value={item.rating} 
@@ -63,7 +63,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${isMobile ? content.mobile.align : content.align}`,
+                                    textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
                                     fontFamily:`${setting.smallFont}`,
                                     color:`${content.elementText.color}`,
                                     fontSize:`${content.elementText.size/20}em`,
@@ -85,7 +85,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${isMobile ? content.mobile.align : content.align}`,
+                                    textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
                                     color:`${content.writer.color}`,
                                     fontFamily:`${setting.smallFont}`,
                                     WebkitTextFillColor: `${content.writer.color}`,

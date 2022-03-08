@@ -1,6 +1,5 @@
 
 .modal-move-button{
-    font-family: Noto Sans KR;
     width:27vw;
     padding:10px 15px;
     border-radius: 10px;
@@ -14,10 +13,10 @@
     align-items : center;
     font-weight: 400;
     justify-content:center;
+    text-decoration: none;
 }
 
 .modal-move-button-back{
-    font-family: Noto Sans KR;
     width:27vw;
     padding:10px 15px;
     border-radius: 10px;
@@ -215,7 +214,8 @@
     align-items :center;
     justify-content:center;
     flex-direction: column;
-    padding-top:0vh;
+    width:100%;
+    padding-top:50px;
 }
 
 .text-alarm{
@@ -232,7 +232,6 @@
     -ms-overflow-style: none; /* IE and Edge */
     height:85vh;
     width:100vw;
-    padding-top:50px;
 }
 
 .modal-fc-select-title{

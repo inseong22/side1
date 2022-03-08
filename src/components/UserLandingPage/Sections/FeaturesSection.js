@@ -35,7 +35,7 @@ function FeaturesSection({content, setting}) {
                     }
                     {
                         content.elementText.descUse && 
-                            <div className="df-margin feature-desc">
+                            <div className="df-margin-small feature-desc">
                                 <TextareaAutosize 
                                     className="text-no-input"  
                                     value={item.desc} 
