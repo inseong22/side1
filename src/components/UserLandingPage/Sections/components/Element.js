@@ -14,7 +14,7 @@ function Element({content, item}) {
     <>
     {
         content.element.use && 
-        <div className="centeras" style={{justifyContent: `${content.align}`}}>
+        <div className="centera" style={{justifyContent: `${content.elementText.align}`}}>
             <div style={{width:`${content.element.size}px`, height:`${content.element.size}px`, position:'relative', cursor:'pointer'}}>
             {
             content.element.type === 'image' ? 

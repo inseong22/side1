@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import './App.css';
 import LoginPage from './pages/Login/Login/LoginPage'
-import MainPage from './pages/Landing/old/MainPage';
 import UserLandingPage from './pages/UserLanding/UserLandingPage';
 import MainPageV2 from './pages/Landing/MainPageV2';
 import MakePageV2 from './pages/Make/MakePageV2';
@@ -11,6 +10,7 @@ import ResponsePage from './pages/Response/ResponsePage';
 import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/unused/SubmitPage';
 import CustomerPage from './pages/Customer/CustomerPage'
+import FirstQuestions from './pages/Questions/FirstQuestions'
 import ExamplePage from './pages/ExamplePage/ExamplePage'
 import ScrollToTop from './tools/ScrollToTop'
 import { createBrowserHistory } from 'history';
@@ -52,9 +52,6 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                             <Route exact path="/" onUpdate={() => window.scrollTo(0, 0)}>
                                 <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
                             </Route>
-                            <Route path="/register">
-                                <RegisterPage history={history} isLoggedIn={isLoggedIn}/>
-                            </Route>
                             <Route path="/response" onUpdate={() => window.scrollTo(0, 0)}>
                                 <ResponsePage history={history} userObj={userObj}/> 
                             </Route>
@@ -64,16 +61,15 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                             <Route path="/make" onUpdate={() => window.scrollTo(0, 0)}>
                                 <MakePageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
                             </Route>
-                            <Route path="/login">
-                                <LoginPage history={history} isLoggedIn={isLoggedIn}/>
-                            </Route>
-                            <Route path="/customer" onUpdate={() => window.scrollTo(0, 0)}>
-                                <CustomerPage history={history} isLoggedIn={isLoggedIn}/>
+                            <Route path="/questions" onUpdate={() => window.scrollTo(0, 0)}>
+                                <FirstQuestions history={history} isLoggedIn={isLoggedIn}/>
                             </Route>
                             <Route path="/surfeeexamples" onUpdate={() => window.scrollTo(0, 0)}>
                                 <ExamplePage history={history} isLoggedIn={isLoggedIn}/>
                             </Route>
-                            <Route exact path="/:id" component={ UserLandingPage } history={history}/>
+                            <Route
+                                path="/:id"
+                                render={(props) => <UserLandingPage {...props} />}/>
                         </Switch>
                     </div>
                     </ScrollToTop> 

@@ -18,7 +18,7 @@ function FeaturesSection({content, setting}) {
             <FeatureCard section="feature" content={content} index={index}>
                 {
                     content.element.use && 
-                    <Element content={content} item={item} index={index} key={index}/>
+                        <Element content={content} item={item} index={index} key={index}/>
                 }
                 {
                     content.elementText.use && 
@@ -40,7 +40,7 @@ function FeaturesSection({content, setting}) {
                     }
                     {
                         content.elementText.descUse && 
-                            <div className="df-margin feature-desc">
+                            <div className="df-margin-small feature-desc">
                                 <TextareaAutosize 
                                     className="text-input"  
                                     value={item.desc} 

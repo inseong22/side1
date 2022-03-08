@@ -38,7 +38,7 @@
 
 .one-section-small{
     text-align:left;
-    font-size:0.8em;
+    font-size:0.7em;
     margin-top:40px;
     font-weight: 400;
     line-height: 2rem;
@@ -193,13 +193,14 @@
         width:70vw;
     }
     .one-section-big{
+        font-size:1.3em;
         text-align: center;
         width:100%;
     }
     .one-section-small{
         text-align: center;
         width:100%;
-        font-size: 0.7em;
+        font-size: 0.6em;
     }
     .main-section-left{
         width: 80%;
