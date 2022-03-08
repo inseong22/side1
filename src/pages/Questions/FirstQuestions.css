@@ -39,6 +39,12 @@
     font-weight: 500;
 }
 
+.disabled{
+    background: #C4C4C4;
+    cursor: default;
+    box-shadow: 4px 4px 15px #E5E5E5;
+}
+
 .modal-mini-text{
     margin-top:12px;
     width:100%;
@@ -239,4 +245,32 @@
     margin-bottom:7px;
     margin-top:3px;
     font-weight: 700;
+}
+
+.url-input-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dup-button{
+    width: 80px;
+    height:30px;
+    border-radius:30px;
+    text-align:center;
+    align-items : center;
+    justify-content: center;
+    font-weight: 500;
+    background: white;
+    color: rgb(108, 99, 255);
+    border: 1px solid rgb(108, 99, 255);
+    margin-left: 10px;
+    line-height: 30px;
+    cursor: pointer;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+.dup-button:hover{
+    background-color: rgb(108, 99, 255);
+    color: white;
 }

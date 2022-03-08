@@ -7,8 +7,11 @@ import './FirstQuestions.css'
 import {Link} from 'react-router-dom'
 import {dbService} from '../../tools/fbase';
 import OverflowScrolling from 'react-overflow-scrolling';
+import { defaults } from '../../components/Make/SectionTypes/baseTypes'
 import produce from 'immer';
+import lodash from 'lodash'
 import { Input } from 'antd';
+import { base } from '../../components/Make/SectionTypes/baseTypes'
 
 const Div = styled('div')`
   display: flex;
@@ -93,6 +96,12 @@ const colorList = [
 ]
 
 function FirstQuestions({history}) {
+    
+    const [setting, setSetting] = useState(lodash.cloneDeep(defaults.setting));
+    const arr = lodash.cloneDeep(base[0])
+    const [contents, setContents] = useState([ arr, lodash.cloneDeep(base[1]), lodash.cloneDeep(base[4]), lodash.cloneDeep(base[5]), lodash.cloneDeep(base[6]) ])
+    const [navi, setNavi] = useState(lodash.cloneDeep(defaults.navi));
+    const [foot, setFoot] = useState(lodash.cloneDeep(defaults.foot));
     // 모달
     const [cnum, setCnum] = useState(1);
     const [title, setTitle] = useState("");
@@ -103,8 +112,18 @@ function FirstQuestions({history}) {
     const [alarm, setAlarm] = useState(false);
     const [urlId, setUrlId] = useState('');
     const [type, setType] = useState('');
+    const [start, setStart] = useState(false);
 
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+
+    const handleClose = async () => {
+        // 마지막에는 입력한 정보도 저장한다. 근데 한명껄 여러번 저장해서 헷갈리지 않게..!
+
+        await dbService.collection('question_answers').add({
+            createdAt: new Date(),
+        })
+        // setOpen(false)
+    };
 
     const onUrlChange = e => {
         if (isNotNumber(e.nativeEvent.data)){ 
@@ -166,62 +185,63 @@ function FirstQuestions({history}) {
             alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
             return;
         }else{
+            setStart(true);
+            alert("사용 가능한 url입니다.");
+            const defaults = await dbService
+                .collection("saved-page")
+                .where("urlId", "==", type)
+                .get(); // ui
 
-            // const defaults = await dbService
-            //     .collection("saved-page")
-            //     .where("urlId", "==", type)
-            //     .get(); // ui
+            let defaultTemplate = defaults.docs.map(doc => {
+                return({...doc.data(), id:doc.id})
+            });
 
-            // let defaultTemplate = defaults.docs.map(doc => {
-            //     return({...doc.data(), id:doc.id})
-            // });
-
-            // let opacityColor = color + '95';
+            let opacityColor = color + '95';
     
-            // defaultTemplate[0].navi.title = title;
-            // defaultTemplate[0].setting.title = title;
-            // defaultTemplate[0].setting.cta.backgroundColor = color;
-            // defaultTemplate[0].setting.color = opacityColor;
-            // defaultTemplate[0].setting.fta.backgroundColor = color;
-            // defaultTemplate[0].setting.ghost.borderColor = color;
-            // defaultTemplate[0].setting.ghost.color = color;
-            // defaultTemplate[0].setting.urlId = setting.urlId;
-            // defaultTemplate[0].setting.font = font;
-            // defaultTemplate[0].foot.copyright.text = title;
+            defaultTemplate[0].navi.title = title;
+            defaultTemplate[0].setting.title = title;
+            defaultTemplate[0].setting.cta.backgroundColor = color;
+            defaultTemplate[0].setting.color = opacityColor;
+            defaultTemplate[0].setting.fta.backgroundColor = color;
+            defaultTemplate[0].setting.ghost.borderColor = color;
+            defaultTemplate[0].setting.ghost.color = color;
+            defaultTemplate[0].setting.urlId = urlId;
+            defaultTemplate[0].setting.font = font;
+            defaultTemplate[0].foot.copyright.text = title;
 
-            // defaultTemplate[0].contents = defaultTemplate[0].contents.map((doc, index) => {
-            //     if(doc.sectionTypeName === 'CtaSection' || doc.sectionTypeName === 'ApplySection' || doc.sectionTypeName === 'AppDownloadSection' ){
-            //         doc.backgroundColor = opacityColor;
-            //     }
-            //     if(index === 1 && doc.sectionTypeName === 'TextSection' ){
-            //         doc.backgroundColor = opacityColor;
-            //     }
-            //     return doc;
-            // })
+            defaultTemplate[0].contents = defaultTemplate[0].contents.map((doc, index) => {
+                if(doc.sectionTypeName === 'CtaSection' || doc.sectionTypeName === 'ApplySection' || doc.sectionTypeName === 'AppDownloadSection' ){
+                    doc.backgroundColor = opacityColor;
+                }
+                if(index === 1 && doc.sectionTypeName === 'TextSection' ){
+                    doc.backgroundColor = opacityColor;
+                }
+                return doc;
+            })
 
-            // if(defaultTemplate){
-            //     setContents(defaultTemplate[0].contents);
-            //     setNavi(defaultTemplate[0].navi);
-            //     setFoot(defaultTemplate[0].foot);
-            //     setSetting(defaultTemplate[0].setting);
-            // }
+            if(defaultTemplate){
+                setContents(defaultTemplate[0].contents);
+                setNavi(defaultTemplate[0].navi);
+                setFoot(defaultTemplate[0].foot);
+                setSetting(defaultTemplate[0].setting);
+            }
             
-            // const body = {
-            //     type: type,
-            //     name: navi.title,
-            //     font: font,
-            //     color:color
-            // }
+            const body = {
+                type: type,
+                name: navi.title,
+                font: font,
+                color:color
+            }
 
-            // const done = await dbService.collection('after-questions').add(body);
+            const done = await dbService.collection('after-questions').add(body);
 
-            // if(JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']).length > 48000){
-            //     // 임시 방편으로 큰 데이터는 건너뛰도록 조치.
-            //     handleClose()
-            // }else{
-            //     localStorage.setItem('temp', JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']));
-            //     handleClose()
-            // }
+            if(JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']).length > 48000){
+                // 임시 방편으로 큰 데이터는 건너뛰도록 조치.
+                handleClose()
+            }else{
+                localStorage.setItem('temp', JSON.stringify([defaultTemplate[0].contents, defaultTemplate[0].navi, defaultTemplate[0].foot, defaultTemplate[0].setting, false, '']));
+                handleClose()
+            }
         }
     }
 
@@ -418,8 +438,17 @@ function FirstQuestions({history}) {
                             마지막으로, <span style={{color:'#6C63FF'}}>{title}</span> 랜딩페이지의 URL을 설정해 주세요.                            
                         </div>
                         <div className="modal-main-card">
-                            <div className="modal-title" style={{fontSize:'25px'}}>
-                                https://surfee.co.kr/<input className="input-holder input-focus" placeholder="영문 소문자와 숫자만 사용 가능합니다." value={urlId} onChange={e => onUrlChange(e)} />
+                            <div className="url-input-box">
+                                <div className="modal-title" style={{fontSize:'25px'}}>
+                                    https://surfee.co.kr/<input className="input-holder input-focus" style={{width: '18vw', marginLeft: '10px'}} placeholder="영문 소문자와 숫자만 사용 가능합니다." value={urlId} 
+                                    onChange={e => {
+                                        setStart(false);
+                                        onUrlChange(e);
+                                    }} />
+                                </div>
+                                <div className="dup-button" onClick={nextAndSetDone}>
+                                    중복 확인
+                                </div>
                             </div>
                             {alarm ? (
                                 <div className="text-alarm">
@@ -432,7 +461,17 @@ function FirstQuestions({history}) {
                             </div>
                             <div className="modal-button-container">
                                 <div className="modal-move-button-back" onClick={e => setCnum(cnum - 1)}>이전</div>
-                                <Link to='/make' className="modal-move-button" onClick={nextAndSetDone}>시작하기</Link>
+                                {
+                                    start ? 
+                                    <Link to={{
+                                        pathname: "/make", 
+                                        state: {
+                                            now: true
+                                        }
+                                    }} className="modal-move-button">시작하기</Link> 
+                                    : 
+                                    <div className="modal-move-button-back">시작하기</div>
+                                }
                             </div>
                         </div>
                     </div>

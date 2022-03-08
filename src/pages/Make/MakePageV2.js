@@ -35,7 +35,7 @@ export const MyContext = React.createContext({
 //     default: false,
 // })
 
-const MakePageV2 = ({history, userObj}) => {
+const MakePageV2 = ({history, userObj, now}) => {
     ChannelTalk.boot({
         "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"
     });
@@ -101,8 +101,8 @@ const MakePageV2 = ({history, userObj}) => {
     useEffect(() => {
         // 관리하기 페이지에서 state.item으로 내용을 가지고 넘어왔다.
         if(location.state !== undefined){
-            if(location.state.newMake){
-                setOpen(true);
+            if(location.state.now){
+                loadLocalStorage()
             }else{
                 setLoading(true)
 
@@ -292,7 +292,7 @@ const MakePageV2 = ({history, userObj}) => {
             
             {/* 모달 모아두기 */}
             <div>
-                <FirstQuestions saveLocalStorage={saveLocalStorage} setContents={setContents} history={history} foot={foot} setFoot={setFoot} type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting} setIsPhone={setIsPhone}/>
+                {/* <FirstQuestions saveLocalStorage={saveLocalStorage} setContents={setContents} history={history} foot={foot} setFoot={setFoot} type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting} setIsPhone={setIsPhone}/> */}
                 <LoadingModal loading={loading} />
             </div>
             <ConfirmCustom open={openConfirm} setOpen={setOpenConfirm} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />
