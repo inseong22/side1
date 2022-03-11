@@ -36,7 +36,7 @@ function SliderCustom({top, text, func, value, max}) {
                 <Slider
                   step={1}
                   focusThumbOnChange={false}
-                  min={1}
+                  min={0}
                   max={max ? max : 100}
                   value={range}
                   onChange={e => {func(e); setRange(e)}}

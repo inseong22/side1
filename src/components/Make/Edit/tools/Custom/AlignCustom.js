@@ -1,11 +1,11 @@
 import React, {useContext} from 'react'
 import { MyContext } from '../../../../../pages/Make/MakePageV2'
 import {AlignLeft} from '@styled-icons/fa-solid'
-import {AlignJustify} from '@styled-icons/fa-solid'
+import {AlignCenter} from '@styled-icons/fa-solid'
 
 const alignOptions = [
     {label:<AlignLeft size="20"/>, value: 'start'},
-    {label:<AlignJustify size="20"/>, value: 'center'}
+    {label:<AlignCenter size="20"/>, value: 'center'}
 ]
 
 export function EditAlignRadio({options, value, onChange}) {

@@ -27,26 +27,23 @@ const CONTENTSSECNUM = 53;
 
 const MARGINTOP = '100px'
 
+const USEDCOLORS = [
+    "#ffffff",
+    "#00ff00",
+    "#ff0000",
+    "#0000ff",
+    "#636cff",
+    "#000000",
+]
+
 export const MakeContext = React.createContext({
-    stateC : {usedColors : [
-        "#ffffff",
-        "#00ff00",
-        "#ff0000",
-        "#0000ff",
-        "#000000",
-    ]},
+    stateC : {usedColors : USEDCOLORS},
     actionC : {setUsedColors : () => {}}
 });
 
 function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting, elementsRef, setContents}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
-    const [usedColors, setUsedColors] = useState([
-        "#ffffff",
-        "#00ff00",
-        "#ff0000",
-        "#0000ff",
-        "#000000",
-    ]);
+    const [usedColors, setUsedColors] = useState(USEDCOLORS);
 
     const contextValue = {
         stateC: {usedColors},
@@ -248,7 +245,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
     }
 
     return (
-        <MakeContext.Provider value={contextValue} style={{position:'relative'}}>
+        <MakeContext.Provider value={contextValue} style={{position:'relative'}} onClick={() => action.setFocus('')}>
             {returnMake()}
         </MakeContext.Provider>
     )

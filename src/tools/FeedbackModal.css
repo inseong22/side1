@@ -1,7 +1,7 @@
 .big-title{
     color: var(--main-color);
     font-weight: 700;
-    font-size: 25px;
+    font-size: 23px;
     text-align: center;
     margin-top: 43px;
     font-family: 'Noto Sans KR';
@@ -10,13 +10,13 @@
 .sub{
     color: black;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 21px;
     line-height: 38px;
 }
 .question{
     color: black;
     font-weight: 500;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 34px;
     margin-top: 0px;
     margin-bottom: 5px;

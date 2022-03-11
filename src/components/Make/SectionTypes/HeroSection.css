@@ -55,7 +55,7 @@
   
 .input-placeholder{
     background-color:white;
-    border : 1px solid var(--main-light-gray);
+    border : 1px solid var(--main-gray);
     width:250px;
     border-radius: 3px;
     margin-right:8px;

@@ -1,11 +1,11 @@
 .recent-color-button{
-    border-radius:5px;
-    width:40px;
-    height:40px;
+    border-radius:2px;
+    width:30px;
+    height:30px;
     display: block;
     cursor: pointer;
     /* border:1px solid rgba(0, 0, 0, 0); */
-    margin-left:5px;
+    margin-left:10px;
     display:flex;
     justify-content: center;
     align-items : center;
@@ -13,6 +13,7 @@
     box-shadow: var(--default-shadow-01);
     flex-direction: column;
 }
+
 .recent-color-text{
     font-size: 11px;
 }

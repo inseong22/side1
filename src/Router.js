@@ -7,9 +7,8 @@ import MainPageV2 from './pages/Landing/MainPageV2';
 import MakePageV2 from './pages/Make/MakePageV2';
 import AdminPage from './pages/AdminPage/AdminPage';
 import ResponsePage from './pages/Response/ResponsePage';
-import RegisterPage from './pages/Login/Register/RegisterPage'
 import SubmitPage from './components/Make/unused/SubmitPage';
-import CustomerPage from './pages/Customer/CustomerPage'
+import WhatIsSurfee from './pages/Customer/WhatIsSurfee'
 import FirstQuestions from './pages/Questions/FirstQuestions'
 import ExamplePage from './pages/ExamplePage/ExamplePage'
 import ScrollToTop from './tools/ScrollToTop'
@@ -66,6 +65,9 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                             </Route>
                             <Route path="/surfeeexamples" onUpdate={() => window.scrollTo(0, 0)}>
                                 <ExamplePage history={history} isLoggedIn={isLoggedIn}/>
+                            </Route>
+                            <Route path="/surfeeintro" onUpdate={() => window.scrollTo(0, 0)}>
+                                <WhatIsSurfee history={history} isLoggedIn={isLoggedIn}/>
                             </Route>
                             <Route
                                 path="/:id"

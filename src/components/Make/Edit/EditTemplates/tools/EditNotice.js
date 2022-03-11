@@ -22,9 +22,9 @@ function EditNotice({content}) {
             <ColorCustom text="색상" value={content.caution.color} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.color = e;
             }))} />
-            <AlignCustom value={content.caution.align} func={e => action.setContents(produce(state.contents, draft => {
+            {/* <AlignCustom value={content.caution.align} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.align = e;
-            }))} />
+            }))} /> */}
             <TextSizeCustom text="크기" desc options={sizeOptions} value={content.caution.size} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.size = e;
             }))} />

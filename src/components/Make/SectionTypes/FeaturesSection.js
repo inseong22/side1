@@ -22,7 +22,7 @@ function FeaturesSection({content, setting}) {
                 }
                 {
                     content.elementText.use && 
-                    <>
+                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}}>
                     {
                         content.elementText.titleUse && 
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
@@ -62,7 +62,7 @@ function FeaturesSection({content, setting}) {
                                 />
                             </div>
                     }
-                    </>
+                    </div>
                 }
             </FeatureCard>
         )}

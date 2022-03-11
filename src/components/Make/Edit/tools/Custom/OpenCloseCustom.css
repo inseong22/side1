@@ -29,6 +29,7 @@
     box-sizing: border-box;
     /* 전체 온오프 패딩 조절 */
     padding:10px 15px;
+    transition: all 0.3s ease-in;
 }
 
 .dis-accordion{

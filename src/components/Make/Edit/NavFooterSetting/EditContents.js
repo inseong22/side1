@@ -230,7 +230,7 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                 </DragDropContext>
                 <div className="center-row">
                     <div className="section-add__button" onClick={() => { setAddOpen(true); }}
-                        style={{margin:'15px', borderRadius:'3px'}} >
+                        style={{margin:'15px'}} >
                         + 섹션 추가하기
                     </div>
                 </div>

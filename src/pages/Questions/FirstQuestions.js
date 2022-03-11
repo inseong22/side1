@@ -6,6 +6,7 @@ import '../../components/Make/Modal/Modal.css';
 import './FirstQuestions.css'
 import {Link} from 'react-router-dom'
 import {dbService} from '../../tools/fbase';
+import MiniModal from '../../tools/MiniModal';
 import OverflowScrolling from 'react-overflow-scrolling';
 import { defaults } from '../../components/Make/SectionTypes/baseTypes'
 import produce from 'immer';
@@ -114,11 +115,12 @@ function FirstQuestions({history}) {
     const [device, setDevice] = useState("");
     const [font, setFont] = useState('');
     const [color, setColor] = useState('');
-    const [tmodalOpen, setTmodalOpen] = useState(false);
     const [alarm, setAlarm] = useState(false);
     const [urlId, setUrlId] = useState('');
     const [type, setType] = useState('');
     const [start, setStart] = useState(false);
+    const [miniModal, setMiniModal] = useState(false);
+    const [miniModalText, setMiniModalText] = useState('');
 
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
@@ -144,7 +146,8 @@ function FirstQuestions({history}) {
 
     const nextAndSetTemplates = async (e) => {
         if(type === ""){
-            alert("위의 보기 중 한가지를 선택해 주세요.");
+            setMiniModal(true);
+            setMiniModalText('위의 보기 중 한가지를 선택해 주세요.');
             return
         }else{
             setCnum(cnum + 1);
@@ -153,7 +156,8 @@ function FirstQuestions({history}) {
 
     const nextAndSetTemplate = async (e) => {
         if(device === ""){
-            alert("위의 보기 중 한가지를 선택해 주세요.");
+            setMiniModal(true);
+            setMiniModalText('위의 보기 중 한가지를 선택해 주세요.');
             return
         }else{
             setCnum(cnum + 1);
@@ -162,7 +166,8 @@ function FirstQuestions({history}) {
 
     const nextAndSetFont = async e => {
         if(font === '' || color === ''){
-            alert("위의 보기 중 한가지를 선택해주세요.");
+            setMiniModal(true);
+            setMiniModalText('위의 보기 중 한가지를 선택해 주세요.');
             return
         }else{
 
@@ -183,16 +188,19 @@ function FirstQuestions({history}) {
         if(urlId === ''){
             e.stopPropagation()
             e.preventDefault()
-            alert("URL을 입력해 주세요. 이후 페이지에서 수정가능합니다.");
+            setMiniModal(true);
+            setMiniModalText('URL을 입력해 주세요. 이후 페이지에서 수정가능합니다.');
             return
         }else if(urlData.length > 0){
             e.stopPropagation()
             e.preventDefault()
-            alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
+            setMiniModal(true);
+            setMiniModalText('이미 존재하는 url입니다. 다른 url을 사용해 주세요.');
             return;
         }else{
             setStart(true);
-            alert("사용 가능한 url입니다.");
+            setMiniModal(true);
+            setMiniModalText('사용 가능한 url입니다.');
             const defaults = await dbService
                 .collection("saved-page")
                 .where("urlId", "==", type)
@@ -202,7 +210,7 @@ function FirstQuestions({history}) {
                 return({...doc.data(), id:doc.id})
             });
 
-            let opacityColor = color + '95';
+            let opacityColor = color + '';
     
             defaultTemplate[0].navi.title = title;
             defaultTemplate[0].setting.title = title;
@@ -253,7 +261,7 @@ function FirstQuestions({history}) {
 
     const ModalBox = (props) => {
         return(
-            <div className="modal-flex-column">
+            <div className="modal-flex-column" style={{paddingTop:`${props.small ? '80px' : '50px'}`}}>
                 <div className="modal-title">
                     {props.title}
                 </div>
@@ -273,7 +281,7 @@ function FirstQuestions({history}) {
         switch(cnum){
             case 1:
                 return(
-                    <div className="modal-flex-column">
+                    <div className="modal-flex-column" style={{paddingTop:'80px'}}>
                         <div className="modal-title">
                             안녕하세요, <span style={{color:'#6C63FF'}}>Surfee</span>에 오신 것을 환영합니다!<br/>
                             당신의 서비스 / 제품 명을 알려주세요.
@@ -302,6 +310,7 @@ function FirstQuestions({history}) {
             case 2:
                 return(
                     <ModalBox 
+                        small
                         title={<><span style={{color:'#6C63FF'}}>{title}</span>의 랜딩페이지는 다음 중 어떤 목표를 향하고 있나요? 🚀</>}>
                         <>
                             <div className="modal-row1">
@@ -336,7 +345,9 @@ function FirstQuestions({history}) {
 
             case 3:
                 return(
-                    <ModalBox title={<>
+                    <ModalBox 
+                    small
+                    title={<>
                         <span style={{color:'#6C63FF'}}>{title}</span>의 랜딩페이지는 주로 어떤 화면으로 보여질까요?
                     </>}>
                         <div className="modal-row" style={{flexWrap:'nowrap'}}>
@@ -439,7 +450,7 @@ function FirstQuestions({history}) {
 
             case 5:
                 return(
-                    <div className="modal-flex-column">
+                    <div className="modal-flex-column" style={{paddingTop:'80px'}}>
                         <div className="modal-title">
                             마지막으로, <span style={{color:'#6C63FF'}}>{title}</span> 랜딩페이지의 URL을 설정해 주세요.                            
                         </div>
@@ -520,6 +531,7 @@ function FirstQuestions({history}) {
             <ChakraProvider className="center-column">
                 {content()}
             </ChakraProvider>
+            <MiniModal open={miniModal} setOpen={setMiniModal} text={miniModalText} />
         </Div>
     )
 }

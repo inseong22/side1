@@ -16,7 +16,7 @@ function GallerySection({content,setting}) {
                <>
                <FeatureCard section="gallery" content={content} index={index}>
                        {content.element.use && 
-                       <div style={{width:'100%', position:'relative', cursor:'pointer'}}>
+                       <div style={{width:'100%', position:'relative', cursor:'pointer'}} onClick={() => {action.setFocus('gallery-image'); action.setCategory(0)}}>
                            { item.attachment ? 
                             <img 
                                 className="uphover" 
@@ -65,7 +65,7 @@ function GallerySection({content,setting}) {
                        }
                        {
                            content.card.use && 
-                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:`${state.isPhone ? 5 : 8}px`}}>
+                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:`${state.isPhone ? 5 : 8}px`}} onClick={() => {action.setFocus('elementText'); action.setCategory(0)}}>
                                 <TextAuto small className="text-input" 
                                     placeholder="여기를 클릭하여 이미지에 대한 설명을 적어보세요."
                                     value={item.text} 

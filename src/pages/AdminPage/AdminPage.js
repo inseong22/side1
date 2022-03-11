@@ -18,21 +18,28 @@ function AdminPage({history}) {
     const [type, setType] = useState(4);
     const [published, setPublished] = useState([]);
     const [feedback, setFeedback] = useState([]);
+    const [emails, setEmails] = useState([]);
+    const [saved, setSaved] = useState([]);
 
     useEffect(() => {
         getThisPublished()
         getFeedback()
-    }, type)
+        getMails()
+        getSaved()
+        emails.map(doc => console.log(doc.email))
+    }, emails)
 
     const getThisPublished = async () => {
         const publishedDatas = await dbService
             .collection('published-page')
+            .orderBy("created", "desc")
             .get();
         let publishedData = publishedDatas.docs.map(doc => {
             return({...doc.data(), id:doc.id})
         });
         setPublished(publishedData);
     }
+
     const getFeedback = async () => {
         const fds = await dbService
             .collection('feedback')
@@ -41,6 +48,27 @@ function AdminPage({history}) {
             return({...doc.data(), id:doc.id})
         });
         setFeedback(fd);
+    }
+
+    const getMails = async () => {
+        const fds = await dbService
+            .collection('apply-datas')
+            .get();
+        let fd = fds.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+        setEmails(fd);
+    }
+
+    const getSaved = async () => {
+        const fds = await dbService
+            .collection('saved-page')
+            .orderBy("created", "desc")
+            .get();
+        let fd = fds.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+        setSaved(fd);
     }
 
     const switchType = () => {
@@ -120,6 +148,36 @@ function AdminPage({history}) {
                     </div>
                 )
 
+                case 3:
+                    return(
+                        <div>
+                            <div>
+                                저장된 페이지
+                            </div>
+                            <div>
+                                {saved &&
+                                saved.map((item, index) => {
+                                    let day = new Date(item.created)
+                                    let date = `${day.getMonth() + 1}월 ${day.getDate()}일 ${day.getHours()}시 ${day.getMinutes()}분`
+                                    return(
+                                        <div className="center-row" style={{margin:'10px'}} key={index}>
+                                            <Half>
+                                                url : {item.urlId}
+                                            </Half>
+                                            <Half>
+                                                날짜 : {date}
+                                            </Half>
+                                            <Half>
+                                                만드신 분 : {item.makerEmail}
+                                            </Half>
+                                        </div>
+                                    )
+                                }) 
+                                }
+                            </div>
+                        </div>
+                    )
+
             default:
                 return(<>뭐요</>)
         }
@@ -131,11 +189,14 @@ function AdminPage({history}) {
                 <RadioButton  onClick={() => setType(0)}>
                     데이터 용도
                 </RadioButton>
-                <RadioButton  onClick={() => setType(1)}>
+                <RadioButton  onClick={() => setType(2)}>
                     피드백(배포 시)
                 </RadioButton>
-                <RadioButton  onClick={() => setType(2)}>
+                <RadioButton  onClick={() => setType(1)}>
                     배포된 페이지
+                </RadioButton>
+                <RadioButton  onClick={() => setType(3)}>
+                    저장된 페이지
                 </RadioButton>
             </div>
             <div>

@@ -10,7 +10,7 @@ function ElementsTable({elements, content}) {
     return (
         <div className="one-element">
             <div className="edit-element__box">
-                <div className="edit-element__title">
+                <div className="edit-element__title" style={{margin:'5px 0px 5px 10px'}}>
                     요소 ON/OFF
                 </div>
                 <div>

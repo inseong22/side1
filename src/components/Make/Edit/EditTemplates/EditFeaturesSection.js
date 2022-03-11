@@ -32,7 +32,7 @@ export const EditImageIcon = ({content}) => {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return(
-        <OpenCloseCustom title="아이콘/이미지" use={content.element.use} tooltip="화면 위에서 아이콘 및 이미지를 업로드 할 수 있습니다.">
+        <OpenCloseCustom title="아이콘/이미지" use={content.element.use} tooltip="화면 위에서 아이콘 및 이미지를 업로드 할 수 있습니다." open={state.focus === 'element'}>
             <RadioCustom text="특징" value={content.element.type} options={featureOptions} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].element.type = e;
             }))} />
@@ -109,7 +109,7 @@ function EditFeaturesSection({content, category}) {
                         <LayoutRFG content={content} />
                         <EditTitleDesc content={content} />
                         <EditImageIcon content={content} />
-                        <OpenCloseCustom title="설명글" use={content.elementText.use}>
+                        <OpenCloseCustom title="설명글" use={content.elementText.use} open={state.focus === 'elementText'}>
                             <div className="box-gray__container">
                             <AlignCustom value={content.elementText.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].elementText.align = e;

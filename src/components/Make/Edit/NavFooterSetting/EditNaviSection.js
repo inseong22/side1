@@ -1,36 +1,26 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { MyContext } from '../../../../pages/Make/MakePageV2'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import InputCustom from '../tools/Custom/InputCustom'
-import ResponsiveCustom from '../tools/Custom/ResponsiveCustom'
-import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import ElementsTable from '../EditTemplates/tools/ElementsTable'
 import SliderCustom from '../tools/Custom/SliderCustom'
-import TextSizeCustom from '../tools/func/TextSizeCustom'
 import BoxCustom from '../tools/Custom/BoxCustom'
 import produce from 'immer';
 import AddContentImg from '../tools/func/FuncContentImg'
 import {Phone} from '@styled-icons/bootstrap'
 import {Desktop} from '@styled-icons/fa-solid'
+import AlignCustom from '../tools/Custom/AlignCustom'
 
 const logoOptions = [
     { label: '로고 이미지', value: 'logo' },
     { label: '텍스트', value: 'text' },
 ]
 
-const logoAlignOptions = [
-    { label: '왼쪽', value: 'start' },
-    { label: '중앙', value: 'center' },
-]
-
-const buttonAlignOptions = [
-    { label: '중앙', value: 'center' },
-    { label: '오른쪽', value: 'end' },
-]
-
 function EditNaviSection({navi, setNavi, category}) {
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const elements = [
         {
@@ -78,10 +68,10 @@ function EditNaviSection({navi, setNavi, category}) {
             <>
                 <div>
                     <ElementsTable elements={elements} />
-                    <OpenCloseCustom title="로고" use={navi.logo.use}>
-                        <RadioCustom options={logoAlignOptions} value={navi.logo.align} func={(e) => setNavi(produce(navi, draft => {
+                    <OpenCloseCustom title="로고" use={navi.logo.use} open={ state.focus === 'navi-logo' }>
+                        <AlignCustom value={navi.logo.align} func={(e) => setNavi(produce(navi, draft => {
                             draft.logo.align = e;
-                        }))} text="정렬" />
+                        }))} />
 
                         <OnOffCustom value={navi.logo.image.use} func={(e) => setNavi(produce(navi, draft => {
                             draft.logo.image.use = !navi.logo.image.use;

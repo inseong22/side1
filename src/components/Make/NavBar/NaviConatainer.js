@@ -11,9 +11,12 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
     return (
         <>
         {navi.logo.use &&  
-            <div className="make-nav-logoc" style={{height:`${navi.height}px`, 
-            justifyContent:`${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? 'right' : navi.logo.align}`,
-            width: `${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? '115%' : '100%'}`}}>
+            <div 
+                onClick={() => {action.setCategory(0); action.setFocus('navi-logo')}}
+                className="make-nav-logoc" 
+                style={{height:`${navi.height}px`, 
+                    justifyContent:`${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? 'right' : navi.logo.align}`,
+                    width: `${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? '115%' : '100%'}`}}>
                 {navi.logo.image.use &&  
                     <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
                 }

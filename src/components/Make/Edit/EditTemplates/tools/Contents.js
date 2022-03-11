@@ -167,7 +167,6 @@ function Contents({content}) {
                     <>
                         <CustomSwitch text="자동 재생" value={content.video.auto} 
                             onChange={ () => action.setContents(produce(state.contents, draft => {
-                                console.log("테테스트")
                                 if (content.video.link.includes('autoplay=1'))
                                     {draft[state.secNum].video.link = content.video.link.replace('autoplay=1', 'autoplay=0');
                                     draft[state.secNum].video.auto = false;}
@@ -343,7 +342,7 @@ function Contents({content}) {
 
 
     return (
-        <OpenCloseCustom title="콘텐츠" use={content.contents.use}>
+        <OpenCloseCustom title="콘텐츠" use={content.contents.use} open={state.focus === 'contents'}>
             <RadioCustom options={contentsOptions} value={content.contents.type} func={e => changeContentOption(e)} />                 
             {
                 returnImageOrVideoAdd()

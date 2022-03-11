@@ -49,7 +49,7 @@ const Backdrop = styled('div')`
 
 const style = {
   width: 800,
-  height: 500,
+  height: 600,
   bgcolor: 'rgba(255,255,255,1)',
   borderRadius:2,
   p: 2,
@@ -100,7 +100,7 @@ function AddingSection({setting, open, setOpen, foot}) {
             >
                 <Box sx={style}>
                     <div className="modal-top__title">
-                        <div className="centera" style={{width:"95%"}}>
+                        <div className="centera" style={{width:"95%", fontSize:'0.8em', fontWeight:'700'}}>
                             원하는 섹션을 추가하세요
                         </div>
                         <div className="modal-close-button" onClick={() => setOpen(false)}>
@@ -110,7 +110,7 @@ function AddingSection({setting, open, setOpen, foot}) {
                     <div className="section-modal__container">
                         {base.map((item,index) => {
                             return(
-                                <div className="section-modal__button" key={index} onClick={() => 
+                                <div className="section-modal__button uphover" key={index} onClick={() => 
                                 {addSection(item.sectionTypeName); 
                                     // isScroll(true);
                                 }}>
@@ -119,6 +119,19 @@ function AddingSection({setting, open, setOpen, foot}) {
                                 </div>
                             )
                         })} 
+                    </div>
+                    <div className="modal-top__title" style={{marginTop:'25px', flexDirection:'column', justifyContent:'center'}}>
+                        <div className="centera" style={{width:"95%", height:'0%', fontSize:'0.8em'}}>
+                            추가되었으면 하는 기능이 있으신가요?
+                        </div>
+                        <div className="section-add__button" onClick={() => { 
+                                window.open(
+                                    'https://tally.so/r/wMZ4Yn',
+                                    '_blank'
+                                )
+                         }} style={{width:'50%', padding:'5px',marginTop:'20px', fontSize:'0.8em'}} >
+                            의견 전달하기
+                        </div>
                     </div>
                 </Box>
             </StyledModal>

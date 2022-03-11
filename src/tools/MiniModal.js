@@ -41,7 +41,7 @@ const Deploy = styled('div')`
     text-align: center;
 `
 
-function MiniModal({open, setOpen, copy, deploy, history}) {
+function MiniModal({open, setOpen, copy, deploy, history, text}) {
 
     useEffect(() => {
         if(open && !deploy){
@@ -62,13 +62,13 @@ function MiniModal({open, setOpen, copy, deploy, history}) {
         else if(deploy){
             return(
                 <Deploy>
-                    <div className="big-title">
-                    첫 배포가 완료되었습니다! 
+                    <div className="modal-big-title">
+                        첫 배포가 완료되었습니다! 
                     </div>
-                    <div className="big-title sub">
-                    페이지 수정을 원하시면 '편집하기'를 눌러 편집 후 '저장하기'를 누르고, <br />
-                    관리 페이지에서 '배포하기'를 다시 눌러주세요. <br />
-                    저장만 한 경우 수정사항이 반영되지 않습니다. <br />
+                    <div className="modal-big-title sub">
+                        페이지 수정을 원하시면 '편집하기'를 눌러 편집 후 '저장하기'를 누르고, <br />
+                        관리 페이지에서 '배포하기'를 다시 눌러주세요. <br />
+                        저장만 한 경우 수정사항이 반영되지 않습니다. <br />
                     </div>
                     <div className="check_button" onClick={() => {
                     setOpen(false);
@@ -77,7 +77,13 @@ function MiniModal({open, setOpen, copy, deploy, history}) {
                 </Deploy>
             )
         }
-        else{
+        else if(text){
+            return (
+                <Alert data-aos="zoom-in-down" data-aos-duration="9000" >
+                    {text}
+                </Alert>
+            )
+        } else{
             return (
                 <Alert data-aos="zoom-in-down" data-aos-duration="9000" >
                     💾 저장되었습니다.

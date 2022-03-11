@@ -13,6 +13,10 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                 content.title.use &&
                 <div style={{width:'100%'}}>
                     <TextareaAutosize 
+                        onClick={() => {
+                            action.setCategory(0);
+                            action.setFocus('title');
+                        }}
                         placeholder={titlePlaceholder}
                         className="text-input" 
                         value={content.title.text} 
@@ -34,6 +38,10 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                 content.desc.use &&
                 <div style={{width:'100%', marginTop:'10px'}}>
                     <TextareaAutosize 
+                        onClick={() => {
+                            action.setCategory(0);
+                            action.setFocus('desc');
+                        }}
                         placeholder={descPlaceholder}
                         className="text-input" 
                         value={content.desc.text} 

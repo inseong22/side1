@@ -1,26 +1,15 @@
 import React, {useState, useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 import EditDesign from './tools/EditDesign'
-import RadioCustom from '../tools/Custom/RadioCustom'
 import ElementsTable from './tools/ElementsTable'
 import produce from 'immer';
-import {CustomSwitch} from '../tools/Custom/OnOffCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
-import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
-import InputCustom from '../tools/Custom/InputCustom'
-import AlignCustom from '../tools/Custom/AlignCustom'
-import ApplyInputCustom from '../tools/Custom/ApplyInputCustom'
 import Layout from './tools/Layout'
 import Contents from './tools/Contents'
 import AddGhostButton from './tools/AddGhostButton'
 import EditTitleDesc from './tools/EditTitleDesc'
 import AddCtaButton from './tools/AddCtaButton'
 import AddAppButton from './tools/AddAppButton'
-
-const buttonAlignOptions = [
-    {label:'왼쪽', value: 'start'},
-    {label:'중앙', value: 'center'}
-]
 
 function EditHeroSection({content, category}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -62,65 +51,6 @@ function EditHeroSection({content, category}) {
             }))
         },
     ]
-
-    const changeButtonAlignOption = e => {
-        action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].button.align = e
-            draft[state.secNum].mobile.buttonAlign = e
-        }))
-    }
-
-    const returnCtaOptions = () => {
-        switch(content.button.ctaOption){
-            case 'link':
-                return(
-                    <>
-                    <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요" value={content.button.ctaLink} func = {(e) => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].button.ctaLink = e
-                    }))} />
-                    <div className="mid-command">입력 후 엔터를 누르세요.</div>
-                    </>
-                )
-            case 'apply':
-                return(
-                    <>
-                    {
-                        content.ctaApplyInputs.length >= 1 ?  
-                        <ApplyInputCustom disabled /> 
-                        :
-                        <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {
-                            draft[state.secNum].ctaApplyInputs.push(e)
-                        }))} /> 
-                    }
-                    
-                    { content.ctaApplyInputs.length > 0 && 
-                    <>
-                        { content.ctaApplyInputs.map((item, index) => {
-                                return(
-                                    <div key={index}>
-                                        <ApplyInputCustom made value={item} func={e => action.setContents(produce(state.contents, draft => {
-                                            if(index === 0 ){
-                                                draft[state.secNum].ctaApplyInputs.shift()
-                                            }else{
-                                                draft[state.secNum].ctaApplyInputs.splice(index, index)
-                                            }
-                                        }))} />
-                                    </div>
-                                )
-                            })
-                        } 
-                    </> }
-                    <div className="mid-command-light"> 최대 5개의 신청 박스만 생성 가능합니다. 
-                    </div>
-                    </>
-                )
-            default:
-                return(
-                    <> </>
-                )
-        }
-    }
-
     
     const returnTable = () => {
         switch(category){
@@ -133,14 +63,6 @@ function EditHeroSection({content, category}) {
                     <EditTitleDesc content={content} />
                     <Contents content={content} />
                     <OpenCloseCustom title="버튼" use={content.button.use}>
-                        <div className="box-gray__container">
-                            {
-                                state.isPhone ? 
-                                <RadioCustom content={content} options={buttonAlignOptions} value={content.mobile.buttonAlign} func={e => changeButtonAlignOption(e)} />
-                                :
-                                <RadioCustom content={content} options={buttonAlignOptions} value={content.button.align} func={e => changeButtonAlignOption(e)} />
-                            }
-                        </div>
                         <AddCtaButton content={content} num={1} />
                         <AddGhostButton content={content} num={1} />
                     </OpenCloseCustom>

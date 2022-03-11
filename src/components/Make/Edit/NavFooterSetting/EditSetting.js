@@ -197,15 +197,15 @@ function EdtiSetting({setting, setSetting, category, setContents}) {
                 return(
                     <>
                     <div>
-                        <OpenCloseCustom title="파비콘" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지를 대표하는 아이콘입니다.">
+                        <OpenCloseCustom title="파비콘" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지를 대표하는 아이콘입니다." open={ state.focus === 'setting-favicon'}>
                             <AddFaviconImg text="파비콘" subtext="최대 1MB 업로드 가능, 64x64px 권장" value={setting.faviconAttachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="페이지 이름" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다.">
+                        <OpenCloseCustom title="페이지 이름" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다." open={ state.focus === 'setting-title'}>
                             <InputCustom value={setting.title} placeholder="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다." func={(e) => setSetting(produce(setting, draft => {
                                 draft.title = e
                             }))} />
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="URL" use={true}>
+                        <OpenCloseCustom title="URL" use={true} open={ state.focus === 'setting-urlId'}>
                             <div style={{flexDirection:'column'}}>
                                 <div style={{display:'flex'}}>
                                     <div style={{color:'#202936', marginTop: '20px'}}>
@@ -230,7 +230,7 @@ function EdtiSetting({setting, setSetting, category, setContents}) {
                                     * 영문 소문자와 숫자만 입력 가능합니다.
                                 </div>
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="플로팅 버튼" use={true} tooltip="화면 하단에 고정되어 떠다니는 버튼입니다. 내비게이션의 버튼과 플로팅 버튼 중 하나만 사용하시길 바랍니다.">
+                        <OpenCloseCustom title="플로팅 버튼" use={true} tooltip="화면 하단에 고정되어 떠다니는 버튼입니다. 내비게이션의 버튼과 플로팅 버튼 중 하나만 사용하시길 바랍니다." open={ state.focus === 'setting-fab'}>
                             <OnOffCustom text="ON/OFF" value={setting.fta.use} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.use = !setting.fta.use
                             }))} />

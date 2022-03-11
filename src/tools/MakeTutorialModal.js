@@ -52,7 +52,7 @@ const style = {
 
 const Desc = styled('div')`
     margin-top:12px;
-    font-size:16px;
+    font-size:15px;
     text-align:center;
 `;
 
@@ -77,7 +77,8 @@ function MakeTutorialModal({open, setOpen}) {
             case 1: return ( 
                 <div>
                     <div className="sub-text">
-                        안녕하세요! Surfee를 사용해주셔서 감사합니다.
+                        안녕하세요. Surfee를 사용해주셔서 감사합니다.<br/>
+                        이보다 더 쉬울 수는 없다! Surfee의 사용방법 빠르게 알려드릴게요 😄
                     </div>
                     <div className="card-container">
                         <div className="card">
@@ -123,11 +124,11 @@ function MakeTutorialModal({open, setOpen}) {
                     <div className="card-container">
                         <div className="card">
                             <img className="card-img" src={Info7} alt="7" />
-                            <Desc>제작 완료 시 오른쪽 위의 저장하기를 눌러 페이지를 저장하고<br/>관리페이지에서 배포할 수 있습니다.</Desc>
+                            <Desc>🖥 제작 완료 시 오른쪽 위의 저장하기를 눌러 페이지를 저장하고<br/>관리페이지에서 배포할 수 있습니다.</Desc>
                         </div>
                     </div>
                 <div className="sub-text">
-                Surfee와 함께 3분 만에 쉽고 빠르게 랜딩페이지 제작을 완료해보세요!
+                    Surfee와 함께 3분 만에 쉽고 빠르게 랜딩페이지 제작을 완료해보세요!
                 </div>
                 </div>)
 
@@ -153,7 +154,7 @@ function MakeTutorialModal({open, setOpen}) {
                     <div className="modal-top__title">
                         <div className="centera">
                             <div className="modal-text-title">
-                                사용 방법
+                                아주 쉬운 Surfee의 사용 방법
                             </div>
                         </div>
                         <div className="modal-close-button" onClick={() => setOpen(false)}>

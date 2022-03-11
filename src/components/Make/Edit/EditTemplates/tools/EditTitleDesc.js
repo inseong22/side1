@@ -12,7 +12,7 @@ function EditTitleDesc({content}) {
 
     return (
         <>
-        <OpenCloseCustom title="제목" use={content.title.use}>
+        <OpenCloseCustom title="제목" use={content.title.use} open={state.focus === 'title'}>
             <ColorCustom text="색상" value={content.title.color} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].title.color = e;
             }))} />
@@ -20,7 +20,7 @@ function EditTitleDesc({content}) {
                 draft[state.secNum].title.size = e;
             }))} />
         </OpenCloseCustom>
-        <OpenCloseCustom title="본문" use={content.desc.use}>
+        <OpenCloseCustom title="본문" use={content.desc.use} open={state.focus === 'desc'}>
             <ColorCustom text="색상" value={content.desc.color} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].desc.color = e;
             }))} />

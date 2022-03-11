@@ -1,11 +1,95 @@
 .excard{
-    width:400px;
+    width:27vw;
     height:300px;
     margin:10px;
-    border-radius:30px;
+    border-radius:6px;
+    /* background-color: white; */
+    box-shadow: 5px 8px 10px rgba(150,150,150,0.3);
+    z-index:3;
+    /* color:var(--main-dark-gray); */
+    color:black;
+    /* background-color:rgba(243, 243, 243, 0.685); */
+    font-family: Noto Sans KR;
+    cursor:default;
+}
+
+.excard-image{
+    height:75%;
+    width:100%;
+    transition: all .2s ease-in-out;
+    border-radius:6px 6px 0px 0px;
+    background-color:black;
+}
+
+.excard-black{
+    display:none;
+    width:100%;
+    height: 100%;
+    justify-content:center;
+    align-items : center;
+    flex-direction:column;
+    color:white;
+    background-color:rgba(0,0,0,0.5);
+    border-radius:6px 6px 0px 0px;
+    font-size: 14px;
+}
+
+.excard-button-1{
+    width:130px;
+    margin:5px;
+    padding:12px;
+    border-radius:6px;
+    background:var(--main-gradient);
+    color:white;
+    border:none;
     cursor:pointer;
-    box-shadow: 5px 8px 10px rgba(50,50,50,0.3);
-    z-index:5;
+    text-align: center;
+}
+.excard-button-2{
+    width:130px;
+    margin:5px;
+    padding:12px;
+    border-radius:6px;
+    border:1px solid rgba(255, 255, 255, 0.616);
+    cursor:pointer;
+    text-align: center;
+}
+
+.excard-button-2:hover{
+    border:1px solid white;
+}
+
+.excard-image:hover .excard-black{
+    display:flex
+}
+
+.excard-image:hover{
+    height:80%;
+}
+
+.excard-image:hover .excard-title{
+    height:20%;
+}
+
+.excard-title{
+    display:flex;
+    align-items:start;
+    justify-content:start;
+    padding:20px 20px;
+    width:100%;
+    height:25%;
+    background-color:rgba(0,0,0,0);
+    font-size:15px;
+    box-sizing:border-box;
+    /* transition: all .2s ease-in-out; */
+    flex-direction: row;
+    font-weight:700;
+}
+
+.excard-link{
+    margin-left:5px;
+    z-index:4;
+    color:var(--main-color);
 }
 
 @media screen and (max-width:800px){

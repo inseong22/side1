@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useContext} from 'react'
+import { MyContext } from '../../../../pages/Make/MakePageV2'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
@@ -38,6 +39,7 @@ const paddingOptions = [
 // ]
 
 function EditFooterSection({foot, setFoot, category}) {
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const elements = [
         {
@@ -87,7 +89,7 @@ function EditFooterSection({foot, setFoot, category}) {
                     {/* <RadioCustom value={foot.layout} options={layoutOptions} func={e => {setFoot(produce(foot, draft => {
                         draft.layout = e;
                     }))}} /> */}
-                    <OpenCloseCustom title="회사 / 팀 정보" use={foot.text.use}>
+                    <OpenCloseCustom title="회사 / 팀 정보" use={foot.text.use} open={state.focus === 'footer-text'}>
                         <ColorCustom text="색상" value={foot.text.color} func={e => setFoot(produce(foot, draft => {
                             draft.text.color = e;
                         }))} />
@@ -95,7 +97,7 @@ function EditFooterSection({foot, setFoot, category}) {
                             draft.text.align = e;
                         }))} />
                     </OpenCloseCustom>
-                    <OpenCloseCustom title="소셜 아이콘" use={foot.icon.use}>
+                    <OpenCloseCustom title="소셜 아이콘" use={foot.icon.use} open={state.focus === 'footer-icons'}>
                         <ColorCustom text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {
                             draft.icon.color = e;
                         }))}} />
@@ -121,7 +123,7 @@ function EditFooterSection({foot, setFoot, category}) {
                             draft.icon.linkedIn = e;
                         }))}} placeholder='링크를 입력해 주세요.'/>
                     </OpenCloseCustom>
-                    <OpenCloseCustom title="저작권 표시" use={foot.copyright.use}>
+                    <OpenCloseCustom title="저작권 표시" use={foot.copyright.use} open={state.focus === 'footer-copyright'}>
                         <div className="center-column">
                             <div className="edit-element center-row" style={{fontSize:'13px', justifyContent:'start'}}>
                                 <div>

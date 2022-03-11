@@ -155,12 +155,25 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     }
     
     const moveButton = (top) => {
-        return(<>
+        return(<div className="main-button__container">
             {
-                isLoggedIn ? 
-                <Link to='/response' className="main__button2 uphover">
+                isMobile ? 
+                <>
+                <button className="main__button2 uphover" onClick={() => alert('죄송합니다. Surfee는 PC 환경에서만 이용할 수 있습니다.')}>
                     무료로 제작하기
-                </Link>:
+                </button>
+                </>
+                :
+                isLoggedIn ? 
+                <>
+                    <Link to='/response' className="main__button2 uphover">
+                        무료로 제작하기
+                    </Link>
+                    <Link to='/surfeeintro' className="main__button3 uphover">
+                        Surfee란?
+                    </Link>
+                </>
+                :
                 <>
                 {
                     top === 'top' ?
@@ -173,7 +186,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                 }
                 </>
             }
-        </>)
+        </div>)
     }
     
     return (
@@ -186,10 +199,16 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                         '랜딩페이지'를 3분 만에 <br/>쉽고 간단하게 제작해 보세요
                     </span>
                     <span className="one-section-small" style={{textAlign: 'center'}}>
-                        Surfee와 함께 '타이핑'과 '이미지'로만 <br/>
-                        빠르고 간단하게 랜딩페이지를 제작해 보세요
+                        무엇보다 쉽고 빠르게 만들 수 있는<br/>
+                        나만의 페이지!
                     </span>
                     {moveButton('top')}
+                    {/* <button className="text-hover" style={{fontSize:'0.6em', marginTop:'10px', cursor: 'pointer'}} onClick={() => {
+                        window.open(
+                            'https://tally.so/r/wMZ4Yn',
+                            '_blank'
+                        )
+                    }}>Surfee는 항상 여러분의 의견을 듣고 싶어요 😁</button> */}
                 </div>
                 <img src={main1} className="section-one-image-main-topbottom mt30" />
                 <span className="one-section-big mt30" style={{textAlign: 'center', fontSize:'1.2em', color:'white'}}>
@@ -207,7 +226,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                 >
                 </lottie-player>
                 <div className="one-section-big" style={{color:'var(--main-color)'}}>
-                    Surfee?
+                    Why Surfee?
                 </div>
             </div>
             <div className="main-page-section1 bg1">
@@ -260,14 +279,18 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             </div>
             <div className="main-page-section1" style={{padding:'30px 0px', flexDirection:'column'}}>
                 <div className="main-section-left-topbottom" style={{color:'black', marginTop:'10px'}}>
-                    <span className="one-section-big osb2" style={{textAlign: 'center'}}>
-                        <span style={{color:'#6c63ff'}}>Surfee</span> 활용 예시
+                    <span className="one-section-big2 osb2" style={{textAlign: 'center'}}>
+                        <span style={{color:'#6c63ff'}}>Surfee</span>로 이렇게 만들 수 있어요!
                     </span>
-                    <span className="one-section-small" style={{textAlign: 'center'}}>
-                        Surfee를 사용한 페이지 디자인 예시를 참고해보세요!
+                    <span className="one-section-small2" style={{textAlign: 'center'}}>
+                        🧑🏻‍💻 Surfee를 사용한 페이지 디자인 예시를 참고해보세요.<br/>
+                        원하는 템플릿을 골라 그 디자인으로 바로 제작을 시작할 수도 있어요!
                     </span>
                 </div>
                 <LandingPageExamples />
+                <Link to='/surfeeexamples' className="main__button2 uphover">
+                    템플릿 사용해서 제작하기
+                </Link>
             </div>
             <div className="main-page-section1" style={{flexDirection: "column", position:'relative'}}>
                 <lottie-player

@@ -14,10 +14,12 @@ function ReviewSection({content, setting}) {
 
     const returnReviewCards = content.elements.map((item, index) => {
         if(index < content.numOfElements){
-            if(content.reviewText) {
             return(
                 <FeatureCard section="feature" content={content} index={index}>
                     <Element content={content} item={item} index={index} key={index}/>
+                    {
+                        content.reviewText &&
+                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}}>
                     {
                         content.elementTitle.use && 
                         <div className="df-margin-big feature-title" style={{width:'100%'}}>            
@@ -97,13 +99,10 @@ function ReviewSection({content, setting}) {
                                 />
                         </div>
                     }
+                    </div>
+                    }
                 </FeatureCard>
             )
-        }
-    else {
-        return(<>
-        </>)
-    }
         }
     })
 

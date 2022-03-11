@@ -64,7 +64,7 @@ function EditReviewSection({content, category}) {
                         <LayoutRFG content={content} />
                         <EditTitleDesc content={content} />
                         <EditImageIcon content={content} />
-                        <OpenCloseCustom title="리뷰 내용" use={content.reviewText}>
+                        <OpenCloseCustom title="리뷰 내용" use={content.reviewText} open={state.focus === 'elementText'}>
                             <div className="box-gray__container">
                                 <ColorCustom text="색상" value={content.elementText.color} func={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elementText.color = e;

@@ -31,10 +31,21 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
                             </Link>
                             {
                                 !isMobile &&
-                                <Link to="/surfeeexamples" className="nav-left-text" style={{marginLeft:'4vw'}}>
-                                    제작 예시
-                                </Link>
+                                <>
+                                    <Link to="/surfeeexamples" className="nav-left-text" style={{marginLeft:'4vw'}}>
+                                        템플릿
+                                    </Link>
+                                    <button className="nav-left-text" style={{marginLeft:'1vw'}} onClick={() => {
+                                        window.open(
+                                            'https://www.notion.so/Surfee-903d24edba264a9e9a8245803f11db11',
+                                            '_blank' // <- This is what makes it open in a new window.
+                                        );
+                                    }}>
+                                        Surfee 소개
+                                    </button>
+                                </>
                             }
+                            
                         </div>
                         <div className="nav-on-v2">
                             {isLoggedIn ? 

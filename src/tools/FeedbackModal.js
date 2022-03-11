@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import {UserContext} from '../Router'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Close } from '@styled-icons/evaicons-solid';
@@ -30,7 +31,7 @@ const style = {
     width: 800,
     height: 620,
     bgcolor: 'white',
-    boxShadow: '18px 18px 36px rgba(0, 0, 0, 0.15), inset 6px 4px 16px rgba(108, 99, 255, 0.1), inset -12px -8px 16px rgba(108, 99, 255, 0.25)',
+    // boxShadow: '18px 18px 36px rgba(0, 0, 0, 0.15), inset 6px 4px 16px rgba(108, 99, 255, 0.1), inset -12px -8px 16px rgba(108, 99, 255, 0.25)',
     borderRadius:2,
     p: 2,
     px: 4,
@@ -38,6 +39,8 @@ const style = {
   };
 
 function FeedbackModal({open, setOpen, deploy}) {
+    const {state, action} = useContext(UserContext) //ContextAPI로 state와 action을 넘겨받는다.
+
     const [quest, goQuest] = useState(false);
     const [page, setPage] = useState(1);
     const [complete, setComplete] = useState(false);
@@ -69,7 +72,9 @@ function FeedbackModal({open, setOpen, deploy}) {
             working_time: time,
             function: func,
             comment: comment,
-            recommendation: recom
+            recommendation: recom,
+            created:Date.now(),
+            user : state.userObj.email
         })
         localStorage.setItem('feedback',true);
     }

@@ -135,7 +135,7 @@
   padding-top:60px;
   font-size:15px;
   background-color:#6a63f700;
-  font-family: Pretendard-Regular;
+  font-family: Noto Sans KR;
 }
 
 .App-logo {
@@ -156,6 +156,7 @@
 }
 .border-hover{
   box-sizing: content-box;
+  border:1px solid #00000000;
   cursor: pointer;
 }
 .border-hover:hover{
@@ -210,6 +211,10 @@
 }
 .our-hover:hover{
   background-color:#544cee;
+}
+
+.back-gradient{
+  background:var(--main-gradient);
 }
 
 .mobile-hide{
@@ -443,26 +448,6 @@ input:disabled{
 .column{
   display:flex;
   flex-direction:column;
-}
-
-@font-face {
-  font-family: 'ImcreSoojin';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'OTWelcomeRA';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'OTWelcomeBA';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeBA.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
 }
 
 @media (prefers-reduced-motion: no-preference) {

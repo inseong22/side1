@@ -9,15 +9,14 @@ import NewSectionMake from '../../components/Make/Edit/NewSectionMake'
 import NavBarInMakePage from './NavBarInMakePage/NavBarInMakePage'
 import MakeNavigationV2 from '../../components/Make/NavBar/MakeNavigationV2'
 import MakeFooterV2 from '../../components/Make/Footer/MakeFooterV2'
-import FirstQuestions from '../Questions/FirstQuestions'
 import LoadingModal from '../../components/Make/Modal/LoadingModal'
-import FeedbackModal from '../../tools/FeedbackModal';
 import OverflowScrolling from 'react-overflow-scrolling';
 import { useLocation, useParams } from 'react-router';
 import { base } from '../../components/Make/SectionTypes/baseTypes'
 import { defaults } from '../../components/Make/SectionTypes/baseTypes'
 import lodash from 'lodash'
 import ConfirmCustom from '../../tools/ConfirmCustom'
+import {dbService} from '../../tools/fbase'
 import { isMobile } from 'react-device-detect';
 import {ChakraProvider} from '@chakra-ui/react'
 import {Prompt} from 'react-router-dom';
@@ -26,6 +25,11 @@ import TextareaAutosize from '../../components/Make/SectionTypes/components/Text
 import ChannelTalk from '../../tools/ChannelTalk'
 
 export const MyContext = React.createContext({
+    state : {},
+    action : {}
+});
+
+export const MySubContext = React.createContext({
     state : {},
     action : {}
 });
@@ -50,10 +54,10 @@ const MakePageV2 = ({history, userObj, now}) => {
     const [full, setFull] = useState(false);
     const [load, setLoad] = useState(false);
     const [editing, setEditing] = useState(false);
-    const [makingTypeByUser, setMakingTypeByUser] = useState("");
     const [category, setCategory] = useState(0);
+    const [focus, setFocus] = useState('');
     const location = useLocation();
-      
+
     // 메인 세팅
     const [setting, setSetting] = useState(lodash.cloneDeep(defaults.setting));
     // 새로운 세팅
@@ -78,11 +82,10 @@ const MakePageV2 = ({history, userObj, now}) => {
     // const [bgc, setBgc] = useState('red');
 
     // useMemo(() => {
-    //     setBgc('#c2bfff')
     //     setTimeout(() => {
-    //         setBgc('white')
-    //     }, 150)
-    // }, [secNum])
+    //         setFocus('')
+    //     }, 1150)
+    // }, [focus])
 
     // 반복 실행되는 useEffect
     useEffect(() => {
@@ -104,6 +107,8 @@ const MakePageV2 = ({history, userObj, now}) => {
             if(location.state.now){
                 loadLocalStorage()
                 setIsPhone(location.state.isPhone)
+            }else if(location.state.template){
+                getTemplate()
             }else{
                 setLoading(true)
 
@@ -135,8 +140,35 @@ const MakePageV2 = ({history, userObj, now}) => {
     },[])
 
     const contextValue = {
-        state: { secNum, contents, isPhone, category, setting},
-        action : {setSecNum, setContents, setIsPhone, setCategory, setSetting},
+        state: { secNum, contents, isPhone, category, setting, focus},
+        action : {setSecNum, setContents, setIsPhone, setCategory, setSetting, setFocus},
+    }
+
+    const contextSubValue = {
+        state: { secNum, isPhone, category, focus},
+        action : {setSecNum, setIsPhone, setCategory, setFocus},
+    }
+
+    const getTemplate = async () => {
+        const savedPages = await dbService
+            .collection("saved-page")
+            .where("urlId", "==", location.state.templateNum)
+            .get(); // uid를 creatorId로 줬었으니까.
+    
+        let savedPage = savedPages.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+
+        let tempSetting = savedPage[0].setting;
+        tempSetting.urlId = location.state.urlId
+
+        setContents(savedPage[0].contents)
+        setNavi(savedPage[0].navi)
+        setFoot(savedPage[0].foot)
+        setSetting(tempSetting)
+        
+        setLoading(false);
+        saveLocalStorage();
     }
 
     const saveLocalStorage = async () => {
@@ -167,6 +199,7 @@ const MakePageV2 = ({history, userObj, now}) => {
             </div>
         )
     })
+    
     // const isScroll = useCallback((scroll)=>{
     //     setScroll(scroll);
     //     if(scroll){
@@ -186,6 +219,7 @@ const MakePageV2 = ({history, userObj, now}) => {
         :
     <>
        <MyContext.Provider value={contextValue}>
+           <MySubContext.Provider value={contextSubValue}>
             <Prompt 
                 when={true}
                 message="편집내용이 저장되지 않았을 수 있습니다. 정말로 제작을 그만두시겠습니까?"
@@ -234,12 +268,14 @@ const MakePageV2 = ({history, userObj, now}) => {
                                 <div className="make-tab-circle"></div>
                                 <div className="make-tab-circle"></div>
                                 <div className="make-tab-one-tab">
-                                    <img src={setting.faviconAttachment} className='make-tab-favicon'/>
-                                    {setting.title}
+                                    <img src={setting.faviconAttachment} className='make-tab-favicon opacity-hover' onClick={() => {setFocus('setting-favicon'); setCategory(0)}}/>
+                                    <span className="opacity-hover" style={{padding:'0px 3px', borderRadius:'2px'}} onClick={() => {setFocus('setting-title'); setCategory(0)}}>
+                                        {setting.title}
+                                    </span>
                                 </div>
                             </div>
                             <div className="right" style={{paddingRight:'23px'}}>
-                                <div className="make-tab-url">
+                                <div className="make-tab-url opacity-hover" onClick={() => {setFocus('setting-urlId'); setCategory(0)}}>
                                     https://surfee.co.kr/{setting.urlId}
                                 </div>
                             </div>
@@ -265,7 +301,8 @@ const MakePageV2 = ({history, userObj, now}) => {
                             <>
                             {  ( setting.fta.use ) &&
                             <div className="fta__container" style={{width:`${full ? '100vw' : isPhone ? '26vw' : '70vw'}`}}>
-                                <div className="fta-button" 
+                                <div className="fta-button"
+                                    onClick={() => {setFocus('setting-fab'); setCategory(0); setSecNum(52)}}
                                     style={{
                                         fontFamily: `${setting.font}`,
                                         backgroundColor:`${setting.fta.backgroundColor}`, 
@@ -294,6 +331,7 @@ const MakePageV2 = ({history, userObj, now}) => {
                 <LoadingModal loading={loading} />
             </div>
             <ConfirmCustom open={openConfirm} setOpen={setOpenConfirm} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />
+        </MySubContext.Provider>
         </MyContext.Provider>
     </> }
     </>)

@@ -10,6 +10,7 @@ import { isMobile } from 'react-device-detect'
 import UserSection from '../../components/UserLandingPage/UserSection'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import ChannelTalk from '../../tools/ChannelTalk'
+import { Helmet } from 'react-helmet'
 
 export const UserContext = React.createContext({
     state : {},
@@ -29,9 +30,8 @@ const UserLandingPage = (props) => {
     }
 
     const favicon = document.getElementById("favicon");
-
     const urltitle = document.getElementById("urltitle");
-
+    const ogTitle = document.querySelector('meta[property="og:title')
 
     ChannelTalk.shutdown();
 
@@ -64,6 +64,9 @@ const UserLandingPage = (props) => {
 
         favicon.href = orderData[0].setting.faviconAttachment;   
         urltitle.innerText = orderData[0].setting.title;
+        ogTitle.getAttribute('content')
+        ogTitle.setAttribute('content', orderData[0].setting.title)
+
         setItem( orderData[0] );
         setSetting( orderData[0].setting );
         setLoading(true);
@@ -82,6 +85,7 @@ const UserLandingPage = (props) => {
     
     return (
         <UserContext.Provider value={contextValue}>
+        {/* <Helmet title="타이틀" /> */}
         {!loading ? 
         <LoadingDisplay />
         :
@@ -89,8 +93,11 @@ const UserLandingPage = (props) => {
         <ErrorPage />
         :
         <div style={{fontSize:`${isMobile ? '22px' : '28px'}`}}>
-            <UserNavBar navi={item.navi} setting={item.setting} />
-            <div style={{paddingTop:`${item.navi.fixed ? '0px': `${item.navi.height}px`}`}}>
+            {
+                item.navi.use && 
+                <UserNavBar navi={item.navi} setting={item.setting} />
+            }
+            <div style={{paddingTop:`${item.navi.fixed && item.navi.use ? '0px': item.navi.use ? `${item.navi.height}px` : '0px'}`}}>
                 <UserContents contents={item.contents} setting={item.setting} />
             </div>
             <UserFoot foot={item.foot} setting={item.setting}/>

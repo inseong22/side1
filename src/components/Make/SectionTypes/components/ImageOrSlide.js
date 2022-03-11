@@ -102,10 +102,18 @@ function ImageOrSlide({content}){
             // 이미지
             if( content.contents.type === 'image' )
                 return (
-                    <div id="attach" onChange = {e => upload_img(e)} onClick={inputClick} className="centera">
+                    <div id="attach" onChange = {e => upload_img(e)} onClick={() => {
+                        inputClick();
+                        action.setCategory(0);
+                        action.setFocus('contents');
+                    }} className="centera" style={{width:`${imageWidth()}%`}}>
                          <input
                             ref={photoInput}
-                            style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                            style={{
+                                display: 'none', 
+                                cursor: 'pointer', 
+                                objectFit:'cover',
+                            }}
                             type="file"
                             accept="image/*"
                             id="file"
@@ -115,7 +123,7 @@ function ImageOrSlide({content}){
                             className="image border-hover" 
                             style={{
                                 borderRadius:`${content.image.border}px`,
-                                width:`${imageWidth()}%`, 
+                                // width:`${imageWidth()}%`, 
                                 boxShadow: `${content.image.shadowValue}`
                             }} />
                     </div>
@@ -136,8 +144,8 @@ function ImageOrSlide({content}){
                     { content.mockup.attachment === '' ?
                     <></>:
                     <img className="upload-mobile  border-hover" src={content.mockup.attachment} style={{ 
-                        width:`${imageWidth()}%`, 
-                        left:`${imageLeft()}%`}} />
+                        width:`${imageWidth()-2}%`, 
+                        left:`${imageLeft()+1}%`}} />
                     }         
                </div>)
             // 목업 - 데스크탑
@@ -209,7 +217,9 @@ function ImageOrSlide({content}){
     }
 
     return(
-        <div className="centera" style={{marginTop:`${!state.isPhone && content.layout === 3 ? '20px' : state.isPhone && content.mobile.layout === 3 ? '10px' : '0px'}`}}>
+        <div className="centera" style={{marginTop:`${!state.isPhone && content.layout === 3 ? '20px' : state.isPhone && content.mobile.layout === 3 ? '10px' : '0px'}`}}
+            onClick={() => {action.setFocus('contents'); action.setCategory(0)}}
+        >
             {returnContent()}
         </div>
     )

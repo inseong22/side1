@@ -52,11 +52,10 @@ function FTemplate({foot, setFoot, history }) {
     return (
         <>
             <div className="footer-section" style={{fontSize:'0.5em'}}>
-                <div
-                    style={{display:'flex', ...returnLayout}}
-                >
+                <div style={{display:'flex', ...returnLayout}} >
                     {foot.text.use && 
                         <TextareaAutosize
+                            onClick={() => {action.setFocus('footer-text'); action.setCategory(0)}}
                             // defaultValue={new Array(15).join('Line.')}
                             className="text-input"
                             value={foot.text.text}
@@ -74,23 +73,30 @@ function FTemplate({foot, setFoot, history }) {
                         /> 
                     }
                     {foot.icon.use && foot.layout === 1 && 
-                        <div className="icon-box" style={{flexDirection: 'column', justifyContent: 'center'}}>
+                        <div className="icon-box" 
+                            style={{flexDirection: 'column', justifyContent: 'center', marginLeft:'10%', width:'60%'}}
+                            onClick={() => {action.setFocus('footer-icons'); action.setCategory(0)}}>
                         {returnIcons()}
                         </div>
                     }
                     {foot.icon.use && foot.layout === 2 && 
-                        <div className="icon-box" style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}>
+                        <div className="icon-box" 
+                            style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}
+                            onClick={() => {action.setFocus('footer-icons'); action.setCategory(0)}}>
                         {returnIcons()}
                         </div>
                     }
                     {foot.icon.use && foot.layout === 3 && 
-                        <div className="icon-box" style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}>
+                        <div className="icon-box" 
+                            style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}
+                            onClick={() => {action.setFocus('footer-icons'); action.setCategory(0)}}>
                         {returnIcons()}
                         </div>
                     }
                 </div>
                 {foot.copyright.use && 
                     <div 
+                        onClick={() => { action.setFocus('footer-copyright'); action.setCategory(0)}}
                         className='copyright-box'
                         style={{
                             fontFamily:`${state.setting.smallFont}`,

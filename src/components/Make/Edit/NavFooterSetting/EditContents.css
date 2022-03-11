@@ -40,14 +40,16 @@
 }
 
 .section-add__button{
-    padding:8px 14px;
+    padding:12px 14px;
+    width:95%;
     font-size:0.9em;
     background-color:#A89AFF;
-    border-radius: 20px;
+    border-radius: 5px;
     color:white;
     margin:2%;
     cursor: pointer;
     border:none;
+    text-align: center;
 }
 
 .section-add__button:hover{

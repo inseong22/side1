@@ -14,6 +14,7 @@ import {
     PopoverBody,
     PopoverFooter,
     PopoverArrow,
+    Button
   } from '@chakra-ui/react'
 
 
@@ -38,7 +39,7 @@ export function EditColor({onChange, value}) {
         if(stateC.usedColors.includes(value)){
             return
         }else{
-            if(stateC.usedColors.length > 5){
+            if(stateC.usedColors.length > 6){
                 actionC.setUsedColors(produce(stateC.usedColors, draft => {
                     draft.shift()
                     draft.push(value)
@@ -92,9 +93,9 @@ export function EditColor({onChange, value}) {
                 <PopoverContent style={{zIndex: 100}}>
                     <PopoverArrow />
                     <PopoverHeader>
-                        <div className="color-close" onClick={ () => closeSave() }>
-                                x
-                        </div>
+                        <Button className="color-close" onClick={ () => closeSave() }>
+                            적용
+                        </Button>
                     </PopoverHeader>
                     <PopoverBody>
                         <div className="center-column">
@@ -110,7 +111,7 @@ export function EditColor({onChange, value}) {
                                 alpha
                             />
                             <div style={{width:'95%', textAlign:'left'}}>최근에 사용한 색상</div>
-                            <div className="center-row">
+                            <div className="center-row" style={{marginTop:'7px', justifyContent:'start'}}>
                                 {stateC.usedColors.map((item, index) => {
                                     return(
                                         <div onClick={() => {onChange(item); setColor({...color, hex:item})}} key={index}>

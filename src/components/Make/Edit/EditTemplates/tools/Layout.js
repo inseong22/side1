@@ -70,7 +70,7 @@ function Layout({content, version, foot, setFoot}) {
                             <RadioCustom layout='on' version='two' options={layout4Options} value={content.mobile.layout} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].mobile.layout = e;
                             }))} />
-                            <RadioCustom text="정렬" options={alignOptions} value={content.mobile.align} func={e => action.setContents(produce(state.contents, draft => {
+                            <AlignCustom all value={content.mobile.align} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].mobile.align = e;
                             }))} />
                         </>

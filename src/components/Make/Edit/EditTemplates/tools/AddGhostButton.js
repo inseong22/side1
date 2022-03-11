@@ -50,7 +50,7 @@ function AddGhostButton({content, num}) {
                 return(
                     <>
                     {
-                        content.ghostApplyInputs.length > num ?  
+                        content.ghostApplyInputs.length >= num ?  
                         <ApplyInputCustom disabled /> 
                         :
                         <ApplyInputCustom func={e => action.setContents(produce(state.contents, draft => {
