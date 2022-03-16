@@ -5,12 +5,26 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
+    Button,
+    Tooltip
   } from '@chakra-ui/react'
   import {ChevronDown} from '@styled-icons/bootstrap'
+  import {dbService} from '../../tools/fbase'
+  import ConfirmCustom from '../../tools/ConfirmCustom'
+  import {produce} from 'immer'
 
-function ResultTable({responses, nowChecking, index}) {
+function ResultTable({responses, nowChecking, index, update, setUpdate, setResponses}) {
     const [type, setType] = useState({name : '전체', value:'all'})
     const [time, setTime] = useState({name : '최신순', value:'new'})
+    const [confirmOpen, setConfirmOpen] = useState(false)
+    const [id, setId] = useState('')
+
+    const deleteData = async id => {
+        await dbService.doc(`datas/${id}`).delete();
+        setResponses(produce(responses, draft => {
+            draft[nowChecking] = draft[nowChecking].filter(doc => doc.id !== id)
+        }))
+    }
 
     const userOneLine = (item) => {
         let day = new Date(item.created)
@@ -28,6 +42,7 @@ function ResultTable({responses, nowChecking, index}) {
                     <div className="response__user-datas-one" style={{textAlign:'right'}}>
                         {date}
                     </div>
+                    <Button size="xs" style={{backgroundColor:'#EB8A8A', color:'white', border:'none', marginRight:'3px'}} variant='outline' onClick={() => {setId(item.id);setConfirmOpen(true)}}>X</Button>
                 </div>
             )
         }else{
@@ -50,6 +65,7 @@ function ResultTable({responses, nowChecking, index}) {
                     <div className="response__user-datas-one" style={{textAlign:'right'}}>
                         {date}
                     </div>
+                    <Button size="xs" style={{backgroundColor:'#EB8A8A', color:'white', border:'none', marginRight:'3px'}} variant='outline' onClick={() => {setId(item.id);setConfirmOpen(true)}}>X</Button>
                 </div>
             )
         }
@@ -94,6 +110,11 @@ function ResultTable({responses, nowChecking, index}) {
                             </MenuItem>
                         </MenuList>
                     </Menu>
+                    <div style={{width:'50px', textAlign:'center', cursor: 'default'}}>            
+                        {/* <Tooltip label='클릭 시 바로 삭제되니 조심하셔야 해요!' placement='top'> */}
+                            ⚠️
+                        {/* </Tooltip> */}
+                    </div>
                 </div>
                 {
                     typeof responses[nowChecking] !== undefined && 
@@ -118,6 +139,7 @@ function ResultTable({responses, nowChecking, index}) {
                     </>
                 }
             </div>
+            <ConfirmCustom open={confirmOpen} setOpen={setConfirmOpen} message={"데이터를 삭제하시겠습니까?"} callback={() => deleteData(id)} warn />
         </ChakraProvider>
     )
 }

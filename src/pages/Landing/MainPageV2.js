@@ -159,9 +159,12 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             {
                 isMobile ? 
                 <>
-                <button className="main__button2 uphover" onClick={() => alert('죄송합니다. Surfee는 PC 환경에서만 이용할 수 있습니다.')}>
-                    무료로 제작하기
-                </button>
+                    <button className="main__button2 uphover" onClick={() => alert('죄송합니다. Surfee는 PC 환경에서만 이용할 수 있습니다.')}>
+                        무료로 제작하기
+                    </button>
+                    <Link to='/surfeeintro' className="main__button3 uphover">
+                        Surfee란?
+                    </Link>
                 </>
                 :
                 isLoggedIn ? 
@@ -177,12 +180,23 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                 <>
                 {
                     top === 'top' ?
-                    <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
-                        무료로 제작하기
-                    </button>:
-                    <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
-                        무료로 제작하기
-                    </button>
+                    <>
+                        <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
+                            무료로 제작하기
+                        </button>
+                        <Link to='/surfeeintro' className="main__button3 uphover">
+                            Surfee란?
+                        </Link>
+                    </>
+                    :
+                    <>
+                        <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
+                            무료로 제작하기
+                        </button>
+                        <Link to='/surfeeintro' className="main__button3 uphover">
+                            Surfee란?
+                        </Link>
+                    </>
                 }
                 </>
             }
@@ -292,15 +306,18 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     템플릿 사용해서 제작하기
                 </Link>
             </div>
-            <div className="main-page-section1" style={{flexDirection: "column", position:'relative'}}>
-                <lottie-player
-                    autoplay
-                    loop
-                    mode="normal"
-                    src="https://assets9.lottiefiles.com/packages/lf20_tkvgymkx.json"
-                    style={{transform:'rotate(90deg)', position:'absolute', zIndex:'0', width:'100%', height:'200%'}}
-                >
-                </lottie-player>
+            <div className="main-page-section1" style={{flexDirection: "column", position:'relative', boxSizing:'border-box'}}>
+                {
+                    !isMobile &&
+                    <lottie-player
+                        autoplay
+                        loop
+                        mode="normal"
+                        src="https://assets9.lottiefiles.com/packages/lf20_tkvgymkx.json"
+                        style={{transform:'rotate(90deg)', position:'absolute', zIndex:'0', width:'100px', height:'200%'}}
+                        >
+                    </lottie-player>
+                }
                 <span className="one-section-big bt2" style={{textAlign:'center'}}>
                     랜딩페이지를 가장 효율적으로<br/> 제작해 보세요
                 </span>

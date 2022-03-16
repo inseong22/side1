@@ -237,7 +237,7 @@ function EdtiSetting({setting, setSetting, category, setContents}) {
                             {
                                 setting.fta.use && 
                                 <>
-                                    <RadioCustom text="사이즈" options={sizeOptions} value={setting.fta.size} func={(e) => setSetting(produce(setting, draft => {
+                                    <RadioCustom text={state.isPhone ? '사이즈 - 모바일에서는 크기가 고정됩니다.' : '사이즈'} options={sizeOptions} value={setting.fta.size} func={(e) => setSetting(produce(setting, draft => {
                                         draft.fta.size = e
                                     }))} />
                                     <RadioCustom text="모양" options={shapeOptions} value={setting.fta.shape} func={(e) => setSetting(produce(setting, draft => {

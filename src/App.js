@@ -17,6 +17,7 @@ function App() {
         if(user){
           setIsLoggedIn(true)
           setUserObj(user.multiFactor.user);
+          console.log(user.multiFactor.user)
         }else{
           setIsLoggedIn(false)
         }

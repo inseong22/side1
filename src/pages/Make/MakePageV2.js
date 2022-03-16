@@ -39,7 +39,7 @@ export const MySubContext = React.createContext({
 //     default: false,
 // })
 
-const MakePageV2 = ({history, userObj, now}) => {
+const MakePageV2 = ({history, userObj}) => {
     ChannelTalk.boot({
         "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"
     });
@@ -49,6 +49,8 @@ const MakePageV2 = ({history, userObj, now}) => {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false); // 첫 질문을 위한 Open
     const [editingId, setEditingId] = useState('')
+    const [confirmMessage, setConfirmMessage] = useState('')
+    const [callback, setCallback] = useState()
 
     const [isPhone, setIsPhone] = useState(false);
     const [full, setFull] = useState(false);
@@ -125,12 +127,16 @@ const MakePageV2 = ({history, userObj, now}) => {
                 setLoading(false);
                 saveLocalStorage();
             }
+        }else if(location.pathname.length > 10 && location.pathname.split('/')[2]){
+            setConfirmMessage(<div>공유받은 템플릿을 사용하겠습니까?</div>)
+            setOpenConfirm(true);
+            setCallback(() => getTemplateFromUser);
         }else{
             // 로컬스토리지에 저장되어인게 있다면
             if(localStorage.getItem('temp') !== null){
-
+                setConfirmMessage(<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>)
                 setOpenConfirm(true);
-
+                setCallback(() => loadLocalStorage);
             }else{
                 saveLocalStorage();
             }
@@ -147,6 +153,27 @@ const MakePageV2 = ({history, userObj, now}) => {
     const contextSubValue = {
         state: { secNum, isPhone, category, focus},
         action : {setSecNum, setIsPhone, setCategory, setFocus},
+    }
+
+    const getTemplateFromUser = async () => {
+        let ttem
+
+        const ssede = await dbService.doc(`saved-page/${location.pathname.split('/')[2]}`)
+            .get()
+            .then(snapshot => ttem = {...snapshot.data(), id:snapshot.id});
+        
+        if(!ttem.setting){
+            alert("코드에 해당하는 템플릿이 존재하지 않습니다.")
+            history.push('/questions')
+            history.go()
+        }else{
+            ttem.setting.urlId = ''
+    
+            setContents(ttem.contents)
+            setNavi(ttem.navi)
+            setFoot(ttem.foot)
+            setSetting(ttem.setting)
+        }
     }
 
     const getTemplate = async () => {
@@ -300,16 +327,17 @@ const MakePageV2 = ({history, userObj, now}) => {
                             </div>
                             <>
                             {  ( setting.fta.use ) &&
-                            <div className="fta__container" style={{width:`${full ? '100vw' : isPhone ? '26vw' : '70vw'}`}}>
+                            <div className="fta__container" style={{width:`${full ? '100vw' : isPhone ? '26vw' : '70vw'}`, fontSize:`${isPhone ? '22px' : '28px'}`}}>
                                 <div className="fta-button"
                                     onClick={() => {setFocus('setting-fab'); setCategory(0); setSecNum(52)}}
                                     style={{
-                                        fontFamily: `${setting.font}`,
+                                        fontFamily: `${setting.smallFont}`,
                                         backgroundColor:`${setting.fta.backgroundColor}`, 
-                                        width:`${setting.fta.size}%`, 
+                                        width:`${isPhone ? 93 : setting.fta.size }%`, 
                                         borderRadius:`${setting.fta.shape}px`, 
                                         border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
-                                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
+                                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`,
+                                        fontSize:'0.7em'
                                     }}>
                                     <TextareaAutosize className='text-input'  
                                         placeholder="플로팅 버튼입니다!"
@@ -317,6 +345,10 @@ const MakePageV2 = ({history, userObj, now}) => {
                                         onChange={e => setSetting(produce(setting, draft => {
                                             draft.fta.text = e.target.value;
                                         }))}
+                                        style={{
+                                            fontFamily: `${setting.smallFont}`,
+                                            resize: 'none'
+                                        }}
                                         color={setting.fta.color} align="center" />
                                 </div>
                             </div> }
@@ -330,7 +362,7 @@ const MakePageV2 = ({history, userObj, now}) => {
                 {/* <FirstQuestions saveLocalStorage={saveLocalStorage} setContents={setContents} history={history} foot={foot} setFoot={setFoot} type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting} setIsPhone={setIsPhone}/> */}
                 <LoadingModal loading={loading} />
             </div>
-            <ConfirmCustom open={openConfirm} setOpen={setOpenConfirm} message={<div>제작 중이던 페이지가 있습니다. 불러오시겠습니까? <br /> 취소 시 이전에 작업하던 내용은 사라집니다.</div>} callback={ loadLocalStorage } />
+            <ConfirmCustom open={openConfirm} setOpen={setOpenConfirm} message={confirmMessage} callback={ callback } />
         </MySubContext.Provider>
         </MyContext.Provider>
     </> }

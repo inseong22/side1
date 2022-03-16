@@ -15,11 +15,11 @@ function ReviewSection({content, setting}) {
     const returnReviewCards = content.elements.map((item, index) => {
         if(index < content.numOfElements){
             return(
-                <FeatureCard section="feature" content={content} index={index}>
+                <FeatureCard align={state.isPhone ? content.mobile.align : content.elementText.align} section="feature" content={content} index={index}>
                     <Element content={content} item={item} index={index} key={index}/>
                     {
                         content.reviewText &&
-                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}}>
+                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%'}}>
                     {
                         content.elementTitle.use && 
                         <div className="df-margin-big feature-title" style={{width:'100%'}}>            
@@ -29,7 +29,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${state.isPhone ? content.mobile.align : content.align}`,
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                     fontFamily:`${state.setting.smallFont}`,
                                     color:`${content.elementTitle.color}`,
                                     fontSize:`${content.elementTitle.size/20}em`,
@@ -44,7 +44,7 @@ function ReviewSection({content, setting}) {
                     }
                     {
                         content.rating.use && 
-                        <div className="df-margin-small" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.align}`}}>
+                        <div className="df-margin-small" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.elementText.align}`}}>
                             <Rating
                                 value={item.rating} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {

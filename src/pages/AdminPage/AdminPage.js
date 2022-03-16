@@ -114,6 +114,8 @@ function AdminPage({history}) {
                         <div>
                             {feedback &&
                             feedback.map((item, index) => {
+                                let day = new Date(item.created)
+                                let date = `${day.getMonth() + 1}월 ${day.getDate()}일 ${day.getHours()}시 ${day.getMinutes()}분`
                                 return(
                                     <div className="center-row" style={{margin:'10px', flexWrap:'wrap', backgroundColor:'rgba(0,0,0,0.2)'}} key={index}>
                                         <Half>
@@ -139,6 +141,9 @@ function AdminPage({history}) {
                                         </Half>
                                         <Half>
                                             작업 시간 : {item.working_time}
+                                        </Half>
+                                        <Half>
+                                            피드백 시간 : {date}
                                         </Half>
                                     </div>
                                 )

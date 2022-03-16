@@ -7,7 +7,6 @@ import * as fs from '@styled-icons/fluentui-system-regular'
 import {Email} from '@styled-icons/entypo'
 import {EmailOutline} from '@styled-icons/evaicons-outline'
 import {KakaoTalk} from '@styled-icons/remix-fill'
-
 import OverflowScrolling from 'react-overflow-scrolling';
 
 import React, {useState} from 'react'

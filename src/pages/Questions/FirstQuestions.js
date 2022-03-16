@@ -506,7 +506,7 @@ function FirstQuestions({history}) {
                     ←
                 </div> 
                 {progressList.map((item, index) => {
-                    let backColor = 'rgba(100,100,100,0.2)'
+                    let backColor = 'rgba(100,100,100,0)'
                     let fontColor = '#C4C4C4'
                     let fontColor2 = 'rgba(0,0,0,0.6)'
 

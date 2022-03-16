@@ -119,8 +119,8 @@ const button = {
         ghostUse:false,
         ghostLink:'',
         ghostApply: '',
-        ctaPadding: 10,
-        ghostPadding: 10,
+        ctaCheck : false,
+        ghostCheck : false,
     },
     appButton:{
         use: true,
@@ -634,6 +634,29 @@ export const base = [
             text:'좌측 메뉴에서 목업을 고르고, 여기를 클릭하여 서비스에 대해 적어보세요.'
         },
     },
+    // {
+    //     ...commons,
+    //     padding:{
+    //         top:5,
+    //         bottom:5,
+    //     },
+    //     name:'선',
+    //     sectionTypeName:'LineSection',
+    //     title:{
+    //         ...commons.title,
+    //         text:'섹션을 구분짓기 위해 \'선\'섹션을 이용해보세요.',
+    //         size:32
+    //     },
+    //     desc:{
+    //         ...commons.desc,
+    //         text:'좌측 메뉴에서 선 종류를 고르세요. 여기를 클릭하여 서비스에 대해 적어보세요.'
+    //     },
+    //     line:{
+    //         use:true,
+    //         type:0,
+    //         color:'#000000',
+    //     }
+    // },
 ]
 
 export const defaults = {

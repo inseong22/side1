@@ -12,7 +12,7 @@ function FeaturesSection({content, setting}) {
     const returnFeatureCards = content.elements.map((item, index) => {
         if (index < content.numOfElements){
         return(
-            <FeatureCard section="feature" content={content} index={index}>
+            <FeatureCard align={isMobile ? content.mobile.align : content.elementText.align} section="feature" content={content} index={index}>
                 {
                     content.element.use && 
                     <Element content={content} item={item} index={index} key={index}/>
@@ -48,7 +48,7 @@ function FeaturesSection({content, setting}) {
                                         // boxSizing:`border-box`, 
                                         textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
                                         resize:'none',
-                                        WebkitTextFillColor: `${content.desc.color}`,
+                                        WebkitTextFillColor: `${content.descColor}`,
                                         WebkitOpacity: 1,
                                     }}
                                     placeholder="여기를 클릭하여 서비스 및 제품의 특징을 적어보세요."

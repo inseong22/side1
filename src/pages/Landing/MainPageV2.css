@@ -259,7 +259,8 @@
     .one-section-small{
         text-align: center;
         width:100%;
-        font-size: 0.6em;
+        font-size: 0.7em;
+        margin-top:10px;
     }
     .main-section-left{
         width: 80%;

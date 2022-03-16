@@ -10,11 +10,9 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-    PopoverHeader,
     PopoverBody,
-    PopoverFooter,
     PopoverArrow,
-    Button
+    Portal,
   } from '@chakra-ui/react'
 
 
@@ -23,19 +21,8 @@ export function EditColor({onChange, value}) {
     const {stateC, actionC} = useContext(MakeContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [color, setColor] = useColor("hex", value);
     const [newColor, setNewColor] = useState(true);
-    const [open, setOpen] = useState(null);
-
-    const handleClick = () => {
-        setOpen(!open);
-        setNewColor(true);
-    };
-  
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+    
     const closeSave = () => {
-        handleClose();
         if(stateC.usedColors.includes(value)){
             return
         }else{
@@ -74,29 +61,23 @@ export function EditColor({onChange, value}) {
             </div>
                 <Popover
                     placement='right'
-                    closeOnBlur={false}
-                    isOpen={open}
                     onClose={() => {
                         closeSave()
                     }}>
                 <PopoverTrigger>
-                    <div className="color-button" 
-                    style={{
-                        backgroundColor:`${value}`, 
-                        color:`${value === '#ffffff' ? '#555C67' : 'white'}`,
-                        border: `${!newColor ? ('2px solid #ffffff'): ('2px solid #6B63F7')}`,
-                    }} onClick={handleClick}>    
-                        새로운 색상
-                        {value}
-                    </div>
+                    <button className="color-button" 
+                        style={{
+                            backgroundColor:`${value}`, 
+                            color:`${value === '#ffffff' ? '#555C67' : 'white'}`,
+                            border: `${!newColor ? ('2px solid #ffffff'): ('2px solid #6B63F7')}`,
+                        }} onClick={() => setNewColor(true)}>    
+                            새로운 색상
+                            {value}
+                    </button>
                 </PopoverTrigger>
+                <Portal>
                 <PopoverContent style={{zIndex: 100}}>
                     <PopoverArrow />
-                    <PopoverHeader>
-                        <Button className="color-close" onClick={ () => closeSave() }>
-                            적용
-                        </Button>
-                    </PopoverHeader>
                     <PopoverBody>
                         <div className="center-column">
                             <ColorPicker
@@ -128,6 +109,7 @@ export function EditColor({onChange, value}) {
                         </div>
                     </PopoverBody>
                 </PopoverContent>
+                </Portal>
                 </Popover>
         </div>
         </ChakraProvider>

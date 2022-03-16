@@ -10,6 +10,7 @@ import Footer from '../NavAndFooter/Footer'
 import NavBarV2 from '../NavAndFooter/NavBarV2'
 import TemplateModal from './TemplateModal'
 import {Link} from 'react-router-dom'
+import {isMobile} from 'react-device-detect'
 import './ExamplePage.css'
 
 const exs = [
@@ -119,7 +120,14 @@ function ExamplePage({isLoggedIn, history}) {
                     <div className="excard-black">
                         {
                             url.length > 1 && 
-                            <div className="section-add__button" style={{width:'130px', fontSize:'14px'}} onClick={() => {setMakeModal(true); setUrl(url)}}>
+                            <div className="section-add__button" style={{width:'130px', fontSize:'14px'}} onClick={() => {
+                                if(!isMobile){
+                                    alert("죄송합니다. 현재 제작은 PC 환경에서만 가능합니다!")
+                                }else{
+                                    setMakeModal(true);
+                                    setUrl(url)
+                                }
+                                }}>
                                 템플릿 사용하기
                             </div>
                         }

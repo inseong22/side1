@@ -11,6 +11,7 @@ import GallerySection from './SectionTypes/GallerySection'
 import TextSection from './SectionTypes/TextSection'
 import MockupSection from './SectionTypes/MockupSection'
 import VideoSection from './SectionTypes/VideoSection'
+import LineSection from './SectionTypes/LineSection'
 
 import './NewSection.css'
 
@@ -86,6 +87,11 @@ function NewSection({elementRef, setting, content, index, secNum, setSecNum, isP
                     <VideoSection content={content} setting={setting}/>
                 )
 
+            case 'LineSection' :
+                return(
+                    <LineSection content={content} setting={setting}/>
+                )
+                
             default:
                 return (
                     <div>

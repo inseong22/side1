@@ -40,3 +40,23 @@
     padding-left:4px;
     color: #202936;
 }
+
+.option-selects{
+    cursor: pointer;
+    padding:7px 5px;
+    display: flex;
+    justify-content: start;
+    align-items : center;
+    border-radius:3px;
+    font-size: 0.85em;
+}
+
+.option-trigger-button{
+    width:35px;
+    height:35px;
+    border-radius:5px;
+    border:1px solid rgb(219, 219, 219);
+    display: flex;
+    justify-content:center;
+    align-items : center;
+}

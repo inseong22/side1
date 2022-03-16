@@ -41,10 +41,10 @@ function WhatIsSurfee({history, isLoggedIn}) {
                     처음 쓰는 사람도 3분안에 예쁜 페이지를 완성할 수 있어요.<br/>
                     <br/>
                     2️⃣ 내가 만든 페이지 안에서 들어온 사람에게 간단한 입력을 받을 수 있어요.<br/>
-                    이 입력받은 정보는 📊관리페이지에서 확인이 가능하답니다.<br/>
+                    이 입력받은 정보는 📊관리페이지에서 확인이 가능하답니다.<br/><br/>
                     <img src={intro1} alt="설명 1" />
                     <br/>
-                    3️⃣ 몇명이 내 페이지로 들어왔는지, 그 중 몇명이 무슨 버튼을 눌렀고,<br/>어떤 응답을 했는지 볼 수 있어요!<br/>
+                    3️⃣ 몇명이 내 페이지로 들어왔는지, 그 중 몇명이 무슨 버튼을 눌렀고,<br/>어떤 응답을 했는지 볼 수 있어요!<br/><br/>
                     <img src={intro2} alt="설명 2" />
                     <div stlye={{marginTop:'160px', display:'flex'}}>&nbsp;</div>
                     <Button colorScheme='red' onClick={() => {

@@ -7,6 +7,7 @@ import faq from '../../../../tools/img/addSection/faq.png'
 import gallery from '../../../../tools/img/addSection/gallery.png'
 import review from '../../../../tools/img/addSection/review.png'
 import mock from '../../../../tools/img/addSection/mock.png'
+import line from '../../../../tools/img/addSection/mock.png'
 import text from '../../../../tools/img/addSection/text.png'
 import video from '../../../../tools/img/addSection/video.png'
 import detail from '../../../../tools/img/addSection/detail.png'
@@ -67,6 +68,10 @@ export const sectionIcons = [
     {
         sectionTypeName : 'ReviewSection',
         icon : <ICON src={review} />
+    },
+    {
+        sectionTypeName : 'LineSection',
+        icon : <ICON src={line} />
     },
 ]
 

@@ -5,7 +5,7 @@ import {CustomSwitch} from '../../tools/Custom/OnOffCustom'
 import RadioCustom from '../../tools/Custom/RadioCustom'
 import InputCustom from '../../tools/Custom/InputCustom'
 import ApplyInputCustom from '../../tools/Custom/ApplyInputCustom'
-import SliderCustom from '../../tools/Custom/SliderCustom'
+import OnOffCustom from '../../tools/Custom/OnOffCustom'
 import TextSizeCustom from '../../tools/func/TextSizeCustom'
 
 const buttonOptions = [
@@ -79,6 +79,12 @@ function AddCtaButton({content, num}) {
                     </> }
                     <div className="mid-command-light"> 최대 {num}개의 신청 박스만 생성 가능합니다. 
                     </div>
+                    <OnOffCustom text="개인정보 동의 확인 사용" value={content.button.ctaCheck} func={e => {
+                        action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].button.ctaCheck = !content.button.ctaCheck
+                        }))
+                        console.log(content.button)
+                    }}/>
                     </>
                 )
             default:
@@ -91,12 +97,12 @@ function AddCtaButton({content, num}) {
     return (
         <div className="box-gray__container">
         <CustomSwitch text="CTA 버튼" value={content.button.ctaUse} onChange = {e => ctaOpen(e)}/>
-            { content.button.ctaUse && (
-                <>
-                    <RadioCustom options={buttonOptions} value={content.button.ctaOption} func={e => changeCtaOption(e)}/>
-                    {returnCtaOptions()}
-                </>
-            )}
+        { content.button.ctaUse && (
+            <>
+                <RadioCustom options={buttonOptions} value={content.button.ctaOption} func={e => changeCtaOption(e)}/>
+                {returnCtaOptions()}
+            </>
+        )}
         </div>
     )
 }

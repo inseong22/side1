@@ -1,13 +1,13 @@
 import React, {useContext} from 'react'
 import { MyContext } from '../../../../pages/Make/MakePageV2'
 
-function FeatureCard({children, section, content, index}) {
+function FeatureCard({children, align, section, content, index}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return (
         <div key={index} className="feature__card" 
             style={{
-            alignItems: 'center',
+            alignItems: `${align}`,
             margin : `${ state.isPhone ? `5px 5px 5px 5px` : `0px ${!state.isPhone && index === content.numOfElements - 1 ? '0px' : '5px'} 0px ${!state.isPhone && index === 0 ? '0px' : '5px'}` }`,
             height : `${state.isPhone ? '' : '100%'}`,
             width : `${state.isPhone ? 

@@ -98,7 +98,7 @@
 
 .fta__container{
     position:fixed;
-    bottom:30px;
+    bottom:15px;
     z-index:1003;
     display: flex;
     justify-content :center;

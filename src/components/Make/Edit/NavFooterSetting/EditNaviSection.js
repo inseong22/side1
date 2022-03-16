@@ -80,7 +80,7 @@ function EditNaviSection({navi, setNavi, category}) {
                             navi.logo.image.use && 
                             <>
                                 <AddContentImg text="로고" value={navi.logo.image.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
-                                <SliderCustom text="로고 사이즈" max='53' func={e => setNavi(produce(navi, draft => {
+                                <SliderCustom text="로고 사이즈" max='100' func={e => setNavi(produce(navi, draft => {
                                     draft.logo.image.width = e;
                                 }))} />
                             </>

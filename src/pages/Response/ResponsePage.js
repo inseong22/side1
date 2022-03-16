@@ -161,13 +161,13 @@ function ResponsePage({userObj, history}) {
                         </div>
                     </div>
                     {
-                    nowChecking !== NOTCLICKED ? 
+                    nowChecking !== NOTCLICKED && responses[nowChecking] !== undefined ? 
                     <div className="response-down__container">
                         <ChromeTapBar content={mylandings[nowChecking]}/>
                         { part === 1 ? 
                         <div className="response-display__container">
                             <ResultTopTitle content={mylandings[nowChecking]} myResponses={responses[nowChecking]} checkPublished={checkPublished} datas={datas[nowChecking]} history={history}/>
-                            <ResultTable responses={responses} nowChecking={nowChecking} />
+                            <ResultTable setUpdate={setUpdate} update={update} responses={responses} nowChecking={nowChecking} setResponses={setResponses} />
                         </div>
                         :
                         <>

@@ -24,18 +24,22 @@ function ReturnButton({content, onlyapp}){
         }))} 
         inputStyle={{
             textAlign: 'center',
-            fontSize:'14px',
-            fontFamily:`${state.setting.smallFont}`,
+            fontSize:14,
+            fontFamily:`Pretendard-Regular`,
             borderRadius:`${state.setting[type].borderRadius}px`,  
             backgroundColor:`rgba(0,0,0,0)`, 
-            padding: `2px 5px`, 
+            padding: `2px 8px`, 
             }}/>
     
     </div>)}
     
     const returnInputs = (type) => {
         return(
-            <div className="centera" style={{flexDirection:`${state.isPhone || content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ? 'column' : 'row'}`, alignItems:`${state.isPhone ? 'center' : 'start'}`, justifyContent:`${state.isPhone ? content.mobile.buttonAlign : content.button.align}`}}>
+            <div className="centera" style={{
+                    flexDirection:`${state.isPhone || content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ? 'column' : 'row'}`, 
+                    alignItems:`${state.isPhone || content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ? 'center' : 'start'}`, 
+                    justifyContent:`${state.isPhone ? content.mobile.buttonAlign : content.button.align}`
+                }}>
                 <div style={{ display:'flex', flexDirection:'column', justifyContent:`${state.isPhone ? content.mobile.buttonAlign : content.button.align}`}}>
                     {content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].map((item, index) => {
                         return <input readOnly
@@ -43,12 +47,15 @@ function ReturnButton({content, onlyapp}){
                                     placeholder={item} 
                                     key={index} 
                                     style={{  margin:'4px', padding: `11px 10px`, }}/>
-                    })}
-                    {/* <div className="input-before">
-                        <Checkbox colorScheme='gray' />&nbsp;(필수) <a href="https://www.notion.so/377223464ebd42e6adb9095f4b6548e5" target='_blank' style={{textDecoration:'underline'}}>&nbsp;개인정보 수집 및 이용</a>&nbsp;동의
-                    </div> */}
+                    })} 
+                    {
+                        content.button[type === 'cta' ? 'ctaCheck' : 'ghostCheck'] && 
+                        <div className="input-before">
+                            <Checkbox colorScheme='gray' />&nbsp;(필수) <a href="https://www.notion.so/377223464ebd42e6adb9095f4b6548e5" target='_blank' style={{textDecoration:'underline'}}>&nbsp;개인정보 수집 및 이용</a>&nbsp;동의
+                        </div> 
+                    }
                 </div>
-                <div style={{marginTop:`${state.isPhone ? '10px' : '0px'}`}}>
+                <div style={{marginTop:`${state.isPhone ? '7px' : '0px'}`}}>
                 {
                     type === 'cta' && <>{CustomButton('cta')}</>
                 }

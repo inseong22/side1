@@ -50,9 +50,9 @@
     align-items: center;
     letter-spacing: -0.02em;
 
-    font-size: 0.95em;
+    font-size: 0.85em;
     margin-left:30px;
-    color: #EB8A8A;
+    color: #d65f5f;
 }
 
 .get-buttons-container button{
@@ -162,6 +162,7 @@
     justify-content:start;
     align-items : center;
     width:100%;
+    border-bottom: 1px solid #E8F0F9;
 }
 
 .response__user-datas-one{
@@ -169,7 +170,6 @@
     width:100%;
     font-size:0.7em;
     padding:15px 30px;
-    border-bottom: 1px solid #E8F0F9;
     color:var(--main-dark-gray);
     /* box-sizing: border-box; */
 }

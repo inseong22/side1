@@ -36,7 +36,6 @@ const UserLandingPage = (props) => {
     ChannelTalk.shutdown();
 
     useEffect(() => {
-        console.log(props)
         loadData()
         ReactGa.initialize('UA-213792742-1');
         // to report page view
@@ -111,7 +110,8 @@ const UserLandingPage = (props) => {
                         width:`${ setting.fta.size }%`, 
                         borderRadius:`${setting.fta.shape}px`, 
                         border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
-                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
+                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`,
+                        fontSize:'0.7em'
                     }}
                     onClick={() => {
                         moveToPage('플로팅 버튼')

@@ -57,9 +57,15 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                             <Route path="/submit">
                                 <SubmitPage history={history}/>
                             </Route>
-                            <Route path="/make" onUpdate={() => window.scrollTo(0, 0)}>
+                            <Route 
+                                path="/make" 
+                                onUpdate={() => window.scrollTo(0, 0)}>
                                 <MakePageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
                             </Route>
+                            {/* <Route 
+                                path="/make/:code" 
+                                onUpdate={() => window.scrollTo(0, 0)}
+                                render={(history, isLoggedIn, userObj) => <MakePageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj} />} /> */}
                             <Route path="/questions" onUpdate={() => window.scrollTo(0, 0)}>
                                 <FirstQuestions history={history} isLoggedIn={isLoggedIn}/>
                             </Route>

@@ -62,14 +62,24 @@ function AddingSection({setting, open, setOpen, foot}) {
 
     const addSection = async (typeName) => {
         // 아래는 state.contents에 섹션 하나를 추가하는 것.
+
+        let tempBody;
         
-        const ee = await dbService.collection('saved-page').where("urlId", '==', '0').get()
+        if(typeName === 'LineSection'){
+            tempBody = base[11]
+        }else{
+            const ee = await dbService.collection('saved-page').where("urlId", '==', '0').get()
 
-        let eee = ee.docs.map(doc => {
-            return({...doc.data(), id:doc.id})
-        });
+            let eee = ee.docs.map(doc => {
+                return({...doc.data(), id:doc.id})
+            });
 
-        let tempBody = eee[0].contents.filter(doc => doc.sectionTypeName === typeName)[0]
+            tempBody = eee[0].contents.filter(doc => doc.sectionTypeName === typeName)[0]
+
+            if(typeName === 'CtaSection'){
+                tempBody = base[2]
+            }
+        }
 
         tempBody['animation'] = setting.animation
 

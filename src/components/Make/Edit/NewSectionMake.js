@@ -11,6 +11,7 @@ import EditGallerySection from './EditTemplates/EditGallerySection'
 import EditTextSection from './EditTemplates/EditTextSection'
 import EditMockupSection from './EditTemplates/EditMockupSection'
 import EditVideoSection from './EditTemplates/EditVideoSection'
+import EditLineSection from './EditTemplates/EditLineSection'
 import EditTopBar from './tools/func/FuncTopBar'
 import {ArrowIosBack} from '@styled-icons/evaicons-solid'
 import EditSetting from './NavFooterSetting/EditSetting'
@@ -18,6 +19,9 @@ import EditFooterSection from './NavFooterSetting/EditFooterSection'
 import EditContents from './NavFooterSetting/EditContents'
 import {sectionIcons} from './NavFooterSetting/ContentsIcons';
 import {Trash} from '@styled-icons/boxicons-solid'
+import {
+    ChakraProvider,
+  } from '@chakra-ui/react'
 import './NewSectionMake.css'
 
 const NAVSECNUM = 50;
@@ -133,6 +137,11 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
             case 'VideoSection':
                 return(
                     <EditVideoSection content={content} category={state.category}/>
+                )
+
+            case 'LineSection':
+                return(
+                    <EditLineSection content={content} category={state.category}/>
                 )
     
             default:

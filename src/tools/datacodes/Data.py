@@ -15,11 +15,12 @@ FILE_PATH = './gadata.json'
 
 cred = credentials.Certificate("kiwi.json")
 firebase_admin.initialize_app(cred, {
-'projectId': 'kiwi-d5dd3',
+    'projectId': 'kiwi-d5dd3',
 })
 
 db = firestore.client()
 coll_ref = db.collection('gadata')
+
 
 def initialize_analyticsreporting():
     """Initializes an Analytics Reporting API V4 service object.
@@ -50,7 +51,7 @@ def get_report(analytics):
                 {
                     'viewId': VIEW_ID,
                     'dateRanges': [{
-                        'startDate': '30daysAgo',
+                        'startDate': '180daysAgo',
                         'endDate': 'today'
                     }],
                     'metrics': [
@@ -115,12 +116,13 @@ def print_response(response):
                     temp['sessions'] = oneMetric[1]
                 if oneMetric[0] == 'ga:pagePath':
                     temp['path'] = oneMetric[1]
-                    
+
             doc_ref = coll_ref.document()
             doc_ref.set(temp)
             result.append(temp)
             temp = []
         return result
+
 
 def delete_collection(coll_ref):
     docs = coll_ref.stream()

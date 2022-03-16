@@ -15,14 +15,14 @@ function FeaturesSection({content, setting}) {
     const returnFeatureCards = content.elements.map((item, index) => {
         if (index < content.numOfElements){
         return(
-            <FeatureCard section="feature" content={content} index={index}>
+            <FeatureCard section="feature" align={state.isPhone ? content.mobile.align : content.elementText.align} content={content} index={index}>
                 {
                     content.element.use && 
                         <Element content={content} item={item} index={index} key={index}/>
                 }
                 {
                     content.elementText.use && 
-                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}}>
+                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%'}}>
                     {
                         content.elementText.titleUse && 
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
@@ -44,8 +44,7 @@ function FeaturesSection({content, setting}) {
                                 <TextareaAutosize 
                                     className="text-input"  
                                     value={item.desc} 
-                                    color = {content.elementText.descCcolor} 
-                                    // align = {state.isPhone ? content.mobile.align : content.align}
+                                    color = {content.elementText.descColor}
                                     onChange={e => action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].elements[index].desc = e.currentTarget.value;
                                     }))}  

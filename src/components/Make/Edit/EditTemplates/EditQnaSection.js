@@ -59,6 +59,10 @@ function EditQnaSection({content, category}) {
                         <ElementsTable elements={elements} />
                         <OpenCloseCustom title="레이아웃" use={true} subtext={state.isPhone ? '모바일' : 'PC'}>
                             <RadioCustom options={layoutOptions} value={content.layout} func={e => changeLayoutOption(e)} />
+                            <AlignCustom all value={content.align} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].title.align = e;
+                                draft[state.secNum].desc.align = e;
+                            }))} />
                         </OpenCloseCustom>
                         <EditTitleDesc content={content} />
                         <OpenCloseCustom title="QnA" use={content.qna.use}>

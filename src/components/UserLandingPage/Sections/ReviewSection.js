@@ -13,7 +13,7 @@ function ReviewSection({content, setting}) {
         if(index < content.numOfElements){
             if(content.reviewText) {
             return(
-                <FeatureCard section="feature" content={content} index={index}>
+                <FeatureCard align={isMobile ? content.mobile.align : content.elementText.align} section="feature" content={content} index={index}>
                     <Element content={content} item={item} index={index} key={index}/>
                     {
                         content.elementTitle.use && 
