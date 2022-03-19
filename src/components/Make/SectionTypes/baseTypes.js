@@ -637,14 +637,14 @@ export const base = [
     // {
     //     ...commons,
     //     padding:{
-    //         top:5,
-    //         bottom:5,
+    //         top:1,
+    //         bottom:1,
     //     },
-    //     name:'선',
+    //     name:'구분선',
     //     sectionTypeName:'LineSection',
     //     title:{
     //         ...commons.title,
-    //         text:'섹션을 구분짓기 위해 \'선\'섹션을 이용해보세요.',
+    //         text:'섹션을 구분짓기 위한 용도입니다.',
     //         size:32
     //     },
     //     desc:{

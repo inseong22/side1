@@ -76,7 +76,7 @@ const OpenCloseCustom = (props) => {
   const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
   return (
-    <div className="one-element" >
+    <div className="one-element" onClick={() => {action.setFocus('qna'); action.setCategory(0)}}>
       <div className={props.type === 'card' ? 'accordion__card' : 'accordion__plain'}>
         <div className="accordion__header-qna" onClick={() => setOpen(!open)}>
           <div className="edit-element">

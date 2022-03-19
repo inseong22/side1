@@ -35,16 +35,17 @@ function ApplySection({content, setting}) {
                         <ReturnButton content={content} />
                     }
                     {content.caution.use &&
-                        <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                        <div className="df-margin-big feature-desc" style={{width:'100%'}}
+                        onClick={() => action.setFocus('caution')}>
                             <TextAuto className="text-input" 
-                            small 
-                            value={content.caution.text} 
-                            color = {content.caution.color} 
-                            align = {content.caution.align}
-                            size = {content.caution.size/20}
-                            onChange={e => action.setContents(produce(state.contents, draft => {
-                                    draft[state.secNum].caution.text = e.currentTarget.value;
-                            }))}  
+                                small   
+                                value={content.caution.text} 
+                                color = {content.caution.color} 
+                                align = {content.caution.align}
+                                size = {content.caution.size/20}
+                                onChange={e => action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].caution.text = e.currentTarget.value;
+                                }))}  
                             />
                         </div>
                     }   

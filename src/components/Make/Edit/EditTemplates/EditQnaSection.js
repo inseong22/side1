@@ -7,7 +7,7 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import EditTitleDesc from './tools/EditTitleDesc'
 import ColorCustom from '../tools/Custom/ColorCustom'
-import TextSizeCustom from '../tools/func/TextSizeCustom'
+import AlignCustom from '../tools/Custom/AlignCustom'
 
 const layoutOptions = [
     {label: '카드', value: 'card'},
@@ -60,12 +60,13 @@ function EditQnaSection({content, category}) {
                         <OpenCloseCustom title="레이아웃" use={true} subtext={state.isPhone ? '모바일' : 'PC'}>
                             <RadioCustom options={layoutOptions} value={content.layout} func={e => changeLayoutOption(e)} />
                             <AlignCustom all value={content.align} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].align = e;
                                 draft[state.secNum].title.align = e;
                                 draft[state.secNum].desc.align = e;
                             }))} />
                         </OpenCloseCustom>
                         <EditTitleDesc content={content} />
-                        <OpenCloseCustom title="QnA" use={content.qna.use}>
+                        <OpenCloseCustom title="QnA" use={content.qna.use} open={state.focus === 'qna'}>
                             <RadioCustom text="기본 모양" options={shapeOptions} value={content.qna.shape} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.shape = e;
                             }))} />

@@ -5,8 +5,9 @@
 }
 
 .ckeditor-container{
-    border-radius: 4px;
+    border-radius: 0px;
     border: 1px solid rgba(231, 0, 0, 0);
+    padding:0px;
 }
 
 .ck-editor__editable{
@@ -19,7 +20,10 @@
 }
 
 .ckeditor-container:hover{
-    border: 1px dashed gray;
+    border:1px solid rgba(200,200,200,0.7);
+}
+.ckeditor-container:focus{
+    outline:1px solid #6e6e6e;
 }
 
 .ck-body{

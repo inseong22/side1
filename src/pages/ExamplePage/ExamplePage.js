@@ -5,7 +5,6 @@ import ex3 from '../../tools/img/main/ex3.png'
 import ex4 from '../../tools/img/main/ex4.png'
 import ex5 from '../../tools/img/main/ex5.png'
 import ex6 from '../../tools/img/main/ex6.png'
-import styled from 'styled-components'
 import Footer from '../NavAndFooter/Footer'
 import NavBarV2 from '../NavAndFooter/NavBarV2'
 import TemplateModal from './TemplateModal'
@@ -121,7 +120,7 @@ function ExamplePage({isLoggedIn, history}) {
                         {
                             url.length > 1 && 
                             <div className="section-add__button" style={{width:'130px', fontSize:'14px'}} onClick={() => {
-                                if(!isMobile){
+                                if(isMobile){
                                     alert("죄송합니다. 현재 제작은 PC 환경에서만 가능합니다!")
                                 }else{
                                     setMakeModal(true);

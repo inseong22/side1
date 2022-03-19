@@ -35,7 +35,8 @@ function AppDownloadSection({content, setting}) {
                             <ReturnButton onlyapp={true} content={content} />
                         }
                         {content.caution.use && 
-                            <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                            <div className="df-margin-big feature-desc" style={{width:'100%'}}
+                            onClick={() => action.setFocus('caution')}>
                                 <TextAuto className="text-input"  
                                     small
                                     value={content.caution.text} 

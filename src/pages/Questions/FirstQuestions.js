@@ -522,7 +522,7 @@ function FirstQuestions({history}) {
 
                     return(
                         <span style={{display:'flex', flexDirection:'column', margin:'3%', alignItems: 'center', justifyContent: 'center'}}>
-                            <span className="list-component" style={{background:`${backColor}`, color:`${fontColor}`, border:`1px solid ${fontColor}`}}>{item.num}</span>
+                            <span className="list-component" style={{background:`${backColor}`, color:`${fontColor}`}}>{item.num}</span>
                             <span style={{fontSize:'12px', color:`${fontColor2}`, marginTop:'7px'}}>{item.name}</span>
                         </span>
                     )

@@ -14,7 +14,8 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
             <div 
                 onClick={() => {action.setCategory(0); action.setFocus('navi-logo')}}
                 className="make-nav-logoc" 
-                style={{height:`${navi.height}px`, 
+                style={{
+                    height:`${navi.height}px`, 
                     justifyContent:`${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? 'right' : navi.logo.align}`,
                     width: `${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? '115%' : '100%'}`}}>
                 {navi.logo.image.use &&  
@@ -31,7 +32,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                             zIndex: 5,
                             color:`${navi.logo.text.color}`, 
                             fontFamily:`${state.setting.font}`,
-                            fontSize:'0.9em',
+                            fontSize:'25px',
                             resize:'none',
                             padding: '0px',
                             marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,

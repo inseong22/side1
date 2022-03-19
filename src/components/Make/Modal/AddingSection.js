@@ -19,9 +19,10 @@ import text from '../../../tools/img/addSection/09text.png'
 import gallery from '../../../tools/img/addSection/10gallery.png'
 import video from '../../../tools/img/addSection/11video.png'
 import mockup from '../../../tools/img/addSection/12mockup.png'
+import line from '../../../tools/img/addSection/12line.png'
 
 const IMGS = [
-    hero, detail, cta, apply, appDownload, feature, review, qna, text, gallery, video, mockup
+    hero, detail, cta, apply, appDownload, feature, review, qna, text, gallery, video, line
 ]
 
 const StyledModal = styled(ModalUnstyled)`

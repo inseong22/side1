@@ -93,9 +93,6 @@ function EditFooterSection({foot, setFoot, category}) {
                         <ColorCustom text="색상" value={foot.text.color} func={e => setFoot(produce(foot, draft => {
                             draft.text.color = e;
                         }))} />
-                        <AlignCustom value={foot.text.align} func={e => setFoot(produce(foot, draft => {
-                            draft.text.align = e;
-                        }))} />
                     </OpenCloseCustom>
                     <OpenCloseCustom title="소셜 아이콘" use={foot.icon.use} open={state.focus === 'footer-icons'}>
                         <ColorCustom text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {

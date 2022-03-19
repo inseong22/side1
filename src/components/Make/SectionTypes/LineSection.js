@@ -17,7 +17,7 @@ function LineSection({content, setting}) {
     const Lines = [
         <hr className="hr_style1" style={{borderTop:`1px solid ${content.line.color}`}}/>,
         <hr className="hr_style2" style={{borderTop:`1px solid ${content.line.color}`}}/>,
-        <hr className="hr_style3" style={{borderTop:`1px solid ${content.line.color}`}}/>,
+        <span className="hr_style3"/>,
         <hr className="hr_style4" style={{borderTop:`1px solid ${content.line.color}`}}/>,
         <hr className="hr_style5" style={{borderTop:`1px solid ${content.line.color}`}}/>,
     ]

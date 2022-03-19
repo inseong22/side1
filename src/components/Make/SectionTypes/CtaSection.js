@@ -33,6 +33,7 @@ function CtaSection({content, setting}) {
                     {content.caution.use && 
                         <div className="df-margin-big feature-desc" style={{width:'100%'}}>
                             <TextAuto 
+                                onClick={() => action.setFocus('caution')}
                                 className="text-input" 
                                 small 
                                 size = {content.caution.size/20}

@@ -314,7 +314,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                         loop
                         mode="normal"
                         src="https://assets9.lottiefiles.com/packages/lf20_tkvgymkx.json"
-                        style={{transform:'rotate(90deg)', position:'absolute', zIndex:'0', width:'100px', height:'200%'}}
+                        style={{transform:'rotate(90deg)', position:'absolute', zIndex:'0', width:'100%', height:'200%'}}
                         >
                     </lottie-player>
                 }

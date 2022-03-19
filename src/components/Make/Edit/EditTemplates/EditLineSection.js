@@ -41,7 +41,8 @@ function EditLineSection({content, category}) {
                         draft[state.secNum].line.type = 2;
                     }))
                 }}>
-                    <hr className="hr_style3" style={{borderTop:`1px solid ${content.line.color}`}}/>
+                    <hr className="hr_style3"/>
+                    <hr className="hr_style3"/>
                 </div>
                 <div className="opacity-hover hr__container" onClick={() => {
                     action.setContents(produce(state.contents, draft => {

@@ -163,6 +163,9 @@ function Layout({content, version, foot, setFoot}) {
                     <RadioCustom layout='on' version='footer' options={layout3Options} value={foot.layout} func={e => {setFoot(produce(foot, draft => {
                             draft.layout = e;
                         }))}} />
+                    <AlignCustom value={foot.text.align} func={e => setFoot(produce(foot, draft => {
+                        draft.text.align = e;
+                    }))} />
                     </>
                 )
         }

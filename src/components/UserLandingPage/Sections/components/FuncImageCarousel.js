@@ -3,7 +3,6 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { MyContext } from '../../../../pages/Make/MakePageV2'
-import styled from 'styled-components'
 import {NavigateBefore, NavigateNext} from '@styled-icons/material'
 
 const IFPHONE = 100/24;

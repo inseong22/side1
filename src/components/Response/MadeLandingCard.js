@@ -38,7 +38,7 @@ function MadeLandingCard({item, published, setCopyOpen, id, index, setNowCheckin
                             <div className="option-selects opacity-hover" style={{color:'#e26a6a'}} onClick={() => {setDeleteOpen(true)}}><Trash size="20" />&nbsp;&nbsp; 페이지 삭제</div>
                             <div className="option-selects opacity-hover" onClick={() => duplicate()}><Duplicate size="20" />&nbsp;&nbsp; 페이지 복제</div>
                             <CopyToClipboard text={"https://surfee.co.kr/make/" + `${item.id}`}>
-                                <div className="option-selects opacity-hover" onClick={() => alert('템플릿 코드를 복사했습니다. \n 이 링크를 이용하여 템플릿을 공유할 수 있습니다.')}><Share size="15"/>&nbsp; &nbsp;이 템플릿 공유하기</div>
+                                <div className="option-selects opacity-hover" onClick={() => alert('템플릿을 복제할 수 있는 링크를 복사했습니다. \n이 링크를 이용하여 템플릿을 공유할 수 있습니다.')}><Share size="15"/>&nbsp; &nbsp;이 템플릿 공유하기</div>
                             </CopyToClipboard>
                         </PopoverBody>
                     </PopoverContent>

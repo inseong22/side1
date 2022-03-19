@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './ResponsePage.css';
 import {dbService} from '../../tools/fbase';
-import ReactGa from 'react-ga'
 import Footer from '../NavAndFooter/Footer'
 import MadeLandingCard from '../../components/Response/MadeLandingCard'
 import ResponseNavBar from '../../components/Response/ResponseNavBar'
@@ -9,12 +8,15 @@ import ChromeTapBar from '../../components/Response/ChromeTapBar'
 import ResultTable from '../../components/Response/ResultTable'
 import ResultTopTitle from '../../components/Response/ResultTopTitle'
 import LoadingDisplay from '../../tools/LoadingDisplay'
-import gadata from '../../tools/datacodes/gadata.json'
 import { Tooltip, ChakraProvider } from '@chakra-ui/react'
 import MiniModal from '../../tools/MiniModal'
 import ChannelTalk from '../../tools/ChannelTalk'
+import FeatVote from '../../tools/modal/FeatVote'
+import { Cookies } from 'react-cookie'
 
 const NOTCLICKED = 10000
+
+const cookies = new Cookies()
 
 function ResponsePage({userObj, history}) {
     const [loading, setLoading] = useState(false);
@@ -26,6 +28,21 @@ function ResponsePage({userObj, history}) {
     const [part, setPart] = useState(1);
     const [nowChecking, setNowChecking] = useState(NOTCLICKED);
     const [copyOpen, setCopyOpen] = useState(false)
+    const [voteOpen, setVoteOpen] = useState(false)
+
+    // useEffect(() => {
+    //     console.log("쿠키", cookies.get('featvote'))
+
+    //     if(cookies.get('featvote')){
+    //         const expires = new Date()
+    //         expires.setDate(expires.getDate() + 7)
+
+    //         setVoteOpen(true);
+    //         cookies.set('featvote', true, {
+    //             expires:expires
+    //         })
+    //     }
+    // }, [])
     
     useEffect(() => {
         ChannelTalk.boot({
@@ -150,7 +167,7 @@ function ResponsePage({userObj, history}) {
                             {
                                 mylandings.length > 2 &&
                                <span className="response-subtext">현재 버전에서 랜딩페이지는 최대 3개까지 만들 수 있습니다. 새로운 페이지를 만들고 싶다면 기존의 페이지를 삭제해 주세요.</span>
-                        }
+                            }
                         </div>
                         <div className="get__mylandings-cantainer">
                             {returnMylandingsTable}
@@ -201,6 +218,7 @@ function ResponsePage({userObj, history}) {
                 </div>
                 </div>
                 <MiniModal open={copyOpen} setOpen={setCopyOpen} copy />
+                <FeatVote open={voteOpen} setOpen={setVoteOpen} />
                 </ChakraProvider>
             )
         }else{

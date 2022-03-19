@@ -122,17 +122,18 @@ function UserFoot({foot, setting}) {
                             </TextareaAutosize>
                         }
                         {foot.icon.use && foot.layout === 1 && 
-                            <div className="icon-box" style={{flexDirection: 'column', justifyContent: 'center'}}>
+                            <div className="icon-box" style={{
+                                flexDirection: 'column', justifyContent: 'center', marginLeft:'10%', width:'60%'}}>
                             {returnIcons()}
                             </div>
                         }
                         {foot.icon.use && foot.layout === 2 && 
-                            <div className="icon-box" style={{display: 'inline', flexDirection: 'row', justifyContent: 'start'}}>
+                            <div className="icon-box" style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}>
                             {returnIcons()}
                             </div>
                         }
                         {foot.icon.use && foot.layout === 3 && 
-                            <div className="icon-box" style={{display: 'inline', flexDirection: 'row', justifyContent: 'start'}}>
+                            <div className="icon-box" style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}>
                             {returnIcons()}
                             </div>
                         }

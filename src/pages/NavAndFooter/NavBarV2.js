@@ -40,6 +40,9 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
                             }}>
                                 Surfee 소개
                             </div>
+                            <Link to="/vote" className="nav-left-text" style={{marginLeft:'1vw'}}>
+                                신규 기능 투표
+                            </Link>
                         </div>
                         {
                             !isMobile && 

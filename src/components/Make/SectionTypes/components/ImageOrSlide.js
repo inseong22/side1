@@ -123,7 +123,7 @@ function ImageOrSlide({content}){
                             className="image border-hover" 
                             style={{
                                 borderRadius:`${content.image.border}px`,
-                                // width:`${imageWidth()}%`, 
+                                width:`100%`, 
                                 boxShadow: `${content.image.shadowValue}`
                             }} />
                     </div>

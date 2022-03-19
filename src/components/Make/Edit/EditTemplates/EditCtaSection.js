@@ -56,9 +56,9 @@ function EditCtaSection({content, category, type}) {
                         }
                         {
                             !(type === 'apply') &&
-                            <AddAppButton content={content} />
+                            <AddAppButton content={content}/>
                         }
-                        <EditNotice content={content}/>
+                        <EditNotice content={content} />
                     </div>
                 )
             case 1:

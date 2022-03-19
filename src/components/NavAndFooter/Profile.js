@@ -90,22 +90,26 @@ function Profile({make}) {
                                     '_blank'
                                 )
                             }}> 
-                            <QuestionAnswer className="profile__icon"/> 문의하기
+                            {/* <QuestionAnswer className="profile__icon"/>  */}
+                            문의하기
                         </MenuItem>
                         <MenuItem className="profile__menu-item"> 
                         {
                             make ? 
                             <div onClick={() => goResponse()}>
-                                <BarGraph className="profile__icon" /> 관리페이지
+                                {/* <BarGraph className="profile__icon" /> */}
+                                관리페이지
                             </div>
                             :
                             <Link to="/response">
-                                <BarGraph className="profile__icon" /> 관리페이지
+                                {/* <BarGraph className="profile__icon" /> */}
+                                관리페이지
                             </Link>
                         }
                         </MenuItem>
                         <MenuItem onClick={() => setConfirm(true)} className="profile__menu-item" style={{borderTop:'1px solid rgba(0,0,0,0.2)'}}> 
-                            <LogOutCircle className="profile__icon"/> 로그아웃
+                            {/* <LogOutCircle className="profile__icon"/> */}
+                            로그아웃
                         </MenuItem>
                     </MenuList>
                 </Menu>
