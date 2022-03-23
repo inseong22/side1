@@ -6,6 +6,7 @@ import rt1 from './img/tutorial/rt1.png'
 import rt2 from './img/tutorial/rt2.png'
 import rt3 from './img/tutorial/rt3.png'
 import rt4 from './img/tutorial/rt4.png'
+import bgcolor from '../tools/info/sky.svg'
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -20,7 +21,7 @@ const StyledModal = styled(ModalUnstyled)`
 `;
 
 const Backdrop = styled('div')`
-  z-index: -1;
+  z-index: -3;
   position: fixed;
   right: 0;
   bottom: 0;
@@ -38,10 +39,17 @@ const style = {
   p: 2,
   px: 4,
   pb: 3,
+  zIndex:-2,
+  backgroundImage:`url(${bgcolor})`,
+  objectFit:'cover',
+  backgroundSize:'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  position:'relative',
 };
 const Desc = styled('div')`
     margin-top:12px;
-    font-size:14px;
+    font-size:15px;
     text-align:center;
 `;
 
@@ -126,6 +134,7 @@ function MakeTutorialModal({open, setOpen}) {
                 BackdropComponent={Backdrop}
             >
                 <Box sx={style}>
+                    {/* <div className="centera" style={{backgroundColor:'rgba(255,255,255,0.8)', position:'absolute', zIndex:'-1'}}></div> */}
                     <div className="modal-top__title">
                         <div className="centera">
                             Surfee 사용방법

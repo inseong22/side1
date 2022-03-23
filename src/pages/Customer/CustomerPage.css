@@ -87,8 +87,34 @@
     margin-top:2%;
 }
 
+.what-inner__container{
+    font-size:20px;
+    width:40%;
+    text-align: left;
+    font-family: Noto Sans KR;
+}
+
+.what-title{
+    font-size:1.1em;
+    font-weight: 700;
+    margin-top:25px;
+}
+
+.what-desc{
+    font-size:0.9em;
+    margin-top:15px;
+    line-height: 1.9em;
+}
+
+.underline{
+    text-decoration: underline;
+}
 
 @media screen and (max-width:800px){
+    .what-inner__container{
+        width:90%;
+        font-size:16px;
+    }
     .nav-button{
         margin-left:1vw;
     }

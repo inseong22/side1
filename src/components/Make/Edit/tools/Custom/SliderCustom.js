@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './SliderCustom.css'
 import {
   Slider,
@@ -19,6 +19,10 @@ import { RamenDiningOutlined } from '@mui/icons-material';
 function SliderCustom({top, text, func, value, max}) {
     const [range, setRange] = useState(value);
 
+    useEffect(() => {
+      setRange(value)
+    }, [value])
+
     return (
       <div className="edit-element slider__container">
         <div className="edit-element__one" style={{flexDirection: 'column'}}>
@@ -32,7 +36,7 @@ function SliderCustom({top, text, func, value, max}) {
                 <Slider
                   step={1}
                   focusThumbOnChange={false}
-                  min={1}
+                  min={0}
                   max={max ? max : 100}
                   value={range}
                   onChange={e => {func(e); setRange(e)}}
@@ -45,15 +49,13 @@ function SliderCustom({top, text, func, value, max}) {
                 </Slider>
                 {/* <NumberInput className="number-input" size='md' maxW='50px' step={1} max={max ? max : 100} value={range} onChange={e => {func(e); setRange(e)}}> */}
                 <input className="number-input" type="number" value={range} min={1} max={max ? max : 100} onChange={e => {
-                  setRange(e.currentTarget.value);
-                  if(range <= max){
-                    func(e.currentTarget.value);
-                  }
-                  else{
-                    func(max)
-                  }
+                  func(e.currentTarget.value);
+                // if(range <= max){
+                //   //   // setRange(e.currentTarget.value);
+                //   } else{
+                //     func(max)
+                //   }
                   }}/>
-
             </ChakraProvider>
           </div>
             {/* {

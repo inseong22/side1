@@ -20,7 +20,11 @@ function HeroSection({content, setting}) {
     }
 
     return (
-        <motion.div style={{ width:'100%', height:'100%'}}>
+        <motion.div 
+        data-aos-easing="ease-in-back"
+        data-aos-delay="200"
+        data-aos-offset="0" data-aos={content.animation} aos-duration="4000"
+        style={{ width:'100%', height:'100%'}}>
             <AnimationDiv setting={setting} content={content} returnLayout={returnLayout}>
                 <div className="text__container" style={{marginTop:`${ !isMobile && content.layout === 4 ? '20px'  : isMobile && content.mobile.layout === 4 ? '10px' : '0px'}` }}>
                     <TitleDesc content={content} />

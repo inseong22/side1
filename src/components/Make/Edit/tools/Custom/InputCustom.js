@@ -16,19 +16,9 @@ function EditInput({value, func, placeholder, noKorean}) {
 }
 
 export function InputCustom({value, func, placeholder, text, noKorean}) {
-    const isNotNumber = (v) => {
-        const regExp = /[a-zA-Z0-9]/g; 
-        return regExp.test(v);
-    }
-
     const onChangeHandler = (e) => {
         if(noKorean){
-            if (isNotNumber(e.nativeEvent.data)){ 
-                func(e.currentTarget.value)
-            }else{
-                e.preventDefault(); 
-                return null; 
-            }
+            func(e)
         }else{
             func(e.currentTarget.value)
         }

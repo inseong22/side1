@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { MyContext } from '../../../../../pages/Make/MakePageV2'
-import {EditCheckbox} from '../../tools/Custom/CheckBoxCustom'
+import CheckBoxCustom from '../../tools/Custom/CheckBoxCustom'
 import produce from 'immer'
 import './ElementsTable.css'
 
@@ -10,18 +10,13 @@ function ElementsTable({elements, content}) {
     return (
         <div className="one-element">
             <div className="edit-element__box">
-                <div className="edit-element__title">
-                    요소
+                <div className="edit-element__title" style={{margin:'5px 0px 5px 10px'}}>
+                    요소 ON/OFF
                 </div>
                 <div>
                     {elements.map((item,index) => {
                         return(
-                            <div className="element__container" key={index}>
-                                <EditCheckbox value={item.use} func={item.func} />
-                                <div className="element_list_text">
-                                    {item.title}
-                                </div>
-                            </div>
+                            <CheckBoxCustom value={item.use} func={item.func} key={index} text={item.title}/>
                         )
                     })}
                 </div>

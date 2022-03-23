@@ -125,6 +125,7 @@
     font-size: 13px;
     box-shadow: var(--default-shadow-01);
     flex-direction: column;
+    text-align: center;
 }
 
 .color-button:hover{

@@ -12,17 +12,16 @@ function GallerySection({content,setting}) {
        if(index < content.numOfElements){
            return(
                <>
-               {content.card.use && 
                <FeatureCard section="gallery" content={content} index={index}>
                        {content.element.use && 
-                       <div style={{width:'100%', position:'relative', cursor:'pointer'}}>
+                       <div style={{width:'100%', position:'relative', cursor:'default'}}>
                            { item.attachment ? 
                             <img 
                                 src={item.attachment} 
                                 style={{
                                     width:'100%',
                                     objectFit:'cover',
-                                    height:`${isMobile ? content.element.size/1.5 : content.element.size}px`, 
+                                    height:`${isMobile ? content.mobile.cardSize : content.element.size}px`, 
                                     borderRadius:`${content.card.borderRadius}px ${content.card.borderRadius}px 0px 0px`
                                 }}/> 
                                :
@@ -38,7 +37,7 @@ function GallerySection({content,setting}) {
                        </div> 
                        }
                        {
-                           content.text.use && 
+                           content.card.use && 
                            <div className="df-margin-big feature-title" style={{
                                width:'100%', 
                                height:'100%', 
@@ -60,7 +59,6 @@ function GallerySection({content,setting}) {
                            </div>
                        }
                    </FeatureCard>
-               }
                </>
            )
        }

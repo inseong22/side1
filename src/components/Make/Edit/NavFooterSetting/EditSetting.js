@@ -10,24 +10,17 @@ import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import OnOffCustom from '../tools/Custom/OnOffCustom'
 import produce from 'immer';
 import AnimationCustom from '../tools/Custom/AnimationCustom'
-import SliderCustom from '../tools/Custom/SliderCustom'
 import AddFaviconImg from '../tools/func/FuncFaviconImg'
 import {Check} from '@styled-icons/bootstrap'
-import {ChevronRight} from '@styled-icons/boxicons-regular'
 import {ChevronDown} from '@styled-icons/bootstrap'
 import OverflowScrolling from 'react-overflow-scrolling';
+import {base} from '../../SectionTypes/baseTypes'
 import {
-    Button,
     ChakraProvider,
     Menu,
     MenuButton,
     MenuList,
     MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
-    ButtonGroup,
   } from '@chakra-ui/react'
 
 const fontOptions = [
@@ -43,7 +36,9 @@ const fontOptions = [
     { label: '레페리포인트-Black', value:'LeferiPoint-BlackA'},
     { label: '고운바탕', value : 'GowunBatang-Bold'},
     { label: '여기어때 잘난체', value: 'yg-jalnan'},
+    { label: '아임혜민', value: 'IM_Hyemin'},
 ]
+
 const smallFontOptions = [
     { label: '노토산스', value: 'Noto Sans KR' },
     { label: '프리텐다드', value: 'Pretendard-Regular' },
@@ -57,6 +52,7 @@ const smallFontOptions = [
     { label: '레페리포인트-Black', value:'LeferiPoint-WhiteA'},
     { label: '고운바탕', value : 'GowunBatang-Regular'},
     { label: '여기어때 잘난체', value: 'yg-jalnan'},
+    { label: '아임혜민', value: 'IM_Hyemin'},
 ]
 
 const shapeOptions = [
@@ -71,8 +67,8 @@ const sizeOptions = [
     { label: '크게', value: 98 },
 ]
 
-function EdtiSetting({setting, setSetting, category}) {
-    const [isFontOpen, setIsFontOpen] = useState(false)
+function EdtiSetting({setting, setSetting, category, setContents}) {
+    const [alarm, setAlarm] = useState(false);
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     // 애니메이션 관련 
@@ -83,10 +79,10 @@ function EdtiSetting({setting, setSetting, category}) {
     ]
 
     const changeAnimationOption = e => {
-        // action.setContents(produce(state.contents, draft => {
-        //     draft[state.secNum].animation.type = e;
-        // }))
-        setSetting({...setting, animation : e})
+        setSetting({...setting, animation : e});
+        action.setContents(produce(state.contents, draft => {
+            draft.map(item => item.animation = e)
+        }))
     }
 
     // 이미지 업로드
@@ -191,6 +187,11 @@ function EdtiSetting({setting, setSetting, category}) {
         )
     }
 
+    const isNotNumber = (v) => {
+        const regExp = /[a-z0-9]/g; 
+        return regExp.test(v);
+    }
+    
     const returnTable = () => {
         switch(category){
             case 0:
@@ -198,39 +199,47 @@ function EdtiSetting({setting, setSetting, category}) {
                 return(
                     <>
                     <div>
-                        <OpenCloseCustom title="파비콘" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지를 대표하는 아이콘입니다.">
+                        <OpenCloseCustom title="파비콘" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지를 대표하는 아이콘입니다." open={ state.focus === 'setting-favicon'}>
                             <AddFaviconImg text="파비콘" subtext="최대 1MB 업로드 가능, 64x64px 권장" value={setting.faviconAttachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="페이지 이름" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다.">
+                        <OpenCloseCustom title="페이지 이름" use={true} tooltip="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다." open={ state.focus === 'setting-title'}>
                             <InputCustom value={setting.title} placeholder="웹 브라우저의 주소창에 표시되는 웹 페이지의 이름입니다." func={(e) => setSetting(produce(setting, draft => {
                                 draft.title = e
                             }))} />
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="URL" use={true}>
+                        <OpenCloseCustom title="URL" use={true} open={ state.focus === 'setting-urlId'}>
                             <div style={{flexDirection:'column'}}>
                                 <div style={{display:'flex'}}>
                                     <div style={{color:'#202936', marginTop: '20px'}}>
-                                        https://surfee.co.kr/#/
+                                        https://surfee.co.kr
                                     </div>
                                     <div>
-                                        <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) => setSetting(produce(setting, draft => {
-                                            draft.urlId = e;
-                                        }))}/>
+                                        <InputCustom value={setting.urlId} placeholder="사용할 url을 입력하세요" noKorean func={(e) =>  {
+                                            if (isNotNumber(e.nativeEvent.data)){ 
+                                                setAlarm(false)
+                                                setSetting(produce(setting, draft => {
+                                                    draft.urlId = e.currentTarget.value
+                                                }))
+                                            }else{
+                                                setAlarm(true)
+                                                e.preventDefault(); 
+                                                return null; 
+                                            }}}/>
                                     </div>
                                 </div>
                             </div>
-                                <div style={{width:'90%', justifyContent:'center', fontSize:'12px', marginBottom:'16px'}}>
+                                <div style={{width:'90%', justifyContent:'center', fontSize:'12px', marginBottom:'16px', color:`${alarm ? 'red' : 'black'}`}}>
                                     * 영문 소문자와 숫자만 입력 가능합니다.
                                 </div>
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="플로팅 버튼" use={true} tooltip="화면 하단에 고정되어 떠다니는 버튼입니다. 내비게이션의 버튼과 플로팅 버튼 중 하나만 사용하시길 바랍니다.">
+                        <OpenCloseCustom title="플로팅 버튼" use={true} tooltip="화면 하단에 고정되어 떠다니는 버튼입니다. 내비게이션의 버튼과 플로팅 버튼 중 하나만 사용하시길 바랍니다." open={ state.focus === 'setting-fab'}>
                             <OnOffCustom text="ON/OFF" value={setting.fta.use} func={(e) => setSetting(produce(setting, draft => {
                                 draft.fta.use = !setting.fta.use
                             }))} />
                             {
                                 setting.fta.use && 
                                 <>
-                                    <RadioCustom text="사이즈" options={sizeOptions} value={setting.fta.size} func={(e) => setSetting(produce(setting, draft => {
+                                    <RadioCustom text={state.isPhone ? '사이즈 - 모바일에서는 크기가 고정됩니다.' : '사이즈'} options={sizeOptions} value={setting.fta.size} func={(e) => setSetting(produce(setting, draft => {
                                         draft.fta.size = e
                                     }))} />
                                     <RadioCustom text="모양" options={shapeOptions} value={setting.fta.shape} func={(e) => setSetting(produce(setting, draft => {

@@ -38,12 +38,15 @@
 }
 
 .back__container{
-    height:40px;
-    padding:15px 15px 5px 15px;
+    scroll-behavior: smooth;
+    padding:10px 15px 5px 15px;
     display: flex;
     justify-content:start;
     align-items:center;
-    position:relative;
+}
+
+.white-box{
+    background-color: white;
 }
 
 /* <<<<<<< HEAD */
@@ -62,8 +65,10 @@
     justify-content: center;
     align-items: center;
     padding:6px 11px 6px 8px;
-    border-radius: 3px;
+    border-radius: 8px;
     font-weight: bold;
+    z-index: 1001;
+    background-color: white;
     /* box-shadow: var(--default-shadow-01); */
 }
 .back__container-button:hover{
@@ -79,8 +84,9 @@
 .back-text{
     width: 100%;
     height: auto;
-    padding-top: 1px;
+    /* padding-top: 1px; */
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 700;
+    font-family: Noto Sans KR;
 }
 

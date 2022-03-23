@@ -1,24 +1,14 @@
-import React, {useState} from 'react'
+import React, {useContext} from 'react'
+import { MyContext } from '../../../../pages/Make/MakePageV2'
 import RadioCustom from '../tools/Custom/RadioCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
-import OnOffCustom from '../tools/Custom/OnOffCustom'
+import AlignCustom from '../tools/Custom/AlignCustom'
 import InputCustom from '../tools/Custom/InputCustom'
-import ResponsiveCustom from '../tools/Custom/ResponsiveCustom'
-import CheckBoxContainer from '../tools/Custom/CheckBoxCustom'
 import ElementsTable from '../EditTemplates/tools/ElementsTable'
 import SliderCustom from '../tools/Custom/SliderCustom'
-import TextSizeCustom from '../tools/func/TextSizeCustom'
-import BoxCustom from '../tools/Custom/BoxCustom'
 import produce from 'immer';
 import Layout from '../EditTemplates/tools/Layout'
-
-import { AlignCenter, AlignEnd, AlignStart } from '@styled-icons/bootstrap';
-
-const alignOptions = [
-    { label: '왼쪽', value: 'start' },
-    { label: '중앙', value: 'center' },
-]
 
 const sizeOptions = [
     { label: '작게', value: 10 },
@@ -49,6 +39,7 @@ const paddingOptions = [
 // ]
 
 function EditFooterSection({foot, setFoot, category}) {
+    const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const elements = [
         {
@@ -98,15 +89,12 @@ function EditFooterSection({foot, setFoot, category}) {
                     {/* <RadioCustom value={foot.layout} options={layoutOptions} func={e => {setFoot(produce(foot, draft => {
                         draft.layout = e;
                     }))}} /> */}
-                    <OpenCloseCustom title="회사 / 팀 정보" use={foot.text.use}>
+                    <OpenCloseCustom title="회사 / 팀 정보" use={foot.text.use} open={state.focus === 'footer-text'}>
                         <ColorCustom text="색상" value={foot.text.color} func={e => setFoot(produce(foot, draft => {
                             draft.text.color = e;
                         }))} />
-                        <RadioCustom text="정렬" options={alignOptions} value={foot.text.align} func={e => setFoot(produce(foot, draft => {
-                            draft.text.align = e;
-                        }))} />
                     </OpenCloseCustom>
-                    <OpenCloseCustom title="소셜 아이콘" use={foot.icon.use}>
+                    <OpenCloseCustom title="소셜 아이콘" use={foot.icon.use} open={state.focus === 'footer-icons'}>
                         <ColorCustom text="색상" value={foot.icon.color} func={e => {setFoot(produce(foot, draft => {
                             draft.icon.color = e;
                         }))}} />
@@ -132,7 +120,7 @@ function EditFooterSection({foot, setFoot, category}) {
                             draft.icon.linkedIn = e;
                         }))}} placeholder='링크를 입력해 주세요.'/>
                     </OpenCloseCustom>
-                    <OpenCloseCustom title="저작권 표시" use={foot.copyright.use}>
+                    <OpenCloseCustom title="저작권 표시" use={foot.copyright.use} open={state.focus === 'footer-copyright'}>
                         <div className="center-column">
                             <div className="edit-element center-row" style={{fontSize:'13px', justifyContent:'start'}}>
                                 <div>
@@ -159,10 +147,8 @@ function EditFooterSection({foot, setFoot, category}) {
                     }))}} />
                 </OpenCloseCustom>
                 <OpenCloseCustom title="여백" use={true}>
-                    <SliderCustom top="상단 여백" max={100} value={foot.paddingTop} func={e => {setFoot(produce(foot, draft => {
+                    <SliderCustom top="높이" max={15} value={foot.paddingTop} func={e => {setFoot(produce(foot, draft => {
                         draft.paddingTop = e;
-                    }))}} />
-                    <SliderCustom top="상단 여백" max={100} value={foot.paddingBottom} func={e => {setFoot(produce(foot, draft => {
                         draft.paddingBottom = e;
                     }))}} />
                 </OpenCloseCustom>
@@ -173,51 +159,3 @@ function EditFooterSection({foot, setFoot, category}) {
 }
 
 export default EditFooterSection
-
-// {
-//     foot.iconUse && 
-//     <>
-//         <div className="edit-element">
-//             <div className="edit-element__one">
-//                 <div className="edit-element__left">아이콘 색상</div>
-//                 <div className="edit-element__right">
-//                     <RadioCustom 
-//                         options={iconColorOptions}
-//                         onChange={(e) => setFoot({...foot, iconColor:e})}
-//                         value={foot.iconColor}
-//                     />
-//                 </div>
-//             </div>
-//         </div>
-//         <div className="edit-element">
-//             <div className="edit-element__one">
-//                 <div className="edit-element__left">아이콘 정렬</div>
-//                 <div className="edit-element__right">
-//                     <RadioCustom 
-//                         options={alignOptions}
-//                         onChange={(e) => setFoot({...foot, iconAlign:e})}
-//                         value={foot.iconAlign}
-//                     />
-//                 </div>
-//             </div>
-//         </div>
-//         <div className="edit-element">
-//             <div className="edit-element__one" style={{height:'500px'}}>
-//                 <div className="edit-element__left">추가할 아이콘</div>
-//                 <div className="edit-element__right">
-//                     {/* <Select options={iconsList} onChange={e => {console.log(e.label)}} style={{color:'black'}}/> */}
-//                     <Select
-//                         closeMenuOnSelect={false}
-//                         components={animatedComponents}
-//                         isMulti
-//                         options={iconsList}
-//                         onChange={e => {setFoot({...foot, icons:e})}}
-//                     />
-//                 </div>
-//             </div>
-//         </div>
-//         {
-//             returnIconLinkSetting
-//         }
-//     </>
-// }

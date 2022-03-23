@@ -21,7 +21,11 @@ function DetailSection({content, setting}) {
     }
     
     return (
-        <motion.div style={{ width:'100%', height:'100%'}}>
+        <motion.div 
+        data-aos-easing="ease-in-back"
+        data-aos-delay="200"
+        data-aos-offset="0" data-aos={content.animation} aos-duration="4000"
+        style={{ width:'100%', height:'100%'}}>
             <AnimationDiv setting={setting} content={content} returnLayout={returnLayout}>
                 <div className="text__container" style={{marginTop:`${ !state.isPhone && content.layout === 4 ? '20px' : state.isPhone && content.mobile.layout === 4 ? '10px' : '0px'}` }}>
                     <TitleDesc content={content} titlePlaceholder="핵심 특징 한 줄을 적어보세요." descPlaceholder="여기를 클릭하여 상품의 핵심 특징에 대한 설명을 적어보세요." />

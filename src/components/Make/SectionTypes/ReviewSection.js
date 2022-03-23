@@ -14,10 +14,12 @@ function ReviewSection({content, setting}) {
 
     const returnReviewCards = content.elements.map((item, index) => {
         if(index < content.numOfElements){
-            if(content.reviewText) {
             return(
-                <FeatureCard section="feature" content={content} index={index}>
+                <FeatureCard align={state.isPhone ? content.mobile.align : content.elementText.align} section="feature" content={content} index={index}>
                     <Element content={content} item={item} index={index} key={index}/>
+                    {
+                        content.reviewText &&
+                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%'}}>
                     {
                         content.elementTitle.use && 
                         <div className="df-margin-big feature-title" style={{width:'100%'}}>            
@@ -27,7 +29,7 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${state.isPhone ? content.mobile.align : content.align}`,
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                     fontFamily:`${state.setting.smallFont}`,
                                     color:`${content.elementTitle.color}`,
                                     fontSize:`${content.elementTitle.size/20}em`,
@@ -42,33 +44,28 @@ function ReviewSection({content, setting}) {
                     }
                     {
                         content.rating.use && 
-                        <div className="df-margin">
-                            <div style={{
-                                width:'100%', 
-                                textAlign:`${state.isPhone ? content.mobile.align : content.align}`
-                            }}>
+                        <div className="df-margin-small" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.elementText.align}`}}>
                             <Rating
                                 value={item.rating} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].elements[index].rating = e.currentTarget.value;
                                 }))}  
-                                precision={0.1}
+                                precision={0.5}
                                 style={{ fontSize: `${content.rating.size}px`, color:`${content.rating.color}` }}
                                 // size={content.rating.size}
                                 // color={content.rating.color}
                             />
-                            </div>
                         </div>
                     }
                     {
                         content.elementText.use && 
-                        <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                        <div className="df-margin feature-desc" style={{width:'100%'}}>
                             <TextareaAutosize
                                 className="text-input" 
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${state.isPhone ? content.mobile.align : content.align}`,
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                     fontFamily:`${state.setting.smallFont}`,
                                     color:`${content.elementText.color}`,
                                     fontSize:`${content.elementText.size/20}em`,
@@ -90,9 +87,10 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${state.isPhone ? content.mobile.align : content.align}`,
+                                    textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
                                     color:`${content.writer.color}`,
                                     fontFamily:`${state.setting.smallFont}`,
+                                    fontSize:`${content.writer.size/17}em`,
                                 }}
                                 value={item.writer} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {
@@ -101,13 +99,10 @@ function ReviewSection({content, setting}) {
                                 />
                         </div>
                     }
+                    </div>
+                    }
                 </FeatureCard>
             )
-        }
-    else {
-        return(<>
-        </>)
-    }
         }
     })
 
@@ -115,7 +110,7 @@ function ReviewSection({content, setting}) {
         <>
             <motion.div className="template"data-aos-easing="ease-in-back"
                 data-aos-delay="200"
-                data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
+                data-aos-offset="0" data-aos={content.animation} aos-duration="4000">
                 
                 <TitleDesc content={content} titlePlaceholder="서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." />
 

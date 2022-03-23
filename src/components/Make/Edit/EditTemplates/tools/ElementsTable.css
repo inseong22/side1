@@ -4,7 +4,10 @@
     flex-direction: row;
     justify-content :start;
     align-items :center;
-    margin-top:12px;
+    margin-top:2px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding:4px;
 }
 
 .edit-element__title{

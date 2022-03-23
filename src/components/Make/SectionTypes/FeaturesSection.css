@@ -12,8 +12,8 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    align-items: start;
+    justify-content: start;
     box-sizing: border-box;
     margin-top:20px;
 }
@@ -63,15 +63,18 @@
     scrollbar-width: none; /* Firefox */
 }
 
-.icon-select__container{
+.overflow-scrolling3{
+    overflow-y: auto;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    height: 200px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction:row;
-    box-sizing: border-box;
-    height: 100%;
-    width: 100%;
-    flex-wrap:wrap;
     z-index:2000;
 }
 

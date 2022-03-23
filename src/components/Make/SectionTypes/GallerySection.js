@@ -14,17 +14,17 @@ function GallerySection({content,setting}) {
        if(index < content.numOfElements){
            return(
                <>
-               {content.card.use && 
                <FeatureCard section="gallery" content={content} index={index}>
                        {content.element.use && 
-                       <div style={{width:'100%', position:'relative', cursor:'pointer'}}>
+                       <div style={{width:'100%', position:'relative', cursor:'pointer'}} onClick={() => {action.setFocus('gallery-image'); action.setCategory(0)}}>
                            { item.attachment ? 
                             <img 
+                                className="uphover" 
                                 src={item.attachment} 
                                 style={{
                                     width:'100%',
                                     objectFit:'cover',
-                                    height:`${state.isPhone ? content.element.size/1.5 : content.element.size}px`, 
+                                    height:`${state.isPhone ? content.mobile.cardSize : content.element.size}px`, 
                                     borderRadius:`${content.card.borderRadius}px ${content.card.borderRadius}px 0px 0px`
                                 }}/> 
                                :
@@ -38,7 +38,7 @@ function GallerySection({content,setting}) {
                             </div>
                            }
                            <input
-                               className="feature-upload-file"
+                               className="feature-upload-file border-hover"
                                type="file" 
                                accept="image/*" 
                                id="file" 
@@ -64,8 +64,8 @@ function GallerySection({content,setting}) {
                        </div> 
                        }
                        {
-                           content.text.use && 
-                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:`${state.isPhone ? 5 : 8}px`}}>
+                           content.card.use && 
+                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:`${state.isPhone ? 5 : 8}px`}} onClick={() => {action.setFocus('elementText'); action.setCategory(0)}}>
                                 <TextAuto small className="text-input" 
                                     placeholder="여기를 클릭하여 이미지에 대한 설명을 적어보세요."
                                     value={item.text} 
@@ -79,7 +79,6 @@ function GallerySection({content,setting}) {
                            </div>
                        }
                    </FeatureCard>
-               }
                </>
            )
        }
@@ -89,8 +88,7 @@ function GallerySection({content,setting}) {
         <motion.div className="template"
         data-aos-easing="ease-in-back"
         data-aos-delay="200"
-        data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
-
+        data-aos-offset="0" data-aos={content.animation} aos-duration="4000">
             <TitleDesc content={content} titlePlaceholder="제목을 적어보세요." descPlaceholder="여기를 클릭하여 내용을 적어보세요." />
 
             <div className="features__container" style={{flexWrap : `${state.isPhone ? 'wrap' : ''}`}}>

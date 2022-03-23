@@ -82,9 +82,20 @@ function LoginModal({open, setOpen}) {
             data = await authService.signInWithEmailAndPassword(
                 id, password
             )
+            // if(!data.user.multiFactor.user.emailVerified){
+            //     alert("이메일 인증이 완료되지 않았습니다!");
+            //     authService.signOut();
+            //     return;
+            // }
             checkRegister(data.user.multiFactor.user.email)
         } catch (err){
-            console.log(err)
+            if(err.code === "auth/user-not-found"){
+                alert("가입되어 있지 않은 이메일입니다.")
+            }else if(err.code === "auth/wrong-password"){
+                alert("잘못된 비밀번호입니다. 반복해서 잘못된 비밀번호를 입력할 시 일시적으로 로그인이 중단될 수 있습니다.")
+            }else if(err.code === "auth/too-many-requests"){
+                alert("반복적으로 잘못된 비밀번호를 입력하여 일시적으로 로그인이 중단되었습니다. 잠시 후 다시 로그인 해주시기 바랍니다.")
+            }
         }
         setOpen(false)
     }

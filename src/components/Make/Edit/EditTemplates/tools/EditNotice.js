@@ -5,11 +5,7 @@ import OpenCloseCustom from '../../tools/Custom/OpenCloseCustom'
 import ColorCustom from '../../tools/Custom/ColorCustom'
 import TextSizeCustom from '../../tools/func/TextSizeCustom'
 import RadioCustom from '../../tools/Custom/RadioCustom'
-
-const alignOptions = [
-    { label: '왼쪽', value: 'start' },
-    { label: '중앙', value: 'center' },
-]
+import AlignCustom from '../../tools/Custom/AlignCustom'
 
 const sizeOptions = [
     { label: '작게', value: 14 },
@@ -21,14 +17,14 @@ function EditNotice({content}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     return (
-        <OpenCloseCustom title="안내사항" use={content.caution.use}>
+        <OpenCloseCustom title="안내사항" use={content.caution.use} open={state.focus === 'caution'} >
            <>
             <ColorCustom text="색상" value={content.caution.color} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.color = e;
             }))} />
-            <RadioCustom text="정렬" options={alignOptions} value={content.caution.align} func={e => action.setContents(produce(state.contents, draft => {
+            {/* <AlignCustom value={content.caution.align} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.align = e;
-            }))} />
+            }))} /> */}
             <TextSizeCustom text="크기" desc options={sizeOptions} value={content.caution.size} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.size = e;
             }))} />

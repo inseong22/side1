@@ -94,11 +94,28 @@
     font-weight: normal;
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'IM_Hyemin';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Regular.woff2') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'IM_Hyemin';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'IM_Hyemin';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
 
 .fta__container{
     position:fixed;
-    bottom:30px;
+    bottom:15px;
     z-index:1003;
     display: flex;
     justify-content :center;

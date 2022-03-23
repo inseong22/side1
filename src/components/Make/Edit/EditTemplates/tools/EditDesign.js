@@ -5,6 +5,7 @@ import produce from 'immer';
 import ColorCustom from '../../tools/Custom/ColorCustom'
 import TextSizeCustom from '../../tools/func/TextSizeCustom'
 import OpenCloseCustom from '../../tools/Custom/OpenCloseCustom'
+import AnimationCustom from '../../tools/Custom/AnimationCustom'
 import BoxCustom from '../../tools/Custom/BoxCustom'
 import SliderCustom from '../../tools/Custom/SliderCustom'
 import OnOffCustom from '../../tools/Custom/OnOffCustom'
@@ -12,10 +13,6 @@ import FuncContentImg from '../../tools/func/FuncContentImg'
 import {Phone} from '@styled-icons/bootstrap'
 import {Desktop} from '@styled-icons/fa-solid'
 
-const alignOptions = [
-    { label: '왼쪽', value: 'start' },
-    { label: '중앙', value: 'center' },
-]
 
 const backOptions = [
     { label: '단색', value: 'color' },
@@ -50,6 +47,12 @@ function EditDesign({content}) {
     const RemoveImage = () => {
         action.setContents(produce(state.contents, draft=>{
             draft[state.secNum].backgroundImage.attachment = '';
+        }))
+    }
+    // 애니메이션 함수
+    const changeAnimationOption = e => {
+        action.setContents(produce(state.contents, draft=>{
+            draft[state.secNum].animation = e;
         }))
     }
 
@@ -93,28 +96,6 @@ function EditDesign({content}) {
                     backgroundColorOrImage() 
                 }
             </OpenCloseCustom>
-            <OpenCloseCustom title="제목" use={content.title.use}>
-                <ColorCustom text="색상" value={content.title.color} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].title.color = e;
-                }))} />
-                <RadioCustom text="정렬" options={alignOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].title.align = e;
-                }))} />
-                <TextSizeCustom text="크기" title value={content.title.size} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].title.size = e;
-                }))} />
-            </OpenCloseCustom>
-            <OpenCloseCustom title="본문" use={content.desc.use}>
-                <ColorCustom text="색상" value={content.desc.color} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].desc.color = e;
-                }))} />
-                <RadioCustom text="정렬" options={alignOptions} value={content.desc.align} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].desc.align = e;
-                }))} />
-                <TextSizeCustom text="크기" desc value={content.desc.size} func={e => action.setContents(produce(state.contents, draft => {
-                    draft[state.secNum].desc.size = e;
-                }))} />
-            </OpenCloseCustom>
             <OpenCloseCustom title="여백" use={true}>
                 <SliderCustom top="상단 여백" value={content.padding.top} max={40} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].padding.top = e;
@@ -123,7 +104,13 @@ function EditDesign({content}) {
                     draft[state.secNum].padding.bottom = e;
                 }))}/>
             </OpenCloseCustom> 
-            <OpenCloseCustom title="박스" use={true}>
+            <OpenCloseCustom title="애니메이션" use={true}>
+                <AnimationCustom 
+                    text="애니메이션" 
+                    value={content.animation} 
+                    func={ e => changeAnimationOption(e)} />
+            </OpenCloseCustom>
+            <BoxCustom title="박스" use={true}>
                 <OnOffCustom text="박스 사용" value={content.box.use} func={(e) => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].box.use = !content.box.use;
                 }))} />
@@ -137,7 +124,7 @@ function EditDesign({content}) {
                         }))} />
                     </>
                 }
-            </OpenCloseCustom>
+            </BoxCustom>
             <BoxCustom title="반응형">
                 <div className="edit-element">
                     <div className="edit-element__one" style={{flexDirection: 'column'}}>

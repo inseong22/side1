@@ -11,16 +11,11 @@ import GallerySection from './SectionTypes/GallerySection'
 import TextSection from './SectionTypes/TextSection'
 import MockupSection from './SectionTypes/MockupSection'
 import VideoSection from './SectionTypes/VideoSection'
+import LineSection from './SectionTypes/LineSection'
 
-import {animations} from './tools/animations'
 import './NewSection.css'
-import { motion } from 'framer-motion'
-import {Delete, Options} from '@styled-icons/fluentui-system-filled'
-import produce from 'immer'
 
-import styled from "styled-components";
-
-function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCategory, full}) {
+function NewSection({elementRef, setting, content, index, secNum, setSecNum, isPhone, setCategory, setContents, full}) {
     const [isHover, setIsHover] = useState('none');
 
     const setThisSection = () => {
@@ -92,6 +87,11 @@ function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCat
                     <VideoSection content={content} setting={setting}/>
                 )
 
+            case 'LineSection' :
+                return(
+                    <LineSection content={content} setting={setting}/>
+                )
+                
             default:
                 return (
                     <div>
@@ -103,13 +103,16 @@ function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCat
     
 
     return(
-        <div>
-        <div className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')}>
+        <div ref={elementRef} className="new-section" onMouseEnter={() => setIsHover('flex')} onMouseLeave={() => setIsHover('none')} style={{
+                borderTop:`${secNum === index ? '1.5px solid #918bff' : 'none'}`,
+                borderBottom:`${secNum === index ? '1.5px solid #918bff' : 'none'}`,
+                borderLeft:`${secNum === index ? '1.5px solid #918bff' : '1.5px solid #edf0f3'}`,
+                borderRight:`${secNum === index ? '1.5px solid #918bff' : '1.5px solid #edf0f3'}`,
+            }}>
             {!full && <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0)'}`}}>
-
             </div>}
             <div className="section__container" 
-                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat'}} 
+                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat', backgroundColor:'white'}} 
                     onClick={() => setThisSection()}>
                 {
                     content.backgroundType === 'color' ?
@@ -122,22 +125,23 @@ function NewSection({setting, content, index, secNum, setSecNum, isPhone, setCat
                 }
                 {
                     content.box.use && 
-                    <div className="section__box" style={{padding:`1vh ${full ? 'calc(11vw)' : '0vh'}`}}>
+                    <div className="section__box" style={{padding:`1vh ${full ? 'calc(11vw)' : '0vw'}`}}>
                         <div style={{backgroundColor:`${content.box.backgroundColor}`, borderRadius:`${content.box.borderRadius}px`, width:'100%', height: '100%'}}>
                         </div>
                     </div>
                 }
                 <div className="section__container-inner"
-                    style={{padding:`${
-                        isPhone ? content.padding.top/2.5 : content.padding.top}vh 
+                    style={{padding:
+                        `
+                        ${isPhone ? content.padding.top/2.5 : content.padding.top}vh 
                         ${full ? 'calc(14vw + 30px)' : `${isPhone ? '15px' : '30px'}`} 
-                        ${isPhone ? content.padding.top/2.5 : content.padding.bottom}vh 
-                        ${full ? 'calc(14vw + 30px)' : `${isPhone ? '15px' : '30px'}`} `}} >
+                        ${isPhone ? content.padding.bottom/2.5 : content.padding.bottom}vh 
+                        ${full ? 'calc(14vw + 30px)' : `${isPhone ? '15px' : '30px'}`}
+                        `}} >
                     {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                     {returnType()}
                 </div>
             </div>
-        </div>
         </div>
     )
 }

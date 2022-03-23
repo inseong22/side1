@@ -1,20 +1,21 @@
 import React from 'react'
-import AutosizeInput from 'react-input-autosize';
 import {dbService} from '../../tools/fbase'
 import { isMobile } from 'react-device-detect'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import AutosizeInput from 'react-input-autosize';
 
 function UserNavBar({setting, navi}) {
 
     const CustomButton = (type) => { return (
-        <div className="cta-button-made" 
+        <div className="cta-button-edit" 
             style={{
                 borderRadius:`${setting[type].borderRadius}px`,
                 backgroundColor:`${setting[type].backgroundColor}`,
                 color:`${setting[type].color}`,
                 boxShadow:`${setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
                 border:`${setting[type].border ? `1px solid ${setting[type].borderColor}` : 'none'}`,
-                display: 'block'
+                display: 'block',
+                cursor: 'pointer'
             }} 
             onClick={() => {
                 moveToPage(type)
@@ -25,14 +26,17 @@ function UserNavBar({setting, navi}) {
                 // window.location.href = navi.button.cta.link
             }}>
     
-            <AutosizeInput className="text-input-flex"
+            <AutosizeInput className="text-input-button"
                 value={ navi.button[type].text } 
                 style={{
                     fontFamily:`${setting.smallFont}`,
                     borderRadius:`${setting[type].borderRadius}px`,  
                     backgroundColor:`${setting[type].backgroundColor}`, 
                     textAlign: 'center', 
-                    padding: `${navi.button[type].padding*0.3}px ${navi.button[type].padding}px` 
+                    padding: `${navi.button[type].padding*0.3}px ${navi.button[type].padding}px`,
+                    cursor: 'pointer',
+                    WebkitTextFillColor: `${setting[type].color}`,
+                    WebkitOpacity: 1,
                 }}
                 disabled
                 />
@@ -57,39 +61,59 @@ function UserNavBar({setting, navi}) {
                 paddingLeft: `${isMobile ? '12px' : 'calc(14vw + 30px)'}`,
                 borderBottom:`${navi.bottomBorder.use ? `1px solid ${navi.bottomBorder.color}` : ''}`, 
                 backgroundColor:`${navi.backgroundColor}`, 
-                height:`${navi.height}px`, position:`${navi.fixed ? 'fixed' : 'relative'}`
-            }}
-            >
-                
+                height:`${navi.height}px`, 
+                position:`${navi.fixed ? 'relative' : 'fixed'}`
+            }} >
             <>
-                <div className="make-nav-logoc" style={{height:`${navi.height}px`, 
+                <div className="make-nav-logoc" style={{
+                    height:`${navi.height}px`, 
                     justifyContent:`${navi.logo.align === 'center' && navi.button.use && !isMobile ? 'right' : navi.logo.align}`,
                     width: `${navi.logo.align === 'center' && navi.button.use && !isMobile ? '115%' : '100%'}`}}>
                         {navi.logo.image.use &&  
                             <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
                         }
                         {navi.logo.text.use && 
-                            <TextareaAutosize
-                                disabled
-                                name="text-no-input"
-                                value={navi.title}
-                                placeholder="서비스명을 입력하세요"
-                                style={{ 
-                                    border:'none',
-                                    backgroundColor:'rgba(0,0,0,0)',
-                                    textAlign:`${navi.logo.align === 'center' ? 'center' : 'left'}`,
-                                    fontSize: `${navi.logo.text.fontSize/20}em`,
-                                    display: 'flex',
-                                    zIndex: 5,
-                                    color:`${navi.logo.text.color}`, 
-                                    fontFamily:`${setting.font}`,
-                                    resize:'none',
-                                    padding: '1px',
-                                    marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`,
-                                }}
-                            />
+                        <div style={{
+                                display: 'flex',
+                                zIndex: 5,
+                                color:`${navi.logo.text.color}`, 
+                                fontFamily:`${setting.font}`,
+                                fontSize:`${isMobile ? '19px' : '24px'}`,
+                                resize:'none',
+                                padding: '0px',
+                                marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,
+                                marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
+                                backgroundColor: 'transparent',
+                                WebkitTextFillColor: `${navi.logo.text.color}`,
+                                WebkitOpacity: 1
+                            }}>
+                            {navi.title}
+                        </div>
+                            // <AutosizeInput
+                            //     disabled
+                            //     name="text-no-input"
+                            //     value={navi.title}
+                            //     placeholder="서비스명을 입력하세요"
+                            //     inputStyle={{ 
+                            //         // textAlign:`${navi.logo.align === 'center' && navi.button.use ? 'right' : navi.logo.align === 'center' ? 'center' : 'left'}`,
+                            //         display: 'flex',
+                            //         zIndex: 5,
+                            //         color:`${navi.logo.text.color}`, 
+                            //         fontFamily:`${setting.font}`,
+                            //         fontSize:'25px',
+                            //         resize:'none',
+                            //         padding: '0px',
+                            //         marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,
+                            //         marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
+                            //         backgroundColor: 'transparent',
+                            //         WebkitTextFillColor: `${navi.logo.text.color}`,
+                            //         WebkitOpacity: 1,
+                            //     }}
+                            // />
                         }
                 </div>
+                {
+                navi.button.use && !isMobile &&
                 <div className="make-nav-buttonc" style={{justifyContent:`${navi.button.align}`}}>
                     { navi.button.cta.use && 
                         <>{CustomButton('cta')}</>
@@ -98,6 +122,7 @@ function UserNavBar({setting, navi}) {
                         <>{CustomButton('ghost')}</>
                     }
                 </div>
+                }
             </>
         </div>
     )

@@ -9,6 +9,8 @@ import ErrorPage from './NavAndFooter/ErrorPage'
 import { isMobile } from 'react-device-detect'
 import UserSection from '../../components/UserLandingPage/UserSection'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import ChannelTalk from '../../tools/ChannelTalk'
+import { Helmet } from 'react-helmet'
 
 export const UserContext = React.createContext({
     state : {},
@@ -28,9 +30,10 @@ const UserLandingPage = (props) => {
     }
 
     const favicon = document.getElementById("favicon");
-
     const urltitle = document.getElementById("urltitle");
-    const channeltalk = document.getElementsByTagName("script");
+    const ogTitle = document.querySelector('meta[property="og:title')
+
+    ChannelTalk.shutdown();
 
     useEffect(() => {
         loadData()
@@ -60,6 +63,9 @@ const UserLandingPage = (props) => {
 
         favicon.href = orderData[0].setting.faviconAttachment;   
         urltitle.innerText = orderData[0].setting.title;
+        ogTitle.getAttribute('content')
+        ogTitle.setAttribute('content', orderData[0].setting.title)
+
         setItem( orderData[0] );
         setSetting( orderData[0].setting );
         setLoading(true);
@@ -78,6 +84,7 @@ const UserLandingPage = (props) => {
     
     return (
         <UserContext.Provider value={contextValue}>
+        {/* <Helmet title="타이틀" /> */}
         {!loading ? 
         <LoadingDisplay />
         :
@@ -85,36 +92,49 @@ const UserLandingPage = (props) => {
         <ErrorPage />
         :
         <div style={{fontSize:`${isMobile ? '22px' : '28px'}`}}>
-            <UserNavBar navi={item.navi} setting={item.setting} />
-            <div style={{paddingTop:`${item.navi.fixed ? `${item.navi.height}px` : '0px'}`}}>
+            {
+                item.navi.use &&
+                <UserNavBar navi={item.navi} setting={item.setting} />
+            }
+            <div style={{paddingTop:`${item.navi.fixed && item.navi.use ? '0px': item.navi.use ? `${item.navi.height}px` : '0px'}`}}>
                 <UserContents contents={item.contents} setting={item.setting} />
             </div>
-            <UserFoot foot={item.foot} setting={item.setting}/>
-
-
+                <UserFoot foot={item.foot} setting={item.setting}/>
             <>
             {  ( setting.fta.use ) &&
-                <div className="fta__container" style={{width:'100vw'}}>
-                    <div className="fta-button" 
+            <div className="fta__container" style={{width:'100vw'}}>
+                <div className="fta-button" 
+                    style={{
+                        backgroundColor:`${setting.fta.backgroundColor}`, 
+                        width:`${ setting.fta.size }%`, 
+                        borderRadius:`${setting.fta.shape}px`, 
+                        border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
+                        boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`,
+                        fontSize:'0.7em'
+                    }}
+                    onClick={() => {
+                        moveToPage('플로팅 버튼')
+                        window.open(
+                            setting.fta.link,
+                            '_blank' // <- This is what makes it open in a new window.
+                        );
+                    }}>
+                    <TextareaAutosize 
+                        className='text-no-input'  
+                        value={setting.fta.text} 
+                        disabled
                         style={{
-                            fontFamily: `${setting.smallFont}`,
-                            backgroundColor:`${setting.fta.backgroundColor}`, 
-                            width:`${setting.fta.size}%`, 
-                            borderRadius:`${setting.fta.shape}px`, 
-                            border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
-                            boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`
-                        }}
-                        onClick={() => {
-                            moveToPage('플로팅 버튼')
-                            window.open(
-                                setting.fta.link,
-                                '_blank' // <- This is what makes it open in a new window.
-                            );
-                        }}>
-                        <TextareaAutosize className='text-input'  value={setting.fta.text}
-                            color={setting.fta.color} align="center" />
-                    </div>
-                </div> }
+                            fontFamily: `${setting.font}`,
+                            resize: 'none',
+                            color:`${setting.fta.color}`,
+                            textAlign:'center',
+                            border:'none',
+                            cursor:'pointer',
+                            WebkitTextFillColor: `${setting.fta.color}`,
+                            WebkitOpacity: 1,
+                        }} />
+                </div>
+            </div> }
             </>
         </div> 
         }

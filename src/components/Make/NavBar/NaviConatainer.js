@@ -11,27 +11,33 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
     return (
         <>
         {navi.logo.use &&  
-            <div className="make-nav-logoc" style={{height:`${navi.height}px`, 
-            justifyContent:`${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? 'right' : navi.logo.align}`,
-            width: `${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? '115%' : '100%'}`}}>
+            <div 
+                onClick={() => {action.setCategory(0); action.setFocus('navi-logo')}}
+                className="make-nav-logoc" 
+                style={{
+                    height:`${navi.height}px`, 
+                    justifyContent:`${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? 'right' : navi.logo.align}`,
+                    width: `${navi.logo.align === 'center' && navi.button.use && !state.isPhone ? '115%' : '100%'}`}}>
                 {navi.logo.image.use &&  
                     <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
                 }
                 {navi.logo.text.use && 
-                    <TextareaAutosize
+                    <AutosizeInput
                         name="form-field-name"
                         value={navi.title}
                         placeholder="서비스명을 입력하세요"
-                        style={{ 
-                            textAlign:`${navi.logo.align === 'center' ? 'center' : 'left'}`,
-                            fontSize: `${navi.logo.text.fontSize/20}em`,
+                        inputStyle={{ 
+                            // textAlign:`${navi.logo.align === 'center' && navi.button.use ? 'right' : navi.logo.align === 'center' ? 'center' : 'left'}`,
                             display: 'flex',
                             zIndex: 5,
                             color:`${navi.logo.text.color}`, 
                             fontFamily:`${state.setting.font}`,
+                            fontSize:`${state.isPhone ? '19px' : '24px'}`,
                             resize:'none',
-                            padding: '1px',
-                            marginLeft:`${navi.logo.image.use ? '8px' : '1px'}`,
+                            padding: '0px',
+                            marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,
+                            marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
+                            backgroundColor: 'transparent',
                         }}
                         onChange={(e) => {
                          setNavi(produce(navi, draft => {

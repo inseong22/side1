@@ -19,9 +19,10 @@ import text from '../../../tools/img/addSection/09text.png'
 import gallery from '../../../tools/img/addSection/10gallery.png'
 import video from '../../../tools/img/addSection/11video.png'
 import mockup from '../../../tools/img/addSection/12mockup.png'
+import line from '../../../tools/img/addSection/12line.png'
 
 const IMGS = [
-    hero, detail, cta, apply, appDownload, feature, review, qna, text, gallery, video, mockup
+    hero, detail, cta, apply, appDownload, feature, review, qna, text, gallery, video, line
 ]
 
 const StyledModal = styled(ModalUnstyled)`
@@ -49,7 +50,7 @@ const Backdrop = styled('div')`
 
 const style = {
   width: 800,
-  height: 500,
+  height: 600,
   bgcolor: 'rgba(255,255,255,1)',
   borderRadius:2,
   p: 2,
@@ -57,26 +58,46 @@ const style = {
   pb: 3,
 };
 
-function AddingSection({open, setOpen}) {
+function AddingSection({setting, open, setOpen, foot}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const addSection = async (typeName) => {
         // 아래는 state.contents에 섹션 하나를 추가하는 것.
+
+        let tempBody;
         
-        const ee = await dbService.collection('saved-page').where("urlId", '==', '0').get()
+        if(typeName === 'LineSection'){
+            tempBody = base[11]
+        }else{
+            const ee = await dbService.collection('saved-page').where("urlId", '==', '0').get()
 
-        let eee = ee.docs.map(doc => {
-            return({...doc.data(), id:doc.id})
-        });
+            let eee = ee.docs.map(doc => {
+                return({...doc.data(), id:doc.id})
+            });
 
-        let body = JSON.parse(JSON.stringify(eee[0].contents.filter(doc => doc.sectionTypeName === typeName)[0]))
+            tempBody = eee[0].contents.filter(doc => doc.sectionTypeName === typeName)[0]
+
+            if(typeName === 'CtaSection'){
+                tempBody = base[2]
+            }
+        }
+
+        tempBody['animation'] = setting.animation
+
+        if(tempBody['sectionTypeName'] === 'CtaSection' || tempBody['sectionTypeName'] === 'ApplySection' || tempBody['sectionTypeName'] === 'AppDownloadSection')
+            {
+                tempBody['backgroundColor'] = setting.color
+            }
+
+        let body = JSON.parse(JSON.stringify(tempBody))
 
         action.setContents([
             ...state.contents.slice(0, state.contents.length),
             body,
         ])
+        window.scrollTo({top:(document.body.scrollHeight - 150), left:0, behavior:'smooth'})
         setOpen(false)
-        // action.setSecNum(state.contents.length)
+        action.setSecNum(state.contents.length)
     }
 
     return (
@@ -90,7 +111,7 @@ function AddingSection({open, setOpen}) {
             >
                 <Box sx={style}>
                     <div className="modal-top__title">
-                        <div className="centera" style={{width:"95%"}}>
+                        <div className="centera" style={{width:"95%", fontSize:'0.8em', fontWeight:'700'}}>
                             원하는 섹션을 추가하세요
                         </div>
                         <div className="modal-close-button" onClick={() => setOpen(false)}>
@@ -100,7 +121,7 @@ function AddingSection({open, setOpen}) {
                     <div className="section-modal__container">
                         {base.map((item,index) => {
                             return(
-                                <div className="section-modal__button" key={index} onClick={() => 
+                                <div className="section-modal__button uphover" key={index} onClick={() => 
                                 {addSection(item.sectionTypeName); 
                                     // isScroll(true);
                                 }}>
@@ -109,6 +130,19 @@ function AddingSection({open, setOpen}) {
                                 </div>
                             )
                         })} 
+                    </div>
+                    <div className="modal-top__title" style={{marginTop:'25px', flexDirection:'column', justifyContent:'center'}}>
+                        <div className="centera" style={{width:"95%", height:'0%', fontSize:'0.8em'}}>
+                            추가되었으면 하는 기능이 있으신가요?
+                        </div>
+                        <div className="section-add__button" onClick={() => { 
+                                window.open(
+                                    'https://tally.so/r/wMZ4Yn',
+                                    '_blank'
+                                )
+                         }} style={{width:'50%', padding:'5px',marginTop:'20px', fontSize:'0.8em'}} >
+                            의견 전달하기
+                        </div>
                     </div>
                 </Box>
             </StyledModal>

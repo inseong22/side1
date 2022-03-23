@@ -6,6 +6,7 @@
     justify-content: center;
     flex-direction:row;
     font-size: 20px;
+    background-color:white;
 }
 
 .response-nav-triple{
@@ -36,7 +37,7 @@
     align-items: center;
 
     font-style: normal;
-    font-size: 0.8em;
+    font-size: 1em;
     line-height: 30px;
     display: flex;
     align-items: center;
@@ -48,6 +49,7 @@
     width:30%;
     text-align:center;
     display: flex;
-    justify-content:end;
+    justify-content:flex-end;
     align-items: center;
+    font-size:15px;
 }

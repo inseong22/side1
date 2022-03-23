@@ -24,7 +24,7 @@
 .confirm-button__container{
     height:20%;
     padding-top:1%;
-    justify-content:end;
+    justify-content:flex-end;
     /* border-top:1px solid rgba(0,0,0,0.1); */
 }
 

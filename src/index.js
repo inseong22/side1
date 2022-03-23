@@ -10,6 +10,7 @@ import {ScrollToTop} from './App'
 
 AOS.init(); 
 
+
 ReactDOM.render(
   <React.StrictMode>
     {/* <ScrollToTop /> */}

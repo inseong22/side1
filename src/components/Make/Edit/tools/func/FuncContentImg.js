@@ -1,7 +1,9 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import ourA from '../../../../../tools/img/005.png'
+import ImageModal from '../../../../../tools/ImageModal'
 
 function FuncContentImg({text, value, func, removeFunc, subtext}) {
+    const [imageModalOpen, setImageModalOpen] = useState(false)
     const photoInput = useRef();
     const inputClick = () => {
         photoInput.current.click();
@@ -9,12 +11,16 @@ function FuncContentImg({text, value, func, removeFunc, subtext}) {
 
     return (
         <div className="edit-element">
+        {/* <ImageModal open={imageModalOpen} setOpen={setImageModalOpen} /> */}
+        {/* <div onClick={() => setImageModalOpen(true)}>
+            이미지를 찾아보실래요?
+        </div> */}
         <div className="top-img-div">
         <div className="put-img-div" 
             onClick={inputClick}
             onChange={e => func(e)}
             id='attach'
-            style={{backgroundImage: `url(${value === '' && (text === '목업' || text === '로고')  ? '' : value!='' ? value : ourA}`}}
+            style={{backgroundImage: `url(${value === '' && (text === '목업' || text === '로고' || text === '목업1' || text === '목업2')  ? '' : value!='' ? value : ourA}`}}
             >
             {/* <div 
                 className="img-remove"

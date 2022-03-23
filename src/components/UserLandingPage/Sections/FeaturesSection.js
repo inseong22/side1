@@ -12,7 +12,7 @@ function FeaturesSection({content, setting}) {
     const returnFeatureCards = content.elements.map((item, index) => {
         if (index < content.numOfElements){
         return(
-            <FeatureCard section="feature" content={content} index={index}>
+            <FeatureCard align={isMobile ? content.mobile.align : content.elementText.align} section="feature" content={content} index={index}>
                 {
                     content.element.use && 
                     <Element content={content} item={item} index={index} key={index}/>
@@ -25,7 +25,7 @@ function FeaturesSection({content, setting}) {
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
                                 <TextAuto className="text-no-input" 
                                     value={item.title} 
-                                    color = {content.elementText.color} 
+                                    color = {content.elementText.titleColor} 
                                     align = {isMobile ? content.mobile.align : content.elementText.align}
                                     size={content.elementText.titleSize/20} 
                                     placeholder="특징"
@@ -35,19 +35,21 @@ function FeaturesSection({content, setting}) {
                     }
                     {
                         content.elementText.descUse && 
-                            <div className="df-margin feature-desc">
+                            <div className="df-margin-small feature-desc">
                                 <TextareaAutosize 
                                     className="text-no-input"  
                                     value={item.desc} 
-                                    color = {content.elementText.color} 
+                                    color = {content.elementText.descColor} 
                                     // align = {isMobile ? content.mobile.align : content.align}
                                     style={{
                                         fontFamily:`${setting.smallFont}`, 
-                                        color:`${content.desc.color}`, 
+                                        color:`${content.elementText.descColor}`, 
                                         fontSize:`${content.elementText.descSize/20}em`, 
                                         // boxSizing:`border-box`, 
                                         textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
-                                        resize:'none'
+                                        resize:'none',
+                                        WebkitTextFillColor: `${content.elementText.descColor}`,
+                                        WebkitOpacity: 1,
                                     }}
                                     placeholder="여기를 클릭하여 서비스 및 제품의 특징을 적어보세요."
                                     disabled
@@ -65,7 +67,7 @@ function FeaturesSection({content, setting}) {
 
     return (
         <>
-            <motion.div className="template" data-aos={setting.animation} data-aos-easing="ease-in-back"
+            <motion.div className="template" data-aos={content.animation} data-aos-easing="ease-in-back"
                 data-aos-delay="200"
                 data-aos-offset="0" aos-duration="4000" >
                     <TitleDesc content={content} titlePlaceholder="특징들의 제목을 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요." />

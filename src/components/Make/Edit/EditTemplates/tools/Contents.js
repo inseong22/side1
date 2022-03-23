@@ -170,7 +170,7 @@ function Contents({content}) {
                                 if (content.video.link.includes('autoplay=1'))
                                     {draft[state.secNum].video.link = content.video.link.replace('autoplay=1', 'autoplay=0');
                                     draft[state.secNum].video.auto = false;}
-                                else if (content.video.link.includes('autoplay=0'))
+                                else
                                     {draft[state.secNum].video.link = content.video.link.replace('autoplay=0', 'autoplay=1');
                                     draft[state.secNum].video.auto = true;}
                             }))}/>
@@ -342,7 +342,7 @@ function Contents({content}) {
 
 
     return (
-        <OpenCloseCustom title="콘텐츠" use={content.contents.use}>
+        <OpenCloseCustom title="콘텐츠" use={content.contents.use} open={state.focus === 'contents'}>
             <RadioCustom options={contentsOptions} value={content.contents.type} func={e => changeContentOption(e)} />                 
             {
                 returnImageOrVideoAdd()

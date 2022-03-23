@@ -1,11 +1,8 @@
 import React from 'react'
 import { isMobile } from 'react-device-detect'
-import {Youtube, Twitter} from '@styled-icons/boxicons-logos';
-import {Facebook} from '@styled-icons/entypo-social/Facebook'
-import {Instagram} from '@styled-icons/boxicons-logos/Instagram'
+import {Youtube, Twitter, Instagram, FacebookSquare, LinkedinSquare} from '@styled-icons/boxicons-logos';
 import {KakaoTalk} from '@styled-icons/remix-fill/KakaoTalk'
 import { Notion } from '@styled-icons/simple-icons';
-import {Linkedin} from '@styled-icons/fa-brands/Linkedin'
 import TextareaAutosize from 'react-textarea-autosize';
 
 function UserFoot({foot, setting}) {
@@ -18,7 +15,7 @@ function UserFoot({foot, setting}) {
         return(
             <>
         {foot.icon.facebook !== '' && 
-                    <Facebook color={foot.icon.color} className="footer-icon" 
+                    <FacebookSquare color={foot.icon.color} className="footer-icon" 
                         onClick={()=>{
                             window.open(
                                 foot.icon.facebook,
@@ -78,7 +75,7 @@ function UserFoot({foot, setting}) {
                     />
         }
         {foot.icon.linkedIn !== '' && 
-                    <Linkedin color={foot.icon.color} className="footer-icon" 
+                    <LinkedinSquare color={foot.icon.color} className="footer-icon" 
                     onClick={()=>{
                         window.open(
                             foot.icon.linkedIn,
@@ -98,13 +95,16 @@ function UserFoot({foot, setting}) {
             padding:`${
                 isMobile ? foot.paddingTop/2.5 : foot.paddingTop}vh 
                 ${isMobile ? '15px' : 'calc(14vw + 30px)'}
-                ${isMobile ? foot.paddingTop/2.5 : foot.paddingBottom}vh 
+                ${isMobile ? foot.paddingBottom/2.5 : foot.paddingBottom}vh 
                 ${isMobile ? '15px' : 'calc(14vw + 30px)'}`
             }}>
                     <div className="footer-section" style={{fontSize:'0.5em'}}>
                     <div style={{display:'flex', ...returnLayout}} >
                         {foot.text.use && 
-                            <TextareaAutosize className="footer-text-input"
+                            <TextareaAutosize 
+                                disabled 
+                                className="text-no-input"
+                                spellcheck="false"   
                                 value = {foot.text.text}
                                 style={{
                                     fontFamily:`${setting.smallFont}`, 
@@ -113,21 +113,24 @@ function UserFoot({foot, setting}) {
                                     backgroundColor: `${foot.backgroundColor}`,
                                     resize:'none',
                                     border:'none',
+                                    WebkitTextFillColor: `${foot.text.color}`,
+                                    WebkitOpacity: 1,
                                 }}>
                             </TextareaAutosize>
                         }
                         {foot.icon.use && foot.layout === 1 && 
-                            <div className="icon-box" style={{flexDirection: 'column', justifyContent: 'center'}}>
+                            <div className="icon-box" style={{
+                                flexDirection: 'column', justifyContent: 'center', marginLeft:'10%', width:'60%'}}>
                             {returnIcons()}
                             </div>
                         }
                         {foot.icon.use && foot.layout === 2 && 
-                            <div className="icon-box" style={{flexDirection: 'row', justifyContent: 'start'}}>
+                            <div className="icon-box" style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}>
                             {returnIcons()}
                             </div>
                         }
                         {foot.icon.use && foot.layout === 3 && 
-                            <div className="icon-box" style={{flexDirection: 'row', justifyContent: 'start'}}>
+                            <div className="icon-box" style={{flexDirection: 'row', justifyContent: `${foot.text.align}`}}>
                             {returnIcons()}
                             </div>
                         }

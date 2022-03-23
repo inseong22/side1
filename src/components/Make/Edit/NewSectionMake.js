@@ -11,12 +11,17 @@ import EditGallerySection from './EditTemplates/EditGallerySection'
 import EditTextSection from './EditTemplates/EditTextSection'
 import EditMockupSection from './EditTemplates/EditMockupSection'
 import EditVideoSection from './EditTemplates/EditVideoSection'
+import EditLineSection from './EditTemplates/EditLineSection'
 import EditTopBar from './tools/func/FuncTopBar'
 import {ArrowIosBack} from '@styled-icons/evaicons-solid'
 import EditSetting from './NavFooterSetting/EditSetting'
 import EditFooterSection from './NavFooterSetting/EditFooterSection'
 import EditContents from './NavFooterSetting/EditContents'
-import BackButton from '../../../tools/img/backButton.png'
+import {sectionIcons} from './NavFooterSetting/ContentsIcons';
+import {Trash} from '@styled-icons/boxicons-solid'
+import {
+    ChakraProvider,
+  } from '@chakra-ui/react'
 import './NewSectionMake.css'
 
 const NAVSECNUM = 50;
@@ -24,30 +29,46 @@ const FOOTSECNUM = 51;
 const SETTINGSECNUM = 52;
 const CONTENTSSECNUM = 53;
 
+const MARGINTOP = '100px'
+
+const USEDCOLORS = [
+    "#ffffff",
+    "#00ff00",
+    "#ff0000",
+    "#0000ff",
+    "#636cff",
+    "#000000",
+]
+
 export const MakeContext = React.createContext({
-    stateC : {usedColors : [
-        "#ffffff",
-        "#00ff00",
-        "#ff0000",
-        "#0000ff",
-        "#000000",
-    ]},
+    stateC : {usedColors : USEDCOLORS},
     actionC : {setUsedColors : () => {}}
 });
 
-function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting}) {
+function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSetting, elementsRef, setContents}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
-    const [usedColors, setUsedColors] = useState([
-        "#ffffff",
-        "#00ff00",
-        "#ff0000",
-        "#0000ff",
-        "#000000",
-    ]);
+    const [usedColors, setUsedColors] = useState(USEDCOLORS);
 
     const contextValue = {
         stateC: {usedColors},
         actionC : {setUsedColors},
+    }
+
+    const deleteSection = (index) => {
+        if(index === 0){
+            action.setContents([
+                ...state.contents.slice(1,state.contents.length)
+            ])
+        }if(index === state.contents.length){
+            action.setContents([
+                ...state.contents.slice(0,index-1),
+            ])
+        }else{
+            action.setContents([
+                ...state.contents.slice(0,index),
+                ...state.contents.slice(index+1, state.contents.length)
+            ])
+        }
     }
 
     const sectionMakeTable = () => {
@@ -117,6 +138,11 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
                 return(
                     <EditVideoSection content={content} category={state.category}/>
                 )
+
+            case 'LineSection':
+                return(
+                    <EditLineSection content={content} category={state.category}/>
+                )
     
             default:
                 return(
@@ -133,17 +159,20 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
         if(state.secNum === NAVSECNUM){
             return(
                 <>
-                    <div className="back__container">
-                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                            <span className="back-button">
-                                <ArrowIosBack size="20" />
-                            </span>
-                            <span className="content__name">
-                                내비게이션 바
-                            </span>
+                    <div className="top-bar__fixed">
+                        <div className="back__container">
+                            <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                <span className="back-button">
+                                    <ArrowIosBack size="20" />
+                                </span>
+                                <span className="content__name">
+                                    내비게이션 바
+                                </span>
+                            </div>
                         </div>
+                        <EditTopBar category={state.category} setCategory={action.setCategory} />
                     </div>
-                    <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    <div style={{marginTop:`${MARGINTOP}`}}></div>
                     <EditNaviSection navi={navi} setNavi={setNavi} category={state.category}/>
                 </>
             )
@@ -151,47 +180,72 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
         }else if(state.secNum === FOOTSECNUM ){
             return(
                 <>
-                    <div className="back__container">
-                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                            <span className="back-button">
-                                <ArrowIosBack size="20" />
-                            </span>
-                            <span className="back-text">
-                                푸터 바
-                            </span>
+                    <div className="top-bar__fixed">
+                        <div className="back__container">
+                            <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                <span className="back-button">
+                                    <ArrowIosBack size="20" />
+                                </span>
+                                <span className="back-text">
+                                    푸터 바
+                                </span>
+                            </div>
                         </div>
+                        <EditTopBar category={state.category} setCategory={action.setCategory} />
                     </div>
-                    <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    <div style={{marginTop:`${MARGINTOP}`}}></div>
                     <EditFooterSection foot={foot} setFoot={setFoot} category={state.category}/>
                 </>
             )
         }else if(state.secNum === SETTINGSECNUM ){
             return(
                 <>
-                    <EditTopBar category={state.category} setCategory={action.setCategory} />
-                    <EditSetting setting={setting} setSetting={setSetting} category={state.category}/>
+                    <div className="top-bar__fixed">
+                        <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    </div>
+                    <div style={{marginTop:`60px`}}></div>
+                    <EditSetting setting={setting} setSetting={setSetting} category={state.category} setContents={setContents} content={content}/>
                 </>
             )
         }else if(state.secNum === CONTENTSSECNUM ){
             return(
-                <EditContents navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot}/>
+                <EditContents setting={setting} navi={navi} setNavi={setNavi} foot={foot} setFoot={setFoot} elementsRef={elementsRef}/>
             )
         }else{
             return (
                 <>
                 {content && 
                 <>
-                    <div className="back__container">
-                        <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
-                            <span className="back-button">
-                                <ArrowIosBack size="20" />
-                            </span>
-                            <span className="back-text">
-                                {content.name}
-                            </span>
+                    <div className="top-bar__fixed">
+                        <div className="back__container">
+                            <div className="centera" style={{width:'50%', justifyContent:'start'}}>
+                                <div className="back__container-button" onClick={() => action.setSecNum(CONTENTSSECNUM)} style={{cursor:'pointer'}}>
+                                    <span className="back-button">
+                                        <ArrowIosBack size="20" />
+                                    </span>
+                                    {
+                                        sectionIcons.filter(doc => doc.sectionTypeName === content.sectionTypeName)[0].icon
+                                    }
+                                    <span className="back-text">
+                                        {content.name}
+                                    </span>
+                                </div>
+                            </div>
+                            <div style={{width:'50%',display:'flex', justifyContent:'end', paddingRight:'10px'}}>
+                                <span className="back__container-button" style={{padding:'6px', cursor:'pointer'}} 
+                                    onClick={() => {
+                                        const yes = window.confirm("정말 삭제하시겠습니까?");
+                                        if(yes){
+                                            deleteSection(state.secNum);
+                                        }
+                                    } }>
+                                    <Trash size="20" style={{color:'rgba(105,105,105,1)'}} />
+                                </span>
+                            </div>
                         </div>
+                        <EditTopBar category={state.category} setCategory={action.setCategory} />
                     </div>
-                    <EditTopBar category={state.category} setCategory={action.setCategory} />
+                    <div style={{marginTop:`${MARGINTOP}`}}></div>
                     {sectionMakeTable()}
                 </> }
                 </>
@@ -200,7 +254,7 @@ function NewSectionMake({content, foot, setFoot, navi, setNavi, setting, setSett
     }
 
     return (
-        <MakeContext.Provider value={contextValue}>
+        <MakeContext.Provider value={contextValue} style={{position:'relative'}} onClick={() => action.setFocus('')}>
             {returnMake()}
         </MakeContext.Provider>
     )

@@ -5,7 +5,9 @@ import ElementsTable from './tools/ElementsTable'
 import produce from 'immer'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import RadioCustom from '../tools/Custom/RadioCustom'
+import EditTitleDesc from './tools/EditTitleDesc'
 import ColorCustom from '../tools/Custom/ColorCustom'
+import AlignCustom from '../tools/Custom/AlignCustom'
 
 const layoutOptions = [
     {label: '카드', value: 'card'},
@@ -57,17 +59,29 @@ function EditQnaSection({content, category}) {
                         <ElementsTable elements={elements} />
                         <OpenCloseCustom title="레이아웃" use={true} subtext={state.isPhone ? '모바일' : 'PC'}>
                             <RadioCustom options={layoutOptions} value={content.layout} func={e => changeLayoutOption(e)} />
+                            <AlignCustom all value={content.align} func={e => action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].align = e;
+                                draft[state.secNum].title.align = e;
+                                draft[state.secNum].desc.align = e;
+                            }))} />
                         </OpenCloseCustom>
-                        <OpenCloseCustom title="QnA" use={content.qna.use}>
+                        <EditTitleDesc content={content} />
+                        <OpenCloseCustom title="QnA" use={content.qna.use} open={state.focus === 'qna'}>
                             <RadioCustom text="기본 모양" options={shapeOptions} value={content.qna.shape} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.shape = e;
                             }))} />
                             <ColorCustom text="질문" value={content.qna.question} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.question = e;
                             }))} />
+                            {/* <TextSizeCustom text="질문 크기" elementTitle value={content.qna.questionSize} func={e =>  action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].qna.questionSize = e;
+                            }))} /> */}
                             <ColorCustom text="답변" value={content.qna.answer} func={e => action.setContents(produce(state.contents, draft => {
                                 draft[state.secNum].qna.answer = e;
                             }))} />
+                            {/* <TextSizeCustom text="답변 크기" elementTitle value={content.qna.answerSize} func={e =>  action.setContents(produce(state.contents, draft => {
+                                draft[state.secNum].qna.answerSize = e;
+                            }))} /> */}
                         </OpenCloseCustom>
 
                     </div>

@@ -10,10 +10,9 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-    PopoverHeader,
     PopoverBody,
-    PopoverFooter,
     PopoverArrow,
+    Portal,
   } from '@chakra-ui/react'
 
 
@@ -21,22 +20,13 @@ export function EditColor({onChange, value}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const {stateC, actionC} = useContext(MakeContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [color, setColor] = useColor("hex", value);
-    const [open, setOpen] = useState(null);
-
-    const handleClick = () => {
-        setOpen(!open);
-    };
-  
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+    const [newColor, setNewColor] = useState(true);
+    
     const closeSave = () => {
-        handleClose();
         if(stateC.usedColors.includes(value)){
             return
         }else{
-            if(stateC.usedColors.length > 5){
+            if(stateC.usedColors.length > 6){
                 actionC.setUsedColors(produce(stateC.usedColors, draft => {
                     draft.shift()
                     draft.push(value)
@@ -52,33 +42,42 @@ export function EditColor({onChange, value}) {
     return (
         <ChakraProvider>
         <div className="center-row" style={{justifyContent: "start"}}>
-            <div className="color-button" style={{backgroundColor : `${state.setting.color}`, color:`${state.setting.color === '#ffffff' ? '#555C67' : 'white'}`}} onClick={() => onChange(`${state.setting.color}`)}>
+            <div className="color-button" 
+                style={{
+                    backgroundColor : `${state.setting.color}`, 
+                    color:`${state.setting.color === '#ffffff' ? '#555C67' : 'white'}`,
+                    border: `${newColor ? ('2px solid #ffffff'): ('2px solid #6B63F7')}`,
+                }} 
+                onClick={() => {
+                    setNewColor(false)
+                    onChange(`${state.setting.color}`)
+                    }}>
                 {/* <div style={{color:'rgba(255,255,255,0.8)'}}>
                     main
                 </div> */}
-                <div>
+                <div>메인 색상
                     {state.setting.color}
                 </div>
             </div>
                 <Popover
                     placement='right'
-                    closeOnBlur={false}
-                    isOpen={open}
                     onClose={() => {
                         closeSave()
                     }}>
                 <PopoverTrigger>
-                    <div className="color-button" style={{backgroundColor:`${value}`, color:`${value === '#ffffff' ? '#555C67' : 'white'}`}} onClick={handleClick}>    
-                        {value}
-                    </div>
+                    <button className="color-button" 
+                        style={{
+                            backgroundColor:`${value}`, 
+                            color:`${value === '#ffffff' ? '#555C67' : 'white'}`,
+                            border: `${!newColor ? ('2px solid #ffffff'): ('2px solid #6B63F7')}`,
+                        }} onClick={() => setNewColor(true)}>    
+                            새로운 색상
+                            {value}
+                    </button>
                 </PopoverTrigger>
+                <Portal>
                 <PopoverContent style={{zIndex: 100}}>
                     <PopoverArrow />
-                    <PopoverHeader>
-                        <div className="color-close" onClick={ () => closeSave() }>
-                                x
-                        </div>
-                    </PopoverHeader>
                     <PopoverBody>
                         <div className="center-column">
                             <ColorPicker
@@ -93,7 +92,7 @@ export function EditColor({onChange, value}) {
                                 alpha
                             />
                             <div style={{width:'95%', textAlign:'left'}}>최근에 사용한 색상</div>
-                            <div className="center-row">
+                            <div className="center-row" style={{marginTop:'7px', justifyContent:'start'}}>
                                 {stateC.usedColors.map((item, index) => {
                                     return(
                                         <div onClick={() => {onChange(item); setColor({...color, hex:item})}} key={index}>
@@ -110,6 +109,7 @@ export function EditColor({onChange, value}) {
                         </div>
                     </PopoverBody>
                 </PopoverContent>
+                </Portal>
                 </Popover>
         </div>
         </ChakraProvider>

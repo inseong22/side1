@@ -10,34 +10,23 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-    PopoverHeader,
     PopoverBody,
-    PopoverFooter,
     PopoverArrow,
+    Portal,
   } from '@chakra-ui/react'
 
 export function EditColor({onChange, value}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const {stateC, actionC} = useContext(MakeContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [color, setColor] = useColor("hex", value);
-    const [open, setOpen] = useState(null);
-    const popover = useRef();
-    const handleClick = () => {
-        setOpen(!open);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const popover = useRef();    
 
     return (
         <ChakraProvider>
         <div className="center-row" style={{justifyContent: "center"}}>
             <Popover
                     placement='right'
-                    closeOnBlur={false}
-                    isOpen={open}
                     onClose={() => {
-                        handleClose();
                         if(stateC.usedColors.includes(value)){
                             return
                         }else{
@@ -54,17 +43,13 @@ export function EditColor({onChange, value}) {
                         }
                     }}>
                 <PopoverTrigger>
-                    <div className="color-button" style={{backgroundColor:`${value}`, color:`${value === '#ffffff' ? '#555C67' : 'white'}`}} onClick={handleClick}>    
+                    <button className="color-button" style={{backgroundColor:`${value}`, color:`${value === '#ffffff' ? '#555C67' : 'white'}`}}>    
                         {value}
-                    </div>
+                    </button>
                 </PopoverTrigger>
+                <Portal>
                 <PopoverContent style={{zIndex: 100}}>
                     <PopoverArrow />
-                    <PopoverHeader>
-                            <div className="color-close" onClick={handleClick}>
-                                x
-                            </div>
-                    </PopoverHeader>
                     <PopoverBody>
                         <div className="center-column">
                             <ColorPicker
@@ -95,6 +80,7 @@ export function EditColor({onChange, value}) {
                         </div>
                     </PopoverBody>
                 </PopoverContent>
+                </Portal>
                 </Popover>
         </div>
         </ChakraProvider>

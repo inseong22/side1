@@ -1,11 +1,7 @@
 import React, {useContext, useState, useRef} from 'react'
 import { motion } from 'framer-motion';
 import { MyContext } from '../../../pages/Make/MakePageV2'
-import {produce} from 'immer'
 import TitleDesc from './components/TitleDesc'
-import Phone from '../../../tools/img/mockup/mobile.png'
-import Desktop from '../../../tools/img/mockup/desktop.png'
-import ourA from '../../../tools/img/005.png'
 import ImageOrSlide from './components/ImageOrSlide'
 import AnimationDiv from './components/AnimationDiv'
 
@@ -17,7 +13,11 @@ function MockupSection({content, setting}) {
         // paddingRight:`${content.layout === 1 ? '0px' : content.layout === 2 ? '30px' : '30px'}`,
     }   
     return (
-        <motion.div tyle={{ width:'100%', height:'100%'}}>
+        <motion.div 
+        data-aos-easing="ease-in-back"
+        data-aos-delay="200"
+        data-aos-offset="0" data-aos={content.animation} aos-duration="4000"
+        style={{ width:'100%', height:'100%'}}>
             <AnimationDiv content={content} returnLayout={returnLayout} setting={setting}>
                 <div className="text__container">
                     <TitleDesc content={content} />

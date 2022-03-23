@@ -86,7 +86,7 @@ function UserSection({content, setting}) {
 
     return(
         <div className="new-section">
-        <div className="section__container" 
+            <div className="section__container" 
             style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat'}} >
             {
                 content.backgroundType === 'color' ?
@@ -99,7 +99,7 @@ function UserSection({content, setting}) {
             }
             {
                 content.box.use && 
-                <div className="section__box" style={{padding:`1vh 11vw`}}>
+                <div className="section__box" style={{padding:`1vh ${isMobile ? '1vw' : '11vw'}`}}>
                     <div style={{backgroundColor:`${content.box.backgroundColor}`, borderRadius:`${content.box.borderRadius}px`, width:'100%', height:'100%'}}>
                     </div>
                 </div>
@@ -108,7 +108,7 @@ function UserSection({content, setting}) {
                 style={{padding:`${
                     isMobile ? content.padding.top/2.5 : content.padding.top}vh 
                     ${isMobile? '15px' : 'calc(14vw + 30px)'}
-                    ${isMobile ? content.padding.top/2.5 : content.padding.bottom}vh 
+                    ${isMobile ? content.padding.bottom/2.5 : content.padding.bottom}vh 
                     ${isMobile ? '15px' : 'calc(14vw + 30px)'}`}} >
                 {/* 실제 섹션이 보여지는건 여기밖에 없음,, */}
                 {returnType()}

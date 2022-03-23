@@ -34,12 +34,12 @@
 
 .make-nav-button{
     background-color:rgba(0,0,0,0);
-    color:var(--main-grey);
-    border-radius: 5px;
+    color:rgba(105,105,105,1);
+    border-radius: 25px;
     display: flex;
     align-items:center;
     justify-content:center;
-    width:110px;
+    width:120px;
     height: 40px;
     margin: 5px;
     cursor: pointer;
@@ -53,6 +53,7 @@
 
 .nb-clicked{
     background-color:#6a63f773;
+    color:black;
 }
 .nb-clicked:hover{
     background-color:#6a63f773;

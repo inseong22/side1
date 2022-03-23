@@ -4,13 +4,14 @@ import './MainPageV2.css'
 import {Link} from 'react-router-dom';
 import { dbService } from '../../tools/fbase'
 import Footer from '../NavAndFooter/Footer'
+import NavBarV2 from '../NavAndFooter/NavBarV2'
 import { motion } from "framer-motion"
 import AskLoginModal from './tools/AskLoginModal'
-import NavBarV2 from '../NavAndFooter/NavBarV2'
 import RegisterModal from '../../components/Login/RegisterModal'
 import ChannelTalk from '../../tools/ChannelTalk'
-import { styled, Box } from '@mui/system';
+import {detect} from 'detect-browser'
 import {isMobile} from 'react-device-detect'
+import {LandingPageExamples} from '../ExamplePage/ExamplePage'
 import "@lottiefiles/lottie-player";
 
 import {DeveloperBoardOff, Animation, DesignServices} from '@styled-icons/material';
@@ -25,6 +26,7 @@ import main3 from '../../tools/img/main/main3.gif';
 import main4 from '../../tools/img/main/main4.gif';
 import main5 from '../../tools/img/main/main5.gif';
 import main6 from '../../tools/img/main/main6.gif';
+import outdoor from '../../tools/img/main/outdoor.png';
 
 const ourInfos = [
     {
@@ -75,6 +77,13 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     const [registerOpen,setRegisterOpen] = useState(false);
     const [loginOpen,setLoginOpen] = useState(false);
     const targets = useRef(null)
+
+    useEffect(() => {
+        const browser = detect();
+        if(browser.name !== 'chrome' || isMobile){
+            alert("본 서비스는 PC 환경과 Chrome 환경에 최적화되어있습니다.")
+        }
+    },[])
     
     ChannelTalk.boot({
         "pluginKey": "e6b830bc-7731-43fa-8eea-1245d3d4fc3e", //please fill with your plugin key"
@@ -105,7 +114,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             alert("로그인하셔야 이용가능한 페이지입니다.");
             setRegisterOpen(true);
         }else{
-            history.push('/#/response');
+            history.push('/response');
             history.go();
             return;
         }
@@ -146,31 +155,54 @@ function MainPageV2({history, isLoggedIn, userObj}) {
     }
     
     const moveButton = (top) => {
-        return(<>
+        return(<div className="main-button__container">
             {
+                isMobile ? 
+                <>
+                    <button className="main__button2 uphover" onClick={() => alert('죄송합니다. Surfee는 PC 환경에서만 이용할 수 있습니다.')}>
+                        무료로 제작하기
+                    </button>
+                    <Link to='/surfeeintro' className="main__button3 uphover">
+                        Surfee란?
+                    </Link>
+                </>
+                :
                 isLoggedIn ? 
-                <Link to='/response' className="main__button2 uphover">
-                    무료로 제작하기
-                </Link>:
+                <>
+                    <Link to='/response' className="main__button2 uphover">
+                        무료로 제작하기
+                    </Link>
+                    <Link to='/surfeeintro' className="main__button3 uphover">
+                        Surfee란?
+                    </Link>
+                </>
+                :
                 <>
                 {
                     top === 'top' ?
-                    <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
-                        무료로 제작하기
-                    </button>:
-                    <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
-                        무료로 제작하기
-                    </button>
+                    <>
+                        <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
+                            무료로 제작하기
+                        </button>
+                        <Link to='/surfeeintro' className="main__button3 uphover">
+                            Surfee란?
+                        </Link>
+                    </>
+                    :
+                    <>
+                        <button className="main__button2 uphover" onClick={() => setAskOpen(true)}>
+                            무료로 제작하기
+                        </button>
+                        <Link to='/surfeeintro' className="main__button3 uphover">
+                            Surfee란?
+                        </Link>
+                    </>
                 }
                 </>
             }
-        </>)
+        </div>)
     }
-
-    console.log("로그 테스트")
-    console.log("로그 테스트")
-    console.log("로그 테스트")
-
+    
     return (
         <>
         <NavBarV2 history={history} isLoggedIn={isLoggedIn} buttonOpen />
@@ -178,16 +210,22 @@ function MainPageV2({history, isLoggedIn, userObj}) {
             <div className="main-page-section1" style={{paddingTop:'30px', marginTop:'50px', flexDirection:'column', background:"linear-gradient(0deg, #6C63FF 0%, #ffffff 100%)"}}>
                 <div className="main-section-left-topbottom" style={{color:'black', marginTop:'50px'}}>
                     <span className="one-section-big osb2" style={{textAlign: 'center'}}>
-                        '랜딩페이지'를 3분만에 <br/>쉽고 간단하게 제작해 보세요
+                        '랜딩페이지'를 3분 만에 <br/>쉽고 간단하게 제작해 보세요
                     </span>
                     <span className="one-section-small" style={{textAlign: 'center'}}>
-                        Surfee와 함께 '타이핑'과 '이미지'로만 <br/>
-                        빠르고 간단하게 랜딩페이지를 제작해 보세요
+                        무엇보다 쉽고 빠르게 만들 수 있는<br/>
+                        나만의 페이지!
                     </span>
                     {moveButton('top')}
+                    {/* <button className="text-hover" style={{fontSize:'0.6em', marginTop:'10px', cursor: 'pointer'}} onClick={() => {
+                        window.open(
+                            'https://tally.so/r/wMZ4Yn',
+                            '_blank'
+                        )
+                    }}>Surfee는 항상 여러분의 의견을 듣고 싶어요 😁</button> */}
                 </div>
                 <img src={main1} className="section-one-image-main-topbottom mt30" />
-                <span className="one-section-big mt30" style={{textAlign: 'center', fontSize:'1.2em'}}>
+                <span className="one-section-big mt30" style={{textAlign: 'center', fontSize:'1.2em', color:'white'}}>
                     고객 검증을 위한 '랜딩페이지'제작은<br/>
                     이제 선택이 아닌 필수입니다.
                 </span>
@@ -202,7 +240,7 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                 >
                 </lottie-player>
                 <div className="one-section-big" style={{color:'var(--main-color)'}}>
-                    Surfee?
+                    Why Surfee?
                 </div>
             </div>
             <div className="main-page-section1 bg1">
@@ -253,15 +291,33 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     </span>
                 </div>
             </div>
-            <div className="main-page-section1" style={{flexDirection: "column", position:'relative'}}>
-                <lottie-player
-                    autoplay
-                    loop
-                    mode="normal"
-                    src="https://assets9.lottiefiles.com/packages/lf20_tkvgymkx.json"
-                    style={{transform:'rotate(90deg)', position:'absolute', zIndex:'0', width:'100%', height:'200%'}}
-                >
-                </lottie-player>
+            <div className="main-page-section1" style={{padding:'30px 0px', flexDirection:'column'}}>
+                <div className="main-section-left-topbottom" style={{color:'black', marginTop:'10px'}}>
+                    <span className="one-section-big2 osb2" style={{textAlign: 'center'}}>
+                        <span style={{color:'#6c63ff'}}>Surfee</span>로 이렇게 만들 수 있어요!
+                    </span>
+                    <span className="one-section-small2" style={{textAlign: 'center'}}>
+                        🧑🏻‍💻 Surfee를 사용한 페이지 디자인 예시를 참고해보세요.<br/>
+                        원하는 템플릿을 골라 그 디자인으로 바로 제작을 시작할 수도 있어요!
+                    </span>
+                </div>
+                <LandingPageExamples />
+                <Link to='/surfeeexamples' className="main__button2 uphover">
+                    템플릿 사용해서 제작하기
+                </Link>
+            </div>
+            <div className="main-page-section1" style={{flexDirection: "column", position:'relative', boxSizing:'border-box'}}>
+                {
+                    !isMobile &&
+                    <lottie-player
+                        autoplay
+                        loop
+                        mode="normal"
+                        src="https://assets9.lottiefiles.com/packages/lf20_tkvgymkx.json"
+                        style={{transform:'rotate(90deg)', position:'absolute', zIndex:'0', width:'100%', height:'200%'}}
+                        >
+                    </lottie-player>
+                }
                 <span className="one-section-big bt2" style={{textAlign:'center'}}>
                     랜딩페이지를 가장 효율적으로<br/> 제작해 보세요
                 </span>
@@ -272,17 +328,18 @@ function MainPageV2({history, isLoggedIn, userObj}) {
                     {ourInfosTable}
                 </div>
             </div>
-            <div className="main-page-section1 bg1" style={{flexDirection: "column", padding:'50px 0px'}}>
+            <div className="main-page-section1 back-image-fit" style={{ color:'white', backgroundImage:`url(${outdoor})`, flexDirection: "column", padding:'50px 0px'}}>
                 <span className="one-section-big osb2" style={{textAlign:'center'}}>
                     Surfee와 함께<br/>랜딩페이지를 제작해 보세요.
                 </span>
+                <div className="centera" style={{backgroundColor:'#6c63ff88', position:'absolute', zIndex:'1'}}></div>
                 {moveButton()}
             </div>
         </div>
         <Footer />
         <AskLoginModal open={askOpen} setOpen={setAskOpen} SomeoneClickMoveToMake={SomeoneClickMoveToMake} registerOpen={registerOpen} setRegisterOpen={setRegisterOpen}/>
         <RegisterModal open={registerOpen} setOpen={setRegisterOpen} />
-        <RegisterModal open={loginOpen} setOpen={setLoginOpen} />
+        {/* <RegisterModal open={loginOpen} setOpen={setLoginOpen} /> */}
         </>
     )
 }

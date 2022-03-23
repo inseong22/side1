@@ -34,6 +34,25 @@
 }
 
 @font-face {
+  font-family: 'Pretendard';
+  src: url('./tools/fonts/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./tools/fonts/Pretendard-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./tools/fonts/Pretendard-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'GmarketSansBold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
     font-weight: normal;
@@ -97,6 +116,7 @@
   --main-hover-color: #b3b0f5;
 
   --default-shadow-01: 2px 4px 20px #E8F0F9;
+  --default-shadow-02: 2px 4px 20px #c9c9c9;
   --non-hover-button-shadow: 2px 4px 20px #E5E5E5;
   --br-01: 25px;
   --br-02:32px;
@@ -134,7 +154,7 @@
   padding-top:60px;
   font-size:15px;
   background-color:#6a63f700;
-  font-family: Pretendard-Regular;
+  font-family: Noto Sans KR;
 }
 
 .App-logo {
@@ -153,6 +173,15 @@
 .insta:hover{
   color:rgb(50,50,50);
 }
+.border-hover{
+  box-sizing: content-box;
+  border:1px solid #00000000;
+  cursor: pointer;
+}
+.border-hover:hover{
+  border:1px solid #00000022;
+  background-color:#00000022;
+}
 
 .uphover{
   cursor: pointer;
@@ -162,6 +191,14 @@
 .uphover:hover{
   transform: translate(0px, -4px);
   box-shadow:0px 3px 8px rgba(50,50,50,0.2);
+}
+.uphover2{
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+.uphover2:hover{
+  transform: translate(0px, -4px);
+  box-shadow:5px 8px 20px rgba(0,0,0,0.3);
 }
 
 .hover-shadow{
@@ -176,8 +213,9 @@
 .opacity-hover{
   background-color: rgba(255,255,255);
 }
+
 .opacity-hover:hover{
-  background-color: rgba(245,245,245);
+  background-color: var(--main-light-gray);
 }
 
 .radio-hover{
@@ -194,6 +232,10 @@
   background-color:#544cee;
 }
 
+.back-gradient{
+  background:var(--main-gradient);
+}
+
 .mobile-hide{
   display: none;
 }
@@ -202,12 +244,13 @@
   align-items: center;
   justify-content:center;
   box-shadow: 4px 4px 15px #E8F0F9;
-  border-radius: var(--br-02);
+  border-radius: 5px;
+  border: 1px solid black;
   color:black;
   font-family: Noto Sans KR;
-  font-weight: normal;
-  font-size: 15px;
-  border:none;
+  font-weight: bold;
+  font-size: 14px;
+  /* border:none; */
   padding:0px 1.5vw;
   height:38px;
   cursor: pointer;
@@ -222,7 +265,7 @@
   box-shadow: var(--non-hover-button-shadow);
   border-radius: var(--br-02);
   color:white;
-  font-size: 15px;
+  font-size: 14px;
   border:none;
   padding:0px 1.5vw;
   height:38px;
@@ -231,6 +274,10 @@
   font-weight: normal;
   margin-left:0.3vw;
 }
+/* 
+.default-button-02:hover{
+  background:#928cff;
+} */
 
 .center-row{
   display:flex;
@@ -311,7 +358,9 @@
 
 .right{
   display:flex;
-  justify-content: end;
+  /* display: -webkit-flex;
+  -webkit-justify-content: flex-end; */
+  justify-content: flex-end;
   align-items: center;
   width:50%;
   padding-right:5px;
@@ -326,36 +375,54 @@
   background-color: var(--main-hover-color);
 }
 
+.text-no-input{
+  border:1px solid rgba(200,200,200,0);
+  background-color:rgba(0,0,0,0);
+  width:100%;
+  overflow:hidden;
+  box-sizing: border-box;
+  word-break:nowrap;
+  flex-wrap: nowrap;
+  word-wrap: nomal;
+}
+input:disabled{
+  background-color:transparent; 
+  border-style: none;
+}
+.text-no-input:hover{
+  border:1px solid rgba(200,200,200,0);
+}
+
+.text-no-input:focus{
+  border:1px solid rgba(200,200,200,0);
+  outline:none;
+}
+
+.text-no-input:disabled{
+  opacity:1;
+}
+
+
 .text-input{
   border:1px solid rgba(200,200,200,0);
   background-color:rgba(0,0,0,0);
   width:100%;
   overflow:hidden;
   word-wrap:break-word;
+  border-radius:1px;
 }
-
-.text-no-input{
-  border:1px solid rgba(200,200,200,0);
-  background-color:rgba(0,0,0,0);
-  width:100%;
-  overflow:hidden;
-  word-wrap:break-word;
-}
-.text-no-input:hover{
-  border:1px solid rgba(200,200,200,0);
-}
-.text-no-input:focus{
-  border:1px solid rgba(200,200,200,0);
-  outline:none;
-}
-
 
 .text-input:hover{
   border:1px solid rgba(200,200,200,0.7);
 }
 
 .text-input:focus {
-  outline:1px solid #383838;
+  /* outline:1px solid #383838; */
+  outline:1px solid #6e6e6e;
+}
+
+.text-input:disabled{
+  opacity:1;
 }
 
 .ti:hover{
@@ -369,11 +436,14 @@
 }
 
 .text-input-flex{
-  border:1px solid rgba(200,200,200,0);
-  background-color:rgba(0,0,0,0);
+  /* border:1px solid rgba(200,200,200,0);
+  background-color:rgba(0,0,0,0); */
+  background-color: transparent; 
+  border: none;
   font-size:var(--button-font-size);
   padding:var(--made-button-padding);
 }
+
 .text-input-button{
   border:none;
   background-color:rgba(0,0,0,0);
@@ -381,6 +451,10 @@
   padding:var(--made-button-padding);
   cursor:pointer;
 }
+.text-input-button:disabled{
+  opacity:1;
+}
+
 .pointer{
   cursor: pointer;
 }
@@ -393,26 +467,6 @@
 .column{
   display:flex;
   flex-direction:column;
-}
-
-@font-face {
-  font-family: 'ImcreSoojin';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'OTWelcomeRA';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'OTWelcomeBA';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeBA.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
 }
 
 @media (prefers-reduced-motion: no-preference) {

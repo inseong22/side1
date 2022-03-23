@@ -20,7 +20,7 @@ const AnimationDiv = ({content, children, returnLayout, setting}) => {
                 style={{display:'flex', ...returnLayout}} 
                 data-aos-easing="ease-in-back"
                 data-aos-delay="200"
-                data-aos-offset="0" data-aos={setting.animation} aos-duration="4000" >
+                data-aos-offset="0" data-aos={content.animation} aos-duration="4000" >
                 {children}
             </motion.div>
             </>

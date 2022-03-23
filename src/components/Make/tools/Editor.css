@@ -1,0 +1,55 @@
+:root{
+    --ck-color-base-focus:black;
+    --ck-color-base-active:black;
+    --ck-color-base-active-focus:black;
+}
+
+.ck{
+    padding:0px;
+}
+
+.ck ~ p{
+    padding:0px;
+}
+
+.ck p{
+    padding:0px;
+}
+
+.ckeditor-container{
+    border-radius: 0px;
+    border: 1px solid rgba(231, 0, 0, 0);
+    padding:0px;
+}
+
+.ck-editor__editable{
+    min-width:30px;
+    padding:0px;
+}
+
+.ck.ck-editor__editable_inline{
+    padding:0px 0px;
+}
+
+.ckeditor-container:hover{
+    border:1px solid rgba(200,200,200,0.7);
+}
+.ckeditor-container:focus{
+    outline:1px solid #6e6e6e;
+}
+
+.ck-body{
+    background-color:black;
+}
+
+.ck-media__placeholder__url__text{
+    color:blue;
+}
+
+.ck-button{
+    background-color:red;
+}                                                                                               
+
+.ck a{
+    color:black;
+}

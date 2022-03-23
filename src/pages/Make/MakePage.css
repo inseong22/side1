@@ -147,11 +147,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color:white;
+    background-color:#edf0f3;
     z-index: 10;
     overflow:visible;
     border-radius: 0px 0px 20px 20px;
-  }
+    transition-property: none;
+    padding-bottom:100px;
+}
 
 .scroll-container{
     overflow: auto;
@@ -216,7 +218,6 @@
 
 .make-tab-url{
     padding:5px 25px 5px 15px;
-    background-color:#ffffff;
     color:#555C67;
     border-radius: 15px;
     opacity: 0.8;

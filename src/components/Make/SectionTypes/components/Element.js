@@ -38,42 +38,44 @@ function Element({content, item, index, gallery}) {
     <ChakraProvider>
     {
         content.element.use && 
-        <div className="centeras" style={{justifyContent: `${content.elementText.align}`}}>
+        <div style={{justifyContent: `${content.elementText.align}`}} onClick={() => {action.setFocus('element'); action.setCategory(0)}}>
             <div style={{width:`${content.element.size}px`, height:`${content.element.size}px`, position:'relative', cursor:'pointer'}}>
             {
             content.element.type === 'image' ? 
-            <div className="feature-upload-button uphover">
-            { item.attachment ? 
-                <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.imageBorder}px`, objectFit:'cover'}}/> 
-                :
-                <div className="feature-upload-button" style={{borderRadius:`${content.element.imageBorder}px`, backgroundColor:`${content.element.backgroundColor}`}}>
-                    <Upload size="25" />
-                </div>
-            }
-            <input
-                className="feature-upload-file"
-                type="file" 
-                accept="image/*" 
-                id="file" 
-                onChange={ e => {
-                    const {target:{files},} = e;
-                    const oneFile = files[0];
-                    const reader = new FileReader();
-                    reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
-                        if(oneFile.size > 3000000){
-                            alert("파일의 크기가 3MB를 초과합니다.")
-                            return;
+                <div className="feature-upload-button border-hover">
+                { item.attachment ? 
+                    <img src={item.attachment} style={{width:`${content.element.size}px`, height:`${content.element.size}px`, borderRadius:`${content.element.imageBorder}px`, objectFit:'cover'}}/> 
+                    :
+                    <div className="feature-upload-button" style={{borderRadius:`${content.element.imageBorder}px`, backgroundColor:`${content.element.backgroundColor}`}}>
+                        <Upload size="25" />
+                    </div>
+                }
+                <input
+                    className="feature-upload-file"
+                    type="file" 
+                    accept="image/*" 
+                    id="file" 
+                    style={{width:'100%', height:'100%', borderRadius:`${content.element.imageBorder}px`}}
+                    onChange={ e => {
+                        const {target:{files},} = e;
+                        const oneFile = files[0];
+                        const reader = new FileReader();
+                        reader.onloadend = (finishedEvent) => { // 로딩이 끝날 때 실행한다는 뜻.
+                            if(oneFile.size > 3000000){
+                                alert("파일의 크기가 3MB를 초과합니다.")
+                                return;
+                            }
+                            const {currentTarget:{result}} = finishedEvent;
+                            action.setContents(produce(state.contents, draft=>{
+                                draft[state.secNum].elements[index].attachment = result;
+                            }))
                         }
-                        const {currentTarget:{result}} = finishedEvent;
-                        action.setContents(produce(state.contents, draft=>{
-                            draft[state.secNum].elements[index].attachment = result;
-                        }))
-                    }
-                    if(oneFile){
-                        reader.readAsDataURL(oneFile);
-                    }
-                } }
-            /> </div> : 
+                        if(oneFile){
+                            reader.readAsDataURL(oneFile);
+                        }
+                    } }
+                /> 
+            </div> : 
             <>
             <Popover
                 style={{zIndex: 6, position: 'relative'}}
@@ -82,7 +84,7 @@ function Element({content, item, index, gallery}) {
                 isOpen={open[index]}
                 onClose={() => handleClose(index)}>
             <PopoverTrigger>
-                    <div className="feature-upload-button uphover" style={{borderRadius:`${content.element.iconBorder}px`, backgroundColor:`${content.element.backgroundColor}`}} onClick={() => handleClick(index)}>
+                    <div className="feature-upload-button border-hover" style={{borderRadius:`${content.element.iconBorder}px`, backgroundColor:`${content.element.backgroundColor}`}} onClick={() => handleClick(index)}>
                         {item.icon ? 
                             <>{returnIcon(item.icon)}</> 
                             :

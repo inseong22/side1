@@ -11,25 +11,38 @@ function QnaSection({content, setting}) {
     const returnQnaCards = content.qnas.map((item, index) => {
         return(
             <QnaOpenClose setting={setting} key={index} title={item.question} open={content.qna.shape === 'open'} color={content.qna.question} content={content} type={content.layout} index={index}>
-                <div className="edit-element">
+                <div className="edit-element" style={{alignItems:'start'}}>
                     <div style={{display:'flex', alignItems: 'start', height:'100%'}}>
-                        <span className="qna__word" style={{fontFamily:`${setting.smallFont}`}}>A. <></></span>
+                        <span className="qna__word" style={{fontFamily:`${setting.smallFont}`, color: `${content.qna.answer}`}}>A. <></></span>
                     </div>
-                    <TextAuto
-                        disabled
-                        small
-                        value={item.answer} 
-                        color={content.qna.answer} align="start" />
+                    <div style={{
+                            marginTop:'4px', 
+                            width:'100%',
+                            color:`${content.qna.answer}`, 
+                            textAlign:`start`,
+                            resize:'none',
+                            fontSize: `${0.9}em`,
+                            fontFamily:`${setting.smallFont}`,
+                        }}>
+                        {item.answer}
+                        {/* <TextAuto
+                            disabled
+                            small
+                            size={0.9}
+                            value={item.answer} 
+                            color={content.qna.answer} align="start" /> */}
+                    </div>
                 </div>
             </QnaOpenClose>
         )
     })
 
     return (
-        <motion.div className="template"
-        data-aos-easing="ease-in-back"
-        data-aos-delay="200"
-        data-aos-offset="0" data-aos={content.animation.type} aos-duration="4000">
+        <motion.div 
+            className="template"
+            data-aos-easing="ease-in-back"
+            data-aos-delay="200"
+            data-aos-offset="0" data-aos={content.animation.type} aos-duration="4000">
 
             {/* 큐앤에이 카드의 그림자때문에 텍스트와 정렬이 맞지 않아서 */}
             <div style={{width : `${isMobile ? '100%' : '95%'}` }}>  

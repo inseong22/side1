@@ -203,7 +203,7 @@
     left:0%;
     width:28vw;
     top:0vh;
-    padding-top:8vh;
+    padding-top:7.9vh;
     height:100vh;
     z-index: 5;
 }
@@ -213,11 +213,12 @@
     -webkit-overflow-scrolling: touch;
     height: 100%;
     box-shadow: var(--default-shadow-01);
-    background-color:rgb(255, 255, 255);
+    background-color:white;
     border-radius: 20px 20px 0px 0px;
     padding-bottom:30px;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+
 }
 
 .overflow-scrolling::-webkit-scrollbar {

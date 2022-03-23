@@ -37,10 +37,7 @@ const commons = {
         top:15,
         bottom:15,
     },
-    animation:{
-        use:true,
-        type:'none',
-    },
+    animation: 'none',
     box:{
         use:false,
         backgroundColor:'#6C63ff1d',
@@ -55,6 +52,8 @@ const commons = {
         align:'center',
         layout:1,
         contentSize:50,
+        cardSize: 100,
+        buttonAlign:'center',
     }
 }
 
@@ -120,8 +119,8 @@ const button = {
         ghostUse:false,
         ghostLink:'',
         ghostApply: '',
-        ctaPadding: 10,
-        ghostPadding: 10,
+        ctaCheck : false,
+        ghostCheck : false,
     },
     appButton:{
         use: true,
@@ -324,7 +323,8 @@ export const base = [
             titleSize: 20,
             descUse:true,
             descSize: 16,
-            color:'#000000',
+            titleColor:'#000000',
+            descColor:'#000000',
             align: 'center'
         },
         elements:[
@@ -398,6 +398,7 @@ export const base = [
         writer:{
             use:true,
             color: '#000000',
+            size: 16,
         },
         elementTitle:{
             use:true,
@@ -411,7 +412,7 @@ export const base = [
             descUse:true,
             descSize: 18,
             color:'#000000',
-            align: 'center'
+            align: 'center',
         },
         elements:[
             {
@@ -419,7 +420,7 @@ export const base = [
                 attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
-                rating:4.8,
+                rating:4.5,
                 writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
@@ -435,7 +436,7 @@ export const base = [
                 attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
-                rating:4.6,
+                rating:4.5,
                 writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
@@ -443,7 +444,7 @@ export const base = [
                 attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
-                rating:4.6,
+                rating:5,
                 writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
             {
@@ -451,7 +452,7 @@ export const base = [
                 attachment:'',
                 title:'"리뷰 / 추천사의 핵심을 적어보세요."',
                 desc:'여기를 클릭하여 서비스 및 제품에 대한\n리뷰, 추천사를 적어\n잠재 유저에게 서비스 및 제품의 신뢰도를 높여보세요!',
-                rating:4.6,
+                rating:5,
                 writer:'ㅇㅇ회사, 대표 ㅇㅇㅇ',
             },
         ],
@@ -475,7 +476,9 @@ export const base = [
             use:true,
             shape: 'close',
             question: '#000000',
+            questionSize: 18,
             answer: '#000000',
+            answerSize: 18,
         },
         qnas:[
             {
@@ -498,12 +501,12 @@ export const base = [
             ...commons.title,
             text:'글만 쓰고 싶을 때 \'글\' 섹션을 이용해 보세요.',
             size:32,
-            align:'center',
+            align:'start',
         },
         desc:{
             ...commons.desc,
             text:'여기를 클릭하여 글을 적어보세요.',
-            align:'center',
+            align:'start',
         },
         padding:{
             top:15,
@@ -594,6 +597,7 @@ export const base = [
         },
         video:{
             ...contents.video,
+            use: true,
             type:'base',
         },
         title:{
@@ -609,6 +613,7 @@ export const base = [
         sectionTypeName:'VideoSection',
         explanation:{
             use:true,
+            size: 18,
             color: '#000000',
             align: 'center',
             text:'여기를 클릭하여 동영상에 대한 추가 설명을 적어 보세요.'
@@ -629,6 +634,29 @@ export const base = [
             text:'좌측 메뉴에서 목업을 고르고, 여기를 클릭하여 서비스에 대해 적어보세요.'
         },
     },
+    // {
+    //     ...commons,
+    //     padding:{
+    //         top:1,
+    //         bottom:1,
+    //     },
+    //     name:'구분선',
+    //     sectionTypeName:'LineSection',
+    //     title:{
+    //         ...commons.title,
+    //         text:'섹션을 구분짓기 위한 용도입니다.',
+    //         size:32
+    //     },
+    //     desc:{
+    //         ...commons.desc,
+    //         text:'좌측 메뉴에서 선 종류를 고르세요. 여기를 클릭하여 서비스에 대해 적어보세요.'
+    //     },
+    //     line:{
+    //         use:true,
+    //         type:0,
+    //         color:'#000000',
+    //     }
+    // },
 ]
 
 export const defaults = {
@@ -670,7 +698,7 @@ export const defaults = {
             },
             text:{
                 color: "#000000",
-                fontSize: 18,
+                fontSize: 32,
                 text: "",
                 use: true,
             },
@@ -735,7 +763,7 @@ export const defaults = {
         faviconAttachment: "",
         font: "yg-jalnan",
         fta:{
-            backgroundColor: "#6c63ff1d",
+            backgroundColor: "#6c63ff",
             border: false,
             borderColor: "#000000",
             borderRadius: 5,

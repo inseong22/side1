@@ -71,21 +71,23 @@ const OpenCloseCustom = (props) => {
    * title, tooltip, preseen 설정 가능
    */
   const isopen = props.content.qna.shape
-  const [open, setOpen] = useState(props.open)
+
+  const [open, setOpen] = useState(false)
   const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
   return (
-    <div className="one-element" >
+    <div className="one-element" onClick={() => {action.setFocus('qna'); action.setCategory(0)}}>
       <div className={props.type === 'card' ? 'accordion__card' : 'accordion__plain'}>
         <div className="accordion__header-qna" onClick={() => setOpen(!open)}>
           <div className="edit-element">
             <ChakraProvider>
             <div className="accordion__title">
-              <div className="title_text" style={{color:`${props.color}`, width:'100%'}}>
-                <div className="qna__word" style={{fontFamily:`${state.setting.smallFont}`}}>Q.</div>
-                <div style={{width:'100%'}}>
+              <div className="title_text" style={{color:`${props.color}`, width:'100%', alignItems: 'start'}}>
+                <div className="qna__word" style={{fontFamily:`${state.setting.smallFont}`, marginRight:`${state.isPhone ? '3px' : '5px'}`}}>Q.</div>
+                <div style={{width:'100%', marginTop:'3px'}}>
                   <TextAuto 
                     small
+                    size={0.9}
                     value={props.title} 
                     onChange={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
@@ -97,13 +99,20 @@ const OpenCloseCustom = (props) => {
               </div> 
             </div>
             </ChakraProvider>
-            <div className="centera" style={{justifyContent: 'end', width:'20%'}}>
-              { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
+            <div className="centera" style={{justifyContent: 'end', width:`${state.isPhone ? '7.5%' : '6%'}`}}>
+              {
+                isopen !== 'open' ? 
+                <>
+                { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
+                </> : 
+                <>
+                </>
+              }
             </div>
           </div>
         </div>
         {isopen === 'open' ? 
-          (<div className="accordion__body" style={{display:`${!open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>
+          (<div className="accordion__body" style={{display:'flex', flexDirection:'row', justifyContent:'start'}}>
           {props.children}
           </div>):
           (<div className="accordion__body" style={{display:`${open ? 'flex' : 'none'}`, flexDirection:'row', justifyContent:'start'}}>

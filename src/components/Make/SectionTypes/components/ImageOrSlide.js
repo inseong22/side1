@@ -102,20 +102,28 @@ function ImageOrSlide({content}){
             // 이미지
             if( content.contents.type === 'image' )
                 return (
-                    <div id="attach" onChange = {e => upload_img(e)} onClick={inputClick} className="centera">
+                    <div id="attach" onChange = {e => upload_img(e)} onClick={() => {
+                        inputClick();
+                        action.setCategory(0);
+                        action.setFocus('contents');
+                    }} className="centera" style={{width:`${imageWidth()}%`}}>
                          <input
                             ref={photoInput}
-                            style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                            style={{
+                                display: 'none', 
+                                cursor: 'pointer', 
+                                objectFit:'cover',
+                            }}
                             type="file"
                             accept="image/*"
                             id="file"
                             onChange = {e => upload_img(e)} />
                         <img 
                             src={`${content.image.attachment === '' ? ourA : content.image.attachment}`} 
-                            className="image uphover" 
+                            className="image border-hover" 
                             style={{
                                 borderRadius:`${content.image.border}px`,
-                                width:`${imageWidth()}%`, 
+                                width:`100%`, 
                                 boxShadow: `${content.image.shadowValue}`
                             }} />
                     </div>
@@ -132,12 +140,12 @@ function ImageOrSlide({content}){
                         id="file"
                         onChange = {e => upload_mockup(e)}
                     />
-                   <img className="mobile-ex  uphover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
+                   <img className="mobile-ex  border-hover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
                     { content.mockup.attachment === '' ?
                     <></>:
-                    <img className="upload-mobile  uphover" src={content.mockup.attachment} style={{ 
-                        width:`${imageWidth()}%`, 
-                        left:`${imageLeft()}%`}} />
+                    <img className="upload-mobile  border-hover" src={content.mockup.attachment} style={{ 
+                        width:`${imageWidth()-2}%`, 
+                        left:`${imageLeft()+1}%`}} />
                     }         
                </div>)
             // 목업 - 데스크탑
@@ -152,15 +160,55 @@ function ImageOrSlide({content}){
                         id="file"
                         onChange = {e => upload_mockup(e)}
                     />
-                        <img className="mobile-ex uphover" src={Desktop} alt="목업틀" style={{width: `${imageWidth()}%`}} />
+                        <img className="mobile-ex border-hover" src={Desktop} alt="목업틀" style={{width: `${imageWidth()}%`}} />
                         { content.mockup.attachment === '' ? 
                         <></> :
-                        <img  className="upload-desk uphover" src={`${content.mockup.attachment}`} style={{ 
+                        <img  className="upload-desk border-hover" src={`${content.mockup.attachment}`} style={{ 
                             width:`${imageWidth(true)}%`, 
                             left:`${imageLeft(true)}%`}} />
                         }
                     </div>
                 )
+            // 목업 - 모바일 2개
+        if(content.mockup.type === 'mobile2' && content.contents.type === 'mockup')
+            return( 
+                <>
+                <div className="mock-container" id="attach" onChange = {e => upload_mockup(e)} onClick={inputClick}>
+                    <input
+                        ref={photoInput}
+                        style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                        type="file"
+                        accept="image/*"
+                        id="file"
+                        onChange = {e => upload_mockup(e)}
+                    />
+                <img className="mobile-ex  border-hover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
+                    { content.mockup.attachment === '' ?
+                    <></>:
+                    <img className="upload-mobile  border-hover" src={content.mockup.attachment} style={{ 
+                        width:`${imageWidth()}%`, 
+                        left:`${imageLeft()}%`}} />
+                    }         
+            </div>
+            <div className="mock-container" id="attach" onChange = {e => upload_mockup(e)} onClick={inputClick}>
+                    <input
+                        ref={photoInput}
+                        style={{display: 'none', cursor: 'pointer', objectFit:'cover'}}
+                        type="file"
+                        accept="image/*"
+                        id="file"
+                        onChange = {e => upload_mockup(e)}
+                    />
+                <img className="mobile-ex  border-hover" src={Phone} alt="목업틀" style={{ width:`${imageWidth()}%` }} />
+                    { content.mockup.attachment2 === '' ?
+                    <></>:
+                    <img className="upload-mobile  border-hover" src={content.mockup.attachment2} style={{ 
+                        width:`${imageWidth()}%`, 
+                        left:`${imageLeft()}%`}} />
+                    }         
+            </div>
+            </>
+            )
         }
         else{
             return(<>
@@ -169,7 +217,9 @@ function ImageOrSlide({content}){
     }
 
     return(
-        <div className="centera" style={{marginTop:`${!state.isPhone && content.layout === 3 ? '20px' : state.isPhone && content.mobile.layout === 3 ? '10px' : '0px'}`}}>
+        <div className="centera" style={{marginTop:`${!state.isPhone && content.layout === 3 ? '20px' : state.isPhone && content.mobile.layout === 3 ? '10px' : '0px'}`}}
+            onClick={() => {action.setFocus('contents'); action.setCategory(0)}}
+        >
             {returnContent()}
         </div>
     )

@@ -10,14 +10,13 @@ import AddYoutubeLink from '../tools/func/FuncYoutubeLink'
 import SliderCustom from '../tools/Custom/SliderCustom'
 import {CustomSwitch} from '../tools/Custom/OnOffCustom'
 import ColorCustom from '../tools/Custom/ColorCustom'
+import TextSizeCustom from '../tools/func/TextSizeCustom'
+import EditTitleDesc from './tools/EditTitleDesc'
+import AlignCustom from '../tools/Custom/AlignCustom'
 
 const videoOptions = [
     { label: '업로드', value: 'base'},
     { label: '유튜브 링크', value: 'youtube'}
-]
-const alignOptions = [
-    { label: '왼쪽', value: 'start' },
-    { label: '중앙', value: 'center' },
 ]
 
 function EditVideoSection({content, category}) {
@@ -74,7 +73,7 @@ function EditVideoSection({content, category}) {
                     <AddYoutubeLink content={content} value={content.video.link} />
                     <CustomSwitch text="자동 재생" value={content.video.auto} 
                         onChange={ () => action.setContents(produce(state.contents, draft => {
-                            if (content.video.link.includes('autoplay=0'))
+                            if (content.video.link.includes('autoplay=1'))
                                 {draft[state.secNum].video.link = content.video.link.replace('autoplay=1', 'autoplay=0');
                                 draft[state.secNum].video.auto = false;}
                             else
@@ -131,6 +130,7 @@ function EditVideoSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
+                        <EditTitleDesc content={content} />
                         <OpenCloseCustom title="동영상" use={content.video.use}>
                             <RadioCustom text="방식" options={videoOptions} value={content.video.type} func={e=>changeVideoOption(e)}/>
                             {videoType()}
@@ -139,8 +139,11 @@ function EditVideoSection({content, category}) {
                         <ColorCustom text="색상" value={content.explanation.color} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].explanation.color = e;
                         }))} />
-                        <RadioCustom text="정렬" options={alignOptions} value={content.explanation.align} func={e => action.setContents(produce(state.contents, draft => {
+                        <AlignCustom value={content.explanation.align} func={e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].explanation.align = e;
+                        }))} />
+                        <TextSizeCustom text="크기" desc value={content.explanation.size} func={e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].explanation.size = e;
                         }))} />
                         </OpenCloseCustom>
                     </div>

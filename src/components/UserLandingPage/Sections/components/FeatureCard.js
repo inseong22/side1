@@ -1,12 +1,12 @@
 import React, {useContext} from 'react'
 import { isMobile } from 'react-device-detect'
 
-function FeatureCard({children, section, content, index}) {
+function FeatureCard({children, align, section, content, index}) {
 
     return (
         <div key={index} className="feature__card" 
             style={{
-            alignItems: 'center',
+            alignItems: `${align}`,
             margin : `${ isMobile ? `5px 5px 5px 5px` : `0px ${!isMobile && index === content.numOfElements - 1 ? '0px' : '5px'} 0px ${!isMobile && index === 0 ? '0px' : '5px'}` }`,
             height : `${isMobile ? '' : '100%'}`,
             width : `${isMobile ? 

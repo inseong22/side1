@@ -28,3 +28,17 @@
     flex-wrap: wrap;
     box-sizing: border-box;
 }
+
+.input-before{
+  text-align: left;
+  color:#8d949e;
+  display: flex;
+  align-content: center;
+  justify-content:start;
+  font-size: 0.9em;
+  margin-top:0px;
+  padding:0px 8px;
+  width: 100%;
+  font-family: Noto Sans KR;
+  font-weight: 500;
+}

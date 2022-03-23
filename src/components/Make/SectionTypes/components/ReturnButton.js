@@ -4,6 +4,7 @@ import AutosizeInput from 'react-input-autosize';
 import appstorebutton from '../../../../tools/img/appstorebutton.png'
 import playstorebutton from '../../../../tools/img/playstorebutton.png'
 import produce from 'immer';
+import { Checkbox, ChakraProvider } from '@chakra-ui/react'
 import './ReturnButton.css'
 
 function ReturnButton({content, onlyapp}){
@@ -16,42 +17,58 @@ function ReturnButton({content, onlyapp}){
         color:`${state.setting[type].color}`,
         boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
         border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
-    }} onClick={() => {}}>
+    }}>
 
-        <AutosizeInput className="text-input-flex ti" value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } onChange={(e) => action.setContents(produce(state.contents, draft => {
+        <AutosizeInput className="text-input-flex" value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } onChange={(e) => action.setContents(produce(state.contents, draft => {
             draft[state.secNum].button[type === "cta" ? 'ctaText' : 'ghostText'] = e.currentTarget.value;
-        }))} inputStyle={{
+        }))} 
+        inputStyle={{
             textAlign: 'center',
-            fontSize: `${content.button.textSize}px`,
-            fontFamily:`${state.setting.smallFont}`,
+            fontSize:14,
+            fontFamily:`Pretendard-Regular`,
             borderRadius:`${state.setting[type].borderRadius}px`,  
-            backgroundColor:`${state.setting[type].backgroundColor}`, 
-            padding: `${state.setting[type].padding * 0.3}px ${state.setting[type].padding}px`, 
+            backgroundColor:`rgba(0,0,0,0)`, 
+            padding: `2px 8px`, 
             }}/>
     
     </div>)}
     
     const returnInputs = (type) => {
         return(
-            <div className="centera" style={{flexDirection:`${state.isPhone || content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ? 'column' : 'row'}`, justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
-                {content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].map((item, index) => {
-                    return <input className="input-placeholder" placeholder={item} key={index} 
-                        style={{
-                            margin:'4px',
-                            padding: `${state.setting[type].padding * 0.3 + 7.2}px 10px`, }}/>
-                })}
+            <div className="centera" style={{
+                    flexDirection:`${state.isPhone || content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ? 'column' : 'row'}`, 
+                    alignItems:`${state.isPhone || content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ? 'center' : 'start'}`, 
+                    justifyContent:`${state.isPhone ? content.mobile.buttonAlign : content.button.align}`
+                }}>
+                <div style={{ display:'flex', flexDirection:'column', justifyContent:`${state.isPhone ? content.mobile.buttonAlign : content.button.align}`}}>
+                    {content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].map((item, index) => {
+                        return <input readOnly
+                                    className="input-placeholder" 
+                                    placeholder={item} 
+                                    key={index} 
+                                    style={{  margin:'4px', padding: `11px 10px`, }}/>
+                    })} 
+                    {
+                        content.button[type === 'cta' ? 'ctaCheck' : 'ghostCheck'] && 
+                        <div className="input-before">
+                            <Checkbox colorScheme='gray' />&nbsp;(필수) <a href="https://www.notion.so/377223464ebd42e6adb9095f4b6548e5" target='_blank' style={{textDecoration:'underline'}}>&nbsp;개인정보 수집 및 이용</a>&nbsp;동의
+                        </div> 
+                    }
+                </div>
+                <div style={{marginTop:`${state.isPhone ? '7px' : '0px'}`}}>
                 {
                     type === 'cta' && <>{CustomButton('cta')}</>
                 }
                 {
                     type === 'ghost' && <>{CustomButton('ghost')}</>
                 }
+                </div>
             </div>
         )
     }
 
     return (
-        <>
+        <ChakraProvider>
     {onlyapp ? 
         (content.appButton.use && 
                <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.appButton.align}`}}>
@@ -72,12 +89,12 @@ function ReturnButton({content, onlyapp}){
                         <div className="button__container" style={{
                             justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`,
                             flexDirection:`${ 
-                                (content.button.ctaUse && content.button.ctaOption === 'apply' && 
-                                content.button.ghostUse && content.button.ghostOption === 'apply') || 
-                                (content.button.ctaUse && content.button.ctaOption === 'apply' && 
-                                content.button.ghostUse && content.button.ghostOption === 'link') ||
-                                (content.button.ctaUse && content.button.ctaOption === 'link' &&
-                                content.button.ghostUse && content.button.ghostOption === 'apply') ? 'column' : 'row' 
+                                ((content.button.ctaUse && content.button.ctaOption === 'apply') && 
+                                (content.button.ghostUse && content.button.ghostOption === 'apply') )|| 
+                                ((content.button.ctaUse && content.button.ctaOption === 'apply') && 
+                                (content.button.ghostUse && content.button.ghostOption === 'link') )||
+                                ((content.button.ctaUse && content.button.ctaOption === 'link') &&
+                                (content.button.ghostUse && content.button.ghostOption === 'apply')) ? 'column' : 'row' 
                                 }`
                             }}>
                             <>
@@ -101,7 +118,7 @@ function ReturnButton({content, onlyapp}){
         }
         {
             content.appButton.use && 
-            <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.appButton.align}`}}>
+            <div className="button__container" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`}}>
                 {
                     content.appButton.google.length > 0 && 
                         <img src={playstorebutton} className="store-button" style={{height:`${state.isPhone ? '31px' : '51px'}`}} />
@@ -114,7 +131,7 @@ function ReturnButton({content, onlyapp}){
             </div>
         }
         </>}
-        </>
+        </ChakraProvider>
     )
 }
 

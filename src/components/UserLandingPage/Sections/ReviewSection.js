@@ -13,7 +13,7 @@ function ReviewSection({content, setting}) {
         if(index < content.numOfElements){
             if(content.reviewText) {
             return(
-                <FeatureCard section="feature" content={content} index={index}>
+                <FeatureCard align={isMobile ? content.mobile.align : content.elementText.align} section="feature" content={content} index={index}>
                     <Element content={content} item={item} index={index} key={index}/>
                     {
                         content.elementTitle.use && 
@@ -24,10 +24,12 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${isMobile ? content.mobile.align : content.align}`,
+                                    textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
                                     fontFamily:`${setting.smallFont}`,
                                     color:`${content.elementTitle.color}`,
                                     fontSize:`${content.elementTitle.size/20}em`,
+                                    WebkitTextFillColor: `${content.elementTitle.color}`,
+                                    WebkitOpacity: 1,
                                 }}
                                 value={item.title} 
                                 spellCheck="false"
@@ -37,14 +39,14 @@ function ReviewSection({content, setting}) {
                     }
                     {
                         content.rating.use && 
-                        <div className="df-margin">
+                        <div className="df-margin-small">
                             <div style={{
                                 width:'100%', 
-                                textAlign:`${isMobile ? content.mobile.align : content.align}`
+                                textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`
                             }}>
                             <Rating
                                 value={item.rating} 
-                                precision={0.1}
+                                precision={0.5}
                                 style={{ fontSize: `${content.rating.size}px`, color:`${content.rating.color}` }}
                                 // size={content.rating.size}
                                 // color={content.rating.color}
@@ -61,10 +63,12 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${isMobile ? content.mobile.align : content.align}`,
+                                    textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
                                     fontFamily:`${setting.smallFont}`,
                                     color:`${content.elementText.color}`,
                                     fontSize:`${content.elementText.size/20}em`,
+                                    WebkitTextFillColor: `${content.elementText.color}`,
+                                    WebkitOpacity: 1,
                                 }}
                                 value={item.desc} 
                                 disabled
@@ -81,9 +85,12 @@ function ReviewSection({content, setting}) {
                                 style={{
                                     width:'100%',
                                     resize:'none',
-                                    textAlign:`${isMobile ? content.mobile.align : content.align}`,
+                                    textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
                                     color:`${content.writer.color}`,
                                     fontFamily:`${setting.smallFont}`,
+                                    WebkitTextFillColor: `${content.writer.color}`,
+                                    WebkitOpacity: 1,
+                                    fontSize:`${content.writer.size/17}em`,
                                 }}
                                 value={item.writer} 
                                 disabled
@@ -104,7 +111,7 @@ function ReviewSection({content, setting}) {
         <>
             <motion.div className="template"data-aos-easing="ease-in-back"
                 data-aos-delay="200"
-                data-aos-offset="0" data-aos={setting.animation} aos-duration="4000">
+                data-aos-offset="0" data-aos={content.animation} aos-duration="4000">
                 
                 <TitleDesc content={content} titlePlaceholder="서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품에 대한 리뷰 혹은 추천사를 적어보세요." />
 

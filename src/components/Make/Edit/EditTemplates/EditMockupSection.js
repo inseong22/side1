@@ -5,6 +5,7 @@ import produce from 'immer';
 import ElementsTable from './tools/ElementsTable'
 import OpenCloseCustom from '../tools/Custom/OpenCloseCustom'
 import SliderCustom from '../tools/Custom/SliderCustom'
+import EditTitleDesc from './tools/EditTitleDesc'
 import FuncContentImg from '../tools/func/FuncContentImg'
 import { Select } from '@chakra-ui/react'
 
@@ -120,6 +121,7 @@ function EditMockupSection({content, category}) {
                 return(
                     <div>
                         <ElementsTable elements={elements} />
+                        <EditTitleDesc content={content} />
                         <OpenCloseCustom title='목업' use={content.mockup.use}>
                             <div className="edit-element">
                                 <div className="func-title">

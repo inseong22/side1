@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { Button } from 'antd';
+// import { Button } from 'antd';
 import './MakeNavBar.css';
 import { MyContext } from '../MakePageV2'
 import {Monitor} from '@styled-icons/feather'
@@ -9,8 +9,12 @@ import LoginModal from '../../../components/Login/LoginModal'
 import { dbService } from '../../../tools/fbase';
 import { stService } from '../../../tools/fbase';
 import MakeTutorialModal from '../../../tools/MakeTutorialModal';
+import MiniModal from '../../../tools/MiniModal';
 import { v4 as uuidv4 } from 'uuid';
+import {Settings} from '@styled-icons/ionicons-sharp'
+import {DocumentOnePage} from '@styled-icons/fluentui-system-filled'
 import lodash from 'lodash'
+import "@lottiefiles/lottie-player";
 import produce from 'immer'
 import {
     ChakraProvider,
@@ -19,13 +23,18 @@ import {
     PopoverContent,
     PopoverBody,
     PopoverArrow,
+    Button,
   } from '@chakra-ui/react'
+import {QuestionCircle} from '@styled-icons/bootstrap'
+import Profile from '../../../components/NavAndFooter/Profile'
 
 const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone, loading, foot, editing,setEditing, setEditingId, editingId, setLoading, setting, navi, setNavi, saveLocalStorage}) => {
     const [loginModal, setLoginModal] = useState(false)
     const {state, action} = useContext(MyContext)
     const [deviceOpen, setDeviceOpen] = useState(false);
     const [tutorialOpen, setTutorialOpen] = useState(false);
+    const [saveOpen, setSaveOpen] = useState(false);
+    const [saveLoading, setSaveLoading] = useState(false);
   
     const handleClick = () => {
         setDeviceOpen(!deviceOpen);
@@ -205,25 +214,39 @@ const saveImages = async () => {
 
 const afterSaveImage = async (returned) => {
     if(editing){
-
-        const body = {
-            contents:returned,
-            navi:navi,
-            foot:foot,
-            setting:setting,
-            created:Date.now(),
-            makerEmail:userObj.email,
-            // makingTypeByUser:makingTypeByUser,
-            urlId:setting.urlId,
-        }
-
-        await dbService.doc(`saved-page/${editingId}`).update(body);
-        // 자동저장 하던 걸 지운다.
-        window.localStorage.removeItem("temp");
+        const savedPages = await dbService
+            .collection("saved-page")
+            .where("urlId", "==", setting.urlId)
+            .get(); // uid를 creatorId로 줬었으니까.
         
-    }else{
-        console.log( '수정 중이 아니다' );
+        let savedPage = savedPages.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
 
+        if(setting.urlId === ''){
+            alert("url을 설정해야 합니다.");
+            setLoading(false);
+        }else if(savedPage.length > 0 && savedPage[0].id !== editingId){
+            alert("이미 존재하는 url입니다. 다른 url을 사용해 주세요.");
+            setLoading(false);
+        }else{
+            const body = {
+                contents:returned,
+                navi:navi,
+                foot:foot,
+                setting:setting,
+                created:Date.now(),
+                makerEmail:userObj.email,
+                // makingTypeByUser:makingTypeByUser,
+                urlId:setting.urlId,
+            }
+
+            await dbService.doc(`saved-page/${editingId}`).update(body);
+            // 자동저장 하던 걸 지운다.
+            window.localStorage.removeItem("temp");
+            setSaveOpen(true);
+        }
+    }else{
         const savedPages = await dbService
             .collection("saved-page")
             .where("urlId", "==", setting.urlId)
@@ -262,6 +285,7 @@ const afterSaveImage = async (returned) => {
 
             // 자동저장 하던 걸 지운다.
             window.localStorage.removeItem("temp");
+            setSaveOpen(true);
         }
     }
 }
@@ -274,24 +298,25 @@ const afterSaveImage = async (returned) => {
             alert("로그인 하셔야 저장 후 배포하실 수 있습니다.");
             setLoginModal(true);
         }else{
-            setLoading(true);        
-            saveLocalStorage();
-            const returned = await saveImages();
-            await afterSaveImage(returned);
-            alert("저장되었습니다!");
-            setLoading(false);
+            setSaveLoading(true);
+            setTimeout(async () => {
+                saveLocalStorage();
+                const returned = await saveImages();
+                await afterSaveImage(returned);
+                setSaveLoading(false);
+            }, 250)
         }
     }
     const goSetup = async () => {
         // 배포하기 클릭
         // 관리페이지에서 수정하기를 누른 거라면
-        const check = window.confirm("관리페이지로 돌아가시겠습니까? 저장하기 버튼을 클릭하지 않으셨다면 저장이 되지 않았을 수 있습니다.")
+        const check = window.confirm("관리페이지로 돌아가시겠습니까?\n저장하기 버튼을 클릭하지 않으셨다면 저장이 되지 않았을 수 있습니다.")
         if(check === true){
             if(userObj === null){
                 alert("로그인을 하셔야 관리 페이지로 접속하실 수 있습니다.");
                 setLoginModal(true);
             }else{
-                history.push('/#/response');
+                history.push('/response');
                 history.go();
             }
         }else{
@@ -375,42 +400,42 @@ const afterSaveImage = async (returned) => {
     return (
         <ChakraProvider>
             <div className="make-page-nav">
-                <div className="make-page-nav-half" style={{justifyContent: 'start', marginLeft:'1%'}}>
+                <div className="response-nav-triple-start" style={{justifyContent: 'start', marginLeft:'1%'}}>
                     <span className={state.secNum === 52 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(52); 
                     }} >
-                        기본 설정
+                        기본 설정 <Settings size="16" style={{ marginLeft:'5px'}} />
                     </span>
                     <span className={state.secNum === 53 ? "make-nav-button nb-clicked" : "make-nav-button"} onClick={e => {
                         action.setSecNum(53);
                     }} >
-                        페이지 구성
+                        페이지 구성 <DocumentOnePage size="16" style={{ marginLeft:'5px'}} />
                     </span>
-                    <span className="make-nav-button" onClick={e => {
-                        setTutorialOpen(true);
-                    }} style={{boxShadow:'none', width:'90px'}}>
-                        사용 방법
+                    <span className="make-nav-button" onClick={e => setTutorialOpen(true)} style={{boxShadow:'none', width:'180px'}}>
+                        사용이 어려우신가요 ?
                     </span>
                 </div>
-                <div className="make-page-nav-half">
+                <div className="response-nav-triple" style={{width:'35%'}}>
                     <div className="centera">
-                        <Button onClick={() => moveToMain()} className="edit-nav-home-button">
+                        <div onClick={() => moveToMain()} className="edit-nav-home-button">
                             Surfee
-                        </Button>
+                        </div>
                     </div>
                 </div>
-                <div className="make-page-nav-half" style={{justifyContent: 'end', marginRight:'1%'}}>
+                <div className="response-nav-triple-end" style={{justifyContent: 'flex-end', marginRight:'1%'}}>
                     {deviceSelect()}
-                    <Button onClick={() => onSubmit()} className="default-button-02">
+                    <Button fontSize="14px" colorScheme='#6c63ff' isLoading={saveLoading} onClick={() => onSubmit()} className="default-button-02">
                         저장하기
                     </Button>
-                    <Button onClick={() => goSetup()} className="default-button-01 opacity-hover" style={{border:`1px solid var(--main-color-soft)`, color:'#6c63ff', margin:'0px 5px'}}>
+                    <Button fontSize="14px" variant='outline' colorScheme='#6c63ff' onClick={() => goSetup()} className="default-button-01 opacity-hover" style={{margin:'0px 5px'}}>
                         관리페이지
                     </Button>
+                    <Profile make />
                 </div>
             </div>
             <LoginModal open={loginModal} setOpen={setLoginModal} />
             <MakeTutorialModal open={tutorialOpen} setOpen={setTutorialOpen} />
+            <MiniModal open={saveOpen} setOpen={setSaveOpen} />
         </ChakraProvider>
     )
 }

@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import {UserContext} from '../Router'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Close } from '@styled-icons/evaicons-solid';
@@ -30,7 +31,7 @@ const style = {
     width: 800,
     height: 620,
     bgcolor: 'white',
-    boxShadow: '18px 18px 36px rgba(0, 0, 0, 0.15), inset 6px 4px 16px rgba(108, 99, 255, 0.1), inset -12px -8px 16px rgba(108, 99, 255, 0.25)',
+    // boxShadow: '18px 18px 36px rgba(0, 0, 0, 0.15), inset 6px 4px 16px rgba(108, 99, 255, 0.1), inset -12px -8px 16px rgba(108, 99, 255, 0.25)',
     borderRadius:2,
     p: 2,
     px: 4,
@@ -38,11 +39,15 @@ const style = {
   };
 
 function FeedbackModal({open, setOpen, deploy}) {
+    const {state, action} = useContext(UserContext) //ContextAPI로 state와 action을 넘겨받는다.
+
     const [quest, goQuest] = useState(false);
     const [page, setPage] = useState(1);
     const [complete, setComplete] = useState(false);
     const [clicked, setClicked] = useState(false);
     const [inputText, setInputText] = useState('');
+    const [job, setJob] = useState('');
+    const [age, setAge] = useState('');
 
     const [path, setPath] = useState('');
     const [pathEtc, setPathEtc] = useState('');
@@ -69,7 +74,11 @@ function FeedbackModal({open, setOpen, deploy}) {
             working_time: time,
             function: func,
             comment: comment,
-            recommendation: recom
+            job:job,
+            age:age,
+            recommendation: recom,
+            created:Date.now(),
+            user : state.userObj.email
         })
         localStorage.setItem('feedback',true);
     }
@@ -125,7 +134,7 @@ function FeedbackModal({open, setOpen, deploy}) {
                         카카오톡 오픈채팅방
                     </div>
                     <div className="round-ans-button" style={{background: `${path === 'disquiet' ? `var(--main-color)`: 'white'}`, color: `${path === 'disquiet' ? 'white': `var(--main-color)`}`}} onClick={() => {setPath('disquiet'); setClicked(true);}}>
-                        디스콰이엇
+                        SNS 광고
                     </div>
                     <div className="round-ans-button" style={{background: `${path === '지인 추천' ? `var(--main-color)`: 'white'}`, color: `${path === '지인 추천' ? 'white': `var(--main-color)`}`}} onClick={() => {setPath('지인 추천'); setClicked(true);}}>
                         지인 추천
@@ -236,34 +245,6 @@ function FeedbackModal({open, setOpen, deploy}) {
             case 5: return(
                 <>
                 <div className="big-title question">
-                제작하는 데 얼마의 시간이 소요되었나요?
-                </div>
-                <div className="column-ans">
-                    <div className="round-ans-button" style={{background: `${time === '5분 미만' ? `var(--main-color)`: 'white'}`, color: `${time === '5분 미만' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('5분 미만'); setClicked(true);}}>
-                        5분 미만
-                    </div>
-                    <div className="round-ans-button" style={{background: `${time === '5분 이상 30분 미만' ? `var(--main-color)`: 'white'}`, color: `${time === '5분 이상 30분 미만' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('5분 이상 30분 미만'); setClicked(true);}}>
-                    5분 이상 30분 미만
-                    </div>
-                    <div className="round-ans-button" style={{background: `${time === '30분 이상 1시간 미만' ? `var(--main-color)`: 'white'}`, color: `${time === '30분 이상 1시간 미만' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('30분 이상 1시간 미만'); setClicked(true);}}>
-                    30분 이상 1시간 미만
-                    </div>
-                    <div className="round-ans-button" style={{background: `${time === '1시간 이상 3시간 미만' ? `var(--main-color)`: 'white'}`, color: `${time === '1시간 이상 3시간 미만' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('1시간 이상 3시간 미만'); setClicked(true);}}>
-                    1시간 이상 3시간 미만
-                    </div>
-                    <div className="round-ans-button" style={{background: `${time === '3시간 이상' ? `var(--main-color)`: 'white'}`, color: `${time === '3시간 이상' ? 'white': `var(--main-color)`}`}} onClick={() => {setTime('3시간 이상'); setClicked(true);}}>
-                    3시간 이상
-                    </div>
-                </div>
-                <div className="prev-next-fbuttons">
-                    <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
-                    <div className="prev-next-fbutton" onClick={toNext}>다음</div>
-                </div>
-                </>
-            )
-            case 6: return(
-                <>
-                <div className="big-title question">
                 추가되면 좋겠다고 생각하는 기능을 자유롭게 남겨주세요!
                 </div>
                 <div className="text-modal-input">
@@ -275,7 +256,7 @@ function FeedbackModal({open, setOpen, deploy}) {
                 </div>
                 </>
             )
-            case 7: return(
+            case 6: return(
                 <>
                 <div className="big-title question">
                 Surfee를 위해, 여러분의 소중한 의견을 자유롭게 남겨주세요!
@@ -289,10 +270,10 @@ function FeedbackModal({open, setOpen, deploy}) {
                 </div>
                 </>
             )
-            case 8: return(
+            case 7: return(
                 <>
                 <div className="big-title question">
-                마지막으로, Surfee를 주위 친구, 동료, 지인에게 추천할 의향이 얼마나 있나요?
+                Surfee를 주위 친구, 동료, 지인에게 추천할 의향이 얼마나 있나요?
                 </div>
                 <div className="row-ans" style={{width: '750px'}}>
                     <div className="circle-text">전혀없음</div>
@@ -311,7 +292,30 @@ function FeedbackModal({open, setOpen, deploy}) {
                 </div>
                 <div className="prev-next-fbuttons">
                     <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
-                    <div className="prev-next-fbutton" onClick={toComplete}>완료</div>
+                    <div className="prev-next-fbutton" onClick={toNext}>완료</div>
+                </div>
+                </>
+            )
+            case 8: return(
+                <>
+                <div className="big-title question">
+                    마지막으로, 다음 답변을 바탕으로 더욱 발전하는 Surfee가 되겠습니다. 감사합니다!
+                </div>
+                <div className="column-ans">
+                    <div style={{margin:'10px'}}>
+                        분야 및 경력
+                    </div>
+                    <input style={{width:'50%'}} placeholder="마케팅 3년차/대학생 등" className="text-modal-input inputbox" value={job} onChange={(e)=>{setJob(e.target.value); setClicked(true);}}/>
+                    <div style={{margin:'10px'}}>
+                        나이
+                    </div>
+                    <div style={{width:'50%', textAlign:'center'}}>
+                        <input style={{width:'50%'}} type="number" placeholder="숫자만 입력해주세요" className="text-modal-input inputbox" value={age} onChange={(e)=>{setAge(e.target.value); setClicked(true);}}/>&nbsp;&nbsp;&nbsp;세
+                    </div>
+                </div>
+                <div className="prev-next-fbuttons">
+                    <div className="prev-next-fbutton" onClick={toPrev}>이전</div>
+                    <div className="prev-next-fbutton" onClick={toComplete}>다음</div>
                 </div>
                 </>
             )

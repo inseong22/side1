@@ -1,5 +1,12 @@
 import * as bi from '@styled-icons/boxicons-logos'
 import * as bs from '@styled-icons/bootstrap'
+import * as hs from '@styled-icons/heroicons-solid'
+import * as ho from '@styled-icons/heroicons-outline'
+import * as fd from '@styled-icons/foundation'
+import * as fs from '@styled-icons/fluentui-system-regular'
+import {Email} from '@styled-icons/entypo'
+import {EmailOutline} from '@styled-icons/evaicons-outline'
+import {KakaoTalk} from '@styled-icons/remix-fill'
 import OverflowScrolling from 'react-overflow-scrolling';
 
 import React, {useState} from 'react'
@@ -7,6 +14,88 @@ import React, {useState} from 'react'
 const ICONSIZE = 30;
 
 export const icons = [
+    {
+        icon:<fd.Link size={ICONSIZE}/>,
+        name:'Link'
+    },
+    {
+        icon:<fd.Laptop size={ICONSIZE}/>,
+        name:'Laptop'
+    },
+    
+    {
+        icon:<fd.GraphBar size={ICONSIZE}/>,
+        name:'GraphBar'
+    },
+    
+    {
+        icon:<fd.Crop size={ICONSIZE}/>,
+        name:'Crop'
+    },
+    {
+        icon:<bi.Mastercard size={ICONSIZE} />,
+        name:'Mastercard'
+    },
+    {
+        icon:<bi.Periscope size={ICONSIZE} />,
+        name:'Periscope'
+    },
+    {
+        icon:<bi.PlayStore size={ICONSIZE} />,
+        name:'PlayStore'
+    },
+    {
+        icon:<bi.Slack size={ICONSIZE} />,
+        name:'Slack'
+    },
+    {
+        icon:<bi.Soundcloud size={ICONSIZE} />,
+        name:'Soundcloud'
+    },
+    {
+        icon:<fs.VideoClip size={ICONSIZE} />,
+        name:'VideoClip'
+    },
+    {
+        icon:<fs.Wand size={ICONSIZE} />,
+        name:'Wand'
+    },
+    {
+        icon:<fs.WebAsset size={ICONSIZE} />,
+        name:'WebAsset'
+    },
+    {
+        icon:<fd.ArrowsOut size={ICONSIZE} />,
+        name:'ArrowsOut'
+    },
+    {
+        icon:<fd.Checkbox size={ICONSIZE} />,
+        name:'Checkbox'
+    },
+    {
+        icon:<ho.Annotation size={ICONSIZE} />,
+        name:'Annotation'
+    },
+    {
+        icon:<ho.CurrencyDollar size={ICONSIZE} />,
+        name:'CurrencyDollar'
+    },
+    {
+        icon:<ho.Database size={ICONSIZE} />,
+        name:'Database'
+    },
+    {
+        icon:<ho.Star size={ICONSIZE} />,
+        name:'Star'
+    },
+    {
+        icon:<ho.TrendingUp size={ICONSIZE} />,
+        name:'TrendingUp'
+    },
+    {
+        icon:<hs.Fire size={ICONSIZE} />,
+        name:'Fire'
+    },
     {
         icon:<bs.StarFill size={ICONSIZE} />,
         name: "StarFill"
@@ -144,10 +233,6 @@ export const icons = [
         name:'LayersFill'
     },
     {
-        icon:<bs.PaletteFill size={ICONSIZE}/>,
-        name:'PaletteFill'
-    },
-    {
         icon:<bs.PlayBtnFill size={ICONSIZE}/>,
         name:'PlayBtnFill'
     },
@@ -168,33 +253,43 @@ export const icons = [
         name:'VolumeUpFill'
     },
     {
-        icons:<bi.Android size={ICONSIZE} />,
+        icon:<bi.Android size={ICONSIZE} />,
         name:'Android',
     },
     {
-        icons:<bi.Apple size={ICONSIZE} />,
+        icon:<bi.Apple size={ICONSIZE} />,
         name:'Apple',
     },
     {
-        icons:<bi.Airbnb size={ICONSIZE} />,
+        icon:<bi.Airbnb size={ICONSIZE} />,
         name:'Airbnb',
     },
     {
-        icons:<bi.FacebookCircle size={ICONSIZE} />,
+        icon:<bi.FacebookCircle size={ICONSIZE} />,
         name:'FacebookCircle',
     },
     {
-        icons:<bi.PlayStore size={ICONSIZE} />,
+        icon:<bi.PlayStore size={ICONSIZE} />,
         name:'PlayStore',
+    },
+    {
+        icon:<Email size={ICONSIZE} />,
+        name:'Email',
+    },
+    {
+        icon:<EmailOutline size={ICONSIZE} />,
+        name:'EmailOutline',
+    },
+    {
+        icon:<KakaoTalk size={ICONSIZE} />,
+        name:'KakaoTalk',
     },
 ]
 
 function IconTable({func, handleClose}) {
 
     return(
-        <div style={{height:'200px'}}>
-            <OverflowScrolling className='overflow-scrolling2'>
-            <div className="icon-select__container">
+        <OverflowScrolling className='overflow-scrolling3'>
             {
                 icons.map((item, i) => {
                     return(
@@ -207,9 +302,7 @@ function IconTable({func, handleClose}) {
                     )
                 })
             }
-            </div>
-            </OverflowScrolling>
-        </div>
+        </OverflowScrolling>
     )
 }
 

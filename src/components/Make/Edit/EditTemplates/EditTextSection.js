@@ -3,6 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import EditDesign from './tools/EditDesign'
 import produce from 'immer';
 import ElementsTable from './tools/ElementsTable'
+import EditTitleDesc from './tools/EditTitleDesc'
 import Layout from './tools/Layout'
 
 function EditTextSection({content, category}) {
@@ -33,6 +34,7 @@ function EditTextSection({content, category}) {
                     <div>
                         <ElementsTable elements={elements} />
                         <Layout content={content} version='text' />
+                        <EditTitleDesc content={content} />
                     </div>
                 )
             case 1:

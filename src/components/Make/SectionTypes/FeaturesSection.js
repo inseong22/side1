@@ -15,20 +15,20 @@ function FeaturesSection({content, setting}) {
     const returnFeatureCards = content.elements.map((item, index) => {
         if (index < content.numOfElements){
         return(
-            <FeatureCard section="feature" content={content} index={index}>
+            <FeatureCard section="feature" align={state.isPhone ? content.mobile.align : content.elementText.align} content={content} index={index}>
                 {
                     content.element.use && 
-                    <Element content={content} item={item} index={index} key={index}/>
+                        <Element content={content} item={item} index={index} key={index}/>
                 }
                 {
                     content.elementText.use && 
-                    <>
+                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%'}}>
                     {
                         content.elementText.titleUse && 
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
                                 <TextAuto className="text-input" 
                                     value={item.title} 
-                                    color = {content.elementText.color} 
+                                    color = {content.elementText.titleColor} 
                                     align = {state.isPhone ? content.mobile.align : content.elementText.align}
                                     onChange={e => action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].elements[index].title = e.currentTarget.value;
@@ -40,18 +40,17 @@ function FeaturesSection({content, setting}) {
                     }
                     {
                         content.elementText.descUse && 
-                            <div className="df-margin feature-desc">
+                            <div className="df-margin-small feature-desc">
                                 <TextareaAutosize 
                                     className="text-input"  
                                     value={item.desc} 
-                                    color = {content.elementText.color} 
-                                    // align = {state.isPhone ? content.mobile.align : content.align}
+                                    color = {content.elementText.descColor}
                                     onChange={e => action.setContents(produce(state.contents, draft => {
                                         draft[state.secNum].elements[index].desc = e.currentTarget.value;
                                     }))}  
                                     style={{
                                         fontFamily:`${state.setting.smallFont}`, 
-                                        color:`${content.desc.color}`, 
+                                        color:`${content.elementText.descColor}`, 
                                         fontSize:`${content.elementText.descSize/20}em`, 
                                         // boxSizing:`border-box`, 
                                         textAlign:`${state.isPhone ? content.mobile.align : content.elementText.align}`,
@@ -62,7 +61,7 @@ function FeaturesSection({content, setting}) {
                                 />
                             </div>
                     }
-                    </>
+                    </div>
                 }
             </FeatureCard>
         )}
@@ -72,7 +71,7 @@ function FeaturesSection({content, setting}) {
 
     return (
         <>
-            <motion.div className="template" data-aos={setting.animation} data-aos-easing="ease-in-back"
+            <motion.div className="template" data-aos={content.animation} data-aos-easing="ease-in-back"
                 data-aos-delay="200"
                 data-aos-offset="0" aos-duration="4000" >
                     <TitleDesc content={content} titlePlaceholder="특징들의 제목을 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요." />

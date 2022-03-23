@@ -1,13 +1,10 @@
 import React, {useContext} from 'react'
 import { MyContext } from '../../../../../pages/Make/MakePageV2'
 import RadioCustom from '../../tools/Custom/RadioCustom'
+import AlignCustom from '../../tools/Custom/AlignCustom'
 import produce from 'immer';
 import OpenCloseCustom from '../../tools/Custom/OpenCloseCustom'
 
-const alignOptions = [
-    { label: '왼쪽', value: 'start' },
-    { label: '중앙', value: 'center' },
-]
 const layoutOptions = [
     { label: '2', value: 2},
     { label: '3', value: 3},
@@ -36,7 +33,7 @@ function LayoutRFG({content}) {
                 <RadioCustom text="단 개수" options={mobileLayoutOptions} value={content.mobile.layout} func={e => action.setContents(produce(state.contents, draft => {
                         draft[state.secNum].mobile.layout = e;
                     }))} />
-                <RadioCustom text="정렬" options={alignOptions} value={content.mobile.align} func={e => action.setContents(produce(state.contents, draft => {
+                <AlignCustom all value={content.mobile.align} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].mobile.align = e;
                 }))} />
                 </>
@@ -46,7 +43,7 @@ function LayoutRFG({content}) {
                         draft[state.secNum].layout = e;
                         draft[state.secNum].numOfElements = e;
                     }))} />
-                <RadioCustom text="정렬" options={alignOptions} value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
+                <AlignCustom all value={content.title.align} func={e => action.setContents(produce(state.contents, draft => {
                     draft[state.secNum].title.align = e;
                     draft[state.secNum].desc.align = e;
                     draft[state.secNum].elementText.align = e;

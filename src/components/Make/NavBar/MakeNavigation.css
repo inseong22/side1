@@ -6,6 +6,8 @@
     align-items : center;
     flex-direction: row;
     position:relative;
+    box-sizing: content-box;
+    background-color: white;
 }
 
 .make-nav-container{
@@ -32,7 +34,7 @@
     justify-content : center;
     width:100%;
 }
-
+/* 
 .make-nav-button{
     height:35px;
     border-radius: 25px;
@@ -40,7 +42,7 @@
     justify-content: center;
     align-items : center;
     border:none;
-}
+} */
 
 .make-nav-logoc{
     display: flex;
@@ -62,7 +64,7 @@
     display:flex;
     align-items : center;
     flex-direction: row;
-    justify-content:end;
+    justify-content:flex-end;
     width:100%;
     box-sizing: border-box;
 }

@@ -4,6 +4,8 @@
     align-items: center;
     width: 95%;
     margin-bottom: 5px;
+    /* cursor:grab; */
+    font-family: Noto Sans KR;
 }
 
 .one-contents-draggable:hover{
@@ -12,7 +14,7 @@
 
 .one-contents__inner{
     border-radius: 5px;
-    cursor:pointer;
+    cursor:grab;
     padding:10px;
     height:100%;
     width:100%;
@@ -38,14 +40,16 @@
 }
 
 .section-add__button{
-    padding:8px 14px;
+    padding:12px 14px;
+    width:95%;
     font-size:0.9em;
     background-color:#A89AFF;
-    border-radius: 20px;
+    border-radius: 5px;
     color:white;
     margin:2%;
     cursor: pointer;
     border:none;
+    text-align: center;
 }
 
 .section-add__button:hover{
@@ -85,7 +89,7 @@
 
 .content__name{
     font-size:16px;
-    font-weight: 900;
+    font-weight: 600;
     color:var(--main-font-color);
 }
 
