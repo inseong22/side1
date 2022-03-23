@@ -32,7 +32,7 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                             zIndex: 5,
                             color:`${navi.logo.text.color}`, 
                             fontFamily:`${state.setting.font}`,
-                            fontSize:'25px',
+                            fontSize:`${state.isPhone ? '19px' : '24px'}`,
                             resize:'none',
                             padding: '0px',
                             marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,

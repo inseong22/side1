@@ -78,7 +78,7 @@ function UserNavBar({setting, navi}) {
                                 zIndex: 5,
                                 color:`${navi.logo.text.color}`, 
                                 fontFamily:`${setting.font}`,
-                                fontSize:'25px',
+                                fontSize:`${isMobile ? '19px' : '24px'}`,
                                 resize:'none',
                                 padding: '0px',
                                 marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,

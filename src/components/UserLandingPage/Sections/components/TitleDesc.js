@@ -17,7 +17,7 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                         className="text-no-input" 
                         value={content.title.text} 
                         style={{
-                            fontFamily:`${state.setting.font}`, 
+                          fontFamily:`${state.setting.font}`, 
                             color:`${content.title.color}`, 
                             fontSize:`${isMobile ? content.title.size/22 : content.title.size/19}em`, 
                             textAlign:`${isMobile ? content.mobile.align : content.title.align}`,

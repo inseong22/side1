@@ -56,7 +56,7 @@ const CustomButton = (type) => { return (
         if(content.button[type === "cta" ? 'ctaOption' : 'ghostOption'] === 'link'){
             moveToPage(type)
             window.open(
-                content.button[[type === "cta" ? 'ctaLink' : 'ghostLinkg']],
+                content.button[[type === "cta" ? 'ctaLink' : 'ghostLink']],
                 '_blank' // <- This is what makes it open in a new window.
             );
         }else{

@@ -29,11 +29,10 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                             }}
                             data={content.title.text}
                             onChange={(event, editor) => {
-                            const data = editor.getData();
-                            console.log(data)
-                            action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].title.text = data;
-                                }))
+                                const data = editor.getData();
+                                action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].title.text = data;
+                                    }))
                             }}
                         />
                     </div> */}

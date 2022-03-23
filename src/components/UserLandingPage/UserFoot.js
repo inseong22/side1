@@ -1,11 +1,8 @@
 import React from 'react'
 import { isMobile } from 'react-device-detect'
-import {Youtube, Twitter} from '@styled-icons/boxicons-logos';
-import {Facebook} from '@styled-icons/entypo-social/Facebook'
-import {Instagram} from '@styled-icons/boxicons-logos/Instagram'
+import {Youtube, Twitter, Instagram, FacebookSquare, LinkedinSquare} from '@styled-icons/boxicons-logos';
 import {KakaoTalk} from '@styled-icons/remix-fill/KakaoTalk'
 import { Notion } from '@styled-icons/simple-icons';
-import {Linkedin} from '@styled-icons/fa-brands/Linkedin'
 import TextareaAutosize from 'react-textarea-autosize';
 
 function UserFoot({foot, setting}) {
@@ -18,7 +15,7 @@ function UserFoot({foot, setting}) {
         return(
             <>
         {foot.icon.facebook !== '' && 
-                    <Facebook color={foot.icon.color} className="footer-icon" 
+                    <FacebookSquare color={foot.icon.color} className="footer-icon" 
                         onClick={()=>{
                             window.open(
                                 foot.icon.facebook,
@@ -78,7 +75,7 @@ function UserFoot({foot, setting}) {
                     />
         }
         {foot.icon.linkedIn !== '' && 
-                    <Linkedin color={foot.icon.color} className="footer-icon" 
+                    <LinkedinSquare color={foot.icon.color} className="footer-icon" 
                     onClick={()=>{
                         window.open(
                             foot.icon.linkedIn,

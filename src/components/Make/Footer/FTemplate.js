@@ -1,9 +1,7 @@
 import React,{useContext} from 'react'
 import produce from 'immer'
 import { MyContext } from '../../../pages/Make/MakePageV2'
-import {Youtube, Twitter} from '@styled-icons/boxicons-logos';
-import {Facebook} from '@styled-icons/entypo-social/Facebook'
-import {Instagram} from '@styled-icons/boxicons-logos/Instagram'
+import {Youtube, Twitter,FacebookSquare, Instagram, LinkedinSquare} from '@styled-icons/boxicons-logos';
 import {KakaoTalk} from '@styled-icons/remix-fill/KakaoTalk'
 import { Notion } from '@styled-icons/simple-icons';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -26,7 +24,7 @@ function FTemplate({foot, setFoot, history }) {
         return(
             <>
         {foot.icon.facebook !== '' && 
-                    <Facebook color={foot.icon.color} className="footer-icon" />
+                    <FacebookSquare color={foot.icon.color} className="footer-icon" />
         }
         {foot.icon.instagram !== '' && 
                     <Instagram color={foot.icon.color} className="footer-icon" />
@@ -44,7 +42,7 @@ function FTemplate({foot, setFoot, history }) {
                     <Notion color={foot.icon.color} className="footer-icon" />
         }
         {foot.icon.linkedIn !== '' && 
-                    <Linkedin color={foot.icon.color} className="footer-icon" />
+                    <LinkedinSquare color={foot.icon.color} className="footer-icon" />
         }
             </>
         )

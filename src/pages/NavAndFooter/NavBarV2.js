@@ -34,7 +34,7 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
                             </Link>
                             <div className="nav-left-text" style={{marginLeft:'1vw'}} onClick={() => {
                                 window.open(
-                                    'https://www.notion.so/Surfee-903d24edba264a9e9a8245803f11db11',
+                                    'https://striped-cabin-4bf.notion.site/Surfee-903d24edba264a9e9a8245803f11db11',
                                     '_blank' // <- This is what makes it open in a new window.
                                 );
                             }}>

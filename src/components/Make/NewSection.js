@@ -125,7 +125,7 @@ function NewSection({elementRef, setting, content, index, secNum, setSecNum, isP
                 }
                 {
                     content.box.use && 
-                    <div className="section__box" style={{padding:`1vh ${full ? 'calc(11vw)' : '0vh'}`}}>
+                    <div className="section__box" style={{padding:`1vh ${full ? 'calc(11vw)' : '0vw'}`}}>
                         <div style={{backgroundColor:`${content.box.backgroundColor}`, borderRadius:`${content.box.borderRadius}px`, width:'100%', height: '100%'}}>
                         </div>
                     </div>

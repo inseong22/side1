@@ -80,7 +80,7 @@ function TemplateModal({open, setOpen, url}) {
                     템플릿으로 페이지 제작
                 </div>
                 <div className="modal-title" style={{fontSize:'17px'}}>
-                    surfee.co.kr/<input className="input-holder input-focus" style={{width: '18vw', padding:'0px 15px', marginLeft: '10px', fontSize:'15px'}} placeholder="URL" value={urlId} 
+                    surfee.co.kr/<input className="input-holder input-focus" style={{width: '18vw', padding:'10px 15px', marginLeft: '10px', fontSize:'15px'}} placeholder="URL" value={urlId} 
                     onChange={e => {
                         onUrlChange(e);
                     }} />

@@ -60,10 +60,8 @@ const Editor = (props) => {
             Italic,
             Underline,
             Strikethrough,
-            FontFamily,
             Font,
             List,
-            Alignment,
             Link,
             PasteFromOffice,
             TextTransformation
@@ -78,14 +76,11 @@ const Editor = (props) => {
                 "underline",
                 "strikethrough",
                 "|",
-                "fontFamily",
                 "fontSize",
                 "fontColor",
                 "fontBackgroundColor",
                 "|",
                 "link",
-                "alignment",
-                "|",
                 "undo",
                 "redo",
               ]},
@@ -93,51 +88,50 @@ const Editor = (props) => {
             columns:4,
             documentColors:4,
             colors:[
-            {
-              color: 'hsl(0, 0%, 0%)',
-              label: '검정'
-            },
-            {
-              color: 'hsl(0, 0%, 90%)',
-              label: '연회색'
-            },
-            {
-              color: 'hsl(0, 0%, 100%)',
-              label: '흰색',
-              hasBorder: true
-            },
-            {
-              color: 'rgb(255,0,0)',
-              label: '빨강'
-            },
-            {
-              color: 'hsl(30, 75%, 60%)',
-              label: '주황'
-            },
-            {
-              color: 'hsl(60, 75%, 60%)',
-              label: '노랑'
-            },
-            {
-              color: 'hsl(90, 75%, 60%)',
-              label: '연초록'
-            },
-            {
-              color: 'hsl(120, 75%, 60%)',
-              label: '초록'
-            },
-            {
-              color: 'hsl(210, 75%, 60%)',
-              label: '하늘'
-            },
-            {
-              color: 'hsl(240, 75%, 60%)',
-              label: '파랑'
-            },
-            {
-              color: 'hsl(270, 75%, 60%)',
-              label: '보라'
-            }
+              {
+                color: '#000000',
+                label: '검정'
+              },
+              {
+                color: '#9B9A97',
+                label: '연회색'
+              },
+              {
+                color: '#64473A',
+                label: '갈색',
+              },
+              {
+                color: '#D9730D',
+                label: '주황'
+              },
+              {
+                color: '#DFAB01',
+                label: '노랑'
+              },
+              {
+                color: '#0F7B6C',
+                label: '연초록'
+              },
+              {
+                color: '#0B6E99',
+                label: '파랑'
+              },
+              {
+                color: '#6940A5',
+                label: '보라'
+              },
+              {
+                color: '#AD1A72',
+                label: '분홍'
+              },
+              {
+                color: '#E03E3E',
+                label: '빨강'
+              },
+              {
+                color: '#FFFFFF',
+                label: '하양'
+              }
           ]},
           fontFamily: {
             options: [
@@ -152,71 +146,61 @@ const Editor = (props) => {
             columns:4,
             documentColors:4,
             colors:[
-            {
-              color: 'hsl(0, 0%, 0%)',
-              label: '검정'
-            },
-            {
-              color: 'hsl(0, 0%, 90%)',
-              label: '연회색'
-            },
-            {
-              color: 'hsl(0, 0%, 100%)',
-              label: '흰색',
-              hasBorder: true
-            },
-            {
-              color: 'rgb(255,0,0)',
-              label: '빨강'
-            },
-            {
-              color: 'hsl(30, 75%, 60%)',
-              label: '주황'
-            },
-            {
-              color: 'hsl(60, 75%, 60%)',
-              label: '노랑'
-            },
-            {
-              color: 'hsl(90, 75%, 60%)',
-              label: '연초록'
-            },
-            {
-              color: 'hsl(120, 75%, 60%)',
-              label: '초록'
-            },
-            {
-              color: 'hsl(210, 75%, 60%)',
-              label: '하늘'
-            },
-            {
-              color: 'hsl(240, 75%, 60%)',
-              label: '파랑'
-            },
-            {
-              color: 'hsl(270, 75%, 60%)',
-              label: '보라'
-            }
+              {
+                color: '#FFFFFF',
+                label: '하양'
+              },
+              {
+                color: '#EBECED',
+                label: '연회색'
+              },
+              {
+                color: '#E9E5E3',
+                label: '갈색',
+              },
+              {
+                color: '#FAEBDD',
+                label: '주황'
+              },
+              {
+                color: '#FBF3DB',
+                label: '노랑'
+              },
+              {
+                color: '#DDEDEA',
+                label: '연초록'
+              },
+              {
+                color: '#DDEBF1',
+                label: '파랑'
+              },
+              {
+                color: '#EAE4F2',
+                label: '보라'
+              },
+              {
+                color: '#F4DFEB',
+                label: '분홍'
+              },
+              {
+                color: '#FBE4E4',
+                label: '빨강'
+              }
           ]},
           fontSize: {
             options: [
-              5,
-              7,
-              9,
-              10,
-              12,
-              14,
+              0.2,
+              0.4,
+              0.6,
+              0.8,
+              0.9,
               'default',
-              16,
-              18,
-              20,
-              24,
-              26,
-              30,
-              32,
-              34,
-              36,
-              40,
+              1.1,
+              1.2,
+              1.4,
+              1.6,
+              1.8,
+              2.0,
             ],
           },
           alignment: {
@@ -236,6 +220,7 @@ const Editor = (props) => {
             },
           },
         }}
+        style={{padding:'0px'}}
         editor={InlineEditor}
         {...props}
             />

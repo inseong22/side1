@@ -36,6 +36,7 @@ const fontOptions = [
     { label: '레페리포인트-Black', value:'LeferiPoint-BlackA'},
     { label: '고운바탕', value : 'GowunBatang-Bold'},
     { label: '여기어때 잘난체', value: 'yg-jalnan'},
+    { label: '아임혜민', value: 'IM_Hyemin'},
 ]
 
 const smallFontOptions = [
@@ -51,6 +52,7 @@ const smallFontOptions = [
     { label: '레페리포인트-Black', value:'LeferiPoint-WhiteA'},
     { label: '고운바탕', value : 'GowunBatang-Regular'},
     { label: '여기어때 잘난체', value: 'yg-jalnan'},
+    { label: '아임혜민', value: 'IM_Hyemin'},
 ]
 
 const shapeOptions = [

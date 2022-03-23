@@ -86,7 +86,7 @@ function UserSection({content, setting}) {
 
     return(
         <div className="new-section">
-        <div className="section__container" 
+            <div className="section__container" 
             style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat'}} >
             {
                 content.backgroundType === 'color' ?
@@ -99,7 +99,7 @@ function UserSection({content, setting}) {
             }
             {
                 content.box.use && 
-                <div className="section__box" style={{padding:`1vh 11vw`}}>
+                <div className="section__box" style={{padding:`1vh ${isMobile ? '1vw' : '11vw'}`}}>
                     <div style={{backgroundColor:`${content.box.backgroundColor}`, borderRadius:`${content.box.borderRadius}px`, width:'100%', height:'100%'}}>
                     </div>
                 </div>

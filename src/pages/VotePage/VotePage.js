@@ -244,7 +244,7 @@ function VotePage({history, isLoggedIn}) {
                 <div style={{width:'91%'}}>
                     <div onClick={() => {
                          window.open(
-                            'https://www.notion.so/Surfee-e2153c36197d40cdb924bab5f54d5b71',
+                            'https://striped-cabin-4bf.notion.site/Surfee-903d24edba264a9e9a8245803f11db11',
                             '_blank'
                         )
                     }} className="morphism-button" style={{width:'400px', padding:'30px 30px', fontSize:'1.1em', fontWeight:'700'}}>
