@@ -166,9 +166,25 @@ function MadeLandingCard({item, published, setCopyOpen, id, index, setNowCheckin
                     </CopyToClipboard>
                 </div>
                 <div className="right" style={{fontSize:'15px', width:'30%'}}>
-                    {/* <button className="content__button cb-delete" onClick={() => {setDeleteOpen(true)}}>삭제</button>
-                    <button className="content__button" onClick={() => duplicate()}>복제</button> */}
-                    <OptionButton />
+                    <Popover>
+                        <PopoverTrigger>
+                            <button className="option-trigger-button opacity-hover">
+                                <ThreeDots color="rgb(90, 90, 90)" size="17" />
+                            </button>
+                        </PopoverTrigger>
+                        <Portal>
+                            <PopoverContent style={{width:'180px'}}>
+                                <PopoverArrow />
+                                <PopoverBody style={{flexDirection:'column'}}>
+                                    <div className="option-selects opacity-hover" style={{color:'#e26a6a'}} onClick={() => {setDeleteOpen(true)}}><Trash size="20" />&nbsp;&nbsp; 페이지 삭제</div>
+                                    <div className="option-selects opacity-hover" onClick={() => duplicate()}><Duplicate size="20" />&nbsp;&nbsp; 페이지 복제</div>
+                                    <CopyToClipboard text={"https://surfee.co.kr/make/" + `${item.id}`}>
+                                        <div className="option-selects opacity-hover" onClick={() => alert('템플릿을 복제할 수 있는 링크를 복사했습니다. \n이 링크를 이용하여 템플릿을 공유할 수 있습니다.')}><Share size="15"/>&nbsp; &nbsp;이 템플릿 공유하기</div>
+                                    </CopyToClipboard>
+                                </PopoverBody>
+                            </PopoverContent>
+                        </Portal>
+                    </Popover>
                 </div>
             </div>
             <ConfirmCustom warn open={deleteopen} setOpen={setDeleteOpen} message={"한번 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?"} callback={deletePage}/>

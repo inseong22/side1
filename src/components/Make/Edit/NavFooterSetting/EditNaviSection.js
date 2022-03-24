@@ -107,9 +107,9 @@ function EditNaviSection({navi, setNavi, category}) {
                                 <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요." value={navi.button.cta.link} func={(e) => setNavi(produce(navi, draft => {
                                     draft.button.cta.link = e
                                 }))} />
-                                <SliderCustom top="CTA 여백" value={navi.button.cta.padding} max={26} func={e => setNavi(produce(navi, draft => {
+                                {/* <SliderCustom top="CTA 여백" value={navi.button.cta.padding} max={26} func={e => setNavi(produce(navi, draft => {
                                     draft.button.cta.padding = e;
-                                }))}/>
+                                }))}/> */}
                             </>
                         }
                         </div>
@@ -123,9 +123,9 @@ function EditNaviSection({navi, setNavi, category}) {
                                 <InputCustom placeholder="연결하고 싶은 URL을 입력해 주세요." value={navi.button.ghost.link} func={(e) => setNavi(produce(navi, draft => {
                                     draft.button.ghost.link = e
                                 }))} />
-                                <SliderCustom top="고스트 여백" value={navi.button.ghost.padding} max={26} func={e => setNavi(produce(navi, draft => {
+                                {/* <SliderCustom top="고스트 여백" value={navi.button.ghost.padding} max={26} func={e => setNavi(produce(navi, draft => {
                                     draft.button.ghost.padding = e;
-                                }))}/>
+                                }))}/> */}
                             </>
                         }
                         </div>

@@ -18,7 +18,6 @@ function EditNotice({content}) {
 
     return (
         <OpenCloseCustom title="안내사항" use={content.caution.use} open={state.focus === 'caution'} >
-           <>
             <ColorCustom text="색상" value={content.caution.color} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.color = e;
             }))} />
@@ -28,7 +27,6 @@ function EditNotice({content}) {
             <TextSizeCustom text="크기" desc options={sizeOptions} value={content.caution.size} func={e => action.setContents(produce(state.contents, draft => {
                 draft[state.secNum].caution.size = e;
             }))} />
-            </>
         </OpenCloseCustom>
     )
 }

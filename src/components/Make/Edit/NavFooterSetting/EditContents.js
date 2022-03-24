@@ -25,6 +25,21 @@ const getItemStyle = (isDragging, draggableStyle, backColor) => {
     };
 };
 
+const sectionDescriptions = {
+    'HeroSection':'이미지를 이용한 설명과 버튼을 사용가능합니다',
+    'DetailSection':'이미지를 이용한 설명이 가능합니다',
+    'CtaSection':'5개의 입력 혹은 앱스토어 버튼을 사용가능합니다',
+    'ApplySection':'최대 5개의 입력을 받을 수 있습니다',
+    'AppDownloadSection':'앱스토어 버튼을 사용가능합니다',
+    'FeaturesSection':'여러개의 특징을 설명할 수 있습니다',
+    'ReviewSection':'별점을 사용해 추천사를 적기 유용합니다',
+    'QnaSection':'질문과 답변을 적을 수 있습니다',
+    'TextSection':'글만을 적을 수 있습니다',
+    'GallerySection':'이미지를 강조하여 설명하는데 유용합니다',
+    'VideoSection':'동영상을 보여줄 수 있습니다',
+    'MockupSection':'휴대폰과 노트북에 이미지를 넣을 수 있습니다',
+}
+
 function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
     const [deleteopen, setDeleteOpen] = useState(false);
@@ -45,7 +60,7 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                 onClick={() => {
                     action.setSecNum(num)
                 }}>
-                설정
+                수정
             </div>
         )
     }
@@ -97,7 +112,12 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                     </div>   
                 </div>
                 <div className="comment">
-                <span style={{fontWeight:'700', fontSize:'1em'}}>드래그 앤 드랍</span>으로 순서를 변경할 수 있습니다
+                    <div>
+                        클릭 시 해당 섹션을 보여줍니다.
+                    </div>
+                    <div>
+                        <span style={{fontWeight:'700', fontSize:'1em'}}>드래그 앤 드랍</span>으로 순서를 변경할 수 있습니다
+                    </div>
                 </div>
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
@@ -139,8 +159,9 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                                                                                 </div>
                                                                             </div>
                                                                             <div className="center-row">
-                                                                                <div className="left" style={{width:'85%', textAlign:'left', color:'#555C67', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                                                                                    {item.title.text}
+                                                                                <div className="left" style={{width:'92%', textAlign:'left', color:'#737a86', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                                                                                    {/* {item.title.text} */}
+                                                                                    {sectionDescriptions[item.sectionTypeName]}
                                                                                 </div>
                                                                                 <div className="right">
                                                                                     <div className="content__button cb-delete"
@@ -195,8 +216,9 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                                                                             </div>
                                                                         </div>
                                                                         <div className="center-row">
-                                                                            <div className="left" style={{width:'85%', textAlign:'left', color:'#555C67', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                                                                                {item.title.text}
+                                                                            <div className="left" style={{width:'92%', textAlign:'left', color:'#737a86', display:'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                                                                                {/* {item.title.text} */}
+                                                                                {sectionDescriptions[item.sectionTypeName]}
                                                                             </div>
                                                                             <div className="right">
                                                                                 <div className="content__button cb-delete"

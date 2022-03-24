@@ -5,7 +5,7 @@ import {produce} from 'immer'
 import TitleDesc from './components/TitleDesc'
 import QnaOpenClose from './components/QnaOpenClose'
 import TextAuto from './components/TextAuto'
-import TextareaAutosize from '@mui/material/TextareaAutosize';
+import Editor from '../../Make/tools/Editor'
 
 function QnaSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -18,15 +18,17 @@ function QnaSection({content, setting}) {
                         <span className="qna__word" style={{fontFamily:`${state.setting.smallFont}`, color: `${content.qna.answer}`}}>A. <></></span>
                     </div>
                     <div style={{marginTop:'4px', width:`${state.isPhone ? '85.6%' : '91.6%'}`}}>
-                        <TextAuto
-                            small
-                            size={0.9}
-                            placeholder="여기를 클릭하여 자주 묻는 질문의 답변을 적어보세요."
-                            value={item.answer} 
-                            onChange={e => action.setContents(produce(state.contents, draft => {
-                                draft[state.secNum].qnas[index].answer = e.currentTarget.value;
-                            }))}
-                            color={content.qna.answer} align="start" />
+                        <div style={{width:'100%', fontSize:'0.9em', color:`${content.qna.answer}`}}>
+                            <Editor 
+                                data={item.answer}
+                                onChange={(evenet, editor) => {
+                                    const data = editor.getData();
+                                    action.setContents(produce(state.contents, draft => {
+                                        draft[state.secNum].qnas[index].answer = data;
+                                    }))
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
             </QnaOpenClose>

@@ -13,30 +13,29 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
             {
                 content.title.use &&
                 <div style={{width:'100%'}}>
-                    {/* <div style={{
+                    <div 
+                        className={state.isPhone ? content.mobile.align === 'start' ? 'alignLeft' : 'alignCenter' : content.title.align === 'start' ? 'alignLeft' : 'alignCenter'}
+                        style={{
                             fontFamily:`${state.setting.font}`, 
                             color:`${content.title.color}`, 
                             fontSize:`${content.title.size/19}em`, 
-                            textAlign:`${state.isPhone ? content.mobile.align : content.title.align}`,
-                            resize:'none'
+                        }}
+                        onClick={() => {
+                            action.setCategory(0);
+                            action.setFocus('title');
                         }}>
                         <Editor 
                             placeholder={titlePlaceholder}
-                            className="text-input"
-                            onClick={() => {
-                                action.setCategory(0);
-                                action.setFocus('title');
-                            }}
                             data={content.title.text}
                             onChange={(event, editor) => {
                                 const data = editor.getData();
                                 action.setContents(produce(state.contents, draft => {
                                     draft[state.secNum].title.text = data;
-                                    }))
+                                }))
                             }}
                         />
-                    </div> */}
-                    <TextareaAutosize 
+                    </div>
+                    {/* <TextareaAutosize 
                         onClick={() => {
                             action.setCategory(0);
                             action.setFocus('title');
@@ -55,13 +54,13 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                             resize:'none'
                         }}
                         spellCheck="false"
-                    />
+                    /> */}
                 </div>
             }
             {
                 content.desc.use &&
                 <div style={{width:'100%', marginTop:'10px'}}>
-                    <TextareaAutosize 
+                    {/* <TextareaAutosize 
                         onClick={() => {
                             action.setCategory(0);
                             action.setFocus('desc');
@@ -81,7 +80,30 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                             resize:'none'
                         }}
                         spellCheck="false"
-                    />
+                    /> */}
+                    <div 
+                        className={state.isPhone ? content.mobile.align === 'start' ? 'alignLeft' : 'alignCenter' : content.title.align === 'start' ? 'alignLeft' : 'alignCenter'}
+                        style={{
+                            fontFamily:`${state.setting.smallFont}`, 
+                            color:`${content.desc.color}`, 
+                            fontSize:`${content.desc.size/19}em`, 
+                        }}
+                        onClick={() => {
+                            action.setCategory(0);
+                            action.setFocus('desc');
+                        }}>
+                        <Editor 
+                            placeholder={descPlaceholder}
+                            className="text-input"
+                            data={content.desc.text}
+                            onChange={(event, editor) => {
+                                const data = editor.getData();
+                                action.setContents(produce(state.contents, draft => {
+                                    draft[state.secNum].desc.text = data;
+                                }))
+                            }}
+                        />
+                    </div>
                 </div>
             }
         </div>

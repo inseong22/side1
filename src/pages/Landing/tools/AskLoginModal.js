@@ -65,12 +65,12 @@ function AskLoginModal({open, setOpen, SomeoneClickMoveToMake, setRegisterOpen})
                         로그인 하시겠습니까?
                     </div>
                     <div className="center-row" style={{height:'30%', marginTop:'40px'}}>
-                        <div className="ask-modal-button uphover" onClick={() => {setRegisterOpen(true); setOpen(false)}}>
+                        <button className="ask-modal-button uphover" onClick={() => {setRegisterOpen(true); setOpen(false)}}>
                             <img src={d1} width={140} /> 
                             <div>
                                 네 <br/>( 로그인/회원가입 하러 가기 ) 
                             </div>
-                        </div>
+                        </button>
                         <Link to={{
                             pathname:`/questions`,
                             state:{

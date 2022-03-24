@@ -41,7 +41,7 @@ const OpenCloseCustom = (props) => {
             </div>
             </ChakraProvider>
             <div className="centera" style={{justifyContent: 'flex-end'}}>
-              { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon />}
+              { open ? <ExpandMoreIcon style={{transform:'rotate(180deg)'}} /> : <ExpandMoreIcon style={{color:'gray'}} />}
             </div>
           </div>
           { props.preseen && 

@@ -6,6 +6,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Editor from '../../tools/Editor'
 import TextAuto from './TextAuto'
 import produce from 'immer'
 import { ChakraProvider } from '@chakra-ui/react'
@@ -83,18 +84,18 @@ const OpenCloseCustom = (props) => {
             <ChakraProvider>
             <div className="accordion__title">
               <div className="title_text" style={{color:`${props.color}`, width:'100%', alignItems: 'start'}}>
-                <div className="qna__word" style={{fontFamily:`${state.setting.smallFont}`, marginRight:`${state.isPhone ? '3px' : '5px'}`}}>Q.</div>
-                <div style={{width:'100%', marginTop:'3px'}}>
-                  <TextAuto 
-                    small
-                    size={0.9}
-                    value={props.title} 
-                    onChange={e => action.setContents(produce(state.contents, draft => {
-                        draft[state.secNum].qnas[props.index].question = e.currentTarget.value;
-                    }))}
-                    color={props.color} align="start"
+                <div className="qna__word" style={{fontFamily:`${state.setting.smallFont}`, marginRight:`${state.isPhone ? '3px' : '5px'}`, fontWeight:'700'}}>Q.</div>
+                <div style={{width:'100%', align:'start', marginTop:'3px', color:`${props.color}`, fontSize:'0.9em'}}>
+                  <Editor 
                     placeholder="여기를 클릭하여 자주 묻는 질문을 적어보세요."
-                    />
+                    data={props.title}
+                    onChange={(event,editor) => {
+                      const data = editor.getData();
+                      action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].qnas[props.index].question = data;
+                      }))
+                    }}
+                  />
                 </div>
               </div> 
             </div>

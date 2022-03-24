@@ -31,9 +31,11 @@ function CtaSection({content, setting}) {
                 <div style={{display:'flex', flexDirection:'column', width:'100%', justifyContent:'center', height:'100%'}}>
                     <ReturnButton content={content} />
                     {content.caution.use && 
-                        <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                        <div 
+                            className="df-margin-big feature-desc" 
+                            style={{width:'100%'}}
+                            onClick={() => {action.setFocus('caution'); action.setCategory(0)}}>
                             <TextAuto 
-                                onClick={() => action.setFocus('caution')}
                                 className="text-input" 
                                 small 
                                 size = {content.caution.size/20}

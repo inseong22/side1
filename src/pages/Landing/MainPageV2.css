@@ -44,6 +44,15 @@
     z-index:2;
     background-color:rgba(0,0,0,0);
 }
+
+.alignLeft p{
+    text-align:start;
+}
+
+.alignCenter p{
+    text-align:center;
+}
+
 .one-section-big2{
     text-align: left;
     font-size:1.3em;

@@ -336,6 +336,10 @@
   font-size: var(--func-subtitle);
   color: var(--main-black-01);
   font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .left{

@@ -6,6 +6,7 @@ import TitleDesc from './components/TitleDesc'
 import TextAuto from './components/TextAuto'
 import {Upload} from '@styled-icons/bootstrap';
 import FeatureCard from './components/FeatureCard'
+import Editor from '../tools/Editor'
 
 function GallerySection({content,setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -65,17 +66,27 @@ function GallerySection({content,setting}) {
                        }
                        {
                            content.card.use && 
-                           <div className="df-margin-big feature-title" style={{width:'100%', height:'100%', alignItems:'start', display: 'flex', margin:'0px', padding:`${state.isPhone ? 5 : 8}px`}} onClick={() => {action.setFocus('elementText'); action.setCategory(0)}}>
-                                <TextAuto small className="text-input" 
-                                    placeholder="여기를 클릭하여 이미지에 대한 설명을 적어보세요."
-                                    value={item.text} 
-                                    size={0.9}
-                                    color = {content.text.color} 
-                                    align = {state.isPhone ? content.mobile.align : content.align}
-                                    onChange={e => action.setContents(produce(state.contents, draft => {
-                                        draft[state.secNum].elements[index].text = e.currentTarget.value;
-                                    }))}  
-                                />
+                           <div className="df-margin-big feature-title" style={{
+                               width:'100%', height:'100%', 
+                                alignItems:'start', 
+                                display: 'flex', 
+                                margin:'0px', 
+                                padding:`${state.isPhone ? 5 : 8}px`,
+                                color: `${content.text.color}` }} 
+                                onClick={() => {action.setFocus('elementText'); action.setCategory(0)}}>
+                                <div style={{width:'100%'}}>
+                                    <Editor 
+                                        placeholder="여기를 클릭하여 이미지에 대한 설명을 적어보세요."
+                                        className="text-input"
+                                        data={item.text}
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData();
+                                            action.setContents(produce(state.contents, draft => {
+                                                draft[state.secNum].elements[index].text = data;
+                                            }))
+                                        }}
+                                    />
+                                </div>
                            </div>
                        }
                    </FeatureCard>

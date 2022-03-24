@@ -22,7 +22,7 @@ function FeaturesSection({content, setting}) {
                 }
                 {
                     content.elementText.use && 
-                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%'}}>
+                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%', marginTop:`${content.element.use ? '5px' : '0px'}`}}>
                     {
                         content.elementText.titleUse && 
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
@@ -74,8 +74,7 @@ function FeaturesSection({content, setting}) {
             <motion.div className="template" data-aos={content.animation} data-aos-easing="ease-in-back"
                 data-aos-delay="200"
                 data-aos-offset="0" aos-duration="4000" >
-                    <TitleDesc content={content} titlePlaceholder="특징들의 제목을 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요." />
-
+                <TitleDesc content={content} titlePlaceholder="특징들의 제목을 적어보세요." descPlaceholder="여기를 클릭하여 서비스 및 제품의 특징을 간단히 적어보세요." />
                 <div className="features__container" style={{flexWrap : `${state.isPhone ? 'wrap' : ''}`}}>
                     {returnFeatureCards}
                 </div>

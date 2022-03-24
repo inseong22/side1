@@ -3,6 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import AutosizeInput from 'react-input-autosize';
 import appstorebutton from '../../../../tools/img/appstorebutton.png'
 import playstorebutton from '../../../../tools/img/playstorebutton.png'
+import {ButtonEditor} from '../../tools/Editor'
 import produce from 'immer';
 import { Checkbox, ChakraProvider } from '@chakra-ui/react'
 import './ReturnButton.css'
@@ -11,27 +12,29 @@ function ReturnButton({content, onlyapp}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const CustomButton = (type) => { return (
-    <div className="cta-button-edit" style={{
-        borderRadius:`${state.setting[type].borderRadius}px`,
-        backgroundColor:`${state.setting[type].backgroundColor}`,
-        color:`${state.setting[type].color}`,
-        boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
-        border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
-    }}>
-
-        <AutosizeInput className="text-input-flex" value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } onChange={(e) => action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].button[type === "cta" ? 'ctaText' : 'ghostText'] = e.currentTarget.value;
-        }))} 
-        inputStyle={{
+        <div className="cta-button-edit" style={{
+            borderRadius:`${state.setting[type].borderRadius}px`,
+            backgroundColor:`${state.setting[type].backgroundColor}`,
+            color:`${state.setting[type].color}`,
+            boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
+            border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
             textAlign: 'center',
-            fontSize:14,
+            fontSize:'14px',
             fontFamily:`Pretendard-Regular`,
-            borderRadius:`${state.setting[type].borderRadius}px`,  
-            backgroundColor:`rgba(0,0,0,0)`, 
-            padding: `2px 8px`, 
-            }}/>
-    
-    </div>)}
+        }}>
+            <div style={{padding:'10px 15px'}}>
+            <ButtonEditor 
+                data={content.button[type === "cta" ? 'ctaText' : 'ghostText']}
+                onChange={(event, editor) => {
+                    const data = editor.getData();
+                    action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button[type === "cta" ? 'ctaText' : 'ghostText'] = data;
+                    }))
+                }}
+            />
+            </div>
+        </div>
+        )}
     
     const returnInputs = (type) => {
         return(

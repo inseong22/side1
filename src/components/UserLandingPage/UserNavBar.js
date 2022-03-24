@@ -7,39 +7,35 @@ import AutosizeInput from 'react-input-autosize';
 function UserNavBar({setting, navi}) {
 
     const CustomButton = (type) => { return (
-        <div className="cta-button-edit" 
-            style={{
-                borderRadius:`${setting[type].borderRadius}px`,
-                backgroundColor:`${setting[type].backgroundColor}`,
-                color:`${setting[type].color}`,
-                boxShadow:`${setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
-                border:`${setting[type].border ? `1px solid ${setting[type].borderColor}` : 'none'}`,
-                display: 'block',
-                cursor: 'pointer'
-            }} 
-            onClick={() => {
-                moveToPage(type)
-                window.open(
-                    navi.button[type].link,
-                    '_blank' // <- This is what makes it open in a new window.
-                  );
-                // window.location.href = navi.button.cta.link
-            }}>
-    
-            <AutosizeInput className="text-input-button"
-                value={ navi.button[type].text } 
-                style={{
+        <div className="cta-button-edit" style={{
+            borderRadius:`${setting[type].borderRadius}px`,
+            backgroundColor:`${setting[type].backgroundColor}`,
+            boxShadow:`${setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
+            border:`${setting[type].border ? `1px solid ${setting[type].borderColor}` : 'none'}`,
+        }} 
+        onClick={() => {
+            moveToPage(type)
+            window.open(
+                navi.button[type].link,
+                '_blank' // <- This is what makes it open in a new window.
+              );
+            // window.location.href = navi.button.cta.link
+        }}>
+            <AutosizeInput className="text-input-flex" value={ navi.button[type].text } 
+                inputStyle={{
+                    color:`${setting[type].color}`,
+                    cursor:'pointer',
+                    border:'none',
+                    textAlign: 'center',
+                    fontSize:'14px',
                     fontFamily:`${setting.smallFont}`,
                     borderRadius:`${setting[type].borderRadius}px`,  
-                    backgroundColor:`${setting[type].backgroundColor}`, 
-                    textAlign: 'center', 
-                    padding: `${navi.button[type].padding*0.3}px ${navi.button[type].padding}px`,
-                    cursor: 'pointer',
+                    backgroundColor:`rgba(0,0,0,0)`, 
+                    padding: `5px 8px`, 
                     WebkitTextFillColor: `${setting[type].color}`,
                     WebkitOpacity: 1,
-                }}
-                disabled
-                />
+                    }}
+                    disabled/>
         </div>
     )}
 

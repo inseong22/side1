@@ -2,7 +2,6 @@ import React, {useEffect, useState, useRef, createRef, useMemo} from 'react'
 import './MakePage.css'
 import './MakeLanding.css'
 // Recoil , Immer JS 적용
-// 
 
 import NewSection from '../../components/Make/NewSection'
 import NewSectionMake from '../../components/Make/Edit/NewSectionMake'
@@ -18,11 +17,11 @@ import lodash from 'lodash'
 import ConfirmCustom from '../../tools/ConfirmCustom'
 import {dbService} from '../../tools/fbase'
 import { isMobile } from 'react-device-detect';
-import {ChakraProvider} from '@chakra-ui/react'
 import {Prompt} from 'react-router-dom';
 import produce from 'immer'
-import TextareaAutosize from '../../components/Make/SectionTypes/components/TextAuto'
 import ChannelTalk from '../../tools/ChannelTalk'
+import {ButtonEditor} from '../../components/Make/tools/Editor'
+import ReactGa from 'react-ga'
 
 export const MyContext = React.createContext({
     state : {},
@@ -91,11 +90,8 @@ const MakePageV2 = ({history, userObj}) => {
 
     // 반복 실행되는 useEffect
     useEffect(() => {
-        // to report page view
-        // ReactGa.initialize('UA-213792742-1');
-        // ReactGa.pageview(`/making/${userObj.email}`);
         function repeat(){
-            saveLocalStorage()
+            saveLocalStorage();
         }
         // 30초에 한번 씩 자동 저장
         let id = setInterval(repeat, 10000);
@@ -104,6 +100,9 @@ const MakePageV2 = ({history, userObj}) => {
 
     // 처음에 한번만 실행되는 useEffect
     useEffect(() => {
+        // to report page view
+        ReactGa.initialize('UA-213792742-1');
+        ReactGa.pageview(`/make`);
         // 관리하기 페이지에서 state.item으로 내용을 가지고 넘어왔다.
         if(location.state !== undefined){
             if(location.state.now){
@@ -156,6 +155,7 @@ const MakePageV2 = ({history, userObj}) => {
     }
 
     const getTemplateFromUser = async () => {
+        setLoading(true)
         let ttem
 
         const ssede = await dbService.doc(`saved-page/${location.pathname.split('/')[2]}`)
@@ -166,6 +166,7 @@ const MakePageV2 = ({history, userObj}) => {
             alert("코드에 해당하는 템플릿이 존재하지 않습니다.")
             history.push('/questions')
             history.go()
+            setLoading(false)
         }else{
             ttem.setting.urlId = ''
     
@@ -173,6 +174,7 @@ const MakePageV2 = ({history, userObj}) => {
             setNavi(ttem.navi)
             setFoot(ttem.foot)
             setSetting(ttem.setting)
+            setLoading(false)
         }
     }
 
@@ -337,19 +339,28 @@ const MakePageV2 = ({history, userObj}) => {
                                         borderRadius:`${setting.fta.shape}px`, 
                                         border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
                                         boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`,
-                                        fontSize:'0.7em'
+                                        fontSize:'0.7em',
+                                        color:`${setting.fta.color}`,
                                     }}>
-                                    <TextareaAutosize className='text-input'  
-                                        placeholder="플로팅 버튼입니다!"
-                                        value={setting.fta.text} 
-                                        onChange={e => setSetting(produce(setting, draft => {
-                                            draft.fta.text = e.target.value;
-                                        }))}
-                                        style={{
-                                            fontFamily: `${setting.smallFont}`,
-                                            resize: 'none'
-                                        }}
-                                        color={setting.fta.color} align="center" />
+                                    
+                                    <div 
+                                        className="alignCenter"
+                                        style={{width:'100%', cursor:'default'}}>
+                                        <ButtonEditor  
+                                            placeholder="플로팅 버튼입니다!"
+                                            data={setting.fta.text} 
+                                            onChange={(event, editor) => {
+                                                const data = editor.getData();
+                                                setSetting(produce(setting, draft => {
+                                                    draft.fta.text = data;
+                                                }))
+                                            }}
+                                            style={{
+                                                fontFamily: `${setting.smallFont}`,
+                                                resize: 'none'
+                                            }}
+                                            color={setting.fta.color} align="center" />
+                                    </div>
                                 </div>
                             </div> }
                             </>

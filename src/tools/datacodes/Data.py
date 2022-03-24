@@ -13,7 +13,7 @@ KEY_FILE_LOCATION = './client_secrets.json'
 VIEW_ID = '256626925'
 FILE_PATH = './gadata.json'
 
-cred = credentials.Certificate("kiwi.json")
+cred = credentials.Certificate("./kiwi.json")
 firebase_admin.initialize_app(cred, {
     'projectId': 'kiwi-d5dd3',
 })
@@ -51,7 +51,7 @@ def get_report(analytics):
                 {
                     'viewId': VIEW_ID,
                     'dateRanges': [{
-                        'startDate': '180daysAgo',
+                        'startDate': '30daysAgo',
                         'endDate': 'today'
                     }],
                     'metrics': [
@@ -64,8 +64,8 @@ def get_report(analytics):
                     'dimensions': [
                         {'name': 'ga:pagePath'}
                     ]
-                    # dimensions에 해당하는 카테고리에서
-                    # metrics의 값이다.
+                    # dimensions?~W~P ?~U??~K??~U~X?~J~T 카?~E~L?| 리?~W~P?~D~\
+                    # metrics?~]~X ?~R?~]??~K?.
                 }]
         }
     ).execute()
@@ -91,12 +91,12 @@ def print_response(response):
             tempMetric = []
 
             for header, dimension in zip(dimensionHeaders, dimensions):
-                # 이건 디멘션 : pagePath, fullReferrer 등이 보여짐
+                # ?~]?건 ?~T~T?~X?~E~X : pagePath, fullReferrer ?~S??~]? 보?~W??~P
                 tempMetric.append([header, dimension])
 
             for i, values in enumerate(dateRangeValues):
                 for metricHeader, value in zip(metricHeaders, values.get('values')):
-                    # 이건 매트릭 : users, sessions 등이 보여짐
+                    # ?~]?건 매?~J?릭 : users, sessions ?~S??~]? 보?~W??~P
                     tempMetric.append([metricHeader.get('name'), value])
             tempDimension.append(tempMetric)
 
@@ -135,9 +135,10 @@ def main():
     analytics = initialize_analyticsreporting()
     response = get_report(analytics)
     result = print_response(response)
+    print(result)
     with open(FILE_PATH, 'w') as f:
         json.dump(result, f)
-    print("실행됨")
+    print("?~K??~V~I?~P?")
 
 
 if __name__ == '__main__':

@@ -35,6 +35,9 @@
     min-height: 100%;
     width: 100%;
     height: 100%;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-color:white;
 }
 .section__container-inner{
     /* 이거 아주 중요합니다,, */

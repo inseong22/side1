@@ -3,10 +3,50 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import AutosizeInput from 'react-input-autosize';
+import {ButtonEditor} from '../tools/Editor'
 import '../SectionTypes/components/ReturnButton.css'
 
-function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
+function NaviConatainer({navi, setNavi}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
+
+    const CustomButton = (type) => { return (
+        <>
+        <div className="cta-button-edit" style={{
+            borderRadius:`${state.setting[type].borderRadius}px`,
+            backgroundColor:`${state.setting[type].backgroundColor}`,
+            color:`${state.setting[type].color}`,
+            boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
+            border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
+            textAlign: 'center',
+            fontFamily:`Pretendard-Regular`,
+            fontSize:'14px',
+        }}>
+            {/* <AutosizeInput 
+                className="text-input-flex" 
+                value={ navi.button[type].text } 
+                onChange={(e) => setNavi(produce(navi, draft => {
+                    draft.button[type].text = e.currentTarget.value;
+                }))} 
+                inputStyle={{
+                    fontSize:14,
+                    borderRadius:`${state.setting[type].borderRadius}px`,  
+                    backgroundColor:`rgba(0,0,0,0)`, 
+                    padding: `2px 8px`, 
+                    }} /> */}
+            <div style={{padding:'10px 15px'}}>
+                <ButtonEditor 
+                    data={navi.button[type].text}
+                    onChange={(event, editor) => {
+                        const data = editor.getData();
+                        setNavi(produce(navi, draft => {
+                            draft.button[type].text = data;
+                        }))
+                    }}
+                />
+            </div>
+        </div>
+        </>
+        )}
 
     return (
         <>
@@ -22,81 +62,63 @@ function NaviConatainer({navi, setNavi, CustomCtaButton, CustomGhostButton}) {
                     <img src={navi.logo.image.attachment} width={navi.logo.image.width} />
                 }
                 {navi.logo.text.use && 
-                    <AutosizeInput
-                        name="form-field-name"
-                        value={navi.title}
-                        placeholder="서비스명을 입력하세요"
-                        inputStyle={{ 
-                            // textAlign:`${navi.logo.align === 'center' && navi.button.use ? 'right' : navi.logo.align === 'center' ? 'center' : 'left'}`,
-                            display: 'flex',
-                            zIndex: 5,
-                            color:`${navi.logo.text.color}`, 
-                            fontFamily:`${state.setting.font}`,
-                            fontSize:`${state.isPhone ? '19px' : '24px'}`,
-                            resize:'none',
-                            padding: '0px',
-                            marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,
-                            marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
-                            backgroundColor: 'transparent',
-                        }}
-                        onChange={(e) => {
-                         setNavi(produce(navi, draft => {
-                            draft.title = e.currentTarget.value;
-                        }))
-                       }}
-                    />
+                    <div style={{
+                        // textAlign:`${navi.logo.align === 'center' && navi.button.use ? 'right' : navi.logo.align === 'center' ? 'center' : 'left'}`,
+                        display: 'flex',
+                        zIndex: 5,
+                        color:`${navi.logo.text.color}`, 
+                        fontFamily:`${state.setting.font}`,
+                        fontSize:`${state.isPhone ? '19px' : '24px'}`,
+                        resize:'none',
+                        padding: '0px',
+                        marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,
+                        marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
+                        backgroundColor: 'transparent',
+                    }}>
+                        {/* <AutosizeInput
+                            name="form-field-name"
+                            value={navi.title}
+                            placeholder="서비스명을 입력하세요"
+                            inputStyle={{ 
+                                // textAlign:`${navi.logo.align === 'center' && navi.button.use ? 'right' : navi.logo.align === 'center' ? 'center' : 'left'}`,
+                                display: 'flex',
+                                zIndex: 5,
+                                color:`${navi.logo.text.color}`, 
+                                fontFamily:`${state.setting.font}`,
+                                fontSize:`${state.isPhone ? '19px' : '24px'}`,
+                                resize:'none',
+                                padding: '0px',
+                                marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,
+                                marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
+                                backgroundColor: 'transparent',
+                            }}
+                            onChange={(e) => {
+                                setNavi(produce(navi, draft => {
+                                    draft.title = e.currentTarget.value;
+                                }))
+                            }}
+                            /> */}
+                        <ButtonEditor
+                            data={navi.title}
+                            onChange={(event, editor) => {
+                                const data = editor.getData();
+                                setNavi(produce(navi, draft => {
+                                    draft.title = data;
+                                }))
+                            }}
+                        />
+                    </div>
                 }
             </div>
         }  
         {navi.button.use && !state.isPhone &&
         <div className="make-nav-buttonc" style={{justifyContent:`${navi.button.align}`}}>
-            { navi.button.cta.use && 
-                <div className="cta-button-edit" style={{
-                    borderRadius:`${state.setting.cta.borderRadius}px`,
-                    backgroundColor:`${state.setting.cta.backgroundColor}`,
-                    color:`${state.setting.cta.color}`,
-                    boxShadow:`${state.setting.cta.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
-                    border:`${state.setting.cta.border ? `1px solid ${state.setting.cta.borderColor}` : 'none'}`,
-                    display: 'block'
-                }} onClick={() => {}}>
-                    <AutosizeInput 
-                    className="text-input-button ti" 
-                    value={navi.button.cta.text } 
-                    onChange={(e) => setNavi(produce(navi, draft => {
-                        draft.button.cta.text = e.currentTarget.value;
-                    }))} 
-                    inputStyle={{
-                        textAlign: 'center', 
-                        fontFamily:`${state.setting.smallFont}`, 
-                        borderRadius:`${state.setting.cta.borderRadius}px`,  
-                        backgroundColor:`${state.setting.cta.backgroundColor}`, 
-                        padding: `${navi.button.cta.padding*0.3}px ${navi.button.cta.padding}px`
-                    }}/>
-                </div>
-            }
-                { navi.button.ghost.use && 
-                <div className="cta-button-edit" style={{
-                    marginLeft:`${ navi.button.cta.use ? '5px' : '0px'}`,
-                    borderRadius:`${state.setting.ghost.borderRadius}px`,
-                    backgroundColor:`${state.setting.ghost.backgroundColor}`,
-                    color:`${state.setting.ghost.color}`,
-                    boxShadow:`${state.setting.ghost.shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
-                    border:`${state.setting.ghost.border ? `1px solid ${state.setting.ghost.borderColor}` : 'none'}`,
-                    display: 'block'
-                }} onClick={() => {}}>
-                    <AutosizeInput className="text-input-button ti"  value={navi.button.ghost.text } 
-                    onChange={(e) => setNavi(produce(navi, draft => {
-                        draft.button.ghost.text = e.currentTarget.value;
-                    }))} 
-                    inputStyle={{
-                        textAlign: 'center',
-                        fontFamily:`${state.setting.smallFont}`, 
-                        borderRadius:`${state.setting.ghost.borderRadius}px`,  
-                        backgroundColor:`${state.setting.ghost.backgroundColor}`,
-                        padding: `${navi.button.ghost.padding*0.3}px ${navi.button.ghost.padding}px`
-                    }}/>
-                </div>
-                }
+            <span>
+                { navi.button.cta.use && CustomButton('cta') }
+            </span>
+            <span>
+                { navi.button.ghost.use && CustomButton('ghost')}
+            </span>
         </div>
         }     
         </>
