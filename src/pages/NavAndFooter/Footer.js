@@ -1,4 +1,5 @@
 import React from 'react'
+import {Instagram} from '@styled-icons/boxicons-logos'
 
 function Footer() {
     return (
@@ -28,6 +29,13 @@ function Footer() {
                 <a href="https://striped-cabin-4bf.notion.site/Surfee-be94494cf8c248e7b03a84e4c3966e1e" target="_blank" className="footer-text-click">
                   개인정보 처리방침
                 </a>
+              </div>
+              <div className="footer-item">
+                <Instagram size="30" style={{cursor:'pointer'}} onClick={() => {
+                  window.open(
+                    'https://www.instagram.com/surfee.official/'
+                  )
+                }} />
               </div>
             </div>
         </div>

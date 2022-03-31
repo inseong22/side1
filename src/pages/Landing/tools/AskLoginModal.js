@@ -1,10 +1,10 @@
-import React, {useState, useContext} from 'react'
+import React from 'react'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Close } from '@styled-icons/evaicons-solid';
 import {Link} from 'react-router-dom'
-import d1 from '../../../tools/img/main/3d1.png'
-import d2 from '../../../tools/img/main/3d2.png'
+import d1 from '../../../tools/img/main/3d1.webp'
+import d2 from '../../../tools/img/main/3d2.webp'
 import d3 from '../../../tools/img/main/3d3.png'
 import './AskLoginModal.css'
 

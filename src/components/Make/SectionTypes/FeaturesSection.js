@@ -8,6 +8,7 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import FeatureCard from './components/FeatureCard'
+import Editor from '../tools/Editor'
 
 function FeaturesSection({content, setting}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -22,26 +23,54 @@ function FeaturesSection({content, setting}) {
                 }
                 {
                     content.elementText.use && 
-                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%', marginTop:`${content.element.use ? '5px' : '0px'}`}}>
+                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%', marginTop:`${content.element.use ? '10px' : '0px'}`}}>
                     {
                         content.elementText.titleUse && 
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                                <TextAuto className="text-input" 
-                                    value={item.title} 
-                                    color = {content.elementText.titleColor} 
-                                    align = {state.isPhone ? content.mobile.align : content.elementText.align}
-                                    onChange={e => action.setContents(produce(state.contents, draft => {
-                                        draft[state.secNum].elements[index].title = e.currentTarget.value;
-                                    }))} 
-                                    size={content.elementText.titleSize/20} 
-                                    placeholder="특징"
-                                />
+                                <div 
+                                    className={state.isPhone ? content.mobile.align === 'start' ? 'alignLeft' : 'alignCenter' : content.elementText.align === 'start' ? 'alignLeft' : 'alignCenter'}
+                                    style={{width:'100%', color:`${content.elementText.titleColor}`, fontSize:`${content.elementText.titleSize/20}em`}}>
+                                    <Editor 
+                                        data={item.title}
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData();
+                                            action.setContents(produce(state.contents, draft => {
+                                                draft[state.secNum].elements[index].title = data;
+                                            }))
+                                        }}
+                                    />
+                                    {/* <TextAuto className="text-input" 
+                                        value={item.title} 
+                                        color = {content.elementText.titleColor} 
+                                        align = {state.isPhone ? content.mobile.align : content.elementText.align}
+                                        onChange={e => action.setContents(produce(state.contents, draft => {
+                                            draft[state.secNum].elements[index].title = e.currentTarget.value;
+                                        }))} 
+                                        size={content.elementText.titleSize/20} 
+                                        placeholder="특징"
+                                    /> */}
+                                </div>
                             </div>
                     }
                     {
                         content.elementText.descUse && 
                             <div className="df-margin-small feature-desc">
-                                <TextareaAutosize 
+                                <div 
+                                    className={state.isPhone ? content.mobile.align === 'start' ? 'alignLeft' : 'alignCenter' : content.elementText.align === 'start' ? 'alignLeft' : 'alignCenter'}
+                                    style={{width:'100%', color:`${content.elementText.descColor}`, 
+                                        fontFamily:`${state.setting.smallFont}`, 
+                                        fontSize:`${content.elementText.descSize/20}em`}}>
+                                    <Editor 
+                                        data={item.desc}
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData();
+                                            action.setContents(produce(state.contents, draft => {
+                                                draft[state.secNum].elements[index].desc = data;
+                                            }))
+                                        }}
+                                    />
+                                </div>
+                                {/* <TextareaAutosize 
                                     className="text-input"  
                                     value={item.desc} 
                                     color = {content.elementText.descColor}
@@ -58,7 +87,7 @@ function FeaturesSection({content, setting}) {
                                     }}
                                     placeholder="여기를 클릭하여 서비스 및 제품의 특징을 적어보세요."
                                     spellCheck="false"
-                                />
+                                /> */}
                             </div>
                     }
                     </div>

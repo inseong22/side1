@@ -227,6 +227,7 @@ export const ButtonEditor =(props) => {
           Strikethrough,
           Font,
           List,
+          Link,
           PasteFromOffice,
           TextTransformation
         ],

@@ -4,6 +4,7 @@ import './App.css';
 import LoginPage from './pages/Login/Login/LoginPage'
 import UserLandingPage from './pages/UserLanding/UserLandingPage';
 import MainPageV2 from './pages/Landing/MainPageV2';
+import MainPageV3 from './pages/Landing/MainPageV3';
 import MakePageV2 from './pages/Make/MakePageV2';
 import AdminPage from './pages/AdminPage/AdminPage';
 import ResponsePage from './pages/Response/ResponsePage';
@@ -51,6 +52,9 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                             </Route>
                             <Route exact path="/" onUpdate={() => window.scrollTo(0, 0)}>
                                 <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
+                            </Route>
+                            <Route exact path="/v3" onUpdate={() => window.scrollTo(0, 0)}>
+                                <MainPageV3 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
                             </Route>
                             <Route path="/response" onUpdate={() => window.scrollTo(0, 0)}>
                                 <ResponsePage history={history} userObj={userObj}/> 

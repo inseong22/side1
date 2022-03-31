@@ -20,9 +20,12 @@ function ReturnButton({content, onlyapp}){
             border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
             textAlign: 'center',
             fontSize:'14px',
-            fontFamily:`Pretendard-Regular`,
         }}>
-            <div style={{padding:'10px 15px'}}>
+            <div style={{
+                padding:'10px 15px',
+                fontFamily:`Pretendard-Regular`,
+                fontWeight:'500',
+            }}>
             <ButtonEditor 
                 data={content.button[type === "cta" ? 'ctaText' : 'ghostText']}
                 onChange={(event, editor) => {
@@ -49,7 +52,7 @@ function ReturnButton({content, onlyapp}){
                                     className="input-placeholder" 
                                     placeholder={item} 
                                     key={index} 
-                                    style={{  margin:'4px', padding: `11px 10px`, }}/>
+                                    style={{  margin:'4px', padding: `13px 10px`, }}/>
                     })} 
                     {
                         content.button[type === 'cta' ? 'ctaCheck' : 'ghostCheck'] && 
@@ -88,7 +91,7 @@ function ReturnButton({content, onlyapp}){
         : 
         <>
         {content.button.use && 
-                    <div style={{width:'100%'}}>
+                    <div style={{width:'100%'}} onClick={() => action.setFocus('button')}>
                         <div className="button__container" style={{
                             justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`,
                             flexDirection:`${ 

@@ -10,7 +10,7 @@ const Alert = styled('div')`
     padding:10px 18px;
     position: fixed;
     top:20px;
-    z-index:3000;
+    z-index:23000;
     left:45vw;
 `;
 
@@ -21,7 +21,7 @@ const Copy = styled('div')`
     padding:10px 18px;
     position: fixed;
     top:20px;
-    z-index:3000;
+    z-index:23000;
     left:45vw;
     box-shadow:2px 4px 14px #e2e2e2;
 `;
@@ -35,19 +35,25 @@ const Deploy = styled('div')`
     padding:10px 18px;
     position: fixed;
     top:20px;
-    z-index:3000;
+    z-index:23000;
     left:30vw;
     box-shadow:2px 4px 14px #e2e2e2;
     text-align: center;
 `
 
-function MiniModal({open, setOpen, copy, deploy, history, text}) {
+function MiniModal({open, setOpen, copy, deploy, history, text, long}) {
 
     useEffect(() => {
         if(open && !deploy){
-            setTimeout(() => {
-                setOpen(false);
-            }, 2100)
+            if(long){
+                setTimeout(() => {
+                    setOpen(false);
+                }, 4100)
+            }else{
+                setTimeout(() => {
+                    setOpen(false);
+                }, 2100)
+            }
         }
     })
 

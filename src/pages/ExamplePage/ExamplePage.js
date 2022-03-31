@@ -5,6 +5,9 @@ import ex3 from '../../tools/img/main/ex3.png'
 import ex4 from '../../tools/img/main/ex4.png'
 import ex5 from '../../tools/img/main/ex5.png'
 import ex6 from '../../tools/img/main/ex6.png'
+import b1 from '../../tools/img/main/b1.png'
+import b2 from '../../tools/img/main/b2.png'
+import o1 from '../../tools/img/main/o1.png'
 import Footer from '../NavAndFooter/Footer'
 import NavBarV2 from '../NavAndFooter/NavBarV2'
 import TemplateModal from './TemplateModal'
@@ -45,8 +48,25 @@ const exs = [
     },
 ]
 
-const ExampleCard = ({img, title, url}) => {
+const examples = [
+    {
+        img:b1,
+        title:<span>버블리 컴퍼니 - 내 일을 위한 워크로그<br/>by. 퍼블리(PUBLY)</span>,
+        url:'bubblyworksurfeex'
+    },
+    {
+        img:b2,
+        title:<span>버블리 컴퍼니 - 마케터의 한 문장 북클럽<br/>by. 퍼블리(PUBLY)</span>,
+        url:'bubblywork2surfeex'
+    },
+    {
+        img:o1,
+        title:<span>OhJandi 🍀<br/>by. OhJandi (@ohjandi_official)</span>,
+        url:'ohjandi'
+    },
+]
 
+export const ExampleCard = ({img, title, url}) => {
     return(
         <div className="excard uphover2" style={{cursor:'pointer'}} onClick={()=>{
                 window.open(
@@ -56,24 +76,6 @@ const ExampleCard = ({img, title, url}) => {
                 }}>
             <div className="back-image-fit excard-image"
                 style={{backgroundImage:`url(${img})`}}>
-                {/* <div className="excard-black">
-                    <Link className="excard-button-1" to={{
-                        pathname:`/make`,
-                        state:{
-                            template:true,
-                            templateNum:url,
-                        }}}>
-                        템플릿 사용하기
-                    </Link>
-                    <div className="excard-button-2" onClick={()=>{
-                        window.open(
-                                'https://surfee.co.kr/' + url,
-                                '_blank' // <- This is what makes it open in a new window.
-                            );
-                        }}>
-                        페이지 보기
-                    </div>
-                </div> */}
             </div>
             <div className="excard-title">
                 {title}
@@ -83,6 +85,18 @@ const ExampleCard = ({img, title, url}) => {
 }
 
 export const LandingPageExamples = () => {
+    return(
+        <div style={{ boxSizing:'border-box', flexWrap: 'wrap', marginTop:'15px', display:'flex', flexDirection:'row', alignItems:'center', justifyContent: 'center', width:'100%'}}>
+            {examples.map((item, index) => {
+                return(
+                    <ExampleCard key={index} img={item.img} title={item.title} url={item.url}/>
+                )
+            })}
+        </div>
+    )
+}
+
+export const UserExamples = () => {
     return(
         <div style={{ boxSizing:'border-box', flexWrap: 'wrap', marginTop:'15px', display:'flex', flexDirection:'row', alignItems:'center', justifyContent: 'center', width:'100%'}}>
             {exs.map((item, index) => {

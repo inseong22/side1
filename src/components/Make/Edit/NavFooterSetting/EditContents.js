@@ -122,8 +122,7 @@ function EditContents({setting, navi, setNavi, foot, setFoot, elementsRef}) {
                 <DragDropContext onDragEnd={handleChange}>
                     <Droppable droppableId="sectionsss">
                         {(provided) => 
-                            (
-                                <>
+                            ( <>
                             <div {...provided.droppableProps} ref={provided.innerRef} style={{width:'100%', display: 'flex', justifyContent:'center', alignItems: 'center', flexDirection:'column'}}>
                                 {state.contents.map((item, index) => {
                                     return(

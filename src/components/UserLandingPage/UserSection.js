@@ -87,7 +87,10 @@ function UserSection({content, setting}) {
     return(
         <div className="new-section">
             <div className="section__container" 
-            style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat'}} >
+            style={{
+                backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat', 
+                backgroundAttachment:`${content.backgroundImage.fixed ? 'fixed' : 'scroll'}`
+            }}>
             {
                 content.backgroundType === 'color' ?
                 <div style={{backgroundColor:`${content.backgroundColor}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>

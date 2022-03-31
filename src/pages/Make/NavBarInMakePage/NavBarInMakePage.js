@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 // import { Button } from 'antd';
 import './MakeNavBar.css';
 import { MyContext } from '../MakePageV2'
@@ -35,6 +35,11 @@ const NavBarInMakePage = ({history, userObj, full, setFull, isPhone, setIsPhone,
     const [tutorialOpen, setTutorialOpen] = useState(false);
     const [saveOpen, setSaveOpen] = useState(false);
     const [saveLoading, setSaveLoading] = useState(false);
+    const [miniOpen, setMiniOpen] = useState(false)
+
+    useEffect(() => {
+        setMiniOpen(true);
+    }, [])
   
     const handleClick = () => {
         setDeviceOpen(!deviceOpen);
@@ -436,6 +441,7 @@ const afterSaveImage = async (returned) => {
             <LoginModal open={loginModal} setOpen={setLoginModal} />
             <MakeTutorialModal open={tutorialOpen} setOpen={setTutorialOpen} />
             <MiniModal open={saveOpen} setOpen={setSaveOpen} />
+            {/* <MiniModal open={miniOpen} setOpen={setMiniOpen} long text="첫 접속 시 페이지가 안정되기까지 수 초가 소요될 수 있습니다." /> */}
         </ChakraProvider>
     )
 }

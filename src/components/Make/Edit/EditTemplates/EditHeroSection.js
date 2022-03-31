@@ -62,7 +62,7 @@ function EditHeroSection({content, category}) {
                     <Layout content={content} version='main'/>
                     <EditTitleDesc content={content} />
                     <Contents content={content} />
-                    <OpenCloseCustom title="버튼" use={content.button.use}>
+                    <OpenCloseCustom title="버튼" use={content.button.use} open={state.focus === 'button'}>
                         <AddCtaButton content={content} num={1} />
                         <AddGhostButton content={content} num={1} />
                     </OpenCloseCustom>

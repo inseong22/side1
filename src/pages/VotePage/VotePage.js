@@ -125,7 +125,7 @@ function VotePage({history, isLoggedIn}) {
     }
 
     return (
-        <div style={{width:'100%'}}>
+        <div style={{width:'100%', background:'rgba(0,0,0,0.1)'}}>
         <NavBarV2 history={history} isLoggedIn={isLoggedIn} />
         <div className="center-column" style={{padding:'100px 0px', fontFamily:'Noto Sans KR'}}>
             <div style={{placeItems:'center', textAlign:'center', width:'100%'}}>
@@ -200,7 +200,7 @@ function VotePage({history, isLoggedIn}) {
                                 return(
                                     <div className="vote-option" onClick={() => setSelect(produce(select, draft => {
                                         draft[index] = !draft[index];
-                                    }))} style={{border:`2px solid ${select[index] ? '#6c63ff' : 'rgba(0,0,0,0)'}`, color:`${select[index] ? '#6c63ff' : 'rgba(0,0,0,1)'}`}}>
+                                    }))} style={{border:`1px solid ${select[index] ? '#6c63ff' : 'rgba(0,0,0,0.15)'}`, color:`${select[index] ? '#6c63ff' : 'rgba(0,0,0,1)'}`}}>
                                         {FEATURES[index]}
                                     </div>
                                 )

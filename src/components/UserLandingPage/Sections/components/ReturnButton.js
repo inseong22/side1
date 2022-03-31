@@ -52,6 +52,8 @@ const CustomButton = (type) => { return (
         backgroundColor:`${state.setting[type].backgroundColor}`,
         boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
         border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
+        color:`${state.setting[type].color}`,
+        fontWeight:'500',
     }} onClick={() => {
         if(content.button[type === "cta" ? 'ctaOption' : 'ghostOption'] === 'link'){
             moveToPage(type)
@@ -63,9 +65,23 @@ const CustomButton = (type) => { return (
             apply()
         }
     }}>
-        <AutosizeInput className="text-input-flex" value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } 
+    <div className="text-input-flex" 
+        dangerouslySetInnerHTML={{__html:content.button[type === "cta" ? 'ctaText' : 'ghostText']}}
+        style={{
+            cursor:'pointer',
+            border:'none',
+            textAlign: 'center',
+            fontSize:'14px',
+            fontFamily:`${state.setting.smallFont}`,
+            borderRadius:`${state.setting[type].borderRadius}px`,  
+            backgroundColor:`rgba(0,0,0,0)`, 
+            padding:'12px 16px',
+        }} />
+        {/* <div className="text-input-flex" 
+            dangerouslySetInnerHTML={{__html:content.button[type === "cta" ? 'ctaText' : 'ghostText']}}
+        />
+        <AutosizeInput value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } 
             inputStyle={{
-                color:`${state.setting[type].color}`,
                 cursor:'pointer',
                 border:'none',
                 textAlign: 'center',
@@ -73,12 +89,11 @@ const CustomButton = (type) => { return (
                 fontFamily:`${state.setting.smallFont}`,
                 borderRadius:`${state.setting[type].borderRadius}px`,  
                 backgroundColor:`rgba(0,0,0,0)`, 
-                padding: `5px 8px`, 
+                padding: '5px 8px', 
                 WebkitTextFillColor: `${state.setting[type].color}`,
                 WebkitOpacity: 1,
                 }}
-                disabled/>
-    
+                disabled/> */}
     </div>)}
     
     const returnInputs = (type) => {
@@ -94,7 +109,7 @@ const CustomButton = (type) => { return (
                             <input 
                                 className="input-placeholder" 
                                 placeholder={item} 
-                                style={{ margin:'4px', padding: '15px 10px', }}
+                                style={{ margin:'4px', padding: '13px 10px', }}
                                 onChange={e => setValues(produce(values, draft => {
                                     draft[index] = e.currentTarget.value
                                 }))} 

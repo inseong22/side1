@@ -47,6 +47,7 @@
 
 .ck.ck-editor__editable_inline{
     padding:0px 0px;
+    overflow: hidden;
 }
 
 .ckeditor-container:hover{
@@ -63,12 +64,9 @@
 
 .ck-media__placeholder__url__text{
     color:blue;
-}
-
-.ck-button{
-    background-color:red;
-}                                                                                               
+}                                                                            
 
 .ck a{
     color:black;
+    background-color: rgba(0,0,0,0);
 }

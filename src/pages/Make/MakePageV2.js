@@ -80,14 +80,6 @@ const MakePageV2 = ({history, userObj}) => {
     const [feedback, setFeedback] = useState(lodash.cloneDeep(defaults.feedback));
     const elementsRef = useRef([0,1,2,3,4,5,6,8,9,7,10,11,12,13,14,15].map(() => createRef()));
 
-    // const [bgc, setBgc] = useState('red');
-
-    // useMemo(() => {
-    //     setTimeout(() => {
-    //         setFocus('')
-    //     }, 1150)
-    // }, [focus])
-
     // 반복 실행되는 useEffect
     useEffect(() => {
         function repeat(){
@@ -108,25 +100,16 @@ const MakePageV2 = ({history, userObj}) => {
             if(location.state.now){
                 loadLocalStorage()
                 setIsPhone(location.state.isPhone)
+                setLoad(true);
             }else if(location.state.template){
                 getTemplate()
+                setLoad(true);
             }else{
-                setLoading(true)
-
-                const item = location.state.item;
-                setContents(item.contents);
-                setNavi(item.navi);
-                setFeedback(item.feedback);
-                setFoot(item.foot);
-                setSetting(item.setting);
-                setOpen(false);
-                setEditing(true);
-                setEditingId(item.id);
-                
-                setLoading(false);
-                saveLocalStorage();
+                getEdit()
+                // saveLocalStorage();
             }
         }else if(location.pathname.length > 10 && location.pathname.split('/')[2]){
+            setLoad(true);
             setConfirmMessage(<div>공유받은 템플릿을 사용하겠습니까?</div>)
             setOpenConfirm(true);
             setCallback(() => getTemplateFromUser);
@@ -139,9 +122,9 @@ const MakePageV2 = ({history, userObj}) => {
             }else{
                 saveLocalStorage();
             }
+            setLoad(true);
         }
 
-        setLoad(true);
     },[])
 
     const contextValue = {
@@ -154,8 +137,37 @@ const MakePageV2 = ({history, userObj}) => {
         action : {setSecNum, setIsPhone, setCategory, setFocus},
     }
 
+    const getEdit = async () => {
+        setLoading(true)
+
+        const item = location.state.item;
+
+        let ttem
+
+        const ssede = await dbService.doc(`saved-page/${item}`)
+            .get()
+            .then(snapshot => ttem = {...snapshot.data(), id:snapshot.id});
+
+        console.log(ttem);
+
+        setOpen(false);
+        setEditing(true);
+        setEditingId(item);
+        
+        setContents(ttem.contents)
+        setNavi(ttem.navi)
+        setFoot(ttem.foot)
+        setSetting(ttem.setting)
+        
+        setTimeout(() => {
+            setLoad(true);
+            setLoading(false);
+        },50)
+    }
+
     const getTemplateFromUser = async () => {
         setLoading(true)
+        setLoad(false);
         let ttem
 
         const ssede = await dbService.doc(`saved-page/${location.pathname.split('/')[2]}`)
@@ -163,10 +175,10 @@ const MakePageV2 = ({history, userObj}) => {
             .then(snapshot => ttem = {...snapshot.data(), id:snapshot.id});
         
         if(!ttem.setting){
+            setLoading(false)
             alert("코드에 해당하는 템플릿이 존재하지 않습니다.")
             history.push('/questions')
             history.go()
-            setLoading(false)
         }else{
             ttem.setting.urlId = ''
     
@@ -174,7 +186,10 @@ const MakePageV2 = ({history, userObj}) => {
             setNavi(ttem.navi)
             setFoot(ttem.foot)
             setSetting(ttem.setting)
-            setLoading(false)
+            setTimeout(() => {
+                setLoad(true);
+                setLoading(false);
+            },50)
         }
     }
 
@@ -247,7 +262,7 @@ const MakePageV2 = ({history, userObj}) => {
         </div> 
         :
     <>
-       <MyContext.Provider value={contextValue}>
+        <MyContext.Provider value={contextValue}>
            <MySubContext.Provider value={contextSubValue}>
             <Prompt 
                 when={true}
@@ -263,6 +278,8 @@ const MakePageV2 = ({history, userObj}) => {
                     navi={navi} foot={foot} setting={setting} setNavi={setNavi}
                     saveLocalStorage={saveLocalStorage}
                />
+            {
+            load &&
             <div className="make-page-container" style={{paddingTop:`${full ? '55px' : '60px'}`}}>
                 {/* 아래는 제작하는 곳 */}
                 {
@@ -343,8 +360,7 @@ const MakePageV2 = ({history, userObj}) => {
                                         color:`${setting.fta.color}`,
                                     }}>
                                     
-                                    <div 
-                                        className="alignCenter"
+                                    <div className="alignCenter"
                                         style={{width:'100%', cursor:'default'}}>
                                         <ButtonEditor  
                                             placeholder="플로팅 버튼입니다!"
@@ -367,7 +383,7 @@ const MakePageV2 = ({history, userObj}) => {
                         </div>
                     </div>
                 </div>
-            
+            }
             {/* 모달 모아두기 */}
             <div>
                 {/* <FirstQuestions saveLocalStorage={saveLocalStorage} setContents={setContents} history={history} foot={foot} setFoot={setFoot} type={makingTypeByUser} setType={setMakingTypeByUser} open={open} setOpen={setOpen} navi={navi} setNavi={setNavi} editing={editing} setEditing={setEditing} setting={setting} setSetting={setSetting} setIsPhone={setIsPhone}/> */}

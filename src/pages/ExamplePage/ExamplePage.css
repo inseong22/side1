@@ -64,7 +64,7 @@
 }
 
 .excard-image:hover{
-    height:80%;
+    /* height:80%; */
 }
 
 .excard-image:hover .excard-title{
@@ -83,7 +83,7 @@
     box-sizing:border-box;
     /* transition: all .2s ease-in-out; */
     flex-direction: row;
-    font-weight:700;
+    font-weight:500;
 }
 
 .excard-link{

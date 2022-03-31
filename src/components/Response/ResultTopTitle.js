@@ -117,7 +117,7 @@ function ResultTopTitle({content, myResponses, checkPublished, history, datas}) 
                 <Link to={{
                     pathname:`/make`,
                     state:{
-                        item:content,
+                        item:content.id,
                     }}} 
                     className="default-button-01 opacity-hover" style={{marginLeft:'15px'}}>편집하기</Link>
                 <Button className="default-button-02" style={{marginLeft:'15px'}} colorScheme="6c63ff"

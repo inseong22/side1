@@ -33,6 +33,7 @@
     align-items: center;
     flex-direction: column;
     font-size: 28px;
+    font-family: Pretendard;
 }
 
 .one-section-big{
@@ -78,7 +79,7 @@
 .one-section-small2{
     text-align:left;
     font-size:0.6em;
-    margin-top:35px;
+    margin-top:16px;
     font-weight: 400;
     line-height: 2rem;
     font-family:Pretendard-Regular;
@@ -146,6 +147,60 @@
     background-color:rgba(233, 233, 233, 0.959);
 }
 
+.main__button4{
+    cursor: pointer;
+    background: linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
+    border-radius:6px;
+    color:white;
+    padding:18px 40px;
+    display: flex;
+    align-items:center;
+    justify-content : center;
+    font-size: 16px;
+    border:none;
+    margin-top:50px;
+    text-decoration: none;
+    font-weight:700;
+    z-index:2;
+    margin:10px;
+}
+
+.main__button5{
+    cursor: pointer;
+    background: #E8E7FF;
+    border-radius:6px;
+    color:#6C63FF;
+    padding:18px 40px;
+    display: flex;
+    align-items:center;
+    justify-content : center;
+    font-size: 16px;
+    border:none;
+    margin-top:50px;
+    text-decoration: none;
+    font-weight:700;
+    z-index:2;
+    margin:10px;
+}
+
+.main__button6{
+    cursor: pointer;
+    background: #FFFFFF;
+    border-radius:6px;
+    color:#6C63FF;
+    padding:18px 40px;
+    display: flex;
+    align-items:center;
+    justify-content : center;
+    font-size: 16px;
+    border:none;
+    margin-top:50px;
+    text-decoration: none;
+    font-weight:700;
+    z-index:2;
+    margin:10px;
+}
+
 .main-page-section1{
     width:100%;
     display: flex;
@@ -155,6 +210,7 @@
     padding:5% 0%;
     box-sizing: border-box;
     position: relative;
+    font-family:Pretendard;
 }
 
 .main-section-left{
@@ -248,10 +304,17 @@
     margin-top:20px;
 }
 
+.underline-hover{
+    cursor:pointer;
+}
+
+.underline-hover:hover{
+    text-decoration: underline;
+}
 
 @media screen and (max-width:800px){
     .main-page-container{
-        font-size: 22px;
+        font-size: 18px;
     }
     .main-page-section1{
         flex-direction: column;

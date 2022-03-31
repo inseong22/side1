@@ -22,37 +22,75 @@ import {
     MenuList,
     MenuItem,
   } from '@chakra-ui/react'
+import './Fonts.css'
 
 const fontOptions = [
-    { label: '노토산스', value: 'Noto Sans KR' },
-    { label: '프리텐다드', value: 'Pretendard-Bold' },
-    { label: '나눔스퀘어 라운드', value: 'NanumSquareRound' },
-    { label: '바른 공군', value: 'ROKAFSansBold' },
-    { label: '지마켓 산스', value: 'GmarketSansBold' },
-    { label: '고운 돋움', value: 'GowunDodum-Regular' },
-    { label: '에스코어 드림', value: 'S-CoreDream-7ExtraBold' },
-    { label: '함박눈체', value : 'SF_HambakSnow'},
-    { label: '카페24 서라운드', value: 'Cafe24Ssurround'},
-    { label: '레페리포인트-Black', value:'LeferiPoint-BlackA'},
-    { label: '고운바탕', value : 'GowunBatang-Bold'},
-    { label: '여기어때 잘난체', value: 'yg-jalnan'},
+    { label: 'Gmarket Sans', value: 'GmarketSans' },
+    { label: 'Neo 둥근모', value: 'NeoDunggeunmo' },
+    { label: 'Noto Sans KR', value: 'Noto Sans KR' },
+    { label: 'Pretendard', value: 'Pretendard' },
+    { label: 'Spoqa Han Sans Neo', value: 'SpoqaHanSansNeo' },
+    { label: 'Y유니버스체', value: 'YUniverse' },
+    { label: '강원교육모두', value: 'GangwonEdu_OTF' },
+    { label: '경기천년바탕', value : 'GyeonggiBatang'},
+    { label: '고운바탕', value: 'GowunBatang'},
+    { label: '레페리포인트', value:'LeferiPoint'},
+    { label: '리디바탕', value : 'RIDIBatang'},
+    { label: '마포금빛나루', value: 'MapoGoldenPier'},
+    { label: '마포꽃섬', value: 'MapoFlowerIsland'},
+    { label: '바른공군체', value: 'ROKAFSans'},
+    { label: '배달의민족 을지로체', value: 'BMEULJIRO'},
+    { label: '배달의민족 주아체', value: 'BMJUA'},
+    { label: '산돌 삼립호빵체', value: 'SDSamliphopangche'},
+    { label: '순천체', value: 'Suncheon'},
     { label: '아임혜민', value: 'IM_Hyemin'},
+    { label: '에스코어 드림', value: 'S-CoreDream'},
+    { label: '영도체', value: 'Yeongdo-Rg'},
+    { label: '여기어때 잘난체', value: 'yg-jalnan'},
+    { label: '원스토어 모바일POP체', value: 'ONE-Mobile-POP'},
+    { label: '유앤피플 고딕', value: 'UNPGothicKS'},
+    { label: '이서윤체', value: 'LeeSeoyun'},
+    { label: '조선일보명조', value: 'Chosunilbo_myungjo'},
+    { label: '카페24 고운밤', value: 'Cafe24Oneprettynight'},
+    { label: '카페24 써라운드', value: 'Cafe24Ssurround'},
+    { label: '카페24 아네모네', value: 'Cafe24Ohsquare'},
+    { label: '코트라 희망체', value: 'KOTRAHOPE'},
+    { label: '티머니 둥근바람', value: 'TmoneyRoundWind'},
+    { label: '함박눈체', value: 'SF_HambakSnow'},
 ]
 
 const smallFontOptions = [
-    { label: '노토산스', value: 'Noto Sans KR' },
-    { label: '프리텐다드', value: 'Pretendard-Regular' },
-    { label: '나눔스퀘어 라운드', value: 'NanumSquareRound' },
-    { label: '바른 공군', value: 'ROKAFSansMedium' },
-    { label: '지마켓 산스', value: 'GmarketSansLight' },
-    { label: '고운 돋움', value: 'GowunDodum-Regular' },
-    { label: '에스코어 드림', value: 'S-CoreDream-4Regular' },
-    { label: '함박눈체', value : 'SF_HambakSnow'},
-    { label: '카페24 서라운드', value: 'Cafe24Ssurround'},
-    { label: '레페리포인트-Black', value:'LeferiPoint-WhiteA'},
-    { label: '고운바탕', value : 'GowunBatang-Regular'},
-    { label: '여기어때 잘난체', value: 'yg-jalnan'},
+    { label: 'Gmarket Sans', value: 'GmarketSans' },
+    { label: 'Neo 둥근모', value: 'NeoDunggeunmo' },
+    { label: 'Noto Sans KR', value: 'Noto Sans KR' },
+    { label: 'Pretendard', value: 'Pretendard' },
+    { label: 'Spoqa Han Sans Neo', value: 'SpoqaHanSansNeo' },
+    { label: 'Y유니버스체', value: 'YUniverse' },
+    { label: '강원교육모두', value: 'GangwonEdu_OTF' },
+    { label: '경기천년바탕', value : 'GyeonggiBatang'},
+    { label: '고운바탕', value: 'GowunBatang'},
+    { label: '레페리포인트', value:'LeferiPoint'},
+    { label: '리디바탕', value : 'RIDIBatang'},
+    { label: '마포금빛나루', value: 'MapoGoldenPier'},
+    { label: '마포꽃섬', value: 'MapoFlowerIsland'},
+    { label: '바른공군체', value: 'ROKAFSans'},
+    { label: '배달의민족 을지로체', value: 'BMEULJIRO'},
+    { label: '배달의민족 주아체', value: 'BMJUA'},
+    { label: '산돌 삼립호빵체', value: 'SDSamliphopangche'},
+    { label: '순천체', value: 'Suncheon'},
     { label: '아임혜민', value: 'IM_Hyemin'},
+    { label: '에스코어 드림', value: 'S-CoreDream'},
+    { label: '영도체', value: 'Yeongdo-Rg'},
+    { label: '원스토어 모바일POP체', value: 'ONE-Mobile-POP'},
+    { label: '유앤피플 고딕', value: 'UNPGothicKS'},
+    { label: '이서윤체', value: 'LeeSeoyun'},
+    { label: '조선일보명조', value: 'Chosunilbo_myungjo'},
+    { label: '카페24 고운밤', value: 'Cafe24Oneprettynight'},
+    { label: '카페24 써라운드', value: 'Cafe24Ssurround'},
+    { label: '카페24 아네모네', value: 'Cafe24Ohsquare'},
+    { label: '코트라 희망체', value: 'KOTRAHOPE'},
+    { label: '티머니 둥근바람', value: 'TmoneyRoundWind'},
+    { label: '함박눈체', value: 'SF_HambakSnow'},
 ]
 
 const shapeOptions = [
@@ -114,12 +152,17 @@ function EdtiSetting({setting, setSetting, category, setContents}) {
             <div className="right" style={{width:'80%'}}>
             <Menu>
                 <MenuButton className="font-button opacity-hover" style={{fontFamily:`${setting.font}`, width:'250px'}}>
-                    {fontOptions.filter(doc => doc.value === setting.font)[0].label}
+                    {
+                    fontOptions.filter(doc => doc.value === setting.font).length !== 0 ?
+                        fontOptions.filter(doc => doc.value === setting.font)[0].label
+                        :
+                        <span>폰트 수정이 필요합니다.</span>
+                    }
                     <ChevronDown size="15" style={{position:'absolute', right:'12px'}}/>
                 </MenuButton>
                 <MenuList>
 
-                <div style={{height:'250px'}}>
+                <div style={{height:'350px'}}>
                     <OverflowScrolling className='overflow-scrolling2'>
                     {fontOptions.map((item, index) => {
                         return(
@@ -154,12 +197,16 @@ function EdtiSetting({setting, setSetting, category, setContents}) {
             <div className="right" style={{width:'80%'}}>
             <Menu>
                 <MenuButton className="font-button opacity-hover" style={{fontFamily:`${setting.smallFont}`, width:'250px'}}>
-                    {smallFontOptions.filter(doc => doc.value === setting.smallFont)[0].label}
+                    {smallFontOptions.filter(doc => doc.value === setting.smallFont).length !== 0 ?
+                        smallFontOptions.filter(doc => doc.value === setting.smallFont)[0].label
+                        :
+                        <span>폰트 수정이 필요합니다.</span>
+                }
                     <ChevronDown size="15" style={{position:'absolute', right:'12px'}}/>
                 </MenuButton>
                 <MenuList>
 
-                <div style={{height:'250px'}}>
+                <div style={{height:'350px'}}>
                     <OverflowScrolling className='overflow-scrolling2'>
                     {smallFontOptions.map((item, index) => {
                         return(

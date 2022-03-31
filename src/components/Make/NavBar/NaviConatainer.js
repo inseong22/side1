@@ -3,7 +3,7 @@ import { MyContext } from '../../../pages/Make/MakePageV2'
 import produce from 'immer'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import AutosizeInput from 'react-input-autosize';
-import {ButtonEditor} from '../tools/Editor'
+import { ButtonEditor } from '../tools/Editor'
 import '../SectionTypes/components/ReturnButton.css'
 
 function NaviConatainer({navi, setNavi}) {
@@ -75,7 +75,7 @@ function NaviConatainer({navi, setNavi}) {
                         marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
                         backgroundColor: 'transparent',
                     }}>
-                        {/* <AutosizeInput
+                        <AutosizeInput
                             name="form-field-name"
                             value={navi.title}
                             placeholder="서비스명을 입력하세요"
@@ -91,14 +91,15 @@ function NaviConatainer({navi, setNavi}) {
                                 marginLeft:`${navi.logo.image.use ? '8px' : '0px'}`,
                                 marginRight: `${navi.logo.align === 'center' && navi.button.use ? '-8px' : navi.logo.align === 'center' ? '0px':'0px'}`,
                                 backgroundColor: 'transparent',
+                                transition:'all .01s ease-in-out',
                             }}
                             onChange={(e) => {
                                 setNavi(produce(navi, draft => {
                                     draft.title = e.currentTarget.value;
                                 }))
                             }}
-                            /> */}
-                        <ButtonEditor
+                            />
+                        {/* <ButtonEditor
                             data={navi.title}
                             onChange={(event, editor) => {
                                 const data = editor.getData();
@@ -106,7 +107,7 @@ function NaviConatainer({navi, setNavi}) {
                                     draft.title = data;
                                 }))
                             }}
-                        />
+                        /> */}
                     </div>
                 }
             </div>
