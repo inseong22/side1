@@ -105,7 +105,6 @@ function UserFoot({foot, setting}) {
                                 className="text-no-input"
                                 dangerouslySetInnerHTML={{__html:foot.text.text}}
                                 style={{
-                                        fontFamily:`${setting.smallFont}`, 
                                         color: `${foot.text.color}`,
                                         textAlign:`${foot.text.align}`,
                                         backgroundColor: `${foot.backgroundColor}`,

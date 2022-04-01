@@ -134,6 +134,8 @@
   --feature-writer-size:0.85em;
   --big-margin:12px;
   --mid-margin:8px;
+  
+  --ck-spacing-large:0;
 }
 
 .App {

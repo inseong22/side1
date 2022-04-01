@@ -1,13 +1,10 @@
-import React, { useContext, useState, useRef, useEffect } from 'react'
+import React, {useState} from 'react'
 import { styled } from '@mui/material/styles';
-import { MyContext } from '../../../../pages/Make/MakePageV2'
-import produce from 'immer'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import TextAuto from './TextAuto'
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -78,7 +75,7 @@ const OpenCloseCustom = (props) => {
           <div className="edit-element">
             <div className="accordion__title">
               <div className="title_text" style={{color:`${props.color}`, width:'100%', alignItems: 'start'}}>
-                <div className="qna__word" style={{fontFamily:`${props.setting.smallFont}`}}>Q.</div>
+                <div className="qna__word" style={{fontWeight:'700'}}>Q.</div>
                 <div style={{width:'100%', marginTop:'3px'}}>
                   <div 
                     dangerouslySetInnerHTML={{__html:props.title}}
@@ -86,7 +83,7 @@ const OpenCloseCustom = (props) => {
                       color:`${props.color}`,
                       fontSize:`0.9em`,
                       textAlign:'left',
-                      fontFamily:`${props.setting.smallFont}`
+                      fontFamily:`${props.setting.smallFont}`,
                     }}
                   />
                   {/* <TextAuto 

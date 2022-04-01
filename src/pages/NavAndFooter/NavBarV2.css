@@ -58,10 +58,10 @@
 .nav-on-v2{
     display: flex;
     align-items :center;
-    width:100%;
+    width:60%;
     cursor:pointer;
-    justify-content : center;
-    margin-right:5vw;
+    justify-content : end;
+    padding-right:20%;
     color:black;
 }
 
@@ -84,11 +84,11 @@
 .footer{
     background-color: rgb(245, 245, 245);
     border-top:1px solid rgb(230,230,230);
-    height:200px;
+    height:250px;
     display: flex;
     justify-content : start;
     align-items : start;
-    color:rgb(171, 171, 171);
+    color:rgb(44, 44, 44);
     font-weight:400;
     flex-direction: row;
     width:100%;
@@ -114,7 +114,7 @@
     align-items : center;
     height: 100%;
     box-sizing: border-box;
-    padding:1vh 8vw;
+    padding:5vh 8vw;
   }
 
 .footer-text-click{
@@ -142,7 +142,7 @@
         justify-content: start;
         align-items : center;
     
-        width:50%;
+        width:100%;
         font-size:14px;
     }
 

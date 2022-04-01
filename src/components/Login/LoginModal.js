@@ -126,11 +126,11 @@ function LoginModal({open, setOpen}) {
     return (
         <div>
             <StyledModal
-            aria-labelledby="unstyled-modal-title"
-            aria-describedby="unstyled-modal-description"
-            open={open}
-            onClose={() => setOpen(!open)}
-            BackdropComponent={Backdrop}>
+                aria-labelledby="unstyled-modal-title"
+                aria-describedby="unstyled-modal-description"
+                open={open}
+                onClose={() => setOpen(!open)}
+                BackdropComponent={Backdrop}>
             <Box sx={style}>
                 <div className="login-modal__inner">
                     <div className="modal-top__title">

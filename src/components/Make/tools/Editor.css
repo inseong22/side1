@@ -4,12 +4,12 @@
     --ck-color-base-active-focus:black;
 }
 
-.ck.ck-editor__editable_inline>:last-child{
-    margin-bottom:0px;
+.ck.ck-editor__editable_inline>*:last-child{
+    margin:0px;
 }
 
-.ck.ck-editor__editable_inline>:first-child {
-    margin-top: 0px;
+.ck.ck-editor__editable_inline>*:first-child {
+    margin: 0px;
 }
 
 .ck{

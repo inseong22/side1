@@ -13,6 +13,7 @@ import {LandingPageExamples} from '../ExamplePage/ExamplePage'
 import {ExampleCard} from '../ExamplePage/ExamplePage'
 import styled from 'styled-components'
 import LandingTemplates from '../../components/Landing/LandingTemplates'
+import ChoiceModal from '../../components/Landing/ChoiceModal'
 import "@lottiefiles/lottie-player";
 
 import mainpc from '../../tools/img/main/mainpc.webp';
@@ -42,6 +43,7 @@ const FCard = styled('div')`
 
 function MainPageV3({history, isLoggedIn, userObj}) {
     const [askOpen,setAskOpen] = useState(false);
+    const [choiceOpen,setChoiceOpen] = useState(false);
     const [registerOpen,setRegisterOpen] = useState(false);
     const [commentory, setCommentory] = useState(0);
 
@@ -69,13 +71,27 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                 </button>
                 :
                 isLoggedIn ? 
-                <Link to='/response' className="main__button6 uphover">
-                    지금바로 시작하기
-                </Link>
+                <>
+                    <Link to='/response' className="main__button6 uphover">
+                        지금바로 시작하기
+                    </Link>
+                    <button className="main__button5 uphover" 
+                        style={{padding:'18px 30px'}} 
+                        onClick={() => setChoiceOpen(true)}>
+                        제작이 어려우신가요?
+                    </button>
+                </>
                 :
-                <button className="main__button6 uphover" onClick={() => setAskOpen(true)}>
-                    지금바로 시작하기
-                </button>
+                <>
+                    <button className="main__button6 uphover" onClick={() => setAskOpen(true)}>
+                        지금바로 시작하기
+                    </button>
+                    <button className="main__button5 uphover" 
+                        style={{padding:'18px 30px'}} 
+                        onClick={() => setChoiceOpen(true)}>
+                        제작이 어려우신가요?
+                    </button>
+                </>
             }
         </div>)
     }
@@ -96,34 +112,24 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                 isLoggedIn ? 
                 <>
                     <Link to='/response' className="main__button4 uphover">
-                    지금바로 시작하기
+                        지금바로 시작하기
                     </Link>
-                    {/* <Link to='/surfeeintro' className="main__button3 uphover">
-                        Surfee란?
-                    </Link> */}
+                    <button className="main__button5 uphover" 
+                        style={{padding:'18px 30px'}} 
+                        onClick={() => setChoiceOpen(true)}>
+                        제작이 어려우신가요?
+                    </button>
                 </>
                 :
                 <>
-                {
-                    top === 'top' ?
-                    <>
-                        <button className="main__button4 uphover" onClick={() => setAskOpen(true)}>
+                    <button className="main__button4 uphover" onClick={() => setAskOpen(true)}>
                         지금바로 시작하기
-                        </button>
-                        {/* <Link to='/surfeeintro' className="main__button3 uphover">
-                            Surfee란?
-                        </Link> */}
-                    </>
-                    :
-                    <>
-                        <button className="main__button4 uphover" onClick={() => setAskOpen(true)}>
-                        지금바로 시작하기
-                        </button>
-                        {/* <Link to='/surfeeintro' className="main__button3 uphover">
-                            Surfee란?
-                        </Link> */}
-                    </>
-                }
+                    </button>
+                    <button className="main__button5 uphover" 
+                        style={{padding:'18px 30px'}} 
+                        onClick={() => setChoiceOpen(true)}>
+                        제작이 어려우신가요?
+                    </button>
                 </>
             }
         </div>)
@@ -250,16 +256,16 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                     <>
                         {
                         isMobile ? 
-                            <div style={{textAlign:'left', fontSize:'17px', zIndex:'1'}}>
-                                <div style={{fontWeight:'600', fontFamily:'Pretendard'}}>
-                                스몰브랜드를 시작하는 단계에서 홈페이지를 구축한다는 게<br/>
-                                비용과 관리에서 큰 부담이었어요.<br/>
-                                Surfee의 <Tc>직관적인 디자인과 템플릿</Tc> 덕분에<br/>
-                                오잔디 페이지를 쉽게 제작할 수 있었어요.<br/>
-                                시즌별 이벤트 페이지, 신규 제품 페이지 등으로도 딱이라<br/>
-                                <Tc>스몰브랜드를 운영하시는 분들</Tc>께 적극 추천합니다.
+                            <div style={{textAlign:'left', fontSize:'15px', zIndex:'1'}}>
+                                <div style={{fontWeight:'600', fontFamily:'Pretendard', lineHeight:'1.5rem'}}>
+                                    스몰브랜드를 시작하는 단계에서 홈페이지를 구축한다는 게<br/>
+                                    비용과 관리에서 큰 부담이었어요.<br/>
+                                    Surfee의 <Tc>직관적인 디자인과 템플릿</Tc> 덕분에<br/>
+                                    오잔디 페이지를 쉽게 제작할 수 있었어요.<br/>
+                                    시즌별 이벤트 페이지, 신규 제품 페이지 등으로도 딱이라<br/>
+                                    <Tc>스몰브랜드를 운영하시는 분들</Tc>께 적극 추천합니다.
                                 </div>
-                                <div style={{color:'rgba(0,0,0,0.4)', fontSize:'15px', marginTop:'40px'}}>
+                                <div style={{color:'rgba(0,0,0,0.4)', fontSize:'13px', marginTop:'40px'}}>
                                     오잔디(OhJandi), 브랜드 디렉터, 한스
                                 </div>
                             </div>
@@ -395,9 +401,9 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                             앞으로 업데이트 할 기능을 정하고자 합니다.<br/>
                             추가되었으면 하는 기능에 투표해 주세요 🗳
                         </span>
-                        <Link to='/vote' className="main__button5 uphover" style={{marginTop:'20px'}}>
+                        <button onClick={() => alert('죄송합니다. 해당 페이지는 PC로 접속하셔야 이용가능합니다.')} className="main__button5 uphover" style={{marginTop:'20px'}}>
                             투표하러 가기
-                        </Link>
+                        </button>
                     </div>
                     :
                     <div className="main-section-left">
@@ -481,6 +487,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
             </div>
         </div>
         <Footer />
+        <ChoiceModal open={choiceOpen} setOpen={setChoiceOpen} />
         <AskLoginModal open={askOpen} setOpen={setAskOpen} SomeoneClickMoveToMake={SomeoneClickMoveToMake} registerOpen={registerOpen} setRegisterOpen={setRegisterOpen}/>
         <RegisterModal open={registerOpen} setOpen={setRegisterOpen} />
         {/* <RegisterModal open={loginOpen} setOpen={setLoginOpen} /> */}

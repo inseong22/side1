@@ -16,7 +16,7 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                         className="text-no-input" 
                         dangerouslySetInnerHTML={{__html:content.title.text}}
                         style={{
-                          fontFamily:`${state.setting.font}`, 
+                            fontFamily:`${state.setting.font}`, 
                             fontSize:`${isMobile ? content.title.size/22 : content.title.size/19}em`, 
                             textAlign:`${isMobile ? content.mobile.align : content.title.align}`,
                             resize:'none',
@@ -35,7 +35,7 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
                         dangerouslySetInnerHTML={{__html:content.desc.text}} 
                         style={{
                             fontFamily:`${state.setting.smallFont}`, 
-                            fontSize:`${isMobile ? content.desc.size/19 : content.desc.size/20}em`, 
+                            fontSize:`${isMobile ? content.desc.size/19 : content.desc.size/19}em`, 
                             // boxSizing:`border-box`, 
                             textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
                             resize:'none',

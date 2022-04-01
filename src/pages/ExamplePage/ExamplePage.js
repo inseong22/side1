@@ -8,6 +8,14 @@ import ex6 from '../../tools/img/main/ex6.png'
 import b1 from '../../tools/img/main/b1.png'
 import b2 from '../../tools/img/main/b2.png'
 import o1 from '../../tools/img/main/o1.png'
+import m1 from '../../tools/img/example/m1.webp'
+import m2 from '../../tools/img/example/m2.webp'
+import s1 from '../../tools/img/example/s1.webp'
+import s2 from '../../tools/img/example/s2.webp'
+import p1 from '../../tools/img/example/p1.webp'
+import p2 from '../../tools/img/example/p2.webp'
+import c1 from '../../tools/img/example/c1.webp'
+import c2 from '../../tools/img/example/c2.webp'
 import Footer from '../NavAndFooter/Footer'
 import NavBarV2 from '../NavAndFooter/NavBarV2'
 import TemplateModal from './TemplateModal'
@@ -16,11 +24,6 @@ import {isMobile} from 'react-device-detect'
 import './ExamplePage.css'
 
 const exs = [
-    {
-        img : ex1,
-        title:"Surfee 랜딩페이지",
-        url:''
-    },
     {
         img : ex2,
         title:"Template 2",
@@ -46,18 +49,58 @@ const exs = [
         title:"Template 6",
         url:'template4'
     },
+    {
+        img : m1,
+        title:"Mercury",
+        url:'mercurysurfeeex'
+    },
+    {
+        img : m2,
+        title:"Data",
+        url:'datasurfeeex'
+    },
+    {
+        img : s1,
+        title:"Code Note",
+        url:'codenotesurfeeex'
+    },
+    {
+        img : s2,
+        title:"Cakehouse",
+        url:'cakehousesurfeeex'
+    },
+    {
+        img : c1,
+        title:"Home Bar",
+        url:'homebarsurfeeex'
+    },
+    {
+        img : c2,
+        title:"Fillom",
+        url:'fillomsurfeeex'
+    },
+    {
+        img : p1,
+        title:"포트폴리오 1",
+        url:'port1surfeeex'
+    },
+    {
+        img : p2,
+        title:"포트폴리오 2",
+        url:'port3surfeeex'
+    },
 ]
 
 const examples = [
     {
         img:b1,
         title:<span>버블리 컴퍼니 - 내 일을 위한 워크로그<br/>by. 퍼블리(PUBLY)</span>,
-        url:'bubblyworksurfeex'
+        url:'bubblyworksurfeeex'
     },
     {
         img:b2,
         title:<span>버블리 컴퍼니 - 마케터의 한 문장 북클럽<br/>by. 퍼블리(PUBLY)</span>,
-        url:'bubblywork2surfeex'
+        url:'bubblywork2surfeeex'
     },
     {
         img:o1,
@@ -77,7 +120,7 @@ export const ExampleCard = ({img, title, url}) => {
             <div className="back-image-fit excard-image"
                 style={{backgroundImage:`url(${img})`}}>
             </div>
-            <div className="excard-title">
+            <div className="excard-title" style={{backgroundColor:'white', borderRadius:'0px 0px 6px 6px'}}>
                 {title}
             </div>
         </div>

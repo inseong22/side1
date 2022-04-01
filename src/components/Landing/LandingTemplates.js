@@ -3,6 +3,14 @@ import mainpc from '../../tools/img/main/mainpc.webp';
 import {isMobile} from 'react-device-detect'
 import styled from 'styled-components'
 import {ExampleCard} from '../../pages/ExamplePage/ExamplePage'
+import m1 from '../../tools/img/example/m1.webp'
+import m2 from '../../tools/img/example/m2.webp'
+import s1 from '../../tools/img/example/s1.webp'
+import s2 from '../../tools/img/example/s2.webp'
+import p1 from '../../tools/img/example/p1.webp'
+import p2 from '../../tools/img/example/p2.webp'
+import c1 from '../../tools/img/example/c1.webp'
+import c2 from '../../tools/img/example/c2.webp'
 
 const For = styled('div')`
     font-family: 'Pretendard';
@@ -71,10 +79,10 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', marginTop:'10px', display:'flex', flexDirection:'row', width:`${isMobile ? '100%' : ''}`}}>
-                    <ExampleCard title="ex" url="" img={mainpc} />
+                    <ExampleCard title="Mercury" url="mercurysurfeeex" img={m1} />
                     {
                         !isMobile &&
-                        <ExampleCard title="ex" url="" img={mainpc} />
+                        <ExampleCard title="Data" url="datasurfeeex" img={m2} />
                     }
                 </div>
             </div>
@@ -101,10 +109,10 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', marginTop:'10px', display:'flex', flexDirection:'row', width:'100%'}}>
-                    <ExampleCard title="ex" url="" img={mainpc} />
+                    <ExampleCard title="Code Note" url="codenotesurfeeex" img={s1} />
                     {
                         !isMobile &&
-                        <ExampleCard title="ex" url="" img={mainpc} />
+                        <ExampleCard title="Cakehouse" url="cakehousesurfeeex" img={s2} />
                     }
                 </div>
             </div>
@@ -131,10 +139,10 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', marginTop:'10px', display:'flex', flexDirection:'row', width:'100%'}}>
-                    <ExampleCard title="ex" url="" img={mainpc} />
+                    <ExampleCard title="Home Bar" url="homebarsurfeeex" img={c1} />
                     {
                         !isMobile &&
-                        <ExampleCard title="ex" url="" img={mainpc} />
+                        <ExampleCard title="Fillom" url="fillomsurfeeex" img={c2} />
                     }
                 </div>
             </div>
@@ -161,10 +169,10 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', marginTop:'10px', display:'flex', flexDirection:'row', width:'100%'}}>
-                    <ExampleCard title="ex" url="" img={mainpc} />
+                    <ExampleCard title="포트폴리오 1" url="port1surfeeex" img={p1} />
                     {
                         !isMobile &&
-                        <ExampleCard title="ex" url="" img={mainpc} />
+                        <ExampleCard title="포트폴리오 2" url="port3surfeeex" img={p2} />
                     }
                 </div>
             </div>
@@ -193,19 +201,19 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', display:'flex', flexDirection:'row', width:`${isMobile ? '100%' : ''}`}}>
-                    <ExampleCard title="ex" url="" img={mainpc} />
+                    <ExampleCard title="Mercury" url="mercurysurfeeex" img={m1} />
                     {
                         !isMobile &&
-                        <ExampleCard title="ex" url="" img={mainpc} />
+                        <ExampleCard title="Data" url="datasurfeeex" img={m2} />
                     }
                 </div>
             </div>
             <div className={isMobile ? 'center-column' : 'center-row'} style={{margin:'100px 10px'}}>
                 <div style={{marginLeft:'10px', display:'flex', flexDirection:'row', width:`${isMobile ? '100%' : ''}`}}>
-                    <ExampleCard title="ex" url="" img={mainpc} />
+                    <ExampleCard title="Code Note" url="codenotesurfeeex" img={s1} />
                     {
                         !isMobile &&
-                        <ExampleCard title="ex" url="" img={mainpc} />
+                        <ExampleCard title="Cakehouse" url="cakehousesurfeeex" img={s2} />
                     }
                 </div>
                 <div style={{width:`${isMobile ? '90vw' : '30vw'}`, paddingLeft:'30px'}}>
@@ -253,19 +261,19 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', display:'flex', flexDirection:'row', width:`${isMobile ? '100%' : ''}`}}>
-                    <ExampleCard title="ex" url="" img={mainpc} />
+                    <ExampleCard title="Home Bar" url="homebarsurfeeex" img={c1} />
                     {
                         !isMobile &&
-                        <ExampleCard title="ex" url="" img={mainpc} />
+                        <ExampleCard title="Fillom" url="fillomsurfeeex" img={c2} />
                     }
                 </div>
             </div>
             <div className={isMobile ? 'center-column' : 'center-row'} style={{margin:'100px 10px'}}>
                 <div style={{marginLeft:'10px', display:'flex', flexDirection:'row', width:`${isMobile ? '100%' : ''}`}}>
-                    <ExampleCard title="ex" url="" img={mainpc} />
+                    <ExampleCard title="포트폴리오 1" url="port3surfeeex" img={p2} />
                     {
                         !isMobile &&
-                        <ExampleCard title="ex" url="" img={mainpc} />
+                        <ExampleCard title="포트폴리오 2" url="port1surfeeex" img={p1} />
                     }
                 </div>
                 <div style={{width:`${isMobile ? '90vw' : '30vw'}`, paddingLeft:'30px'}}>

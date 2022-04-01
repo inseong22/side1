@@ -69,23 +69,23 @@ function FTemplate({foot, setFoot, history }) {
                         //         onChangeText(e.currentTarget.value);
                         //     }}
                         // />
-                        <div style={{
-                                fontFamily:`${state.setting.smallFont}`, 
+                        <div
+                            className={ foot.text.align === 'start' ? 'alignLeft' : 'alignCenter' }
+                            style={{
                                 color: `${foot.text.color}`,
                                 textAlign:`${foot.text.align}`,
                                 resize: 'none',
                                 backgroundColor: `${foot.backgroundColor}`
-                            }}
-                            onClick={() => {action.setFocus('footer-text'); action.setCategory(0)}}>
-                            <Editor 
-                                placeholder='회사 또는 팀 정보를 입력하세요.'
-                                className="text-input"
-                                data={foot.text.text}
-                                onChange={(event, editor) => {
-                                    const data = editor.getData();
-                                    onChangeText(data)
-                                }}
-                            />
+                            }} onClick={() => {action.setFocus('footer-text'); action.setCategory(0)}}>
+                                <Editor 
+                                    placeholder='회사 또는 팀 정보를 입력하세요.'
+                                    className="text-input"
+                                    data={foot.text.text}
+                                    onChange={(event, editor) => {
+                                        const data = editor.getData();
+                                        onChangeText(data)
+                                    }}
+                                />
                         </div>
                     }
                     {foot.icon.use && foot.layout === 1 && 
@@ -114,7 +114,6 @@ function FTemplate({foot, setFoot, history }) {
                     <div onClick={() => { action.setFocus('footer-copyright'); action.setCategory(0)}}
                         className='copyright-box'
                         style={{
-                            fontFamily:`${state.setting.smallFont}`,
                             color:`${foot.text.color}`,
                         }}>
                         Copyright 2022 {foot.copyright.text}

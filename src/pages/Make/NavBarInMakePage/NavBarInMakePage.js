@@ -9,6 +9,7 @@ import LoginModal from '../../../components/Login/LoginModal'
 import { dbService } from '../../../tools/fbase';
 import { stService } from '../../../tools/fbase';
 import MakeTutorialModal from '../../../tools/MakeTutorialModal';
+import ChoiceModal from '../../../components/Landing/ChoiceModal'
 import MiniModal from '../../../tools/MiniModal';
 import { v4 as uuidv4 } from 'uuid';
 import {Settings} from '@styled-icons/ionicons-sharp'
@@ -438,8 +439,9 @@ const afterSaveImage = async (returned) => {
                     <Profile make />
                 </div>
             </div>
-            <LoginModal open={loginModal} setOpen={setLoginModal} />
-            <MakeTutorialModal open={tutorialOpen} setOpen={setTutorialOpen} />
+            <LoginModal open={loginModal} setOpen={setLoginModal}/>
+            <ChoiceModal open={tutorialOpen} setOpen={setTutorialOpen} newTab />
+            {/* <MakeTutorialModal open={tutorialOpen} setOpen={setTutorialOpen} /> */}
             <MiniModal open={saveOpen} setOpen={setSaveOpen} />
             {/* <MiniModal open={miniOpen} setOpen={setMiniOpen} long text="첫 접속 시 페이지가 안정되기까지 수 초가 소요될 수 있습니다." /> */}
         </ChakraProvider>

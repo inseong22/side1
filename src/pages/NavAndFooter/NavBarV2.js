@@ -60,10 +60,10 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
                             <div className="nav-on-v2">
                                 {isLoggedIn ? 
                                 <>
-                                {/* <span className="nav-left-text" onClick={() => onLogout()}>
-                                    로그아웃
-                                </span> */}
-                                <Profile history={history} />
+                                    {/* <span className="nav-left-text" onClick={() => onLogout()}>
+                                        로그아웃
+                                    </span> */}
+                                    <Profile history={history} />
                                 </> 
                                 : 
                                 <>

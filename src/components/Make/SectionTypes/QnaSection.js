@@ -15,10 +15,10 @@ function QnaSection({content, setting}) {
             <QnaOpenClose setting={state.setting} key={index} title={item.question} open={content.qna.shape === 'open'} color={content.qna.question} content={content} type={content.layout} index={index}>
                 <div className="edit-element" style={{alignItems:'start'}}>
                     <div style={{display:'flex', alignItems: 'start', height:'100%'}}>
-                        <span className="qna__word" style={{fontFamily:`${state.setting.smallFont}`, color: `${content.qna.answer}`}}>A. <></></span>
+                        <span className="qna__word" style={{ color: `${content.qna.answer}`}}>A. <></></span>
                     </div>
                     <div style={{marginTop:'4px', width:`${state.isPhone ? '85.6%' : '91.6%'}`}}>
-                        <div style={{width:'100%', fontSize:'0.9em', color:`${content.qna.answer}`}}>
+                        <div style={{width:'100%', fontSize:'0.9em', color:`${content.qna.answer}`, fontFamily:`${state.setting.smallFont}`}}>
                             <Editor 
                                 data={item.answer}
                                 onChange={(evenet, editor) => {

@@ -13,6 +13,7 @@ import WhatIsSurfee from './pages/Customer/WhatIsSurfee'
 import VotePage from './pages/VotePage/VotePage'
 import FirstQuestions from './pages/Questions/FirstQuestions'
 import ExamplePage from './pages/ExamplePage/ExamplePage'
+import SourcingPage from './pages/Sourcing/SourcingPage'
 import ScrollToTop from './tools/ScrollToTop'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
@@ -82,6 +83,9 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                             </Route>
                             <Route path="/vote" onUpdate={() => window.scrollTo(0, 0)}>
                                 <VotePage history={history} isLoggedIn={isLoggedIn}/>
+                            </Route>
+                            <Route path="/sourcing" onUpdate={() => window.scrollTo(0, 0)}>
+                                <SourcingPage history={history} isLoggedIn={isLoggedIn}/>
                             </Route>
                             <Route
                                 path="/:id"
