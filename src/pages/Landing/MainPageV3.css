@@ -56,3 +56,15 @@
     z-index:2;
     margin:10px;
 }
+
+.font-gradient-main{
+    background: linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.back-line{
+    background: #C4C1FF;
+    height:20px;
+    width:100%;
+}

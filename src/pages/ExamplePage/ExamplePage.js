@@ -151,6 +151,43 @@ export const UserExamples = () => {
     )
 }
 
+export const ExampleCardInTemplate = ({img, title, url, setUrl, setMakeModal}) => {
+
+    return(
+        <div className="excard uphover2">
+            <div className="back-image-fit excard-image"
+                style={{backgroundImage:`url(${img})`}}>
+                <div className="excard-black">
+                    {
+                        url.length > 1 && 
+                        <div className="section-add__button" style={{width:'130px', fontSize:'14px'}} onClick={() => {
+                            if(isMobile){
+                                alert("죄송합니다. 현재 제작은 PC 환경에서만 가능합니다!")
+                            }else{
+                                setMakeModal(true);
+                                setUrl(url)
+                            }
+                            }}>
+                            템플릿 사용하기
+                        </div>
+                    }
+                    <div className="excard-button-2" onClick={()=>{
+                        window.open(
+                                'https://surfee.co.kr/' + url,
+                                '_blank' // <- This is what makes it open in a new window.
+                            );
+                        }}>
+                        페이지 보기
+                    </div>
+                </div>
+            </div>
+            <div className="excard-title">
+                {title}
+            </div>
+        </div>
+    )
+}
+
 function ExamplePage({isLoggedIn, history}) {
     const [makeModal, setMakeModal] = useState(false)
     const [url, setUrl] = useState('')
@@ -187,14 +224,6 @@ function ExamplePage({isLoggedIn, history}) {
                                 템플릿 사용하기
                             </div>
                         }
-                        {/* <Link className="excard-button-1" to={{
-                            pathname:`/make`,
-                            state:{
-                                template:true,
-                                templateNum:url,
-                            }}}>
-                            템플릿 사용하기
-                        </Link> */}
                         <div className="excard-button-2" onClick={()=>{
                             window.open(
                                     'https://surfee.co.kr/' + url,

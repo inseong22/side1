@@ -85,7 +85,7 @@ const OpenCloseCustom = (props) => {
             <div className="accordion__title">
               <div className="title_text" style={{color:`${props.color}`, width:'100%', alignItems: 'start'}}>
                 <div className="qna__word" style={{ marginRight:`${state.isPhone ? '3px' : '5px'}`, fontWeight:'700'}}>Q.</div>
-                <div style={{width:'100%', align:'start', marginTop:'3px', color:`${props.color}`, fontSize:'0.9em', fontFamily:`${state.setting.smallFont}`}}>
+                <div style={{width:'100%', align:'start', marginTop:'6px', color:`${props.color}`, fontSize:'0.9em', fontFamily:`${state.setting.smallFont}`}}>
                   <Editor 
                     placeholder="여기를 클릭하여 자주 묻는 질문을 적어보세요."
                     data={props.title}

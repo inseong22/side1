@@ -75,7 +75,9 @@ function GallerySection({content,setting}) {
                                     display: 'flex', 
                                     margin:'0px', 
                                     padding:`${state.isPhone ? 5 : 8}px`,
-                                    color: `${content.text.color}` }} 
+                                    color: `${content.text.color}`,
+                                    fontFamily:`${state.setting.smallFont}`
+                                }} 
                                 onClick={() => {action.setFocus('elementText'); action.setCategory(0)}}>
                                 <div 
                                     className={state.isPhone ? content.mobile.align === 'start' ? 'alignLeft' : 'alignCenter' : content.align === 'start' ? 'alignLeft' : 'alignCenter'}

@@ -52,10 +52,10 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                                 <AdminPage history={history}/>
                             </Route>
                             <Route exact path="/" onUpdate={() => window.scrollTo(0, 0)}>
-                                <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
-                            </Route>
-                            <Route exact path="/v3" onUpdate={() => window.scrollTo(0, 0)}>
                                 <MainPageV3 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
+                            </Route>
+                            <Route exact path="/oldoldoldold" onUpdate={() => window.scrollTo(0, 0)}>
+                                <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
                             </Route>
                             <Route path="/response" onUpdate={() => window.scrollTo(0, 0)}>
                                 <ResponsePage history={history} userObj={userObj}/> 

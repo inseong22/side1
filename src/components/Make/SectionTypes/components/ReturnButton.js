@@ -19,7 +19,7 @@ function ReturnButton({content, onlyapp}){
             boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
             border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
             textAlign: 'center',
-            fontSize:'14px',
+            fontSize:`${state.isPhone ? '10px' : '14px'}`,
         }}>
             <div style={{
                 padding:'10px 15px',
@@ -61,7 +61,8 @@ function ReturnButton({content, onlyapp}){
                         </div> 
                     }
                 </div>
-                <div style={{marginTop:`${state.isPhone ? '7px' : '0px'}`}}>
+                <div style={{marginTop:`${state.isPhone || ( content.button[type === 'cta' ? 'ctaCheck' : 'ghostCheck'] && content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ) 
+                    ? '7px' : '0px'}`}}>
                 {
                     type === 'cta' && <>{CustomButton('cta')}</>
                 }

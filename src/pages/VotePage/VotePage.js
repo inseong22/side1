@@ -139,7 +139,7 @@ function VotePage({history, isLoggedIn}) {
             </div>
             <div className="center-column" style={{width:'60%', marginTop:'30px'}}>
                 <div style={{display:'flex', flexDirection:'row', width:'100%'}}>
-                    <div className="vote-one__container" style={{width:'45%'}}>
+                    <div className="vote-one__container" style={{width:'45%', marginRight:'10px'}}>
                         <div className="vote-title">
                             💡 현재 투표 순위
                         </div>
@@ -171,7 +171,7 @@ function VotePage({history, isLoggedIn}) {
                             </span>
                         </Purple>
                     </div>
-                    <div className="vote-one__container" style={{width:'55%'}}>
+                    <div className="vote-one__container" style={{width:'55%', marginLeft:'10px'}}>
                         <div className="vote-title">
                             🔔 현재 추가 중인 기능
                         </div>
@@ -186,7 +186,7 @@ function VotePage({history, isLoggedIn}) {
                         </div>
                     </div>
                 </div>
-                <div className="vote-one__container" style={{width:'90%'}}>
+                <div className="vote-one__container" style={{width:'100%'}}>
                     <div className="vote-title">
                         👉 투표하기 👈
                     </div>
@@ -241,7 +241,7 @@ function VotePage({history, isLoggedIn}) {
                         다른 기능도 건의하기! →
                     </div>
                 </div>
-                <div style={{width:'91%'}}>
+                <div style={{width:'100%'}}>
                     <div onClick={() => {
                          window.open(
                             'https://striped-cabin-4bf.notion.site/Surfee-903d24edba264a9e9a8245803f11db11',

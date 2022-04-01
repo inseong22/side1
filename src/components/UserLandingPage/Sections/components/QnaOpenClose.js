@@ -76,7 +76,7 @@ const OpenCloseCustom = (props) => {
             <div className="accordion__title">
               <div className="title_text" style={{color:`${props.color}`, width:'100%', alignItems: 'start'}}>
                 <div className="qna__word" style={{fontWeight:'700'}}>Q.</div>
-                <div style={{width:'100%', marginTop:'3px'}}>
+                <div style={{width:'100%', marginTop:'6px'}}>
                   <div 
                     dangerouslySetInnerHTML={{__html:props.title}}
                     style={{

@@ -36,7 +36,7 @@ const FCard = styled('div')`
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    margin:20px;
+    margin:20px 30px;
     font-family:Pretendard;
     padding:22px;
 `
@@ -67,13 +67,13 @@ function MainPageV3({history, isLoggedIn, userObj}) {
             {
                 isMobile ? 
                 <button className="main__button6 uphover" onClick={() => alert('죄송합니다. Surfee는 PC 환경에서만 이용할 수 있습니다.')}>
-                    지금바로 시작하기
+                    지금 바로 시작하기
                 </button>
                 :
                 isLoggedIn ? 
                 <>
                     <Link to='/response' className="main__button6 uphover">
-                        지금바로 시작하기
+                        지금 바로 시작하기
                     </Link>
                     <button className="main__button5 uphover" 
                         style={{padding:'18px 30px'}} 
@@ -84,7 +84,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                 :
                 <>
                     <button className="main__button6 uphover" onClick={() => setAskOpen(true)}>
-                        지금바로 시작하기
+                        지금 바로 시작하기
                     </button>
                     <button className="main__button5 uphover" 
                         style={{padding:'18px 30px'}} 
@@ -112,7 +112,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                 isLoggedIn ? 
                 <>
                     <Link to='/response' className="main__button4 uphover">
-                        지금바로 시작하기
+                        지금 바로 시작하기
                     </Link>
                     <button className="main__button5 uphover" 
                         style={{padding:'18px 30px'}} 
@@ -123,7 +123,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                 :
                 <>
                     <button className="main__button4 uphover" onClick={() => setAskOpen(true)}>
-                        지금바로 시작하기
+                        지금 바로 시작하기
                     </button>
                     <button className="main__button5 uphover" 
                         style={{padding:'18px 30px'}} 
@@ -151,9 +151,9 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                 isMobile ?
                 <div className="main-page-section1" style={{ padding:'30px 20px 0px 20px', marginTop:'50px', flexDirection:'column' }}>
                     <div className="main-section-left-topbottom" style={{color:'black', textAlign: 'left', marginTop:'10px'}}>
-                        <span className="one-section-big osb2" style={{fontSize:'1.7em', textAlign: 'left'}}>
+                        <h1 className="one-section-big osb2" style={{fontSize:'1.7em', textAlign: 'left'}}>
                             코딩없이<br/>나만의 <Tc>홍보페이지</Tc> 만들기
-                        </span>
+                        </h1>
                         <span style={{fontWeight:'500', fontSize:'19px', width:'100%', marginTop:'18px'}}>
                             당신이 원하는 대로 <br/>
                             어떤 페이지든 커스텀 해보세요.
@@ -172,9 +172,9 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                 :
                 <div className="main-page-section1" style={{ paddingTop:'30px', marginTop:'50px', flexDirection:'column' }}>
                     <div className="main-section-left-topbottom" style={{color:'black', marginTop:'50px'}}>
-                        <span className="one-section-big osb2" style={{textAlign: 'center', fontSize:'1.7em'}}>
-                            코딩없이 나만의 <Tc>홍보페이지</Tc> 만들기
-                        </span>
+                        <h1 className="one-section-big osb2" style={{textAlign: 'center', fontSize:'1.7em'}}>
+                            코딩없이 나만의 <span className="font-gradient-main">홍보페이지</span> 만들기
+                        </h1>
                     </div>
                     <div className="centero" style={{position:'relative', width:'100%', height:'100vh', marginTop:'25px'}}>
                         <img src={mainpc} style={{width:'80%', position:'absolute', zIndex:0}}/>
@@ -196,8 +196,8 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                     <span className="one-section-big2 osb2" style={{textAlign: 'center'}}>
                         <span style={{color:'#6c63ff'}}>Surfee</span>로 이렇게도 만들 수 있어요
                     </span>
-                    <span className="one-section-small2" style={{textAlign: 'center'}}>
-                        아래의 이미지를 클릭하여 전체 페이지를 구경해보세요.
+                    <span className="one-section-small2" style={{textAlign: 'center', fontSize:`${isMobile ? '0.9em' : '0.6em'}`}}>
+                        아래는 실제로 Surfee를 사용한 예시예요.<br/>이미지를 클릭하여 전체 페이지를 구경해 보세요.
                     </span>
                 </div>
                 <LandingPageExamples />
@@ -238,7 +238,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                         </div>
                         :
                         <div style={{textAlign:'center', fontSize:'22px', zIndex:'1'}}>
-                            <div style={{fontWeight:'600', fontFamily:'Pretendard'}}>
+                            <div style={{fontWeight:'600', fontFamily:'Pretendard', lineHeight:'2rem'}}>
                                 코딩 없이 실험하고, 아이디어를 검증하고, 이벤트를 구현하여<br/>
                                 주도적으로 성과를 내는 마케터가 되고 싶다면 Surfee를 추천드립니다.<br/>
                                 Surfee는 <span style={{color:'#6c63ff'}}>아이디어를 가볍고 빠르게 실행할 수 있도록 도와주는 무기</span>가 되어 줄 것입니다.<br/>
@@ -271,7 +271,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                             </div>
                             :
                             <div style={{textAlign:'center', fontSize:'22px', zIndex:'1'}}>
-                                <div style={{fontWeight:'600', fontFamily:'Pretendard'}}>
+                                <div style={{fontWeight:'600', fontFamily:'Pretendard', lineHeight:'2rem'}}>
                                 스몰브랜드를 시작하는 단계에서 홈페이지를 구축한다는 게 비용과 관리에서 큰 부담이었어요.<br/>
                                 Surfee의 <Tc>직관적인 디자인과 템플릿</Tc> 덕분에 오잔디 페이지를 쉽게 제작할 수 있었어요.<br/>
                                 시즌별 이벤트 페이지, 신규 제품 페이지 등으로도 딱이라<br/>
@@ -288,7 +288,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
             <div className="main-page-section1" style={{padding:`${isMobile ? '50px 0px' : '130px 0px'}`, flexDirection:'column'}}>
                 <div className="main-section-left-topbottom" style={{color:'black', margin:'10px 0px'}}>
                     <span className="one-section-big2 osb2" style={{textAlign: 'center'}}>
-                        이런 상황에서 <Tc>Surfee</Tc>를 활용해 보세요.
+                        이런 상황에서 <Tc>Surfee</Tc>를 활용해 보세요
                     </span>
                     <span className="one-section-small2" style={{textAlign: 'center', fontSize:`${isMobile ? '1em' : '0.6em'}`}}>
                         상황별 템플릿을 골라 바로 제작을 시작할 수 있어요.
@@ -394,7 +394,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                     isMobile ?
                     <div className="main-section-left">
                         <span className="one-section-big" style={{marginTop:'30px', fontSize:'26px', textAlign:'left'}}>
-                            <span style={{color:'#6c63ff'}}>Surfee</span>가 나아갈 방향을<br/> 함께 정해주세요.
+                            <span style={{color:'#6c63ff'}}>Surfee</span>가 나아갈 방향을<br/> 함께 정해주세요
                         </span>
                         <span className="one-section-small" style={{fontSize:'14px', marginTop:'15px', textAlign:'left'}}>
                             Surfee의 소중한 유저분들의 의견을 바탕으로<br/>
@@ -408,7 +408,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                     :
                     <div className="main-section-left">
                         <span className="one-section-big" style={{marginTop:'30px', fontSize:'32px'}}>
-                            <span style={{color:'#6c63ff'}}>Surfee</span>가 나아갈 방향을 함께 정해주세요.
+                            <span style={{color:'#6c63ff'}}>Surfee</span>가 나아갈 방향을 함께 정해주세요
                         </span>
                         <span className="one-section-small" style={{fontSize:'18px', marginTop:'15px'}}>
                             Surfee의 소중한 유저분들의 의견을 바탕으로<br/>

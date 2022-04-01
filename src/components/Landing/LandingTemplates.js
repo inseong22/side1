@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import mainpc from '../../tools/img/main/mainpc.webp';
 import {isMobile} from 'react-device-detect'
 import styled from 'styled-components'
@@ -11,6 +11,8 @@ import p1 from '../../tools/img/example/p1.webp'
 import p2 from '../../tools/img/example/p2.webp'
 import c1 from '../../tools/img/example/c1.webp'
 import c2 from '../../tools/img/example/c2.webp'
+import TemplateModal from '../../pages/ExamplePage/TemplateModal.js'
+import {ExampleCardInTemplate} from '../../pages/ExamplePage/ExamplePage.js'
 
 const For = styled('div')`
     font-family: 'Pretendard';
@@ -53,6 +55,9 @@ const TempMove = styled('div')`
 `;
 
 function LandingTemplates() {
+    const [makeModal, setMakeModal] = useState(false);
+    const [url, setUrl] = useState('');
+
     return (
         <>
         {
@@ -109,10 +114,10 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', marginTop:'10px', display:'flex', flexDirection:'row', width:'100%'}}>
-                    <ExampleCard title="Code Note" url="codenotesurfeeex" img={s1} />
+                    <ExampleCard title="Code Note" url="codenotesurfeeex" img={s2} />
                     {
                         !isMobile &&
-                        <ExampleCard title="Cakehouse" url="cakehousesurfeeex" img={s2} />
+                        <ExampleCard title="Cakehouse" url="cakehousesurfeeex" img={s1} />
                     }
                 </div>
             </div>
@@ -169,10 +174,10 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', marginTop:'10px', display:'flex', flexDirection:'row', width:'100%'}}>
-                    <ExampleCard title="포트폴리오 1" url="port1surfeeex" img={p1} />
+                    <ExampleCard title="포트폴리오 1" url="port1surfeeex" img={p2} />
                     {
                         !isMobile &&
-                        <ExampleCard title="포트폴리오 2" url="port3surfeeex" img={p2} />
+                        <ExampleCard title="포트폴리오 2" url="port3surfeeex" img={p1} />
                     }
                 </div>
             </div>
@@ -183,7 +188,7 @@ function LandingTemplates() {
                 <div style={{width:`${isMobile ? '90vw' : '30vw'}`}}>
                     <For> for 마케터 </For>
                     <Ment>
-                        "아... 개발팀 바쁘시군요..."
+                        <span className="back-line"></span>"아... 개발팀 바쁘시군요..."
                         {/* <div style={{backgroundColor:'#6c63ff', position:'absolute', width:'150px', height:'30px', top:'0px'}}>
                         </div> */}
                     </Ment>
@@ -201,19 +206,19 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', display:'flex', flexDirection:'row', width:`${isMobile ? '100%' : ''}`}}>
-                    <ExampleCard title="Mercury" url="mercurysurfeeex" img={m1} />
+                    <ExampleCardInTemplate setUrl={setUrl} setMakeModal={setMakeModal} title="Mercury" url="mercurysurfeeex" img={m1} />
                     {
                         !isMobile &&
-                        <ExampleCard title="Data" url="datasurfeeex" img={m2} />
+                        <ExampleCardInTemplate setUrl={setUrl} setMakeModal={setMakeModal} title="Data" url="datasurfeeex" img={m2} />
                     }
                 </div>
             </div>
             <div className={isMobile ? 'center-column' : 'center-row'} style={{margin:'100px 10px'}}>
                 <div style={{marginLeft:'10px', display:'flex', flexDirection:'row', width:`${isMobile ? '100%' : ''}`}}>
-                    <ExampleCard title="Code Note" url="codenotesurfeeex" img={s1} />
+                    <ExampleCardInTemplate setUrl={setUrl} setMakeModal={setMakeModal} title="CODE NOTE" url="codenotesurfeeex" img={s2} />
                     {
                         !isMobile &&
-                        <ExampleCard title="Cakehouse" url="cakehousesurfeeex" img={s2} />
+                        <ExampleCardInTemplate setUrl={setUrl} setMakeModal={setMakeModal} title="Cakehouse" url="cakehousesurfeeex" img={s1} />
                     }
                 </div>
                 <div style={{width:`${isMobile ? '90vw' : '30vw'}`, paddingLeft:'30px'}}>
@@ -261,19 +266,19 @@ function LandingTemplates() {
                     </TempMove>
                 </div>
                 <div style={{marginLeft:'10px', display:'flex', flexDirection:'row', width:`${isMobile ? '100%' : ''}`}}>
-                    <ExampleCard title="Home Bar" url="homebarsurfeeex" img={c1} />
+                    <ExampleCardInTemplate setUrl={setUrl} setMakeModal={setMakeModal} title="Home Bar" url="homebarsurfeeex" img={c1} />
                     {
                         !isMobile &&
-                        <ExampleCard title="Fillom" url="fillomsurfeeex" img={c2} />
+                        <ExampleCardInTemplate setUrl={setUrl} setMakeModal={setMakeModal} title="Fillom" url="fillomsurfeeex" img={c2} />
                     }
                 </div>
             </div>
             <div className={isMobile ? 'center-column' : 'center-row'} style={{margin:'100px 10px'}}>
                 <div style={{marginLeft:'10px', display:'flex', flexDirection:'row', width:`${isMobile ? '100%' : ''}`}}>
-                    <ExampleCard title="포트폴리오 1" url="port3surfeeex" img={p2} />
+                    <ExampleCardInTemplate setUrl={setUrl} setMakeModal={setMakeModal} title="포트폴리오 1" url="port1surfeeex" img={p2} />
                     {
                         !isMobile &&
-                        <ExampleCard title="포트폴리오 2" url="port1surfeeex" img={p1} />
+                        <ExampleCardInTemplate setUrl={setUrl} setMakeModal={setMakeModal} title="포트폴리오 2" url="port3surfeeex" img={p1} />
                     }
                 </div>
                 <div style={{width:`${isMobile ? '90vw' : '30vw'}`, paddingLeft:'30px'}}>
@@ -300,6 +305,7 @@ function LandingTemplates() {
             </div>
             </>
         }
+        <TemplateModal url={url} open={makeModal} setOpen={setMakeModal} />
         </>
     )
 }

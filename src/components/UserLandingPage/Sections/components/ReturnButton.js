@@ -5,7 +5,6 @@ import { UserContext } from '../../../../pages/UserLanding/UserLandingPage'
 import {dbService} from '../../../../tools/fbase'
 import { isMobile } from 'react-device-detect'
 import produce from 'immer'
-import AutosizeInput from 'react-input-autosize';
 import { Checkbox, ChakraProvider } from '@chakra-ui/react'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
@@ -71,7 +70,7 @@ const CustomButton = (type) => { return (
             cursor:'pointer',
             border:'none',
             textAlign: 'center',
-            fontSize:'14px',
+            fontSize:`${isMobile ? '10px' : '14px'}`,
             fontFamily:`${state.setting.smallFont}`,
             borderRadius:`${state.setting[type].borderRadius}px`,  
             backgroundColor:`rgba(0,0,0,0)`, 
@@ -123,7 +122,8 @@ const CustomButton = (type) => { return (
                         </div>
                     }
                 </div>
-                <div style={{marginTop:`${isMobile ? '7px' : '0px'}`}}>
+                <div style={{marginTop:`${isMobile  || ( content.button[type === 'cta' ? 'ctaCheck' : 'ghostCheck'] && content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ) 
+                     ? '7px' : '0px'}`}}>
                 {
                     type === 'cta' && <>{CustomButton('cta')}</>
                 }
