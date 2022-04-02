@@ -186,7 +186,7 @@ function VotePage({history, isLoggedIn}) {
                         </div>
                     </div>
                 </div>
-                <div className="vote-one__container" style={{width:'100%'}}>
+                <div className="vote-one__container" style={{width:'100%', marginTop:'20px'}}>
                     <div className="vote-title">
                         👉 투표하기 👈
                     </div>
