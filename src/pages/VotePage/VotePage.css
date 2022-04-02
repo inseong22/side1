@@ -5,16 +5,17 @@
     align-items: center;
     justify-content: center;
     background: #FFFFFF;
-    box-shadow: 18px 18px 36px rgba(0, 0, 0, 0.15), inset 6px 4px 16px rgba(108, 99, 255, 0.1), inset -12px -8px 16px rgba(108, 99, 255, 0.25);
-    border-radius: 20px;
+    box-shadow: 18px 18px 36px rgba(0, 0, 0, 0.15);
+    /* inset 6px 4px 16px rgba(108, 99, 255, 0.1), inset -12px -8px 16px rgba(108, 99, 255, 0.25); */
+    border-radius: 6px;
     padding:30px 20px;
-    margin:10px;
 }
 
 .morphism-button{
     background: #FFFFFF;
-    box-shadow: 6px 6px 24px rgba(0, 0, 0, 0.15), inset 3px 2px 4px rgba(108, 99, 255, 0.1), inset -6px -4px 8px rgba(108, 99, 255, 0.25);
-    border-radius: 20px;
+    border:1px solid rgba(0, 0, 0, 0.25);
+    /* inset 3px 2px 4px rgba(108, 99, 255, 0.1), inset -6px -4px 8px rgba(108, 99, 255, 0.25); */
+    border-radius: 6px;
     margin:20px 0px;
     padding:20px 100px;
     display: flex;
@@ -25,8 +26,9 @@
 }
 
 .morphism-button:hover{
-    transform: translate(0px, -5px);
-    box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.25), inset 3px 2px 4px rgba(108, 99, 255, 0.1), inset -6px -4px 8px rgba(108, 99, 255, 0.25);
+    transform: translate(0px, -5px);    
+    border:1px solid rgba(0, 0, 0, 0.45);
+    /* inset 3px 2px 4px rgba(108, 99, 255, 0.1), inset -6px -4px 8px rgba(108, 99, 255, 0.25); */
 }
 
 
@@ -39,7 +41,7 @@
 .soft-purple__container{
     background: #A5A0FF;
     box-shadow: 6px 6px 24px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+    border-radius: 6px;
     padding:40px 30px;
     width:80%;
     text-align: center;
@@ -65,8 +67,8 @@
 
 .vote-option{
     background: #FFFFFF;
-    box-shadow: 6px 6px 24px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
+    border:1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
     width:170px;
     height:130px;
     place-items:center;
@@ -83,7 +85,6 @@
 
 .vote-option:hover{
     transform: translate(0px, -5px);
-    box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.25);
 }
 
 .click-text{

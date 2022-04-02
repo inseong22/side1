@@ -36,7 +36,7 @@ function ApplySection({content, setting}) {
                     }
                     {content.caution.use &&
                         <div className="df-margin-big feature-desc" style={{width:'100%'}}
-                        onClick={() => action.setFocus('caution')}>
+                        onClick={() => {action.setFocus('caution'); action.setCategory(0)}}>
                             <TextAuto className="text-input" 
                                 small   
                                 value={content.caution.text} 

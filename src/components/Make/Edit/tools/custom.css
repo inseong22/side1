@@ -155,6 +155,7 @@
 .top-img-div{
     display: flex;
     margin-left: 5px;
+    width:100%;
 }
 .put-img-div{
     width: 128px;
@@ -239,15 +240,17 @@
 }
 .upload-div{
     margin-left: 10px;
+    width:100%;
 }
+
 .upload-img-click{
     cursor: pointer;
     background: linear-gradient(180deg, #9281FF 0%, #6C63FF 100%);
     /* 메인 섀도우 01 */
     box-shadow: 4px 4px 15px #D0CDFF;
     border-radius: 32px;
-    width: 180px;
-    height: 40px;
+    width:100%;
+    padding:15px 0px;
     font-style: normal;
     font-weight: normal;
     font-size: var(--button-font-size);

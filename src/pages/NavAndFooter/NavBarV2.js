@@ -16,10 +16,21 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
             {
                 isMobile ? <>
                 <div className="nav-bar-container-v2">
-                    <div className="nav-bar-left-v2">
+                    <div className="nav-bar-left-v2" style={{width:'100%'}}>
                         <Link to="/" className="nav-bar-title-v2" style={{cursor:'pointer', color:'#6a63f7'}}>
                             Surfee
                         </Link>
+                        <Link to="/surfeeexamples" className="nav-left-text" style={{marginLeft:'4vw'}}>
+                            템플릿
+                        </Link>
+                        <div className="nav-left-text" style={{marginLeft:'1vw'}} onClick={() => {
+                            window.open(
+                                'https://striped-cabin-4bf.notion.site/Surfee-903d24edba264a9e9a8245803f11db11',
+                                '_blank' // <- This is what makes it open in a new window.
+                            );
+                        }}>
+                            Surfee 소개
+                        </div>
                     </div>
                 </div>
                 
@@ -49,10 +60,10 @@ function NavBarV2({history, scrollPosition, isLoggedIn, buttonOpen}) {
                             <div className="nav-on-v2">
                                 {isLoggedIn ? 
                                 <>
-                                {/* <span className="nav-left-text" onClick={() => onLogout()}>
-                                    로그아웃
-                                </span> */}
-                                <Profile history={history} />
+                                    {/* <span className="nav-left-text" onClick={() => onLogout()}>
+                                        로그아웃
+                                    </span> */}
+                                    <Profile history={history} />
                                 </> 
                                 : 
                                 <>

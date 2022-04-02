@@ -74,6 +74,13 @@ function MakeTutorialModal({open, setOpen}) {
 
     const returnTutorials = () => {
         switch(page){
+            case 0:return(
+                <div>
+                    <div>
+                        템플릿
+                    </div>
+                </div>
+            )
             case 1: return ( 
                 <div>
                     <div className="sub-text">
@@ -90,7 +97,8 @@ function MakeTutorialModal({open, setOpen}) {
                             <Desc>페이지 구성에서 섹션을 생성하고 삭제할 수 있습니다.</Desc>
                         </div>
                     </div>
-                </div>)
+                </div>
+            )
 
             case 2: return ( <div>
                 <div className="sub-text" />
@@ -120,7 +128,8 @@ function MakeTutorialModal({open, setOpen}) {
                     </div>
                 </div>)
 
-            case 4: return ( <div>
+            case 4: return ( 
+                <div>
                     <div className="card-container">
                         <div className="card">
                             <img className="card-img" src={Info7} alt="7" />
@@ -164,20 +173,34 @@ function MakeTutorialModal({open, setOpen}) {
                     <div className="tutorial-box">
                         {returnTutorials()}
                     </div>
-                    <div className="prev-next-buttons">
-                        {
-                            page === 4 ? 
-                            <>
-                                <div className="modal-move-button-back uphover" onClick={e => setPage(page - 1)} style={{visibility:`${page === 1 ? 'hidden' : 'visible'}`}}>이전</div>
-                                <div className="modal-move-button uphover" onClick={() => {setOpen(false); setPage(1)}}>제작하러 가기</div>
-                            </>
-                            :
-                            <>
-                                <div className="modal-move-button-back uphover" onClick={e => setPage(page - 1)} style={{visibility:`${page === 1 ? 'hidden' : 'visible'}`}}>이전</div>
-                                <div className="modal-move-button uphover" onClick={e => setPage(page + 1)}>다음</div>  
-                            </>
-                        }
-                    </div>
+                    {
+                        page !== 0 &&
+                            <div className="prev-next-buttons">
+                            {
+                                page === 4 ? 
+                                <>
+                                    <div className="modal-move-button-back uphover" onClick={e => setPage(page - 1)} style={{visibility:`${page === 1 ? 'hidden' : 'visible'}`}}>이전</div>
+                                    <div className="modal-move-button uphover" onClick={() => {setOpen(false); setPage(1)}}>제작하러 가기</div>
+                                </>
+                                :
+                                page === 1 ?
+                                <>
+                                    <div className="modal-move-button-back uphover" onClick={e => {
+                                        window.open(
+                                            'https://surfee.co.kr/surfeeexamples',
+                                            '_blank' // <- This is what makes it open in a new window.
+                                        );
+                                    }}>템플릿으로 만들기</div>
+                                    <div className="modal-move-button uphover" onClick={e => setPage(page + 1)}>다음</div>  
+                                </>
+                                :
+                                <>
+                                    <div className="modal-move-button-back uphover" onClick={e => setPage(page - 1)} style={{visibility:`${page === 1 ? 'hidden' : 'visible'}`}}>이전</div>
+                                    <div className="modal-move-button uphover" onClick={e => setPage(page + 1)}>다음</div>  
+                                </>
+                            }
+                        </div>
+                    }
                 </Box>
             </StyledModal>
         </div>

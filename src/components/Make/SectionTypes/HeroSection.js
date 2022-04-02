@@ -16,7 +16,7 @@ import './DetailSection.css'
 import './Default.css'
 import './HeroSection.css'
 
-function HeroSection({content, setting}) {
+function HeroSection({content, setting, Editor}) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const returnLayout = {

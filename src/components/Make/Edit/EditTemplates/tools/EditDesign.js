@@ -70,8 +70,14 @@ function EditDesign({content}) {
                 return(
                     <>
                         <FuncContentImg text="이미지" subtext="최대 5MB 업로드 가능" value={content.backgroundImage.attachment} func={e => onChangeContentImage(e)} removeFunc={e => RemoveImage(e)}/>
-                        <OnOffCustom value={content.backgroundImage.overlay} text="오버레이" func={e=>action.setContents(produce(state.contents, draft => {
+                        <OnOffCustom value={content.backgroundImage.fixed} text="배경 고정" func={ e => action.setContents(produce(state.contents, draft => {
+                            draft[state.secNum].backgroundImage.fixed = !content.backgroundImage.fixed;
+                        }))} />
+                        <OnOffCustom value={content.backgroundImage.overlay} text="오버레이" func={ e => action.setContents(produce(state.contents, draft => {
                             draft[state.secNum].backgroundImage.overlay = !content.backgroundImage.overlay;
+                            if(draft[state.secNum].backgroundColor.length === 7){
+                                draft[state.secNum].backgroundColor = draft[state.secNum].backgroundColor + '88'
+                            }
                         }))} />
                         {
                             content.backgroundImage.overlay && 

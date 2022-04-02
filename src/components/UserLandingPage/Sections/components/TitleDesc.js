@@ -10,45 +10,36 @@ function TitleDesc({content, titlePlaceholder, descPlaceholder}) {
         <div className="title-desc__container">
             {
                 content.title.use &&
-                <div style={{width:'100%'}}>
-                    <TextareaAutosize 
-                        disabled
-                        placeholder={titlePlaceholder}
+                <div style={{width:'100%',
+                color:`${content.title.color}`}}>
+                    <div 
                         className="text-no-input" 
-                        value={content.title.text} 
+                        dangerouslySetInnerHTML={{__html:content.title.text}}
                         style={{
-                          fontFamily:`${state.setting.font}`, 
-                            color:`${content.title.color}`, 
+                            fontFamily:`${state.setting.font}`, 
                             fontSize:`${isMobile ? content.title.size/22 : content.title.size/19}em`, 
                             textAlign:`${isMobile ? content.mobile.align : content.title.align}`,
                             resize:'none',
-                            WebkitTextFillColor: `${content.title.color}`,
-                            WebkitOpacity: 1,
                         }}
-                        spellcheck="false"
+
                     />
                 </div>
             }
             {
                 content.desc.use &&
-                <div style={{width:'100%', marginTop:'10px'}}>
-                    <TextareaAutosize 
-                        disabled
-                        placeholder={descPlaceholder}
-                        className="text-no-input" 
-                        value={content.desc.text} 
+                <div style={{
+                    width:'100%', 
+                    marginTop:'10px',
+                    color:`${content.desc.color}`}}>
+                    <div className="text-no-input" 
+                        dangerouslySetInnerHTML={{__html:content.desc.text}} 
                         style={{
                             fontFamily:`${state.setting.smallFont}`, 
-                            color:`${content.desc.color}`, 
-                            fontSize:`${isMobile ? content.desc.size/19 : content.desc.size/20}em`, 
+                            fontSize:`${isMobile ? content.desc.size/19 : content.desc.size/19}em`, 
                             // boxSizing:`border-box`, 
                             textAlign:`${isMobile ? content.mobile.align : content.desc.align}`,
                             resize:'none',
-                            WebkitTextFillColor: `${content.desc.color}`,
-                            WebkitOpacity: 1,
-                        }}
-                        spellcheck="false"
-                    />
+                        }} />
                 </div>
             }
         </div>

@@ -17,7 +17,7 @@ function ReviewSection({content, setting}) {
                     <Element content={content} item={item} index={index} key={index}/>
                     {
                         content.elementTitle.use && 
-                        <div className="df-margin-big feature-title" style={{width:'100%'}}>            
+                        <div className="df-margin-big feature-title" style={{width:'100%', marginTop:'8px'}}>            
                             <TextareaAutosize 
                                 placeholder="리뷰/추천사의 핵심을 적어보세요."
                                 className="text-no-input"  
@@ -42,7 +42,8 @@ function ReviewSection({content, setting}) {
                         <div className="df-margin-small">
                             <div style={{
                                 width:'100%', 
-                                textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`
+                                textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
+                                marginTop:'-5px'
                             }}>
                             <Rating
                                 value={item.rating} 
@@ -57,7 +58,7 @@ function ReviewSection({content, setting}) {
                     }
                     {
                         content.elementText.use && 
-                        <div className="df-margin-big feature-desc" style={{width:'100%'}}>
+                        <div className="df-margin feature-desc" style={{width:'100%', marginTop:'7px'}}>
                             <TextareaAutosize
                                 className="text-no-input" 
                                 style={{

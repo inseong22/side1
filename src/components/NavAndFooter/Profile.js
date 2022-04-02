@@ -79,7 +79,7 @@ function Profile({make}) {
                                 <div>
                                     {state.userObj.displayName}
                                 </div>
-                                <div style={{fontSize:'0.8em'}}>
+                                <div style={{display:'flex', fontSize:'0.8em', flexWrap:'wrap'}}>
                                     {state.userObj.email}
                                 </div>
                             </div>

@@ -110,7 +110,8 @@ const UserLandingPage = (props) => {
                         borderRadius:`${setting.fta.shape}px`, 
                         border:`${setting.fta.border ? `1px solid ${setting.fta.borderColor}` : 'none'}`,
                         boxShadow:`${setting.fta.shadow ? '2px 2px 5px rgba(0,0,0,0.3)' : ''}`,
-                        fontSize:'0.7em'
+                        fontSize:'0.7em',
+                        color:`${setting.fta.color}`,
                     }}
                     onClick={() => {
                         moveToPage('플로팅 버튼')
@@ -119,20 +120,15 @@ const UserLandingPage = (props) => {
                             '_blank' // <- This is what makes it open in a new window.
                         );
                     }}>
-                    <TextareaAutosize 
-                        className='text-no-input'  
-                        value={setting.fta.text} 
-                        disabled
+                    <div className='text-no-input'  
                         style={{
                             fontFamily: `${setting.font}`,
                             resize: 'none',
-                            color:`${setting.fta.color}`,
                             textAlign:'center',
                             border:'none',
                             cursor:'pointer',
-                            WebkitTextFillColor: `${setting.fta.color}`,
-                            WebkitOpacity: 1,
-                        }} />
+                        }} 
+                        dangerouslySetInnerHTML={{__html:setting.fta.text}}/>
                 </div>
             </div> }
             </>

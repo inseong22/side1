@@ -3,6 +3,7 @@ import { MyContext } from '../../../../pages/Make/MakePageV2'
 import AutosizeInput from 'react-input-autosize';
 import appstorebutton from '../../../../tools/img/appstorebutton.png'
 import playstorebutton from '../../../../tools/img/playstorebutton.png'
+import {ButtonEditor} from '../../tools/Editor'
 import produce from 'immer';
 import { Checkbox, ChakraProvider } from '@chakra-ui/react'
 import './ReturnButton.css'
@@ -11,27 +12,32 @@ function ReturnButton({content, onlyapp}){
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
 
     const CustomButton = (type) => { return (
-    <div className="cta-button-edit" style={{
-        borderRadius:`${state.setting[type].borderRadius}px`,
-        backgroundColor:`${state.setting[type].backgroundColor}`,
-        color:`${state.setting[type].color}`,
-        boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
-        border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
-    }}>
-
-        <AutosizeInput className="text-input-flex" value={ content.button[type === "cta" ? 'ctaText' : 'ghostText'] } onChange={(e) => action.setContents(produce(state.contents, draft => {
-            draft[state.secNum].button[type === "cta" ? 'ctaText' : 'ghostText'] = e.currentTarget.value;
-        }))} 
-        inputStyle={{
+        <div className="cta-button-edit" style={{
+            borderRadius:`${state.setting[type].borderRadius}px`,
+            backgroundColor:`${state.setting[type].backgroundColor}`,
+            color:`${state.setting[type].color}`,
+            boxShadow:`${state.setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
+            border:`${state.setting[type].border ? `1px solid ${state.setting[type].borderColor}` : 'none'}`,
             textAlign: 'center',
-            fontSize:14,
-            fontFamily:`Pretendard-Regular`,
-            borderRadius:`${state.setting[type].borderRadius}px`,  
-            backgroundColor:`rgba(0,0,0,0)`, 
-            padding: `2px 8px`, 
-            }}/>
-    
-    </div>)}
+            fontSize:`${state.isPhone ? '10px' : '14px'}`,
+        }}>
+            <div style={{
+                padding:'10px 15px',
+                fontFamily:`Pretendard-Regular`,
+                fontWeight:'500',
+            }}>
+            <ButtonEditor 
+                data={content.button[type === "cta" ? 'ctaText' : 'ghostText']}
+                onChange={(event, editor) => {
+                    const data = editor.getData();
+                    action.setContents(produce(state.contents, draft => {
+                        draft[state.secNum].button[type === "cta" ? 'ctaText' : 'ghostText'] = data;
+                    }))
+                }}
+            />
+            </div>
+        </div>
+        )}
     
     const returnInputs = (type) => {
         return(
@@ -46,7 +52,7 @@ function ReturnButton({content, onlyapp}){
                                     className="input-placeholder" 
                                     placeholder={item} 
                                     key={index} 
-                                    style={{  margin:'4px', padding: `11px 10px`, }}/>
+                                    style={{  margin:'4px', padding: `13px 10px`, }}/>
                     })} 
                     {
                         content.button[type === 'cta' ? 'ctaCheck' : 'ghostCheck'] && 
@@ -55,7 +61,8 @@ function ReturnButton({content, onlyapp}){
                         </div> 
                     }
                 </div>
-                <div style={{marginTop:`${state.isPhone ? '7px' : '0px'}`}}>
+                <div style={{marginTop:`${state.isPhone || ( content.button[type === 'cta' ? 'ctaCheck' : 'ghostCheck'] && content[type === 'cta' ? 'ctaApplyInputs' : 'ghostApplyInputs'].length > 1 ) 
+                    ? '7px' : '0px'}`}}>
                 {
                     type === 'cta' && <>{CustomButton('cta')}</>
                 }
@@ -85,7 +92,7 @@ function ReturnButton({content, onlyapp}){
         : 
         <>
         {content.button.use && 
-                    <div style={{width:'100%'}}>
+                    <div style={{width:'100%'}} onClick={() => action.setFocus('button')}>
                         <div className="button__container" style={{
                             justifyContent:`${state.isPhone ? content.mobile.align : content.button.align}`,
                             flexDirection:`${ 

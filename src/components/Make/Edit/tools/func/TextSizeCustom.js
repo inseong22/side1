@@ -8,39 +8,39 @@ import {
 } from '@chakra-ui/react'
 
 const titleSizeOptions = [
-    { label: '작게', value: 36 },
-    { label: '보통', value: 42 },
-    { label: '크게', value: 54 },
+    { label: 'S', value: 36 },
+    { label: 'M', value: 42 },
+    { label: 'L', value: 54 },
 ]
 const textSizeOptions = [
-    { label: '작게', value: 28 },
-    { label: '보통', value: 36 },
-    { label: '크게', value: 42 },
+    { label: 'S', value: 28 },
+    { label: 'M', value: 36 },
+    { label: 'L', value: 42 },
 ]
 const subTextSizeOptions = [
-    { label: '작게', value: 16 },
-    { label: '보통', value: 18 },
-    { label: '크게', value: 20 },
+    { label: 'S', value: 16 },
+    { label: 'M', value: 18 },
+    { label: 'L', value: 20 },
 ]
 const logoSizeOptions = [
-    { label: '작게', value: 28 },
-    { label: '보통', value: 32 },
-    { label: '크게', value: 36 },
+    { label: 'S', value: 28 },
+    { label: 'M', value: 32 },
+    { label: 'L', value: 36 },
 ]
 const elementTitleOptions = [
-    { label: '작게', value: 18 },
-    { label: '보통', value: 20 },
-    { label: '크게', value: 22 },
+    { label: 'S', value: 18 },
+    { label: 'M', value: 20 },
+    { label: 'L', value: 22 },
 ]
 const elementDescOptions = [
-    { label: '작게', value: 14 },
-    { label: '보통', value: 16 },
-    { label: '크게', value: 18 },
+    { label: 'S', value: 14 },
+    { label: 'M', value: 16 },
+    { label: 'L', value: 18 },
 ]
 const buttonTextOptions = [
-    { label: '작게', value: 10 },
-    { label: '보통', value: 12 },
-    { label: '크게', value: 14 }
+    { label: 'S', value: 10 },
+    { label: 'M', value: 12 },
+    { label: 'L', value: 14 }
 ]
 
 function RadioCustom({options, value, onChange}) {

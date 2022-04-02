@@ -112,8 +112,11 @@ function NewSection({elementRef, setting, content, index, secNum, setSecNum, isP
             {!full && <div className="for-section-hover" style={{backgroundColor: `${isHover === 'flex' ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0)'}`}}>
             </div>}
             <div className="section__container" 
-                style={{backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, backgroundSize:'cover', backgroundRepeat: 'no-repeat', backgroundColor:'white'}} 
-                    onClick={() => setThisSection()}>
+                style={{
+                    backgroundImage:`${ content.backgroundType === 'image' ? `url(${content.backgroundImage.attachment})` : ''}`, 
+                    backgroundAttachment:`${content.backgroundImage.fixed ? 'fixed' : 'scroll'}`
+                }} 
+                onClick={() => setThisSection()}>
                 {
                     content.backgroundType === 'color' ?
                     <div style={{backgroundColor:`${content.backgroundColor}`, width:'100%', height:'100%', zIndex:2, position:'absolute'}}>
@@ -128,6 +131,18 @@ function NewSection({elementRef, setting, content, index, secNum, setSecNum, isP
                     <div className="section__box" style={{padding:`1vh ${full ? 'calc(11vw)' : '0vw'}`}}>
                         <div style={{backgroundColor:`${content.box.backgroundColor}`, borderRadius:`${content.box.borderRadius}px`, width:'100%', height: '100%'}}>
                         </div>
+                    </div>
+                }
+                {
+                    !content.responsive.pc && !isPhone &&
+                    <div style={{backgroundColor:`rgba(0,0,0,0.7)`, color:'white', width:'100%', height: '100%', position:'absolute', zIndex:4, display:'flex', justifyContent:'center', alignItems:'center', fontSize:'15px'}}>
+                        이 섹션은 PC에서 보이지 않습니다.
+                    </div>
+                }
+                {
+                    !content.responsive.mobile && isPhone &&
+                    <div style={{backgroundColor:`rgba(0,0,0,0.7)`, color:'white', width:'100%', height: '100%', position:'absolute', zIndex:4, display:'flex', justifyContent:'center', alignItems:'center', fontSize:'15px'}}>
+                        이 섹션은 모바일에서 보이지 않습니다.
                     </div>
                 }
                 <div className="section__container-inner"

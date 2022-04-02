@@ -1,10 +1,10 @@
-import React, {useState, useContext} from 'react'
+import React from 'react'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Close } from '@styled-icons/evaicons-solid';
 import {Link} from 'react-router-dom'
-import d1 from '../../../tools/img/main/3d1.png'
-import d2 from '../../../tools/img/main/3d2.png'
+import d1 from '../../../tools/img/main/3d1.webp'
+import d2 from '../../../tools/img/main/3d2.webp'
 import d3 from '../../../tools/img/main/3d3.png'
 import './AskLoginModal.css'
 
@@ -65,12 +65,12 @@ function AskLoginModal({open, setOpen, SomeoneClickMoveToMake, setRegisterOpen})
                         로그인 하시겠습니까?
                     </div>
                     <div className="center-row" style={{height:'30%', marginTop:'40px'}}>
-                        <div className="ask-modal-button uphover" onClick={() => {setRegisterOpen(true); setOpen(false)}}>
+                        <button className="ask-modal-button uphover" onClick={() => {setRegisterOpen(true); setOpen(false)}}>
                             <img src={d1} width={140} /> 
                             <div>
                                 네 <br/>( 로그인/회원가입 하러 가기 ) 
                             </div>
-                        </div>
+                        </button>
                         <Link to={{
                             pathname:`/questions`,
                             state:{

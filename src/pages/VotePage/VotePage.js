@@ -125,7 +125,7 @@ function VotePage({history, isLoggedIn}) {
     }
 
     return (
-        <div style={{width:'100%'}}>
+        <div style={{width:'100%', background:'rgba(0,0,0,0.1)'}}>
         <NavBarV2 history={history} isLoggedIn={isLoggedIn} />
         <div className="center-column" style={{padding:'100px 0px', fontFamily:'Noto Sans KR'}}>
             <div style={{placeItems:'center', textAlign:'center', width:'100%'}}>
@@ -139,7 +139,7 @@ function VotePage({history, isLoggedIn}) {
             </div>
             <div className="center-column" style={{width:'60%', marginTop:'30px'}}>
                 <div style={{display:'flex', flexDirection:'row', width:'100%'}}>
-                    <div className="vote-one__container" style={{width:'45%'}}>
+                    <div className="vote-one__container" style={{width:'45%', marginRight:'10px'}}>
                         <div className="vote-title">
                             💡 현재 투표 순위
                         </div>
@@ -171,7 +171,7 @@ function VotePage({history, isLoggedIn}) {
                             </span>
                         </Purple>
                     </div>
-                    <div className="vote-one__container" style={{width:'55%'}}>
+                    <div className="vote-one__container" style={{width:'55%', marginLeft:'10px'}}>
                         <div className="vote-title">
                             🔔 현재 추가 중인 기능
                         </div>
@@ -186,7 +186,7 @@ function VotePage({history, isLoggedIn}) {
                         </div>
                     </div>
                 </div>
-                <div className="vote-one__container" style={{width:'90%'}}>
+                <div className="vote-one__container" style={{width:'100%', marginTop:'20px'}}>
                     <div className="vote-title">
                         👉 투표하기 👈
                     </div>
@@ -200,7 +200,7 @@ function VotePage({history, isLoggedIn}) {
                                 return(
                                     <div className="vote-option" onClick={() => setSelect(produce(select, draft => {
                                         draft[index] = !draft[index];
-                                    }))} style={{border:`2px solid ${select[index] ? '#6c63ff' : 'rgba(0,0,0,0)'}`, color:`${select[index] ? '#6c63ff' : 'rgba(0,0,0,1)'}`}}>
+                                    }))} style={{border:`1px solid ${select[index] ? '#6c63ff' : 'rgba(0,0,0,0.15)'}`, color:`${select[index] ? '#6c63ff' : 'rgba(0,0,0,1)'}`}}>
                                         {FEATURES[index]}
                                     </div>
                                 )
@@ -241,7 +241,7 @@ function VotePage({history, isLoggedIn}) {
                         다른 기능도 건의하기! →
                     </div>
                 </div>
-                <div style={{width:'91%'}}>
+                <div style={{width:'100%'}}>
                     <div onClick={() => {
                          window.open(
                             'https://striped-cabin-4bf.notion.site/Surfee-903d24edba264a9e9a8245803f11db11',

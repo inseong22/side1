@@ -25,11 +25,7 @@ const imageBorderOptions = [
     { label: '라운드', value: 5 },
     { label: '원형', value: 15 },
 ]
-const imageSizeOptions = [
-    { label: '작게', value: 250 },
-    { label: '보통', value: 400 },
-    { label: '크게', value: 500 },
-]
+
 const videoOptions = [
     { label: '업로드', value: 'base'},
     { label: '유튜브 링크', value: 'youtube'}

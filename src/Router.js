@@ -4,6 +4,7 @@ import './App.css';
 import LoginPage from './pages/Login/Login/LoginPage'
 import UserLandingPage from './pages/UserLanding/UserLandingPage';
 import MainPageV2 from './pages/Landing/MainPageV2';
+import MainPageV3 from './pages/Landing/MainPageV3';
 import MakePageV2 from './pages/Make/MakePageV2';
 import AdminPage from './pages/AdminPage/AdminPage';
 import ResponsePage from './pages/Response/ResponsePage';
@@ -12,6 +13,7 @@ import WhatIsSurfee from './pages/Customer/WhatIsSurfee'
 import VotePage from './pages/VotePage/VotePage'
 import FirstQuestions from './pages/Questions/FirstQuestions'
 import ExamplePage from './pages/ExamplePage/ExamplePage'
+import SourcingPage from './pages/Sourcing/SourcingPage'
 import ScrollToTop from './tools/ScrollToTop'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
@@ -50,6 +52,9 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                                 <AdminPage history={history}/>
                             </Route>
                             <Route exact path="/" onUpdate={() => window.scrollTo(0, 0)}>
+                                <MainPageV3 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
+                            </Route>
+                            <Route exact path="/oldoldoldold" onUpdate={() => window.scrollTo(0, 0)}>
                                 <MainPageV2 history={history} isLoggedIn={isLoggedIn} userObj={userObj}/>
                             </Route>
                             <Route path="/response" onUpdate={() => window.scrollTo(0, 0)}>
@@ -78,6 +83,9 @@ const AppRouter = ({userObj, isLoggedIn}) => {
                             </Route>
                             <Route path="/vote" onUpdate={() => window.scrollTo(0, 0)}>
                                 <VotePage history={history} isLoggedIn={isLoggedIn}/>
+                            </Route>
+                            <Route path="/sourcing" onUpdate={() => window.scrollTo(0, 0)}>
+                                <SourcingPage history={history} isLoggedIn={isLoggedIn}/>
                             </Route>
                             <Route
                                 path="/:id"

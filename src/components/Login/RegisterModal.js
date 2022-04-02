@@ -46,7 +46,7 @@ const style = {
   pb: 3,
 };
 
-function RegisterModal({open, setOpen, history}) {
+function RegisterModal({open, setOpen, history, loginButton}) {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState("");
@@ -113,13 +113,13 @@ function RegisterModal({open, setOpen, history}) {
     }
 
     return (
-        <div>
+        <>
             <StyledModal
-            aria-labelledby="unstyled-modal-title"
-            aria-describedby="unstyled-modal-description"
-            open={open}
-            onClose={() => setOpen(!open)}
-            BackdropComponent={Backdrop}>
+                aria-labelledby="unstyled-modal-title"
+                aria-describedby="unstyled-modal-description"
+                open={open}
+                onClose={() => setOpen(!open)}
+                BackdropComponent={Backdrop}>
             <Box sx={style}>
                 <div className="login-modal__inner">
                     <div className="modal-top__title">
@@ -181,7 +181,7 @@ function RegisterModal({open, setOpen, history}) {
                 </div>
             </Box>
         </StyledModal>
-        </div>
+        </>
     )
 }
 

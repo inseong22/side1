@@ -10,28 +10,6 @@ import SliderCustom from '../tools/Custom/SliderCustom'
 import produce from 'immer';
 import Layout from '../EditTemplates/tools/Layout'
 
-const sizeOptions = [
-    { label: '작게', value: 10 },
-    { label: '보통', value: 15 },
-    { label: '크게', value: 20 },   
-]
-const layoutOptions = [
-    { label: '1', value: 1 },
-    { label: '2', value: 2 },
-    { label: '3', value: 3 },
-]
-
-const iconColorOptions = [
-    { label: '흰색', value: 'white' },
-    { label: '검은색', value: 'black' },
-]
-
-const paddingOptions = [
-    { label: '좁게', value: 1 },
-    { label: '보통', value: 3 },
-    { label: '넓게', value: 5 },
-]
-
 // const alignOptions = [
 //     { label: <AlignStart width={30} />, value: 'start' },
 //     { label: <AlignCenter width={30} />, value: 'center' },

@@ -19,7 +19,7 @@ function ReviewSection({content, setting}) {
                     <Element content={content} item={item} index={index} key={index}/>
                     {
                         content.reviewText &&
-                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%'}}>
+                    <div onClick={() => {action.setFocus('elementText'); action.setCategory(0)}} style={{width:'100%', marginTop:'8px'}}>
                     {
                         content.elementTitle.use && 
                         <div className="df-margin-big feature-title" style={{width:'100%'}}>            
@@ -44,7 +44,7 @@ function ReviewSection({content, setting}) {
                     }
                     {
                         content.rating.use && 
-                        <div className="df-margin-small" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.elementText.align}`}}>
+                        <div className="df-margin-small" style={{justifyContent:`${state.isPhone ? content.mobile.align : content.elementText.align}`, marginTop:'-5px'}}>
                             <Rating
                                 value={item.rating} 
                                 onChange={e => action.setContents(produce(state.contents, draft => {
@@ -59,7 +59,7 @@ function ReviewSection({content, setting}) {
                     }
                     {
                         content.elementText.use && 
-                        <div className="df-margin feature-desc" style={{width:'100%'}}>
+                        <div className="df-margin feature-desc" style={{width:'100%', marginTop:'7px'}}>
                             <TextareaAutosize
                                 className="text-input" 
                                 style={{

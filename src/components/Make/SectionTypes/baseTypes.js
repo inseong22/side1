@@ -13,6 +13,7 @@ const commons = {
     backgroundImage:{
         attachment:'',
         overlay:false,
+        fixed:false,
     },
     title:{
         use:true,

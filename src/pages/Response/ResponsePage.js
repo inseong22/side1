@@ -59,6 +59,7 @@ function ResponsePage({userObj, history}) {
         const thisuserDatas = await dbService
             .collection('saved-page')
             .where("makerEmail", "==", userObj.email)
+            .orderBy("created", "desc")
             .get();
         
         let thisuserData = thisuserDatas.docs.map(doc => {

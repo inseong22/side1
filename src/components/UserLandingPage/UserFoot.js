@@ -101,22 +101,34 @@ function UserFoot({foot, setting}) {
                     <div className="footer-section" style={{fontSize:'0.5em'}}>
                     <div style={{display:'flex', ...returnLayout}} >
                         {foot.text.use && 
-                            <TextareaAutosize 
-                                disabled 
+                            <div 
                                 className="text-no-input"
-                                spellcheck="false"   
-                                value = {foot.text.text}
+                                dangerouslySetInnerHTML={{__html:foot.text.text}}
                                 style={{
-                                    fontFamily:`${setting.smallFont}`, 
-                                    color: `${foot.text.color}`,
-                                    textAlign:`${foot.text.align}`,
-                                    backgroundColor: `${foot.backgroundColor}`,
-                                    resize:'none',
-                                    border:'none',
-                                    WebkitTextFillColor: `${foot.text.color}`,
-                                    WebkitOpacity: 1,
-                                }}>
-                            </TextareaAutosize>
+                                        color: `${foot.text.color}`,
+                                        textAlign:`${foot.text.align}`,
+                                        backgroundColor: `${foot.backgroundColor}`,
+                                        resize:'none',
+                                        border:'none',
+                                    }}
+                                >
+                            </div>
+                            // <TextareaAutosize 
+                            //     disabled 
+                            //     className="text-no-input"
+                            //     spellcheck="false"   
+                            //     value = {foot.text.text}
+                            //     style={{
+                            //         fontFamily:`${setting.smallFont}`, 
+                            //         color: `${foot.text.color}`,
+                            //         textAlign:`${foot.text.align}`,
+                            //         backgroundColor: `${foot.backgroundColor}`,
+                            //         resize:'none',
+                            //         border:'none',
+                            //         WebkitTextFillColor: `${foot.text.color}`,
+                            //         WebkitOpacity: 1,
+                            //     }}>
+                            // </TextareaAutosize>
                         }
                         {foot.icon.use && foot.layout === 1 && 
                             <div className="icon-box" style={{

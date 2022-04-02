@@ -145,6 +145,9 @@ function AdminPage({history}) {
                                         <Half>
                                             피드백 시간 : {date}
                                         </Half>
+                                        <Half>
+                                            작성자 : {item.user}
+                                        </Half>
                                     </div>
                                 )
                             }) 

@@ -7,22 +7,22 @@ import { Close } from '@styled-icons/evaicons-solid';
 import {dbService} from '../../../tools/fbase'
 import './AddingSection.css'
 
-import hero from '../../../tools/img/addSection/01hero.png'
+import hero from '../../../tools/img/addSection/01hero.webp'
 import detail from '../../../tools/img/addSection/02detail.png'
 import cta from '../../../tools/img/addSection/03cta.png'
-import apply from '../../../tools/img/addSection/04apply.png'
-import appDownload from '../../../tools/img/addSection/05appDownload.png'
-import feature from '../../../tools/img/addSection/06feature.png'
-import review from '../../../tools/img/addSection/07review.png'
-import qna from '../../../tools/img/addSection/08qna.png'
-import text from '../../../tools/img/addSection/09text.png'
-import gallery from '../../../tools/img/addSection/10gallery.png'
-import video from '../../../tools/img/addSection/11video.png'
-import mockup from '../../../tools/img/addSection/12mockup.png'
+import apply from '../../../tools/img/addSection/04apply.webp'
+import appDownload from '../../../tools/img/addSection/05appDownload.webp'
+import feature from '../../../tools/img/addSection/06feature.webp'
+import review from '../../../tools/img/addSection/07review.webp'
+import qna from '../../../tools/img/addSection/08qna.webp'
+import text from '../../../tools/img/addSection/09text.webp'
+import gallery from '../../../tools/img/addSection/10gallery.webp'
+import video from '../../../tools/img/addSection/11video.webp'
+import mockup from '../../../tools/img/addSection/12mockup.webp'
 import line from '../../../tools/img/addSection/12line.png'
 
 const IMGS = [
-    hero, detail, cta, apply, appDownload, feature, review, qna, text, gallery, video, line
+    hero, detail, cta, apply, appDownload, feature, review, qna, text, gallery, video, mockup
 ]
 
 const StyledModal = styled(ModalUnstyled)`

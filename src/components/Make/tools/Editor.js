@@ -18,26 +18,123 @@ import TextTransformation from "@ckeditor/ckeditor5-typing/src/texttransformatio
 // import Base64UploadAdapter from "@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter";
 import './Editor.css'
 
-const editorConfiguration = {
-    plugins: [Essentials, Bold, Italic, Underline, Strikethrough, Font],
-    toolbar: ["heading", "|", "bold", "italic", "underline", "strikethrough", "alignment", "fontSize"],
-    alignment: {
-      options: ["justify", "left", "center", "right"],
+const FONTCOLOR = {
+  columns:4,
+  documentColors:4,
+  colors:[
+    {
+      color: '#000000',
+      label: '검정'
     },
-    fontSize: {
-        options: [
-          14,
-          15,
-          19,
-          'default',
-          26,
-          27,
-          28,
-          29,
-          30,
-        ],
-      },
-  };
+    {
+      color: '#9B9A97',
+      label: '회색'
+    },
+    {
+      color: '#64473A',
+      label: '갈색',
+    },
+    {
+      color: '#D9730D',
+      label: '주황'
+    },
+    {
+      color: '#DFAB01',
+      label: '노랑'
+    },
+    {
+      color: '#0F7B6C',
+      label: '초록'
+    },
+    {
+      color: '#0B6E99',
+      label: '파랑'
+    },
+    {
+      color: '#6940A5',
+      label: '보라'
+    },
+    {
+      color: '#AD1A72',
+      label: '분홍'
+    },
+    {
+      color: '#E03E3E',
+      label: '빨강'
+    },
+    {
+      color: '#FFFFFF',
+      label: '하양',
+      hasBorder: true
+    }
+]}
+
+const FONTBACKGROUNDCOLOR = {
+  columns:4,
+  documentColors:4,
+  colors:[
+    {
+      color: '#FFFFFF',
+      label: '하양'
+    },
+    {
+      color: '#EBECED',
+      label: '연회색'
+    },
+    {
+      color: '#E9E5E3',
+      label: '갈색',
+    },
+    {
+      color: '#FAEBDD',
+      label: '주황'
+    },
+    {
+      color: '#FBF3DB',
+      label: '노랑'
+    },
+    {
+      color: '#DDEDEA',
+      label: '연초록'
+    },
+    {
+      color: '#DDEBF1',
+      label: '파랑'
+    },
+    {
+      color: '#EAE4F2',
+      label: '보라'
+    },
+    {
+      color: '#F4DFEB',
+      label: '분홍'
+    },
+    {
+      color: '#FBE4E4',
+      label: '빨강'
+    }
+]}
+
+const FONTSIZE = {
+  options: [
+    0.2,
+    0.4,
+    0.6,
+    0.8,
+    0.9,
+    'default',
+    1.1,
+    1.2,
+    1.4,
+    1.6,
+    1.8,
+    2.0,
+  ],
+}
+
+const ALIGNMENT = {
+  options: ["justify", "left", "center", "right"],
+}
 
 const Editor = (props) => {
     return (
@@ -79,133 +176,12 @@ const Editor = (props) => {
                 "fontSize",
                 "fontColor",
                 "fontBackgroundColor",
-                "|",
                 "link",
-                "undo",
-                "redo",
               ]},
-          fontColor:{
-            columns:4,
-            documentColors:4,
-            colors:[
-              {
-                color: '#000000',
-                label: '검정'
-              },
-              {
-                color: '#9B9A97',
-                label: '연회색'
-              },
-              {
-                color: '#64473A',
-                label: '갈색',
-              },
-              {
-                color: '#D9730D',
-                label: '주황'
-              },
-              {
-                color: '#DFAB01',
-                label: '노랑'
-              },
-              {
-                color: '#0F7B6C',
-                label: '연초록'
-              },
-              {
-                color: '#0B6E99',
-                label: '파랑'
-              },
-              {
-                color: '#6940A5',
-                label: '보라'
-              },
-              {
-                color: '#AD1A72',
-                label: '분홍'
-              },
-              {
-                color: '#E03E3E',
-                label: '빨강'
-              },
-              {
-                color: '#FFFFFF',
-                label: '하양'
-              }
-          ]},
-          fontFamily: {
-            options: [
-                "default",
-                "Ubuntu, Arial, sans-serif",
-                "yg-jalnan, yg-jalnan",
-                "Noto Sans KR, Noto Sans KR",
-                "Pretendard, Pretendard",
-            ],
-          },
-          fontBackgroundColor:{
-            columns:4,
-            documentColors:4,
-            colors:[
-              {
-                color: '#FFFFFF',
-                label: '하양'
-              },
-              {
-                color: '#EBECED',
-                label: '연회색'
-              },
-              {
-                color: '#E9E5E3',
-                label: '갈색',
-              },
-              {
-                color: '#FAEBDD',
-                label: '주황'
-              },
-              {
-                color: '#FBF3DB',
-                label: '노랑'
-              },
-              {
-                color: '#DDEDEA',
-                label: '연초록'
-              },
-              {
-                color: '#DDEBF1',
-                label: '파랑'
-              },
-              {
-                color: '#EAE4F2',
-                label: '보라'
-              },
-              {
-                color: '#F4DFEB',
-                label: '분홍'
-              },
-              {
-                color: '#FBE4E4',
-                label: '빨강'
-              }
-          ]},
-          fontSize: {
-            options: [
-              0.2,
-              0.4,
-              0.6,
-              0.8,
-              0.9,
-              'default',
-              1.1,
-              1.2,
-              1.4,
-              1.6,
-              1.8,
-              2.0,
-            ],
-          },
-          alignment: {
-            options: ["justify", "left", "center", "right"],
-          },
+          fontColor:FONTCOLOR,
+          fontBackgroundColor:FONTBACKGROUNDCOLOR,
+          fontSize: FONTSIZE,
+          alignment: ALIGNMENT,
           typing: {
             transformations: {
               remove: [
@@ -220,12 +196,78 @@ const Editor = (props) => {
             },
           },
         }}
-        style={{padding:'0px'}}
         editor={InlineEditor}
         {...props}
-            />
+        placeholder={props.placeholder}
+        />
         </div>
     )
+}
+
+export const ButtonEditor =(props) => {
+  return (
+      <div className="ckeditor-container">
+      <CKEditor
+      onInit={(editor) => {
+        editor.ui
+          .getEditableElement()
+          .parentElement.insertBefore(
+            editor.ui.view.toolbar.element,
+            editor.ui.getEditableElement()
+          );
+      }}
+      config={{
+          language: {ui: 'ko', content: "ko"},
+        plugins: [
+          Essentials,
+          Paragraph,
+          Bold,
+          Italic,
+          Underline,
+          Strikethrough,
+          Font,
+          List,
+          Link,
+          PasteFromOffice,
+          TextTransformation
+        ],
+        toolbar: props.toolbar
+          ? props.toolbar
+          : {
+            shouldNotGroupWhenFull:true,
+            items:[
+              "bold",
+              "italic",
+              "underline",
+              "strikethrough",
+              "|",
+              "fontSize",
+              "fontColor",
+              "fontBackgroundColor",
+            ]},
+        fontColor:FONTCOLOR,
+        fontBackgroundColor:FONTBACKGROUNDCOLOR,
+        fontSize: FONTSIZE,
+        typing: {
+          transformations: {
+            remove: [
+              "enDash",
+              "emDash",
+              "oneHalf",
+              "oneThird",
+              "twoThirds",
+              "oneForth",
+              "threeQuarters",
+            ],
+          },
+        },
+      }}
+      editor={InlineEditor}
+      {...props}
+      placeholder={props.placeholder}
+      />
+      </div>
+  )
 }
 
 export default Editor

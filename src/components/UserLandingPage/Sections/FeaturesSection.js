@@ -23,20 +23,37 @@ function FeaturesSection({content, setting}) {
                     {
                         content.elementText.titleUse && 
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                                <TextAuto className="text-no-input" 
+                                {/* <TextAuto className="text-no-input" 
                                     value={item.title} 
                                     color = {content.elementText.titleColor} 
                                     align = {isMobile ? content.mobile.align : content.elementText.align}
                                     size={content.elementText.titleSize/20} 
                                     placeholder="특징"
                                     disabled
+                                /> */}
+                                <div dangerouslySetInnerHTML={{__html:item.title}}
+                                    style={{
+                                        color:`${content.elementText.titleColor}`,
+                                        textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
+                                        fontSize:`${content.elementText.titleSize/20}em`,
+                                        fontFamily:`${setting.font}`
+                                    }}
                                 />
                             </div>
                     }
                     {
                         content.elementText.descUse && 
-                            <div className="df-margin-small feature-desc">
-                                <TextareaAutosize 
+                            <div className="df-margin-small feature-desc" style={{width:'100%'}}>
+                                <div dangerouslySetInnerHTML={{__html:item.desc}}
+                                    style={{
+                                        color:`${content.elementText.descColor}`,
+                                        textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
+                                        fontSize:`${content.elementText.descSize/20}em`, 
+                                        fontFamily:`${setting.smallFont}`,
+                                        width:'100%'
+                                    }}>
+                                </div>
+                                {/* <TextareaAutosize 
                                     className="text-no-input"  
                                     value={item.desc} 
                                     color = {content.elementText.descColor} 
@@ -54,7 +71,7 @@ function FeaturesSection({content, setting}) {
                                     placeholder="여기를 클릭하여 서비스 및 제품의 특징을 적어보세요."
                                     disabled
                                     spellCheck="false"
-                                />
+                                /> */}
                             </div>
                     }
                     </>

@@ -15,7 +15,7 @@
     align-items: start;
     justify-content: start;
     box-sizing: border-box;
-    margin-top:20px;
+    margin-top:25px;
 }
 
 .feature-upload-button{
@@ -80,9 +80,11 @@
 
 .feature-title{
     /* width:80%; */
+    margin:0px;
 }
 .feature-desc{
     /* width: 80%; */
+    margin:0px;
 }
 .feature-writer{
     font-size:var(--feature-writer-size);

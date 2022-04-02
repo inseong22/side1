@@ -49,7 +49,7 @@ function EditCtaSection({content, category, type}) {
                         <EditTitleDesc content={content} />
                         {
                             !(type === 'appDownload') &&
-                            <OpenCloseCustom title="버튼" use={content.button.use}>
+                            <OpenCloseCustom title="버튼" use={content.button.use} open={state.focus === 'button'}>
                                 <AddCtaButton content={content} num={5}/>
                                 <AddGhostButton content={content} num={5}/>
                             </OpenCloseCustom>

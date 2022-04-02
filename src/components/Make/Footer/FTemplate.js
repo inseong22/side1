@@ -5,7 +5,7 @@ import {Youtube, Twitter,FacebookSquare, Instagram, LinkedinSquare} from '@style
 import {KakaoTalk} from '@styled-icons/remix-fill/KakaoTalk'
 import { Notion } from '@styled-icons/simple-icons';
 import TextareaAutosize from 'react-textarea-autosize';
-import {Linkedin} from '@styled-icons/fa-brands/Linkedin'
+import Editor from '../tools/Editor'
 
 function FTemplate({foot, setFoot, history }) {
     const {state, action} = useContext(MyContext) //ContextAPI로 state와 action을 넘겨받는다.
@@ -52,23 +52,41 @@ function FTemplate({foot, setFoot, history }) {
             <div className="footer-section" style={{fontSize:'0.5em'}}>
                 <div style={{display:'flex', ...returnLayout}} >
                     {foot.text.use && 
-                        <TextareaAutosize
-                            onClick={() => {action.setFocus('footer-text'); action.setCategory(0)}}
-                            // defaultValue={new Array(15).join('Line.')}
-                            className="text-input"
-                            value={foot.text.text}
+                        // <TextareaAutosize
+                        //     onClick={() => {action.setFocus('footer-text'); action.setCategory(0)}}
+                        //     // defaultValue={new Array(15).join('Line.')}
+                        //     className="text-input"
+                        //     value={foot.text.text}
+                        //     style={{
+                        //         fontFamily:`${state.setting.smallFont}`, 
+                        //         color: `${foot.text.color}`,
+                        //         textAlign:`${foot.text.align}`,
+                        //         resize: 'none',
+                        //         backgroundColor: `${foot.backgroundColor}`
+                        //     }}
+                        //     placeholder='회사 또는 팀 정보를 입력하세요.'
+                        //     onChange={(e) => {
+                        //         onChangeText(e.currentTarget.value);
+                        //     }}
+                        // />
+                        <div
+                            className={ foot.text.align === 'start' ? 'alignLeft' : 'alignCenter' }
                             style={{
-                                fontFamily:`${state.setting.smallFont}`, 
                                 color: `${foot.text.color}`,
                                 textAlign:`${foot.text.align}`,
                                 resize: 'none',
                                 backgroundColor: `${foot.backgroundColor}`
-                            }}
-                            placeholder='회사 또는 팀 정보를 입력하세요.'
-                            onChange={(e) => {
-                                onChangeText(e.currentTarget.value);
-                            }}
-                        /> 
+                            }} onClick={() => {action.setFocus('footer-text'); action.setCategory(0)}}>
+                                <Editor 
+                                    placeholder='회사 또는 팀 정보를 입력하세요.'
+                                    className="text-input"
+                                    data={foot.text.text}
+                                    onChange={(event, editor) => {
+                                        const data = editor.getData();
+                                        onChangeText(data)
+                                    }}
+                                />
+                        </div>
                     }
                     {foot.icon.use && foot.layout === 1 && 
                         <div className="icon-box" 
@@ -93,11 +111,9 @@ function FTemplate({foot, setFoot, history }) {
                     }
                 </div>
                 {foot.copyright.use && 
-                    <div 
-                        onClick={() => { action.setFocus('footer-copyright'); action.setCategory(0)}}
+                    <div onClick={() => { action.setFocus('footer-copyright'); action.setCategory(0)}}
                         className='copyright-box'
                         style={{
-                            fontFamily:`${state.setting.smallFont}`,
                             color:`${foot.text.color}`,
                         }}>
                         Copyright 2022 {foot.copyright.text}
