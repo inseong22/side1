@@ -12,6 +12,9 @@ function UserNavBar({setting, navi}) {
             backgroundColor:`${setting[type].backgroundColor}`,
             boxShadow:`${setting[type].shadow ? '1px 2px 4px rgba(0,0,0,0.2)' : 'none'}`,
             border:`${setting[type].border ? `1px solid ${setting[type].borderColor}` : 'none'}`,
+            textAlign: 'center',
+            fontFamily:`Pretendard-Regular`,
+            fontSize:'14px',
         }} 
         onClick={() => {
             moveToPage(type)
@@ -21,7 +24,18 @@ function UserNavBar({setting, navi}) {
               );
             // window.location.href = navi.button.cta.link
         }}>
-            <AutosizeInput className="text-input-flex" value={ navi.button[type].text } 
+            <div style={{padding:'10px 15px'}}>
+                <div dangerouslySetInnerHTML={{__html:navi.button[type].text}}
+                style={{
+                    backgroundColor:`rgba(0,0,0,0)`, 
+                    cursor:'pointer',
+                    border:'none',
+                    textAlign: 'center',
+                    fontFamily:`${setting.smallFont}`,
+                    color:`${setting[type].color}`
+                }}
+                />
+        {/* <AutosizeInput className="text-input-flex" value={ navi.button[type].text } 
                 inputStyle={{
                     color:`${setting[type].color}`,
                     cursor:'pointer',
@@ -35,7 +49,8 @@ function UserNavBar({setting, navi}) {
                     WebkitTextFillColor: `${setting[type].color}`,
                     WebkitOpacity: 1,
                     }}
-                    disabled/>
+                    disabled/> */}
+            </div>
         </div>
     )}
 

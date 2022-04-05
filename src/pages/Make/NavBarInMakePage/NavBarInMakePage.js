@@ -417,7 +417,7 @@ const afterSaveImage = async (returned) => {
                     }} >
                         페이지 구성 <DocumentOnePage size="16" style={{ marginLeft:'5px'}} />
                     </span>
-                    <span className="make-nav-button" onClick={e => setTutorialOpen(true)} style={{boxShadow:'none', width:'180px'}}>
+                    <span className="make-nav-button" onClick={e => setTutorialOpen(true)} style={{boxShadow:'none', width:'180px', color:'#6C63FF', fontWeight:'700'}}>
                         사용이 어려우신가요 ?
                     </span>
                 </div>

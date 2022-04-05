@@ -16,6 +16,7 @@ import p1 from '../../tools/img/example/p1.webp'
 import p2 from '../../tools/img/example/p2.webp'
 import c1 from '../../tools/img/example/c1.webp'
 import c2 from '../../tools/img/example/c2.webp'
+import clofos from '../../tools/img/example/clofos.png'
 import Footer from '../NavAndFooter/Footer'
 import NavBarV2 from '../NavAndFooter/NavBarV2'
 import TemplateModal from './TemplateModal'
@@ -78,6 +79,11 @@ const exs = [
         img : c2,
         title:"Fillom",
         url:'fillomsurfeeex'
+    },
+    {
+        img : clofos,
+        title:"Clofos",
+        url:'clofossurfeeex'
     },
     {
         img : p1,
@@ -184,6 +190,18 @@ export const ExampleCardInTemplate = ({img, title, url, setUrl, setMakeModal}) =
             <div className="excard-title">
                 {title}
             </div>
+        </div>
+    )
+}
+
+export const TemplatesList = ({exList, setUrl, setMakeModal}) => {
+    return(
+        <div style={{ boxSizing:'border-box', flexWrap: 'wrap', marginTop:'15px', display:'flex', flexDirection:'row', alignItems:'center', justifyContent: 'center', width:'100%'}}>
+            {exList.map((item, index) => {
+                return(
+                    <ExampleCardInTemplate key={index} img={item.img} title={item.title} url={item.url} setUrl={setUrl} setMakeModal={setMakeModal}/>
+                )
+            })}
         </div>
     )
 }

@@ -24,7 +24,7 @@ import {
   } from '@chakra-ui/react'
 import './Fonts.css'
 
-const fontOptions = [
+export const fontOptions = [
     { label: 'Gmarket Sans', value: 'GmarketSansBold' },
     { label: 'Neo 둥근모', value: 'NeoDunggeunmo' },
     { label: 'Noto Sans KR', value: 'Noto Sans KR' },

@@ -67,7 +67,7 @@ function SourcingPage({history, isLoggedIn}) {
                         autoplay
                         loop
                         mode="normal"
-                        src="https://s3.amazonaws.com/cdnl.iconscout.com/lottie/premium/original/4042273.json?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4VMJAKC54WWWCYMY%2F20220331%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220331T084216Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=806b0c67b8888fd7c47030c999615f8f051f77329c16d806b33a5f7af965fe84"
+                        src="https://s3.amazonaws.com/cdnl.iconscout.com/lottie/premium/original/4042273.json?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4VMJAKC54WWWCYMY%2F20220405%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220405T024911Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=d2238275c851d54b81e6c89611dde0b7af7ba3cbe270661325dc229eb476c738"
                         style={{width:'30%', zIndex:'1'}}
                     >
                     </lottie-player>
@@ -139,6 +139,16 @@ function SourcingPage({history, isLoggedIn}) {
                         <br/><br/>
                         더 궁금하신게 있다면 메일 : surfee.business@gmail.com로<br/>혹은 화면 가장 오른쪽 아래의 이모티콘을 클릭해 연락주세요!
                     </div>
+                    <button className="fab-button uphover" onClick={() => {
+                        window.open(
+                            'https://bit.ly/3qUaVOW',
+                            '_blank'
+                        )
+                    }} style={{marginTop:'60px', borderRadius:'6px', color:'white'}}>
+                        📝 지금 바로 의뢰하기<br/>
+
+                        <span style={{fontSize:'13px'}}>페이지 디자인부터 기획까지, 더 이상 고민하지 마세요.</span>
+                    </button>
                 </div>
             </div>
         </div>

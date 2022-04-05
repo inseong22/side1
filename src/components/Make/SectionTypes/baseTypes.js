@@ -762,7 +762,7 @@ export const defaults = {
             shadow: true,
         },
         faviconAttachment: "",
-        font: "yg-jalnan",
+        font: "",
         fta:{
             backgroundColor: "#6c63ff",
             border: false,
