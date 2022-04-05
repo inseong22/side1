@@ -19,18 +19,10 @@ function FeaturesSection({content, setting}) {
                 }
                 {
                     content.elementText.use && 
-                    <>
+                    <div style={{width:'100%', marginTop:`${content.element.use ? '10px' : '0px'}`}}>
                     {
                         content.elementText.titleUse && 
                             <div className="df-margin-big feature-title" style={{width:'100%'}}>
-                                {/* <TextAuto className="text-no-input" 
-                                    value={item.title} 
-                                    color = {content.elementText.titleColor} 
-                                    align = {isMobile ? content.mobile.align : content.elementText.align}
-                                    size={content.elementText.titleSize/20} 
-                                    placeholder="특징"
-                                    disabled
-                                /> */}
                                 <div dangerouslySetInnerHTML={{__html:item.title}}
                                     style={{
                                         color:`${content.elementText.titleColor}`,
@@ -43,7 +35,7 @@ function FeaturesSection({content, setting}) {
                     }
                     {
                         content.elementText.descUse && 
-                            <div className="df-margin-small feature-desc" style={{width:'100%'}}>
+                            <div className="df-margin-small feature-desc" style={{width:'100%', marginTop:'5px'}}>
                                 <div dangerouslySetInnerHTML={{__html:item.desc}}
                                     style={{
                                         color:`${content.elementText.descColor}`,
@@ -53,28 +45,9 @@ function FeaturesSection({content, setting}) {
                                         width:'100%'
                                     }}>
                                 </div>
-                                {/* <TextareaAutosize 
-                                    className="text-no-input"  
-                                    value={item.desc} 
-                                    color = {content.elementText.descColor} 
-                                    // align = {isMobile ? content.mobile.align : content.align}
-                                    style={{
-                                        fontFamily:`${setting.smallFont}`, 
-                                        color:`${content.elementText.descColor}`, 
-                                        fontSize:`${content.elementText.descSize/20}em`, 
-                                        // boxSizing:`border-box`, 
-                                        textAlign:`${isMobile ? content.mobile.align : content.elementText.align}`,
-                                        resize:'none',
-                                        WebkitTextFillColor: `${content.elementText.descColor}`,
-                                        WebkitOpacity: 1,
-                                    }}
-                                    placeholder="여기를 클릭하여 서비스 및 제품의 특징을 적어보세요."
-                                    disabled
-                                    spellCheck="false"
-                                /> */}
                             </div>
                     }
-                    </>
+                    </div>
                 }
             </FeatureCard>
         )}

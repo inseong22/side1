@@ -20,12 +20,14 @@ function AdminPage({history}) {
     const [feedback, setFeedback] = useState([]);
     const [emails, setEmails] = useState([]);
     const [saved, setSaved] = useState([]);
+    const [voted, setVoted] = useState([]);
 
     useEffect(() => {
         getThisPublished()
         getFeedback()
         getMails()
         getSaved()
+        getVoted()
         emails.map(doc => console.log(doc.email))
     }, emails)
 
@@ -69,6 +71,17 @@ function AdminPage({history}) {
             return({...doc.data(), id:doc.id})
         });
         setSaved(fd);
+    }
+
+    const getVoted = async () => {
+        const fds = await dbService
+            .collection('vote')
+            .orderBy("created", "desc")
+            .get();
+        let fd = fds.docs.map(doc => {
+            return({...doc.data(), id:doc.id})
+        });
+        setVoted(fd);
     }
 
     const switchType = () => {
@@ -186,6 +199,35 @@ function AdminPage({history}) {
                         </div>
                     )
 
+            case 4:
+                return(
+                    <div>
+                        <div>
+                            투표결과
+                        </div>
+                        <div>
+                            {voted &&
+                                voted.map((item, index) => {
+                                    console.log(item)
+                                    let day = new Date(item.created)
+                                    let date = `${day.getMonth() + 1}월 ${day.getDate()}일 ${day.getHours()}시 ${day.getMinutes()}분`
+                                    return(
+                                        <div className="center-row" style={{margin:'10px'}} key={index}>
+                                            <Half>
+                                                투표 : {item.select.map((item1,index) => {
+                                                    return item1 + ','
+                                                })}
+                                            </Half>
+                                            <Half>
+                                                날짜 : {date}
+                                            </Half>
+                                        </div>
+                                    )
+                            }) 
+                            }
+                        </div>
+                    </div>
+                )
             default:
                 return(<>뭐요</>)
         }
@@ -205,6 +247,9 @@ function AdminPage({history}) {
                 </RadioButton>
                 <RadioButton  onClick={() => setType(3)}>
                     저장된 페이지
+                </RadioButton>
+                <RadioButton  onClick={() => setType(4)}>
+                    투표
                 </RadioButton>
             </div>
             <div>

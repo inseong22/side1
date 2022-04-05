@@ -98,12 +98,12 @@ const MakePageV2 = ({history, userObj}) => {
         // 관리하기 페이지에서 state.item으로 내용을 가지고 넘어왔다.
         if(location.state !== undefined){
             if(location.state.now){
+                setLoad(false);
                 loadLocalStorage()
                 setIsPhone(location.state.isPhone)
                 setLoad(true);
             }else if(location.state.template){
                 getTemplate()
-                setLoad(true);
             }else{
                 getEdit()
                 // saveLocalStorage();
@@ -194,6 +194,7 @@ const MakePageV2 = ({history, userObj}) => {
     }
 
     const getTemplate = async () => {
+
         const savedPages = await dbService
             .collection("saved-page")
             .where("urlId", "==", location.state.templateNum)
@@ -206,13 +207,19 @@ const MakePageV2 = ({history, userObj}) => {
         let tempSetting = savedPage[0].setting;
         tempSetting.urlId = location.state.urlId
 
+        console.log("여기까지는 왔다", savedPage)
+
         setContents(savedPage[0].contents)
         setNavi(savedPage[0].navi)
         setFoot(savedPage[0].foot)
         setSetting(tempSetting)
         
-        setLoading(false);
         saveLocalStorage();
+
+        setTimeout(() => {
+            setLoad(true);
+            setLoading(false);
+        },50)
     }
 
     const saveLocalStorage = async () => {

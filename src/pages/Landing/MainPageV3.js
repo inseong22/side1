@@ -78,7 +78,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                     <button className="main__button5 uphover" 
                         style={{padding:'18px 30px'}} 
                         onClick={() => setChoiceOpen(true)}>
-                        제작이 어려우신가요?
+                        더 쉽게 시작하기
                     </button>
                 </>
                 :
@@ -89,7 +89,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                     <button className="main__button5 uphover" 
                         style={{padding:'18px 30px'}} 
                         onClick={() => setChoiceOpen(true)}>
-                        제작이 어려우신가요?
+                        더 쉽게 시작하기
                     </button>
                 </>
             }
@@ -117,7 +117,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                     <button className="main__button5 uphover" 
                         style={{padding:'18px 30px'}} 
                         onClick={() => setChoiceOpen(true)}>
-                        제작이 어려우신가요?
+                        더 쉽게 시작하기
                     </button>
                 </>
                 :
@@ -128,7 +128,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                     <button className="main__button5 uphover" 
                         style={{padding:'18px 30px'}} 
                         onClick={() => setChoiceOpen(true)}>
-                        제작이 어려우신가요?
+                        더 쉽게 시작하기
                     </button>
                 </>
             }
@@ -308,7 +308,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                             autoplay
                             loop
                             mode="normal"
-                            src="https://s3.amazonaws.com/cdnl.iconscout.com/lottie/premium/original/3264482.json?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4VMJAKC54WWWCYMY%2F20220330%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220330T042800Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=a26a79a800e73bf110084a896886b0b0eb48837208d078455461070f0ac98e97"
+                            src="https://s3.amazonaws.com/cdnl.iconscout.com/lottie/premium/original/3264482.json?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4VMJAKC54WWWCYMY%2F20220405%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220405T025014Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=ea14eb82c200b446efc9d05ea8493a54c8d229021800f9cc02266bb6f1b7e232"
                             style={{width:'90%'}}
                         >
                         </lottie-player>
@@ -326,7 +326,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                             autoplay
                             loop
                             mode="normal"
-                            src="https://s3.amazonaws.com/cdnl.iconscout.com/lottie/premium/original/3264485.json?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4VMJAKC54WWWCYMY%2F20220330%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220330T061113Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=82eb671242ee34577abb71d62632b0c1199480dc6053b1f7ad23e65e8704da89"
+                            src="https://s3.amazonaws.com/cdnl.iconscout.com/lottie/premium/original/3264485.json?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4VMJAKC54WWWCYMY%2F20220405%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220405T025018Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=b7a206467d98ee79249126cd4bd5037c505373d3678d755536a44213a3cba89c"
                             style={{width:'90%'}}
                         >
                         </lottie-player>
@@ -344,7 +344,7 @@ function MainPageV3({history, isLoggedIn, userObj}) {
                             autoplay
                             loop
                             mode="normal"
-                            src="https://s3.amazonaws.com/cdnl.iconscout.com/lottie/premium/original/3264479.json?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4VMJAKC54WWWCYMY%2F20220330%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220330T061405Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=fd32a78cd6658f4439f04fc311947d8c2374121635640dd87f4fde514fc39e6d"
+                            src="https://s3.amazonaws.com/cdnl.iconscout.com/lottie/premium/original/3264479.json?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4VMJAKC54WWWCYMY%2F20220405%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220405T025022Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Signature=faf2e00d13c282551059216c032ceb407ef10fd2a1f333e519ba911a4751f013"
                             style={{width:'90%'}}
                         >
                         </lottie-player>
